@@ -7,21 +7,21 @@
 <link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ====== Reset + base ====== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; background: #f3f5fa; color: #1f2937; -webkit-font-smoothing: antialiased; overflow: hidden; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-feature-settings: 'cv02','cv03','cv04','cv11'; background: #f3f5fa; color: #1f2937; -webkit-font-smoothing: antialiased; overflow: hidden; }
 
 /* INLINE:demo-bar.css */
-.demo-bar { background: linear-gradient(90deg, #C8102E 0%, #a00d24 100%); color: #fff; height: 32px; display: flex; align-items: center; padding: 0 14px; gap: 14px; font-family: 'DM Sans', system-ui, sans-serif; font-size: 11.5px; position: relative; z-index: 200; box-shadow: 0 1px 0 rgba(0,0,0,0.1); }
+.demo-bar { background: linear-gradient(90deg, #C8102E 0%, #a00d24 100%); color: #fff; height: 32px; display: flex; align-items: center; padding: 0 14px; gap: 14px; font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; position: relative; z-index: 200; box-shadow: 0 1px 0 rgba(0,0,0,0.1); }
 .demo-bar__brand { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase; font-size: 10px; color: rgba(255,255,255,0.95); }
 .demo-bar__brand::before { content: '▶'; font-size: 8px; color: rgba(255,255,255,0.7); }
 .demo-bar__scenario { color: rgba(255,255,255,0.85); font-weight: 500; }
 .demo-bar__divider { width: 1px; height: 16px; background: rgba(255,255,255,0.3); }
 .demo-bar__spacer { flex: 1; }
-.demo-bar__step { font-family: 'DM Mono', ui-monospace, monospace; font-size: 10.5px; color: rgba(255,255,255,0.85); padding: 3px 8px; background: rgba(255,255,255,0.12); border-radius: 4px; letter-spacing: 0.4px; }
+.demo-bar__step { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10.5px; color: rgba(255,255,255,0.85); padding: 3px 8px; background: rgba(255,255,255,0.12); border-radius: 4px; letter-spacing: 0.4px; }
 .demo-bar__nav { display: flex; gap: 2px; }
 .demo-bar__nav-btn { width: 24px; height: 22px; background: rgba(255,255,255,0.12); border: none; color: #fff; cursor: pointer; border-radius: 4px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; font-family: inherit; transition: background 120ms; }
 .demo-bar__nav-btn:hover:not(:disabled) { background: rgba(255,255,255,0.22); }
@@ -33,7 +33,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .demo-bar #role-switcher .rs-name { font-size: 10.5px; }
 .demo-bar #role-switcher .rs-role { font-size: 9.5px; }
 .demo-bar #role-switcher .rs-chev { font-size: 8px; }
-.demo-bar__step-side { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.65); white-space: nowrap; }
+.demo-bar__step-side { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.65); white-space: nowrap; }
 /* /INLINE */
 
 /* App layout: demo-bar (32px) + stage area (rest) */
@@ -47,7 +47,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 
 /* INLINE:zoho-tokens.css */
 :root { --zoho-topbar-bg: #ffffff; --zoho-topbar-border: #e5e7eb; --zoho-topbar-text: #1f2937; --zoho-topbar-text-muted: #6b7280; --zoho-topbar-icon: #6b7280; --zoho-topbar-icon-hover: #1f2937; --zoho-topbar-height: 52px; --zoho-topbar-search-bg: #f3f5fa; --zoho-sidebar-bg: #f7f8fa; --zoho-sidebar-border: #e8eaed; --zoho-sidebar-text: #4a5568; --zoho-sidebar-section-text: #6b7280; --zoho-sidebar-active-bg: #e6efff; --zoho-sidebar-active-text: #2563eb; --zoho-sidebar-hover-bg: #eef1f7; --zoho-sidebar-width: 225px; --zoho-content-bg: #ffffff; --zoho-content-alt: #f9fafb; --zoho-content-secondary: #f3f5fa; --zoho-content-grey: #eef1f7; --zoho-border: #e5e7eb; --zoho-border-light: #f0f2f5; --zoho-divider: #ebeef2; --zoho-text: #1f2937; --zoho-text-secondary: #4b5563; --zoho-text-muted: #6b7280; --zoho-text-disabled: #9ca3af; --zoho-link: #2563eb; --zoho-link-hover: #1d4ed8; --zoho-primary: #3b6ef5; --zoho-primary-hover: #2563eb; --zoho-primary-text: #ffffff; --zoho-outline: #d1d5db; --zoho-outline-hover: #9ca3af; --zoho-violet: #7c3aed; --zoho-violet-light: #ede9fe; --zoho-pill-today-bg: #fff1de; --zoho-pill-today-text: #c2410c; --zoho-pill-overdue-bg: #fee2e2; --zoho-pill-overdue-text: #991b1b; --zoho-success: #10b981; --zoho-danger: #ef4444; --zoho-phone: #22c55e; --zoho-fs-base: 13px; --zoho-fs-sm: 12px; --zoho-fs-xs: 11px; --zoho-fs-lg: 14px; --zoho-fs-xl: 17px; --zoho-radius-sm: 4px; --zoho-radius: 6px; --zoho-radius-lg: 8px; --zoho-radius-pill: 999px; }
-.zoho-shell { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; color: #1f2937; background: #fff; display: grid; grid-template-rows: 52px 1fr; height: 100%; overflow: hidden; }
+.zoho-shell { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; color: #1f2937; background: #fff; display: grid; grid-template-rows: 52px 1fr; height: 100%; overflow: hidden; }
 .zoho-topbar { background: #fff; border-bottom: 1px solid #e5e7eb; display: grid; grid-template-columns: 235px 1fr auto; align-items: stretch; height: 52px; }
 .zoho-tb__brand { display: flex; align-items: center; gap: 8px; padding: 0 14px; border-right: 1px solid #e5e7eb; }
 .zoho-tb__logo { width: 22px; height: 22px; border-radius: 50%; background: conic-gradient(from 0deg, #f43f5e, #ec4899, #a855f7, #6366f1, #3b82f6, #06b6d4, #f43f5e); position: relative; flex-shrink: 0; }
@@ -77,7 +77,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .zoho-sidebar { background: #f7f8fa; border-right: 1px solid #e8eaed; overflow-y: auto; padding: 8px 0; font-size: 13px; }
 .zoho-sb__item { display: flex; align-items: center; gap: 10px; padding: 7px 14px; color: #4a5568; cursor: pointer; transition: background 120ms; text-decoration: none; font-size: 13px; }
 .zoho-sb__item:hover { background: #eef1f7; }
-.zoho-sb__item.active { background: #e6efff; color: #2563eb; font-weight: 500; border-right: 2px solid #2563eb; padding-right: 12px; }
+.zoho-sb__item.active { background: #dbeafe; color: #1d4ed8; font-weight: 600; border-right: 2px solid #1d4ed8; padding-right: 12px; }
 .zoho-sb__item-icon { width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
 .zoho-sb__item--home .zoho-sb__item-icon { color: #f43f5e; }
 .zoho-sb__item--reports .zoho-sb__item-icon { color: #ec4899; }
@@ -139,7 +139,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .zoho-kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 14px 22px 0; }
 .zoho-kpi { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px 18px; cursor: pointer; }
 .zoho-kpi__label { font-size: 13px; color: #4b5563; margin-bottom: 14px; }
-.zoho-kpi__value { font-size: 28px; font-weight: 600; color: #1f2937; }
+.zoho-kpi__value { font-size: 30px; font-weight: 700; color: #1f2937; }
 .zoho-home-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 14px 22px; }
 .zoho-home-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; }
 .zoho-home-card__header { padding: 12px 16px; border-bottom: 1px solid #f0f2f5; }
@@ -192,7 +192,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .zoho-input:focus { outline: none; border-color: #3b6ef5; box-shadow: 0 0 0 3px rgba(59,110,245,0.15); }
 .zoho-textarea { min-height: 80px; resize: vertical; padding: 10px 12px; }
 .zoho-label { display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px; font-weight: 500; }
-.zoho-smart-chat { position: absolute; bottom: 0; left: 225px; right: 0; background: #fff; border-top: 1px solid #e5e7eb; padding: 6px 22px; display: flex; align-items: center; gap: 12px; font-size: 12px; color: #6b7280; z-index: 4; }
+.zoho-smart-chat { position: absolute; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid #e5e7eb; padding: 6px 22px 6px 247px; display: flex; align-items: center; gap: 12px; font-size: 12px; color: #6b7280; z-index: 4; }
 .zoho-smart-chat__placeholder { flex: 1; }
 .zoho-smart-chat__icons { display: flex; gap: 4px; }
 .zoho-smart-chat__icon { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; color: #6b7280; font-size: 13px; cursor: pointer; }
@@ -226,7 +226,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 /* /INLINE */
 
 /* role-switcher CSS (inlined; matches what the JS injects) */
-#role-switcher { position: relative; font-family: 'DM Sans', sans-serif; }
+#role-switcher { position: relative; font-family: 'Inter', sans-serif; }
 .rs-trigger { display: flex; align-items: center; gap: 8px; color: #fff; cursor: pointer; text-align: left; }
 .rs-avatar { border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-weight: 600; flex-shrink: 0; }
 .rs-avatar--ios { background: #003087; } .rs-avatar--nc { background: #1f9535; } .rs-avatar--reviewer { background: #e85d0c; } .rs-avatar--dp { background: #C8102E; } .rs-avatar--school { background: #7c3aed; } .rs-avatar--portal { background: #0ea5e9; } .rs-avatar--marketing { background: #ec4899; } .rs-avatar--guardian { background: #f59e0b; } .rs-avatar--default { background: #6b7280; }
@@ -247,7 +247,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .rs-opt-scope { font-size: 10.5px; color: #9aa3b8; font-style: italic; }
 .rs-check { color: #003087; font-weight: 600; opacity: 0; font-size: 14px; }
 .rs-option.active .rs-check { opacity: 1; }
-.field-masked, .masked { font-family: 'DM Mono', monospace; color: #9aa3b8; letter-spacing: 1px; }
+.field-masked, .masked { font-family: 'JetBrains Mono', monospace; color: #9aa3b8; letter-spacing: 1px; }
 
 /* Role-comparison split view for step 8 */
 .split-view { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 16px 22px; background: #f9fafb; height: 100%; overflow: auto; }
@@ -268,12 +268,39 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .ref-table td { padding: 8px 14px; border-bottom: 1px solid #e2e6ed; vertical-align: top; }
 .ref-table tr:nth-child(even) td { background: #f8f9fb; }
 .ref-table tr.section td { background: #E8EEF6; color: #003087; font-weight: 600; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 14px; }
-.ft-name { font-family: 'DM Mono', monospace; font-size: 11px; color: #5a6480; }
-.ft-t { display: inline-block; padding: 2px 7px; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 10px; background: #f3f5fa; color: #5a6480; }
+.ft-name { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #5a6480; }
+.ft-t { display: inline-block; padding: 2px 7px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 10px; background: #f3f5fa; color: #5a6480; }
 .ft-pick { background: #f0f4ff; color: #1e3a8a; } .ft-look { background: #f0fdf4; color: #166534; } .ft-auto { background: #fef3c7; color: #92400e; }
+
+/* Toast notification */
+.uwc-toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #1f2937; color: #fff; padding: 10px 18px; border-radius: 8px; font-size: 13px; z-index: 9999; box-shadow: 0 8px 24px rgba(0,0,0,0.25); font-family: 'Inter', sans-serif; pointer-events: none; animation: toastIn 200ms ease; white-space: nowrap; }
+@keyframes toastIn { from { opacity:0; transform: translateX(-50%) translateY(8px); } to { opacity:1; transform: translateX(-50%) translateY(0); } }
+
+/* Dropdown menus */
+.zoho-dd { position: relative; display: inline-flex; }
+.zoho-dd-menu { position: absolute; top: calc(100% + 4px); left: 0; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); min-width: 200px; z-index: 50; overflow: hidden; }
+.zoho-dd-menu[hidden] { display: none; }
+.zoho-dd-item { display: block; padding: 8px 14px; font-size: 13px; color: #1f2937; cursor: pointer; background: #fff; border: none; width: 100%; text-align: left; font-family: 'Inter', sans-serif; }
+.zoho-dd-item:hover { background: #f3f5fa; }
+.zoho-dd-item.active { color: #1d4ed8; font-weight: 500; }
+.zoho-dd-sep { height: 1px; background: #f0f2f5; margin: 4px 0; }
+
+/* SVG icon sizing in sidebar */
+.zoho-sb__item-icon svg { display: block; }
+.zoho-tb__icon svg { display: block; pointer-events: none; }
+.ico-use { display:inline-flex; align-items:center; justify-content:center; }
 </style>
 </head>
 <body>
+
+<!-- Shared SVG symbol defs (referenced via <use> to avoid repeating large paths) -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="ico-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+  <symbol id="ico-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="ico-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="ico-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+  <symbol id="ico-waffle" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="5" r="1.5"/><circle cx="12" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="12" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/></symbol>
+</svg>
 
 <div class="app">
   <!-- ============ DEMO BAR (red strip, above everything) ============ -->
@@ -312,22 +339,22 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
             </div>
           </div>
           <div class="zoho-tb__icons">
-            <button class="zoho-tb__icon zoho-tb__icon--plus" title="Quick create">+</button>
-            <button class="zoho-tb__icon zoho-tb__icon--zia" title="Zia AI">ZA</button>
-            <button class="zoho-tb__icon zoho-tb__icon--bell" title="Notifications">🔔</button>
-            <button class="zoho-tb__icon" title="Calendar">📅</button>
-            <button class="zoho-tb__icon" title="Profile">👤</button>
-            <button class="zoho-tb__icon" title="Settings">⚙</button>
+            <button class="zoho-tb__icon zoho-tb__icon--plus" title="Quick create" data-toast="Quick create — choose a module to add a record">+</button>
+            <button class="zoho-tb__icon zoho-tb__icon--zia" title="Zia AI" data-toast="Zia AI — your intelligent assistant is ready">ZA</button>
+            <button class="zoho-tb__icon zoho-tb__icon--bell" title="Notifications" data-toast="Notifications — 1 new: Lena Fischer submitted her application"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-bell"/></svg></button>
+            <button class="zoho-tb__icon" title="Calendar" data-toast="Calendar — 3 upcoming deadlines this week"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-cal"/></svg></button>
+            <button class="zoho-tb__icon" title="Profile" data-toast="Profile — Marcus Weber · NC Admin Germany"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-user"/></svg></button>
+            <button class="zoho-tb__icon" title="Settings" data-toast="Settings — CRM configuration"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
             <span class="zoho-tb__org" title="A2Z Cloud — UWC org">A2Z</span>
-            <button class="zoho-tb__icon zoho-tb__waffle" title="Apps menu"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button>
+            <button class="zoho-tb__icon" title="Apps menu" data-toast="Zoho suite — switch between Zoho apps"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><use href="#ico-waffle"/></svg></button>
           </div>
         </header>
         <div class="zoho-body">
           <aside class="zoho-sidebar">
-            <a class="zoho-sb__item zoho-sb__item--home active" data-role-variant="ana:Home"><span class="zoho-sb__item-icon">🏠</span><span>Home</span></a>
-            <a class="zoho-sb__item zoho-sb__item--reports"><span class="zoho-sb__item-icon">📊</span><span>Reports</span></a>
-            <a class="zoho-sb__item zoho-sb__item--analytics"><span class="zoho-sb__item-icon">📈</span><span>Analytics</span></a>
-            <a class="zoho-sb__item zoho-sb__item--requests"><span class="zoho-sb__item-icon">📋</span><span>My Requests</span></a>
+            <a class="zoho-sb__item zoho-sb__item--home active" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span>Home</span></a>
+            <a class="zoho-sb__item zoho-sb__item--reports" data-sb-nav="reports"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></span><span>Reports</span></a>
+            <a class="zoho-sb__item zoho-sb__item--analytics" data-sb-nav="analytics"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></span><span>Analytics</span></a>
+            <a class="zoho-sb__item zoho-sb__item--requests" data-sb-nav="requests"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6a1 1 0 0 1 1 1v2H8V3a1 1 0 0 1 1-1z"/><rect x="4" y="5" width="16" height="17" rx="2"/></svg></span><span>My Requests</span></a>
             <div class="zoho-sb__teamspace">
               <span class="zoho-sb__teamspace-icon">CT</span>
               <span class="zoho-sb__teamspace-name" data-role-variant="marcus:Germany NC|ana:Brazil NC|akanksha:CRM Teamspace|data-protection:CRM Teamspace">Germany NC</span>
@@ -337,26 +364,26 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
             <div class="zoho-sb__search"><span style="color:#9ca3af;font-size:12px;">🔍</span><input placeholder="Search"></div>
             <a class="zoho-sb__item"><span class="zoho-sb__item-icon">✨</span><span>Workqueue</span></a>
             <div class="zoho-sb__group">
-              <div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">📁</span><span>Sales</span><span class="zoho-sb__group-chev">⌄</span></div>
+              <div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span><span>Sales</span><span class="zoho-sb__group-chev">⌄</span></div>
               <div class="zoho-sb__group-items">
-                <a class="zoho-sb__item"><span class="zoho-sb__item-icon">◐</span><span>Leads</span></a>
-                <a class="zoho-sb__item"><span class="zoho-sb__item-icon">◉</span><span>Contacts</span></a>
-                <a class="zoho-sb__item" data-role-hide="marcus"><span class="zoho-sb__item-icon">🏢</span><span>Accounts</span></a>
-                <a class="zoho-sb__item"><span class="zoho-sb__item-icon">📑</span><span>Applications</span></a>
-                <a class="zoho-sb__item"><span class="zoho-sb__item-icon">📣</span><span>Campaigns</span></a>
+                <a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span><span>Leads</span></a>
+                <a class="zoho-sb__item" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span><span>Contacts</span></a>
+                <a class="zoho-sb__item" data-role-hide="marcus" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span><span>Accounts</span></a>
+                <a class="zoho-sb__item" data-sb-nav="applications"><span class="zoho-sb__item-icon">·</span><span>Applications</span></a>
+                <a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span><span>Campaigns</span></a>
               </div>
             </div>
             <div class="zoho-sb__group">
-              <div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">📁</span><span>Activities</span><span class="zoho-sb__group-chev">⌄</span></div>
+              <div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span><span>Activities</span><span class="zoho-sb__group-chev">⌄</span></div>
               <div class="zoho-sb__group-items">
-                <a class="zoho-sb__item"><span class="zoho-sb__item-icon">☑</span><span>Tasks</span></a>
-                <a class="zoho-sb__item"><span class="zoho-sb__item-icon">📅</span><span>Meetings</span></a>
-                <a class="zoho-sb__item"><span class="zoho-sb__item-icon">📞</span><span>Calls</span></a>
+                <a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span><span>Tasks</span></a>
+                <a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span><span>Meetings</span></a>
+                <a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span><span>Calls</span></a>
               </div>
             </div>
-            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">🎓</span><span>Programmes</span></a>
-            <a class="zoho-sb__item" data-role-hide="data-protection"><span class="zoho-sb__item-icon">🏛</span><span>Governance</span></a>
-            <a class="zoho-sb__item" data-role-hide="data-protection"><span class="zoho-sb__item-icon">🌐</span><span>National Committees</span></a>
+            <a class="zoho-sb__item" data-sb-nav="programmes"><span class="zoho-sb__item-icon">🎓</span><span>Programmes</span></a>
+            <a class="zoho-sb__item" data-role-hide="data-protection" data-sb-nav="other"><span class="zoho-sb__item-icon">🏛</span><span>Governance</span></a>
+            <a class="zoho-sb__item" data-role-hide="data-protection" data-sb-nav="other"><span class="zoho-sb__item-icon">🌐</span><span>National Committees</span></a>
           </aside>
           <main class="zoho-content">
             <div class="zoho-home-banner">
@@ -378,11 +405,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
                 <div class="zoho-home-card__header"><div class="zoho-home-card__title" data-role-variant="marcus:Recent Germany Applications|ana:Recent Brazil Applications|akanksha:Recent Applications (All NCs)|data-protection:Recent Applications">Recent Germany Applications</div></div>
                 <table class="zoho-list">
                   <thead><tr><th>Applicant</th><th>Stage</th><th>Submitted</th></tr></thead>
-                  <tbody data-role-variant="marcus:germany|ana:brazil|akanksha:global|data-protection:global" data-content-by-role>
-                    <tr><td class="zoho-list__name-link">Lena Fischer</td><td><span class="zoho-pill zoho-pill--review">Submitted</span></td><td>25 May 2026</td></tr>
-                    <tr><td class="zoho-list__name-link">Amara Diallo</td><td><span class="zoho-pill zoho-pill--shortlist">Shortlisted</span></td><td>20 May 2026</td></tr>
-                    <tr><td class="zoho-list__name-link">Klaus Berger</td><td><span class="zoho-pill zoho-pill--review">Under Review</span></td><td>22 May 2026</td></tr>
-                    <tr><td class="zoho-list__name-link">Anneke Müller</td><td><span class="zoho-pill zoho-pill--elig">In Progress</span></td><td>26 May 2026</td></tr>
+                  <tbody id="recent-apps-tbody">
+                    <!-- Germany applicants (default / marcus / akanksha / data-protection) -->
+                    <tr data-role-show="marcus,akanksha,data-protection"><td class="zoho-list__name-link">Lena Fischer</td><td><span class="zoho-pill zoho-pill--review">Submitted</span></td><td>25 May 2026</td></tr>
+                    <tr data-role-show="marcus,akanksha,data-protection"><td class="zoho-list__name-link">Amara Diallo</td><td><span class="zoho-pill zoho-pill--shortlist">Shortlisted</span></td><td>20 May 2026</td></tr>
+                    <tr data-role-show="marcus,akanksha,data-protection"><td class="zoho-list__name-link">Klaus Berger</td><td><span class="zoho-pill zoho-pill--review">Under Review</span></td><td>22 May 2026</td></tr>
+                    <tr data-role-show="marcus,akanksha,data-protection"><td class="zoho-list__name-link">Anneke Müller</td><td><span class="zoho-pill zoho-pill--elig">In Progress</span></td><td>26 May 2026</td></tr>
+                    <!-- Brazil applicants shown when Ana is active -->
+                    <tr data-role-show="ana,akanksha"><td class="zoho-list__name-link">Sofia Almeida</td><td><span class="zoho-pill zoho-pill--qual">Under Review</span></td><td>22 May 2026</td></tr>
+                    <tr data-role-show="ana,akanksha"><td class="zoho-list__name-link">Miguel Santos</td><td><span class="zoho-pill zoho-pill--elig">In Progress</span></td><td>24 May 2026</td></tr>
+                    <tr data-role-show="ana"><td class="zoho-list__name-link">Clara Ribeiro</td><td><span class="zoho-pill zoho-pill--review">Submitted</span></td><td>21 May 2026</td></tr>
+                    <tr data-role-show="ana"><td class="zoho-list__name-link">Lucas Ferreira</td><td><span class="zoho-pill zoho-pill--shortlist">Shortlisted</span></td><td>19 May 2026</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -413,17 +446,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         <header class="zoho-topbar">
           <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
           <div class="zoho-tb__center"><h1 class="zoho-tb__module">Programmes</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">🔍</span><input placeholder="Search records"></div></div>
-          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">🔔</button><button class="zoho-tb__icon">📅</button><button class="zoho-tb__icon">👤</button><button class="zoho-tb__icon">⚙</button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus" data-toast="Quick create — choose a module to add a record">+</button><button class="zoho-tb__icon zoho-tb__icon--zia" data-toast="Zia AI — your intelligent assistant is ready">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell" data-toast="Notifications — 1 new notification"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-bell"/></svg></button><button class="zoho-tb__icon" data-toast="Calendar — upcoming deadlines"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-cal"/></svg></button><button class="zoho-tb__icon" data-toast="Profile settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-user"/></svg></button><button class="zoho-tb__icon" data-toast="Settings — CRM configuration"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-gear"/></svg></button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon" data-toast="Zoho suite — switch between Zoho apps"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><use href="#ico-waffle"/></svg></button></div>
         </header>
         <div class="zoho-body">
           <aside class="zoho-sidebar">
-            <a class="zoho-sb__item zoho-sb__item--home"><span class="zoho-sb__item-icon">🏠</span>Home</a>
-            <a class="zoho-sb__item zoho-sb__item--reports"><span class="zoho-sb__item-icon">📊</span>Reports</a>
-            <a class="zoho-sb__item zoho-sb__item--analytics"><span class="zoho-sb__item-icon">📈</span>Analytics</a>
+            <a class="zoho-sb__item zoho-sb__item--home" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>Home</a>
+            <a class="zoho-sb__item zoho-sb__item--reports" data-sb-nav="reports"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></span>Reports</a>
+            <a class="zoho-sb__item zoho-sb__item--analytics" data-sb-nav="analytics"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></span>Analytics</a>
             <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name">Germany NC</span><span class="zoho-sb__teamspace-chev">⌄</span><span class="zoho-sb__teamspace-more">⋯</span></div>
-            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">📁</span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item"><span class="zoho-sb__item-icon">◐</span>Leads</a><a class="zoho-sb__item"><span class="zoho-sb__item-icon">◉</span>Contacts</a><a class="zoho-sb__item"><span class="zoho-sb__item-icon">📑</span>Applications</a><a class="zoho-sb__item"><span class="zoho-sb__item-icon">📣</span>Campaigns</a></div></div>
-            <a class="zoho-sb__item active"><span class="zoho-sb__item-icon">🎓</span>Programmes</a>
-            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">🌐</span>National Committees</a>
+            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Leads</a><a class="zoho-sb__item" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span>Contacts</a><a class="zoho-sb__item" data-sb-nav="applications"><span class="zoho-sb__item-icon">·</span>Applications</a><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Campaigns</a></div></div>
+            <a class="zoho-sb__item active" data-sb-nav="programmes"><span class="zoho-sb__item-icon">🎓</span>Programmes</a>
+            <a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">🌐</span>National Committees</a>
           </aside>
           <main class="zoho-content">
             <div class="zoho-detail__hero">
@@ -435,9 +468,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
               </div>
               <div class="zoho-detail__actions">
                 <span class="zoho-detail__last-update">Last Update : 14:22 PM</span>
-                <button class="zoho-btn--primary zoho-btn">Send Mail</button>
-                <button class="zoho-btn">Edit</button>
-                <button class="zoho-btn">⋯</button>
+                <button class="zoho-btn--primary zoho-btn" data-toast="Send Mail — compose email to applicant">Send Mail</button>
+                <button class="zoho-btn" data-toast="Edit — enter edit mode for this record">Edit</button>
+                <button class="zoho-btn" data-toast="More actions — clone, delete, merge, convert">⋯</button>
               </div>
             </div>
             <div class="zoho-tabs">
@@ -502,36 +535,70 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         <header class="zoho-topbar">
           <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
           <div class="zoho-tb__center"><h1 class="zoho-tb__module">Applications</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">🔍</span><input placeholder="Search records"></div></div>
-          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">🔔</button><button class="zoho-tb__icon">📅</button><button class="zoho-tb__icon">👤</button><button class="zoho-tb__icon">⚙</button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus" data-toast="Quick create — choose a module to add a record">+</button><button class="zoho-tb__icon zoho-tb__icon--zia" data-toast="Zia AI — your intelligent assistant is ready">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell" data-toast="Notifications — 1 new notification"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-bell"/></svg></button><button class="zoho-tb__icon" data-toast="Calendar — upcoming deadlines"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-cal"/></svg></button><button class="zoho-tb__icon" data-toast="Profile settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-user"/></svg></button><button class="zoho-tb__icon" data-toast="Settings — CRM configuration"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-gear"/></svg></button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon" data-toast="Zoho suite — switch between Zoho apps"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><use href="#ico-waffle"/></svg></button></div>
         </header>
         <div class="zoho-body">
           <aside class="zoho-sidebar">
-            <a class="zoho-sb__item zoho-sb__item--home"><span class="zoho-sb__item-icon">🏠</span>Home</a>
-            <a class="zoho-sb__item zoho-sb__item--reports"><span class="zoho-sb__item-icon">📊</span>Reports</a>
-            <a class="zoho-sb__item zoho-sb__item--analytics"><span class="zoho-sb__item-icon">📈</span>Analytics</a>
+            <a class="zoho-sb__item zoho-sb__item--home" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>Home</a>
+            <a class="zoho-sb__item zoho-sb__item--reports" data-sb-nav="reports"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></span>Reports</a>
+            <a class="zoho-sb__item zoho-sb__item--analytics" data-sb-nav="analytics"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></span>Analytics</a>
             <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name" data-role-variant="marcus:Germany NC|ana:Brazil NC|akanksha:CRM Teamspace">Germany NC</span><span class="zoho-sb__teamspace-chev">⌄</span><span class="zoho-sb__teamspace-more">⋯</span></div>
-            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">📁</span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item"><span class="zoho-sb__item-icon">◐</span>Leads</a><a class="zoho-sb__item"><span class="zoho-sb__item-icon">◉</span>Contacts</a><a class="zoho-sb__item active"><span class="zoho-sb__item-icon">📑</span>Applications</a><a class="zoho-sb__item"><span class="zoho-sb__item-icon">📣</span>Campaigns</a></div></div>
-            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">🎓</span>Programmes</a>
+            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Leads</a><a class="zoho-sb__item" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span>Contacts</a><a class="zoho-sb__item active" data-sb-nav="applications"><span class="zoho-sb__item-icon">·</span>Applications</a><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Campaigns</a></div></div>
+            <a class="zoho-sb__item" data-sb-nav="programmes"><span class="zoho-sb__item-icon">🎓</span>Programmes</a>
           </aside>
           <main class="zoho-content">
             <div class="zoho-page-strip">
-              <div class="zoho-page-strip__view" data-role-variant="marcus:Germany Applications ⌄|ana:Brazil Applications ⌄|akanksha:All Applications ⌄">Germany Applications ⌄</div>
-              <span class="zoho-page-strip__more">⋯</span>
+              <div class="zoho-dd" style="position:relative;">
+                <div class="zoho-page-strip__view" id="view-picker-label" data-dropdown="view-dd" data-role-variant="marcus:Germany Applications ⌄|ana:Brazil Applications ⌄|akanksha:All Applications ⌄">Germany Applications ⌄</div>
+                <div class="zoho-dd-menu" id="view-dd" hidden>
+                  <button class="zoho-dd-item active" data-view-label="All Applications ⌄">All Applications</button>
+                  <button class="zoho-dd-item" data-view-label="My Open Applications ⌄">My Open Applications</button>
+                  <button class="zoho-dd-item" data-view-label="Applications by NC ⌄">Applications by NC</button>
+                  <div class="zoho-dd-sep"></div>
+                  <button class="zoho-dd-item" data-view-label="Closed This Cycle ⌄">Closed This Cycle</button>
+                </div>
+              </div>
+              <span class="zoho-page-strip__more" data-toast="More view options">⋯</span>
               <span class="zoho-helper-tag" style="margin-left:auto;">Marcus sees only Germany — no Brazil, Kenya, India or UK records</span>
             </div>
             <div class="zoho-toolbar">
-              <button class="zoho-toolbar__btn">▼ Filter</button>
-              <button class="zoho-toolbar__btn">↕ Sort</button>
+              <div class="zoho-dd" style="position:relative;">
+                <button class="zoho-toolbar__btn" data-dropdown="filter-dd">▼ Filter</button>
+                <div class="zoho-dd-menu" id="filter-dd" hidden>
+                  <button class="zoho-dd-item">My Open Applications</button>
+                  <button class="zoho-dd-item active">All Applications</button>
+                  <button class="zoho-dd-item">Applications by NC</button>
+                  <div class="zoho-dd-sep"></div>
+                  <button class="zoho-dd-item">Closed This Cycle</button>
+                </div>
+              </div>
+              <div class="zoho-dd" style="position:relative;">
+                <button class="zoho-toolbar__btn" data-dropdown="sort-dd">↕ Sort</button>
+                <div class="zoho-dd-menu" id="sort-dd" hidden>
+                  <button class="zoho-dd-item active">By Name A → Z</button>
+                  <button class="zoho-dd-item">By Name Z → A</button>
+                  <button class="zoho-dd-item">By Stage</button>
+                  <button class="zoho-dd-item">By Submitted Date</button>
+                </div>
+              </div>
               <span class="zoho-toolbar__divider"></span>
-              <span class="zoho-toolbar__view-icon">☰</span>
-              <span class="zoho-toolbar__view-icon active">▦</span>
-              <span class="zoho-toolbar__view-icon">📅</span>
-              <span class="zoho-toolbar__view-icon">⚏</span>
-              <span class="zoho-toolbar__view-icon">📊</span>
-              <span class="zoho-toolbar__view-icon">▾</span>
+              <span class="zoho-toolbar__view-icon" data-toast="List view">☰</span>
+              <span class="zoho-toolbar__view-icon active" data-toast="Kanban view (active)">▦</span>
+              <span class="zoho-toolbar__view-icon" data-toast="Calendar view">📅</span>
+              <span class="zoho-toolbar__view-icon" data-toast="Canvas view">⚏</span>
+              <span class="zoho-toolbar__view-icon" data-toast="Analytics view">📊</span>
+              <span class="zoho-toolbar__view-icon" data-toast="More views">▾</span>
               <span class="zoho-toolbar__spacer"></span>
-              <button class="zoho-toolbar__cta">Create Application</button><button class="zoho-toolbar__cta-split">▾</button>
-              <span class="zoho-toolbar__more">⋯</span>
+              <button class="zoho-toolbar__cta" data-toast="Create Application — opens new record form">Create Application</button><button class="zoho-toolbar__cta-split" data-toast="More create options">▾</button>
+              <div class="zoho-dd" style="position:relative;">
+                <span class="zoho-toolbar__more" data-dropdown="more-dd">⋯</span>
+                <div class="zoho-dd-menu" id="more-dd" hidden style="right:0;left:auto;">
+                  <button class="zoho-dd-item">Mass Update</button>
+                  <button class="zoho-dd-item">Export</button>
+                  <div class="zoho-dd-sep"></div>
+                  <button class="zoho-dd-item">Delete Selected</button>
+                </div>
+              </div>
             </div>
             <div class="zoho-kanban-header">
               <span class="zoho-kanban-header__view">STAGEVIEW ⌄</span>
@@ -590,7 +657,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         <header class="zoho-topbar">
           <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
           <div class="zoho-tb__center"><h1 class="zoho-tb__module">Setup</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">🔍</span><input placeholder="Search settings"></div></div>
-          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">🔔</button><button class="zoho-tb__icon">📅</button><button class="zoho-tb__icon">⚙</button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus" data-toast="Quick create — choose a module to add a record">+</button><button class="zoho-tb__icon zoho-tb__icon--zia" data-toast="Zia AI — your intelligent assistant is ready">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell" data-toast="Notifications — 1 new notification"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-bell"/></svg></button><button class="zoho-tb__icon" data-toast="Calendar — upcoming deadlines"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-cal"/></svg></button><button class="zoho-tb__icon" data-toast="Settings — CRM configuration"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-gear"/></svg></button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon" data-toast="Zoho suite — switch between Zoho apps"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><use href="#ico-waffle"/></svg></button></div>
         </header>
         <div class="zoho-body">
           <aside class="zoho-sidebar">
@@ -642,7 +709,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         <header class="zoho-topbar">
           <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
           <div class="zoho-tb__center"><h1 class="zoho-tb__module">Profile · NC Administrator</h1></div>
-          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">🔔</button><button class="zoho-tb__icon">⚙</button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus" data-toast="Quick create — choose a module to add a record">+</button><button class="zoho-tb__icon zoho-tb__icon--zia" data-toast="Zia AI — your intelligent assistant is ready">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell" data-toast="Notifications — 1 new notification"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-bell"/></svg></button><button class="zoho-tb__icon" data-toast="Settings — CRM configuration"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-gear"/></svg></button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon" data-toast="Zoho suite — switch between Zoho apps"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><use href="#ico-waffle"/></svg></button></div>
         </header>
         <div class="zoho-body">
           <aside class="zoho-sidebar">
@@ -673,7 +740,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
               </tbody>
             </table>
             <div style="padding:16px 22px;background:#fffbeb;border-top:1px solid #fde047;font-size:12.5px;color:#78350f;line-height:1.5;">
-              <b>Data sharing scope:</b> NC Administrators can only see records where <code style="background:#fff;padding:1px 5px;border-radius:3px;font-family:'DM Mono',monospace;color:#92400e;">National Committee = their own NC</code>. Brazil NC Admin cannot see Germany records. Field-level security applies independently to Financial Aid, DOB, and Parental Consent fields.
+              <b>Data sharing scope:</b> NC Administrators can only see records where <code style="background:#fff;padding:1px 5px;border-radius:3px;font-family:'JetBrains Mono',monospace;color:#92400e;">National Committee = their own NC</code>. Brazil NC Admin cannot see Germany records. Field-level security applies independently to Financial Aid, DOB, and Parental Consent fields.
             </div>
           </main>
         </div>
@@ -686,13 +753,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         <header class="zoho-topbar">
           <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
           <div class="zoho-tb__center"><h1 class="zoho-tb__module">Contacts</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">🔍</span><input placeholder="Search records"></div></div>
-          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">🔔</button><button class="zoho-tb__icon">📅</button><button class="zoho-tb__icon">⚙</button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus" data-toast="Quick create — choose a module to add a record">+</button><button class="zoho-tb__icon zoho-tb__icon--zia" data-toast="Zia AI — your intelligent assistant is ready">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell" data-toast="Notifications — 1 new notification"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-bell"/></svg></button><button class="zoho-tb__icon" data-toast="Calendar — upcoming deadlines"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-cal"/></svg></button><button class="zoho-tb__icon" data-toast="Settings — CRM configuration"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-gear"/></svg></button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon" data-toast="Zoho suite — switch between Zoho apps"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><use href="#ico-waffle"/></svg></button></div>
         </header>
         <div class="zoho-body">
           <aside class="zoho-sidebar">
-            <a class="zoho-sb__item zoho-sb__item--home"><span class="zoho-sb__item-icon">🏠</span>Home</a>
+            <a class="zoho-sb__item zoho-sb__item--home" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>Home</a>
             <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name">Germany NC</span><span class="zoho-sb__teamspace-chev">⌄</span></div>
-            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">📁</span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item"><span class="zoho-sb__item-icon">◐</span>Leads</a><a class="zoho-sb__item active"><span class="zoho-sb__item-icon">◉</span>Contacts</a><a class="zoho-sb__item"><span class="zoho-sb__item-icon">📑</span>Applications</a></div></div>
+            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Leads</a><a class="zoho-sb__item active" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span>Contacts</a><a class="zoho-sb__item" data-sb-nav="applications"><span class="zoho-sb__item-icon">·</span>Applications</a></div></div>
           </aside>
           <main class="zoho-content">
             <div class="zoho-detail__hero">
@@ -704,9 +771,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
               </div>
               <div class="zoho-detail__actions">
                 <span class="zoho-detail__last-update">Last Update : 11:08 AM</span>
-                <button class="zoho-btn--primary zoho-btn">Send Mail</button>
-                <button class="zoho-btn">Edit</button>
-                <button class="zoho-btn">⋯</button>
+                <button class="zoho-btn--primary zoho-btn" data-toast="Send Mail — compose email to applicant">Send Mail</button>
+                <button class="zoho-btn" data-toast="Edit — enter edit mode for this record">Edit</button>
+                <button class="zoho-btn" data-toast="More actions — clone, delete, merge, convert">⋯</button>
               </div>
             </div>
             <div class="zoho-tabs"><span class="zoho-tabs__tab active">Overview</span><span class="zoho-tabs__tab">Timeline</span></div>
@@ -752,7 +819,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         <header class="zoho-topbar">
           <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span></div>
           <div class="zoho-tb__center"><h1 class="zoho-tb__module">Applications</h1></div>
-          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">🔔</button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus" data-toast="Quick create — choose a module to add a record">+</button><button class="zoho-tb__icon zoho-tb__icon--zia" data-toast="Zia AI — your intelligent assistant is ready">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell" data-toast="Notifications — 1 new notification"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-bell"/></svg></button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon" data-toast="Zoho suite — switch between Zoho apps"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><use href="#ico-waffle"/></svg></button></div>
         </header>
         <div class="zoho-body">
           <aside class="zoho-sidebar">
@@ -888,7 +955,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
     <section class="screen" id="sc-8">
       <div class="appendix">
         <h1>Module field reference — Scenario A</h1>
-        <p>Field-level model for the modules touched in Scenario A. Used throughout the demo; documented here for reference. Every <code style="font-family:'DM Mono',monospace;background:#E8EEF6;color:#003087;padding:1px 6px;border-radius:3px;">API name</code> matches the live Zoho org.</p>
+        <p>Field-level model for the modules touched in Scenario A. Used throughout the demo; documented here for reference. Every <code style="font-family:'JetBrains Mono',monospace;background:#E8EEF6;color:#003087;padding:1px 6px;border-radius:3px;">API name</code> matches the live Zoho org.</p>
 
         <h2 style="font-family:'Playfair Display',Georgia,serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:18px;">Programmes module</h2>
         <table class="ref-table">
@@ -1001,29 +1068,194 @@ UWC.getRolesFor = function(code) {
 })();
 /* /INLINE */
 
-/* Scenario A driver */
+/* ---- Toast helper ---- */
+function showToast(msg) {
+  // Remove any existing toast immediately
+  var existing = document.querySelector('.uwc-toast');
+  if (existing) existing.remove();
+  var t = document.createElement('div');
+  t.className = 'uwc-toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(function() { if (t.parentNode) t.remove(); }, 1800);
+}
+
+/* ---- Scenario A driver ---- */
 const TOTAL = 9;
 let step = 0;
 const stepCounterEl = document.getElementById('step-counter');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
+
 function go(i) {
   if (i < 0 || i >= TOTAL) return;
   step = i;
-  document.querySelectorAll('.screen').forEach((s, j) => s.classList.toggle('active', j === i));
+  document.querySelectorAll('.screen').forEach(function(s, j) { s.classList.toggle('active', j === i); });
   stepCounterEl.textContent = 'Step ' + (i + 1) + ' / ' + TOTAL;
   prevBtn.disabled = i === 0;
   nextBtn.disabled = i === TOTAL - 1;
+  // Close any open dropdowns on navigation
+  document.querySelectorAll('.zoho-dd-menu').forEach(function(m) { m.hidden = true; });
 }
-prevBtn.addEventListener('click', () => go(step - 1));
-nextBtn.addEventListener('click', () => go(step + 1));
-document.addEventListener('keydown', (e) => {
+
+prevBtn.addEventListener('click', function() { go(step - 1); });
+nextBtn.addEventListener('click', function() { go(step + 1); });
+document.addEventListener('keydown', function(e) {
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
   if (e.key === 'ArrowRight') go(step + 1);
   if (e.key === 'ArrowLeft') go(step - 1);
 });
 
-// Initialise role switcher
+/* ---- Sidebar navigation (delegated) ---- */
+// Map sidebar nav keys to step indices
+const SB_NAV_MAP = {
+  'home': 0,
+  'programmes': 1,
+  'applications': 2,
+  'contacts': 5,
+  'reports': null,
+  'analytics': null,
+  'requests': null,
+  'other': null
+};
+
+document.addEventListener('click', function(e) {
+  // Close dropdowns on outside click
+  var ddTarget = e.target.closest('[data-dropdown]');
+  document.querySelectorAll('.zoho-dd-menu').forEach(function(m) {
+    if (!ddTarget || m.id !== ddTarget.dataset.dropdown) m.hidden = true;
+  });
+
+  // ---- Dropdown trigger ----
+  if (ddTarget) {
+    var menuId = ddTarget.dataset.dropdown;
+    var menu = document.getElementById(menuId);
+    if (menu) {
+      menu.hidden = !menu.hidden;
+      e.stopPropagation();
+      return;
+    }
+  }
+
+  // ---- Dropdown item click ----
+  var ddItem = e.target.closest('.zoho-dd-item');
+  if (ddItem) {
+    // Handle view-picker label change
+    if (ddItem.dataset.viewLabel) {
+      var lbl = document.getElementById('view-picker-label');
+      if (lbl) lbl.textContent = ddItem.dataset.viewLabel;
+    }
+    // Mark active in menu
+    var parentMenu = ddItem.closest('.zoho-dd-menu');
+    if (parentMenu) {
+      parentMenu.querySelectorAll('.zoho-dd-item').forEach(function(x) { x.classList.remove('active'); });
+      ddItem.classList.add('active');
+      parentMenu.hidden = true;
+    }
+    showToast(ddItem.textContent.trim() + ' selected');
+    return;
+  }
+
+  // ---- Sidebar item navigation ----
+  var sbItem = e.target.closest('[data-sb-nav]');
+  if (sbItem) {
+    var navKey = sbItem.dataset.sbNav;
+    var targetStep = SB_NAV_MAP[navKey];
+    if (targetStep !== null && targetStep !== undefined) {
+      go(targetStep);
+      // Update active class on all matching sidebar items
+      document.querySelectorAll('[data-sb-nav]').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      sbItem.classList.add('active');
+    } else {
+      // Module not covered in this scenario
+      var itemName = sbItem.querySelector('span:last-child');
+      var label = itemName ? itemName.textContent.trim() : navKey;
+      showToast(label + ' — see other scenarios for full module demo');
+    }
+    return;
+  }
+
+  // ---- Toast on data-toast elements ----
+  var toastEl = e.target.closest('[data-toast]');
+  if (toastEl && !toastEl.closest('[data-sb-nav]') && !toastEl.closest('[data-dropdown]')) {
+    showToast(toastEl.dataset.toast);
+    return;
+  }
+
+  // ---- Back button (← arrow) ----
+  if (e.target.classList.contains('zoho-detail__back')) {
+    go(Math.max(0, step - 1));
+    return;
+  }
+
+  // ---- Toggle sidebar groups ----
+  var grpHeader = e.target.closest('.zoho-sb__group-header');
+  if (grpHeader) {
+    grpHeader.parentElement.classList.toggle('collapsed');
+    return;
+  }
+
+  // ---- Toggle setup permission toggles ----
+  var toggle = e.target.closest('.zoho-setup-toggle');
+  if (toggle) {
+    toggle.classList.toggle('on');
+    showToast(toggle.classList.contains('on') ? 'Permission enabled' : 'Permission disabled');
+    return;
+  }
+
+  // ---- Modal close ----
+  var modalClose = e.target.closest('.zoho-modal__close');
+  if (modalClose) {
+    var overlay = modalClose.closest('.zoho-modal-overlay');
+    if (overlay) { overlay.style.display = 'none'; showToast('Modal dismissed'); }
+    return;
+  }
+
+  // ---- Toolbar view icons ----
+  var viewIcon = e.target.closest('.zoho-toolbar__view-icon');
+  if (viewIcon) {
+    document.querySelectorAll('.zoho-toolbar__view-icon').forEach(function(x) { x.classList.remove('active'); });
+    viewIcon.classList.add('active');
+    if (viewIcon.dataset.toast) showToast(viewIcon.dataset.toast);
+    return;
+  }
+
+  // ---- Setup tabs ----
+  var setupTab = e.target.closest('.zoho-setup-tabs__tab');
+  if (setupTab) {
+    setupTab.closest('.zoho-setup-tabs').querySelectorAll('.zoho-setup-tabs__tab').forEach(function(t) { t.classList.remove('active'); });
+    setupTab.classList.add('active');
+    showToast(setupTab.textContent.trim() + ' tab selected');
+    return;
+  }
+
+  // ---- Detail tabs ----
+  var detailTab = e.target.closest('.zoho-tabs__tab');
+  if (detailTab) {
+    detailTab.closest('.zoho-tabs').querySelectorAll('.zoho-tabs__tab').forEach(function(t) { t.classList.remove('active'); });
+    detailTab.classList.add('active');
+    showToast(detailTab.textContent.trim() + ' tab');
+    return;
+  }
+
+  // ---- CTA / primary buttons ---- catch remaining buttons not handled above
+  var btn = e.target.closest('button, .zoho-btn');
+  if (btn && !btn.closest('.demo-bar') && !btn.closest('#role-switcher')) {
+    var txt = btn.textContent.trim().substring(0, 50);
+    if (txt && !btn.disabled) showToast(txt + ' — action acknowledged');
+  }
+});
+
+/* ---- Dropdown keyboard close (Escape) ---- */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.zoho-dd-menu').forEach(function(m) { m.hidden = true; });
+  }
+});
+
+/* ---- Initialise role switcher ---- */
 RoleSwitcher.init({ scenarioCode: 'A', defaultRoleId: 'marcus', roles: UWC.getRolesFor('A') });
 
 go(0);
