@@ -1,0 +1,86 @@
+/*
+ * Field Formulas — paste into individual Field configuration panels.
+ * NOT functions — these go into Setup → Modules → <Module> → <Field> → Formula.
+ */
+
+
+/* ====================================================================
+ * Applications · Form_Completion_Pct
+ * ================================================================== */
+totalRequired = 12;
+filled = 0;
+if (!isnull(${Applications.Personal_Statement}) && len(${Applications.Personal_Statement}) > 50) filled = filled + 1;
+if (!isnull(${Applications.Education_Background})) filled = filled + 1;
+if (!isnull(${Applications.Extracurricular_Activities})) filled = filled + 1;
+if (!isnull(${Applications.Leadership_Statement})) filled = filled + 1;
+if (!isnull(${Applications.NC_Local_Question_Answer})) filled = filled + 1;
+if (!isnull(${Applications.Application_Language})) filled = filled + 1;
+if (!isnull(${Applications.Country_of_Residence})) filled = filled + 1;
+if (!isnull(${Applications.Citizenship})) filled = filled + 1;
+if (!isnull(${Applications.Applicant_Name})) filled = filled + 1;
+if (!isnull(${Applications.Programme})) filled = filled + 1;
+if (!isnull(${Applications.Guardian_Contact})) filled = filled + 1;
+if (${Applications.Parental_Consent_Status} == "Received") filled = filled + 1;
+return (filled * 100) / totalRequired;
+
+
+/* ====================================================================
+ * Applications · Average_Score
+ * ================================================================== */
+sum = 0;
+count = 0;
+for each r in ${Applications.Review_Scores} {
+  if (!isnull(r.get("Score_Academic"))) {
+    sum = sum + r.get("Score_Academic") + r.get("Score_Community") + r.get("Score_Communication") + r.get("Score_Values");
+    count = count + 4;
+  }
+}
+if (count == 0) return 0;
+return (sum * 1.0) / count;
+
+
+/* ====================================================================
+ * Governance_Memberships · Term_Expires
+ * ================================================================== */
+return addDay(${Governance_Memberships.Appointed_Date}, ${Governance_Memberships.Term_Length} * 365);
+
+
+/* ====================================================================
+ * Training_Records · Expiry_Date
+ * ================================================================== */
+if (${Training_Records.Training_Type} == "Safeguarding") return addDay(${Training_Records.Completed_Date}, 730);
+if (${Training_Records.Training_Type} == "Code of Conduct") return addDay(${Training_Records.Completed_Date}, 1095);
+if (${Training_Records.Training_Type} == "Selection Process") return addDay(${Training_Records.Completed_Date}, 365);
+if (${Training_Records.Training_Type} == "GDPR") return addDay(${Training_Records.Completed_Date}, 730);
+return ${Training_Records.Completed_Date};
+
+
+/* ====================================================================
+ * Training_Records · Training_Status
+ * ================================================================== */
+today = zoho.currentdate;
+soonCut = addDay(today, 90);
+exp = ${Training_Records.Expiry_Date};
+if (isnull(exp)) return "MISSING";
+if (exp < today) return "EXPIRED";
+if (exp < soonCut) return "EXPIRING SOON";
+return "CURRENT";
+
+
+/* ====================================================================
+ * MoU_Obligations · Overdue_Days
+ * ================================================================== */
+if (${MoU_Obligations.Obligation_Status} == "Overdue") return daysBetween(${MoU_Obligations.Due_Date}, zoho.currentdate);
+return 0;
+
+
+/* ====================================================================
+ * School_Place_Allocations · Places_Remaining
+ * ================================================================== */
+return ifnull(${School_Place_Allocations.Places_Allocated}, 0) - ifnull(${School_Place_Allocations.Places_Used}, 0);
+
+
+/* ====================================================================
+ * NC_Volunteers · Full_Name
+ * ================================================================== */
+return ifnull(${NC_Volunteers.Contact_Lookup.First_Name}, "") + " " + ifnull(${NC_Volunteers.Contact_Lookup.Last_Name}, "");

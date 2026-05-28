@@ -1,0 +1,5 @@
+# Communication Logs are created LIVE in Scenario G step 5 by log_campaign_sends function.
+# Pre-seed only Marcus Weber's BLOCKED row so the GDPR proof is visible even before live send.
+#
+Contact,Campaign,Direction,Channel,Sent At,Open Status,Suppression Reason
+Marcus Weber,,Outbound,Email,2026-04-22 10:00:00,BLOCKED (opted out),Email opted out 2026-04-22 — historical send blocked

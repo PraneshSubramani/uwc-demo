@@ -1,0 +1,188 @@
+/*
+ * demo_reset.deluge
+ * --------------------------------------------------------------------
+ * Restores the org to the "demo morning" state so the C–G demo can be
+ * re-run cleanly. Paste into Setup → Customisation → Functions, name
+ * "demo_reset", arguments: none. Execute before every dry-run + 30 min
+ * before live demo.
+ *
+ * Resets:
+ *   - Sofia's Application: Stage=Under Review, Review_Count=1, all flags off
+ *   - Miguel's Application: Stage=Under Review, Safeguarding_Flag_Status=None
+ *   - Sofia's Review_Scores subform: keep Clara's row, remove Paulo's if present
+ *   - Kwame's Application: Stage=Nominated (pre-seeded D step jumpoff)
+ *   - All Place Allocations: Places_Used=0
+ *   - Safeguarding Cases: delete any created during last demo
+ *   - Nomination Packs: delete any created during last demo
+ *   - Mailing Lists "Impact Report Q2 2026": List_Status=Draft, counts=0
+ *   - Communication Logs: delete entries from current month's "Impact Report" campaign
+ *   - MoU Annual Report Q2 2026 (Kenya): Status=Overdue, Submitted_On=null
+ *   - Marcus Weber Consent: ensure latest record is Opted Out
+ *
+ * The 7 recompute_* functions are then run to refresh derived fields.
+ * Total runtime: ~10 seconds.
+ *
+ * Run as Akanksha (uwc_admin) so all writes have a clean audit signature.
+ */
+
+// ------------------------------------------------------------------
+// Helpers
+// ------------------------------------------------------------------
+findAppByApplicant = thisapp.thisapp;  // placeholder so the file is one block
+
+// ------------------------------------------------------------------
+// 1) Reset Sofia's Application
+// ------------------------------------------------------------------
+sofiaSearch = zoho.crm.searchRecords("Deals", "(Contact_Name:equals:Sofia Almeida)");
+if (sofiaSearch.size() > 0) {
+  sofia = sofiaSearch.get(0);
+  sofiaId = sofia.get("id").toLong();
+  upd = Map();
+  upd.put("Stage", "Under Review");
+  upd.put("Review_Count", 1);
+  upd.put("All_Reviews_Complete", false);
+  upd.put("Safeguarding_Flag_Status", "None");
+  upd.put("Safeguarding_Flag_Raised_By", null);
+  upd.put("Safeguarding_Flag_Raised_Date", null);
+  upd.put("School_Nominated", null);
+  upd.put("BC_Invoice_ID", null);
+  zoho.crm.updateRecord("Deals", sofiaId, upd);
+
+  // Wipe Paulo row if present (keep Clara only)
+  rows = ifnull(sofia.get("Review_Scores"), List());
+  keep = List();
+  for each r in rows {
+    rev = r.get("Reviewer_Lookup");
+    if (!isnull(rev) && rev.get("name").contains("Clara")) {
+      r.put("Visible_to_NC_Admin", false);
+      keep.add(r);
+    }
+  }
+  zoho.crm.updateRecord("Deals", sofiaId, {"Review_Scores": keep});
+  info "demo_reset: Sofia application reset (" + keep.size() + " review row kept)";
+}
+
+// ------------------------------------------------------------------
+// 2) Reset Miguel's Application
+// ------------------------------------------------------------------
+miguelSearch = zoho.crm.searchRecords("Deals", "(Contact_Name:equals:Miguel Santos)");
+if (miguelSearch.size() > 0) {
+  miguel = miguelSearch.get(0).get("id").toLong();
+  upd = Map();
+  upd.put("Stage", "Under Review");
+  upd.put("Review_Count", 0);
+  upd.put("All_Reviews_Complete", false);
+  upd.put("Safeguarding_Flag_Status", "None");
+  upd.put("Safeguarding_Flag_Raised_By", null);
+  upd.put("Safeguarding_Flag_Raised_Date", null);
+  zoho.crm.updateRecord("Deals", miguel, upd);
+  info "demo_reset: Miguel application reset";
+}
+
+// ------------------------------------------------------------------
+// 3) Kwame stays at Nominated (jumpoff for D demo continuation)
+//    No action — confirm via info log only
+// ------------------------------------------------------------------
+kwameSearch = zoho.crm.searchRecords("Deals", "(Contact_Name:equals:Kwame Asante)");
+if (kwameSearch.size() > 0) {
+  k = kwameSearch.get(0).get("id").toLong();
+  zoho.crm.updateRecord("Deals", k, {"Stage": "Nominated", "BC_Invoice_ID": null});
+  info "demo_reset: Kwame application set to Nominated";
+}
+
+// ------------------------------------------------------------------
+// 4) Reset Place Allocations
+// ------------------------------------------------------------------
+allocs = zoho.crm.getRecords("School_Place_Allocations", 1, 100);
+for each a in allocs {
+  zoho.crm.updateRecord("School_Place_Allocations", a.get("id").toLong(), {"Places_Used": 0});
+}
+info "demo_reset: " + allocs.size() + " place allocations reset to Places_Used=0";
+
+// ------------------------------------------------------------------
+// 5) Delete demo-created Safeguarding Cases
+// ------------------------------------------------------------------
+sgCases = zoho.crm.getRecords("Safeguarding_Cases", 1, 200);
+for each c in sgCases {
+  zoho.crm.deleteRecord("Safeguarding_Cases", c.get("id").toLong());
+}
+info "demo_reset: " + sgCases.size() + " safeguarding cases deleted";
+
+// ------------------------------------------------------------------
+// 6) Delete demo-created Nomination Packs
+// ------------------------------------------------------------------
+packs = zoho.crm.getRecords("Nomination_Packs", 1, 200);
+for each p in packs {
+  zoho.crm.deleteRecord("Nomination_Packs", p.get("id").toLong());
+}
+info "demo_reset: " + packs.size() + " nomination packs deleted";
+
+// ------------------------------------------------------------------
+// 7) Reset Mailing List + delete related Comm Logs
+// ------------------------------------------------------------------
+listSearch = zoho.crm.searchRecords("Mailing_Lists", "(List_Name:equals:Impact Report Q2 2026)");
+if (listSearch.size() > 0) {
+  l = listSearch.get(0);
+  lId = l.get("id").toLong();
+
+  // Delete Campaigns + Comm Logs linked to this list
+  linkedCampaignId = l.get("Campaign_Lookup");
+  if (!isnull(linkedCampaignId)) {
+    cId = linkedCampaignId.get("id");
+    crit = "(Campaign_Lookup:equals:" + cId + ")";
+    logs = zoho.crm.searchRecords("Communication_Logs", crit, 1, 200);
+    for each lg in logs {
+      zoho.crm.deleteRecord("Communication_Logs", lg.get("id").toLong());
+    }
+    zoho.crm.deleteRecord("Campaigns", cId.toLong());
+    info "demo_reset: deleted " + logs.size() + " comm logs + 1 campaign";
+  }
+
+  zoho.crm.updateRecord("Mailing_Lists", lId, {
+    "Member_Count": 0,
+    "Exclusion_Count": 0,
+    "Built_At": null,
+    "List_Status": "Draft",
+    "Campaign_Lookup": null
+  });
+  info "demo_reset: Impact Report mailing list reset to Draft";
+}
+
+// Re-insert Marcus BLOCKED historical row (so DSAR proof is visible without live send)
+marcusSearch = zoho.crm.searchRecords("Contacts", "(Last_Name:equals:Weber)");
+if (marcusSearch.size() > 0) {
+  marcusId = marcusSearch.get(0).get("id");
+  blocked = Map();
+  blocked.put("Contact_Lookup", marcusId);
+  blocked.put("Direction", "Outbound");
+  blocked.put("Channel", "Email");
+  blocked.put("Sent_At", "2026-04-22T10:00:00");
+  blocked.put("Open_Status", "BLOCKED (opted out)");
+  blocked.put("Suppression_Reason", "Email opted out 2026-04-22 — historical send blocked");
+  zoho.crm.createRecord("Communication_Logs", blocked);
+}
+
+// ------------------------------------------------------------------
+// 8) Reset Annual Report Q2 2026 (Kenya) to Overdue
+// ------------------------------------------------------------------
+kenyaMou = zoho.crm.searchRecords("MoU_Obligations", "(Obligation_Name:equals:Annual Report Q2 2026)and(NC_Lookup:equals:UWC Kenya)");
+if (kenyaMou.size() > 0) {
+  m = kenyaMou.get(0).get("id").toLong();
+  zoho.crm.updateRecord("MoU_Obligations", m, {
+    "Obligation_Status": "Overdue",
+    "Submitted_On": null
+  });
+  info "demo_reset: Kenya Annual Report reset to Overdue";
+}
+
+// ------------------------------------------------------------------
+// 9) Recompute all derived fields
+// ------------------------------------------------------------------
+thisapp.recompute_competency_gaps();
+thisapp.recompute_mou_health();
+thisapp.recompute_volunteer_training_status();
+thisapp.mark_mou_overdue();
+thisapp.lapse_expired_memberships();
+
+info "demo_reset: COMPLETE — org returned to demo morning state";
+return "demo_reset complete";

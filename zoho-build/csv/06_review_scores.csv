@@ -1,0 +1,20 @@
+# Review Scores is a SUBFORM on Applications - cannot bulk-import via standard Import.
+# Use Zoho CRM API or add rows manually.
+# Pre-seed only Sofia's Application with Clara's row (Paulo's row is created live during demo).
+#
+# Subform row for Sofia Almeida - Application:
+# Reviewer = Clara Ramos
+# Score_Academic = 9
+# Score_Community = 8
+# Score_Communication = 8
+# Score_Values = 9
+# Overall_Recommendation = Yes
+# Reviewer_Comments = "Outstanding personal statement; strong commitment to community work in São Paulo favela schools."
+# Submitted_At = 2026-01-22 11:15:00
+# Visible_to_NC_Admin = false
+#
+# Manual steps in Zoho UI:
+#  1. Open Sofia Almeida's Application
+#  2. Scroll to Review Scores subform → + Add Row
+#  3. Enter values above → Save
+#  4. Refresh → confirm Review_Count = 1 (workflow fires)

@@ -1,0 +1,6 @@
+# Campaigns are created LIVE in Scenario G step 3 by Push to Mailchimp button.
+# No pre-seed required.
+#
+# If you want a historical campaign for reference list:
+# Campaign Name,Subject Line,From Name,Delivery Channel,Mailchimp Campaign ID,Scheduled At
+# UWC Newsletter Q1 2026,UWC International Q1 Update,UWC International <hello@uwc.org>,Mailchimp,MC-demo-000001,2026-01-15 09:00:00

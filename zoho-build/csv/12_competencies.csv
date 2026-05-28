@@ -1,0 +1,12 @@
+Competency Name,Category,Required for Board
+Governance,Governance,true
+Strategy,Governance,true
+Finance,Finance,true
+Legal,Legal,true
+Marketing & Comms,Sector,true
+Youth Engagement,Sector,true
+Safeguarding,Sector,true
+Asia-Pacific Regional,Regional,true
+Africa Regional,Regional,true
+Europe Regional,Regional,true
+Americas Regional,Regional,true

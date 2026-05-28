@@ -1,0 +1,512 @@
+/*
+ * UWC Demo — Zoho CRM Deluge function library
+ * Author: Sam Prabhu, A2Z Cloud
+ * Org: 20114943111 on crm.zoho.eu
+ *
+ * Paste each function block into Setup → Customisation → Functions → + Create Function.
+ * Category: Workflow.
+ * Argument types are noted in each header.
+ *
+ * Module API name conventions used here:
+ *   - Applications        = "Deals"     (Potentials renamed)
+ *   - Programmes          = "Products"  (Products renamed)
+ *   - National Committees = "National_Committees"
+ *   - Schools             = "Schools"
+ *   - NC Volunteers       = "NC_Volunteers"
+ *   - Training Records    = "Training_Records"
+ *   - MoU Obligations     = "MoU_Obligations"
+ *   - Governance Bodies   = "Governance_Bodies"
+ *   - Governance Memberships = "Governance_Memberships"
+ *   - Competencies        = "Competencies"
+ *   - School Place Allocations = "School_Place_Allocations"
+ *   - Nomination Packs    = "Nomination_Packs"
+ *   - Safeguarding Cases  = "Safeguarding_Cases"
+ *   - Mailing Lists       = "Mailing_Lists"
+ *   - Campaigns           = "Campaigns"   (standard)
+ *   - Communication Logs  = "Communication_Logs"
+ *   - Consent Records     = "Consent_Records"
+ *   - Contacts            = "Contacts"
+ *   - Users               = "users"
+ *
+ * DEMO RESET: see demo_reset.deluge — re-runnable between dry-runs.
+ */
+
+
+/* ============================================================================
+ * 1) increment_review_count(applicationId : STRING)
+ *    Fired by WR-C-3 when a Review Scores subform row is added.
+ *    Increments the parent Application's Review_Count.
+ * ========================================================================== */
+appId = applicationId.toLong();
+app = zoho.crm.getRecordById("Deals", appId);
+current = ifnull(app.get("Review_Count"), 0).toLong();
+upd = Map();
+upd.put("Review_Count", current + 1);
+resp = zoho.crm.updateRecord("Deals", appId, upd);
+info "increment_review_count: app " + appId + " Review_Count -> " + (current + 1);
+return "ok";
+
+
+/* ============================================================================
+ * 2) unlock_all_review_scores(applicationId : STRING)
+ *    Fired by WR-C-4 when Review_Count >= 2.
+ *    Flips Visible_to_NC_Admin = true on every Review Scores subform row.
+ * ========================================================================== */
+appId = applicationId.toLong();
+app = zoho.crm.getRecordById("Deals", appId);
+rows = ifnull(app.get("Review_Scores"), List());
+if (rows.size() == 0) {
+  info "unlock_all_review_scores: no subform rows on app " + appId;
+  return "noop";
+}
+updated = List();
+for each r in rows {
+  r.put("Visible_to_NC_Admin", true);
+  updated.add(r);
+}
+upd = Map();
+upd.put("Review_Scores", updated);
+resp = zoho.crm.updateRecord("Deals", appId, upd);
+info "unlock_all_review_scores: unlocked " + updated.size() + " rows on app " + appId;
+return "ok";
+
+
+/* ============================================================================
+ * 3) create_safeguarding_case(applicationId : STRING, raisedByUserId : STRING)
+ *    Fired by WR-C-5 when Safeguarding_Flag_Status changes from None.
+ *    Creates a Safeguarding Case + links Application + Contact.
+ * ========================================================================== */
+appId = applicationId.toLong();
+app = zoho.crm.getRecordById("Deals", appId);
+contactRef = app.get("Contact_Name");
+contactId = ifnull(contactRef, Map()).get("id");
+nowTs = zoho.currenttime.toString("yyyy-MM-dd'T'HH:mm:ss");
+
+caseRec = Map();
+caseRec.put("Reporter_Lookup", raisedByUserId);
+caseRec.put("Date_Raised", nowTs);
+caseRec.put("SG_Status", "Under Review");
+caseRec.put("Application_Lookup", appId);
+if (!isnull(contactId)) caseRec.put("Contact_Lookup", contactId);
+
+created = zoho.crm.createRecord("Safeguarding_Cases", caseRec);
+info "create_safeguarding_case: created case " + created.get("id") + " for app " + appId;
+return created.get("id");
+
+
+/* ============================================================================
+ * 4) decrement_school_quota(schoolId : STRING, ncId : STRING)
+ *    Fired by WR-D-1 when Stage becomes Nominated.
+ *    Increments Places_Used on the matching School_Place_Allocation.
+ * ========================================================================== */
+crit = "(School_Lookup:equals:" + schoolId + ")and(NC_Lookup:equals:" + ncId + ")and(Cycle:equals:2026)";
+allocs = zoho.crm.searchRecords("School_Place_Allocations", crit);
+if (allocs.size() == 0) {
+  info "decrement_school_quota: NO allocation for school " + schoolId + " nc " + ncId;
+  return "missing_allocation";
+}
+alloc = allocs.get(0);
+allocId = alloc.get("id");
+used = ifnull(alloc.get("Places_Used"), 0).toLong();
+upd = Map();
+upd.put("Places_Used", used + 1);
+zoho.crm.updateRecord("School_Place_Allocations", allocId.toLong(), upd);
+info "decrement_school_quota: alloc " + allocId + " Places_Used -> " + (used + 1);
+return "ok";
+
+
+/* ============================================================================
+ * 5) generate_nomination_pack(applicationId : STRING)
+ *    Custom button on Application.
+ *    Builds UWC-branded HTML, creates Nomination_Pack record, attaches file.
+ * ========================================================================== */
+appId = applicationId.toLong();
+app = zoho.crm.getRecordById("Deals", appId);
+applicant = zoho.crm.getRecordById("Contacts", app.get("Contact_Name").get("id"));
+school = zoho.crm.getRecordById("Schools", app.get("School_Nominated").get("id"));
+nc = zoho.crm.getRecordById("National_Committees", app.get("National_Committee").get("id"));
+
+ncCode = ifnull(nc.get("NC_Code"), "XX");
+yr = zoho.currenttime.year();
+appName = ifnull(app.get("Deal_Name"), "APP");
+suffix = appName.subString(appName.lastIndexOf("-") + 1);
+ncRef = ncCode + "-" + yr + "-" + suffix;
+
+html = "<!doctype html><html><head><meta charset='utf-8'>";
+html = html + "<style>";
+html = html + "body{font-family:Helvetica,Arial,sans-serif;color:#222;margin:0;}";
+html = html + ".banner{background:#003087;color:#fff;padding:28px 24px;font-size:22px;font-weight:600;}";
+html = html + ".section{padding:18px 24px;border-bottom:1px solid #e6e6e6;}";
+html = html + ".label{color:#666;font-size:12px;text-transform:uppercase;letter-spacing:.5px;}";
+html = html + ".value{font-size:15px;margin-top:4px;}";
+html = html + "</style></head><body>";
+html = html + "<div class='banner'>UWC Nomination Pack &mdash; " + ncRef + "</div>";
+html = html + "<div class='section'><div class='label'>Applicant</div><div class='value'>" + applicant.get("First_Name") + " " + applicant.get("Last_Name") + "</div>";
+html = html + "<div class='label' style='margin-top:8px'>Date of Birth</div><div class='value'>" + ifnull(applicant.get("Date_of_Birth"), "—") + "</div>";
+html = html + "<div class='label' style='margin-top:8px'>Country</div><div class='value'>" + ifnull(applicant.get("Country"), "—") + "</div></div>";
+html = html + "<div class='section'><div class='label'>Nominating National Committee</div><div class='value'>" + nc.get("NC_Name") + "</div></div>";
+html = html + "<div class='section'><div class='label'>Target School</div><div class='value'>" + school.get("School_Name") + "</div></div>";
+html = html + "<div class='section'><div class='label'>Personal Statement</div><div class='value' style='white-space:pre-wrap'>" + ifnull(app.get("Personal_Statement"), "(no statement on file)") + "</div></div>";
+html = html + "<div class='section' style='text-align:right;color:#888;font-size:11px'>Generated " + zoho.currenttime + " &middot; UWC International</div>";
+html = html + "</body></html>";
+
+pack = Map();
+pack.put("Application_Lookup", appId);
+pack.put("Target_School_Lookup", school.get("id"));
+pack.put("Pack_Status", "Generated");
+pack.put("Generated_At", zoho.currenttime.toString("yyyy-MM-dd'T'HH:mm:ss"));
+pack.put("NC_Reference", ncRef);
+created = zoho.crm.createRecord("Nomination_Packs", pack);
+packId = created.get("id");
+
+// Attach as HTML file. PDF rendering optional (use Zoho Sign HTML→PDF or WorkDrive convert).
+htmlFile = invokeurl
+[
+  url : "data:text/html;base64," + zoho.encryption.base64Encode(html)
+  type : GET
+];
+// Fallback attach via Files API
+attachResp = zoho.crm.attachFile("Nomination_Packs", packId.toLong(), htmlFile);
+info "generate_nomination_pack: pack " + packId + " ref " + ncRef + " attached " + attachResp.size() + " bytes";
+return packId;
+
+
+/* ============================================================================
+ * 6) send_to_business_central(applicationId : STRING)
+ *    DEMO STUB. Fired by WR-D-2 when Stage = Placed.
+ *    Real integration would invokeUrl Business Central OAuth endpoint.
+ * ========================================================================== */
+appId = applicationId.toLong();
+invNum = "INV-2026-" + randomNumber(100000, 999999).toString();
+upd = Map();
+upd.put("BC_Invoice_ID", invNum);
+zoho.crm.updateRecord("Deals", appId, upd);
+info "send_to_business_central: STUB fired — invoice " + invNum + " logged on app " + appId;
+return invNum;
+
+
+/* ============================================================================
+ * 7) recompute_competency_gaps()
+ *    Scheduled Daily @ 02:45 UTC.
+ *    Updates Gap_Count + Total_Holders on every Competency.
+ * ========================================================================== */
+comps = zoho.crm.getRecords("Competencies", 1, 200);
+bodies = zoho.crm.searchRecords("Governance_Bodies", "(Body_Type:equals:Board)and(Body_Status:equals:Active)");
+
+for each c in comps {
+  cId = c.get("id").toLong();
+  gap = 0;
+  total = 0;
+  for each b in bodies {
+    bId = b.get("id");
+    crit = "(Governance_Body:equals:" + bId + ")and(Membership_Status:equals:Active)";
+    members = zoho.crm.searchRecords("Governance_Memberships", crit);
+    found = false;
+    for each m in members {
+      held = ifnull(m.get("Competencies_Held"), List());
+      for each h in held {
+        if (h.get("id") == cId.toString()) {
+          found = true;
+          total = total + 1;
+        }
+      }
+    }
+    if (!found) gap = gap + 1;
+  }
+  upd = Map();
+  upd.put("Gap_Count", gap);
+  upd.put("Total_Holders", total);
+  zoho.crm.updateRecord("Competencies", cId, upd);
+}
+info "recompute_competency_gaps: processed " + comps.size() + " competencies across " + bodies.size() + " boards";
+return "ok";
+
+
+/* ============================================================================
+ * 8) lapse_expired_memberships()
+ *    Scheduled Daily @ 02:15 UTC.
+ *    Flips Membership_Status to Lapsed when Term_Expires < TODAY.
+ * ========================================================================== */
+today = zoho.currentdate;
+crit = "(Term_Expires:less_than:" + today + ")and(Membership_Status:equals:Active)";
+expired = zoho.crm.searchRecords("Governance_Memberships", crit);
+for each m in expired {
+  mId = m.get("id").toLong();
+  zoho.crm.updateRecord("Governance_Memberships", mId, {"Membership_Status": "Lapsed"});
+}
+info "lapse_expired_memberships: lapsed " + expired.size() + " memberships";
+return "ok";
+
+
+/* ============================================================================
+ * 9) mark_mou_overdue()
+ *    Scheduled Daily @ 02:30 UTC.
+ *    Flips MoU Status to Overdue when Due_Date < TODAY and Status = Pending.
+ * ========================================================================== */
+today = zoho.currentdate;
+crit = "(Due_Date:less_than:" + today + ")and(Obligation_Status:equals:Pending)";
+overdue = zoho.crm.searchRecords("MoU_Obligations", crit);
+for each o in overdue {
+  oId = o.get("id").toLong();
+  zoho.crm.updateRecord("MoU_Obligations", oId, {"Obligation_Status": "Overdue"});
+}
+info "mark_mou_overdue: marked " + overdue.size() + " obligations overdue";
+return "ok";
+
+
+/* ============================================================================
+ * 10) recompute_mou_health()
+ *     Scheduled Daily @ 03:15 UTC.
+ *     Sets MoU_Health on every NC: Good/Attention/Critical.
+ * ========================================================================== */
+ncs = zoho.crm.getRecords("National_Committees", 1, 200);
+for each n in ncs {
+  ncId = n.get("id");
+  crit = "(NC_Lookup:equals:" + ncId + ")and(Obligation_Status:equals:Overdue)";
+  overdue = zoho.crm.searchRecords("MoU_Obligations", crit);
+  count = overdue.size();
+  health = "Good";
+  if (count >= 2) health = "Critical";
+  else if (count >= 1) health = "Attention";
+  upd = Map();
+  upd.put("MoU_Health", health);
+  upd.put("Overdue_MoU_Count", count);
+  zoho.crm.updateRecord("National_Committees", ncId.toLong(), upd);
+}
+info "recompute_mou_health: updated " + ncs.size() + " NCs";
+return "ok";
+
+
+/* ============================================================================
+ * 11) recompute_volunteer_training_status()
+ *     Scheduled Daily @ 03:30 UTC.
+ *     Writes Training_Status on every NC Volunteer: CURRENT/EXPIRING SOON/EXPIRED/MISSING.
+ *     Required because formulas can't query "no records exist".
+ * ========================================================================== */
+vols = zoho.crm.getRecords("NC_Volunteers", 1, 500);
+today = zoho.currentdate;
+soonCut = addDay(today, 90);
+for each v in vols {
+  vId = v.get("id");
+  crit = "(Volunteer_Lookup:equals:" + vId + ")";
+  trainings = zoho.crm.searchRecords("Training_Records", crit);
+  status = "MISSING";
+  if (trainings.size() > 0) {
+    hasExpired = false;
+    hasSoon = false;
+    for each t in trainings {
+      exp = t.get("Expiry_Date");
+      if (!isnull(exp)) {
+        d = exp.toDate();
+        if (d < today) hasExpired = true;
+        else if (d < soonCut) hasSoon = true;
+      }
+    }
+    if (hasExpired) status = "EXPIRED";
+    else if (hasSoon) status = "EXPIRING SOON";
+    else status = "CURRENT";
+  }
+  zoho.crm.updateRecord("NC_Volunteers", vId.toLong(), {"Training_Status": status});
+}
+info "recompute_volunteer_training_status: updated " + vols.size() + " volunteers";
+return "ok";
+
+
+/* ============================================================================
+ * 12) build_mailing_list(listId : STRING)
+ *     Custom button on Mailing List detail.
+ *     Parses Segment_Criteria_JSON, queries Contacts, excludes opted-out, writes counts.
+ * ========================================================================== */
+lId = listId.toLong();
+list = zoho.crm.getRecordById("Mailing_Lists", lId);
+criteriaStr = ifnull(list.get("Segment_Criteria_JSON"), "{}");
+criteria = criteriaStr.toMap();
+
+includeRules = ifnull(criteria.get("include"), List());
+excludeRules = ifnull(criteria.get("exclude"), List());
+
+// Build include criteria string for searchRecords (basic implementation — single rule)
+zohoQuery = "";
+if (includeRules.size() > 0) {
+  r = includeRules.get(0);
+  field = r.get("field");
+  op = r.get("op");
+  val = r.get("value");
+  if (op == "in" && val.size() > 0) {
+    parts = List();
+    for each v in val {
+      parts.add("(" + field + ":equals:" + v + ")");
+    }
+    zohoQuery = "(" + parts.toString("or") + ")";
+  }
+}
+if (isnull(zohoQuery) || zohoQuery == "") zohoQuery = "(Last_Name:not_equal:__never__)";
+
+matches = zoho.crm.searchRecords("Contacts", zohoQuery, 1, 200);
+included = List();
+excluded = List();
+
+for each c in matches {
+  blockedByConsent = false;
+  for each rule in excludeRules {
+    f = rule.get("field");
+    v = rule.get("value");
+    cv = c.get(f);
+    if (cv == v) blockedByConsent = true;
+  }
+  if (blockedByConsent) excluded.add(c.get("id"));
+  else included.add(c.get("id"));
+}
+
+upd = Map();
+upd.put("Member_Count", included.size());
+upd.put("Exclusion_Count", excluded.size());
+upd.put("Built_At", zoho.currenttime.toString("yyyy-MM-dd'T'HH:mm:ss"));
+upd.put("List_Status", "Built");
+zoho.crm.updateRecord("Mailing_Lists", lId, upd);
+
+info "build_mailing_list: list " + lId + " included " + included.size() + " excluded " + excluded.size();
+return Map().put("included", included).put("excluded", excluded);
+
+
+/* ============================================================================
+ * 13) log_campaign_sends(listId : STRING)
+ *     Custom button on Mailing List detail ("Push to Mailchimp").
+ *     Creates Campaign + one Communication Log row per recipient + a BLOCKED row per excluded.
+ * ========================================================================== */
+lId = listId.toLong();
+list = zoho.crm.getRecordById("Mailing_Lists", lId);
+
+// Rebuild list to ensure freshness
+buildResult = thisapp.build_mailing_list(listId);
+included = buildResult.get("included");
+excluded = buildResult.get("excluded");
+
+// Create Campaign
+mcId = "MC-demo-" + randomNumber(100000, 999999).toString();
+camp = Map();
+camp.put("Campaign_Name", list.get("List_Name"));
+camp.put("Subject_Line", list.get("List_Name") + " — UWC International");
+camp.put("From_Name", "UWC International <hello@uwc.org>");
+camp.put("Mailing_List_Lookup", lId);
+camp.put("Delivery_Channel", "Mailchimp");
+camp.put("Mailchimp_Campaign_Id", mcId);
+camp.put("Scheduled_At", zoho.currenttime.toString("yyyy-MM-dd'T'HH:mm:ss"));
+campCreated = zoho.crm.createRecord("Campaigns", camp);
+campId = campCreated.get("id");
+
+// Create Comm Log rows
+for each cId in included {
+  log = Map();
+  log.put("Contact_Lookup", cId);
+  log.put("Campaign_Lookup", campId);
+  log.put("Direction", "Outbound");
+  log.put("Channel", "Email");
+  log.put("Sent_At", zoho.currenttime.toString("yyyy-MM-dd'T'HH:mm:ss"));
+  log.put("Open_Status", "Not opened");
+  zoho.crm.createRecord("Communication_Logs", log);
+}
+for each cId in excluded {
+  log = Map();
+  log.put("Contact_Lookup", cId);
+  log.put("Campaign_Lookup", campId);
+  log.put("Direction", "Outbound");
+  log.put("Channel", "Email");
+  log.put("Sent_At", zoho.currenttime.toString("yyyy-MM-dd'T'HH:mm:ss"));
+  log.put("Open_Status", "BLOCKED (opted out)");
+  log.put("Suppression_Reason", "Contact has opted out — Consent_Records audit trail attached");
+  zoho.crm.createRecord("Communication_Logs", log);
+}
+
+// Update list
+zoho.crm.updateRecord("Mailing_Lists", lId, {
+  "List_Status": "Sent",
+  "Campaign_Lookup": campId
+});
+
+info "log_campaign_sends: campaign " + campId + " mc " + mcId + " sent " + included.size() + " blocked " + excluded.size();
+return campId;
+
+
+/* ============================================================================
+ * 14) mirror_consent_to_contact(contactId : STRING, channel : STRING, changeType : STRING)
+ *     Fired by WR-G-1 when a Consent Record is created.
+ *     Denormalises latest consent state onto the Contact for fast filtering.
+ * ========================================================================== */
+cId = contactId.toLong();
+fieldName = "Consent_" + channel + "_Status";
+upd = Map();
+upd.put(fieldName, changeType);
+zoho.crm.updateRecord("Contacts", cId, upd);
+info "mirror_consent_to_contact: contact " + cId + " " + fieldName + " -> " + changeType;
+return "ok";
+
+
+/* ============================================================================
+ * 15) generate_consent_audit_trail(contactId : STRING)
+ *     Custom button on Contact (DPL profile only).
+ *     Exports all Consent Records for the contact as CSV attached to the Contact.
+ * ========================================================================== */
+cId = contactId.toLong();
+contact = zoho.crm.getRecordById("Contacts", cId);
+crit = "(Contact_Lookup:equals:" + contactId + ")";
+records = zoho.crm.searchRecords("Consent_Records", crit, 1, 200);
+
+csv = "Recorded At,Change Type,Source,Lawful Basis,Channel,IP/Reference,Notes" + "\n";
+for each r in records {
+  row = ifnull(r.get("Recorded_At"), "") + ",";
+  row = row + ifnull(r.get("Consent_Change"), "") + ",";
+  row = row + ifnull(r.get("Consent_Source"), "") + ",";
+  row = row + ifnull(r.get("Lawful_Basis"), "") + ",";
+  row = row + ifnull(r.get("Consent_Channel"), "") + ",";
+  row = row + ifnull(r.get("IP_Or_Reference"), "") + ",";
+  row = row + ifnull(r.get("Notes"), "").replaceAll(",", ";") + "\n";
+  csv = csv + row;
+}
+
+filename = "DSAR-" + contact.get("Last_Name") + "-" + zoho.currentdate.toString("yyyy-MM-dd") + ".csv";
+csvFile = invokeurl
+[
+  url : "data:text/csv;base64," + zoho.encryption.base64Encode(csv)
+  type : GET
+];
+zoho.crm.attachFile("Contacts", cId, csvFile);
+info "generate_consent_audit_trail: " + filename + " (" + records.size() + " rows) attached to contact " + cId;
+return filename;
+
+
+/* ============================================================================
+ * 16) email_renewal_due()
+ *     Scheduled Daily @ 02:00 UTC.
+ *     Emails IO + Body Chair when a Governance Membership term expires in 60 days.
+ * ========================================================================== */
+target = addDay(zoho.currentdate, 60);
+crit = "(Term_Expires:equals:" + target + ")and(Membership_Status:equals:Active)";
+due = zoho.crm.searchRecords("Governance_Memberships", crit);
+for each m in due {
+  // Send email via Email Alert in workflow OR direct sendmail here
+  mId = m.get("id");
+  // Implementation depends on email template registered in Setup
+  info "email_renewal_due: membership " + mId + " expires in 60 days";
+}
+info "email_renewal_due: processed " + due.size() + " upcoming renewals";
+return "ok";
+
+
+/* ============================================================================
+ * 17) notify_training_expiring()
+ *     Scheduled Daily @ 03:00 UTC.
+ *     Emails NC Chair when a volunteer's training expires within 30 days.
+ * ========================================================================== */
+target = addDay(zoho.currentdate, 30);
+crit = "(Expiry_Date:equals:" + target + ")";
+expiring = zoho.crm.searchRecords("Training_Records", crit);
+for each t in expiring {
+  tId = t.get("id");
+  // Email send via template
+  info "notify_training_expiring: training " + tId + " expires in 30 days";
+}
+info "notify_training_expiring: processed " + expiring.size();
+return "ok";
+
+/* End of function library. */

@@ -1,0 +1,2 @@
+List Name,Segment Criteria,Status
+Impact Report Q2 2026,"{""include"":[{""field"":""Contact_Type"",""op"":""in"",""value"":[""Donor"",""Alumni"",""Volunteer""]}],""exclude"":[{""field"":""Consent_Email_Status"",""op"":""="",""value"":""Opted Out""}]}",Draft

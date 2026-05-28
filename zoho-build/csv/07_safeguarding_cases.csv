@@ -1,0 +1,7 @@
+# Safeguarding Cases — DO NOT pre-seed for demo.
+# Akanksha creates SGC-2026-00001 LIVE during Scenario C step 7 by clicking the
+# Raise Safeguarding Flag button on Miguel Santos. The Deluge function
+# create_safeguarding_case fires the WR-C-5 chain.
+#
+# If you need to test before demo, manually flip Miguel.Safeguarding_Flag_Status
+# to "Under Review" once, verify case auto-creates, then revert via demo_reset.deluge.
