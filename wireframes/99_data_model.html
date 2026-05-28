@@ -3,893 +3,978 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UWC CRM — Data Model &amp; Architecture · A2Z Cloud</title>
+<title>Data Model &amp; Architecture · UWC International CRM · A2Z Cloud</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* <!-- INLINE:uwc-tokens.css --> */
-:root{--uwc-navy:#003087;--uwc-navy-deep:#001a4d;--uwc-navy-tint:#E8EEF6;--uwc-red:#C8102E;--uwc-red-tint:#fdeaea;--uwc-gold:#C8AB00;--uwc-green:#1f9535;--uwc-orange:#e85d0c;--uwc-navy-live:#004A97;--uwc-teal:#009482;--uwc-white:#ffffff;--uwc-grey-50:#f8f9fb;--uwc-grey-100:#f3f5fa;--uwc-grey-200:#e2e6ed;--uwc-grey-300:#c8cdd8;--uwc-grey-400:#9aa3b8;--uwc-grey-500:#6C757D;--uwc-grey-600:#5a6480;--uwc-grey-800:#0d1b3e;--uwc-font-title:'Playfair Display',Georgia,serif;--uwc-font-body:'DM Sans',system-ui,sans-serif;--uwc-font-mono:'DM Mono',ui-monospace,monospace;--uwc-radius-sm:4px;--uwc-radius:8px;--uwc-radius-lg:12px;--uwc-radius-pill:999px;--uwc-shadow-sm:0 1px 2px rgba(0,0,0,0.04);--uwc-shadow:0 2px 8px rgba(0,48,135,0.08);--uwc-shadow-lg:0 8px 24px rgba(0,48,135,0.12);--uwc-tx-fast:120ms ease;--uwc-tx:200ms cubic-bezier(0.4,0,0.2,1)}
-*,*::before,*::after{box-sizing:border-box}
-body{margin:0;font-family:var(--uwc-font-body);font-size:14px;color:var(--uwc-grey-800);background:var(--uwc-grey-100);-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4,h5{font-family:var(--uwc-font-title);font-weight:500;line-height:1.2;margin:0}
-a{color:var(--uwc-navy);text-decoration:none}
-a:hover{color:var(--uwc-red);text-decoration:underline}
-/* <!-- /INLINE --> */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-feature-settings:'cv02','cv03','cv11';color:#0f172a;background:#f1f5f9;-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:#003087;text-decoration:none}
+a:hover{text-decoration:underline}
+.serif{font-family:'Playfair Display',Georgia,serif;font-weight:500}
+.mono{font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
 
-/* ── Topbar ── */
-.topbar{background:var(--uwc-navy);color:#fff;padding:0 32px;height:52px;display:flex;align-items:center;gap:20px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.25)}
-.topbar__back{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,0.75);font-size:12.5px;font-weight:500;transition:color var(--uwc-tx-fast)}
-.topbar__back:hover{color:#fff;text-decoration:none}
-.topbar__back::before{content:'←';font-size:14px}
-.topbar__divider{width:1px;height:20px;background:rgba(255,255,255,0.2)}
-.topbar__brand{display:flex;align-items:center;gap:10px}
-.topbar__logo{width:28px;height:28px;border-radius:50%;background:#fff;color:var(--uwc-navy);display:flex;align-items:center;justify-content:center;font-family:var(--uwc-font-title);font-weight:700;font-size:10px;flex-shrink:0}
-.topbar__title{font-family:var(--uwc-font-title);font-size:15px;font-weight:500;color:#fff}
-.topbar__subtitle{font-size:11px;color:rgba(255,255,255,0.55);letter-spacing:1.2px;text-transform:uppercase;margin-left:auto}
-.topbar__badge{background:var(--uwc-red);color:#fff;font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border-radius:var(--uwc-radius-sm)}
+/* ===== HEADER ===== */
+.header{background:linear-gradient(135deg,#001a4d 0%,#003087 50%,#004A97 100%);color:#fff;border-bottom:3px solid #C8102E;padding:0}
+.header-inner{max-width:1440px;margin:0 auto;padding:26px 32px;display:flex;align-items:center;gap:20px}
+.header-mark{width:48px;height:48px;border-radius:50%;background:#fff;color:#003087;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:14px;flex-shrink:0}
+.header-titleblock{flex:1}
+.header-title{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:24px;letter-spacing:0.2px}
+.header-sub{font-size:12.5px;color:rgba(255,255,255,0.7);margin-top:4px;letter-spacing:0.3px}
+.header-meta{display:flex;gap:14px;font-size:11px;color:rgba(255,255,255,0.65)}
+.header-meta strong{color:#fff;font-weight:600;display:block;font-size:14px;margin-top:2px}
+.header-meta div{padding:0 14px;border-left:1px solid rgba(255,255,255,0.18)}
+.header-meta div:first-child{border-left:none;padding-left:0}
+.header-back{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,0.75);font-size:12.5px;font-weight:500;white-space:nowrap;padding:8px 16px;border:1px solid rgba(255,255,255,0.25);border-radius:8px;transition:all 120ms}
+.header-back:hover{color:#fff;background:rgba(255,255,255,0.1);text-decoration:none}
 
-/* ── Page layout ── */
-.page-wrap{max-width:1440px;margin:0 auto;padding:32px}
-.section-header{margin:48px 0 20px}
-.section-header:first-child{margin-top:0}
-.section-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--uwc-red);margin-bottom:8px}
-.section-title{font-family:var(--uwc-font-title);font-size:26px;font-weight:500;color:var(--uwc-navy)}
-.section-desc{font-size:13.5px;color:var(--uwc-grey-500);margin-top:6px;line-height:1.55;max-width:820px}
+/* ===== STATS BAR ===== */
+.stats{background:#fff;border-bottom:1px solid #e2e8f0;padding:14px 0}
+.stats-inner{max-width:1440px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.stat{display:flex;flex-direction:column;gap:2px}
+.stat-label{font-size:10.5px;font-weight:600;color:#64748b;letter-spacing:1.4px;text-transform:uppercase}
+.stat-val{font-family:'Playfair Display',Georgia,serif;font-weight:600;font-size:22px;color:#003087;line-height:1}
+.stat-sub{font-size:11px;color:#64748b}
 
-/* ── How-to-read legend card ── */
-.legend-card{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);padding:18px 22px;margin-bottom:28px;box-shadow:var(--uwc-shadow-sm);display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start}
-.legend-title{font-size:11px;font-weight:700;color:var(--uwc-grey-500);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;width:100%}
-.legend-group{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--uwc-grey-600)}
-.legend-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:var(--uwc-radius-sm);font-size:10.5px;font-weight:600;font-family:var(--uwc-font-mono)}
-.chip-current{background:#d1fae5;color:#065f46;border:1px solid #6ee7b7}
-.chip-target{background:var(--uwc-navy-tint);color:var(--uwc-navy);border:1px solid #93c5fd}
+/* ===== MAIN CONTENT ===== */
+.page{max-width:1440px;margin:0 auto;padding:32px 32px 60px}
+
+.section-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#C8102E;margin-bottom:8px}
+.section-title{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:26px;color:#003087;margin-bottom:6px}
+.section-desc{font-size:13.5px;color:#64748b;line-height:1.6;max-width:860px}
+.section-header{margin:0 0 20px}
+.section-header+.section-header{margin-top:56px}
+
+/* ===== LEGEND CARD ===== */
+.legend-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:18px 22px;margin-bottom:24px;box-shadow:0 1px 2px rgba(15,23,42,0.04);display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+.legend-title{font-size:10px;font-weight:700;color:#64748b;letter-spacing:1.6px;text-transform:uppercase;width:100%;margin-bottom:4px}
+.legend-item{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:#475569}
+.legend-dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex-shrink:0}
+.legend-chip{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:10.5px;font-weight:600;font-family:'JetBrains Mono',monospace}
+.chip-live{background:#dcfce7;color:#166534;border:1px solid #86efac}
+.chip-partial{background:#fef9c3;color:#854d0e;border:1px solid #fde047}
+.chip-pending{background:#e0e7ff;color:#3730a3;border:1px solid #c7d2fe}
 .chip-renamed{background:#fef3c7;color:#92400e;border:1px solid #fcd34d}
-.legend-line{display:inline-block;width:36px;height:2px;background:var(--uwc-grey-400);border-radius:2px;vertical-align:middle}
-.legend-line-dashed{display:inline-block;width:36px;height:0;border-top:2px dashed var(--uwc-grey-400);vertical-align:middle}
-.legend-dot{display:inline-block;width:10px;height:10px;border-radius:50%}
-.legend-sep{width:1px;height:32px;background:var(--uwc-grey-200);margin:0 4px}
+.legend-sep{width:1px;height:28px;background:#e2e8f0;margin:0 4px}
+.legend-line{display:inline-block;width:32px;height:2px;background:#94a3b8;border-radius:2px;vertical-align:middle}
+.legend-dashed{display:inline-block;width:32px;height:0;border-top:2px dashed #94a3b8;vertical-align:middle}
 
-/* ── SVG wrapper ── */
-.svg-scroll{width:100%;overflow-x:auto;background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);box-shadow:var(--uwc-shadow);padding:8px}
-.svg-scroll svg{display:block;min-width:1380px}
+/* ===== SVG WRAPPERS ===== */
+.svg-scroll{width:100%;overflow-x:auto;background:#fff;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 2px rgba(15,23,42,0.04);padding:8px}
+.svg-scroll svg{display:block}
 
-/* ── Architecture section ── */
-.arch-svg-wrap{width:100%;overflow-x:auto;background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);box-shadow:var(--uwc-shadow);padding:8px}
+/* ===== SPACER ===== */
+.spacer-56{height:56px}
 
-/* ── Footer ── */
-footer{background:var(--uwc-navy-deep);color:rgba(255,255,255,0.5);padding:22px 32px;text-align:center;font-size:11px;letter-spacing:0.4px;margin-top:56px}
+/* ===== FOOTER ===== */
+footer{background:#001a4d;color:rgba(255,255,255,0.5);padding:22px 32px;text-align:center;font-size:11px;letter-spacing:0.4px;margin-top:56px}
 footer strong{color:rgba(255,255,255,0.85)}
+
+@media print{
+  .header-back{display:none}
+  .svg-scroll{overflow:visible}
+  svg{page-break-inside:avoid}
+}
 </style>
 </head>
 <body>
 
-<!-- ── Topbar ── -->
-<nav class="topbar">
-  <a href="00_index.html" class="topbar__back">Back to scenarios</a>
-  <div class="topbar__divider"></div>
-  <div class="topbar__brand">
-    <div class="topbar__logo">UWC</div>
-    <span class="topbar__title">Data Model &amp; Architecture</span>
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-inner">
+    <div class="header-mark">UWC</div>
+    <div class="header-titleblock">
+      <div class="header-title">Data Model &amp; Architecture</div>
+      <div class="header-sub">UWC International CRM · Zoho CRM EU · 18 Modules · A2Z Cloud</div>
+    </div>
+    <div class="header-meta">
+      <div><span>Reference</span><strong>UWC-CRM-5128</strong></div>
+      <div><span>Version</span><strong>v4.0</strong></div>
+      <div><span>Demo</span><strong>1 Jun 2026</strong></div>
+      <div><span>Partner</span><strong>A2Z Cloud</strong></div>
+    </div>
+    <a href="00_index.html" class="header-back">← Back to scenarios</a>
   </div>
-  <span class="topbar__subtitle">Reference · 99</span>
-  <div class="topbar__badge">Demo · 1 Jun 2026</div>
-</nav>
+</header>
 
-<div class="page-wrap">
+<!-- ===== STATS BAR ===== -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat">
+      <span class="stat-label">Modules</span>
+      <span class="stat-val">18</span>
+      <span class="stat-sub">across 8 domains</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Live Now</span>
+      <span class="stat-val">7</span>
+      <span class="stat-sub">in Zoho CRM EU</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Target Build</span>
+      <span class="stat-val">11</span>
+      <span class="stat-sub">post-pilot phase</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Relationships</span>
+      <span class="stat-val">22</span>
+      <span class="stat-sub">1:N and N:N links</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Arch Layers</span>
+      <span class="stat-val">8</span>
+      <span class="stat-sub">actor → security</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Integrations</span>
+      <span class="stat-val">6</span>
+      <span class="stat-sub">via Zoho Flow</span>
+    </div>
+  </div>
+</div>
 
-  <!-- ══════════════════════════════════════════════
+<!-- ===== PAGE ===== -->
+<main class="page">
+
+  <!-- ────────────────────────────────
        SECTION 1 — ERD
-  ══════════════════════════════════════════════ -->
+  ──────────────────────────────── -->
   <div class="section-header">
     <div class="section-tag">Section 1 of 2</div>
     <h2 class="section-title">Entity Relationship Diagram — 18 Modules</h2>
-    <p class="section-desc">Salesforce Schema-Builder-style view of every CRM module, grouped by domain. Boxes show key fields and current deployment status. Connector lines carry cardinality labels. Scroll right on smaller screens.</p>
+    <p class="section-desc">Salesforce Schema-Builder–style view of every CRM module, grouped by domain. Each box shows the domain-coloured header, key fields, and deployment status chip. Connector lines carry cardinality labels. Scroll right on smaller screens.</p>
   </div>
 
-  <!-- How-to-read legend -->
   <div class="legend-card">
     <div class="legend-title">How to read this diagram</div>
-    <div class="legend-group"><span class="legend-dot" style="background:#0ea5e9"></span> People domain</div>
-    <div class="legend-group"><span class="legend-dot" style="background:#003087"></span> Application core</div>
-    <div class="legend-group"><span class="legend-dot" style="background:#7c3aed"></span> Selection</div>
-    <div class="legend-group"><span class="legend-dot" style="background:#10b981"></span> Placement</div>
-    <div class="legend-group"><span class="legend-dot" style="background:#C8AB00"></span> Governance</div>
-    <div class="legend-group"><span class="legend-dot" style="background:#1f9535"></span> Volunteer ops</div>
-    <div class="legend-group"><span class="legend-dot" style="background:#ec4899"></span> Comms</div>
-    <div class="legend-group"><span class="legend-dot" style="background:#6b7280"></span> Audit</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#0ea5e9"></span> People</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#003087"></span> Application Core</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#7c3aed"></span> Selection</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#10b981"></span> Placement</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#C8AB00"></span> Governance</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#1f9535"></span> Volunteer Ops</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#ec4899"></span> Comms</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#6b7280"></span> Audit</div>
     <div class="legend-sep"></div>
-    <div class="legend-group"><span class="chip-current">Current ✓</span> Exists in live Zoho org</div>
-    <div class="legend-group"><span class="chip-target">Target ⊕</span> Needs build post-pilot</div>
-    <div class="legend-group"><span class="chip-renamed">Renamed ⟳</span> Standard module renamed</div>
+    <div class="legend-item"><span class="chip-live legend-chip">Live ✓</span> In Zoho org now</div>
+    <div class="legend-item"><span class="chip-renamed legend-chip">Renamed ⟳</span> Std module renamed</div>
+    <div class="legend-item"><span class="chip-pending legend-chip">Pending ⊕</span> Post-pilot build</div>
     <div class="legend-sep"></div>
-    <div class="legend-group"><span class="legend-line"></span> 1:N relationship</div>
-    <div class="legend-group"><span class="legend-line-dashed"></span> N:N (junction)</div>
+    <div class="legend-item"><span class="legend-line"></span> 1:N relationship</div>
+    <div class="legend-item"><span class="legend-dashed"></span> N:N (junction)</div>
   </div>
 
   <div class="svg-scroll">
-<!-- ERD SVG -->
-<svg viewBox="0 0 1400 1060" xmlns="http://www.w3.org/2000/svg" style="font-family:'DM Sans',system-ui,sans-serif">
+<!--
+  ERD LAYOUT (all coordinates are absolute within the 1500×1120 viewBox)
+  ─────────────────────────────────────────────────────────────────────
+  Row 0 (y=40):  domain cluster labels
+  Row 1 (y=55–305):   Contact(28,55) | Programme(310,55) | Application(560,55) | ReviewScore(900,55) | NomPack(1130,55)
+  Row 2 (y=330–510):  Lead(28,330)   | NatComm(310,330)  | School(560,330)     | SafeFlag(900,330)   | SPA(1130,330)
+  Row 3 (y=570–830):  GovBody(28,570)| GovMem(280,570)   | Competency(28,780) [INSIDE GOV cluster]
+                       NCVol(560,570) | Training(780,570) | MoUObl(560,770)
+                       MailList(1020,570)| Campaign(1240,570)
+                       CommLog(1020,770) | Consent(1240,770)
+  Bottom:  AuditLog spans wide at y=980
+-->
+<svg viewBox="0 0 1500 1220" xmlns="http://www.w3.org/2000/svg"
+     style="font-family:'Inter',-apple-system,sans-serif;display:block;min-width:1380px">
 
 <defs>
-  <!-- Arrow markers -->
-  <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-    <path d="M0,0 L0,6 L8,3 z" fill="#94a3b8"/>
+  <marker id="a1" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+    <path d="M0,0 L0,7 L8,3.5 z" fill="#94a3b8"/>
   </marker>
-  <marker id="arr-dark" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-    <path d="M0,0 L0,6 L8,3 z" fill="#64748b"/>
+  <marker id="a2" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+    <path d="M0,0 L0,7 L8,3.5 z" fill="#64748b"/>
   </marker>
-  <!-- Grid background -->
-  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#f1f5f9" stroke-width="1"/>
+  <filter id="bshadow" x="-5%" y="-5%" width="110%" height="120%">
+    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.07"/>
+  </filter>
+  <pattern id="dotgrid" width="30" height="30" patternUnits="userSpaceOnUse">
+    <circle cx="1" cy="1" r="1" fill="#e2e8f0"/>
   </pattern>
 </defs>
 
 <!-- Background -->
-<rect width="1400" height="1060" fill="#f8fafc"/>
-<rect width="1400" height="1060" fill="url(#grid)"/>
+<rect width="1500" height="1220" fill="#f8fafc"/>
+<rect width="1500" height="1220" fill="url(#dotgrid)"/>
 
-<!-- Domain cluster backgrounds -->
-<!-- People cluster -->
-<rect x="18" y="18" width="270" height="290" rx="12" fill="#e0f2fe" opacity="0.5" stroke="#bae6fd" stroke-width="1.5" stroke-dasharray="6,3"/>
-<text x="26" y="36" font-size="10" font-weight="600" fill="#0369a1" letter-spacing="1.2" text-anchor="start" font-family="'DM Sans',sans-serif">PEOPLE</text>
+<!-- ══════════════════════════════════════
+     DOMAIN CLUSTER BACKGROUNDS
+══════════════════════════════════════ -->
 
-<!-- Application core cluster -->
-<rect x="440" y="18" width="420" height="400" rx="12" fill="#e8eef6" opacity="0.5" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="6,3"/>
-<text x="448" y="36" font-size="10" font-weight="600" fill="#003087" letter-spacing="1.2" text-anchor="start" font-family="'DM Sans',sans-serif">APPLICATION CORE</text>
+<!-- People cluster (x=14 y=40 w=258 h=500) -->
+<rect x="14" y="40" width="258" height="500" rx="12" fill="#e0f2fe" fill-opacity="0.45" stroke="#7dd3fc" stroke-width="1.5" stroke-dasharray="6,3"/>
+<text x="24" y="57" font-size="9.5" font-weight="700" fill="#0369a1" letter-spacing="1.5" font-family="'Inter',sans-serif">PEOPLE</text>
 
-<!-- Selection cluster -->
-<rect x="880" y="18" width="250" height="260" rx="12" fill="#ede9fe" opacity="0.5" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="6,3"/>
-<text x="888" y="36" font-size="10" font-weight="600" fill="#6d28d9" letter-spacing="1.2" text-anchor="start" font-family="'DM Sans',sans-serif">SELECTION</text>
+<!-- Application Core cluster (x=290 y=40 w=590 h=500) -->
+<rect x="290" y="40" width="590" height="500" rx="12" fill="#e8eef6" fill-opacity="0.5" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="6,3"/>
+<text x="300" y="57" font-size="9.5" font-weight="700" fill="#003087" letter-spacing="1.5" font-family="'Inter',sans-serif">APPLICATION CORE</text>
 
-<!-- Placement cluster -->
-<rect x="1145" y="18" width="240" height="260" rx="12" fill="#d1fae5" opacity="0.5" stroke="#6ee7b7" stroke-width="1.5" stroke-dasharray="6,3"/>
-<text x="1153" y="36" font-size="10" font-weight="600" fill="#065f46" letter-spacing="1.2" text-anchor="start" font-family="'DM Sans',sans-serif">PLACEMENT</text>
+<!-- Selection cluster (x=890 y=40 w=220 h=500) -->
+<rect x="890" y="40" width="220" height="500" rx="12" fill="#ede9fe" fill-opacity="0.5" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="6,3"/>
+<text x="900" y="57" font-size="9.5" font-weight="700" fill="#6d28d9" letter-spacing="1.5" font-family="'Inter',sans-serif">SELECTION</text>
 
-<!-- Governance cluster -->
-<rect x="18" y="640" width="380" height="280" rx="12" fill="#fefce8" opacity="0.5" stroke="#fcd34d" stroke-width="1.5" stroke-dasharray="6,3"/>
-<text x="26" y="658" font-size="10" font-weight="600" fill="#92400e" letter-spacing="1.2" text-anchor="start" font-family="'DM Sans',sans-serif">GOVERNANCE</text>
+<!-- Placement cluster (x=1120 y=40 w=360 h=500) -->
+<rect x="1120" y="40" width="360" height="500" rx="12" fill="#d1fae5" fill-opacity="0.45" stroke="#6ee7b7" stroke-width="1.5" stroke-dasharray="6,3"/>
+<text x="1130" y="57" font-size="9.5" font-weight="700" fill="#065f46" letter-spacing="1.5" font-family="'Inter',sans-serif">PLACEMENT</text>
 
-<!-- Volunteer ops cluster -->
-<rect x="415" y="640" width="440" height="280" rx="12" fill="#dcfce7" opacity="0.5" stroke="#86efac" stroke-width="1.5" stroke-dasharray="6,3"/>
-<text x="423" y="658" font-size="10" font-weight="600" fill="#14532d" letter-spacing="1.2" text-anchor="start" font-family="'DM Sans',sans-serif">VOLUNTEER OPS</text>
+<!-- Governance cluster (x=14 y=555 w=510 h=360) -->
+<rect x="14" y="555" width="510" height="360" rx="12" fill="#fefce8" fill-opacity="0.6" stroke="#fcd34d" stroke-width="1.5" stroke-dasharray="6,3"/>
+<text x="24" y="572" font-size="9.5" font-weight="700" fill="#92400e" letter-spacing="1.5" font-family="'Inter',sans-serif">GOVERNANCE</text>
 
-<!-- Comms cluster -->
-<rect x="870" y="640" width="510" height="280" rx="12" fill="#fce7f3" opacity="0.5" stroke="#f9a8d4" stroke-width="1.5" stroke-dasharray="6,3"/>
-<text x="878" y="658" font-size="10" font-weight="600" fill="#9d174d" letter-spacing="1.2" text-anchor="start" font-family="'DM Sans',sans-serif">COMMUNICATIONS</text>
+<!-- Volunteer Ops cluster (x=540 y=555 w=360 h=360) -->
+<rect x="540" y="555" width="360" height="360" rx="12" fill="#dcfce7" fill-opacity="0.5" stroke="#86efac" stroke-width="1.5" stroke-dasharray="6,3"/>
+<text x="550" y="572" font-size="9.5" font-weight="700" fill="#14532d" letter-spacing="1.5" font-family="'Inter',sans-serif">VOLUNTEER OPS</text>
 
-<!-- ─────────────────────────────────────────────────────
-     MODULE BOXES
-───────────────────────────────────────────────────── -->
+<!-- Comms cluster (x=910 y=555 w=470 h=360) -->
+<rect x="910" y="555" width="470" height="360" rx="12" fill="#fce7f3" fill-opacity="0.45" stroke="#f9a8d4" stroke-width="1.5" stroke-dasharray="6,3"/>
+<text x="920" y="572" font-size="9.5" font-weight="700" fill="#9d174d" letter-spacing="1.5" font-family="'Inter',sans-serif">COMMUNICATIONS</text>
 
-<!-- ══ Contact (extended) — People, top-left ══ -->
-<g id="mod-contact" transform="translate(28,50)">
-  <rect width="238" height="185" rx="8" fill="#fff" stroke="#0ea5e9" stroke-width="2" filter="url(#shadow)"/>
-  <rect width="238" height="32" rx="8" fill="#0ea5e9"/>
-  <rect y="24" width="238" height="8" fill="#0ea5e9"/>
-  <text x="119" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Contact (extended)</text>
+<!-- Audit cluster (x=14 y=1050 w=1466 h=155) -->
+<rect x="14" y="1050" width="1466" height="155" rx="12" fill="#f1f5f9" fill-opacity="0.7" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6,3"/>
+<text x="24" y="1067" font-size="9.5" font-weight="700" fill="#475569" letter-spacing="1.5" font-family="'Inter',sans-serif">AUDIT</text>
+
+<!-- ══════════════════════════════════════
+     MODULE BOX HELPER MACRO
+     Each box: outer rect + header rect + fields + status chip
+══════════════════════════════════════ -->
+
+<!-- ─── Contact (extended) ─── x=28 y=65 w=230 h=220 -->
+<g id="mod-contact" filter="url(#bshadow)">
+  <rect x="28" y="65" width="230" height="220" rx="8" fill="#fff" stroke="#0ea5e9" stroke-width="1.5"/>
+  <rect x="28" y="65" width="230" height="34" rx="8" fill="#0ea5e9"/>
+  <rect x="28" y="91" width="230" height="8" fill="#0ea5e9"/>
+  <!-- title -->
+  <text x="143" y="87" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">Contact (extended)</text>
   <!-- fields -->
-  <text x="10" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">First Name · Last Name</text>
-  <text x="10" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Type (Student/Staff/Donor)</text>
-  <text x="10" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Date of Birth · Gender</text>
-  <text x="10" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Country of Residence</text>
-  <text x="10" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Parent Name · Relationship</text>
-  <text x="10" y="132" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Email · Phone</text>
-  <text x="10" y="148" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">GDPR Consent Status</text>
+  <text x="40" y="118" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">First Name · Last Name</text>
+  <text x="40" y="134" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Type (Student/Staff/Donor)</text>
+  <text x="40" y="150" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Date of Birth · Gender</text>
+  <text x="40" y="166" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Country of Residence</text>
+  <text x="40" y="182" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Parent · GDPR Consent</text>
+  <text x="40" y="198" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Email · Phone</text>
   <!-- status chip -->
-  <rect x="10" y="160" width="70" height="18" rx="4" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
-  <text x="45" y="173" text-anchor="middle" font-size="9.5" font-weight="600" fill="#065f46" font-family="'DM Sans',sans-serif">Current ✓</text>
+  <rect x="40" y="206" width="68" height="16" rx="3" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="74" y="218" text-anchor="middle" font-size="9" font-weight="600" fill="#166534" font-family="'Inter',sans-serif">Live ✓</text>
 </g>
 
-<!-- ══ Lead — People ══ -->
-<g id="mod-lead" transform="translate(28,270)">
-  <rect width="238" height="155" rx="8" fill="#fff" stroke="#0ea5e9" stroke-width="2"/>
-  <rect width="238" height="32" rx="8" fill="#0ea5e9"/>
-  <rect y="24" width="238" height="8" fill="#0ea5e9"/>
-  <text x="119" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Lead</text>
-  <text x="10" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Lead Name · Email</text>
-  <text x="10" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Country · Lead Source</text>
-  <text x="10" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Age Range (Eligible)</text>
-  <text x="10" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Converted (→ Contact)</text>
-  <text x="10" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Campaign Source</text>
-  <rect x="10" y="128" width="70" height="18" rx="4" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
-  <text x="45" y="141" text-anchor="middle" font-size="9.5" font-weight="600" fill="#065f46" font-family="'DM Sans',sans-serif">Current ✓</text>
+<!-- ─── Lead ─── x=28 y=305 w=230 h=185 -->
+<g id="mod-lead" filter="url(#bshadow)">
+  <rect x="28" y="305" width="230" height="185" rx="8" fill="#fff" stroke="#0ea5e9" stroke-width="1.5"/>
+  <rect x="28" y="305" width="230" height="34" rx="8" fill="#0ea5e9"/>
+  <rect x="28" y="331" width="230" height="8" fill="#0ea5e9"/>
+  <text x="143" y="327" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">Lead</text>
+  <text x="40" y="358" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Lead Name · Email</text>
+  <text x="40" y="374" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Country · Lead Source</text>
+  <text x="40" y="390" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Age Range (Eligible)</text>
+  <text x="40" y="406" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Converted → Contact</text>
+  <text x="40" y="422" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Campaign Source</text>
+  <rect x="40" y="430" width="68" height="16" rx="3" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="74" y="442" text-anchor="middle" font-size="9" font-weight="600" fill="#166534" font-family="'Inter',sans-serif">Live ✓</text>
 </g>
 
-<!-- ══ Application (centrepiece) — App core ══ -->
-<g id="mod-application" transform="translate(550,50)">
-  <rect width="280" height="230" rx="8" fill="#fff" stroke="#003087" stroke-width="2.5"/>
-  <rect width="280" height="32" rx="8" fill="#003087"/>
-  <rect y="24" width="280" height="8" fill="#003087"/>
-  <text x="140" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="'DM Sans',sans-serif">Application ★</text>
-  <text x="10" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Application Name (APP-2026-00001)</text>
-  <text x="10" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Application Stage (Blueprint)</text>
-  <text x="10" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Applicant Name → Contact</text>
-  <text x="10" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">National Committee → NC</text>
-  <text x="10" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Programme → Programme</text>
-  <text x="10" y="132" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Eligibility Status · Parental Consent</text>
-  <text x="10" y="148" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Review Count · All Reviews Done</text>
-  <text x="10" y="164" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Safeguarding Flag Status</text>
-  <text x="10" y="180" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Panel Decision · Scholarship £</text>
-  <!-- status chip - renamed -->
-  <rect x="10" y="196" width="118" height="18" rx="4" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
-  <text x="69" y="209" text-anchor="middle" font-size="9.5" font-weight="600" fill="#92400e" font-family="'DM Sans',sans-serif">Renamed Potentials ⟳</text>
+<!-- ─── Programme ─── x=308 y=65 w=220 h=205 -->
+<g id="mod-programme" filter="url(#bshadow)">
+  <rect x="308" y="65" width="220" height="205" rx="8" fill="#fff" stroke="#003087" stroke-width="1.5"/>
+  <rect x="308" y="65" width="220" height="34" rx="8" fill="#003087"/>
+  <rect x="308" y="91" width="220" height="8" fill="#003087"/>
+  <text x="418" y="87" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">Programme</text>
+  <text x="320" y="118" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Programme Name</text>
+  <text x="320" y="134" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">NC → National Committee</text>
+  <text x="320" y="150" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Open Date · Deadline</text>
+  <text x="320" y="166" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Cycle Year (2026)</text>
+  <text x="320" y="182" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Local Question (multilingual)</text>
+  <text x="320" y="198" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Status (Active / Closed)</text>
+  <!-- renamed chip -->
+  <rect x="320" y="204" width="104" height="16" rx="3" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="372" y="216" text-anchor="middle" font-size="9" font-weight="600" fill="#92400e" font-family="'Inter',sans-serif">Renamed Products ⟳</text>
 </g>
 
-<!-- ══ Programme — App core ══ -->
-<g id="mod-programme" transform="translate(460,50)">
-  <rect width="218" height="180" rx="8" fill="#fff" stroke="#003087" stroke-width="2"/>
-  <rect width="218" height="32" rx="8" fill="#003087"/>
-  <rect y="24" width="218" height="8" fill="#003087"/>
-  <text x="109" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Programme</text>
-  <text x="10" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Programme Name</text>
-  <text x="10" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">National Committee → NC</text>
-  <text x="10" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Open Date · Deadline</text>
-  <text x="10" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Cycle Year (2026)</text>
-  <text x="10" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Local Question (multilingual)</text>
-  <text x="10" y="132" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Status (Active/Closed)</text>
-  <!-- status chip -->
-  <rect x="10" y="148" width="118" height="18" rx="4" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
-  <text x="69" y="161" text-anchor="middle" font-size="9.5" font-weight="600" fill="#92400e" font-family="'DM Sans',sans-serif">Renamed Products ⟳</text>
+<!-- ─── Application (centrepiece) ─── x=560 y=65 w=300 h=275 -->
+<g id="mod-application" filter="url(#bshadow)">
+  <rect x="560" y="65" width="300" height="275" rx="8" fill="#fff" stroke="#003087" stroke-width="2.5"/>
+  <rect x="560" y="65" width="300" height="36" rx="8" fill="#003087"/>
+  <rect x="560" y="93" width="300" height="8" fill="#003087"/>
+  <!-- title — FULL width, centred, no clipping -->
+  <text x="710" y="89" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" font-family="'Inter',sans-serif">Application ★</text>
+  <!-- fields -->
+  <text x="574" y="122" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Application ID: APP-2026-0001</text>
+  <text x="574" y="138" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Application Stage (Blueprint)</text>
+  <text x="574" y="154" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Applicant → Contact</text>
+  <text x="574" y="170" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">National Committee → NC</text>
+  <text x="574" y="186" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Programme → Programme</text>
+  <text x="574" y="202" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Eligibility Status · Parental Consent</text>
+  <text x="574" y="218" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Review Count · All Reviews Done</text>
+  <text x="574" y="234" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Safeguarding Flag Status</text>
+  <text x="574" y="250" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Panel Decision · Scholarship £</text>
+  <!-- renamed chip — fits inside box -->
+  <rect x="574" y="258" width="156" height="16" rx="3" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+  <text x="652" y="270" text-anchor="middle" font-size="9" font-weight="600" fill="#92400e" font-family="'Inter',sans-serif">Renamed Potentials ⟳</text>
+  <!-- live chip -->
+  <rect x="740" y="258" width="52" height="16" rx="3" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="766" y="270" text-anchor="middle" font-size="9" font-weight="600" fill="#166534" font-family="'Inter',sans-serif">Live ✓</text>
 </g>
 
-<!-- ══ National Committee — App core ══ -->
-<g id="mod-nc" transform="translate(460,265)">
-  <rect width="218" height="175" rx="8" fill="#fff" stroke="#003087" stroke-width="2"/>
-  <rect width="218" height="32" rx="8" fill="#003087"/>
-  <rect y="24" width="218" height="8" fill="#003087"/>
-  <text x="109" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">National Committee</text>
-  <text x="10" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">NC Name · Country</text>
-  <text x="10" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">NC Admin → Contact</text>
-  <text x="10" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Member Count · Status</text>
-  <text x="10" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">MoU Submitted Date</text>
-  <text x="10" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Annual Report Status</text>
-  <text x="10" y="132" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Active Programmes Count</text>
-  <!-- target chip -->
-  <rect x="10" y="148" width="68" height="18" rx="4" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-  <text x="44" y="161" text-anchor="middle" font-size="9.5" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
+<!-- ─── National Committee ─── x=308 y=305 w=220 h=210 -->
+<g id="mod-nc" filter="url(#bshadow)">
+  <rect x="308" y="305" width="220" height="210" rx="8" fill="#fff" stroke="#003087" stroke-width="1.5"/>
+  <rect x="308" y="305" width="220" height="34" rx="8" fill="#003087"/>
+  <rect x="308" y="331" width="220" height="8" fill="#003087"/>
+  <text x="418" y="327" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">National Committee</text>
+  <text x="320" y="358" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">NC Name · Country</text>
+  <text x="320" y="374" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">NC Admin → Contact</text>
+  <text x="320" y="390" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Member Count · Status</text>
+  <text x="320" y="406" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">MoU Submitted Date</text>
+  <text x="320" y="422" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Active Programmes Count</text>
+  <text x="320" y="438" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Annual Report Status</text>
+  <rect x="320" y="446" width="80" height="16" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="360" y="458" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
 </g>
 
-<!-- ══ School — App core ══ -->
-<g id="mod-school" transform="translate(700,265)">
-  <rect width="218" height="175" rx="8" fill="#fff" stroke="#003087" stroke-width="2"/>
-  <rect width="218" height="32" rx="8" fill="#003087"/>
-  <rect y="24" width="218" height="8" fill="#003087"/>
-  <text x="109" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">School</text>
-  <text x="10" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">School Name · Country</text>
-  <text x="10" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Admissions Director → Contact</text>
-  <text x="10" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Total Places · Remaining</text>
-  <text x="10" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">School Type · Region</text>
-  <text x="10" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Partnership Agreement</text>
-  <text x="10" y="132" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Contact Email · Portal URL</text>
-  <rect x="10" y="148" width="68" height="18" rx="4" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-  <text x="44" y="161" text-anchor="middle" font-size="9.5" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
+<!-- ─── School ─── x=560 y=365 w=300 h=190 -->
+<g id="mod-school" filter="url(#bshadow)">
+  <rect x="560" y="365" width="300" height="190" rx="8" fill="#fff" stroke="#003087" stroke-width="1.5"/>
+  <rect x="560" y="365" width="300" height="34" rx="8" fill="#003087"/>
+  <rect x="560" y="391" width="300" height="8" fill="#003087"/>
+  <text x="710" y="387" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">School</text>
+  <text x="574" y="418" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">School Name · Country</text>
+  <text x="574" y="434" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Admissions Director → Contact</text>
+  <text x="574" y="450" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Total Places · Remaining</text>
+  <text x="574" y="466" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">School Type · Region</text>
+  <text x="574" y="482" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Partnership Agreement · Portal URL</text>
+  <rect x="574" y="490" width="80" height="16" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="614" y="502" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
 </g>
 
-<!-- ══ Review Score — Selection ══ -->
-<g id="mod-review" transform="translate(890,50)">
-  <rect width="228" height="175" rx="8" fill="#fff" stroke="#7c3aed" stroke-width="2"/>
-  <rect width="228" height="32" rx="8" fill="#7c3aed"/>
-  <rect y="24" width="228" height="8" fill="#7c3aed"/>
-  <text x="114" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Review Score (subform)</text>
-  <text x="10" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Reviewer → User</text>
-  <text x="10" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Academic Score (1–10)</text>
-  <text x="10" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Community Score (1–10)</text>
-  <text x="10" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Communication Score (1–10)</text>
-  <text x="10" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">UWC Values Score (1–10)</text>
-  <text x="10" y="132" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Scored Date · Comments</text>
-  <rect x="10" y="148" width="68" height="18" rx="4" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-  <text x="44" y="161" text-anchor="middle" font-size="9.5" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
+<!-- ─── Review Score ─── x=908 y=65 w=190 h=215 -->
+<g id="mod-review" filter="url(#bshadow)">
+  <rect x="908" y="65" width="190" height="215" rx="8" fill="#fff" stroke="#7c3aed" stroke-width="1.5"/>
+  <rect x="908" y="65" width="190" height="34" rx="8" fill="#7c3aed"/>
+  <rect x="908" y="91" width="190" height="8" fill="#7c3aed"/>
+  <text x="1003" y="87" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">Review Score (subform)</text>
+  <text x="920" y="118" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Reviewer → User</text>
+  <text x="920" y="134" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Academic Score (1–10)</text>
+  <text x="920" y="150" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Community Score (1–10)</text>
+  <text x="920" y="166" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Comms Score (1–10)</text>
+  <text x="920" y="182" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">UWC Values (1–10)</text>
+  <text x="920" y="198" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Scored Date · Comments</text>
+  <rect x="920" y="206" width="80" height="16" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="960" y="218" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
 </g>
 
-<!-- ══ Safeguarding Flag — Selection ══ -->
-<g id="mod-safeguard" transform="translate(890,262)">
-  <rect width="228" height="155" rx="8" fill="#fff" stroke="#7c3aed" stroke-width="2"/>
-  <rect width="228" height="32" rx="8" fill="#7c3aed"/>
-  <rect y="24" width="228" height="8" fill="#7c3aed"/>
-  <text x="114" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Safeguarding Flag</text>
-  <text x="10" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Application → Application</text>
-  <text x="10" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Raised By → User</text>
-  <text x="10" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Raised Date · Severity</text>
-  <text x="10" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Status (Under Review / Resolved)</text>
-  <text x="10" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">IO Notified Date</text>
-  <rect x="10" y="128" width="68" height="18" rx="4" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-  <text x="44" y="141" text-anchor="middle" font-size="9.5" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
+<!-- ─── Safeguarding Flag ─── x=908 y=310 w=190 h=200 -->
+<g id="mod-safeguard" filter="url(#bshadow)">
+  <rect x="908" y="310" width="190" height="200" rx="8" fill="#fff" stroke="#7c3aed" stroke-width="1.5"/>
+  <rect x="908" y="310" width="190" height="34" rx="8" fill="#7c3aed"/>
+  <rect x="908" y="336" width="190" height="8" fill="#7c3aed"/>
+  <text x="1003" y="332" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">Safeguarding Flag</text>
+  <text x="920" y="363" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Application → Application</text>
+  <text x="920" y="379" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Raised By → User</text>
+  <text x="920" y="395" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Raised Date · Severity</text>
+  <text x="920" y="411" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Status (Under Review/Resolved)</text>
+  <text x="920" y="427" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">IO Notified Date</text>
+  <rect x="920" y="434" width="80" height="16" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="960" y="446" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
 </g>
 
-<!-- ══ Nomination Pack — Placement ══ -->
-<g id="mod-nompack" transform="translate(1155,50)">
-  <rect width="220" height="170" rx="8" fill="#fff" stroke="#10b981" stroke-width="2"/>
-  <rect width="220" height="32" rx="8" fill="#10b981"/>
-  <rect y="24" width="220" height="8" fill="#10b981"/>
-  <text x="110" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Nomination Pack</text>
-  <text x="10" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Application → Application (1:1)</text>
-  <text x="10" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">School Nominated → School</text>
-  <text x="10" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Pack Generated Date</text>
-  <text x="10" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Sent To School Date</text>
-  <text x="10" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">School Decision (Accept/Decline)</text>
-  <text x="10" y="132" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Pack PDF URL (WorkDrive)</text>
-  <rect x="10" y="148" width="68" height="18" rx="4" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-  <text x="44" y="161" text-anchor="middle" font-size="9.5" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
+<!-- ─── Nomination Pack ─── x=1138 y=65 w=196 h=215 -->
+<g id="mod-nompack" filter="url(#bshadow)">
+  <rect x="1138" y="65" width="196" height="215" rx="8" fill="#fff" stroke="#10b981" stroke-width="1.5"/>
+  <rect x="1138" y="65" width="196" height="34" rx="8" fill="#10b981"/>
+  <rect x="1138" y="91" width="196" height="8" fill="#10b981"/>
+  <text x="1236" y="87" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">Nomination Pack</text>
+  <text x="1150" y="118" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Application → App (1:1)</text>
+  <text x="1150" y="134" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">School Nominated → School</text>
+  <text x="1150" y="150" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Pack Generated Date</text>
+  <text x="1150" y="166" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Sent To School Date</text>
+  <text x="1150" y="182" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">School Decision (Acc/Decline)</text>
+  <text x="1150" y="198" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Pack PDF (WorkDrive URL)</text>
+  <rect x="1150" y="206" width="80" height="16" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="1190" y="218" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
 </g>
 
-<!-- ══ School Place Allocation — Placement ══ -->
-<g id="mod-placement" transform="translate(1155,255)">
-  <rect width="220" height="165" rx="8" fill="#fff" stroke="#10b981" stroke-width="2"/>
-  <rect width="220" height="32" rx="8" fill="#10b981"/>
-  <rect y="24" width="220" height="8" fill="#10b981"/>
-  <text x="110" y="21" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">School Place Allocation</text>
-  <text x="10" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">School → School</text>
-  <text x="10" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">National Committee → NC</text>
-  <text x="10" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Quota Allocated · Used</text>
-  <text x="10" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Cycle Year</text>
-  <text x="10" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">IO Approver → User</text>
-  <text x="10" y="132" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Approved Date</text>
-  <rect x="10" y="144" width="68" height="18" rx="4" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-  <text x="44" y="157" text-anchor="middle" font-size="9.5" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
+<!-- ─── School Place Allocation ─── x=1138 y=310 w=196 h=215 -->
+<g id="mod-spc" filter="url(#bshadow)">
+  <rect x="1138" y="310" width="196" height="215" rx="8" fill="#fff" stroke="#10b981" stroke-width="1.5"/>
+  <rect x="1138" y="310" width="196" height="34" rx="8" fill="#10b981"/>
+  <rect x="1138" y="336" width="196" height="8" fill="#10b981"/>
+  <text x="1236" y="332" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">School Place Allocation</text>
+  <text x="1150" y="362" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">School → School</text>
+  <text x="1150" y="378" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">National Committee → NC</text>
+  <text x="1150" y="394" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Quota Allocated · Used</text>
+  <text x="1150" y="410" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Cycle Year</text>
+  <text x="1150" y="426" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">IO Approver → User</text>
+  <text x="1150" y="442" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Approved Date</text>
+  <rect x="1150" y="450" width="80" height="16" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="1190" y="462" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
 </g>
 
-<!-- ══ Governance Body — Governance ══ -->
-<g id="mod-govbody" transform="translate(28,670)">
-  <rect width="220" height="200" rx="8" fill="#fff" stroke="#C8AB00" stroke-width="2"/>
-  <rect width="220" height="32" rx="8" fill="#C8AB00"/>
-  <rect y="24" width="220" height="8" fill="#C8AB00"/>
-  <text x="110" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Governance Body</text>
-  <text x="10" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Body Name · Type (Board/Cmte)</text>
-  <text x="10" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Purpose · Meeting Cadence</text>
-  <text x="10" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Active · Established Date</text>
-  <text x="10" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Chair → Contact</text>
-  <text x="10" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Secretary → Contact</text>
-  <text x="10" y="132" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Last Meeting Date</text>
-  <text x="10" y="148" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Quorum Required</text>
-  <rect x="10" y="166" width="68" height="18" rx="4" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-  <text x="44" y="179" text-anchor="middle" font-size="9.5" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
+<!-- ─── Governance Body ─── x=28 y=580 w=225 h=230 -->
+<g id="mod-govbody" filter="url(#bshadow)">
+  <rect x="28" y="580" width="225" height="230" rx="8" fill="#fff" stroke="#C8AB00" stroke-width="1.5"/>
+  <rect x="28" y="580" width="225" height="34" rx="8" fill="#C8AB00"/>
+  <rect x="28" y="606" width="225" height="8" fill="#C8AB00"/>
+  <text x="140" y="602" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">Governance Body</text>
+  <text x="40" y="630" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Body Name · Type (Board/Cmte)</text>
+  <text x="40" y="646" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Purpose · Meeting Cadence</text>
+  <text x="40" y="662" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Active · Established Date</text>
+  <text x="40" y="678" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Chair → Contact</text>
+  <text x="40" y="694" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Secretary → Contact</text>
+  <text x="40" y="710" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Last Meeting Date</text>
+  <text x="40" y="726" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Quorum Required</text>
+  <rect x="40" y="734" width="80" height="16" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="80" y="746" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
 </g>
 
-<!-- ══ Governance Membership — Governance (junction) ══ -->
-<g id="mod-govmem" transform="translate(263,670)">
-  <rect width="125" height="195" rx="8" fill="#fff" stroke="#C8AB00" stroke-width="2" stroke-dasharray="6,3"/>
-  <rect width="125" height="32" rx="8" fill="#C8AB00"/>
-  <rect y="24" width="125" height="8" fill="#C8AB00"/>
-  <text x="62" y="15" text-anchor="middle" font-size="10" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Governance</text>
-  <text x="62" y="27" text-anchor="middle" font-size="10" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Membership</text>
-  <text x="8" y="52" font-size="10" fill="#374151" font-family="'DM Mono',monospace">Body → Gov Body</text>
-  <text x="8" y="67" font-size="10" fill="#374151" font-family="'DM Mono',monospace">Member → Contact</text>
-  <text x="8" y="82" font-size="10" fill="#374151" font-family="'DM Mono',monospace">Role on Body</text>
-  <text x="8" y="97" font-size="10" fill="#374151" font-family="'DM Mono',monospace">Term Start · End</text>
-  <text x="8" y="112" font-size="10" fill="#374151" font-family="'DM Mono',monospace">Term Expired</text>
-  <text x="8" y="127" font-size="10" fill="#374151" font-family="'DM Mono',monospace">Voting Member</text>
-  <rect x="8" y="158" width="68" height="18" rx="4" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-  <text x="42" y="171" text-anchor="middle" font-size="9" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
+<!-- ─── Governance Membership (junction) ─── x=28 y=828 w=190 h=200 -->
+<g id="mod-govmem" filter="url(#bshadow)">
+  <rect x="28" y="828" width="190" height="200" rx="8" fill="#fff" stroke="#C8AB00" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <rect x="28" y="828" width="190" height="34" rx="8" fill="#C8AB00"/>
+  <rect x="28" y="854" width="190" height="8" fill="#C8AB00"/>
+  <text x="123" y="845" text-anchor="middle" font-size="11" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">Governance Membership</text>
+  <text x="40" y="878" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Body → Governance Body</text>
+  <text x="40" y="894" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Member → Contact</text>
+  <text x="40" y="910" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Role on Body</text>
+  <text x="40" y="926" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Term Start · End</text>
+  <text x="40" y="942" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Voting Member</text>
+  <rect x="40" y="950" width="80" height="16" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="80" y="962" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
 </g>
 
-<!-- ══ Competency — Governance ══ -->
-<g id="mod-competency" transform="translate(130,820)">
-  <rect width="155" height="165" rx="8" fill="#fff" stroke="#C8AB00" stroke-width="2"/>
-  <rect width="155" height="32" rx="8" fill="#C8AB00"/>
-  <rect y="24" width="155" height="8" fill="#C8AB00"/>
-  <text x="77" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Competency</text>
-  <text x="8" y="52" font-size="10" fill="#374151" font-family="'DM Mono',monospace">Competency Name</text>
-  <text x="8" y="67" font-size="10" fill="#374151" font-family="'DM Mono',monospace">Category · Description</text>
-  <text x="8" y="82" font-size="10" fill="#374151" font-family="'DM Mono',monospace">Bodies Requiring This</text>
-  <text x="8" y="97" font-size="10" fill="#374151" font-family="'DM Mono',monospace">Members With This</text>
-  <text x="8" y="112" font-size="10" fill="#374151" font-family="'DM Mono',monospace">Gap Status</text>
-  <rect x="8" y="128" width="68" height="18" rx="4" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-  <text x="42" y="141" text-anchor="middle" font-size="9.5" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
+<!-- ─── Competency ─── x=270 y=580 w=230 h=200 (INSIDE governance cluster, no overlap with VolOps) -->
+<g id="mod-competency" filter="url(#bshadow)">
+  <rect x="270" y="580" width="230" height="200" rx="8" fill="#fff" stroke="#C8AB00" stroke-width="1.5"/>
+  <rect x="270" y="580" width="230" height="34" rx="8" fill="#C8AB00"/>
+  <rect x="270" y="606" width="230" height="8" fill="#C8AB00"/>
+  <text x="385" y="602" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">Competency</text>
+  <text x="282" y="630" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Competency Name</text>
+  <text x="282" y="646" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Category · Description</text>
+  <text x="282" y="662" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Bodies Requiring This</text>
+  <text x="282" y="678" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Members With This</text>
+  <text x="282" y="694" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Gap Status</text>
+  <rect x="282" y="702" width="80" height="16" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="322" y="714" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
 </g>
 
-<!-- ══ NC Volunteer (junction) — Volunteer ops ══ -->
-<g id="mod-ncvol" transform="translate(425,670)">
-  <rect width="185" height="185" rx="8" fill="#fff" stroke="#1f9535" stroke-width="2" stroke-dasharray="6,3"/>
-  <rect width="185" height="32" rx="8" fill="#1f9535"/>
-  <rect y="24" width="185" height="8" fill="#1f9535"/>
-  <text x="92" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">NC Volunteer (junction)</text>
-  <text x="8" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">NC → National Committee</text>
-  <text x="8" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Volunteer → Contact</text>
-  <text x="8" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Role (Reviewer/Chair/Member)</text>
-  <text x="8" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Start Date · End Date</text>
-  <text x="8" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">DBS Check Expiry</text>
-  <text x="8" y="132" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Active (checkbox)</text>
-  <rect x="8" y="150" width="68" height="18" rx="4" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-  <text x="42" y="163" text-anchor="middle" font-size="9.5" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
+<!-- ─── NC Volunteer (junction) ─── x=556 y=580 w=200 h=215 -->
+<g id="mod-ncvol" filter="url(#bshadow)">
+  <rect x="556" y="580" width="200" height="215" rx="8" fill="#fff" stroke="#1f9535" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <rect x="556" y="580" width="200" height="34" rx="8" fill="#1f9535"/>
+  <rect x="556" y="606" width="200" height="8" fill="#1f9535"/>
+  <text x="656" y="602" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">NC Volunteer (junction)</text>
+  <text x="568" y="630" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">NC → National Committee</text>
+  <text x="568" y="646" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Volunteer → Contact</text>
+  <text x="568" y="662" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Role (Reviewer/Chair)</text>
+  <text x="568" y="678" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Start Date · End Date</text>
+  <text x="568" y="694" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">DBS Check Expiry</text>
+  <text x="568" y="710" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Active (checkbox)</text>
+  <rect x="568" y="718" width="80" height="16" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="608" y="730" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
 </g>
 
-<!-- ══ Training Record — Volunteer ops ══ -->
-<g id="mod-training" transform="translate(630,670)">
-  <rect width="200" height="185" rx="8" fill="#fff" stroke="#1f9535" stroke-width="2"/>
-  <rect width="200" height="32" rx="8" fill="#1f9535"/>
-  <rect y="24" width="200" height="8" fill="#1f9535"/>
-  <text x="100" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Training Record</text>
-  <text x="8" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">NC Volunteer → NC Volunteer</text>
-  <text x="8" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Training Type</text>
-  <text x="8" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Completed Date</text>
-  <text x="8" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Expiry Date</text>
-  <text x="8" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Status (Current/Expired/Missing)</text>
-  <text x="8" y="132" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Certificate URL</text>
-  <rect x="8" y="150" width="68" height="18" rx="4" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-  <text x="42" y="163" text-anchor="middle" font-size="9.5" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
+<!-- ─── Training Record ─── x=776 y=580 w=108 y=580 — placed right of NCVol -->
+<g id="mod-training" filter="url(#bshadow)">
+  <rect x="770" y="580" width="118" height="215" rx="8" fill="#fff" stroke="#1f9535" stroke-width="1.5"/>
+  <rect x="770" y="580" width="118" height="34" rx="8" fill="#1f9535"/>
+  <rect x="770" y="606" width="118" height="8" fill="#1f9535"/>
+  <text x="829" y="602" text-anchor="middle" font-size="10.5" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">Training Record</text>
+  <text x="780" y="630" font-size="9.5" fill="#374151" font-family="'JetBrains Mono',monospace">NC Volunteer →</text>
+  <text x="780" y="644" font-size="9.5" fill="#374151" font-family="'JetBrains Mono',monospace">Training Type</text>
+  <text x="780" y="658" font-size="9.5" fill="#374151" font-family="'JetBrains Mono',monospace">Completed Date</text>
+  <text x="780" y="672" font-size="9.5" fill="#374151" font-family="'JetBrains Mono',monospace">Expiry Date</text>
+  <text x="780" y="686" font-size="9.5" fill="#374151" font-family="'JetBrains Mono',monospace">Status</text>
+  <text x="780" y="700" font-size="9.5" fill="#374151" font-family="'JetBrains Mono',monospace">Certificate URL</text>
+  <rect x="780" y="718" width="72" height="16" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="816" y="730" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
 </g>
 
-<!-- ══ MoU Obligation — Volunteer ops ══ -->
-<g id="mod-mou" transform="translate(430,840)">
-  <rect width="180" height="165" rx="8" fill="#fff" stroke="#1f9535" stroke-width="2"/>
-  <rect width="180" height="32" rx="8" fill="#1f9535"/>
-  <rect y="24" width="180" height="8" fill="#1f9535"/>
-  <text x="90" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">MoU Obligation</text>
-  <text x="8" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">NC → National Committee</text>
-  <text x="8" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Obligation Type</text>
-  <text x="8" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Due Date · Status</text>
-  <text x="8" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Submitted Date</text>
-  <text x="8" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Reviewed By → User</text>
-  <rect x="8" y="132" width="68" height="18" rx="4" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-  <text x="42" y="145" text-anchor="middle" font-size="9.5" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
+<!-- ─── MoU Obligation ─── x=556 y=810 w=185 h=190 -->
+<g id="mod-mou" filter="url(#bshadow)">
+  <rect x="556" y="810" width="185" height="190" rx="8" fill="#fff" stroke="#1f9535" stroke-width="1.5"/>
+  <rect x="556" y="810" width="185" height="34" rx="8" fill="#1f9535"/>
+  <rect x="556" y="836" width="185" height="8" fill="#1f9535"/>
+  <text x="648" y="832" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">MoU Obligation</text>
+  <text x="568" y="862" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">NC → National Committee</text>
+  <text x="568" y="878" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Obligation Type</text>
+  <text x="568" y="894" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Due Date · Status</text>
+  <text x="568" y="910" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Submitted Date</text>
+  <text x="568" y="926" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Reviewed By → User</text>
+  <rect x="568" y="934" width="80" height="16" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="608" y="946" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
 </g>
 
-<!-- ══ Mailing List — Comms ══ -->
-<g id="mod-maillist" transform="translate(880,670)">
-  <rect width="180" height="170" rx="8" fill="#fff" stroke="#ec4899" stroke-width="2"/>
-  <rect width="180" height="32" rx="8" fill="#ec4899"/>
-  <rect y="24" width="180" height="8" fill="#ec4899"/>
-  <text x="90" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Mailing List</text>
-  <text x="8" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">List Name · Audience Type</text>
-  <text x="8" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Segment Criteria (JSON)</text>
-  <text x="8" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Mailchimp List ID</text>
-  <text x="8" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Subscriber Count</text>
-  <text x="8" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Last Synced Date</text>
-  <text x="8" y="132" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Owner → User</text>
-  <rect x="8" y="148" width="68" height="18" rx="4" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-  <text x="42" y="161" text-anchor="middle" font-size="9.5" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
+<!-- ─── Mailing List ─── x=920 y=580 w=190 h=205 -->
+<g id="mod-maillist" filter="url(#bshadow)">
+  <rect x="920" y="580" width="190" height="205" rx="8" fill="#fff" stroke="#ec4899" stroke-width="1.5"/>
+  <rect x="920" y="580" width="190" height="34" rx="8" fill="#ec4899"/>
+  <rect x="920" y="606" width="190" height="8" fill="#ec4899"/>
+  <text x="1015" y="602" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">Mailing List</text>
+  <text x="932" y="630" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">List Name · Audience Type</text>
+  <text x="932" y="646" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Segment Criteria (JSON)</text>
+  <text x="932" y="662" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Mailchimp List ID</text>
+  <text x="932" y="678" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Subscriber Count</text>
+  <text x="932" y="694" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Last Synced Date</text>
+  <text x="932" y="710" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Owner → User</text>
+  <rect x="932" y="718" width="80" height="16" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="972" y="730" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
 </g>
 
-<!-- ══ Campaign — Comms ══ -->
-<g id="mod-campaign" transform="translate(1075,670)">
-  <rect width="185" height="170" rx="8" fill="#fff" stroke="#ec4899" stroke-width="2"/>
-  <rect width="185" height="32" rx="8" fill="#ec4899"/>
-  <rect y="24" width="185" height="8" fill="#ec4899"/>
-  <text x="92" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Campaign</text>
-  <text x="8" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Campaign Name · Type</text>
-  <text x="8" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Mailing List → Mailing List</text>
-  <text x="8" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Send Date · Status</text>
-  <text x="8" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Mailchimp Campaign ID</text>
-  <text x="8" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Open Rate · Click Rate</text>
-  <text x="8" y="132" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Opt-outs Count</text>
-  <rect x="8" y="148" width="70" height="18" rx="4" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
-  <text x="43" y="161" text-anchor="middle" font-size="9.5" font-weight="600" fill="#065f46" font-family="'DM Sans',sans-serif">Current ✓</text>
+<!-- ─── Campaign ─── x=1130 y=580 w=210 h=205 -->
+<g id="mod-campaign" filter="url(#bshadow)">
+  <rect x="1130" y="580" width="220" height="205" rx="8" fill="#fff" stroke="#ec4899" stroke-width="1.5"/>
+  <rect x="1130" y="580" width="220" height="34" rx="8" fill="#ec4899"/>
+  <rect x="1130" y="606" width="220" height="8" fill="#ec4899"/>
+  <text x="1240" y="602" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">Campaign</text>
+  <text x="1142" y="630" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Campaign Name · Type</text>
+  <text x="1142" y="646" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Mailing List → Mailing List</text>
+  <text x="1142" y="662" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Send Date · Status</text>
+  <text x="1142" y="678" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Mailchimp Campaign ID</text>
+  <text x="1142" y="694" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Open Rate · Click Rate</text>
+  <text x="1142" y="710" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Opt-outs Count</text>
+  <rect x="1142" y="718" width="52" height="16" rx="3" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="1168" y="730" text-anchor="middle" font-size="9" font-weight="600" fill="#166534" font-family="'Inter',sans-serif">Live ✓</text>
 </g>
 
-<!-- ══ Communication Log — Comms ══ -->
-<g id="mod-commlog" transform="translate(1270,670)">
-  <rect width="100" height="170" rx="8" fill="#fff" stroke="#ec4899" stroke-width="2"/>
-  <rect width="100" height="32" rx="8" fill="#ec4899"/>
-  <rect y="24" width="100" height="8" fill="#ec4899"/>
-  <text x="50" y="15" text-anchor="middle" font-size="9.5" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Communication</text>
-  <text x="50" y="27" text-anchor="middle" font-size="9.5" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Log</text>
-  <text x="6" y="52" font-size="9.5" fill="#374151" font-family="'DM Mono',monospace">Contact → Contact</text>
-  <text x="6" y="66" font-size="9.5" fill="#374151" font-family="'DM Mono',monospace">Campaign → Campaign</text>
-  <text x="6" y="80" font-size="9.5" fill="#374151" font-family="'DM Mono',monospace">Channel · Sent Date</text>
-  <text x="6" y="94" font-size="9.5" fill="#374151" font-family="'DM Mono',monospace">Delivered?</text>
-  <text x="6" y="108" font-size="9.5" fill="#374151" font-family="'DM Mono',monospace">Opened?</text>
-  <rect x="6" y="148" width="68" height="18" rx="4" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-  <text x="40" y="161" text-anchor="middle" font-size="9" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
+<!-- ─── Communication Log ─── x=920 y=800 w=190 h=195 -->
+<g id="mod-commlog" filter="url(#bshadow)">
+  <rect x="920" y="800" width="190" height="195" rx="8" fill="#fff" stroke="#ec4899" stroke-width="1.5"/>
+  <rect x="920" y="800" width="190" height="34" rx="8" fill="#ec4899"/>
+  <rect x="920" y="826" width="190" height="8" fill="#ec4899"/>
+  <text x="1015" y="822" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">Communication Log</text>
+  <text x="932" y="852" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Contact → Contact</text>
+  <text x="932" y="868" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Campaign → Campaign</text>
+  <text x="932" y="884" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Channel · Sent Date</text>
+  <text x="932" y="900" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Delivered · Opened</text>
+  <text x="932" y="916" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Bounced</text>
+  <rect x="932" y="924" width="80" height="16" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="972" y="936" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
 </g>
 
-<!-- ══ Consent Record — Comms ══ -->
-<g id="mod-consent" transform="translate(880,860)">
-  <rect width="175" height="155" rx="8" fill="#fff" stroke="#ec4899" stroke-width="2"/>
-  <rect width="175" height="32" rx="8" fill="#ec4899"/>
-  <rect y="24" width="175" height="8" fill="#ec4899"/>
-  <text x="87" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Consent Record</text>
-  <text x="8" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Contact → Contact</text>
-  <text x="8" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Consent Type (Comms/Data)</text>
-  <text x="8" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Given Date · Withdrawn Date</text>
-  <text x="8" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Channel (Email/SMS/Post)</text>
-  <text x="8" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">GDPR Basis</text>
-  <rect x="8" y="130" width="68" height="18" rx="4" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-  <text x="42" y="143" text-anchor="middle" font-size="9.5" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
+<!-- ─── Consent Record ─── x=1130 y=800 w=220 h=195 -->
+<g id="mod-consent" filter="url(#bshadow)">
+  <rect x="1130" y="800" width="220" height="195" rx="8" fill="#fff" stroke="#ec4899" stroke-width="1.5"/>
+  <rect x="1130" y="800" width="220" height="34" rx="8" fill="#ec4899"/>
+  <rect x="1130" y="826" width="220" height="8" fill="#ec4899"/>
+  <text x="1240" y="822" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">Consent Record</text>
+  <text x="1142" y="852" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Contact → Contact</text>
+  <text x="1142" y="868" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Consent Type (Comms/Data)</text>
+  <text x="1142" y="884" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Given Date · Withdrawn Date</text>
+  <text x="1142" y="900" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Channel (Email/SMS/Post)</text>
+  <text x="1142" y="916" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">GDPR Basis</text>
+  <rect x="1142" y="924" width="80" height="16" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="1182" y="936" text-anchor="middle" font-size="9" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
 </g>
 
-<!-- ══ Audit Log — Audit ══ -->
-<g id="mod-audit" transform="translate(1085,850)">
-  <rect width="175" height="145" rx="8" fill="#fff" stroke="#6b7280" stroke-width="2"/>
-  <rect width="175" height="32" rx="8" fill="#6b7280"/>
-  <rect y="24" width="175" height="8" fill="#6b7280"/>
-  <text x="87" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'DM Sans',sans-serif">Audit Log</text>
-  <text x="8" y="52" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Record ID · Module</text>
-  <text x="8" y="68" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Action (Created/Modified)</text>
-  <text x="8" y="84" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Changed By · Timestamp</text>
-  <text x="8" y="100" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">Old Value · New Value</text>
-  <text x="8" y="116" font-size="10.5" fill="#374151" font-family="'DM Mono',monospace">IP Address</text>
-  <rect x="8" y="120" width="70" height="18" rx="4" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
-  <text x="43" y="133" text-anchor="middle" font-size="9.5" font-weight="600" fill="#065f46" font-family="'DM Sans',sans-serif">Current ✓</text>
+<!-- ─── Audit Log ─── x=28 y=1065 w=800 h=120 (wide, spanning bottom) -->
+<g id="mod-audit" filter="url(#bshadow)">
+  <rect x="28" y="1065" width="800" height="100" rx="8" fill="#fff" stroke="#6b7280" stroke-width="1.5"/>
+  <rect x="28" y="1065" width="800" height="34" rx="8" fill="#6b7280"/>
+  <rect x="28" y="1091" width="800" height="8" fill="#6b7280"/>
+  <text x="428" y="1087" text-anchor="middle" font-size="12" font-weight="600" fill="#fff" font-family="'Inter',sans-serif">Audit Log  —  All modules feed into this record</text>
+  <!-- fields in single row -->
+  <text x="40" y="1121" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Record ID · Module</text>
+  <text x="200" y="1121" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Action (Created/Modified/Deleted)</text>
+  <text x="500" y="1121" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Changed By · Timestamp · IP Address</text>
+  <text x="40" y="1137" font-size="10" fill="#374151" font-family="'JetBrains Mono',monospace">Old Value · New Value</text>
+  <rect x="40" y="1145" width="52" height="16" rx="3" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="66" y="1157" text-anchor="middle" font-size="9" font-weight="600" fill="#166534" font-family="'Inter',sans-serif">Live ✓</text>
 </g>
 
-<!-- ─────────────────────────────────────────────────────
-     CONNECTOR LINES with cardinality labels
-───────────────────────────────────────────────────── -->
+<!-- ══════════════════════════════════════
+     CONNECTOR LINES  (clean, right-angled paths)
+══════════════════════════════════════ -->
 
-<!-- Lead → Contact (1:1 conversion) -->
-<line x1="147" y1="270" x2="147" y2="235" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
-<text x="153" y="258" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:1</text>
+<!-- 1. Lead → Contact (1:1 conversion) vertical -->
+<path d="M 143 305 L 143 285" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+<text x="149" y="298" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">1:1</text>
 
-<!-- Contact → Application (1:N) — from right edge of Contact to left of Application -->
-<path d="M 266,142 C 360,142 460,165 550,165" stroke="#64748b" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
-<text x="370" y="158" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:N</text>
+<!-- 2. Contact → Application (1:N) right-angle via waypoint -->
+<path d="M 258 175 C 350 175, 500 130, 560 130" stroke="#64748b" stroke-width="1.5" fill="none" marker-end="url(#a2)"/>
+<text x="370" y="162" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">1:N</text>
 
-<!-- Programme → Application (1:N) -->
-<line x1="678" y1="195" x2="692" y2="195" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
-<text x="681" y="188" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:N</text>
+<!-- 3. Programme → Application (adjacent right arrow) -->
+<path d="M 528 148 L 560 148" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+<text x="530" y="142" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">1:N</text>
 
-<!-- National Committee → Programme (1:N) -->
-<line x1="569" y1="230" x2="569" y2="245" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
-<text x="575" y="243" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:N</text>
+<!-- 4. NC → Programme (down, then right) -->
+<path d="M 418 305 L 418 320 L 418 272" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+<text x="424" y="300" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">1:N</text>
 
-<!-- Application → Review Score (1:N subform) -->
-<line x1="830" y1="115" x2="890" y2="115" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
-<text x="846" y="108" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:N</text>
+<!-- 5. Application → Review Score (1:N) -->
+<path d="M 860 150 L 908 150" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+<text x="865" y="143" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">1:N</text>
 
-<!-- Application → Safeguarding Flag (1:N) -->
-<line x1="830" y1="200" x2="890" y2="310" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
-<text x="842" y="268" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:N</text>
+<!-- 6. Application → Safeguarding Flag (1:N) — right-angle -->
+<path d="M 860 240 L 890 240 L 890 380 L 908 380" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+<text x="862" y="310" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">1:N</text>
 
-<!-- Application → Nomination Pack (1:1) -->
-<line x1="830" y1="100" x2="1155" y2="100" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
-<text x="980" y="94" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:1</text>
+<!-- 7. Application → Nomination Pack (1:1) — horizontal -->
+<path d="M 860 110 L 1138 110" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+<text x="970" y="103" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">1:1</text>
 
-<!-- School → School Place Allocation (1:N) -->
-<line x1="1155" y1="360" x2="1265" y2="358" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)" transform="translate(-100,0)"/>
-<!-- Redirect: School (700+218=918,342) to placement (1155,337) -->
-<path d="M 918,342 C 1020,342 1080,337 1155,337" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
-<text x="1010" y="332" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:N</text>
+<!-- 8. School → School Place Allocation (1:N) -->
+<path d="M 860 430 L 930 430 L 930 500 L 1138 430" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+<text x="988" y="424" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">1:N</text>
 
-<!-- NC → School Place Allocation (1:N) -->
-<path d="M 569,440 C 569,520 1100,520 1200,420" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#arr)"/>
-<text x="870" y="518" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:N</text>
+<!-- 9. NC → School Place Allocation (1:N) dashed -->
+<path d="M 418 515 L 418 540 L 1236 540 L 1236 525" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#a1)"/>
+<text x="820" y="534" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">1:N</text>
 
-<!-- Nomination Pack → School (lookup) -->
-<line x1="1265" y1="100" x2="1265" y2="242" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
-<text x="1271" y="180" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">lookup</text>
+<!-- 10. Nomination Pack → School (lookup) vertical -->
+<path d="M 1236 280 L 1236 365" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+<text x="1242" y="328" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">lookup</text>
 
-<!-- NC → NC Volunteer (1:N) -->
-<path d="M 569,440 L 569,580 L 517,580 L 517,670" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
-<text x="523" y="630" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:N</text>
+<!-- 11. NC → NC Volunteer (1:N) — down, then right -->
+<path d="M 418 515 L 418 545 L 556 545 L 556 580" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+<text x="480" y="539" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">1:N</text>
 
-<!-- NC Volunteer → Contact (back-ref dashed) -->
-<path d="M 425,720 C 300,720 240,380 180,235" stroke="#94a3b8" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#arr)"/>
-<text x="270" y="440" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">N:N</text>
+<!-- 12. NC Volunteer → Contact (N:N dashed back-ref) — left arc -->
+<path d="M 556 640 C 410 640, 300 500, 143 285" stroke="#94a3b8" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#a1)"/>
+<text x="288" y="500" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">N:N</text>
 
-<!-- NC Volunteer → Training Record (1:N) -->
-<line x1="610" y1="755" x2="630" y2="755" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
-<text x="614" y="748" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:N</text>
+<!-- 13. NC Volunteer → Training Record (1:N) -->
+<path d="M 756 638 L 770 638" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+<text x="756" y="630" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">1:N</text>
 
-<!-- NC → MoU Obligation (1:N) -->
-<path d="M 569,440 L 569,600 L 520,600 L 520,840" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arr)"/>
-<text x="526" y="758" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:N</text>
+<!-- 14. NC → MoU Obligation (1:N) — routed down and right -->
+<path d="M 418 515 L 418 760 L 556 760 L 556 810" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#a1)"/>
+<text x="464" y="780" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">1:N</text>
 
-<!-- Governance Body → Governance Membership (1:N) -->
-<line x1="248" y1="760" x2="263" y2="760" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
-<text x="249" y="753" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:N</text>
+<!-- 15. Governance Body → Governance Membership (1:N) -->
+<path d="M 140 810 L 140 828" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+<text x="146" y="823" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">1:N</text>
 
-<!-- Governance Membership → Contact (N:N) -->
-<path d="M 325,670 C 325,560 200,480 147,235" stroke="#94a3b8" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#arr)"/>
-<text x="200" y="460" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">N:N</text>
+<!-- 16. Governance Membership → Contact (N:N dashed) -->
+<path d="M 123 828 C 123 720, 143 500, 143 285" stroke="#94a3b8" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#a1)"/>
+<text x="62" y="560" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">N:N</text>
 
-<!-- Governance Body → Competency (N:N) -->
-<path d="M 138,870 L 205,870" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#arr)"/>
-<text x="152" y="864" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">N:N</text>
+<!-- 17. Governance Body → Competency (N:N dashed) -->
+<path d="M 253 670 L 270 670" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#a1)"/>
+<text x="247" y="663" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">N:N</text>
 
-<!-- Mailing List → Campaign (1:N) -->
-<line x1="1060" y1="740" x2="1075" y2="740" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
-<text x="1060" y="733" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:N</text>
+<!-- 18. Mailing List → Campaign (1:N) -->
+<path d="M 1110 680 L 1130 680" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+<text x="1107" y="672" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">1:N</text>
 
-<!-- Campaign → Communication Log (1:N) -->
-<line x1="1260" y1="740" x2="1270" y2="740" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
-<text x="1261" y="733" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:N</text>
+<!-- 19. Campaign → Communication Log (1:N) -->
+<path d="M 1240 785 L 1240 800 L 1110 800" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+<text x="1162" y="793" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace">1:N</text>
 
-<!-- Communication Log → Contact (N → back) -->
-<path d="M 1320,670 C 1350,600 1370,420 1370,300 C 1370,200 380,180 266,175" stroke="#94a3b8" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#arr)"/>
-<text x="1340" y="430" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">→Contact</text>
+<!-- 20. Contact → Consent Record (1:N) dashed long -->
+<path d="M 258 220 C 1480 220, 1480 870, 1350 870 L 1350 800" stroke="#94a3b8" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#a1)"/>
+<text x="1460" y="540" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace" text-anchor="middle" transform="rotate(-90,1460,540)">1:N consent</text>
 
-<!-- Contact → Consent Record (1:N) -->
-<path d="M 147,235 C 147,500 800,820 880,900" stroke="#94a3b8" stroke-width="1.2" fill="none" stroke-dasharray="4,3" marker-end="url(#arr)"/>
-<text x="400" y="700" font-size="9" fill="#64748b" font-family="'DM Mono',monospace">1:N consent</text>
+<!-- 21. Communication Log → Contact (back-ref dashed) -->
+<path d="M 920 870 C 870 870, 860 250, 258 200" stroke="#94a3b8" stroke-width="1.2" fill="none" stroke-dasharray="3,4" marker-end="url(#a1)"/>
+<text x="830" y="555" font-size="9" fill="#64748b" font-family="'JetBrains Mono',monospace" text-anchor="middle" transform="rotate(-90,830,555)">→Contact</text>
 
-<!-- Audit label note -->
-<text x="1085" y="848" font-size="9" fill="#6b7280" font-family="'DM Mono',monospace" font-style="italic">All modules →</text>
+<!-- ══════════════════════════════════════
+     INLINE DOMAIN LEGEND  (bottom-right)
+══════════════════════════════════════ -->
+<rect x="858" y="1065" width="620" height="145" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1" filter="url(#bshadow)"/>
+<text x="872" y="1085" font-size="10" font-weight="700" fill="#64748b" letter-spacing="1.2" font-family="'Inter',sans-serif">DOMAIN LEGEND</text>
 
-<!-- ─── Domain legend top-right ─── -->
-<rect x="1140" y="460" width="245" height="165" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
-<text x="1152" y="478" font-size="10" font-weight="700" fill="#6b7280" letter-spacing="1.2" font-family="'DM Sans',sans-serif">DOMAIN LEGEND</text>
-<circle cx="1158" cy="494" r="6" fill="#0ea5e9"/><text x="1170" y="498" font-size="10" fill="#374151" font-family="'DM Sans',sans-serif">People</text>
-<circle cx="1158" cy="510" r="6" fill="#003087"/><text x="1170" y="514" font-size="10" fill="#374151" font-family="'DM Sans',sans-serif">Application Core</text>
-<circle cx="1158" cy="526" r="6" fill="#7c3aed"/><text x="1170" y="530" font-size="10" fill="#374151" font-family="'DM Sans',sans-serif">Selection</text>
-<circle cx="1158" cy="542" r="6" fill="#10b981"/><text x="1170" y="546" font-size="10" fill="#374151" font-family="'DM Sans',sans-serif">Placement</text>
-<circle cx="1158" cy="558" r="6" fill="#C8AB00"/><text x="1170" y="562" font-size="10" fill="#374151" font-family="'DM Sans',sans-serif">Governance</text>
-<circle cx="1158" cy="574" r="6" fill="#1f9535"/><text x="1170" y="578" font-size="10" fill="#374151" font-family="'DM Sans',sans-serif">Volunteer Ops</text>
-<circle cx="1158" cy="590" r="6" fill="#ec4899"/><text x="1170" y="594" font-size="10" fill="#374151" font-family="'DM Sans',sans-serif">Communications</text>
-<circle cx="1158" cy="606" r="6" fill="#6b7280"/><text x="1170" y="610" font-size="10" fill="#374151" font-family="'DM Sans',sans-serif">Audit</text>
+<circle cx="878" cy="1102" r="6" fill="#0ea5e9"/><text x="892" y="1106" font-size="10" fill="#374151" font-family="'Inter',sans-serif">People</text>
+<circle cx="958" cy="1102" r="6" fill="#003087"/><text x="972" y="1106" font-size="10" fill="#374151" font-family="'Inter',sans-serif">Application Core</text>
+<circle cx="1095" cy="1102" r="6" fill="#7c3aed"/><text x="1109" y="1106" font-size="10" fill="#374151" font-family="'Inter',sans-serif">Selection</text>
+<circle cx="1185" cy="1102" r="6" fill="#10b981"/><text x="1199" y="1106" font-size="10" fill="#374151" font-family="'Inter',sans-serif">Placement</text>
+<circle cx="1310" cy="1102" r="6" fill="#C8AB00"/><text x="1324" y="1106" font-size="10" fill="#374151" font-family="'Inter',sans-serif">Governance</text>
+<circle cx="1415" cy="1102" r="6" fill="#1f9535"/><text x="1429" y="1106" font-size="10" fill="#374151" font-family="'Inter',sans-serif">Vol. Ops</text>
 
-<!-- Status chips legend -->
-<rect x="1140" y="635" width="245" height="80" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
-<text x="1152" y="652" font-size="10" font-weight="700" fill="#6b7280" letter-spacing="1.2" font-family="'DM Sans',sans-serif">STATUS</text>
-<rect x="1152" y="659" width="58" height="15" rx="3" fill="#d1fae5" stroke="#6ee7b7" stroke-width="1"/>
-<text x="1181" y="670" text-anchor="middle" font-size="8.5" font-weight="600" fill="#065f46" font-family="'DM Sans',sans-serif">Current ✓</text>
-<text x="1215" y="671" font-size="9" fill="#6b7280" font-family="'DM Sans',sans-serif"> Live Zoho org</text>
-<rect x="1152" y="678" width="58" height="15" rx="3" fill="#e8eef6" stroke="#93c5fd" stroke-width="1"/>
-<text x="1181" y="689" text-anchor="middle" font-size="8.5" font-weight="600" fill="#003087" font-family="'DM Sans',sans-serif">Target ⊕</text>
-<text x="1215" y="690" font-size="9" fill="#6b7280" font-family="'DM Sans',sans-serif"> Post-pilot build</text>
-<rect x="1152" y="697" width="58" height="15" rx="3" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
-<text x="1181" y="708" text-anchor="middle" font-size="8.5" font-weight="600" fill="#92400e" font-family="'DM Sans',sans-serif">Renamed ⟳</text>
-<text x="1215" y="709" font-size="9" fill="#6b7280" font-family="'DM Sans',sans-serif"> Std module renamed</text>
+<circle cx="878" cy="1122" r="6" fill="#ec4899"/><text x="892" y="1126" font-size="10" fill="#374151" font-family="'Inter',sans-serif">Comms</text>
+<circle cx="958" cy="1122" r="6" fill="#6b7280"/><text x="972" y="1126" font-size="10" fill="#374151" font-family="'Inter',sans-serif">Audit</text>
+
+<text x="872" y="1148" font-size="10" font-weight="700" fill="#64748b" letter-spacing="1.2" font-family="'Inter',sans-serif">STATUS</text>
+<rect x="872" y="1155" width="60" height="15" rx="3" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+<text x="902" y="1166" text-anchor="middle" font-size="8.5" font-weight="600" fill="#166534" font-family="'Inter',sans-serif">Live ✓</text>
+<text x="938" y="1166" font-size="9.5" fill="#64748b" font-family="'Inter',sans-serif">In Zoho org now</text>
+
+<rect x="872" y="1174" width="70" height="15" rx="3" fill="#fef3c7" stroke="#fcd34d" stroke-width="1"/>
+<text x="907" y="1185" text-anchor="middle" font-size="8.5" font-weight="600" fill="#92400e" font-family="'Inter',sans-serif">Renamed ⟳</text>
+<text x="948" y="1185" font-size="9.5" fill="#64748b" font-family="'Inter',sans-serif">Std module renamed</text>
+
+<rect x="1090" y="1155" width="68" height="15" rx="3" fill="#e0e7ff" stroke="#c7d2fe" stroke-width="1"/>
+<text x="1124" y="1166" text-anchor="middle" font-size="8.5" font-weight="600" fill="#3730a3" font-family="'Inter',sans-serif">Pending ⊕</text>
+<text x="1164" y="1166" font-size="9.5" fill="#64748b" font-family="'Inter',sans-serif">Post-pilot build</text>
+
+<text x="1090" y="1185" font-size="9.5" fill="#64748b" font-family="'Inter',sans-serif">Dashed border = junction / bridge table</text>
 
 </svg>
-  </div><!-- end svg-scroll -->
+  </div><!-- /svg-scroll -->
 
-  <!-- SECTION 2 -->
-  <div class="section-header" style="margin-top:56px">
+  <!-- ────────────────────────────────
+       SECTION 2 — SOLUTION ARCHITECTURE
+  ──────────────────────────────── -->
+  <div class="spacer-56"></div>
+  <div class="section-header">
     <div class="section-tag">Section 2 of 2</div>
     <h2 class="section-title">Solution Architecture — 8-Layer Stack</h2>
-    <p class="section-desc">Top-down view of every system layer: external actors through portals, API, CRM core, automations, storage, integrations, and security perimeter. Arrows show primary data-flow direction between layers.</p>
+    <p class="section-desc">Top-down view of every system layer: external actors through portals, API gateway, CRM core, automations, storage, integrations, and security perimeter. Solid arrows = primary outbound flow; dashed = bidirectional / event-driven.</p>
   </div>
 
   <div class="legend-card">
     <div class="legend-title">How to read this diagram</div>
-    <div class="legend-group"><strong style="font-size:11px">Top → Bottom</strong> &nbsp; data flows generally downward</div>
-    <div class="legend-group"><span style="display:inline-block;width:24px;height:2px;background:#003087;vertical-align:middle;border-radius:2px"></span> Downward / outbound flow</div>
-    <div class="legend-group"><span style="display:inline-block;width:24px;height:0;border-top:2px dashed #9aa3b8;vertical-align:middle"></span> Bidirectional / event-driven</div>
+    <div class="legend-item"><strong style="font-size:11px">Top → Bottom</strong>&nbsp; data flows generally downward</div>
+    <div class="legend-item"><span class="legend-line"></span> Downward / outbound</div>
+    <div class="legend-item"><span class="legend-dashed"></span> Bidirectional / event-driven</div>
     <div class="legend-sep"></div>
-    <div class="legend-group"><span class="legend-dot" style="background:#003087"></span> UWC / A2Z built</div>
-    <div class="legend-group"><span class="legend-dot" style="background:#009482"></span> Zoho platform</div>
-    <div class="legend-group"><span class="legend-dot" style="background:#6b7280"></span> Third-party SaaS</div>
-    <div class="legend-group"><span class="legend-dot" style="background:#C8102E"></span> Security boundary</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#003087"></span> UWC / A2Z built</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#009482"></span> Zoho platform</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#6b7280"></span> Third-party SaaS</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#C8102E"></span> Security boundary</div>
   </div>
 
-  <div class="arch-svg-wrap">
-<svg viewBox="0 0 1360 900" xmlns="http://www.w3.org/2000/svg" style="font-family:'DM Sans',system-ui,sans-serif;display:block;width:100%">
+  <div class="svg-scroll">
+<svg viewBox="0 0 1440 920" xmlns="http://www.w3.org/2000/svg"
+     style="font-family:'Inter',-apple-system,sans-serif;display:block;width:100%">
 <defs>
-  <marker id="farr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-    <path d="M0,0 L0,6 L8,3 z" fill="#003087"/>
+  <marker id="fa" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+    <path d="M0,0 L0,7 L8,3.5 z" fill="#003087"/>
   </marker>
-  <marker id="farr-grey" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-    <path d="M0,0 L0,6 L8,3 z" fill="#9aa3b8"/>
+  <marker id="fa-g" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+    <path d="M0,0 L0,7 L8,3.5 z" fill="#94a3b8"/>
+  </marker>
+  <marker id="fa-t" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+    <path d="M0,0 L0,7 L8,3.5 z" fill="#009482"/>
   </marker>
 </defs>
 
-<!-- ── BG ── -->
-<rect width="1360" height="900" fill="#f8fafc"/>
+<rect width="1440" height="920" fill="#f8fafc"/>
 
-<!-- ════════════════════════════════════════════
-     LAYER BAND HELPER — each band is a rect + label + pills
-════════════════════════════════════════════ -->
-
-<!-- LAYER 1 — External Actors (y=14, h=80) -->
-<rect x="14" y="14" width="1332" height="82" rx="10" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1.5"/>
-<text x="30" y="30" font-size="9.5" font-weight="700" fill="#64748b" letter-spacing="1.5" font-family="'DM Sans',sans-serif">LAYER 1 — EXTERNAL ACTORS</text>
-<!-- pills -->
-<g font-size="11" font-family="'DM Sans',sans-serif">
-  <!-- Applicants -->
-  <rect x="30" y="36" width="90" height="24" rx="12" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
-  <text x="75" y="52" text-anchor="middle" fill="#334155" font-weight="500">Applicants</text>
-  <!-- NCs -->
-  <rect x="130" y="36" width="100" height="24" rx="12" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
-  <text x="180" y="52" text-anchor="middle" fill="#334155" font-weight="500">Nat. Committees</text>
-  <!-- Schools -->
-  <rect x="240" y="36" width="76" height="24" rx="12" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
-  <text x="278" y="52" text-anchor="middle" fill="#334155" font-weight="500">Schools</text>
-  <!-- IO Staff -->
-  <rect x="326" y="36" width="80" height="24" rx="12" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
-  <text x="366" y="52" text-anchor="middle" fill="#334155" font-weight="500">IO Staff</text>
-  <!-- Donors -->
-  <rect x="416" y="36" width="72" height="24" rx="12" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
-  <text x="452" y="52" text-anchor="middle" fill="#334155" font-weight="500">Donors</text>
-  <!-- Mailchimp -->
-  <rect x="498" y="36" width="82" height="24" rx="12" fill="#fff9e6" stroke="#fcd34d" stroke-width="1"/>
-  <text x="539" y="52" text-anchor="middle" fill="#92400e" font-weight="500">Mailchimp</text>
-  <!-- HubSpot -->
-  <rect x="590" y="36" width="76" height="24" rx="12" fill="#fff9e6" stroke="#fcd34d" stroke-width="1"/>
-  <text x="628" y="52" text-anchor="middle" fill="#92400e" font-weight="500">HubSpot</text>
-  <!-- Google Drive -->
-  <rect x="676" y="36" width="92" height="24" rx="12" fill="#fff9e6" stroke="#fcd34d" stroke-width="1"/>
-  <text x="722" y="52" text-anchor="middle" fill="#92400e" font-weight="500">Google Drive</text>
-  <!-- Raiser's Edge -->
-  <rect x="778" y="36" width="120" height="24" rx="12" fill="#fff9e6" stroke="#fcd34d" stroke-width="1"/>
-  <text x="838" y="52" text-anchor="middle" fill="#92400e" font-weight="500">Raiser's Edge NXT</text>
-  <!-- Business Central -->
-  <rect x="908" y="36" width="124" height="24" rx="12" fill="#fff9e6" stroke="#fcd34d" stroke-width="1"/>
-  <text x="970" y="52" text-anchor="middle" fill="#92400e" font-weight="500">Business Central</text>
+<!-- ══ LAYER 1 — External Actors ══ y=14 h=84 -->
+<rect x="14" y="14" width="1412" height="84" rx="10" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1.5"/>
+<text x="30" y="32" font-size="9" font-weight="700" fill="#64748b" letter-spacing="1.5" font-family="'Inter',sans-serif">LAYER 1 — EXTERNAL ACTORS</text>
+<g font-size="10.5" font-family="'Inter',sans-serif" font-weight="500">
+  <rect x="30" y="38" width="88" height="24" rx="12" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="74" y="54" text-anchor="middle" fill="#334155">Applicants</text>
+  <rect x="128" y="38" width="126" height="24" rx="12" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="191" y="54" text-anchor="middle" fill="#334155">Nat. Committees</text>
+  <rect x="264" y="38" width="78" height="24" rx="12" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="303" y="54" text-anchor="middle" fill="#334155">Schools</text>
+  <rect x="352" y="38" width="80" height="24" rx="12" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="392" y="54" text-anchor="middle" fill="#334155">IO Staff</text>
+  <rect x="442" y="38" width="68" height="24" rx="12" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="476" y="54" text-anchor="middle" fill="#334155">Donors</text>
+  <rect x="522" y="38" width="94" height="24" rx="12" fill="#fff9e6" stroke="#fcd34d" stroke-width="1"/>
+  <text x="569" y="54" text-anchor="middle" fill="#78350f">Mailchimp</text>
+  <rect x="626" y="38" width="84" height="24" rx="12" fill="#fff9e6" stroke="#fcd34d" stroke-width="1"/>
+  <text x="668" y="54" text-anchor="middle" fill="#78350f">HubSpot</text>
+  <rect x="720" y="38" width="104" height="24" rx="12" fill="#fff9e6" stroke="#fcd34d" stroke-width="1"/>
+  <text x="772" y="54" text-anchor="middle" fill="#78350f">Google Drive</text>
+  <rect x="834" y="38" width="138" height="24" rx="12" fill="#fff9e6" stroke="#fcd34d" stroke-width="1"/>
+  <text x="903" y="54" text-anchor="middle" fill="#78350f">Raiser's Edge NXT</text>
+  <rect x="982" y="38" width="140" height="24" rx="12" fill="#fff9e6" stroke="#fcd34d" stroke-width="1"/>
+  <text x="1052" y="54" text-anchor="middle" fill="#78350f">Business Central</text>
+  <!-- badge -->
+  <circle cx="1400" cy="56" r="12" fill="#e2e8f0"/>
+  <text x="1400" y="60" text-anchor="middle" font-size="9" font-weight="700" fill="#64748b">1</text>
 </g>
 
-<!-- LAYER 2 — Portals (y=120, h=80) -->
-<rect x="14" y="120" width="1332" height="82" rx="10" fill="#E8EEF6" stroke="#003087" stroke-width="1.5"/>
-<text x="30" y="136" font-size="9.5" font-weight="700" fill="#003087" letter-spacing="1.5" font-family="'DM Sans',sans-serif">LAYER 2 — PORTALS  ·  Custom on Zoho Catalyst  ·  EU Data Centre</text>
-<g font-size="11" font-family="'DM Sans',sans-serif">
-  <rect x="30" y="142" width="148" height="28" rx="14" fill="#003087" stroke="#001a4d" stroke-width="1"/>
-  <text x="104" y="160" text-anchor="middle" fill="#fff" font-weight="600">Student Portal (UWC)</text>
-  <rect x="190" y="142" width="110" height="28" rx="14" fill="#003087" stroke="#001a4d" stroke-width="1"/>
-  <text x="245" y="160" text-anchor="middle" fill="#fff" font-weight="600">NC Portal</text>
-  <rect x="312" y="142" width="116" height="28" rx="14" fill="#003087" stroke="#001a4d" stroke-width="1"/>
-  <text x="370" y="160" text-anchor="middle" fill="#fff" font-weight="600">School Portal</text>
-  <rect x="440" y="142" width="130" height="28" rx="14" fill="#003087" stroke="#001a4d" stroke-width="1"/>
-  <text x="505" y="160" text-anchor="middle" fill="#fff" font-weight="600">Guardian Portal</text>
-  <!-- note -->
-  <text x="620" y="158" font-size="10.5" fill="#003087" font-style="italic">Multilingual · Zoho Catalyst · React / Catalyst Pages · UWC-branded</text>
+<!-- ══ L1→L2 arrow ══ -->
+<line x1="350" y1="98" x2="350" y2="114" stroke="#003087" stroke-width="1.5" marker-end="url(#fa)"/>
+<text x="358" y="110" font-size="8.5" fill="#003087" font-family="'JetBrains Mono',monospace">request</text>
+
+<!-- ══ LAYER 2 — Portals ══ y=118 h=84 -->
+<rect x="14" y="118" width="1412" height="84" rx="10" fill="#E8EEF6" stroke="#003087" stroke-width="1.5"/>
+<text x="30" y="136" font-size="9" font-weight="700" fill="#003087" letter-spacing="1.5" font-family="'Inter',sans-serif">LAYER 2 — PORTALS  ·  Custom on Zoho Catalyst  ·  EU Data Centre</text>
+<g font-size="10.5" font-family="'Inter',sans-serif" font-weight="600">
+  <rect x="30" y="142" width="160" height="30" rx="15" fill="#003087" stroke="#001a4d" stroke-width="1"/>
+  <text x="110" y="161" text-anchor="middle" fill="#fff">Student Portal (UWC)</text>
+  <rect x="202" y="142" width="110" height="30" rx="15" fill="#003087" stroke="#001a4d" stroke-width="1"/>
+  <text x="257" y="161" text-anchor="middle" fill="#fff">NC Portal</text>
+  <rect x="324" y="142" width="120" height="30" rx="15" fill="#003087" stroke="#001a4d" stroke-width="1"/>
+  <text x="384" y="161" text-anchor="middle" fill="#fff">School Portal</text>
+  <rect x="456" y="142" width="140" height="30" rx="15" fill="#003087" stroke="#001a4d" stroke-width="1"/>
+  <text x="526" y="161" text-anchor="middle" fill="#fff">Guardian Portal</text>
+  <text x="612" y="162" font-size="10" fill="#003087" font-style="italic" font-weight="400">Multilingual · React / Catalyst Pages · UWC-branded · Mobile-friendly</text>
+  <circle cx="1400" cy="160" r="12" fill="#003087"/>
+  <text x="1400" y="164" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">2</text>
 </g>
 
-<!-- LAYER 3 — API Layer (y=226, h=76) -->
-<rect x="14" y="226" width="1332" height="76" rx="10" fill="#e6f7f5" stroke="#009482" stroke-width="1.5"/>
-<text x="30" y="242" font-size="9.5" font-weight="700" fill="#007a6a" letter-spacing="1.5" font-family="'DM Sans',sans-serif">LAYER 3 — API LAYER  ·  Zoho Catalyst Functions + Zoho Flow Connectors</text>
-<g font-size="11" font-family="'DM Sans',sans-serif">
-  <rect x="30" y="248" width="148" height="26" rx="13" fill="#009482" stroke="#007a6a" stroke-width="1"/>
-  <text x="104" y="265" text-anchor="middle" fill="#fff" font-weight="600">Catalyst REST APIs</text>
-  <rect x="190" y="248" width="154" height="26" rx="13" fill="#009482" stroke="#007a6a" stroke-width="1"/>
-  <text x="267" y="265" text-anchor="middle" fill="#fff" font-weight="600">Zoho Flow Connectors</text>
-  <rect x="356" y="248" width="180" height="26" rx="13" fill="#009482" stroke="#007a6a" stroke-width="1"/>
-  <text x="446" y="265" text-anchor="middle" fill="#fff" font-weight="600">OAuth 2.0 + EU DC scope</text>
-  <rect x="548" y="248" width="138" height="26" rx="13" fill="#009482" stroke="#007a6a" stroke-width="1"/>
-  <text x="617" y="265" text-anchor="middle" fill="#fff" font-weight="600">Webhook triggers</text>
-  <text x="702" y="264" font-size="10.5" fill="#007a6a" font-style="italic">HTTPS only · JWT auth · Rate-limited · EU residency enforced</text>
+<!-- ══ L2→L3 arrow ══ -->
+<line x1="350" y1="202" x2="350" y2="218" stroke="#009482" stroke-width="1.5" marker-end="url(#fa-t)"/>
+<text x="358" y="214" font-size="8.5" fill="#009482" font-family="'JetBrains Mono',monospace">REST call</text>
+
+<!-- ══ LAYER 3 — API Layer ══ y=222 h=78 -->
+<rect x="14" y="222" width="1412" height="78" rx="10" fill="#e6f7f5" stroke="#009482" stroke-width="1.5"/>
+<text x="30" y="240" font-size="9" font-weight="700" fill="#007a6a" letter-spacing="1.5" font-family="'Inter',sans-serif">LAYER 3 — API LAYER  ·  Zoho Catalyst Functions + Zoho Flow Connectors</text>
+<g font-size="10.5" font-family="'Inter',sans-serif" font-weight="600">
+  <rect x="30" y="246" width="155" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
+  <text x="107" y="264" text-anchor="middle" fill="#fff">Catalyst REST APIs</text>
+  <rect x="197" y="246" width="162" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
+  <text x="278" y="264" text-anchor="middle" fill="#fff">Zoho Flow Connectors</text>
+  <rect x="371" y="246" width="186" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
+  <text x="464" y="264" text-anchor="middle" fill="#fff">OAuth 2.0 · EU DC scope</text>
+  <rect x="569" y="246" width="142" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
+  <text x="640" y="264" text-anchor="middle" fill="#fff">Webhook triggers</text>
+  <text x="726" y="263" font-size="10" fill="#007a6a" font-style="italic" font-weight="400">HTTPS only · JWT auth · Rate-limited · EU residency enforced</text>
+  <circle cx="1400" cy="261" r="12" fill="#009482"/>
+  <text x="1400" y="265" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">3</text>
 </g>
 
-<!-- LAYER 4 — CRM Core (y=326, h=98) -->
-<rect x="14" y="326" width="1332" height="98" rx="10" fill="#E8EEF6" stroke="#003087" stroke-width="2"/>
-<text x="30" y="342" font-size="9.5" font-weight="700" fill="#003087" letter-spacing="1.5" font-family="'DM Sans',sans-serif">LAYER 4 — CRM CORE  ·  Zoho CRM EU  ·  org 20114943111</text>
-<!-- module pills -->
-<g font-size="11" font-family="'DM Sans',sans-serif">
-  <rect x="30" y="350" width="108" height="28" rx="8" fill="#fff" stroke="#003087" stroke-width="1.5"/>
-  <text x="84" y="368" text-anchor="middle" fill="#003087" font-weight="600">Contact</text>
-  <rect x="150" y="350" width="134" height="28" rx="8" fill="#003087" stroke="#001a4d" stroke-width="1.5"/>
-  <text x="217" y="368" text-anchor="middle" fill="#fff" font-weight="700">Application ★</text>
-  <rect x="296" y="350" width="112" height="28" rx="8" fill="#fff" stroke="#003087" stroke-width="1.5"/>
-  <text x="352" y="368" text-anchor="middle" fill="#003087" font-weight="600">Programme</text>
-  <rect x="420" y="350" width="148" height="28" rx="8" fill="#fff" stroke="#003087" stroke-width="1.5"/>
-  <text x="494" y="368" text-anchor="middle" fill="#003087" font-weight="600">National Committee</text>
-  <rect x="580" y="350" width="88" height="28" rx="8" fill="#fff" stroke="#003087" stroke-width="1.5"/>
-  <text x="624" y="368" text-anchor="middle" fill="#003087" font-weight="600">School</text>
-  <rect x="680" y="350" width="148" height="28" rx="8" fill="#fff" stroke="#003087" stroke-width="1.5"/>
-  <text x="754" y="368" text-anchor="middle" fill="#003087" font-weight="600">Governance Body</text>
-  <rect x="840" y="350" width="128" height="28" rx="8" fill="#fff" stroke="#003087" stroke-width="1.5"/>
-  <text x="904" y="368" text-anchor="middle" fill="#003087" font-weight="600">NC Volunteer</text>
-  <rect x="980" y="350" width="104" height="28" rx="8" fill="#fff" stroke="#003087" stroke-width="1.5"/>
-  <text x="1032" y="368" text-anchor="middle" fill="#003087" font-weight="600">Campaign</text>
-  <rect x="1096" y="350" width="120" height="28" rx="8" fill="#fff" stroke="#003087" stroke-width="1.5"/>
-  <text x="1156" y="368" text-anchor="middle" fill="#003087" font-weight="600">Consent Record</text>
-  <!-- second row -->
-  <rect x="30" y="388" width="104" height="24" rx="6" fill="#fff" stroke="#7c3aed" stroke-width="1.2"/>
-  <text x="82" y="404" text-anchor="middle" fill="#7c3aed" font-weight="500" font-size="10.5">Review Score</text>
-  <rect x="146" y="388" width="128" height="24" rx="6" fill="#fff" stroke="#7c3aed" stroke-width="1.2"/>
-  <text x="210" y="404" text-anchor="middle" fill="#7c3aed" font-weight="500" font-size="10.5">Safeguarding Flag</text>
-  <rect x="286" y="388" width="128" height="24" rx="6" fill="#fff" stroke="#10b981" stroke-width="1.2"/>
-  <text x="350" y="404" text-anchor="middle" fill="#065f46" font-weight="500" font-size="10.5">Nomination Pack</text>
-  <rect x="426" y="388" width="154" height="24" rx="6" fill="#fff" stroke="#10b981" stroke-width="1.2"/>
-  <text x="503" y="404" text-anchor="middle" fill="#065f46" font-weight="500" font-size="10.5">School Place Allocation</text>
-  <rect x="592" y="388" width="118" height="24" rx="6" fill="#fff" stroke="#ec4899" stroke-width="1.2"/>
-  <text x="651" y="404" text-anchor="middle" fill="#9d174d" font-weight="500" font-size="10.5">Communication Log</text>
-  <rect x="722" y="388" width="112" height="24" rx="6" fill="#fff" stroke="#C8AB00" stroke-width="1.2"/>
-  <text x="778" y="404" text-anchor="middle" fill="#78600a" font-weight="500" font-size="10.5">Competency</text>
-  <rect x="846" y="388" width="120" height="24" rx="6" fill="#fff" stroke="#1f9535" stroke-width="1.2"/>
-  <text x="906" y="404" text-anchor="middle" fill="#14532d" font-weight="500" font-size="10.5">Training Record</text>
-  <rect x="978" y="388" width="114" height="24" rx="6" fill="#fff" stroke="#1f9535" stroke-width="1.2"/>
-  <text x="1035" y="404" text-anchor="middle" fill="#14532d" font-weight="500" font-size="10.5">MoU Obligation</text>
-  <rect x="1104" y="388" width="90" height="24" rx="6" fill="#fff" stroke="#6b7280" stroke-width="1.2"/>
-  <text x="1149" y="404" text-anchor="middle" fill="#4b5563" font-weight="500" font-size="10.5">Audit Log</text>
+<!-- ══ L3→L4 arrow ══ -->
+<line x1="350" y1="300" x2="350" y2="316" stroke="#003087" stroke-width="1.5" marker-end="url(#fa)"/>
+<text x="358" y="312" font-size="8.5" fill="#003087" font-family="'JetBrains Mono',monospace">CRM API</text>
+
+<!-- ══ LAYER 4 — CRM Core ══ y=320 h=104 -->
+<rect x="14" y="320" width="1412" height="104" rx="10" fill="#E8EEF6" stroke="#003087" stroke-width="2"/>
+<text x="30" y="338" font-size="9" font-weight="700" fill="#003087" letter-spacing="1.5" font-family="'Inter',sans-serif">LAYER 4 — CRM CORE  ·  Zoho CRM EU  ·  org 20114943111  ·  18 Modules</text>
+<!-- Row 1 modules -->
+<g font-size="10.5" font-family="'Inter',sans-serif" font-weight="500">
+  <rect x="30" y="344" width="90" height="26" rx="7" fill="#fff" stroke="#003087" stroke-width="1.5"/>
+  <text x="75" y="361" text-anchor="middle" fill="#003087" font-weight="600">Contact</text>
+  <rect x="132" y="344" width="116" height="26" rx="7" fill="#003087" stroke="#001a4d" stroke-width="1.5"/>
+  <text x="190" y="361" text-anchor="middle" fill="#fff" font-weight="700">Application ★</text>
+  <rect x="260" y="344" width="102" height="26" rx="7" fill="#fff" stroke="#003087" stroke-width="1.5"/>
+  <text x="311" y="361" text-anchor="middle" fill="#003087" font-weight="600">Programme</text>
+  <rect x="374" y="344" width="148" height="26" rx="7" fill="#fff" stroke="#003087" stroke-width="1.5"/>
+  <text x="448" y="361" text-anchor="middle" fill="#003087" font-weight="600">National Committee</text>
+  <rect x="534" y="344" width="80" height="26" rx="7" fill="#fff" stroke="#003087" stroke-width="1.5"/>
+  <text x="574" y="361" text-anchor="middle" fill="#003087" font-weight="600">School</text>
+  <rect x="626" y="344" width="136" height="26" rx="7" fill="#fff" stroke="#003087" stroke-width="1.5"/>
+  <text x="694" y="361" text-anchor="middle" fill="#003087" font-weight="600">Governance Body</text>
+  <rect x="774" y="344" width="114" height="26" rx="7" fill="#fff" stroke="#003087" stroke-width="1.5"/>
+  <text x="831" y="361" text-anchor="middle" fill="#003087" font-weight="600">NC Volunteer</text>
+  <rect x="900" y="344" width="98" height="26" rx="7" fill="#fff" stroke="#003087" stroke-width="1.5"/>
+  <text x="949" y="361" text-anchor="middle" fill="#003087" font-weight="600">Campaign</text>
+  <rect x="1010" y="344" width="122" height="26" rx="7" fill="#fff" stroke="#003087" stroke-width="1.5"/>
+  <text x="1071" y="361" text-anchor="middle" fill="#003087" font-weight="600">Consent Record</text>
+  <!-- Row 2 -->
+  <rect x="30" y="378" width="98" height="22" rx="6" fill="#fff" stroke="#7c3aed" stroke-width="1.2"/>
+  <text x="79" y="393" text-anchor="middle" fill="#7c3aed" font-size="9.5">Review Score</text>
+  <rect x="140" y="378" width="126" height="22" rx="6" fill="#fff" stroke="#7c3aed" stroke-width="1.2"/>
+  <text x="203" y="393" text-anchor="middle" fill="#7c3aed" font-size="9.5">Safeguarding Flag</text>
+  <rect x="278" y="378" width="122" height="22" rx="6" fill="#fff" stroke="#10b981" stroke-width="1.2"/>
+  <text x="339" y="393" text-anchor="middle" fill="#065f46" font-size="9.5">Nomination Pack</text>
+  <rect x="412" y="378" width="152" height="22" rx="6" fill="#fff" stroke="#10b981" stroke-width="1.2"/>
+  <text x="488" y="393" text-anchor="middle" fill="#065f46" font-size="9.5">School Place Allocation</text>
+  <rect x="576" y="378" width="116" height="22" rx="6" fill="#fff" stroke="#ec4899" stroke-width="1.2"/>
+  <text x="634" y="393" text-anchor="middle" fill="#9d174d" font-size="9.5">Communication Log</text>
+  <rect x="704" y="378" width="106" height="22" rx="6" fill="#fff" stroke="#C8AB00" stroke-width="1.2"/>
+  <text x="757" y="393" text-anchor="middle" fill="#78600a" font-size="9.5">Competency</text>
+  <rect x="822" y="378" width="116" height="22" rx="6" fill="#fff" stroke="#1f9535" stroke-width="1.2"/>
+  <text x="880" y="393" text-anchor="middle" fill="#14532d" font-size="9.5">Training Record</text>
+  <rect x="950" y="378" width="108" height="22" rx="6" fill="#fff" stroke="#1f9535" stroke-width="1.2"/>
+  <text x="1004" y="393" text-anchor="middle" fill="#14532d" font-size="9.5">MoU Obligation</text>
+  <rect x="1070" y="378" width="90" height="22" rx="6" fill="#fff" stroke="#6b7280" stroke-width="1.2"/>
+  <text x="1115" y="393" text-anchor="middle" fill="#4b5563" font-size="9.5">Audit Log</text>
+  <!-- Mailing List was missing from CRM layer -->
+  <rect x="1172" y="344" width="100" height="26" rx="7" fill="#fff" stroke="#ec4899" stroke-width="1.5"/>
+  <text x="1222" y="361" text-anchor="middle" fill="#9d174d" font-weight="600">Mailing List</text>
+  <circle cx="1400" cy="372" r="12" fill="#003087"/>
+  <text x="1400" y="376" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">4</text>
 </g>
 
-<!-- LAYER 5 — Automations (y=448, h=76) -->
-<rect x="14" y="448" width="1332" height="76" rx="10" fill="#fefce8" stroke="#C8AB00" stroke-width="1.5"/>
-<text x="30" y="464" font-size="9.5" font-weight="700" fill="#92400e" letter-spacing="1.5" font-family="'DM Sans',sans-serif">LAYER 5 — AUTOMATIONS  ·  Zoho CRM native tools</text>
-<g font-size="11" font-family="'DM Sans',sans-serif">
-  <rect x="30" y="470" width="186" height="28" rx="14" fill="#C8AB00" stroke="#a38900" stroke-width="1"/>
-  <text x="123" y="488" text-anchor="middle" fill="#fff" font-weight="600">Blueprints (10 stages)</text>
-  <rect x="228" y="470" width="170" height="28" rx="14" fill="#C8AB00" stroke="#a38900" stroke-width="1"/>
-  <text x="313" y="488" text-anchor="middle" fill="#fff" font-weight="600">Workflow Rules (8)</text>
-  <rect x="410" y="470" width="208" height="28" rx="14" fill="#C8AB00" stroke="#a38900" stroke-width="1"/>
-  <text x="514" y="488" text-anchor="middle" fill="#fff" font-weight="600">Custom Functions (Deluge)</text>
-  <rect x="630" y="470" width="152" height="28" rx="14" fill="#C8AB00" stroke="#a38900" stroke-width="1"/>
-  <text x="706" y="488" text-anchor="middle" fill="#fff" font-weight="600">Scheduled Jobs</text>
-  <rect x="794" y="470" width="152" height="28" rx="14" fill="#C8AB00" stroke="#a38900" stroke-width="1"/>
-  <text x="870" y="488" text-anchor="middle" fill="#fff" font-weight="600">Email Templates (6)</text>
-  <rect x="958" y="470" width="148" height="28" rx="14" fill="#C8AB00" stroke="#a38900" stroke-width="1"/>
-  <text x="1032" y="488" text-anchor="middle" fill="#fff" font-weight="600">Review Triggers</text>
+<!-- ══ L4→L5 arrow ══ -->
+<line x1="350" y1="424" x2="350" y2="440" stroke="#C8AB00" stroke-width="1.5" marker-end="url(#fa)"/>
+<text x="358" y="436" font-size="8.5" fill="#92400e" font-family="'JetBrains Mono',monospace">triggers</text>
+
+<!-- L4→L6 file upload dashed -->
+<line x1="680" y1="424" x2="680" y2="538" stroke="#0369a1" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#fa)"/>
+<text x="688" y="488" font-size="8.5" fill="#0369a1" font-family="'JetBrains Mono',monospace">file upload</text>
+
+<!-- ══ LAYER 5 — Automations ══ y=444 h=76 -->
+<rect x="14" y="444" width="1412" height="76" rx="10" fill="#fefce8" stroke="#C8AB00" stroke-width="1.5"/>
+<text x="30" y="462" font-size="9" font-weight="700" fill="#92400e" letter-spacing="1.5" font-family="'Inter',sans-serif">LAYER 5 — AUTOMATIONS  ·  Zoho CRM native tools</text>
+<g font-size="10.5" font-family="'Inter',sans-serif" font-weight="600">
+  <rect x="30" y="468" width="188" height="28" rx="14" fill="#C8AB00" stroke="#a38900" stroke-width="1"/>
+  <text x="124" y="486" text-anchor="middle" fill="#fff">Blueprints (10 stages)</text>
+  <rect x="230" y="468" width="162" height="28" rx="14" fill="#C8AB00" stroke="#a38900" stroke-width="1"/>
+  <text x="311" y="486" text-anchor="middle" fill="#fff">Workflow Rules (8)</text>
+  <rect x="404" y="468" width="198" height="28" rx="14" fill="#C8AB00" stroke="#a38900" stroke-width="1"/>
+  <text x="503" y="486" text-anchor="middle" fill="#fff">Custom Functions (Deluge)</text>
+  <rect x="614" y="468" width="148" height="28" rx="14" fill="#C8AB00" stroke="#a38900" stroke-width="1"/>
+  <text x="688" y="486" text-anchor="middle" fill="#fff">Scheduled Jobs</text>
+  <rect x="774" y="468" width="152" height="28" rx="14" fill="#C8AB00" stroke="#a38900" stroke-width="1"/>
+  <text x="850" y="486" text-anchor="middle" fill="#fff">Email Templates (6)</text>
+  <rect x="938" y="468" width="148" height="28" rx="14" fill="#C8AB00" stroke="#a38900" stroke-width="1"/>
+  <text x="1012" y="486" text-anchor="middle" fill="#fff">Review Triggers</text>
+  <circle cx="1400" cy="482" r="12" fill="#C8AB00"/>
+  <text x="1400" y="486" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">5</text>
 </g>
 
-<!-- LAYER 6 — Storage (y=548, h=68) -->
-<rect x="14" y="548" width="1332" height="68" rx="10" fill="#e0f2fe" stroke="#0369a1" stroke-width="1.5"/>
-<text x="30" y="564" font-size="9.5" font-weight="700" fill="#0369a1" letter-spacing="1.5" font-family="'DM Sans',sans-serif">LAYER 6 — STORAGE  ·  EU-resident document storage</text>
-<g font-size="11" font-family="'DM Sans',sans-serif">
-  <rect x="30" y="570" width="152" height="28" rx="14" fill="#0369a1" stroke="#024f86" stroke-width="1"/>
-  <text x="106" y="588" text-anchor="middle" fill="#fff" font-weight="600">Zoho WorkDrive</text>
-  <text x="192" y="587" font-size="11" fill="#0369a1" font-weight="500">→  Nomination Pack PDFs · Application Documents · MoU files</text>
-  <rect x="630" y="570" width="200" height="28" rx="14" fill="#4b9cd3" stroke="#3a7ea8" stroke-width="1"/>
-  <text x="730" y="588" text-anchor="middle" fill="#fff" font-weight="600">Google Drive (per NFR-044)</text>
-  <text x="842" y="587" font-size="10.5" fill="#0369a1">Legacy NC files · IO shared drives</text>
+<!-- ══ L5→L7 flow trigger ══ -->
+<line x1="530" y1="520" x2="530" y2="634" stroke="#009482" stroke-width="1.5" marker-end="url(#fa-t)"/>
+<text x="538" y="582" font-size="8.5" fill="#007a6a" font-family="'JetBrains Mono',monospace">flow trigger</text>
+
+<!-- ══ LAYER 6 — Storage ══ y=542 h=72 -->
+<rect x="14" y="542" width="1412" height="72" rx="10" fill="#e0f2fe" stroke="#0369a1" stroke-width="1.5"/>
+<text x="30" y="560" font-size="9" font-weight="700" fill="#0369a1" letter-spacing="1.5" font-family="'Inter',sans-serif">LAYER 6 — STORAGE  ·  EU-resident document storage</text>
+<g font-size="10.5" font-family="'Inter',sans-serif" font-weight="600">
+  <rect x="30" y="566" width="152" height="28" rx="14" fill="#0369a1" stroke="#024f86" stroke-width="1"/>
+  <text x="106" y="584" text-anchor="middle" fill="#fff">Zoho WorkDrive</text>
+  <text x="194" y="583" font-size="10" fill="#0369a1" font-style="italic" font-weight="400">Nomination Pack PDFs · Application Documents · MoU files</text>
+  <rect x="636" y="566" width="210" height="28" rx="14" fill="#4b9cd3" stroke="#3a7ea8" stroke-width="1"/>
+  <text x="741" y="584" text-anchor="middle" fill="#fff">Google Drive (per NFR-044)</text>
+  <text x="858" y="583" font-size="10" fill="#0369a1" font-weight="400">Legacy NC files · IO shared drives</text>
+  <circle cx="1400" cy="578" r="12" fill="#0369a1"/>
+  <text x="1400" y="582" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">6</text>
 </g>
 
-<!-- LAYER 7 — Integrations (y=640, h=76) -->
-<rect x="14" y="640" width="1332" height="76" rx="10" fill="#e6f7f5" stroke="#009482" stroke-width="1.5"/>
-<text x="30" y="656" font-size="9.5" font-weight="700" fill="#007a6a" letter-spacing="1.5" font-family="'DM Sans',sans-serif">LAYER 7 — INTEGRATIONS  ·  Zoho Flow orchestration</text>
-<g font-size="11" font-family="'DM Sans',sans-serif">
-  <rect x="30" y="662" width="208" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
-  <text x="134" y="680" text-anchor="middle" fill="#fff" font-weight="600">Zoho Flow → Mailchimp</text>
-  <rect x="250" y="662" width="170" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
-  <text x="335" y="680" text-anchor="middle" fill="#fff" font-weight="600">Flow → HubSpot</text>
-  <rect x="432" y="662" width="226" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
-  <text x="545" y="680" text-anchor="middle" fill="#fff" font-weight="600">Raiser's Edge SKY API</text>
-  <rect x="670" y="662" width="222" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
-  <text x="781" y="680" text-anchor="middle" fill="#fff" font-weight="600">BC OData Connector</text>
-  <rect x="904" y="662" width="170" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
-  <text x="989" y="680" text-anchor="middle" fill="#fff" font-weight="600">WorkDrive API</text>
-  <rect x="1086" y="662" width="150" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
-  <text x="1161" y="680" text-anchor="middle" fill="#fff" font-weight="600">SMTP (email relay)</text>
+<!-- ══ LAYER 7 — Integrations ══ y=638 h=78 -->
+<rect x="14" y="638" width="1412" height="78" rx="10" fill="#e6f7f5" stroke="#009482" stroke-width="1.5"/>
+<text x="30" y="656" font-size="9" font-weight="700" fill="#007a6a" letter-spacing="1.5" font-family="'Inter',sans-serif">LAYER 7 — INTEGRATIONS  ·  Zoho Flow orchestration</text>
+<g font-size="10.5" font-family="'Inter',sans-serif" font-weight="600">
+  <rect x="30" y="662" width="200" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
+  <text x="130" y="680" text-anchor="middle" fill="#fff">Zoho Flow → Mailchimp</text>
+  <rect x="242" y="662" width="160" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
+  <text x="322" y="680" text-anchor="middle" fill="#fff">Flow → HubSpot</text>
+  <rect x="414" y="662" width="226" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
+  <text x="527" y="680" text-anchor="middle" fill="#fff">Raiser's Edge SKY API</text>
+  <rect x="652" y="662" width="218" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
+  <text x="761" y="680" text-anchor="middle" fill="#fff">BC OData Connector</text>
+  <rect x="882" y="662" width="164" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
+  <text x="964" y="680" text-anchor="middle" fill="#fff">WorkDrive API</text>
+  <rect x="1058" y="662" width="152" height="28" rx="14" fill="#009482" stroke="#007a6a" stroke-width="1"/>
+  <text x="1134" y="680" text-anchor="middle" fill="#fff">SMTP (email relay)</text>
+  <circle cx="1400" cy="678" r="12" fill="#009482"/>
+  <text x="1400" y="682" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">7</text>
 </g>
 
-<!-- LAYER 8 — Security (y=740, h=82) — red border -->
-<rect x="14" y="740" width="1332" height="82" rx="10" fill="#fef2f2" stroke="#C8102E" stroke-width="2"/>
-<text x="30" y="756" font-size="9.5" font-weight="700" fill="#C8102E" letter-spacing="1.5" font-family="'DM Sans',sans-serif">LAYER 8 — SECURITY PERIMETER  ·  GDPR · RBAC · Zero-Trust</text>
-<g font-size="11" font-family="'DM Sans',sans-serif">
-  <rect x="30" y="762" width="210" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
-  <text x="135" y="780" text-anchor="middle" fill="#fff" font-weight="600">SSO via Google Cloud Identity</text>
-  <rect x="252" y="762" width="106" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
-  <text x="305" y="780" text-anchor="middle" fill="#fff" font-weight="600">RBAC Roles</text>
-  <rect x="370" y="762" width="162" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
-  <text x="451" y="780" text-anchor="middle" fill="#fff" font-weight="600">Field-Level Security</text>
-  <rect x="544" y="762" width="106" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
-  <text x="597" y="780" text-anchor="middle" fill="#fff" font-weight="600">Audit Log</text>
-  <rect x="662" y="762" width="116" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
-  <text x="720" y="780" text-anchor="middle" fill="#fff" font-weight="600">GDPR DSAR</text>
-  <rect x="790" y="762" width="154" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
-  <text x="867" y="780" text-anchor="middle" fill="#fff" font-weight="600">MFA via OneAuth</text>
-  <rect x="956" y="762" width="160" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
-  <text x="1036" y="780" text-anchor="middle" fill="#fff" font-weight="600">Consent Management</text>
-  <rect x="1128" y="762" width="156" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
-  <text x="1206" y="780" text-anchor="middle" fill="#fff" font-weight="600">Zoho EU Data Centre</text>
+<!-- L7 sync back up to external actors -->
+<line x1="900" y1="638" x2="900" y2="98" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#fa-g)"/>
+<text x="908" y="370" font-size="8.5" fill="#94a3b8" font-family="'JetBrains Mono',monospace">sync</text>
+
+<!-- ══ LAYER 8 — Security Perimeter ══ y=740 h=86 -->
+<rect x="14" y="740" width="1412" height="86" rx="10" fill="#fef2f2" stroke="#C8102E" stroke-width="2"/>
+<text x="30" y="758" font-size="9" font-weight="700" fill="#C8102E" letter-spacing="1.5" font-family="'Inter',sans-serif">LAYER 8 — SECURITY PERIMETER  ·  GDPR · RBAC · Zero-Trust</text>
+<g font-size="10.5" font-family="'Inter',sans-serif" font-weight="600">
+  <rect x="30" y="764" width="206" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
+  <text x="133" y="782" text-anchor="middle" fill="#fff">SSO Google Cloud Identity</text>
+  <rect x="248" y="764" width="106" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
+  <text x="301" y="782" text-anchor="middle" fill="#fff">RBAC Roles</text>
+  <rect x="366" y="764" width="158" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
+  <text x="445" y="782" text-anchor="middle" fill="#fff">Field-Level Security</text>
+  <rect x="536" y="764" width="108" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
+  <text x="590" y="782" text-anchor="middle" fill="#fff">Audit Log</text>
+  <rect x="656" y="764" width="116" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
+  <text x="714" y="782" text-anchor="middle" fill="#fff">GDPR DSAR</text>
+  <rect x="784" y="764" width="148" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
+  <text x="858" y="782" text-anchor="middle" fill="#fff">MFA via OneAuth</text>
+  <rect x="944" y="764" width="162" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
+  <text x="1025" y="782" text-anchor="middle" fill="#fff">Consent Management</text>
+  <rect x="1118" y="764" width="162" height="28" rx="14" fill="#C8102E" stroke="#9a0c23" stroke-width="1"/>
+  <text x="1199" y="782" text-anchor="middle" fill="#fff">Zoho EU Data Centre</text>
+  <circle cx="1400" cy="782" r="12" fill="#C8102E"/>
+  <text x="1400" y="786" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">8</text>
 </g>
 
-<!-- ── FLOW ARROWS between layers ── -->
-<!-- L1 → L2 -->
-<line x1="400" y1="96" x2="400" y2="118" stroke="#003087" stroke-width="1.5" marker-end="url(#farr)"/>
-<text x="406" y="111" font-size="9" fill="#003087" font-family="'DM Mono',monospace">request</text>
-<!-- L2 → L3 -->
-<line x1="400" y1="202" x2="400" y2="224" stroke="#009482" stroke-width="1.5" marker-end="url(#farr)"/>
-<text x="406" y="217" font-size="9" fill="#009482" font-family="'DM Mono',monospace">REST call</text>
-<!-- L3 → L4 -->
-<line x1="400" y1="302" x2="400" y2="324" stroke="#003087" stroke-width="1.5" marker-end="url(#farr)"/>
-<text x="406" y="317" font-size="9" fill="#003087" font-family="'DM Mono',monospace">CRM API</text>
-<!-- L4 → L5 -->
-<line x1="400" y1="424" x2="400" y2="446" stroke="#C8AB00" stroke-width="1.5" marker-end="url(#farr)"/>
-<text x="406" y="440" font-size="9" fill="#92400e" font-family="'DM Mono',monospace">triggers</text>
-<!-- L4 → L6 -->
-<line x1="700" y1="424" x2="700" y2="546" stroke="#0369a1" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#farr)"/>
-<text x="706" y="490" font-size="9" fill="#0369a1" font-family="'DM Mono',monospace">file upload</text>
-<!-- L5 → L7 -->
-<line x1="550" y1="524" x2="550" y2="638" stroke="#009482" stroke-width="1.5" marker-end="url(#farr)"/>
-<text x="556" y="586" font-size="9" fill="#007a6a" font-family="'DM Mono',monospace">flow trigger</text>
-<!-- L7 → ext (upward) -->
-<line x1="950" y1="640" x2="950" y2="98" stroke="#9aa3b8" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#farr-grey)"/>
-<text x="956" y="380" font-size="9" fill="#9aa3b8" font-family="'DM Mono',monospace">sync</text>
-<!-- Security wraps all -->
-<text x="1280" y="400" font-size="9" fill="#C8102E" font-family="'DM Mono',monospace" text-anchor="middle" transform="rotate(-90,1280,400)">Security perimeter wraps all layers</text>
+<!-- Security wraps label -->
+<text x="1430" y="400" font-size="9" fill="#C8102E" font-family="'JetBrains Mono',monospace" text-anchor="middle" transform="rotate(-90,1430,400)">Security perimeter wraps all layers</text>
 
-<!-- ── Layer number badges ── -->
-<g font-family="'DM Sans',sans-serif" font-size="9" font-weight="700">
-  <circle cx="1330" cy="55" r="10" fill="#e2e8f0"/><text x="1330" y="59" text-anchor="middle" fill="#64748b">1</text>
-  <circle cx="1330" cy="161" r="10" fill="#003087"/><text x="1330" y="165" text-anchor="middle" fill="#fff">2</text>
-  <circle cx="1330" cy="264" r="10" fill="#009482"/><text x="1330" y="268" text-anchor="middle" fill="#fff">3</text>
-  <circle cx="1330" cy="375" r="10" fill="#003087"/><text x="1330" y="379" text-anchor="middle" fill="#fff">4</text>
-  <circle cx="1330" cy="486" r="10" fill="#C8AB00"/><text x="1330" y="490" text-anchor="middle" fill="#fff">5</text>
-  <circle cx="1330" cy="582" r="10" fill="#0369a1"/><text x="1330" y="586" text-anchor="middle" fill="#fff">6</text>
-  <circle cx="1330" cy="678" r="10" fill="#009482"/><text x="1330" y="682" text-anchor="middle" fill="#fff">7</text>
-  <circle cx="1330" cy="781" r="10" fill="#C8102E"/><text x="1330" y="785" text-anchor="middle" fill="#fff">8</text>
-</g>
-
-<!-- ── Architecture key ── -->
-<rect x="14" y="840" width="1332" height="46" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
-<text x="30" y="856" font-size="9" font-weight="700" fill="#64748b" font-family="'DM Sans',sans-serif" letter-spacing="1.2">TECH STACK</text>
-<text x="30" y="874" font-size="10" fill="#374151" font-family="'DM Sans',sans-serif">Zoho CRM (EU DC) · Zoho Catalyst (serverless) · Zoho WorkDrive · Zoho Flow · Mailchimp · HubSpot · Raiser's Edge SKY API · Microsoft Business Central OData · Google Cloud Identity SSO · OneAuth MFA</text>
+<!-- ══ Tech Stack Footer ══ -->
+<rect x="14" y="844" width="1412" height="48" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+<text x="30" y="862" font-size="9" font-weight="700" fill="#64748b" font-family="'Inter',sans-serif" letter-spacing="1.2">TECH STACK</text>
+<text x="30" y="881" font-size="9.5" fill="#374151" font-family="'Inter',sans-serif">Zoho CRM (EU DC) · Zoho Catalyst (serverless) · Zoho WorkDrive · Zoho Flow · Mailchimp · HubSpot · Raiser's Edge SKY API · Microsoft Business Central OData · Google Cloud Identity SSO · OneAuth MFA · Zoho EU DC</text>
 
 </svg>
-  </div><!-- end arch-svg-wrap -->
+  </div><!-- /arch svg-scroll -->
 
-</div><!-- end page-wrap -->
+</main>
 
+<!-- ===== FOOTER ===== -->
 <footer>
   <strong>UWC International · CRM Data Model &amp; Architecture Reference</strong> &nbsp;|&nbsp;
   A2Z Cloud · Zoho Premium Partner &nbsp;|&nbsp;

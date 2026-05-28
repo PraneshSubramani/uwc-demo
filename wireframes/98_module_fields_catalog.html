@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module & Field Catalogue · UWC International CRM · A2Z Cloud</title>
+<link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-feature-settings:'cv02','cv03','cv11';color:#0f172a;background:#f1f5f9;-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:#003087;text-decoration:none}
+a:hover{text-decoration:underline}
+.serif{font-family:'Playfair Display',Georgia,serif;font-weight:500}
+.mono{font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+
+/* ===== HEADER ===== */
+.header{background:linear-gradient(135deg,#001a4d 0%,#003087 50%,#004A97 100%);color:#fff;border-bottom:3px solid #C8102E;padding:0}
+.header-inner{max-width:1440px;margin:0 auto;padding:26px 32px;display:flex;align-items:center;gap:20px}
+.header-mark{width:48px;height:48px;border-radius:50%;background:#fff;color:#003087;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:14px;flex-shrink:0}
+.header-titleblock{flex:1}
+.header-title{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:24px;letter-spacing:0.2px}
+.header-sub{font-size:12.5px;color:rgba(255,255,255,0.7);margin-top:4px;letter-spacing:0.3px}
+.header-meta{display:flex;gap:14px;font-size:11px;color:rgba(255,255,255,0.65)}
+.header-meta strong{color:#fff;font-weight:600;display:block;font-size:14px;margin-top:2px}
+.header-meta div{padding:0 14px;border-left:1px solid rgba(255,255,255,0.18)}
+.header-meta div:first-child{border-left:none;padding-left:0}
+
+/* ===== STATS BAR ===== */
+.stats{background:#fff;border-bottom:1px solid #e2e8f0;padding:14px 0}
+.stats-inner{max-width:1440px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.stat{display:flex;flex-direction:column;gap:2px}
+.stat-label{font-size:10.5px;font-weight:600;color:#64748b;letter-spacing:1.4px;text-transform:uppercase}
+.stat-val{font-family:'Playfair Display',Georgia,serif;font-weight:600;font-size:22px;color:#003087;line-height:1}
+.stat-sub{font-size:11px;color:#64748b}
+
+/* ===== TOOLBAR ===== */
+.toolbar{background:#fff;border-bottom:1px solid #e2e8f0;padding:10px 0;position:sticky;top:0;z-index:50}
+.toolbar-inner{max-width:1440px;margin:0 auto;padding:0 32px;display:flex;align-items:center;gap:12px}
+.search-box{flex:1;max-width:420px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:10px;transition:all 120ms}
+.search-box:focus-within{background:#fff;border-color:#3b6ef5;box-shadow:0 0 0 3px rgba(59,110,245,0.12)}
+.search-box svg{color:#94a3b8;flex-shrink:0}
+.search-box input{flex:1;border:none;outline:none;background:transparent;font-family:inherit;font-size:13.5px;color:#0f172a}
+.search-box input::placeholder{color:#94a3b8}
+.domain-filter{display:flex;gap:6px;flex-wrap:wrap}
+.domain-chip{font-size:11.5px;font-weight:500;padding:6px 12px;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;border-radius:999px;cursor:pointer;transition:all 120ms;font-family:inherit;display:inline-flex;align-items:center;gap:6px}
+.domain-chip:hover{background:#e2e8f0}
+.domain-chip.active{background:#003087;color:#fff;border-color:#003087}
+.domain-chip-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.toolbar-actions{display:flex;gap:8px;margin-left:auto}
+.btn{font-family:inherit;font-size:12.5px;font-weight:500;padding:7px 14px;border-radius:8px;border:1px solid #e2e8f0;background:#fff;color:#0f172a;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all 120ms}
+.btn:hover{background:#f8fafc;border-color:#cbd5e1}
+.btn-primary{background:#003087;color:#fff;border-color:#003087}
+.btn-primary:hover{background:#001a4d;border-color:#001a4d}
+
+/* ===== LAYOUT ===== */
+.layout{max-width:1440px;margin:0 auto;padding:24px 32px 60px;display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:start}
+.toc{position:sticky;top:64px;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:18px;box-shadow:0 1px 2px rgba(15,23,42,0.04);max-height:calc(100vh - 84px);overflow-y:auto}
+.toc-label{font-size:10px;font-weight:700;color:#64748b;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:12px}
+.toc-domain{margin-bottom:14px}
+.toc-domain-header{font-size:10.5px;font-weight:700;color:#003087;letter-spacing:1.2px;text-transform:uppercase;display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.toc-link{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;font-size:12.5px;color:#334155;cursor:pointer;transition:background 120ms;text-decoration:none}
+.toc-link:hover{background:#f1f5f9;text-decoration:none;color:#003087}
+.toc-link.active{background:#E8EEF6;color:#003087;font-weight:500}
+.toc-link-status{margin-left:auto;font-size:10px}
+.toc-count{font-size:10.5px;color:#94a3b8;margin-left:auto}
+
+/* ===== MODULES ===== */
+.modules{display:flex;flex-direction:column;gap:20px}
+.module-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(15,23,42,0.04)}
+.module-card.hidden{display:none}
+.module-header{padding:20px 24px;border-bottom:1px solid #f1f5f9;display:flex;align-items:flex-start;gap:18px;background:linear-gradient(180deg,#fff 0%,#fafbfc 100%)}
+.module-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0;font-weight:600}
+.module-icon.people{background:linear-gradient(135deg,#003087,#004A97)}
+.module-icon.app-core{background:linear-gradient(135deg,#3b82f6,#1d4ed8)}
+.module-icon.selection{background:linear-gradient(135deg,#7c3aed,#5b21b6)}
+.module-icon.placement{background:linear-gradient(135deg,#10b981,#047857)}
+.module-icon.governance{background:linear-gradient(135deg,#f59e0b,#b45309)}
+.module-icon.volunteer{background:linear-gradient(135deg,#06b6d4,#0e7490)}
+.module-icon.comms{background:linear-gradient(135deg,#ec4899,#be185d)}
+.module-icon.audit{background:linear-gradient(135deg,#64748b,#334155)}
+.module-titleblock{flex:1;min-width:0}
+.module-name{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:20px;color:#0f172a;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.module-api{font-family:'JetBrains Mono',monospace;font-size:11px;color:#64748b;font-weight:400;background:#f1f5f9;padding:2px 8px;border-radius:4px;border:1px solid #e2e8f0}
+.module-purpose{font-size:13px;color:#475569;margin-top:6px;line-height:1.55}
+.module-meta-strip{display:flex;gap:14px;margin-top:10px;font-size:11.5px;color:#64748b;flex-wrap:wrap;align-items:center}
+.module-meta-strip strong{color:#0f172a;font-weight:600}
+.module-meta-strip code{font-family:'JetBrains Mono',monospace;font-size:11px;background:#f1f5f9;padding:1px 6px;border-radius:3px;color:#003087}
+.module-status{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:0.2px}
+.status-current{background:#dcfce7;color:#166534;border:1px solid #86efac}
+.status-partial{background:#fef3c7;color:#92400e;border:1px solid #fcd34d}
+.status-pending{background:#e0e7ff;color:#3730a3;border:1px solid #c7d2fe}
+.status-current::before{content:'●';font-size:10px}
+.status-partial::before{content:'◐';font-size:10px}
+.status-pending::before{content:'○';font-size:10px}
+
+/* ===== FIELDS TABLE ===== */
+.fields-table-wrap{overflow-x:auto}
+.fields-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.fields-table thead{background:#f8fafc}
+.fields-table th{padding:10px 14px;text-align:left;font-size:10.5px;font-weight:700;color:#475569;letter-spacing:0.8px;text-transform:uppercase;border-bottom:1px solid #e2e8f0;white-space:nowrap}
+.fields-table th:first-child{padding-left:24px;width:22%}
+.fields-table th:last-child{padding-right:24px}
+.fields-table td{padding:11px 14px;border-bottom:1px solid #f1f5f9;vertical-align:top;color:#1e293b}
+.fields-table td:first-child{padding-left:24px;font-weight:500}
+.fields-table td:last-child{padding-right:24px}
+.fields-table tr:last-child td{border-bottom:none}
+.fields-table tr:hover td{background:#f8fafc}
+.section-row td{background:#E8EEF6 !important;color:#003087;font-weight:700;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;padding:7px 14px;padding-left:24px}
+.api-name{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#64748b}
+.required-yes{color:#dc2626;font-weight:700}
+.required-no{color:#94a3b8}
+.field-type{display:inline-block;padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:500;white-space:nowrap}
+.t-text{background:#e0e7ff;color:#3730a3}
+.t-multiline{background:#ede9fe;color:#5b21b6}
+.t-pick{background:#fef3c7;color:#92400e}
+.t-multipick{background:#fed7aa;color:#9a3412}
+.t-date{background:#dbeafe;color:#1e40af}
+.t-datetime{background:#cffafe;color:#155e75}
+.t-int{background:#dcfce7;color:#166534}
+.t-decimal{background:#d1fae5;color:#047857}
+.t-currency{background:#bbf7d0;color:#14532d}
+.t-bool{background:#f3f4f6;color:#374151}
+.t-lookup{background:#fce7f3;color:#9d174d}
+.t-multilookup{background:#fbcfe8;color:#831843}
+.t-auto{background:#fef9c3;color:#854d0e}
+.t-formula{background:#fae8ff;color:#6b21a8}
+.t-email{background:#dbeafe;color:#1e40af}
+.t-phone{background:#dcfce7;color:#166534}
+.t-url{background:#e0e7ff;color:#3730a3}
+.t-file{background:#fed7aa;color:#9a3412}
+.t-subform{background:#fda4af;color:#9f1239}
+.sample-val{font-family:'JetBrains Mono',monospace;font-size:11px;color:#475569;background:#fafbfc;padding:1px 6px;border-radius:3px;display:inline-block}
+.note{font-size:11.5px;color:#64748b;line-height:1.5}
+.note b{color:#0f172a;font-weight:600}
+.tag{display:inline-block;font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px;margin-left:4px;letter-spacing:0.3px}
+.tag-pii{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.tag-gate{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa}
+.tag-auto{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+.tag-api{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe}
+
+/* ===== KEY ===== */
+.legend{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 18px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;font-size:11.5px;color:#475569}
+.legend-block{display:flex;align-items:center;gap:6px}
+
+/* ===== FOOTER ===== */
+.footer{background:#001a4d;color:rgba(255,255,255,0.7);padding:24px 32px;text-align:center;font-size:11px;letter-spacing:0.3px}
+.footer strong{color:#fff;font-weight:600}
+
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr}
+  .toc{position:static;max-height:none}
+  .stats-inner{grid-template-columns:repeat(3,1fr)}
+}
+@media print{
+  body{background:#fff}
+  .toolbar,.toc,.footer{display:none}
+  .module-card{break-inside:avoid;border:1px solid #cbd5e1;box-shadow:none}
+  .header{background:#003087 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .layout{grid-template-columns:1fr;padding:0;max-width:100%}
+  @page{margin:12mm}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-mark">UWC</div>
+    <div class="header-titleblock">
+      <div class="header-title">Module &amp; Field Catalogue</div>
+      <div class="header-sub">UWC International CRM &amp; Applications Platform · Complete data model reference</div>
+    </div>
+    <div class="header-meta">
+      <div>Reference<strong>UWC-CRM-5128</strong></div>
+      <div>Demo<strong>1 June 2026</strong></div>
+      <div>Partner<strong>A2Z Cloud · Zoho Premium</strong></div>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat"><span class="stat-label">Modules</span><span class="stat-val">18</span><span class="stat-sub">Standard + custom</span></div>
+    <div class="stat"><span class="stat-label">Fields</span><span class="stat-val">156</span><span class="stat-sub">Across all modules</span></div>
+    <div class="stat"><span class="stat-label">Workflows</span><span class="stat-val">8</span><span class="stat-sub">Triggered automations</span></div>
+    <div class="stat"><span class="stat-label">Blueprint Stages</span><span class="stat-val">10</span><span class="stat-sub">Application lifecycle</span></div>
+    <div class="stat"><span class="stat-label">Custom Functions</span><span class="stat-val">6</span><span class="stat-sub">Deluge scripts</span></div>
+    <div class="stat"><span class="stat-label">Integrations</span><span class="stat-val">6</span><span class="stat-sub">External systems</span></div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="search-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="search-input" placeholder="Search modules and fields…" autocomplete="off">
+    </div>
+    <div class="domain-filter" id="domain-filter">
+      <button class="domain-chip active" data-domain="all"><span class="domain-chip-dot" style="background:#0f172a"></span>All</button>
+      <button class="domain-chip" data-domain="people"><span class="domain-chip-dot" style="background:#003087"></span>People</button>
+      <button class="domain-chip" data-domain="app-core"><span class="domain-chip-dot" style="background:#3b82f6"></span>Application</button>
+      <button class="domain-chip" data-domain="selection"><span class="domain-chip-dot" style="background:#7c3aed"></span>Selection</button>
+      <button class="domain-chip" data-domain="placement"><span class="domain-chip-dot" style="background:#10b981"></span>Placement</button>
+      <button class="domain-chip" data-domain="governance"><span class="domain-chip-dot" style="background:#f59e0b"></span>Governance</button>
+      <button class="domain-chip" data-domain="volunteer"><span class="domain-chip-dot" style="background:#06b6d4"></span>Volunteer Ops</button>
+      <button class="domain-chip" data-domain="comms"><span class="domain-chip-dot" style="background:#ec4899"></span>Comms</button>
+      <button class="domain-chip" data-domain="audit"><span class="domain-chip-dot" style="background:#64748b"></span>Audit</button>
+    </div>
+    <div class="toolbar-actions">
+      <button class="btn" onclick="window.print()">Print / PDF</button>
+      <a class="btn" href="00_index.html">← All scenarios</a>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- ====== TABLE OF CONTENTS ====== -->
+  <aside class="toc">
+    <div class="toc-label">Module Index</div>
+
+    <div class="toc-domain">
+      <div class="toc-domain-header"><span class="domain-chip-dot" style="background:#003087"></span>People</div>
+      <a class="toc-link" href="#m-contact">Contact (extended) <span class="toc-count">15</span></a>
+      <a class="toc-link" href="#m-lead">Lead <span class="toc-count">9</span></a>
+    </div>
+
+    <div class="toc-domain">
+      <div class="toc-domain-header"><span class="domain-chip-dot" style="background:#3b82f6"></span>Application Core</div>
+      <a class="toc-link" href="#m-application">Application <span class="toc-count">31</span></a>
+      <a class="toc-link" href="#m-programme">Programme <span class="toc-count">10</span></a>
+      <a class="toc-link" href="#m-nc">National Committee <span class="toc-count">11</span></a>
+      <a class="toc-link" href="#m-school">School <span class="toc-count">9</span></a>
+    </div>
+
+    <div class="toc-domain">
+      <div class="toc-domain-header"><span class="domain-chip-dot" style="background:#7c3aed"></span>Selection</div>
+      <a class="toc-link" href="#m-review-score">Review Score (subform) <span class="toc-count">8</span></a>
+      <a class="toc-link" href="#m-safeguarding">Safeguarding Flag <span class="toc-count">7</span></a>
+    </div>
+
+    <div class="toc-domain">
+      <div class="toc-domain-header"><span class="domain-chip-dot" style="background:#10b981"></span>Placement</div>
+      <a class="toc-link" href="#m-nomination">Nomination Pack <span class="toc-count">8</span></a>
+      <a class="toc-link" href="#m-allocation">School Place Allocation <span class="toc-count">7</span></a>
+    </div>
+
+    <div class="toc-domain">
+      <div class="toc-domain-header"><span class="domain-chip-dot" style="background:#f59e0b"></span>Governance</div>
+      <a class="toc-link" href="#m-gov-body">Governance Body <span class="toc-count">7</span></a>
+      <a class="toc-link" href="#m-gov-member">Governance Membership <span class="toc-count">8</span></a>
+      <a class="toc-link" href="#m-competency">Competency <span class="toc-count">5</span></a>
+    </div>
+
+    <div class="toc-domain">
+      <div class="toc-domain-header"><span class="domain-chip-dot" style="background:#06b6d4"></span>Volunteer Ops</div>
+      <a class="toc-link" href="#m-nc-volunteer">NC Volunteer <span class="toc-count">8</span></a>
+      <a class="toc-link" href="#m-training">Training Record <span class="toc-count">7</span></a>
+      <a class="toc-link" href="#m-mou">MoU Obligation <span class="toc-count">6</span></a>
+    </div>
+
+    <div class="toc-domain">
+      <div class="toc-domain-header"><span class="domain-chip-dot" style="background:#ec4899"></span>Communications</div>
+      <a class="toc-link" href="#m-mailing">Mailing List <span class="toc-count">6</span></a>
+      <a class="toc-link" href="#m-campaign">Campaign <span class="toc-count">8</span></a>
+      <a class="toc-link" href="#m-comm-log">Communication Log <span class="toc-count">7</span></a>
+      <a class="toc-link" href="#m-consent">Consent Record <span class="toc-count">7</span></a>
+    </div>
+
+    <div class="toc-domain">
+      <div class="toc-domain-header"><span class="domain-chip-dot" style="background:#64748b"></span>Audit</div>
+      <a class="toc-link" href="#m-audit">Audit Log <span class="toc-count">7</span></a>
+    </div>
+  </aside>
+
+  <!-- ====== MODULES ====== -->
+  <main class="modules" id="modules">
+
+    <div class="legend">
+      <span class="legend-block"><span class="module-status status-current" style="font-size:10px;padding:2px 8px"></span><span>Built in live Zoho org</span></span>
+      <span class="legend-block"><span class="module-status status-partial" style="font-size:10px;padding:2px 8px"></span><span>Partially configured</span></span>
+      <span class="legend-block"><span class="module-status status-pending" style="font-size:10px;padding:2px 8px"></span><span>Build pending — post-pilot</span></span>
+      <span class="legend-block"><span class="tag tag-pii">PII</span><span>Personally identifiable — masked from DPL</span></span>
+      <span class="legend-block"><span class="tag tag-gate">GATE</span><span>Blueprint gate condition</span></span>
+      <span class="legend-block"><span class="tag tag-auto">AUTO</span><span>System-managed (workflow / formula)</span></span>
+      <span class="legend-block"><span class="tag tag-api">API</span><span>Written by external system</span></span>
+    </div>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="module-card" id="m-contact" data-domain="people">
+      <div class="module-header">
+        <div class="module-icon people">C</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Contact (extended) <span class="module-api">Contacts</span><span class="module-status status-current">Live</span></h2>
+          <p class="module-purpose">Single source of truth for every person in UWC's network — applicant, parent, alumnus, donor, volunteer, NC Chair, governance member. Role tags applied over time without separate records. <strong>Extended in live org</strong> with student-specific fields (Type, DOB, Gender, Parent Name, Relationship).</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Standard (extended)</strong></span>
+            <span>Used in scenarios: <strong>All (A–G)</strong></span>
+            <span>Related modules: <code>Application</code> <code>NC Volunteer</code> <code>Governance Membership</code> <code>Communication Log</code> <code>Consent Record</code></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr class="section-row"><td colspan="6">Core identity</td></tr>
+            <tr><td>First Name</td><td class="api-name">First_Name</td><td><span class="field-type t-text">Text 80</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Sofia</span></td><td class="note">Used as personalisation token in emails.</td></tr>
+            <tr><td>Last Name</td><td class="api-name">Last_Name</td><td><span class="field-type t-text">Text 80</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Almeida</span></td><td class="note">Used for record name display.</td></tr>
+            <tr><td>Contact Type</td><td class="api-name">Contact_Type</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Student</span></td><td class="note">Values: <code>Student · Parent · Alumnus · Donor · Volunteer · NC Chair · Governance Member · Staff</code>. A contact can carry several via tags.</td></tr>
+            <tr><td>Date of Birth</td><td class="api-name">Date_of_Birth</td><td><span class="field-type t-date">Date</span></td><td class="required-yes">Yes</td><td><span class="sample-val">15 Aug 2009</span></td><td class="note">Drives eligibility check (15–17 on 1 Sep). <span class="tag tag-pii">PII</span> <span class="tag tag-gate">GATE</span> Masked from Data Protection Lead profile.</td></tr>
+            <tr><td>Gender</td><td class="api-name">Gender</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-no">No</td><td><span class="sample-val">Female</span></td><td class="note">Values: <code>Female · Male · Non-binary · Prefer not to say</code></td></tr>
+            <tr><td>Citizenship</td><td class="api-name">Citizenship</td><td><span class="field-type t-multipick">Multi-pick</span></td><td class="required-no">No</td><td><span class="sample-val">Brazil, Portugal</span></td><td class="note">ISO country codes; supports dual nationality.</td></tr>
+            <tr><td>Country of Residence</td><td class="api-name">Country_of_Residence</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Brazil</span></td><td class="note">Drives NC assignment.</td></tr>
+            <tr><td>Email</td><td class="api-name">Email</td><td><span class="field-type t-email">Email</span></td><td class="required-yes">Yes</td><td><span class="sample-val">sofia.almeida@…</span></td><td class="note">Unique. Portal login identifier. <span class="tag tag-pii">PII</span></td></tr>
+            <tr><td>Phone</td><td class="api-name">Phone</td><td><span class="field-type t-phone">Phone</span></td><td class="required-no">No</td><td><span class="sample-val">+55 11 9…</span></td><td class="note"><span class="tag tag-pii">PII</span> Masked from Data Protection Lead profile.</td></tr>
+            <tr class="section-row"><td colspan="6">Family &amp; consent</td></tr>
+            <tr><td>Parent Name</td><td class="api-name">Parent_Name</td><td><span class="field-type t-lookup">Lookup → Contact</span></td><td class="required-no">No</td><td><span class="sample-val">Maria Almeida</span></td><td class="note">Required for minor applicants before stage transition. <span class="tag tag-pii">PII</span></td></tr>
+            <tr><td>Relationship</td><td class="api-name">Relationship</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-no">No</td><td><span class="sample-val">Mother</span></td><td class="note">Values: <code>Mother · Father · Guardian · Other</code></td></tr>
+            <tr><td>GDPR Consent Status</td><td class="api-name">GDPR_Consent_Status</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Opted In</span></td><td class="note">Values: <code>Opted In · Opted Out · Pending</code>. Drives campaign eligibility (Scenario G).</td></tr>
+            <tr class="section-row"><td colspan="6">Audit + system</td></tr>
+            <tr><td>Owner</td><td class="api-name">Owner</td><td><span class="field-type t-lookup">Lookup → User</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Ana Carvalho</span></td><td class="note">Drives NC-level record visibility.</td></tr>
+            <tr><td>Created Time</td><td class="api-name">Created_Time</td><td><span class="field-type t-auto">DateTime AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">2026-03-12 14:22</span></td><td class="note">System-set on insert.</td></tr>
+            <tr><td>Modified Time</td><td class="api-name">Modified_Time</td><td><span class="field-type t-auto">DateTime AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">2026-05-25 11:08</span></td><td class="note">System-set on every save.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ LEAD ============ -->
+    <section class="module-card" id="m-lead" data-domain="people">
+      <div class="module-header">
+        <div class="module-icon people">L</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Lead <span class="module-api">Leads</span><span class="module-status status-current">Live</span></h2>
+          <p class="module-purpose">Marketing-qualified inbound only. Auto-converts to Contact on portal registration (Scenario B step 5) — preserves source attribution for IO Marketing.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Standard</strong></span>
+            <span>Used in scenarios: <strong>B (registration), G (campaigns)</strong></span>
+            <span>Lifecycle: <code>Lead → Contact (auto-convert)</code></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>First Name / Last Name</td><td class="api-name">First_Name · Last_Name</td><td><span class="field-type t-text">Text 80</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Sofia Almeida</span></td><td class="note">Standard lead identity.</td></tr>
+            <tr><td>Email</td><td class="api-name">Email</td><td><span class="field-type t-email">Email</span></td><td class="required-yes">Yes</td><td><span class="sample-val">sofia@…</span></td><td class="note">Dedupe key against Contact module.</td></tr>
+            <tr><td>Lead Source</td><td class="api-name">Lead_Source</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Social</span></td><td class="note">Values: <code>Social · NC Website · Partner School · Direct Search · Referral · Campaign · Other</code></td></tr>
+            <tr><td>Campaign Source</td><td class="api-name">Campaign_Source</td><td><span class="field-type t-lookup">Lookup → Campaign</span></td><td class="required-no">No</td><td><span class="sample-val">UWC Awareness 2026</span></td><td class="note">If lead came from a tracked campaign.</td></tr>
+            <tr><td>UTM Campaign</td><td class="api-name">UTM_Campaign</td><td><span class="field-type t-text">Text 100</span></td><td class="required-no">No</td><td><span class="sample-val">uwc-spring-2026</span></td><td class="note">From URL parameter on portal landing.</td></tr>
+            <tr><td>UTM Source / Medium</td><td class="api-name">UTM_Source · UTM_Medium</td><td><span class="field-type t-text">Text 50</span></td><td class="required-no">No</td><td><span class="sample-val">instagram · cpc</span></td><td class="note">Marketing attribution.</td></tr>
+            <tr><td>Country of Residence</td><td class="api-name">Country_of_Residence</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-no">No</td><td><span class="sample-val">Brazil</span></td><td class="note">Determines auto-assigned NC on conversion.</td></tr>
+            <tr><td>Converted Contact</td><td class="api-name">Converted_Contact</td><td><span class="field-type t-lookup">Lookup → Contact</span></td><td class="required-no">No</td><td><span class="sample-val">Sofia Almeida</span></td><td class="note">Populated by auto-conversion workflow on portal sign-up. <span class="tag tag-auto">AUTO</span></td></tr>
+            <tr><td>Owner</td><td class="api-name">Owner</td><td><span class="field-type t-lookup">Lookup → User</span></td><td class="required-yes">Yes</td><td><span class="sample-val">IO Marketing</span></td><td class="note">Default = round-robin in marketing group.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ APPLICATION ============ -->
+    <section class="module-card" id="m-application" data-domain="app-core">
+      <div class="module-header">
+        <div class="module-icon app-core">A</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Application <span class="module-api">Potentials (renamed)</span><span class="module-status status-partial">Partial</span></h2>
+          <p class="module-purpose">One record per applicant per cycle. Centrepiece of the system — holds blueprint stage, scores, decisions, audit. <strong>Currently uses 3 of 10 stages</strong> (Qualification / Eligibility Review / Review). Full 10-stage Blueprint pending per BLUEPRINT_AND_WORKFLOW_SPEC.md §2.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Standard (Potentials) renamed</strong></span>
+            <span>Used in scenarios: <strong>A, B, C, D</strong></span>
+            <span>Blueprint stages: <strong>10</strong></span>
+            <span>Workflows: <strong>8</strong></span>
+            <span>Includes subform: <code>Review Scores</code></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr class="section-row"><td colspan="6">Identity</td></tr>
+            <tr><td>Application Name</td><td class="api-name">Deal_Name</td><td><span class="field-type t-auto">Auto-number</span></td><td class="required-yes">Yes</td><td><span class="sample-val">APP-2026-00041</span></td><td class="note">Format <code>APP-{YYYY}-{00001}</code>. Renamed from Deal Name.</td></tr>
+            <tr><td>Applicant Number</td><td class="api-name">Applicant_Number</td><td><span class="field-type t-auto">Auto-number</span></td><td class="required-yes">Yes</td><td><span class="sample-val">APL-00041</span></td><td class="note">Distinct from Application Name — Applicant can apply across multiple cycles.</td></tr>
+            <tr><td>Applicant Name</td><td class="api-name">Contact_Name</td><td><span class="field-type t-lookup">Lookup → Contact</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Sofia Almeida</span></td><td class="note">Required. Drives parental-consent gate.</td></tr>
+            <tr><td>Application Language</td><td class="api-name">Application_Language</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Português</span></td><td class="note"><code>English · Português · Español · Français · العربية</code></td></tr>
+            <tr><td>Country of Residence</td><td class="api-name">Country_of_Residence</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Brazil</span></td><td class="note">Copied from Contact on create.</td></tr>
+            <tr><td>Eligibility Status</td><td class="api-name">Eligibility_Status</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Passed</span></td><td class="note"><code>Pending Check · Passed · Failed</code>. <span class="tag tag-gate">GATE</span> for stage 1→2.</td></tr>
+            <tr><td>Eligibility Failed Reason</td><td class="api-name">Eligibility_Failed_Reason</td><td><span class="field-type t-text">Text 255</span></td><td class="required-no">No</td><td><span class="sample-val">Age &lt; 15 on 1 Sep</span></td><td class="note">Only shown when Eligibility Status = Failed.</td></tr>
+            <tr class="section-row"><td colspan="6">Lifecycle (Blueprint)</td></tr>
+            <tr><td>Application Stage</td><td class="api-name">Stage</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Under Review</span></td><td class="note">Blueprint values: <code>Registered · In Progress · Submitted · Under Review · Shortlisted · Nominated · Placed · Declined · Withdrawn · Waitlisted</code>. See colour map.</td></tr>
+            <tr><td>Form Completion %</td><td class="api-name">Form_Completion_Pct</td><td><span class="field-type t-formula">Formula AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">72</span></td><td class="note">Computed from 12 required fields. Drives student dashboard progress bar. <span class="tag tag-auto">AUTO</span></td></tr>
+            <tr><td>Submitted Date</td><td class="api-name">Submitted_Date</td><td><span class="field-type t-datetime">DateTime AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">2026-05-25 16:42</span></td><td class="note">Set by Blueprint transition to Submitted. <span class="tag tag-auto">AUTO</span></td></tr>
+            <tr><td>Review Count</td><td class="api-name">Review_Count</td><td><span class="field-type t-int">Integer</span></td><td class="required-no">—</td><td><span class="sample-val">2</span></td><td class="note">Incremented by WR-3 on each Review Scores subform row save. <span class="tag tag-auto">AUTO</span></td></tr>
+            <tr><td>All Reviews Complete</td><td class="api-name">All_Reviews_Complete</td><td><span class="field-type t-bool">Checkbox</span></td><td class="required-no">—</td><td><span class="sample-val">true</span></td><td class="note">Flips to true when Review Count ≥ 2 → unlocks blind review (Scenario C). <span class="tag tag-auto">AUTO</span> <span class="tag tag-gate">GATE</span></td></tr>
+            <tr><td>Panel Decision</td><td class="api-name">Panel_Decision</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-no">No</td><td><span class="sample-val">Shortlisted</span></td><td class="note"><code>Shortlisted · Not Progressed</code>. <span class="tag tag-gate">GATE</span></td></tr>
+            <tr><td>Panel Decision Date</td><td class="api-name">Panel_Decision_Date</td><td><span class="field-type t-date">Date</span></td><td class="required-no">No</td><td><span class="sample-val">2026-05-28</span></td><td class="note">Auto-set when Panel Decision changes from blank.</td></tr>
+            <tr><td>Decline Reason</td><td class="api-name">Decline_Reason</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-no">No</td><td><span class="sample-val">Below academic threshold</span></td><td class="note"><span class="tag tag-gate">GATE</span> required for any-stage → Declined.</td></tr>
+            <tr><td>Withdrawal Reason</td><td class="api-name">Withdrawal_Reason</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-no">No</td><td><span class="sample-val">Family circumstance</span></td><td class="note"><span class="tag tag-gate">GATE</span> required for any-stage → Withdrawn.</td></tr>
+            <tr><td>Unlock Reason</td><td class="api-name">Unlock_Reason</td><td><span class="field-type t-text">Text 255</span></td><td class="required-no">No</td><td><span class="sample-val">Additional reference letter</span></td><td class="note">Required when NC Admin uses "Unlock Application" custom button.</td></tr>
+            <tr class="section-row"><td colspan="6">Consent &amp; safeguarding</td></tr>
+            <tr><td>Parental Consent Status</td><td class="api-name">Parental_Consent_Status</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Received</span></td><td class="note"><code>Pending · Received · Waived</code>. <span class="tag tag-gate">GATE</span> for In Progress → Submitted when minor.</td></tr>
+            <tr><td>Parental Consent Date</td><td class="api-name">Parental_Consent_Date</td><td><span class="field-type t-datetime">DateTime AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">2026-05-24 09:15</span></td><td class="note">Set when status changes to Received.</td></tr>
+            <tr><td>Guardian Contact</td><td class="api-name">Guardian_Contact</td><td><span class="field-type t-lookup">Lookup → Contact</span></td><td class="required-no">No</td><td><span class="sample-val">Maria Almeida</span></td><td class="note">The parent/guardian completing consent.</td></tr>
+            <tr><td>Safeguarding Flag Status</td><td class="api-name">Safeguarding_Flag_Status</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">None</span></td><td class="note"><code>None · Under Review · Resolved</code>. <span class="tag tag-gate">GATE</span> must be None to progress past Under Review.</td></tr>
+            <tr><td>Safeguarding Flag Raised By</td><td class="api-name">Safeguarding_Flag_Raised_By</td><td><span class="field-type t-lookup">Lookup → User</span></td><td class="required-no">No</td><td><span class="sample-val">Clara Ramos</span></td><td class="note">Auto-set when flag raised.</td></tr>
+            <tr><td>Safeguarding Flag Raised Date</td><td class="api-name">Safeguarding_Flag_Raised_Date</td><td><span class="field-type t-datetime">DateTime AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">2026-05-22 11:30</span></td><td class="note">Locks record from progression until resolved.</td></tr>
+            <tr class="section-row"><td colspan="6">Relationships</td></tr>
+            <tr><td>Programme</td><td class="api-name">Programme</td><td><span class="field-type t-lookup">Lookup → Programme</span></td><td class="required-yes">Yes</td><td><span class="sample-val">UWC Brazil 2026 Selection</span></td><td class="note">Determines NC, deadline, place quota.</td></tr>
+            <tr><td>National Committee</td><td class="api-name">NC_Lookup</td><td><span class="field-type t-lookup">Lookup → NC</span></td><td class="required-yes">Yes</td><td><span class="sample-val">UWC Brazil NC</span></td><td class="note">Copied from Programme. Drives NC-scoped visibility.</td></tr>
+            <tr><td>School Nominated</td><td class="api-name">School_Nominated</td><td><span class="field-type t-lookup">Lookup → School</span></td><td class="required-no">No</td><td><span class="sample-val">UWC Atlantic</span></td><td class="note">Set when nominated (Scenario D).</td></tr>
+            <tr><td>Preferred School</td><td class="api-name">Preferred_School</td><td><span class="field-type t-lookup">Lookup → School</span></td><td class="required-no">No</td><td><span class="sample-val">UWC Atlantic</span></td><td class="note">Set by applicant in portal — advisory only, not binding.</td></tr>
+            <tr class="section-row"><td colspan="6">Form responses (written via Catalyst API from portal)</td></tr>
+            <tr><td>Personal Statement</td><td class="api-name">Personal_Statement</td><td><span class="field-type t-multiline">Multi-line 5000</span></td><td class="required-yes">Yes</td><td><span class="sample-val">"My grandmother taught me…"</span></td><td class="note">Max 800 words enforced client-side. <span class="tag tag-api">API</span></td></tr>
+            <tr><td>Education Background</td><td class="api-name">Education_Background</td><td><span class="field-type t-multiline">Multi-line 3000</span></td><td class="required-yes">Yes</td><td><span class="sample-val">School name + grades</span></td><td class="note"><span class="tag tag-api">API</span></td></tr>
+            <tr><td>Extracurricular Activities</td><td class="api-name">Extracurricular_Activities</td><td><span class="field-type t-multiline">Multi-line 3000</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Debate club captain…</span></td><td class="note"><span class="tag tag-api">API</span></td></tr>
+            <tr><td>Leadership Statement</td><td class="api-name">Leadership_Statement</td><td><span class="field-type t-multiline">Multi-line 3000</span></td><td class="required-yes">Yes</td><td><span class="sample-val">"I led a beach cleanup…"</span></td><td class="note"><span class="tag tag-api">API</span></td></tr>
+            <tr><td>NC Local Question Answer</td><td class="api-name">NC_Local_Question_Answer</td><td><span class="field-type t-multiline">Multi-line 3000</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Response to local Q</span></td><td class="note">Question text comes from Programme record.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ PROGRAMME ============ -->
+    <section class="module-card" id="m-programme" data-domain="app-core">
+      <div class="module-header">
+        <div class="module-icon app-core">P</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Programme <span class="module-api">Products (renamed)</span><span class="module-status status-partial">Partial</span></h2>
+          <p class="module-purpose">Per-NC, per-cycle configuration: open date, deadline, place allocation, stages, local question. <strong>Module exists but empty</strong> in live org — needs 5 sample records seeded (Brazil 2026, Germany 2026, Kenya 2026, India 2026, UK 2026) per Build Plan v4.1 §2.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Standard (Products) renamed</strong></span>
+            <span>Records expected: <strong>5 (one per NC for 2026 cycle)</strong></span>
+            <span>Used in: <strong>A, D</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Programme Name</td><td class="api-name">Product_Name</td><td><span class="field-type t-text">Text 120</span></td><td class="required-yes">Yes</td><td><span class="sample-val">UWC Deutschland 2026 Auswahl</span></td><td class="note">Display name in local language.</td></tr>
+            <tr><td>Programme Code</td><td class="api-name">Product_Code</td><td><span class="field-type t-text">Text 20</span></td><td class="required-yes">Yes</td><td><span class="sample-val">DE-2026</span></td><td class="note">Convention: <code>{NC ISO}-{YYYY}</code></td></tr>
+            <tr><td>National Committee</td><td class="api-name">NC_Lookup</td><td><span class="field-type t-lookup">Lookup → NC</span></td><td class="required-yes">Yes</td><td><span class="sample-val">UWC Germany NC</span></td><td class="note">One Programme belongs to one NC; one NC has many Programmes (one per cycle).</td></tr>
+            <tr><td>Cycle Year</td><td class="api-name">Cycle_Year</td><td><span class="field-type t-int">Integer</span></td><td class="required-yes">Yes</td><td><span class="sample-val">2026</span></td><td class="note">Used in reporting and filtering.</td></tr>
+            <tr><td>Open Date</td><td class="api-name">Open_Date</td><td><span class="field-type t-date">Date</span></td><td class="required-yes">Yes</td><td><span class="sample-val">01 Feb 2026</span></td><td class="note">Portal opens registration on this date.</td></tr>
+            <tr><td>Application Deadline</td><td class="api-name">Application_Deadline</td><td><span class="field-type t-date">Date</span></td><td class="required-yes">Yes</td><td><span class="sample-val">30 May 2026</span></td><td class="note">NC Admin can edit inline. Submissions after deadline auto-flagged.</td></tr>
+            <tr><td>Place Allocation</td><td class="api-name">Place_Allocation</td><td><span class="field-type t-int">Integer</span></td><td class="required-yes">Yes</td><td><span class="sample-val">6</span></td><td class="note">Maximum places this NC can nominate this cycle.</td></tr>
+            <tr><td>Places Remaining</td><td class="api-name">Places_Remaining</td><td><span class="field-type t-formula">Formula AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">4</span></td><td class="note">= Place Allocation − count(Nominations). <span class="tag tag-auto">AUTO</span></td></tr>
+            <tr><td>Local Question</td><td class="api-name">Local_Question</td><td><span class="field-type t-multiline">Multi-line 500</span></td><td class="required-no">No</td><td><span class="sample-val">"Beschreibe ein gesellschaftliches Problem…"</span></td><td class="note">Added by NC Admin in own language. Rendered on portal form.</td></tr>
+            <tr><td>Status</td><td class="api-name">Status</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Active</span></td><td class="note"><code>Draft · Active · Closed · Cancelled</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ NATIONAL COMMITTEE ============ -->
+    <section class="module-card" id="m-nc" data-domain="app-core">
+      <div class="module-header">
+        <div class="module-icon app-core">NC</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">National Committee <span class="module-api">National_Committees</span><span class="module-status status-pending">Pending</span></h2>
+          <p class="module-purpose">One record per UWC NC (150+ globally). Drives record-level visibility — NC Admin sees only own NC. Linked to volunteers, MoU obligations, programmes, governance bodies.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Custom — to be created</strong></span>
+            <span>Used in: <strong>A, D, F, G</strong></span>
+            <span>Records expected: <strong>5 demo (target 150+)</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>NC Name</td><td class="api-name">NC_Name</td><td><span class="field-type t-text">Text 120</span></td><td class="required-yes">Yes</td><td><span class="sample-val">UWC Brazil National Committee</span></td><td class="note">Display in sidebar Teamspace.</td></tr>
+            <tr><td>Country</td><td class="api-name">Country</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Brazil</span></td><td class="note">ISO country.</td></tr>
+            <tr><td>Country Code</td><td class="api-name">Country_Code</td><td><span class="field-type t-text">Text 2</span></td><td class="required-yes">Yes</td><td><span class="sample-val">BR</span></td><td class="note">ISO 3166-1 alpha-2. Used for flag rendering.</td></tr>
+            <tr><td>Region</td><td class="api-name">Region</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Americas</span></td><td class="note"><code>Africa · Americas · Asia Pacific · Europe · SWANA/MENA</code></td></tr>
+            <tr><td>Status</td><td class="api-name">Status</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Active</span></td><td class="note"><code>Active · Inactive · Pipeline · Wound Up</code></td></tr>
+            <tr><td>NC Admin</td><td class="api-name">NC_Admin</td><td><span class="field-type t-lookup">Lookup → User</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Ana Carvalho</span></td><td class="note">Primary admin user.</td></tr>
+            <tr><td>Key Contact</td><td class="api-name">Key_Contact</td><td><span class="field-type t-lookup">Lookup → Contact</span></td><td class="required-no">No</td><td><span class="sample-val">Ana Carvalho</span></td><td class="note">Public-facing contact (may differ from CRM admin user).</td></tr>
+            <tr><td>NC Email</td><td class="api-name">NC_Email</td><td><span class="field-type t-email">Email</span></td><td class="required-yes">Yes</td><td><span class="sample-val">brazil@uwc.org</span></td><td class="note">Group inbox.</td></tr>
+            <tr><td>Portal URL</td><td class="api-name">Portal_URL</td><td><span class="field-type t-url">URL</span></td><td class="required-no">No</td><td><span class="sample-val">https://brazil.uwc.org</span></td><td class="note">Public NC website.</td></tr>
+            <tr><td>Established Date</td><td class="api-name">Established_Date</td><td><span class="field-type t-date">Date</span></td><td class="required-no">No</td><td><span class="sample-val">1972-09-01</span></td><td class="note">For NC history records.</td></tr>
+            <tr><td>Active Programmes Count</td><td class="api-name">Active_Programmes_Count</td><td><span class="field-type t-formula">Formula AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">1</span></td><td class="note">Count of Programme records with Status = Active.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ SCHOOL ============ -->
+    <section class="module-card" id="m-school" data-domain="app-core">
+      <div class="module-header">
+        <div class="module-icon app-core">S</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">School <span class="module-api">Schools</span><span class="module-status status-pending">Pending</span></h2>
+          <p class="module-purpose">One record per UWC school (18 globally — Atlantic, Red Cross Nordic, Mahindra, Pearson, etc.). Holds total places and active allocations. School Admissions Director has scoped access.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Custom — to be created</strong></span>
+            <span>Used in: <strong>D</strong></span>
+            <span>Records expected: <strong>3 demo (target 18)</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>School Name</td><td class="api-name">School_Name</td><td><span class="field-type t-text">Text 120</span></td><td class="required-yes">Yes</td><td><span class="sample-val">UWC Atlantic College</span></td><td class="note"></td></tr>
+            <tr><td>Country / Region</td><td class="api-name">Country</td><td><span class="field-type t-text">Text 80</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Wales, UK</span></td><td class="note"></td></tr>
+            <tr><td>Admissions Director</td><td class="api-name">Admissions_Director</td><td><span class="field-type t-lookup">Lookup → User</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Helen Richards</span></td><td class="note">Owns nomination decisions.</td></tr>
+            <tr><td>Admissions Email</td><td class="api-name">Admissions_Email</td><td><span class="field-type t-email">Email</span></td><td class="required-yes">Yes</td><td><span class="sample-val">admissions@uwcatlantic.org</span></td><td class="note">Receives nomination pack notifications.</td></tr>
+            <tr><td>Total Places (2-year cycle)</td><td class="api-name">Total_Places</td><td><span class="field-type t-int">Integer</span></td><td class="required-yes">Yes</td><td><span class="sample-val">12</span></td><td class="note">Annual intake capacity.</td></tr>
+            <tr><td>Places Remaining</td><td class="api-name">Places_Remaining</td><td><span class="field-type t-formula">Formula AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">8</span></td><td class="note">= Total Places − accepted nominations this cycle.</td></tr>
+            <tr><td>Region</td><td class="api-name">Region</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Europe</span></td><td class="note">For IO reporting.</td></tr>
+            <tr><td>Partnership Agreement</td><td class="api-name">Partnership_Agreement</td><td><span class="field-type t-file">File</span></td><td class="required-no">No</td><td><span class="sample-val">Atlantic_MoU_2025.pdf</span></td><td class="note">Signed agreement with UWC International.</td></tr>
+            <tr><td>Contact Email (public)</td><td class="api-name">Contact_Email</td><td><span class="field-type t-email">Email</span></td><td class="required-no">No</td><td><span class="sample-val">info@uwcatlantic.org</span></td><td class="note">General enquiry inbox.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ REVIEW SCORE (subform) ============ -->
+    <section class="module-card" id="m-review-score" data-domain="selection">
+      <div class="module-header">
+        <div class="module-icon selection">RS</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Review Score (subform) <span class="module-api">Application.Review_Scores[]</span><span class="module-status status-pending">Pending</span></h2>
+          <p class="module-purpose">Subform on Application. Each row = one reviewer's scoring. Blind review enforced via <code>Visible_To_NC_Admin</code> flag — invisible until two scores submitted (Scenario C centrepiece).</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Custom subform (multi-line items)</strong></span>
+            <span>Parent: <strong>Application</strong></span>
+            <span>Used in: <strong>C</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Reviewer</td><td class="api-name">Reviewer</td><td><span class="field-type t-lookup">Lookup → User</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Clara Ramos</span></td><td class="note">The reviewer assigned.</td></tr>
+            <tr><td>Academic Potential</td><td class="api-name">Academic_Potential</td><td><span class="field-type t-int">Integer 1–10</span></td><td class="required-yes">Yes</td><td><span class="sample-val">9</span></td><td class="note">Scoring dimension.</td></tr>
+            <tr><td>Community Engagement</td><td class="api-name">Community_Engagement</td><td><span class="field-type t-int">Integer 1–10</span></td><td class="required-yes">Yes</td><td><span class="sample-val">8</span></td><td class="note">Scoring dimension.</td></tr>
+            <tr><td>Communication Skills</td><td class="api-name">Communication_Skills</td><td><span class="field-type t-int">Integer 1–10</span></td><td class="required-yes">Yes</td><td><span class="sample-val">9</span></td><td class="note">Scoring dimension.</td></tr>
+            <tr><td>UWC Values Commitment</td><td class="api-name">UWC_Values_Commitment</td><td><span class="field-type t-int">Integer 1–10</span></td><td class="required-yes">Yes</td><td><span class="sample-val">9</span></td><td class="note">Scoring dimension.</td></tr>
+            <tr><td>Overall Recommendation</td><td class="api-name">Overall_Recommendation</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Yes</span></td><td class="note"><code>Yes · Conditional · No</code></td></tr>
+            <tr><td>Submitted At</td><td class="api-name">Submitted_At</td><td><span class="field-type t-datetime">DateTime AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">2026-05-26 14:22</span></td><td class="note">Triggers WR-3 (increment Review Count). <span class="tag tag-auto">AUTO</span></td></tr>
+            <tr><td>Visible to NC Admin</td><td class="api-name">Visible_To_NC_Admin</td><td><span class="field-type t-bool">Checkbox</span></td><td class="required-no">—</td><td><span class="sample-val">false → true</span></td><td class="note">Blind review lock. Flipped true by WR-4 when All Reviews Complete = true. <span class="tag tag-auto">AUTO</span> <span class="tag tag-gate">GATE</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ SAFEGUARDING FLAG ============ -->
+    <section class="module-card" id="m-safeguarding" data-domain="selection">
+      <div class="module-header">
+        <div class="module-icon selection">SF</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Safeguarding Flag <span class="module-api">Safeguarding_Flags</span><span class="module-status status-pending">Pending</span></h2>
+          <p class="module-purpose">Custom module — one per safeguarding incident raised on an Application. Locks the Application from stage progression until resolved. Triggers immediate dual email to NC Admin and IO Super Admin.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Custom</strong></span>
+            <span>Used in: <strong>C</strong></span>
+            <span>Workflow: <strong>WR-5 fires on insert</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Application</td><td class="api-name">Application</td><td><span class="field-type t-lookup">Lookup → Application</span></td><td class="required-yes">Yes</td><td><span class="sample-val">APP-2026-00073</span></td><td class="note">Parent application. Triggers lock.</td></tr>
+            <tr><td>Raised By</td><td class="api-name">Raised_By</td><td><span class="field-type t-lookup">Lookup → User</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Clara Ramos</span></td><td class="note">Reviewer or NC Admin who flagged.</td></tr>
+            <tr><td>Raised Date</td><td class="api-name">Raised_Date</td><td><span class="field-type t-datetime">DateTime AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">2026-05-22 11:30</span></td><td class="note">System-set on insert.</td></tr>
+            <tr><td>Severity</td><td class="api-name">Severity</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Medium</span></td><td class="note"><code>Low · Medium · High · Critical</code></td></tr>
+            <tr><td>Category</td><td class="api-name">Category</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Wellbeing concern</span></td><td class="note"><code>Wellbeing · Disclosure · Family · Health · Documentation · Other</code></td></tr>
+            <tr><td>Status</td><td class="api-name">Status</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Under Review</span></td><td class="note"><code>Under Review · Resolved · Escalated</code>. <span class="tag tag-gate">GATE</span></td></tr>
+            <tr><td>IO Notified</td><td class="api-name">IO_Notified</td><td><span class="field-type t-bool">Checkbox</span></td><td class="required-no">—</td><td><span class="sample-val">true</span></td><td class="note">Auto-set true when WR-5 sends notification. <span class="tag tag-auto">AUTO</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ NOMINATION PACK ============ -->
+    <section class="module-card" id="m-nomination" data-domain="placement">
+      <div class="module-header">
+        <div class="module-icon placement">NP</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Nomination Pack <span class="module-api">Nomination_Packs</span><span class="module-status status-pending">Pending</span></h2>
+          <p class="module-purpose">Compiled PDF generated from an Application — includes personal details, scores (unlocked), references, parental consent receipt, NC recommendation. Sent to School Admissions Director for decision (Scenario D centrepiece).</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Custom</strong></span>
+            <span>Used in: <strong>D</strong></span>
+            <span>PDF: <strong>Generated by Deluge function</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Application</td><td class="api-name">Application</td><td><span class="field-type t-lookup">Lookup → Application</span></td><td class="required-yes">Yes</td><td><span class="sample-val">APP-2026-00041</span></td><td class="note">Source application. 1:1 relationship.</td></tr>
+            <tr><td>School Nominated</td><td class="api-name">School_Nominated</td><td><span class="field-type t-lookup">Lookup → School</span></td><td class="required-yes">Yes</td><td><span class="sample-val">UWC Atlantic</span></td><td class="note"></td></tr>
+            <tr><td>Pack Generated Date</td><td class="api-name">Pack_Generated_Date</td><td><span class="field-type t-datetime">DateTime AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">2026-05-28 16:00</span></td><td class="note">When Deluge function ran.</td></tr>
+            <tr><td>Sent To School Date</td><td class="api-name">Sent_To_School_Date</td><td><span class="field-type t-datetime">DateTime AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">2026-05-28 16:01</span></td><td class="note">When WR-6 fired email.</td></tr>
+            <tr><td>School Decision</td><td class="api-name">School_Decision</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-no">No</td><td><span class="sample-val">Accepted</span></td><td class="note"><code>Pending · Accepted · Declined · Conditional</code></td></tr>
+            <tr><td>Decision Date</td><td class="api-name">Decision_Date</td><td><span class="field-type t-date">Date</span></td><td class="required-no">No</td><td><span class="sample-val">2026-05-30</span></td><td class="note">Set when School Director clicks Accept/Decline.</td></tr>
+            <tr><td>Pack PDF</td><td class="api-name">Pack_PDF</td><td><span class="field-type t-file">File (WorkDrive)</span></td><td class="required-no">No</td><td><span class="sample-val">Pack_APP-2026-00041.pdf</span></td><td class="note">Stored in Zoho WorkDrive or Google Drive per NFR-044.</td></tr>
+            <tr><td>Cycle Year</td><td class="api-name">Cycle_Year</td><td><span class="field-type t-int">Integer</span></td><td class="required-yes">Yes</td><td><span class="sample-val">2026</span></td><td class="note">Inherited from Programme. Drives quota checks.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ SCHOOL PLACE ALLOCATION ============ -->
+    <section class="module-card" id="m-allocation" data-domain="placement">
+      <div class="module-header">
+        <div class="module-icon placement">PA</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">School Place Allocation <span class="module-api">School_Place_Allocations</span><span class="module-status status-pending">Pending</span></h2>
+          <p class="module-purpose">Matrix of School × NC × Cycle holding the quota IO Admissions has allocated. Decremented automatically by Deluge function on each nomination. Drives the Scenario D allocation grid.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Custom (junction)</strong></span>
+            <span>Used in: <strong>D</strong></span>
+            <span>Records expected: <strong>~150 per cycle (5 NCs × 3 schools per demo)</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>School</td><td class="api-name">School</td><td><span class="field-type t-lookup">Lookup → School</span></td><td class="required-yes">Yes</td><td><span class="sample-val">UWC Atlantic</span></td><td class="note"></td></tr>
+            <tr><td>National Committee</td><td class="api-name">National_Committee</td><td><span class="field-type t-lookup">Lookup → NC</span></td><td class="required-yes">Yes</td><td><span class="sample-val">UWC Brazil</span></td><td class="note">Junction key with School.</td></tr>
+            <tr><td>Cycle Year</td><td class="api-name">Cycle_Year</td><td><span class="field-type t-int">Integer</span></td><td class="required-yes">Yes</td><td><span class="sample-val">2026</span></td><td class="note">Junction key with School + NC.</td></tr>
+            <tr><td>Quota Allocated</td><td class="api-name">Quota_Allocated</td><td><span class="field-type t-int">Integer</span></td><td class="required-yes">Yes</td><td><span class="sample-val">3</span></td><td class="note">Set by IO Admissions.</td></tr>
+            <tr><td>Quota Used</td><td class="api-name">Quota_Used</td><td><span class="field-type t-int">Integer</span></td><td class="required-yes">Yes</td><td><span class="sample-val">1</span></td><td class="note">Default 0. Decremented by <code>decrementSchoolQuota()</code> Deluge function. <span class="tag tag-auto">AUTO</span></td></tr>
+            <tr><td>IO Approver</td><td class="api-name">IO_Approver</td><td><span class="field-type t-lookup">Lookup → User</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Fatima Al-Rashid</span></td><td class="note">Who approved this allocation.</td></tr>
+            <tr><td>Approved Date</td><td class="api-name">Approved_Date</td><td><span class="field-type t-datetime">DateTime AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">2026-01-15 09:00</span></td><td class="note">Set on insert.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ GOVERNANCE BODY ============ -->
+    <section class="module-card" id="m-gov-body" data-domain="governance">
+      <div class="module-header">
+        <div class="module-icon governance">GB</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Governance Body <span class="module-api">Governance_Bodies</span><span class="module-status status-pending">Pending</span></h2>
+          <p class="module-purpose">Boards, committees, advisory groups at international and NC level. Holds historical membership and surfaces competency gaps (Scenario E centrepiece).</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Custom</strong></span>
+            <span>Used in: <strong>E</strong></span>
+            <span>Records expected: <strong>4 demo (Board, Audit Committee, Nominations, Risk Advisory)</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Body Name</td><td class="api-name">Body_Name</td><td><span class="field-type t-text">Text 120</span></td><td class="required-yes">Yes</td><td><span class="sample-val">UWC International Board</span></td><td class="note"></td></tr>
+            <tr><td>Type</td><td class="api-name">Body_Type</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Board</span></td><td class="note"><code>Board · Committee · Advisory · Working Group</code></td></tr>
+            <tr><td>Purpose</td><td class="api-name">Purpose</td><td><span class="field-type t-multiline">Multi-line 1000</span></td><td class="required-yes">Yes</td><td><span class="sample-val">"Governance of UWC International…"</span></td><td class="note">Displayed in the body record header.</td></tr>
+            <tr><td>Country / Scope</td><td class="api-name">Scope</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">International</span></td><td class="note"><code>International · NC · School · Region</code></td></tr>
+            <tr><td>Established Date</td><td class="api-name">Established_Date</td><td><span class="field-type t-date">Date</span></td><td class="required-no">No</td><td><span class="sample-val">1962-01-01</span></td><td class="note"></td></tr>
+            <tr><td>Chair Contact</td><td class="api-name">Chair</td><td><span class="field-type t-lookup">Lookup → Contact</span></td><td class="required-no">No</td><td><span class="sample-val">Dame Catherine Prior</span></td><td class="note">Active chair.</td></tr>
+            <tr><td>Last Meeting Date</td><td class="api-name">Last_Meeting_Date</td><td><span class="field-type t-date">Date</span></td><td class="required-no">No</td><td><span class="sample-val">2026-04-15</span></td><td class="note">For activity tracking.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ GOVERNANCE MEMBERSHIP ============ -->
+    <section class="module-card" id="m-gov-member" data-domain="governance">
+      <div class="module-header">
+        <div class="module-icon governance">GM</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Governance Membership <span class="module-api">Governance_Memberships</span><span class="module-status status-pending">Pending</span></h2>
+          <p class="module-purpose">Junction: Contact × Governance Body × Role × Term. Preserves historical appointments. Powers the "EXPIRED" badges Akanksha shows in Scenario E.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Custom (junction)</strong></span>
+            <span>Used in: <strong>E</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Contact</td><td class="api-name">Contact</td><td><span class="field-type t-lookup">Lookup → Contact</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Dame Catherine Prior</span></td><td class="note">The member.</td></tr>
+            <tr><td>Governance Body</td><td class="api-name">Governance_Body</td><td><span class="field-type t-lookup">Lookup → Body</span></td><td class="required-yes">Yes</td><td><span class="sample-val">UWC International Board</span></td><td class="note">The body served.</td></tr>
+            <tr><td>Role</td><td class="api-name">Role</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Chair</span></td><td class="note"><code>Chair · Vice-Chair · Trustee · Secretary · Treasurer · Member · Advisor</code></td></tr>
+            <tr><td>Term Start</td><td class="api-name">Term_Start</td><td><span class="field-type t-date">Date</span></td><td class="required-yes">Yes</td><td><span class="sample-val">2022-01-01</span></td><td class="note"></td></tr>
+            <tr><td>Term End</td><td class="api-name">Term_End</td><td><span class="field-type t-date">Date</span></td><td class="required-yes">Yes</td><td><span class="sample-val">2026-12-31</span></td><td class="note">Drives EXPIRED badge when in past.</td></tr>
+            <tr><td>Status</td><td class="api-name">Status</td><td><span class="field-type t-formula">Formula AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">Current</span></td><td class="note">Derived: <code>if Term_End &lt; today then 'EXPIRED' else 'Current'</code>. <span class="tag tag-auto">AUTO</span></td></tr>
+            <tr><td>Voting Member</td><td class="api-name">Voting_Member</td><td><span class="field-type t-bool">Checkbox</span></td><td class="required-no">—</td><td><span class="sample-val">true</span></td><td class="note">Distinguishes voting trustees from observers.</td></tr>
+            <tr><td>Notes</td><td class="api-name">Notes</td><td><span class="field-type t-multiline">Multi-line 500</span></td><td class="required-no">No</td><td><span class="sample-val">Re-elected 2024</span></td><td class="note"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ COMPETENCY ============ -->
+    <section class="module-card" id="m-competency" data-domain="governance">
+      <div class="module-header">
+        <div class="module-icon governance">C</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Competency <span class="module-api">Competencies</span><span class="module-status status-pending">Pending</span></h2>
+          <p class="module-purpose">Lookup of skills/expertise areas (Finance, Legal, Safeguarding, Climate, etc.). Linked to Governance Body (required) and Contact (holds). Drives the competency-matrix gap analysis in Scenario E.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Custom</strong></span>
+            <span>Used in: <strong>E</strong></span>
+            <span>Records expected: <strong>~16 (per Build Plan competency list)</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Competency Name</td><td class="api-name">Competency_Name</td><td><span class="field-type t-text">Text 80</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Safeguarding</span></td><td class="note">Unique.</td></tr>
+            <tr><td>Category</td><td class="api-name">Category</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Governance</span></td><td class="note"><code>Governance · Finance · People · Risk · Strategy · Regional · Functional</code></td></tr>
+            <tr><td>Description</td><td class="api-name">Description</td><td><span class="field-type t-multiline">Multi-line 500</span></td><td class="required-no">No</td><td><span class="sample-val">"Expertise in child protection..."</span></td><td class="note"></td></tr>
+            <tr><td>Bodies Requiring This</td><td class="api-name">Bodies_Requiring_This</td><td><span class="field-type t-multilookup">Multi-lookup → Body</span></td><td class="required-no">No</td><td><span class="sample-val">Board, Audit Committee</span></td><td class="note">Which governance bodies need at least one member with this competency.</td></tr>
+            <tr><td>Members With This</td><td class="api-name">Members_With_This</td><td><span class="field-type t-multilookup">Multi-lookup → Contact</span></td><td class="required-no">No</td><td><span class="sample-val">Sarah Okonkwo</span></td><td class="note">Drives the matrix tick marks.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ NC VOLUNTEER ============ -->
+    <section class="module-card" id="m-nc-volunteer" data-domain="volunteer">
+      <div class="module-header">
+        <div class="module-icon volunteer">V</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">NC Volunteer <span class="module-api">NC_Volunteers</span><span class="module-status status-pending">Pending</span></h2>
+          <p class="module-purpose">Junction: Contact × National Committee × Role. Holds tenure dates and training compliance. Used by Scenario F (Kenya volunteer roster + IO health dashboard).</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Custom (junction)</strong></span>
+            <span>Used in: <strong>F</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>National Committee</td><td class="api-name">National_Committee</td><td><span class="field-type t-lookup">Lookup → NC</span></td><td class="required-yes">Yes</td><td><span class="sample-val">UWC Kenya</span></td><td class="note"></td></tr>
+            <tr><td>Volunteer Contact</td><td class="api-name">Volunteer_Contact</td><td><span class="field-type t-lookup">Lookup → Contact</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Grace Omondi</span></td><td class="note">The person.</td></tr>
+            <tr><td>Role</td><td class="api-name">Role</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">NC Chair</span></td><td class="note"><code>NC Chair · Vice-Chair · Selection Coordinator · Treasurer · Reviewer · Alumni Liaison · Member</code></td></tr>
+            <tr><td>Start Date</td><td class="api-name">Start_Date</td><td><span class="field-type t-date">Date</span></td><td class="required-yes">Yes</td><td><span class="sample-val">2024-01-14</span></td><td class="note"></td></tr>
+            <tr><td>End Date</td><td class="api-name">End_Date</td><td><span class="field-type t-date">Date</span></td><td class="required-no">No</td><td><span class="sample-val">—</span></td><td class="note">Blank = active. Set when stepping down.</td></tr>
+            <tr><td>DBS Check Expiry</td><td class="api-name">DBS_Check_Expiry</td><td><span class="field-type t-date">Date</span></td><td class="required-no">No</td><td><span class="sample-val">2027-01-14</span></td><td class="note">Background check renewal date.</td></tr>
+            <tr><td>Active</td><td class="api-name">Active</td><td><span class="field-type t-bool">Checkbox</span></td><td class="required-no">—</td><td><span class="sample-val">true</span></td><td class="note">Default true. Drives the active-volunteer-count KPI on Scenario F dashboard.</td></tr>
+            <tr><td>Latest Training Status</td><td class="api-name">Latest_Training_Status</td><td><span class="field-type t-formula">Formula AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">CURRENT</span></td><td class="note">Derived from most recent Training Record. Values: <code>CURRENT · EXPIRING · EXPIRED · MISSING</code>. <span class="tag tag-auto">AUTO</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ TRAINING RECORD ============ -->
+    <section class="module-card" id="m-training" data-domain="volunteer">
+      <div class="module-header">
+        <div class="module-icon volunteer">T</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Training Record <span class="module-api">Training_Records</span><span class="module-status status-pending">Pending</span></h2>
+          <p class="module-purpose">Per-Contact training event. Auto-calculates expiry (completion + 2 years for safeguarding). Daily workflow re-computes CURRENT / EXPIRING SOON / EXPIRED status.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Custom</strong></span>
+            <span>Used in: <strong>F</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>NC Volunteer</td><td class="api-name">NC_Volunteer</td><td><span class="field-type t-lookup">Lookup → NC Volunteer</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Grace Omondi · Kenya</span></td><td class="note">The volunteer.</td></tr>
+            <tr><td>Training Type</td><td class="api-name">Training_Type</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Safeguarding</span></td><td class="note"><code>Safeguarding · GDPR · Bias Training · Interview Skills · UWC Values · DBS Check</code></td></tr>
+            <tr><td>Completed Date</td><td class="api-name">Completed_Date</td><td><span class="field-type t-date">Date</span></td><td class="required-yes">Yes</td><td><span class="sample-val">2024-01-14</span></td><td class="note"></td></tr>
+            <tr><td>Expiry Date</td><td class="api-name">Expiry_Date</td><td><span class="field-type t-formula">Formula AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">2026-01-14</span></td><td class="note">= Completed + N years per training type. <span class="tag tag-auto">AUTO</span></td></tr>
+            <tr><td>Status</td><td class="api-name">Status</td><td><span class="field-type t-formula">Formula AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">EXPIRED</span></td><td class="note"><code>CURRENT · EXPIRING · EXPIRED</code>. Updated daily by scheduled workflow. <span class="tag tag-auto">AUTO</span></td></tr>
+            <tr><td>Provider</td><td class="api-name">Provider</td><td><span class="field-type t-text">Text 120</span></td><td class="required-no">No</td><td><span class="sample-val">Kenya Safeguarding Trust</span></td><td class="note">Who delivered the training.</td></tr>
+            <tr><td>Certificate URL</td><td class="api-name">Certificate_URL</td><td><span class="field-type t-url">URL or File</span></td><td class="required-no">No</td><td><span class="sample-val">https://…/cert.pdf</span></td><td class="note">For audit.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ MOU OBLIGATION ============ -->
+    <section class="module-card" id="m-mou" data-domain="volunteer">
+      <div class="module-header">
+        <div class="module-icon volunteer">M</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">MoU Obligation <span class="module-api">MoU_Obligations</span><span class="module-status status-pending">Pending</span></h2>
+          <p class="module-purpose">Per-NC obligation row (Annual Report, Selection Results, Financial Report, etc.). Surfaces overdue items on the IO NC-health dashboard.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Custom</strong></span>
+            <span>Used in: <strong>F</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>National Committee</td><td class="api-name">National_Committee</td><td><span class="field-type t-lookup">Lookup → NC</span></td><td class="required-yes">Yes</td><td><span class="sample-val">UWC Kenya</span></td><td class="note"></td></tr>
+            <tr><td>Obligation Type</td><td class="api-name">Obligation_Type</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Annual Report</span></td><td class="note"><code>Annual Report · Selection Results · Financial Report · Audit Submission · MoU Renewal</code></td></tr>
+            <tr><td>Due Date</td><td class="api-name">Due_Date</td><td><span class="field-type t-date">Date</span></td><td class="required-yes">Yes</td><td><span class="sample-val">2026-03-31</span></td><td class="note"></td></tr>
+            <tr><td>Status</td><td class="api-name">Status</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">OVERDUE</span></td><td class="note"><code>Pending · Submitted · OVERDUE · Approved</code>. OVERDUE auto-set when Due Date passed without Submitted.</td></tr>
+            <tr><td>Submitted Date</td><td class="api-name">Submitted_Date</td><td><span class="field-type t-date">Date</span></td><td class="required-no">No</td><td><span class="sample-val">2026-03-28</span></td><td class="note"></td></tr>
+            <tr><td>Document</td><td class="api-name">Document</td><td><span class="field-type t-file">File</span></td><td class="required-no">No</td><td><span class="sample-val">Kenya_AnnualReport_2026.pdf</span></td><td class="note">Linked MoU document.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ MAILING LIST ============ -->
+    <section class="module-card" id="m-mailing" data-domain="comms">
+      <div class="module-header">
+        <div class="module-icon comms">ML</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Mailing List <span class="module-api">Mailing_Lists</span><span class="module-status status-pending">Pending</span></h2>
+          <p class="module-purpose">Saved segment + Mailchimp sync handle. Criteria-driven (e.g. "donors who contributed in last 12 months"). Auto-excludes opted-out contacts.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Custom</strong></span>
+            <span>Used in: <strong>G</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>List Name</td><td class="api-name">List_Name</td><td><span class="field-type t-text">Text 100</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Impact Report Q2 2026</span></td><td class="note"></td></tr>
+            <tr><td>Audience Type</td><td class="api-name">Audience_Type</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Donors + NC Chairs</span></td><td class="note"><code>Donors · Alumni · NC Chairs · Volunteers · Applicants · Custom</code></td></tr>
+            <tr><td>Segment Criteria</td><td class="api-name">Segment_Criteria</td><td><span class="field-type t-multiline">Multi-line (JSON)</span></td><td class="required-yes">Yes</td><td><span class="sample-val">{"contact_type":"Donor","last_donation_within":"12m"}</span></td><td class="note">JSON expression evaluated by Deluge.</td></tr>
+            <tr><td>Mailchimp List ID</td><td class="api-name">Mailchimp_List_ID</td><td><span class="field-type t-text">Text 50</span></td><td class="required-no">No</td><td><span class="sample-val">a1b2c3d4e5</span></td><td class="note">Audience ID in Mailchimp. Set after first sync.</td></tr>
+            <tr><td>Subscriber Count</td><td class="api-name">Subscriber_Count</td><td><span class="field-type t-formula">Formula AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">59</span></td><td class="note">Counts contacts matching criteria, minus opt-outs. <span class="tag tag-auto">AUTO</span></td></tr>
+            <tr><td>Last Synced Date</td><td class="api-name">Last_Synced_Date</td><td><span class="field-type t-datetime">DateTime AUTO</span></td><td class="required-no">—</td><td><span class="sample-val">2026-05-27 09:00</span></td><td class="note">Updated by Zoho Flow Mailchimp connector.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ CAMPAIGN ============ -->
+    <section class="module-card" id="m-campaign" data-domain="comms">
+      <div class="module-header">
+        <div class="module-icon comms">C</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Campaign <span class="module-api">Campaigns</span><span class="module-status status-current">Live</span></h2>
+          <p class="module-purpose">Standard Zoho Campaigns module. Mirrors Mailchimp campaign data + holds open/click rates. Bulk-updates Communication Log records on send.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Standard</strong></span>
+            <span>Used in: <strong>G</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Campaign Name</td><td class="api-name">Campaign_Name</td><td><span class="field-type t-text">Text 120</span></td><td class="required-yes">Yes</td><td><span class="sample-val">UWC Impact Report 2026</span></td><td class="note"></td></tr>
+            <tr><td>Type</td><td class="api-name">Type</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Email</span></td><td class="note"><code>Email · Social · Direct Mail · Webinar · Event</code></td></tr>
+            <tr><td>Mailing List</td><td class="api-name">Mailing_List</td><td><span class="field-type t-lookup">Lookup → Mailing List</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Impact Report Q2 2026</span></td><td class="note"></td></tr>
+            <tr><td>Send Date</td><td class="api-name">Send_Date</td><td><span class="field-type t-datetime">DateTime</span></td><td class="required-yes">Yes</td><td><span class="sample-val">2026-05-30 09:00</span></td><td class="note"></td></tr>
+            <tr><td>Status</td><td class="api-name">Status</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Sent</span></td><td class="note"><code>Draft · Scheduled · Sending · Sent · Cancelled</code></td></tr>
+            <tr><td>Mailchimp Campaign ID</td><td class="api-name">Mailchimp_Campaign_ID</td><td><span class="field-type t-text">Text 50</span></td><td class="required-no">No</td><td><span class="sample-val">cam_a1b2c3</span></td><td class="note">External reference.</td></tr>
+            <tr><td>Open Rate</td><td class="api-name">Open_Rate</td><td><span class="field-type t-decimal">Decimal %</span></td><td class="required-no">No</td><td><span class="sample-val">42.8</span></td><td class="note">Synced back from Mailchimp.</td></tr>
+            <tr><td>Click Rate</td><td class="api-name">Click_Rate</td><td><span class="field-type t-decimal">Decimal %</span></td><td class="required-no">No</td><td><span class="sample-val">8.4</span></td><td class="note">Synced back from Mailchimp.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ COMMUNICATION LOG ============ -->
+    <section class="module-card" id="m-comm-log" data-domain="comms">
+      <div class="module-header">
+        <div class="module-icon comms">CL</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Communication Log <span class="module-api">Communication_Logs</span><span class="module-status status-pending">Pending</span></h2>
+          <p class="module-purpose">Per-Contact outbound record. Bulk-inserted by campaign send. Powers the communication history view on Jonathan Osei's Contact in Scenario G.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Custom</strong></span>
+            <span>Used in: <strong>G</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Contact</td><td class="api-name">Contact</td><td><span class="field-type t-lookup">Lookup → Contact</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Jonathan Osei</span></td><td class="note">Recipient.</td></tr>
+            <tr><td>Campaign</td><td class="api-name">Campaign</td><td><span class="field-type t-lookup">Lookup → Campaign</span></td><td class="required-no">No</td><td><span class="sample-val">UWC Impact Report 2026</span></td><td class="note">Blank if 1:1 message.</td></tr>
+            <tr><td>Channel</td><td class="api-name">Channel</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Email</span></td><td class="note"><code>Email · SMS · Post · Phone · In-Person</code></td></tr>
+            <tr><td>Sent Date</td><td class="api-name">Sent_Date</td><td><span class="field-type t-datetime">DateTime AUTO</span></td><td class="required-yes">Yes</td><td><span class="sample-val">2026-05-30 09:01</span></td><td class="note">Bulk-set by campaign send. <span class="tag tag-auto">AUTO</span></td></tr>
+            <tr><td>Delivered</td><td class="api-name">Delivered</td><td><span class="field-type t-bool">Checkbox</span></td><td class="required-no">—</td><td><span class="sample-val">true</span></td><td class="note">Updated by Mailchimp delivery webhook.</td></tr>
+            <tr><td>Opened</td><td class="api-name">Opened</td><td><span class="field-type t-bool">Checkbox</span></td><td class="required-no">—</td><td><span class="sample-val">true</span></td><td class="note">Updated by Mailchimp open webhook.</td></tr>
+            <tr><td>Clicked</td><td class="api-name">Clicked</td><td><span class="field-type t-bool">Checkbox</span></td><td class="required-no">—</td><td><span class="sample-val">false</span></td><td class="note">Updated by Mailchimp click webhook.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ CONSENT RECORD ============ -->
+    <section class="module-card" id="m-consent" data-domain="comms">
+      <div class="module-header">
+        <div class="module-icon comms">CR</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Consent Record <span class="module-api">Consent_Records</span><span class="module-status status-pending">Pending</span></h2>
+          <p class="module-purpose">Append-only audit of consent changes per Contact. GDPR-grade — every opt-in / opt-out is its own row with timestamp + source + lawful basis. Powers the audit screen in Scenario G step 8.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Custom — append-only</strong></span>
+            <span>Used in: <strong>G</strong></span>
+            <span>GDPR: <strong>Critical</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Contact</td><td class="api-name">Contact</td><td><span class="field-type t-lookup">Lookup → Contact</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Marcus Weber</span></td><td class="note"></td></tr>
+            <tr><td>Consent Type</td><td class="api-name">Consent_Type</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Marketing</span></td><td class="note"><code>Marketing · Newsletter · Event Invitations · Research · Photo / Video</code></td></tr>
+            <tr><td>Action</td><td class="api-name">Action</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Opted Out</span></td><td class="note"><code>Opted In · Opted Out · Modified · Withdrawn (GDPR)</code></td></tr>
+            <tr><td>Given Date</td><td class="api-name">Given_Date</td><td><span class="field-type t-datetime">DateTime AUTO</span></td><td class="required-yes">Yes</td><td><span class="sample-val">2026-02-15 14:33</span></td><td class="note">System-set on insert. Append-only — never updated.</td></tr>
+            <tr><td>Channel</td><td class="api-name">Channel</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Email link</span></td><td class="note"><code>Web form · Email link · Manual · API · Phone</code></td></tr>
+            <tr><td>Lawful Basis (GDPR)</td><td class="api-name">Lawful_Basis</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Consent (Art. 6.1.a)</span></td><td class="note"><code>Consent · Contract · Legal Obligation · Vital Interest · Public Task · Legitimate Interest</code></td></tr>
+            <tr><td>Source URL</td><td class="api-name">Source_URL</td><td><span class="field-type t-url">URL</span></td><td class="required-no">No</td><td><span class="sample-val">https://uwc.org/unsubscribe?t=…</span></td><td class="note">For audit traceability.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ AUDIT LOG ============ -->
+    <section class="module-card" id="m-audit" data-domain="audit">
+      <div class="module-header">
+        <div class="module-icon audit">AL</div>
+        <div class="module-titleblock">
+          <h2 class="module-name">Audit Log <span class="module-api">Audit_Log (native)</span><span class="module-status status-current">Live</span></h2>
+          <p class="module-purpose">Native Zoho CRM audit log + custom additions for application-stage transitions and override actions (NC Admin unlock, edit-on-behalf). Read-only, append-only.</p>
+          <div class="module-meta-strip">
+            <span>Type: <strong>Native (extended)</strong></span>
+            <span>Used in: <strong>A, B, C, D (referenced)</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="fields-table-wrap">
+        <table class="fields-table">
+          <thead><tr><th>Field</th><th>API Name</th><th>Type</th><th>Required</th><th>Sample value</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Record ID</td><td class="api-name">Record_ID</td><td><span class="field-type t-text">Text 30</span></td><td class="required-yes">Yes</td><td><span class="sample-val">APP-2026-00073</span></td><td class="note">The record acted upon.</td></tr>
+            <tr><td>Module</td><td class="api-name">Module</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Application</span></td><td class="note">Module of the target record.</td></tr>
+            <tr><td>Action</td><td class="api-name">Action</td><td><span class="field-type t-pick">Picklist</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Unlock</span></td><td class="note"><code>Created · Modified · Deleted · Stage Transition · Unlock · Lock · Override Edit · Bulk Update · Export</code></td></tr>
+            <tr><td>Changed By</td><td class="api-name">Changed_By</td><td><span class="field-type t-lookup">Lookup → User</span></td><td class="required-yes">Yes</td><td><span class="sample-val">Marcus Weber</span></td><td class="note"></td></tr>
+            <tr><td>Timestamp</td><td class="api-name">Timestamp</td><td><span class="field-type t-datetime">DateTime AUTO</span></td><td class="required-yes">Yes</td><td><span class="sample-val">2026-05-27 16:08</span></td><td class="note"></td></tr>
+            <tr><td>Old Value</td><td class="api-name">Old_Value</td><td><span class="field-type t-text">Text 500</span></td><td class="required-no">No</td><td><span class="sample-val">12 Feb 2009</span></td><td class="note">For field changes.</td></tr>
+            <tr><td>New Value</td><td class="api-name">New_Value</td><td><span class="field-type t-text">Text 500</span></td><td class="required-no">No</td><td><span class="sample-val">12 Mar 2009</span></td><td class="note">For field changes.</td></tr>
+            <tr><td>IP Address</td><td class="api-name">IP_Address</td><td><span class="field-type t-text">Text 45</span></td><td class="required-yes">Yes</td><td><span class="sample-val">88.214.55.10</span></td><td class="note">Captured automatically. Supports forensic audit.</td></tr>
+            <tr><td>Reason</td><td class="api-name">Reason</td><td><span class="field-type t-text">Text 500</span></td><td class="required-no">No</td><td><span class="sample-val">"Applicant requested DOB correction…"</span></td><td class="note">Required for Override Edit / Unlock actions. Captures the NC Admin's justification.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <strong>UWC International CRM Module &amp; Field Catalogue</strong> · A2Z Cloud Ltd · Zoho Premium Partner · Salisbury, UK · <em>Demo reference document for procurement evaluation 1 June 2026</em>
+</footer>
+
+<script>
+// Search filter
+const input = document.getElementById('search-input');
+const modules = document.querySelectorAll('.module-card');
+const tocLinks = document.querySelectorAll('.toc-link');
+input.addEventListener('input', (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  modules.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    const matches = !q || text.includes(q);
+    card.classList.toggle('hidden', !matches);
+  });
+});
+
+// Domain filter chips
+const chips = document.querySelectorAll('.domain-chip');
+chips.forEach(c => c.addEventListener('click', () => {
+  chips.forEach(x => x.classList.remove('active'));
+  c.classList.add('active');
+  const domain = c.dataset.domain;
+  modules.forEach(card => {
+    const show = domain === 'all' || card.dataset.domain === domain;
+    card.classList.toggle('hidden', !show);
+  });
+}));
+
+// TOC highlight on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      tocLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-30% 0px -55% 0px' });
+modules.forEach(m => observer.observe(m));
+</script>
+</body>
+</html>
