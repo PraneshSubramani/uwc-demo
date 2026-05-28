@@ -3,1285 +3,999 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scenario D — Nomination, Place Allocation & Pack · UWC International Demo</title>
+<title>Scenario D — Nomination &amp; Place Allocation · UWC Demo</title>
+<link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--uwc-navy:#003087;--uwc-navy-deep:#001a4d;--uwc-navy-tint:#E8EEF6;--uwc-red:#C8102E;--uwc-red-tint:#fdeaea;--uwc-gold:#C8AB00;--uwc-green:#1f9535;--uwc-orange:#e85d0c;--uwc-navy-live:#004A97;--uwc-teal:#009482;--uwc-white:#ffffff;--uwc-grey-50:#f8f9fb;--uwc-grey-100:#f3f5fa;--uwc-grey-200:#e2e6ed;--uwc-grey-300:#c8cdd8;--uwc-grey-400:#9aa3b8;--uwc-grey-500:#6C757D;--uwc-grey-600:#5a6480;--uwc-grey-800:#0d1b3e;--uwc-font-title:'Playfair Display',Georgia,serif;--uwc-font-body:'DM Sans',system-ui,sans-serif;--uwc-font-mono:'DM Mono',ui-monospace,monospace;--uwc-fs-display:32px;--uwc-fs-h1:26px;--uwc-fs-h2:20px;--uwc-fs-h3:16px;--uwc-fs-body:14px;--uwc-fs-small:12.5px;--uwc-fs-tiny:11px;--uwc-fs-micro:10px;--uwc-sp-1:4px;--uwc-sp-2:8px;--uwc-sp-3:12px;--uwc-sp-4:16px;--uwc-sp-5:20px;--uwc-sp-6:24px;--uwc-sp-8:32px;--uwc-radius-sm:4px;--uwc-radius:8px;--uwc-radius-lg:12px;--uwc-radius-pill:999px;--uwc-shadow-sm:0 1px 2px rgba(0,0,0,0.04);--uwc-shadow:0 2px 8px rgba(0,48,135,0.08);--uwc-shadow-lg:0 8px 24px rgba(0,48,135,0.12);--uwc-tx-fast:120ms ease;--uwc-tx:200ms cubic-bezier(0.4,0,0.2,1)}
-:root{--zoho-topbar-bg:#1c1f25;--zoho-topbar-text:#ffffff;--zoho-topbar-text-muted:rgba(255,255,255,0.55);--zoho-topbar-icon:#b9bcc7;--zoho-topbar-height:48px;--zoho-topbar-search-bg:rgba(255,255,255,0.08);--zoho-sidebar-bg:#f7f8fa;--zoho-sidebar-border:#e8eaed;--zoho-sidebar-text:#4a5568;--zoho-sidebar-section-text:#6b7280;--zoho-sidebar-active-bg:#e6efff;--zoho-sidebar-active-text:#2563eb;--zoho-sidebar-hover-bg:#eef1f7;--zoho-sidebar-width:225px;--zoho-content-bg:#ffffff;--zoho-content-alt:#f9fafb;--zoho-content-secondary:#f3f5fa;--zoho-border:#e5e7eb;--zoho-border-light:#f0f2f5;--zoho-divider:#ebeef2;--zoho-text:#1f2937;--zoho-text-secondary:#4b5563;--zoho-text-muted:#6b7280;--zoho-text-disabled:#9ca3af;--zoho-link:#2563eb;--zoho-link-hover:#1d4ed8;--zoho-primary:#3b6ef5;--zoho-primary-hover:#2563eb;--zoho-primary-text:#ffffff;--zoho-outline:#d1d5db;--zoho-outline-hover:#9ca3af;--zoho-success:#10b981;--zoho-warning:#f59e0b;--zoho-danger:#ef4444;--zoho-info:#3b82f6;--zoho-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Open Sans","Helvetica Neue",sans-serif;--zoho-fs-base:13px;--zoho-fs-sm:12px;--zoho-fs-xs:11px;--zoho-fs-lg:14px;--zoho-fs-xl:16px;--zoho-radius-sm:4px;--zoho-radius:6px;--zoho-radius-lg:8px}
-html{box-sizing:border-box}*,*::before,*::after{box-sizing:inherit}
-body{margin:0;padding:0;font-family:var(--uwc-font-body);font-size:var(--uwc-fs-body);line-height:1.5;color:var(--uwc-grey-800);background:var(--uwc-grey-100);-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4,h5{font-family:var(--uwc-font-title);font-weight:500;line-height:1.2;margin:0}
-h1{font-size:var(--uwc-fs-h1)}h2{font-size:var(--uwc-fs-h2)}h3{font-size:var(--uwc-fs-h3)}
-a{color:var(--uwc-navy);text-decoration:none;transition:color var(--uwc-tx-fast)}
-button{font-family:inherit}
-.shell{display:grid;grid-template-columns:280px 1fr;grid-template-rows:60px 1fr;min-height:100vh;background:var(--uwc-grey-100)}
-.topbar{grid-column:1/-1;background:var(--uwc-navy-deep);display:flex;align-items:center;padding:0 20px;gap:16px;border-bottom:3px solid var(--uwc-red);color:#fff}
-.topbar__brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
-.topbar__logo{font-family:var(--uwc-font-title);font-size:18px;font-weight:600;color:#fff;letter-spacing:.3px}
-.topbar__demo-badge{background:var(--uwc-red);color:#fff;font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;padding:3px 10px;border-radius:var(--uwc-radius-sm)}
-.topbar__divider{width:1px;height:22px;background:rgba(255,255,255,.18)}
-.topbar__scenario{font-size:12.5px;color:rgba(255,255,255,.7)}
-.topbar__scenario strong{color:#fff;font-weight:500}
-.topbar__center{flex:1}
-.topbar__right{margin-left:auto;display:flex;align-items:center;gap:14px}
-.topbar__step-counter{font-size:11.5px;color:rgba(255,255,255,.6);font-family:var(--uwc-font-mono);letter-spacing:.6px;padding:4px 10px;border:1px solid rgba(255,255,255,.15);border-radius:var(--uwc-radius-sm)}
-.sidebar{background:#fff;border-right:1px solid var(--uwc-grey-200);padding:18px 0;overflow-y:auto}
-.sidebar__label{font-size:var(--uwc-fs-micro);font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--uwc-grey-400);padding:10px 18px 8px}
-.sidebar__item{display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer;margin:0 8px 2px;border-radius:var(--uwc-radius);transition:background var(--uwc-tx-fast)}
-.sidebar__item:hover{background:var(--uwc-grey-100)}
-.sidebar__item.active{background:var(--uwc-navy-tint);border-left:3px solid var(--uwc-navy);padding-left:11px}
-.sidebar__num{width:24px;height:24px;border-radius:50%;background:var(--uwc-grey-200);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--uwc-grey-600);flex-shrink:0;transition:background var(--uwc-tx-fast),color var(--uwc-tx-fast)}
-.sidebar__item.active .sidebar__num{background:var(--uwc-navy);color:#fff}
-.sidebar__item.done .sidebar__num{background:var(--uwc-green);color:#fff}
-.sidebar__item.done .sidebar__label-text{color:var(--uwc-grey-400)}
-.sidebar__label-text{font-size:12.5px;color:var(--uwc-grey-600);line-height:1.3}
-.sidebar__item.active .sidebar__label-text{color:var(--uwc-navy);font-weight:500}
-.sidebar__progress{margin:16px;padding:12px;background:var(--uwc-grey-100);border-radius:var(--uwc-radius)}
-.sidebar__progress-label{font-size:11.5px;color:var(--uwc-grey-600);display:flex;justify-content:space-between;margin-bottom:8px}
-.sidebar__progress-track{height:4px;background:var(--uwc-grey-200);border-radius:var(--uwc-radius-pill);overflow:hidden}
-.sidebar__progress-fill{height:4px;background:var(--uwc-navy);border-radius:var(--uwc-radius-pill);transition:width var(--uwc-tx)}
-.main{overflow-y:auto;padding:28px 32px;background:var(--uwc-grey-100)}
-.screen{display:none;max-width:1240px}
-.screen.active{display:block;animation:fadeIn 240ms ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.screen-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;gap:16px}
-.screen-title{font-family:var(--uwc-font-title);font-size:var(--uwc-fs-display);font-weight:500;color:var(--uwc-grey-800);line-height:1.15;max-width:800px}
-.screen-sub{font-size:var(--uwc-fs-body);color:var(--uwc-grey-600);margin-top:6px;line-height:1.5;max-width:800px}
-.step-nav{display:flex;gap:8px;flex-shrink:0}
-.btn-nav{padding:8px 16px;font-size:12.5px;font-weight:500;font-family:var(--uwc-font-body);border:1px solid var(--uwc-grey-300);border-radius:var(--uwc-radius);background:#fff;color:var(--uwc-grey-600);cursor:pointer;transition:all var(--uwc-tx-fast)}
-.btn-nav:hover:not(:disabled){background:var(--uwc-grey-100);border-color:var(--uwc-grey-400)}
-.btn-nav:disabled{opacity:.4;cursor:not-allowed}
-.btn-nav--primary{background:var(--uwc-navy);color:#fff;border-color:var(--uwc-navy)}
-.btn-nav--primary:hover:not(:disabled){background:var(--uwc-navy-deep);border-color:var(--uwc-navy-deep)}
-.card{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;margin-bottom:16px;box-shadow:var(--uwc-shadow-sm)}
-.card__header{background:var(--uwc-navy);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
-.card__title{color:#fff;font-size:13.5px;font-weight:500}
-.card__sub{color:rgba(255,255,255,.55);font-size:11.5px;font-family:var(--uwc-font-mono)}
-.card__body{padding:16px 18px}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.alert{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--uwc-radius);font-size:12.5px;line-height:1.5;margin-bottom:12px}
-.alert:last-child{margin-bottom:0}
-.alert--info{background:var(--uwc-navy-tint);color:var(--uwc-navy);border:1px solid #93c5fd}
-.alert--success{background:#f0fdf4;color:#14532d;border:1px solid #86efac}
-.alert--warning{background:#fffbeb;color:#78350f;border:1px solid #fbbf24}
-.alert--error{background:var(--uwc-red-tint);color:#7f1d1d;border:1px solid #fca5a5}
-.alert--demo-note{background:#faf5ff;color:#581c87;border:1px solid #d8b4fe}
-.pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:500;padding:3px 10px;border-radius:var(--uwc-radius-pill);border:1px solid transparent}
-.pill::before{content:'';width:6px;height:6px;border-radius:50%}
-.pill--nominated{background:#ede9fe;color:#4c1d95;border-color:#c4b5fd}.pill--nominated::before{background:#7c3aed}
-.pill--shortlisted{background:#dbeafe;color:#1e3a8a;border-color:#93c5fd}.pill--shortlisted::before{background:#3b82f6}
-.pill--placed{background:#d1fae5;color:#064e3b;border-color:#6ee7b7}.pill--placed::before{background:#10b981}
-.pill--sent{background:#fef3c7;color:#78350f;border-color:#fcd34d}.pill--sent::before{background:#f59e0b}
-.pill--accepted{background:#d1fae5;color:#064e3b;border-color:#6ee7b7}.pill--accepted::before{background:#10b981}
-.pill--declined{background:#fee2e2;color:#7f1d1d;border-color:#fca5a5}.pill--declined::before{background:#ef4444}
-.pill--reviewed{background:#ede9fe;color:#4c1d95;border-color:#c4b5fd}.pill--reviewed::before{background:#7c3aed}
-.context-banner{background:linear-gradient(90deg,var(--uwc-navy) 0%,var(--uwc-navy-deep) 100%);color:#fff;padding:12px 18px;border-radius:var(--uwc-radius);margin-bottom:16px;display:flex;align-items:center;gap:14px}
-.context-banner__icon{background:rgba(255,255,255,.16);padding:6px 10px;border-radius:var(--uwc-radius-sm);font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase}
-.context-banner__text{font-size:13px;line-height:1.5;flex:1}
-.context-banner__text strong{color:#fff}
-.demo-mode-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:4px 10px;border-radius:var(--uwc-radius-pill);border:1px dashed}
-.demo-mode-tag--zoho{color:#2563eb;border-color:#93c5fd;background:#eff6ff}
-.demo-mode-tag--portal{color:var(--uwc-teal);border-color:var(--uwc-teal);background:#f0fafa}
-.demo-mode-tag--school{color:#7c3aed;border-color:#c4b5fd;background:#f5f3ff}
-.field-group{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius);overflow:hidden}
-.field-cell{padding:10px 14px;border-bottom:1px solid var(--uwc-grey-200);border-right:1px solid var(--uwc-grey-200)}
-.field-cell:nth-child(even){border-right:none}
-.field-cell.full{grid-column:1/-1;border-right:none}
-.field-cell__label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--uwc-grey-400);margin-bottom:4px}
-.field-cell__value{font-size:13.5px;color:var(--uwc-grey-800);font-weight:500}
-.field-cell__value.muted{color:var(--uwc-grey-500);font-weight:400}
-.field-cell__value.success{color:#166534}
-.badge{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:500;padding:3px 8px;border-radius:var(--uwc-radius-sm);font-family:var(--uwc-font-mono)}
-.badge--api{background:#dbeafe;color:#1e40af}
-.badge--auto{background:#dcfce7;color:#166534}
-.badge--gate{background:#fee2e2;color:#991b1b}
-.badge--info{background:var(--uwc-navy-tint);color:var(--uwc-navy)}
-.role-context{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;background:var(--uwc-navy-tint);color:var(--uwc-navy);border-radius:var(--uwc-radius-pill);font-size:12px;font-weight:500;margin-bottom:14px}
-.role-switch-banner{background:linear-gradient(90deg,#581c87,#7c3aed);color:#fff;padding:10px 18px;border-radius:var(--uwc-radius);margin-bottom:16px;display:flex;align-items:center;gap:12px;font-size:13px;animation:roleswitchIn .4s ease}
-@keyframes roleswitchIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
-.role-switch-banner__badge{background:rgba(255,255,255,.2);padding:4px 10px;border-radius:var(--uwc-radius-sm);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase}
-.zoho-topbar{height:var(--zoho-topbar-height);background:var(--zoho-topbar-bg);color:var(--zoho-topbar-text);display:flex;align-items:center;padding:0 16px;position:sticky;top:0;z-index:50;gap:16px}
-.zoho-topbar__logo{display:flex;align-items:center;gap:8px;font-weight:500;font-size:14px}
-.zoho-topbar__logo-icon{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#8b5cf6,#3b82f6);display:inline-block}
-.zoho-topbar__search{background:var(--zoho-topbar-search-bg);border:1px solid rgba(255,255,255,.12);border-radius:var(--zoho-radius);padding:6px 12px;color:var(--zoho-topbar-text-muted);font-size:var(--zoho-fs-sm);width:320px;margin:0 auto}
-.zoho-topbar__right{margin-left:auto;display:flex;align-items:center;gap:10px}
-.zoho-topbar__org{width:32px;height:32px;border-radius:50%;background:#f7d427;color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px}
-.zoho-shell{display:grid;grid-template-columns:var(--zoho-sidebar-width) 1fr;min-height:calc(100vh - var(--zoho-topbar-height));max-height:560px}
-.zoho-sidebar{background:var(--zoho-sidebar-bg);border-right:1px solid var(--zoho-sidebar-border);padding:12px 0;overflow-y:auto}
-.zoho-sidebar__group{padding:0 8px;margin-bottom:4px}
-.zoho-sidebar__item{display:flex;align-items:center;gap:10px;padding:7px 10px;font-size:var(--zoho-fs-base);color:var(--zoho-sidebar-text);cursor:pointer;border-radius:var(--zoho-radius);transition:background var(--uwc-tx-fast)}
-.zoho-sidebar__item:hover{background:var(--zoho-sidebar-hover-bg)}
-.zoho-sidebar__item.active{background:var(--zoho-sidebar-active-bg);color:var(--zoho-sidebar-active-text);font-weight:500}
-.zoho-main{padding:0;overflow-y:auto;background:var(--zoho-content-bg)}
-.zoho-page-header{padding:14px 20px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;gap:12px}
-.zoho-page-title{font-size:16px;font-weight:600;color:var(--zoho-text)}
-.zoho-page-tools{padding:10px 20px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;gap:8px;background:#fff;position:sticky;top:0;z-index:5}
-.zoho-page-tools__right{margin-left:auto;display:flex;gap:8px}
-.zoho-btn{padding:7px 14px;font-size:var(--zoho-fs-base);border-radius:var(--zoho-radius);border:1px solid var(--zoho-outline);background:#fff;color:var(--zoho-text);cursor:pointer;font-family:var(--zoho-font);transition:all var(--uwc-tx-fast);display:inline-flex;align-items:center;gap:6px}
-.zoho-btn--primary{background:var(--zoho-primary);color:#fff;border-color:var(--zoho-primary)}
-.zoho-btn--success{background:#10b981;color:#fff;border-color:#10b981}
-.zoho-btn--danger{background:#ef4444;color:#fff;border-color:#ef4444}
-.zoho-pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:var(--zoho-radius-sm);font-size:var(--zoho-fs-xs);font-weight:500}
-.zoho-pill--recent{background:#d1fae5;color:#065f46}
-.zoho-pill--info{background:#dbeafe;color:#1e40af}
-.zoho-pill--warn{background:#fef3c7;color:#92400e}
-.zoho-detail__hero{display:flex;align-items:center;gap:14px;padding:14px 20px;background:#fff;border-bottom:1px solid var(--zoho-border-light)}
-.zoho-detail__avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#ec4899);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px}
-.zoho-detail__name{font-size:18px;font-weight:600}
-.zoho-detail__actions{margin-left:auto;display:flex;gap:8px}
-.zoho-detail__sections{padding:16px 20px}
-.zoho-detail__section{background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);margin-bottom:16px;overflow:hidden}
-.zoho-detail__section-header{padding:12px 16px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;justify-content:space-between}
-.zoho-detail__section-title{font-size:var(--zoho-fs-base);font-weight:600}
-.zoho-detail__section-body{padding:12px 16px}
-.zoho-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;font-size:var(--zoho-fs-base)}
-.zoho-field{display:flex;gap:12px;align-items:baseline}
-.zoho-field__label{width:140px;flex-shrink:0;color:var(--zoho-text-muted);text-align:right;font-size:var(--zoho-fs-sm)}
-.zoho-field__value{flex:1;color:var(--zoho-text)}
-.zoho-blueprint{display:flex;gap:4px;padding:14px 20px;background:#fff;border-bottom:1px solid var(--zoho-border-light);overflow-x:auto}
-.zoho-blueprint__stage{padding:8px 16px;border-radius:var(--zoho-radius-sm);font-size:var(--zoho-fs-sm);font-weight:500;white-space:nowrap;position:relative}
-.zoho-blueprint__stage.done{background:#f0fdf4;color:#166534}
-.zoho-blueprint__stage.current{background:var(--uwc-navy);color:#fff}
-.zoho-blueprint__stage.future{background:var(--zoho-content-alt);color:var(--zoho-text-muted)}
-.zoho-blueprint__stage::after{content:'›';position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--zoho-text-disabled)}
-.zoho-blueprint__stage:last-child::after{display:none}
-/* Allocation grid */
-.alloc-table{width:100%;border-collapse:collapse;font-size:13px}
-.alloc-table th{background:var(--uwc-navy);color:#fff;padding:10px 14px;text-align:left;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase}
-.alloc-table th:first-child{width:200px}
-.alloc-table td{padding:10px 14px;border-bottom:1px solid var(--uwc-grey-200)}
-.alloc-table tr:last-child td{border-bottom:none;background:var(--uwc-grey-50);font-weight:600}
-.alloc-cell{display:flex;align-items:center;gap:6px}
-.alloc-num{font-family:var(--uwc-font-mono);font-size:13px;color:var(--uwc-navy);font-weight:600}
-.alloc-rem{font-family:var(--uwc-font-mono);font-size:12px;color:var(--uwc-green)}
-.alloc-zero{font-family:var(--uwc-font-mono);font-size:12px;color:var(--uwc-red)}
-.alloc-slash{color:var(--uwc-grey-300);margin:0 2px}
-/* Modal */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:300;display:flex;align-items:center;justify-content:center;animation:fadeIn 160ms ease}
-.modal{background:#fff;border-radius:var(--uwc-radius-lg);width:480px;max-width:95vw;box-shadow:0 20px 60px rgba(0,0,0,.2);overflow:hidden}
-.modal__header{background:var(--uwc-navy);padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
-.modal__title{color:#fff;font-family:var(--uwc-font-title);font-size:16px}
-.modal__close{background:rgba(255,255,255,.15);border:none;color:#fff;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
-.modal__body{padding:20px}
-.modal__footer{padding:14px 20px;border-top:1px solid var(--uwc-grey-200);display:flex;gap:10px;justify-content:flex-end}
-/* NC dashboard tiles */
-.nc-tile{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);padding:16px;position:relative;overflow:hidden}
-.nc-tile.highlight{border-color:var(--uwc-green);box-shadow:0 0 0 3px rgba(31,149,53,.15)}
-.nc-tile.highlight::before{content:'NEW';position:absolute;top:10px;right:10px;background:var(--uwc-green);color:#fff;font-size:9px;font-weight:700;letter-spacing:1px;padding:2px 8px;border-radius:var(--uwc-radius-pill)}
-.nc-tile__school{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--uwc-grey-400);margin-bottom:6px}
-.nc-tile__places{font-family:var(--uwc-font-title);font-size:28px;font-weight:600;color:var(--uwc-navy);line-height:1}
-.nc-tile__label{font-size:12px;color:var(--uwc-grey-500);margin-top:4px}
-/* PDF mock */
-.pdf-mock{background:#fff;border:1px solid #ccc;border-radius:4px;font-family:Georgia,'Times New Roman',serif;max-width:720px;margin:0 auto;box-shadow:0 4px 20px rgba(0,0,0,.15)}
-.pdf-header{background:var(--uwc-navy);padding:24px 32px;display:flex;align-items:center;gap:20px}
-.pdf-header__logo{width:52px;height:52px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--uwc-font-title);color:var(--uwc-navy);font-weight:700;font-size:14px;flex-shrink:0}
-.pdf-header__title{color:#fff;font-family:var(--uwc-font-title);font-size:22px;font-weight:600;line-height:1.2}
-.pdf-header__sub{color:rgba(255,255,255,.65);font-size:12px;margin-top:3px;font-family:Arial,sans-serif}
-.pdf-body{padding:28px 32px}
-.pdf-section{margin-bottom:24px}
-.pdf-section-title{font-size:13px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--uwc-navy);border-bottom:2px solid var(--uwc-navy);padding-bottom:6px;margin-bottom:14px;font-family:Arial,sans-serif}
-.pdf-photo-row{display:flex;gap:24px;align-items:flex-start;margin-bottom:20px}
-.pdf-photo{width:100px;height:120px;background:var(--uwc-grey-200);border:1px solid var(--uwc-grey-300);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column;color:var(--uwc-grey-400);font-size:11px;font-family:Arial,sans-serif;text-align:center;flex-shrink:0}
-.pdf-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;font-size:13px;font-family:Arial,sans-serif}
-.pdf-field__label{color:#666;font-size:11px;text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px}
-.pdf-field__value{color:#111;font-weight:600;border-bottom:1px solid #e0e0e0;padding-bottom:4px}
-.pdf-scores{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
-.pdf-score-box{border:1px solid #ddd;border-radius:4px;padding:10px;text-align:center;font-family:Arial,sans-serif}
-.pdf-score-box__num{font-size:26px;font-weight:700;color:var(--uwc-navy);line-height:1}
-.pdf-score-box__label{font-size:10px;color:#666;margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
-.pdf-ref-row{display:flex;gap:12px;padding:8px 0;border-bottom:1px solid #eee;font-size:13px;font-family:Arial,sans-serif}
-.pdf-ref-name{font-weight:600;width:160px;flex-shrink:0}
-.pdf-ref-role{color:#666;flex:1}
-.pdf-ref-status{font-size:11px;color:var(--uwc-green);font-weight:600}
-.pdf-footer{background:#f5f5f5;border-top:2px solid var(--uwc-navy);padding:16px 32px;display:flex;justify-content:space-between;align-items:center;font-family:Arial,sans-serif;font-size:11px;color:#666}
-.pdf-sig{border-top:1px solid #333;padding-top:6px;margin-top:24px;font-size:12px;font-family:Arial,sans-serif;color:#444}
-/* School portal */
-.school-portal{border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;background:#fff;box-shadow:var(--uwc-shadow)}
-.school-portal-topbar{background:linear-gradient(135deg,#7c3aed,#4c1d95);padding:14px 22px;display:flex;align-items:center;justify-content:space-between;color:#fff}
-.school-portal-brand{display:flex;align-items:center;gap:10px}
-.school-portal-brand__mark{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:var(--uwc-font-title);font-weight:700;font-size:12px;color:#fff}
-.school-portal-brand__name{font-size:14px;font-weight:600}
-.school-portal-brand__sub{font-size:10px;color:rgba(255,255,255,.65);margin-top:1px}
-.school-portal-user{display:flex;align-items:center;gap:8px;font-size:12.5px}
-.school-portal-body{background:var(--uwc-grey-100);padding:20px}
-.school-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
-.school-stat{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius);padding:14px;text-align:center}
-.school-stat__val{font-family:var(--uwc-font-title);font-size:26px;font-weight:600;color:var(--uwc-navy)}
-.school-stat__lbl{font-size:11px;color:var(--uwc-grey-500);margin-top:3px}
-.school-nom-row{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius);padding:14px 18px;margin-bottom:10px;display:flex;align-items:center;gap:14px}
-.school-nom-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;flex-shrink:0}
-.school-nom-info{flex:1}
-.school-nom-name{font-size:14px;font-weight:600;color:var(--uwc-grey-800)}
-.school-nom-meta{font-size:12px;color:var(--uwc-grey-500);margin-top:2px}
-.school-task-badge{font-size:11px;padding:3px 10px;border-radius:var(--uwc-radius-pill);font-weight:500}
-/* Pack tracker */
-.pack-table{width:100%;border-collapse:collapse;font-size:13px}
-.pack-table th{background:var(--zoho-content-alt);padding:10px 14px;text-align:left;font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--zoho-text-secondary);border-bottom:2px solid var(--zoho-border)}
-.pack-table td{padding:10px 14px;border-bottom:1px solid var(--zoho-border-light)}
-.pack-table tr:hover td{background:var(--zoho-content-alt)}
-/* Stat tiles */
-.stat-tile{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius);padding:14px}
-.stat-tile__label{font-size:11px;color:var(--uwc-grey-500);margin-bottom:4px;font-weight:500}
-.stat-tile__value{font-family:var(--uwc-font-title);font-size:24px;font-weight:600;color:var(--uwc-navy);line-height:1.1}
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+/* ====== Reset + base ====== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; background: #f3f5fa; color: #1f2937; -webkit-font-smoothing: antialiased; overflow: hidden; }
+
+/* INLINE:demo-bar.css */
+.demo-bar { background: linear-gradient(90deg, #C8102E 0%, #a00d24 100%); color: #fff; height: 32px; display: flex; align-items: center; padding: 0 14px; gap: 14px; font-family: 'DM Sans', system-ui, sans-serif; font-size: 11.5px; position: relative; z-index: 200; box-shadow: 0 1px 0 rgba(0,0,0,0.1); }
+.demo-bar__brand { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase; font-size: 10px; color: rgba(255,255,255,0.95); }
+.demo-bar__brand::before { content: '▶'; font-size: 8px; color: rgba(255,255,255,0.7); }
+.demo-bar__scenario { color: rgba(255,255,255,0.85); font-weight: 500; }
+.demo-bar__divider { width: 1px; height: 16px; background: rgba(255,255,255,0.3); }
+.demo-bar__spacer { flex: 1; }
+.demo-bar__step { font-family: 'DM Mono', ui-monospace, monospace; font-size: 10.5px; color: rgba(255,255,255,0.85); padding: 3px 8px; background: rgba(255,255,255,0.12); border-radius: 4px; letter-spacing: 0.4px; }
+.demo-bar__nav { display: flex; gap: 2px; }
+.demo-bar__nav-btn { width: 24px; height: 22px; background: rgba(255,255,255,0.12); border: none; color: #fff; cursor: pointer; border-radius: 4px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; font-family: inherit; transition: background 120ms; }
+.demo-bar__nav-btn:hover:not(:disabled) { background: rgba(255,255,255,0.22); }
+.demo-bar__nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.demo-bar__home { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 11px; padding: 3px 8px; border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; transition: background 120ms; }
+.demo-bar__home:hover { background: rgba(255,255,255,0.12); color: #fff; }
+.demo-bar #role-switcher .rs-trigger { background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.3); padding: 3px 10px 3px 4px; font-size: 11px; min-width: 180px; height: 22px; }
+.demo-bar #role-switcher .rs-avatar { width: 18px; height: 18px; font-size: 9px; }
+.demo-bar #role-switcher .rs-name { font-size: 10.5px; }
+.demo-bar #role-switcher .rs-role { font-size: 9.5px; }
+.demo-bar #role-switcher .rs-chev { font-size: 8px; }
+.demo-bar__step-side { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.65); white-space: nowrap; }
+/* /INLINE */
+
+.app { height: 100vh; display: grid; grid-template-rows: 32px 1fr; }
+.stage { overflow: hidden; padding: 0; }
+.screen { display: none; height: 100%; }
+.screen.active { display: block; animation: fadeIn 250ms ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* INLINE:zoho-tokens.css */
+:root { --zoho-topbar-bg: #ffffff; --zoho-topbar-border: #e5e7eb; --zoho-topbar-text: #1f2937; --zoho-topbar-text-muted: #6b7280; --zoho-topbar-icon: #6b7280; --zoho-topbar-icon-hover: #1f2937; --zoho-topbar-height: 52px; --zoho-topbar-search-bg: #f3f5fa; --zoho-sidebar-bg: #f7f8fa; --zoho-sidebar-border: #e8eaed; --zoho-sidebar-text: #4a5568; --zoho-sidebar-section-text: #6b7280; --zoho-sidebar-active-bg: #e6efff; --zoho-sidebar-active-text: #2563eb; --zoho-sidebar-hover-bg: #eef1f7; --zoho-sidebar-width: 225px; --zoho-content-bg: #ffffff; --zoho-content-alt: #f9fafb; --zoho-content-secondary: #f3f5fa; --zoho-content-grey: #eef1f7; --zoho-border: #e5e7eb; --zoho-border-light: #f0f2f5; --zoho-divider: #ebeef2; --zoho-text: #1f2937; --zoho-text-secondary: #4b5563; --zoho-text-muted: #6b7280; --zoho-text-disabled: #9ca3af; --zoho-link: #2563eb; --zoho-link-hover: #1d4ed8; --zoho-primary: #3b6ef5; --zoho-primary-hover: #2563eb; --zoho-primary-text: #ffffff; --zoho-outline: #d1d5db; --zoho-outline-hover: #9ca3af; --zoho-violet: #7c3aed; --zoho-violet-light: #ede9fe; --zoho-pill-today-bg: #fff1de; --zoho-pill-today-text: #c2410c; --zoho-pill-overdue-bg: #fee2e2; --zoho-pill-overdue-text: #991b1b; --zoho-success: #10b981; --zoho-danger: #ef4444; --zoho-phone: #22c55e; --zoho-fs-base: 13px; --zoho-fs-sm: 12px; --zoho-fs-xs: 11px; --zoho-fs-lg: 14px; --zoho-fs-xl: 17px; --zoho-radius-sm: 4px; --zoho-radius: 6px; --zoho-radius-lg: 8px; --zoho-radius-pill: 999px; }
+.zoho-shell { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; color: #1f2937; background: #fff; display: grid; grid-template-rows: 52px 1fr; height: 100%; overflow: hidden; }
+.zoho-topbar { background: #fff; border-bottom: 1px solid #e5e7eb; display: grid; grid-template-columns: 235px 1fr auto; align-items: stretch; height: 52px; }
+.zoho-tb__brand { display: flex; align-items: center; gap: 8px; padding: 0 14px; border-right: 1px solid #e5e7eb; }
+.zoho-tb__logo { width: 22px; height: 22px; border-radius: 50%; background: conic-gradient(from 0deg, #f43f5e, #ec4899, #a855f7, #6366f1, #3b82f6, #06b6d4, #f43f5e); position: relative; flex-shrink: 0; }
+.zoho-tb__logo::after { content: ''; position: absolute; inset: 4px; background: #fff; border-radius: 50%; }
+.zoho-tb__logo::before { content: ''; position: absolute; inset: 7px; background: linear-gradient(135deg, #ec4899 0%, #a855f7 50%, #3b82f6 100%); border-radius: 50%; z-index: 1; }
+.zoho-tb__name { font-size: 14px; font-weight: 500; color: #1f2937; }
+.zoho-tb__panel-toggle { margin-left: auto; background: none; border: none; color: #6b7280; font-size: 16px; cursor: pointer; padding: 4px 6px; border-radius: 4px; }
+.zoho-tb__center { display: flex; align-items: center; gap: 18px; padding: 0 18px; min-width: 0; }
+.zoho-tb__module { font-size: 17px; font-weight: 500; color: #1f2937; margin: 0; white-space: nowrap; }
+.zoho-tb__search { display: flex; align-items: center; gap: 8px; background: #f3f5fa; border: 1px solid transparent; border-radius: 6px; padding: 6px 12px; flex: 1; max-width: 360px; margin-left: auto; }
+.zoho-tb__search-icon { color: #9ca3af; font-size: 13px; }
+.zoho-tb__search input { background: transparent; border: none; outline: none; font-size: 12px; color: #1f2937; flex: 1; font-family: inherit; }
+.zoho-tb__search input::placeholder { color: #9ca3af; }
+.zoho-tb__icons { display: flex; align-items: center; gap: 4px; padding: 0 14px; }
+.zoho-tb__icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: transparent; border: none; color: #6b7280; cursor: pointer; font-size: 15px; position: relative; transition: background 120ms; }
+.zoho-tb__icon:hover { background: #eef1f7; color: #1f2937; }
+.zoho-tb__icon--plus { border: 1.5px solid #7c3aed; color: #7c3aed; font-weight: 600; }
+.zoho-tb__icon--plus:hover { background: #ede9fe; color: #7c3aed; }
+.zoho-tb__icon--zia { background: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #a855f7 100%); color: #fff; font-size: 11px; font-weight: 700; }
+.zoho-tb__icon--zia:hover { color: #fff; }
+.zoho-tb__icon--bell::after { content: ''; position: absolute; top: 8px; right: 9px; width: 6px; height: 6px; background: #ef4444; border-radius: 50%; border: 1.5px solid #fff; }
+.zoho-tb__org { width: 32px; height: 32px; border-radius: 50%; background: #fbd926; color: #1f2937; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; letter-spacing: -0.3px; margin-left: 6px; position: relative; cursor: pointer; }
+.zoho-tb__org::after { content: '1'; position: absolute; top: -3px; right: -3px; width: 14px; height: 14px; background: #7c3aed; color: #fff; font-size: 9px; font-weight: 600; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1.5px solid #fff; }
+.zoho-tb__waffle { display: grid; grid-template-columns: repeat(3, 4px); gap: 2px; width: auto; padding: 0 6px; }
+.zoho-tb__waffle span { width: 4px; height: 4px; background: #6b7280; border-radius: 1px; }
+.zoho-body { display: grid; grid-template-columns: 225px 1fr; height: 100%; overflow: hidden; }
+.zoho-sidebar { background: #f7f8fa; border-right: 1px solid #e8eaed; overflow-y: auto; padding: 8px 0; font-size: 13px; }
+.zoho-sb__item { display: flex; align-items: center; gap: 10px; padding: 7px 14px; color: #4a5568; cursor: pointer; transition: background 120ms; text-decoration: none; font-size: 13px; }
+.zoho-sb__item:hover { background: #eef1f7; }
+.zoho-sb__item.active { background: #e6efff; color: #2563eb; font-weight: 500; border-right: 2px solid #2563eb; padding-right: 12px; }
+.zoho-sb__item-icon { width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.zoho-sb__teamspace { margin: 12px 10px; padding: 10px 12px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.zoho-sb__teamspace-icon { width: 22px; height: 22px; background: #ef4444; color: #fff; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+.zoho-sb__teamspace-name { font-weight: 500; color: #1f2937; flex: 1; }
+.zoho-sb__teamspace-chev { color: #6b7280; font-size: 10px; }
+.zoho-sb__teamspace-more { color: #6b7280; font-size: 16px; line-height: 1; cursor: pointer; padding: 0 4px; }
+.zoho-sb__search { margin: 0 10px 12px; background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 6px 10px; display: flex; align-items: center; gap: 8px; }
+.zoho-sb__search input { border: none; outline: none; background: transparent; width: 100%; font-size: 12px; color: #1f2937; font-family: inherit; }
+.zoho-sb__search input::placeholder { color: #9ca3af; }
+.zoho-sb__group { margin: 4px 0; }
+.zoho-sb__group-header { display: flex; align-items: center; gap: 8px; padding: 6px 14px; cursor: pointer; color: #1f2937; font-weight: 500; font-size: 13px; }
+.zoho-sb__group-header:hover { background: #eef1f7; }
+.zoho-sb__group-icon { color: #3b82f6; font-size: 14px; }
+.zoho-sb__group-chev { margin-left: auto; font-size: 10px; color: #6b7280; transition: transform 150ms; }
+.zoho-sb__group.collapsed .zoho-sb__group-chev { transform: rotate(-90deg); }
+.zoho-sb__group.collapsed .zoho-sb__group-items { display: none; }
+.zoho-sb__group-items .zoho-sb__item { padding-left: 38px; }
+.zoho-sb__group-items .zoho-sb__item-icon { color: #6b7280; }
+.zoho-content { background: #fff; overflow: auto; position: relative; }
+.zoho-page-strip { display: flex; align-items: center; gap: 12px; padding: 10px 22px; border-bottom: 1px solid #f0f2f5; background: #fff; }
+.zoho-page-strip__view { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; background: #eef1f7; border-radius: 6px; font-size: 13px; color: #1f2937; cursor: pointer; font-weight: 500; }
+.zoho-toolbar { display: flex; align-items: center; gap: 6px; padding: 8px 22px; border-bottom: 1px solid #f0f2f5; background: #fff; }
+.zoho-toolbar__btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: transparent; border: 1px solid transparent; border-radius: 6px; font-size: 13px; color: #1f2937; cursor: pointer; font-family: inherit; }
+.zoho-toolbar__btn:hover { background: #eef1f7; }
+.zoho-toolbar__divider { width: 1px; height: 20px; background: #e5e7eb; margin: 0 4px; }
+.zoho-toolbar__view-icon { width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; cursor: pointer; color: #6b7280; font-size: 14px; }
+.zoho-toolbar__view-icon:hover { background: #eef1f7; color: #1f2937; }
+.zoho-toolbar__view-icon.active { background: #ede9fe; color: #7c3aed; }
+.zoho-toolbar__spacer { flex: 1; }
+.zoho-toolbar__cta { background: #3b6ef5; color: #fff; border: 1px solid #3b6ef5; border-radius: 6px 0 0 6px; padding: 6px 14px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; }
+.zoho-toolbar__cta:hover { background: #2563eb; }
+.zoho-toolbar__cta-split { background: #3b6ef5; color: #fff; border: 1px solid #3b6ef5; border-left: 1px solid rgba(255,255,255,0.3); border-radius: 0 6px 6px 0; padding: 6px 8px; cursor: pointer; }
+.zoho-toolbar__more { color: #6b7280; font-size: 16px; cursor: pointer; padding: 0 8px; margin-left: 6px; }
+.zoho-detail__hero { display: flex; align-items: center; gap: 16px; padding: 16px 22px; background: #fff; border-bottom: 1px solid #f0f2f5; }
+.zoho-detail__back { color: #6b7280; font-size: 18px; cursor: pointer; padding: 4px; }
+.zoho-detail__avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #ec4899); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 16px; flex-shrink: 0; }
+.zoho-detail__name-block { flex: 1; }
+.zoho-detail__name { font-size: 19px; font-weight: 600; color: #1f2937; }
+.zoho-detail__add-tags { font-size: 12px; color: #2563eb; cursor: pointer; margin-top: 2px; }
+.zoho-detail__actions { display: flex; align-items: center; gap: 8px; }
+.zoho-detail__last-update { font-size: 12px; color: #6b7280; margin-right: 12px; }
+.zoho-tabs { display: inline-flex; background: #eef1f7; border-radius: 6px; padding: 3px; gap: 0; margin: 14px 22px 0; }
+.zoho-tabs__tab { padding: 6px 22px; font-size: 13px; color: #6b7280; cursor: pointer; border-radius: 4px; font-weight: 500; }
+.zoho-tabs__tab.active { background: #fff; color: #1f2937; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+.zoho-detail__body { display: grid; grid-template-columns: 220px 1fr; gap: 0; }
+.zoho-detail__rail { background: #fff; border-right: 1px solid #f0f2f5; padding: 16px 14px; font-size: 13px; }
+.zoho-detail__rail-header { font-size: 12px; font-weight: 600; color: #1f2937; margin-bottom: 8px; }
+.zoho-detail__rail-item { display: flex; align-items: center; gap: 8px; padding: 5px 0; color: #4b5563; cursor: pointer; }
+.zoho-detail__rail-item:hover { color: #2563eb; }
+.zoho-detail__rail-item.active { color: #2563eb; font-weight: 500; }
+.zoho-detail__rail-count { margin-left: auto; background: #eef1f7; color: #6b7280; font-size: 11px; padding: 1px 7px; border-radius: 999px; }
+.zoho-detail__rail-add { color: #2563eb; cursor: pointer; padding: 5px 0; }
+.zoho-detail__main { padding: 16px 22px; background: #f9fafb; min-height: 100%; }
+.zoho-detail__card { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 18px 22px; margin-bottom: 14px; }
+.zoho-detail__card-title { font-size: 13px; font-weight: 600; color: #1f2937; margin-bottom: 14px; }
+.zoho-fields-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 28px; font-size: 13px; }
+.zoho-field-row { display: flex; align-items: baseline; gap: 16px; }
+.zoho-field-row__label { min-width: 130px; text-align: right; color: #6b7280; font-size: 12px; flex-shrink: 0; }
+.zoho-field-row__value { color: #1f2937; flex: 1; font-size: 13px; word-break: break-word; }
+.zoho-field-row__value.link { color: #2563eb; }
+.zoho-btn { padding: 7px 14px; font-size: 13px; border-radius: 6px; border: 1px solid #d1d5db; background: #fff; color: #1f2937; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 6px; transition: all 120ms; font-weight: 400; }
+.zoho-btn:hover { background: #eef1f7; }
+.zoho-btn--primary { background: #3b6ef5; color: #fff; border-color: #3b6ef5; font-weight: 500; }
+.zoho-btn--primary:hover { background: #2563eb; }
+.zoho-input { width: 100%; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; font-family: inherit; color: #1f2937; background: #fff; }
+.zoho-label { display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px; font-weight: 500; }
+.zoho-list { width: 100%; border-collapse: collapse; font-size: 13px; }
+.zoho-list th { padding: 10px 16px; text-align: left; font-size: 12px; font-weight: 500; color: #4b5563; border-bottom: 1px solid #e5e7eb; white-space: nowrap; background: #fff; }
+.zoho-list td { padding: 12px 16px; border-bottom: 1px solid #f0f2f5; color: #1f2937; vertical-align: middle; }
+.zoho-list tr:hover td { background: #f9fafb; }
+.zoho-list__name-link { color: #2563eb; cursor: pointer; }
+.zoho-pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+.zoho-pill--qual { background: #ede9fe; color: #5b21b6; }
+.zoho-pill--elig { background: #fff1de; color: #c2410c; }
+.zoho-pill--review { background: #fefce8; color: #854d0e; }
+.zoho-pill--shortlist { background: #fefce8; color: #854d0e; border: 1px solid #fde047; }
+.zoho-pill--nominate { background: #f0fdf4; color: #14532d; }
+.zoho-pill--placed { background: #ecfdf5; color: #064e3b; }
+.zoho-stat-block { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px 18px; }
+.zoho-stat-block__label { font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 500; }
+.zoho-stat-block__value { font-size: 20px; font-weight: 600; color: #1f2937; margin-top: 4px; }
+.zoho-helper-tag { display: inline-flex; align-items: center; gap: 5px; background: #ede9fe; color: #5b21b6; font-size: 10.5px; padding: 2px 8px; border-radius: 999px; font-weight: 500; }
+.zoho-helper-tag::before { content: '👁'; font-size: 11px; }
+.zoho-smart-chat { position: absolute; bottom: 0; left: 225px; right: 0; background: #fff; border-top: 1px solid #e5e7eb; padding: 6px 22px; display: flex; align-items: center; gap: 12px; font-size: 12px; color: #6b7280; z-index: 4; }
+.zoho-smart-chat__placeholder { flex: 1; }
+.zoho-smart-chat__icons { display: flex; gap: 4px; }
+.zoho-smart-chat__icon { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; color: #6b7280; font-size: 13px; cursor: pointer; }
+/* /INLINE */
+
+/* role-switcher CSS */
+#role-switcher { position: relative; font-family: 'DM Sans', sans-serif; }
+.rs-trigger { display: flex; align-items: center; gap: 8px; color: #fff; cursor: pointer; text-align: left; }
+.rs-avatar { border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-weight: 600; flex-shrink: 0; }
+.rs-avatar--ios { background: #003087; } .rs-avatar--nc { background: #1f9535; } .rs-avatar--reviewer { background: #e85d0c; } .rs-avatar--dp { background: #C8102E; } .rs-avatar--school { background: #7c3aed; } .rs-avatar--portal { background: #0ea5e9; } .rs-avatar--marketing { background: #ec4899; } .rs-avatar--guardian { background: #f59e0b; } .rs-avatar--visitor { background: #6b7280; } .rs-avatar--default { background: #6b7280; }
+.rs-current { display: flex; flex-direction: column; line-height: 1.2; flex: 1; }
+.rs-name { font-weight: 500; color: #fff; }
+.rs-role { color: rgba(255,255,255,0.6); }
+.rs-chev { color: rgba(255,255,255,0.6); margin-left: 2px; }
+.rs-menu { position: absolute; top: calc(100% + 6px); right: 0; background: #fff; border: 1px solid #e2e6ed; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); min-width: 300px; z-index: 100; overflow: hidden; }
+.rs-menu-header { padding: 10px 14px; font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: #6b7280; background: #f7f8fa; font-weight: 600; }
+.rs-menu-footer { padding: 10px 14px; font-size: 11px; color: #6b7280; border-top: 1px solid #f0f2f5; background: #fafbfd; line-height: 1.4; }
+.rs-option { display: flex; align-items: center; gap: 10px; padding: 10px 14px; width: 100%; background: #fff; border: none; border-bottom: 1px solid #f0f2f5; cursor: pointer; text-align: left; }
+.rs-option:hover { background: #f7f8fa; }
+.rs-option.active { background: #E8EEF6; }
+.rs-option .rs-avatar { width: 32px; height: 32px; font-size: 12px; }
+.rs-opt-text { flex: 1; display: flex; flex-direction: column; line-height: 1.3; }
+.rs-opt-name { font-size: 13px; font-weight: 500; color: #0d1b3e; }
+.rs-opt-role { font-size: 11.5px; color: #5a6480; }
+.rs-opt-scope { font-size: 10.5px; color: #9aa3b8; font-style: italic; }
+.rs-check { color: #003087; font-weight: 600; opacity: 0; font-size: 14px; }
+.rs-option.active .rs-check { opacity: 1; }
+
+/* UWC Portal shell */
+.uwc-portal-shell { background: #f3f5fa; height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+.uwc-portal-topbar { background: linear-gradient(90deg, #003087 0%, #004A97 100%); color: #fff; padding: 14px 24px; display: flex; align-items: center; gap: 16px; border-bottom: 3px solid #C8102E; flex-shrink: 0; }
+.uwc-portal-topbar__logo { width: 40px; height: 40px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #003087; font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 13px; flex-shrink: 0; }
+.uwc-portal-topbar__title { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: 17px; }
+.uwc-portal-topbar__lang { margin-left: auto; display: flex; gap: 4px; }
+.uwc-portal-topbar__lang-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; }
+.uwc-portal-topbar__lang-btn.active { background: rgba(255,255,255,0.2); color: #fff; border-color: rgba(255,255,255,0.6); }
+.uwc-portal-body { flex: 1; overflow-y: auto; padding: 24px; }
+.uwc-portal-content { max-width: 920px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 32px; box-shadow: 0 2px 8px rgba(0,48,135,0.06); }
+.uwc-portal-h1 { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: 26px; color: #003087; margin-bottom: 8px; }
+.uwc-portal-h2 { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: 18px; color: #0d1b3e; margin-bottom: 6px; }
+.uwc-portal-sub { color: #5a6480; font-size: 14px; line-height: 1.6; }
+.uwc-portal-btn-primary { background: #003087; color: #fff; border: none; padding: 12px 22px; border-radius: 8px; font-weight: 500; font-size: 14px; cursor: pointer; }
+
+/* Portal sidebar layout */
+.uwc-portal-layout { display: grid; grid-template-columns: 220px 1fr; flex: 1; overflow: hidden; }
+.uwc-portal-sidebar { background: #fff; border-right: 1px solid #e5e7eb; padding: 20px 0; overflow-y: auto; }
+.uwc-portal-sidebar__section { padding: 8px 20px 4px; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: #9ca3af; font-weight: 600; }
+.uwc-portal-sidebar__item { display: flex; align-items: center; gap: 10px; padding: 9px 20px; color: #4a5568; cursor: pointer; font-size: 14px; text-decoration: none; }
+.uwc-portal-sidebar__item:hover { background: #f3f5fa; }
+.uwc-portal-sidebar__item.active { background: #E8EEF6; color: #003087; font-weight: 500; border-right: 3px solid #003087; }
+.uwc-portal-sidebar__icon { font-size: 16px; flex-shrink: 0; }
+.uwc-portal-main { background: #f3f5fa; overflow-y: auto; padding: 24px; }
+
+/* Blueprint strip */
+.blueprint-strip { display: flex; align-items: center; gap: 0; padding: 14px 22px; overflow-x: auto; border-bottom: 1px solid #f0f2f5; background: #fff; }
+.bp-node { padding: 5px 12px; font-size: 11.5px; font-weight: 500; border-radius: 4px; white-space: nowrap; }
+.bp-node--done { background: #dcfce7; color: #166534; }
+.bp-node--active { background: #003087; color: #fff; }
+.bp-node--todo { background: #f3f4f6; color: #6b7280; }
+.bp-arrow { color: #9ca3af; font-size: 13px; padding: 0 5px; flex-shrink: 0; }
+
+/* Tags */
+.tag { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+.tag--blue { background: #dbeafe; color: #1e3a8a; }
+.tag--green { background: #dcfce7; color: #166534; }
+.tag--orange { background: #fff7ed; color: #c2410c; }
+.tag--purple { background: #ede9fe; color: #5b21b6; }
+.tag--red { background: #fee2e2; color: #991b1b; }
+.tag--new { background: #003087; color: #fff; }
+
+/* Field-reference appendix */
+.appendix { background: #fff; padding: 30px 40px; height: 100%; overflow: auto; }
+.appendix h1 { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; color: #003087; font-size: 24px; margin-bottom: 6px; }
+.appendix p { color: #5a6480; font-size: 13px; margin-bottom: 22px; }
+.ref-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 20px; }
+.ref-table th { background: #003087; color: #fff; padding: 8px 14px; text-align: left; font-size: 11px; font-weight: 500; }
+.ref-table td { padding: 8px 14px; border-bottom: 1px solid #e2e6ed; vertical-align: top; }
+.ref-table tr:nth-child(even) td { background: #f8f9fb; }
+.ref-table tr.section td { background: #E8EEF6; color: #003087; font-weight: 600; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 14px; }
+.ft-name { font-family: 'DM Mono', monospace; font-size: 11px; color: #5a6480; }
+.ft-t { display: inline-block; padding: 2px 7px; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 10px; background: #f3f5fa; color: #5a6480; }
+.ft-pick { background: #f0f4ff; color: #1e3a8a; } .ft-look { background: #f0fdf4; color: #166534; } .ft-auto { background: #fef3c7; color: #92400e; }
+
+/* Modal overlay */
+.modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.38); display: flex; align-items: center; justify-content: center; z-index: 50; }
+.modal { background: #fff; border-radius: 10px; padding: 28px 32px; max-width: 480px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+.modal-title { font-size: 16px; font-weight: 600; color: #1f2937; margin-bottom: 16px; }
+.modal-actions { display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end; }
+
+/* Allocation matrix table */
+.alloc-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.alloc-table th { background: #003087; color: #fff; padding: 9px 14px; text-align: center; font-size: 11px; font-weight: 500; }
+.alloc-table th:first-child { text-align: left; }
+.alloc-table td { padding: 10px 14px; border-bottom: 1px solid #e5e7eb; text-align: center; }
+.alloc-table td:first-child { text-align: left; font-weight: 500; color: #1f2937; }
+.alloc-table tr:hover td { background: #f9fafb; }
+.alloc-cell { font-size: 12px; color: #4b5563; }
+.alloc-cell strong { color: #1f2937; }
+.alloc-cell .rem { color: #166534; font-size: 11px; }
+
 /* Toast */
-.toast{position:fixed;bottom:24px;right:24px;background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);padding:14px 18px;box-shadow:var(--uwc-shadow-lg);display:flex;align-items:center;gap:12px;z-index:400;min-width:320px;animation:toastIn .3s ease}
-@keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.toast__icon{width:32px;height:32px;border-radius:50%;background:#f0fdf4;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.toast__title{font-size:13px;font-weight:600;color:var(--uwc-grey-800)}
-.toast__sub{font-size:11.5px;color:var(--uwc-grey-500);margin-top:2px}
-.badges-strip{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.toast { position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%); background: #1f2937; color: #fff; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 500; white-space: nowrap; box-shadow: 0 4px 16px rgba(0,0,0,0.2); z-index: 60; }
+.toast--success { background: #166534; }
+
+/* Dashboard tile */
+.dash-tile { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px 18px; }
+.dash-tile__label { font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 500; margin-bottom: 6px; }
+.dash-tile__value { font-size: 18px; font-weight: 600; color: #1f2937; }
+.dash-tile__sub { font-size: 12px; color: #6b7280; margin-top: 4px; }
+.badge-new { display: inline-flex; align-items: center; padding: 2px 7px; background: #003087; color: #fff; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; margin-left: 6px; }
+
+/* Spinner */
+.spinner { width: 32px; height: 32px; border: 3px solid #e5e7eb; border-top-color: #003087; border-radius: 50%; animation: spin 0.8s linear infinite; display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
-<div class="shell">
-<!-- TOPBAR -->
-<header class="topbar">
-  <div class="topbar__brand">
-    <div style="width:32px;height:32px;border-radius:50%;background:#fff;color:var(--uwc-navy);display:flex;align-items:center;justify-content:center;font-family:var(--uwc-font-title);font-weight:700;font-size:11px;flex-shrink:0">UWC</div>
-    <span class="topbar__logo">UWC International</span>
-    <span class="topbar__demo-badge">DEMO</span>
-  </div>
-  <div class="topbar__divider"></div>
-  <div class="topbar__scenario"><strong>Scenario D</strong> · Nomination, Place Allocation &amp; Pack Generation</div>
-  <div class="topbar__center"></div>
-  <div class="topbar__right">
+
+<div class="app">
+  <div class="demo-bar">
+    <a href="00_index.html" class="demo-bar__home">← All scenarios</a>
+    <span class="demo-bar__brand">Demo Mode</span>
+    <span class="demo-bar__divider"></span>
+    <span class="demo-bar__scenario"><b>Scenario D</b> · Nomination · Place Allocation · Pack Generation</span>
+    <span class="demo-bar__spacer"></span>
     <div id="role-switcher"></div>
-    <div class="topbar__step-counter" id="step-counter">Step 1 of 10</div>
-  </div>
-</header>
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="sidebar__label">Scenario D · Nomination &amp; Packs</div>
-  <div class="sidebar__item active" id="nav-0" onclick="go(0)"><div class="sidebar__num">1</div><div class="sidebar__label-text">IO place-allocation grid</div></div>
-  <div class="sidebar__item" id="nav-1" onclick="go(1)"><div class="sidebar__num">2</div><div class="sidebar__label-text">Allocate 2 Atlantic places → Brazil</div></div>
-  <div class="sidebar__item" id="nav-2" onclick="go(2)"><div class="sidebar__num">3</div><div class="sidebar__label-text">Ana's NC dashboard — quota updated</div></div>
-  <div class="sidebar__item" id="nav-3" onclick="go(3)"><div class="sidebar__num">4</div><div class="sidebar__label-text">Generate nomination pack — Sofia</div></div>
-  <div class="sidebar__item" id="nav-4" onclick="go(4)"><div class="sidebar__num">5</div><div class="sidebar__label-text">Nomination pack PDF preview</div></div>
-  <div class="sidebar__item" id="nav-5" onclick="go(5)"><div class="sidebar__num">6</div><div class="sidebar__label-text">Ana nominates Sofia → Atlantic #4</div></div>
-  <div class="sidebar__item" id="nav-6" onclick="go(6)"><div class="sidebar__num">7</div><div class="sidebar__label-text">Helen — school portal, nominations</div></div>
-  <div class="sidebar__item" id="nav-7" onclick="go(7)"><div class="sidebar__num">8</div><div class="sidebar__label-text">Helen reviews &amp; accepts Sofia</div></div>
-  <div class="sidebar__item" id="nav-8" onclick="go(8)"><div class="sidebar__num">9</div><div class="sidebar__label-text">Fatima — placement confirmed</div></div>
-  <div class="sidebar__item" id="nav-9" onclick="go(9)"><div class="sidebar__num">10</div><div class="sidebar__label-text">Pack tracker + field reference</div></div>
-  <div class="sidebar__progress">
-    <div class="sidebar__progress-label"><span>Progress</span><span id="progress-txt">Step 1 of 10</span></div>
-    <div class="sidebar__progress-track"><div class="sidebar__progress-fill" id="progress-fill" style="width:10%"></div></div>
-  </div>
-</aside>
-<!-- MAIN -->
-<main class="main" id="main">
-<!-- ===== SCREEN 0: IO PLACE-ALLOCATION GRID ===== -->
-<section class="screen active" id="sc-0">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">👤 Fatima Al-Rashid — IO Admissions · Global Place Allocation</div>
-      <h1 class="screen-title">School Place Allocation Grid</h1>
-      <p class="screen-sub">Fatima reviews the full Schools × National Committees matrix. Each cell shows allocated / remaining quota. Total quota is auto-summed at the top row.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" disabled>← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(1)">Next →</button>
+    <span class="demo-bar__divider"></span>
+    <span class="demo-bar__step" id="step-counter">Step 1 / 10</span>
+    <div class="demo-bar__nav">
+      <button class="demo-bar__nav-btn" id="prev-btn" title="Previous">‹</button>
+      <button class="demo-bar__nav-btn" id="next-btn" title="Next">›</button>
     </div>
   </div>
-  <div class="demo-mode-tag demo-mode-tag--zoho" style="margin-bottom:14px">⚙ Zoho CRM — IO Admissions Module</div>
-  <div class="card">
-    <div class="card__header"><span class="card__title">Place Allocation Matrix — Cycle 2026</span><span class="card__sub">Live · Schools × NCs · 3 schools · 5 NCs</span></div>
-    <div class="card__body" style="padding:0;overflow-x:auto">
-      <table class="alloc-table">
-        <thead>
-          <tr>
-            <th>School</th>
-            <th>🇧🇷 Brazil NC</th>
-            <th>🇩🇪 Germany NC</th>
-            <th>🇰🇪 Kenya NC</th>
-            <th>🇮🇳 India NC</th>
-            <th>🇬🇧 UK NC</th>
-            <th style="background:#002070">Total Allocated</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:#f0f4ff;font-weight:600">
-            <td style="color:var(--uwc-navy);font-weight:700">Total Quota</td>
-            <td><span class="alloc-num">6</span></td>
-            <td><span class="alloc-num">5</span></td>
-            <td><span class="alloc-num">5</span></td>
-            <td><span class="alloc-num">4</span></td>
-            <td><span class="alloc-num">6</span></td>
-            <td><span class="alloc-num">26</span></td>
-          </tr>
-          <tr>
-            <td style="font-weight:600">UWC Atlantic College</td>
-            <td><div class="alloc-cell"><span class="alloc-num">0</span><span class="alloc-slash">/</span><span class="alloc-rem">2 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">2</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-            <td><span class="alloc-num">5</span> / <span class="alloc-rem">6 rem</span></td>
-          </tr>
-          <tr>
-            <td style="font-weight:600">UWC Red Cross Nordic</td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">2 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">2</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">2 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">0</span><span class="alloc-slash">/</span><span class="alloc-rem">2 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">2</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-            <td><span class="alloc-num">6</span> / <span class="alloc-rem">8 rem</span></td>
-          </tr>
-          <tr>
-            <td style="font-weight:600">UWC Mahindra College</td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">2 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">0</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">2</span><span class="alloc-slash">/</span><span class="alloc-rem">0 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">2 rem</span></div></td>
-            <td><span class="alloc-num">5</span> / <span class="alloc-rem">6 rem</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="alert alert--info">ℹ️ <div>Atlantic → Brazil shows <strong>0 allocated / 2 remaining</strong>. Fatima will now allocate 2 places to the Brazil NC. Click Next to see the allocation modal.</div></div>
-  <div class="badges-strip">
-    <span class="badge badge--api">Live sync from Place Allocation module</span>
-    <span class="badge badge--auto">Quota totals auto-calculated</span>
-    <span class="badge badge--info">Cells: allocated / remaining — click any cell to edit</span>
-  </div>
-</section>
 
-<!-- ===== SCREEN 1: ALLOCATE PLACES MODAL ===== -->
-<section class="screen" id="sc-1">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">👤 Fatima Al-Rashid — IO Admissions</div>
-      <h1 class="screen-title">Allocate 2 Atlantic Places to Brazil NC</h1>
-      <p class="screen-sub">Fatima clicks the Atlantic → Brazil cell and uses the allocation modal to confirm the quota, preview the audit message, and save.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(0)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(2)">Next →</button>
-    </div>
-  </div>
-  <div class="demo-mode-tag demo-mode-tag--zoho" style="margin-bottom:14px">⚙ Zoho CRM — Allocation Modal</div>
-  <!-- Background grid faded -->
-  <div style="opacity:.35;pointer-events:none;margin-bottom:0">
-    <div class="card"><div class="card__header"><span class="card__title">Place Allocation Matrix — Cycle 2026</span></div>
-    <div class="card__body" style="padding:10px 18px;font-size:12px;color:var(--uwc-grey-500)">Matrix visible behind modal — Atlantic → Brazil cell highlighted…</div></div>
-  </div>
-  <!-- Modal inline -->
-  <div style="background:rgba(0,0,0,.38);border-radius:var(--uwc-radius-lg);padding:40px 0;display:flex;align-items:center;justify-content:center;margin-top:-8px">
-    <div class="modal" style="position:relative">
-      <div class="modal__header">
-        <span class="modal__title">Allocate Places — UWC Atlantic → Brazil NC</span>
-        <button class="modal__close">✕</button>
-      </div>
-      <div class="modal__body">
-        <div class="field-group" style="margin-bottom:16px">
-          <div class="field-cell"><div class="field-cell__label">School</div><div class="field-cell__value">UWC Atlantic College</div></div>
-          <div class="field-cell"><div class="field-cell__label">National Committee</div><div class="field-cell__value">UWC Brazil</div></div>
-          <div class="field-cell"><div class="field-cell__label">Cycle</div><div class="field-cell__value">2026</div></div>
-          <div class="field-cell"><div class="field-cell__label">School Total Quota</div><div class="field-cell__value">12</div></div>
-        </div>
-        <div style="margin-bottom:14px">
-          <label style="display:block;font-size:12px;font-weight:600;color:var(--uwc-grey-600);margin-bottom:6px">Places to Allocate to Brazil NC <span style="color:var(--uwc-red)">*</span></label>
-          <div style="display:flex;align-items:center;gap:10px">
-            <input type="number" value="2" style="width:80px;padding:9px 12px;border:2px solid var(--uwc-navy);border-radius:var(--uwc-radius-sm);font-size:16px;font-family:var(--uwc-font-mono);font-weight:700;text-align:center;color:var(--uwc-navy)">
-            <span style="font-size:12.5px;color:var(--uwc-grey-500)">of 8 remaining Atlantic places</span>
-          </div>
-        </div>
-        <div style="background:var(--uwc-navy-tint);border:1px solid #93c5fd;border-radius:var(--uwc-radius);padding:12px 14px;margin-bottom:14px">
-          <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--uwc-navy);margin-bottom:6px">Audit Message Preview</div>
-          <div style="font-size:12.5px;color:var(--uwc-navy);line-height:1.6;font-family:var(--uwc-font-mono)">IO Admissions (Fatima Al-Rashid) allocated <strong>2 places</strong> at UWC Atlantic College to Brazil NC — Cycle 2026. Effective: 27 May 2026 14:32 UTC. NC quota updated: 0 → 2 (Brazil · Atlantic).</div>
-        </div>
-        <div class="alert alert--warning" style="margin-bottom:0">⚠️ <div>NC Admin (Ana Carvalho) will be notified by email. Brazil NC dashboard updates immediately upon save.</div></div>
-      </div>
-      <div class="modal__footer">
-        <button class="btn-nav" onclick="go(0)">Cancel</button>
-        <button class="btn-nav btn-nav--primary" onclick="go(2)">✓ Confirm Allocation</button>
-      </div>
-    </div>
-  </div>
-  <div class="badges-strip" style="margin-top:12px">
-    <span class="badge badge--auto">Zoho Blueprint audit trail — every allocation logged</span>
-    <span class="badge badge--api">Email notification triggers on save</span>
-  </div>
-</section>
+  <div class="stage" id="stage">
 
-<!-- ===== SCREEN 2: ANA'S NC DASHBOARD ===== -->
-<section class="screen" id="sc-2">
-  <div class="screen-header">
-    <div>
-      <div class="role-switch-banner"><span class="role-switch-banner__badge">Role Switch</span> Now viewing as <strong>Ana Carvalho</strong> — NC Admin, UWC Brazil</div>
-      <h1 class="screen-title">Brazil NC Dashboard — Quota Updated</h1>
-      <p class="screen-sub">Ana's dashboard reflects the allocation immediately. The Atlantic College tile is highlighted with the new quota. She can now nominate candidates for those places.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(1)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(3)">Next →</button>
-    </div>
-  </div>
-  <div class="demo-mode-tag demo-mode-tag--zoho" style="margin-bottom:14px">⚙ Zoho CRM — NC Admin Dashboard · UWC Brazil</div>
-  <div class="alert alert--success" style="margin-bottom:14px">✅ <strong>Allocation received from IO Admissions.</strong> UWC Atlantic College: 2 places now available for Brazil NC nominations. Ana received email notification at 14:32 UTC.</div>
-  <div class="stat-grid">
-    <div class="nc-tile highlight">
-      <div class="nc-tile__school">UWC Atlantic College</div>
-      <div class="nc-tile__places">2</div>
-      <div class="nc-tile__label">places available · 0 nominated</div>
-      <div style="margin-top:10px"><button class="zoho-btn zoho-btn--primary" style="font-size:12px;padding:6px 12px" onclick="go(5)">+ Nominate candidate</button></div>
-    </div>
-    <div class="nc-tile">
-      <div class="nc-tile__school">UWC Red Cross Nordic</div>
-      <div class="nc-tile__places">2</div>
-      <div class="nc-tile__label">places available · 1 nominated</div>
-    </div>
-    <div class="nc-tile">
-      <div class="nc-tile__school">UWC Mahindra College</div>
-      <div class="nc-tile__places">2</div>
-      <div class="nc-tile__label">places available · 1 nominated</div>
-    </div>
-    <div class="stat-tile">
-      <div class="stat-tile__label">Shortlisted applicants</div>
-      <div class="stat-tile__value">4</div>
-    </div>
-    <div class="stat-tile">
-      <div class="stat-tile__label">Packs generated</div>
-      <div class="stat-tile__value">1</div>
-    </div>
-    <div class="stat-tile">
-      <div class="stat-tile__label">Nominations sent</div>
-      <div class="stat-tile__value">0</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card__header"><span class="card__title">Shortlisted Candidates — Ready to Nominate</span></div>
-    <div class="card__body" style="padding:0">
-      <table style="width:100%;border-collapse:collapse;font-size:13px">
-        <thead><tr style="background:var(--zoho-content-alt)">
-          <th style="padding:10px 14px;text-align:left;font-size:11px;color:var(--zoho-text-secondary);font-weight:600;border-bottom:1px solid var(--zoho-border)">Applicant</th>
-          <th style="padding:10px 14px;text-align:left;font-size:11px;color:var(--zoho-text-secondary);font-weight:600;border-bottom:1px solid var(--zoho-border)">Stage</th>
-          <th style="padding:10px 14px;text-align:left;font-size:11px;color:var(--zoho-text-secondary);font-weight:600;border-bottom:1px solid var(--zoho-border)">Score</th>
-          <th style="padding:10px 14px;text-align:left;font-size:11px;color:var(--zoho-text-secondary);font-weight:600;border-bottom:1px solid var(--zoho-border)">Pack</th>
-          <th style="padding:10px 14px;font-size:11px;border-bottom:1px solid var(--zoho-border)"></th>
-        </tr></thead>
-        <tbody>
-          <tr style="background:#f0fdf4">
-            <td style="padding:10px 14px;font-weight:600">Sofia Almeida</td>
-            <td style="padding:10px 14px"><span class="pill pill--shortlisted">Shortlisted</span></td>
-            <td style="padding:10px 14px;font-family:var(--uwc-font-mono)">35/40</td>
-            <td style="padding:10px 14px"><span class="zoho-pill zoho-pill--recent">Generated</span></td>
-            <td style="padding:10px 14px"><button class="zoho-btn zoho-btn--primary" style="font-size:11px;padding:5px 10px" onclick="go(5)">Nominate</button></td>
-          </tr>
-          <tr>
-            <td style="padding:10px 14px;font-weight:600">Miguel Santos</td>
-            <td style="padding:10px 14px"><span class="pill pill--shortlisted">Shortlisted</span></td>
-            <td style="padding:10px 14px;font-family:var(--uwc-font-mono)">31/40</td>
-            <td style="padding:10px 14px"><span class="zoho-pill zoho-pill--warn">Pending</span></td>
-            <td style="padding:10px 14px"><button class="zoho-btn" style="font-size:11px;padding:5px 10px">Generate Pack</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="badges-strip">
-    <span class="badge badge--auto">Quota tiles update in real-time via Zoho webhook</span>
-    <span class="badge badge--api">Email notification delivered to Ana at allocation time</span>
-  </div>
-</section>
-
-<!-- ===== SCREEN 3: GENERATE NOMINATION PACK ===== -->
-<section class="screen" id="sc-3">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">👤 Ana Carvalho — NC Admin, UWC Brazil</div>
-      <h1 class="screen-title">Generate Nomination Pack — Sofia Almeida</h1>
-      <p class="screen-sub">Ana opens Sofia's Zoho record and clicks "Generate Pack". The system assembles application data, reviewer assessments, references, and parental consent into a PDF.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(2)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(4)">Next →</button>
-    </div>
-  </div>
-  <div class="demo-mode-tag demo-mode-tag--zoho" style="margin-bottom:14px">⚙ Zoho CRM — Application Record · Sofia Almeida</div>
-  <!-- Zoho detail view -->
-  <div style="border:1px solid var(--zoho-border);border-radius:var(--zoho-radius-lg);overflow:hidden;background:#fff;box-shadow:var(--uwc-shadow)">
-    <div class="zoho-topbar">
-      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM — UWC International</div>
-      <div class="zoho-topbar__search">🔍  Search records…</div>
-      <div class="zoho-topbar__right"><div class="zoho-topbar__org">AC</div></div>
-    </div>
-    <div class="zoho-detail__hero">
-      <div class="zoho-detail__avatar">SA</div>
-      <div>
-        <div class="zoho-detail__name">Sofia Almeida</div>
-        <div style="font-size:12.5px;color:var(--zoho-text-secondary)">APP-2026-BR-001 · Brazil NC · <span class="pill pill--shortlisted" style="font-size:11px">Shortlisted</span></div>
-      </div>
-      <div class="zoho-detail__actions">
-        <button class="zoho-btn">Edit</button>
-        <button class="zoho-btn">Send Email</button>
-        <button class="zoho-btn zoho-btn--primary" id="gen-pack-btn" onclick="showSpinner()">📄 Generate Pack</button>
-      </div>
-    </div>
-    <div class="zoho-blueprint">
-      <div class="zoho-blueprint__stage done">Registered</div>
-      <div class="zoho-blueprint__stage done">Submitted</div>
-      <div class="zoho-blueprint__stage done">Under Review</div>
-      <div class="zoho-blueprint__stage current">Shortlisted</div>
-      <div class="zoho-blueprint__stage future">Nominated</div>
-      <div class="zoho-blueprint__stage future">Placed</div>
-    </div>
-    <div style="padding:16px 20px">
-      <div class="zoho-detail__section">
-        <div class="zoho-detail__section-header"><span class="zoho-detail__section-title">Nomination Pack Status</span></div>
-        <div class="zoho-detail__section-body">
-          <div id="pack-status-area">
-            <div class="alert alert--warning">⏳ <strong>Nomination pack not yet generated.</strong> Click "Generate Pack" to compile all application data into a shareable PDF for Helen Richards (Atlantic).</div>
-            <div style="margin-top:12px;font-size:12.5px;color:var(--zoho-text-secondary)">Pack will include: Personal Details · Application Summary · Reviewer Assessments (Clara Ramos, Paulo Fonseca) · References (2) · Parental Consent receipt · NC Recommendation letter</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Spinner state (hidden initially) -->
-  <div id="spinner-overlay" style="display:none;margin-top:16px">
-    <div class="alert alert--info" style="align-items:center">
-      <div style="width:20px;height:20px;border:3px solid var(--uwc-navy);border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0"></div>
-      <div><strong>Generating nomination pack…</strong> Compiling 8 data sections · Rendering PDF · Uploading to Zoho Docs</div>
-    </div>
-  </div>
-  @keyframes spin{to{transform:rotate(360deg)}}
-  <div class="badges-strip">
-    <span class="badge badge--auto">Pack auto-compiled from live CRM data — no manual assembly</span>
-    <span class="badge badge--api">Zoho Functions trigger: onGeneratePack() → PDF renderer → Docs attach</span>
-  </div>
-</section>
-
-<!-- ===== SCREEN 4: PDF PREVIEW ===== -->
-<section class="screen" id="sc-4">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">👤 Ana Carvalho — NC Admin, UWC Brazil</div>
-      <h1 class="screen-title">Nomination Pack — PDF Preview</h1>
-      <p class="screen-sub">The compiled nomination pack opens inline. Ana reviews before sending to UWC Atlantic. This document goes to Helen Richards for the school's admission decision.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(3)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(5)">Next →</button>
-    </div>
-  </div>
-  <div class="demo-mode-tag demo-mode-tag--zoho" style="margin-bottom:14px">📄 UWC Nomination Pack — PDF Mock · Generated 27 May 2026</div>
-  <div class="pdf-mock">
-    <!-- PDF Header -->
-    <div class="pdf-header">
-      <div class="pdf-header__logo">UWC</div>
-      <div>
-        <div class="pdf-header__title">UWC International — Nomination Pack</div>
-        <div class="pdf-header__sub">Cycle 2026 · Confidential · Generated by UWC CRM · 27 May 2026 14:35 UTC</div>
-        <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:3px;font-family:Arial,sans-serif">Document ref: NOM-2026-BR-001-ATL · Prepared by: Brazil National Committee</div>
-      </div>
-    </div>
-    <div class="pdf-body">
-      <!-- Photo + Personal Details -->
-      <div class="pdf-section">
-        <div class="pdf-section-title">Personal Details</div>
-        <div class="pdf-photo-row">
-          <div class="pdf-photo">
-            <div style="font-size:28px;margin-bottom:4px">🖼</div>
-            <div>Photo<br>Placeholder</div>
-          </div>
-          <div style="flex:1">
-            <div class="pdf-fields">
-              <div><div class="pdf-field__label">Full Name</div><div class="pdf-field__value">Sofia Almeida</div></div>
-              <div><div class="pdf-field__label">Application ID</div><div class="pdf-field__value">APP-2026-BR-001</div></div>
-              <div><div class="pdf-field__label">Date of Birth</div><div class="pdf-field__value">12 March 2010 (Age 16)</div></div>
-              <div><div class="pdf-field__label">Nationality</div><div class="pdf-field__value">Brazilian</div></div>
-              <div><div class="pdf-field__label">City / Country</div><div class="pdf-field__value">São Paulo, Brazil</div></div>
-              <div><div class="pdf-field__label">Language</div><div class="pdf-field__value">Portuguese (native), English (B2)</div></div>
-              <div><div class="pdf-field__label">School (Current)</div><div class="pdf-field__value">Colégio São Paulo International</div></div>
-              <div><div class="pdf-field__label">Nominated to</div><div class="pdf-field__value">UWC Atlantic College — Place #4</div></div>
+    <!-- STEP 1 — IO Place Allocation matrix -->
+    <section class="screen active" id="sc-0">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">Place Allocations</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">🔍</span><input placeholder="Search allocations"></div></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">🔔</button><button class="zoho-tb__icon">📅</button><button class="zoho-tb__icon">👤</button><button class="zoho-tb__icon">⚙</button><span class="zoho-tb__org">UWC</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">🏠</span>Home</a>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">IO</span><span class="zoho-sb__teamspace-name">IO Global</span><span class="zoho-sb__teamspace-chev">⌄</span></div>
+            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">🎓</span>Admissions<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item active"><span class="zoho-sb__item-icon">🗂</span>Place Allocations</a><a class="zoho-sb__item"><span class="zoho-sb__item-icon">📑</span>Applications</a><a class="zoho-sb__item"><span class="zoho-sb__item-icon">🏫</span>Schools</a><a class="zoho-sb__item"><span class="zoho-sb__item-icon">🌐</span>National Committees</a></div></div>
+          </aside>
+          <main class="zoho-content" style="overflow:auto;">
+            <div class="zoho-page-strip">
+              <div class="zoho-page-strip__view">Cycle 2026 — IO × NC Allocation Matrix ⌄</div>
+              <span class="zoho-helper-tag" style="margin-left:auto;">Fatima manages place quotas for each school × NC pair</span>
             </div>
-          </div>
-        </div>
-      </div>
-      <!-- Application Summary -->
-      <div class="pdf-section">
-        <div class="pdf-section-title">Application Summary</div>
-        <div style="font-size:13px;font-family:Arial,sans-serif;line-height:1.7;color:#222;background:#f9f9f9;border-left:3px solid var(--uwc-navy);padding:12px 16px;border-radius:0 4px 4px 0">
-          Sofia Almeida demonstrates exceptional academic performance (GPA 9.4/10), combined with deep community engagement through her co-founding of "Código para Todas," a coding initiative reaching 340 girls in underserved São Paulo schools. Her bilingual capability, cross-cultural curiosity, and measured approach to conflict resolution distinguish her as an outstanding UWC candidate. Sofia's personal essay articulates a clear vision for using education as a tool for social equity — aligned with UWC's mission.
-        </div>
-        <div style="margin-top:10px;font-size:12px;font-family:Arial,sans-serif;color:#555;display:flex;gap:20px">
-          <span>GPA: <strong>9.4 / 10</strong></span>
-          <span>Extracurriculars: <strong>4 activities</strong></span>
-          <span>Essay score: <strong>Exceptional</strong></span>
-          <span>Interview: <strong>Panel recommended</strong></span>
-        </div>
-      </div>
-      <!-- Reviewer Assessments -->
-      <div class="pdf-section">
-        <div class="pdf-section-title">Reviewer Assessments</div>
-        <div class="pdf-scores">
-          <div class="pdf-score-box"><div class="pdf-score-box__num" style="color:#003087">9</div><div class="pdf-score-box__label">Academic</div></div>
-          <div class="pdf-score-box"><div class="pdf-score-box__num" style="color:#1f9535">8</div><div class="pdf-score-box__label">Community</div></div>
-          <div class="pdf-score-box"><div class="pdf-score-box__num" style="color:#003087">9</div><div class="pdf-score-box__label">Communication</div></div>
-          <div class="pdf-score-box"><div class="pdf-score-box__num" style="color:#1f9535">9</div><div class="pdf-score-box__label">UWC Values</div></div>
-        </div>
-        <div style="margin-top:12px;font-size:12.5px;font-family:Arial,sans-serif;border:1px solid #e0e0e0;border-radius:4px;overflow:hidden">
-          <div style="background:#f3f5fa;padding:8px 14px;font-weight:700;font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:#444">Reviewer Comments</div>
-          <div style="padding:12px 14px;border-bottom:1px solid #eee">
-            <div style="font-weight:600;font-size:12.5px">Clara Ramos <span style="font-weight:400;color:#888">· NC Reviewer</span></div>
-            <div style="color:#333;margin-top:4px;line-height:1.6">"Sofia's maturity and social awareness are remarkable for her age. Her coding initiative directly addresses gender inequality in STEM — exactly the kind of impact UWC looks for. Strong recommendation."</div>
-          </div>
-          <div style="padding:12px 14px">
-            <div style="font-weight:600;font-size:12.5px">Paulo Fonseca <span style="font-weight:400;color:#888">· NC Reviewer</span></div>
-            <div style="color:#333;margin-top:4px;line-height:1.6">"Exceptional candidate. Panel interview confirmed high emotional intelligence and genuine commitment to cross-cultural dialogue. Scores reflect consensus assessment."</div>
-          </div>
-        </div>
-      </div>
-      <!-- References -->
-      <div class="pdf-section">
-        <div class="pdf-section-title">References</div>
-        <div class="pdf-ref-row"><div class="pdf-ref-name">Prof. Luciana Costa</div><div class="pdf-ref-role">Head of Science, Colégio São Paulo International</div><div class="pdf-ref-status">✓ Received</div></div>
-        <div class="pdf-ref-row"><div class="pdf-ref-name">Carlos Mendes</div><div class="pdf-ref-role">Director, Programa Jovens Líderes (NGO)</div><div class="pdf-ref-status">✓ Received</div></div>
-      </div>
-      <!-- Parental Consent -->
-      <div class="pdf-section">
-        <div class="pdf-section-title">Parental Consent</div>
-        <div style="font-size:13px;font-family:Arial,sans-serif;color:#333;line-height:1.6;background:#f0fdf4;border:1px solid #86efac;border-radius:4px;padding:12px 16px">
-          ✅ <strong>Parental consent received.</strong> Guardian: Maria Almeida (Mother). Signed digitally via UWC Portal on 18 April 2026 at 19:22 UTC. IP: 177.xxx.xxx.xxx (São Paulo, BR). Consent covers: data sharing with UWC schools, medical disclosure, travel authorisation.
-        </div>
-      </div>
-      <!-- NC Recommendation -->
-      <div class="pdf-section">
-        <div class="pdf-section-title">NC Recommendation</div>
-        <div style="font-size:13px;font-family:Arial,sans-serif;line-height:1.7;color:#222;border:1px solid #ddd;padding:14px 16px;border-radius:4px">
-          The UWC Brazil National Committee formally nominates <strong>Sofia Almeida</strong> (APP-2026-BR-001) for a place at <strong>UWC Atlantic College</strong>, Cycle 2026. This recommendation is made following a rigorous multi-stage selection process involving eligibility screening, application review by two independent reviewers, and a panel interview. Sofia achieved the highest overall score among Brazil's shortlisted candidates. We believe she will thrive in the UWC environment and make a meaningful contribution to the Atlantic College community.
-        </div>
-        <div class="pdf-sig">
-          <div style="display:flex;gap:48px;margin-top:16px">
-            <div>
-              <div style="font-family:'Playfair Display',Georgia,serif;font-size:20px;color:var(--uwc-navy);font-style:italic;margin-bottom:4px">Ana Carvalho</div>
-              <div>Ana Carvalho · NC Admin, UWC Brazil</div>
-              <div style="color:#888">27 May 2026</div>
+            <div class="zoho-toolbar">
+              <button class="zoho-toolbar__btn">▼ Filter</button>
+              <button class="zoho-toolbar__btn">↕ Sort</button>
+              <span class="zoho-toolbar__spacer"></span>
+              <button class="zoho-toolbar__cta">Allocate Places</button><button class="zoho-toolbar__cta-split">▾</button>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="pdf-footer">
-      <span>UWC International · Bonn House · London SE1 7PB</span>
-      <span>NOM-2026-BR-001-ATL · Page 1 of 1</span>
-      <span>Confidential — school admissions only</span>
-    </div>
-  </div>
-  <div class="badges-strip" style="margin-top:16px">
-    <span class="badge badge--auto">PDF auto-generated from CRM — no manual editing</span>
-    <span class="badge badge--api">Attached to Sofia's Zoho record · Shared link sent to Helen Richards</span>
-    <span class="badge badge--info">UWC branding applied automatically</span>
-  </div>
-</section>
-<!-- ===== SCREEN 5: ANA NOMINATES SOFIA ===== -->
-<section class="screen" id="sc-5">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">👤 Ana Carvalho — NC Admin, UWC Brazil</div>
-      <h1 class="screen-title">Nominate Sofia → Atlantic Place #4</h1>
-      <p class="screen-sub">Ana confirms the nomination. The modal shows the quota auto-decrement (2 → 1) and the stage transition from Shortlisted → Nominated.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(4)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(6)">Next →</button>
-    </div>
-  </div>
-  <div class="demo-mode-tag demo-mode-tag--zoho" style="margin-bottom:14px">⚙ Zoho CRM — Nomination Confirmation</div>
-  <div style="background:rgba(0,0,0,.32);border-radius:var(--uwc-radius-lg);padding:40px 0;display:flex;align-items:center;justify-content:center">
-    <div class="modal" style="position:relative;width:520px">
-      <div class="modal__header" style="background:linear-gradient(90deg,var(--uwc-navy),#7c3aed)">
-        <span class="modal__title">Confirm Nomination — Sofia Almeida</span>
-        <button class="modal__close">✕</button>
-      </div>
-      <div class="modal__body">
-        <div class="field-group" style="margin-bottom:16px">
-          <div class="field-cell"><div class="field-cell__label">Applicant</div><div class="field-cell__value">Sofia Almeida</div></div>
-          <div class="field-cell"><div class="field-cell__label">Application ID</div><div class="field-cell__value">APP-2026-BR-001</div></div>
-          <div class="field-cell"><div class="field-cell__label">Nominated School</div><div class="field-cell__value" style="color:var(--uwc-navy)">UWC Atlantic College</div></div>
-          <div class="field-cell"><div class="field-cell__label">Place Number</div><div class="field-cell__value">#4 of 12</div></div>
-          <div class="field-cell"><div class="field-cell__label">Nomination Pack</div><div class="field-cell__value success">✓ Generated · NOM-2026-BR-001-ATL</div></div>
-          <div class="field-cell"><div class="field-cell__label">NC Recommendation</div><div class="field-cell__value success">✓ Signed by Ana Carvalho</div></div>
-        </div>
-        <div style="background:#fffbeb;border:1px solid #fbbf24;border-radius:var(--uwc-radius);padding:14px;margin-bottom:14px">
-          <div style="font-size:11.5px;font-weight:700;color:#78350f;margin-bottom:8px;text-transform:uppercase;letter-spacing:.6px">Quota Auto-Decrement</div>
-          <div style="display:flex;align-items:center;gap:14px;font-size:14px;font-family:var(--uwc-font-mono)">
-            <div style="text-align:center">
-              <div style="font-size:28px;font-weight:700;color:var(--uwc-navy)">2</div>
-              <div style="font-size:11px;color:#78350f">Before</div>
+            <div style="padding:18px 22px;overflow-x:auto;">
+              <table class="alloc-table">
+                <thead>
+                  <tr>
+                    <th style="min-width:160px;">IO School</th>
+                    <th>Total Alloc</th>
+                    <th>Brazil NC</th>
+                    <th>Germany NC</th>
+                    <th>Kenya NC</th>
+                    <th>India NC</th>
+                    <th>UK NC</th>
+                    <th>Remaining</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>🏫 UWC Atlantic College</td>
+                    <td style="font-weight:600;color:#003087;">12</td>
+                    <td><div class="alloc-cell"><strong>2</strong> alloc<br><span class="rem">✓ 2 remaining</span></div></td>
+                    <td><div class="alloc-cell"><strong>3</strong> alloc<br><span class="rem">✓ 2 remaining</span></div></td>
+                    <td><div class="alloc-cell"><strong>2</strong> alloc<br><span class="rem">✓ 1 remaining</span></div></td>
+                    <td><div class="alloc-cell"><strong>3</strong> alloc<br><span class="rem">✓ 1 remaining</span></div></td>
+                    <td><div class="alloc-cell"><strong>2</strong> alloc<br><span class="rem">✓ 2 remaining</span></div></td>
+                    <td><span style="background:#dcfce7;color:#166534;padding:2px 10px;border-radius:4px;font-weight:600;font-size:12px;">8</span></td>
+                  </tr>
+                  <tr>
+                    <td>🏫 UWC RC Nordic</td>
+                    <td style="font-weight:600;color:#003087;">8</td>
+                    <td><div class="alloc-cell"><strong>1</strong> alloc<br><span class="rem">✓ 1 remaining</span></div></td>
+                    <td><div class="alloc-cell"><strong>2</strong> alloc<br><span class="rem">✓ 1 remaining</span></div></td>
+                    <td><div class="alloc-cell"><strong>2</strong> alloc<br><span class="rem">✓ 1 remaining</span></div></td>
+                    <td><div class="alloc-cell"><strong>2</strong> alloc<br><span class="rem">✓ 2 remaining</span></div></td>
+                    <td><div class="alloc-cell"><strong>1</strong> alloc<br><span class="rem">✓ 1 remaining</span></div></td>
+                    <td><span style="background:#dcfce7;color:#166534;padding:2px 10px;border-radius:4px;font-weight:600;font-size:12px;">6</span></td>
+                  </tr>
+                  <tr>
+                    <td>🏫 UWC Mahindra College</td>
+                    <td style="font-weight:600;color:#003087;">6</td>
+                    <td><div class="alloc-cell"><strong>2</strong> alloc<br><span class="rem">✓ 1 remaining</span></div></td>
+                    <td><div class="alloc-cell"><strong>1</strong> alloc<br><span class="rem">✓ 1 remaining</span></div></td>
+                    <td><div class="alloc-cell"><strong>1</strong> alloc<br><span class="rem">✓ 1 remaining</span></div></td>
+                    <td><div class="alloc-cell"><strong>1</strong> alloc<br><span class="rem">✓ 1 remaining</span></div></td>
+                    <td><div class="alloc-cell"><strong>1</strong> alloc<br><span class="rem">✓ 0 remaining</span></div></td>
+                    <td><span style="background:#fef3c7;color:#92400e;padding:2px 10px;border-radius:4px;font-weight:600;font-size:12px;">4</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style="margin-top:14px;font-size:12px;color:#6b7280;">3 schools · Cycle 2026 · Last updated 28 May 2026 09:14 by Fatima Al-Rashid</div>
             </div>
-            <div style="font-size:22px;color:#92400e">→</div>
-            <div style="text-align:center">
-              <div style="font-size:28px;font-weight:700;color:var(--uwc-green)">1</div>
-              <div style="font-size:11px;color:var(--uwc-green)">After</div>
-            </div>
-            <div style="font-size:12.5px;color:#78350f;flex:1">Atlantic → Brazil places remaining after this nomination</div>
-          </div>
-        </div>
-        <div style="background:var(--uwc-navy-tint);border:1px solid #93c5fd;border-radius:var(--uwc-radius);padding:12px 14px">
-          <div style="font-size:11.5px;font-weight:700;color:var(--uwc-navy);margin-bottom:6px">Stage Transition</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:13px">
-            <span style="background:#dbeafe;color:#1e3a8a;padding:5px 12px;border-radius:var(--uwc-radius-sm);font-weight:600">Shortlisted</span>
-            <span style="color:var(--uwc-grey-400)">→</span>
-            <span style="background:#ede9fe;color:#4c1d95;padding:5px 12px;border-radius:var(--uwc-radius-sm);font-weight:600">Nominated</span>
-          </div>
-          <div style="font-size:12px;color:var(--uwc-grey-600);margin-top:8px">Helen Richards (Atlantic) will receive email + CRM notification. Pack attached automatically.</div>
+            <div class="zoho-smart-chat"><span class="zoho-smart-chat__placeholder">Here is your Smart Chat (Ctrl+Space)</span></div>
+          </main>
         </div>
       </div>
-      <div class="modal__footer">
-        <button class="btn-nav" onclick="go(4)">← Review Pack First</button>
-        <button class="btn-nav btn-nav--primary" onclick="go(6)">✓ Confirm Nomination</button>
-      </div>
-    </div>
-  </div>
-  <div class="badges-strip" style="margin-top:12px">
-    <span class="badge badge--auto">Quota decrement + stage transition — single atomic operation</span>
-    <span class="badge badge--api">Email to Helen Richards triggers on confirm</span>
-    <span class="badge badge--info">Blueprint enforces pack must be generated before nomination</span>
-  </div>
-</section>
+    </section>
 
-<!-- ===== SCREEN 6: HELEN'S SCHOOL PORTAL ===== -->
-<section class="screen" id="sc-6">
-  <div class="screen-header">
-    <div>
-      <div class="role-switch-banner" style="background:linear-gradient(90deg,#4c1d95,#7c3aed)"><span class="role-switch-banner__badge">Role Switch</span> Now viewing as <strong>Helen Richards</strong> — Admissions Director, UWC Atlantic College</div>
-      <h1 class="screen-title">Atlantic College — School Admissions Portal</h1>
-      <p class="screen-sub">Helen views the school's dedicated admissions portal — a branded, purpose-built interface distinct from the Zoho CRM used by IO and NC Admins. 3 nominations pending review.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(5)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(7)">Next →</button>
-    </div>
-  </div>
-  <div class="demo-mode-tag demo-mode-tag--school" style="margin-bottom:14px">🏫 UWC Atlantic College — School Admissions Portal (UWC-branded)</div>
-  <div class="school-portal">
-    <!-- School portal topbar -->
-    <div class="school-portal-topbar">
-      <div class="school-portal-brand">
-        <div class="school-portal-brand__mark">AC</div>
-        <div>
-          <div class="school-portal-brand__name">UWC Atlantic College</div>
-          <div class="school-portal-brand__sub">Admissions Portal · Cycle 2026</div>
-        </div>
-      </div>
-      <div class="school-portal-user">
-        <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px">HR</div>
-        <div>
-          <div style="font-size:12.5px;font-weight:500">Helen Richards</div>
-          <div style="font-size:10.5px;color:rgba(255,255,255,.6)">Admissions Director</div>
-        </div>
-      </div>
-    </div>
-    <div class="school-portal-body">
-      <!-- Stats row -->
-      <div class="school-stat-row">
-        <div class="school-stat">
-          <div class="school-stat__val" style="color:#7c3aed">3</div>
-          <div class="school-stat__lbl">Nominations pending</div>
-        </div>
-        <div class="school-stat">
-          <div class="school-stat__val">8</div>
-          <div class="school-stat__lbl">Remaining places (of 12)</div>
-        </div>
-        <div class="school-stat">
-          <div class="school-stat__val" style="color:var(--uwc-green)">4</div>
-          <div class="school-stat__lbl">Placements confirmed</div>
-        </div>
-      </div>
-      <!-- Auto task banner -->
-      <div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:var(--uwc-radius);padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px;font-size:13px">
-        <span style="font-size:18px">📋</span>
-        <div style="flex:1">
-          <strong>Auto-task:</strong> Review 3 new nominations — due in <strong>5 days</strong> (1 June 2026)
-          <div style="font-size:11.5px;color:#92400e;margin-top:2px">Assigned to: Helen Richards · Priority: High · Created by: UWC CRM automation</div>
-        </div>
-        <span style="background:#f59e0b;color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:var(--uwc-radius-pill)">DUE SOON</span>
-      </div>
-      <!-- Nominations list -->
-      <div style="font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--uwc-grey-400);margin-bottom:10px">Pending Nominations</div>
-      <div class="school-nom-row" style="border-color:#7c3aed;box-shadow:0 0 0 2px rgba(124,58,237,.12)">
-        <div class="school-nom-avatar" style="background:linear-gradient(135deg,#f59e0b,#ec4899)">SA</div>
-        <div class="school-nom-info">
-          <div class="school-nom-name">Sofia Almeida</div>
-          <div class="school-nom-meta">Brazil NC · APP-2026-BR-001 · Nominated 27 May 2026 · Score: 35/40</div>
-        </div>
-        <span class="school-task-badge" style="background:#ede9fe;color:#4c1d95">Nominated</span>
-        <div style="display:flex;gap:6px">
-          <button class="btn-nav" style="font-size:11.5px;padding:6px 12px" onclick="go(7)">📄 Review Pack</button>
-        </div>
-      </div>
-      <div class="school-nom-row">
-        <div class="school-nom-avatar" style="background:linear-gradient(135deg,#10b981,#3b82f6)">KA</div>
-        <div class="school-nom-info">
-          <div class="school-nom-name">Kwame Asante</div>
-          <div class="school-nom-meta">Kenya NC · APP-2026-KE-007 · Nominated 24 May 2026 · Score: 33/40</div>
-        </div>
-        <span class="school-task-badge" style="background:#ede9fe;color:#4c1d95">Nominated</span>
-        <div style="display:flex;gap:6px">
-          <button class="btn-nav" style="font-size:11.5px;padding:6px 12px">📄 Review Pack</button>
-        </div>
-      </div>
-      <div class="school-nom-row">
-        <div class="school-nom-avatar" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6)">LF</div>
-        <div class="school-nom-info">
-          <div class="school-nom-name">Lena Fischer</div>
-          <div class="school-nom-meta">Germany NC · APP-2026-DE-003 · Nominated 22 May 2026 · Score: 31/40</div>
-        </div>
-        <span class="school-task-badge" style="background:#ede9fe;color:#4c1d95">Nominated</span>
-        <div style="display:flex;gap:6px">
-          <button class="btn-nav" style="font-size:11.5px;padding:6px 12px">📄 Review Pack</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="badges-strip">
-    <span class="badge badge--info">School portal is separate from Zoho — purpose-built for school admissions staff</span>
-    <span class="badge badge--auto">Auto-task created by CRM on nomination receipt — due date calculated from SLA</span>
-  </div>
-</section>
-
-<!-- ===== SCREEN 7: HELEN REVIEWS + ACCEPTS ===== -->
-<section class="screen" id="sc-7">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">👤 Helen Richards — Admissions Director, UWC Atlantic College</div>
-      <h1 class="screen-title">Review Pack &amp; Accept Sofia's Nomination</h1>
-      <p class="screen-sub">Helen reads the nomination pack inline within the portal, then clicks Accept. Stage transitions to Placed. Automated emails sent to all three parties.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(6)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(8)">Next →</button>
-    </div>
-  </div>
-  <div class="demo-mode-tag demo-mode-tag--school" style="margin-bottom:14px">🏫 UWC Atlantic College — Pack Review · Sofia Almeida</div>
-  <div class="school-portal">
-    <div class="school-portal-topbar">
-      <div class="school-portal-brand">
-        <div class="school-portal-brand__mark">AC</div>
-        <div><div class="school-portal-brand__name">UWC Atlantic College</div><div class="school-portal-brand__sub">Pack Review — Sofia Almeida / APP-2026-BR-001</div></div>
-      </div>
-      <div class="school-portal-user">
-        <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px">HR</div>
-        <div style="font-size:12px">Helen Richards</div>
-      </div>
-    </div>
-    <div class="school-portal-body">
-      <div style="display:flex;gap:16px;align-items:flex-start">
-        <!-- Embedded PDF preview (condensed) -->
-        <div style="flex:1;background:#fff;border:1px solid #ccc;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.1);overflow:hidden">
-          <div style="background:var(--uwc-navy);padding:14px 20px;display:flex;align-items:center;gap:12px">
-            <div style="width:32px;height:32px;border-radius:50%;background:#fff;color:var(--uwc-navy);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;flex-shrink:0">UWC</div>
-            <div>
-              <div style="color:#fff;font-family:var(--uwc-font-title);font-size:15px">Nomination Pack · Sofia Almeida</div>
-              <div style="color:rgba(255,255,255,.6);font-size:11px;font-family:Arial,sans-serif">NOM-2026-BR-001-ATL · Brazil NC · 27 May 2026</div>
+    <!-- STEP 2 — Allocate places modal -->
+    <section class="screen" id="sc-1">
+      <div class="zoho-shell" style="position:relative;">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">Place Allocations</h1></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">🔔</button><span class="zoho-tb__org">UWC</span></div>
+        </header>
+        <div class="zoho-body" style="position:relative;">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">🏠</span>Home</a>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">IO</span><span class="zoho-sb__teamspace-name">IO Global</span><span class="zoho-sb__teamspace-chev">⌄</span></div>
+            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">🎓</span>Admissions<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item active"><span class="zoho-sb__item-icon">🗂</span>Place Allocations</a></div></div>
+          </aside>
+          <main class="zoho-content" style="opacity:0.4;pointer-events:none;overflow:auto;">
+            <div style="padding:18px 22px;overflow-x:auto;">
+              <table class="alloc-table"><thead><tr><th>IO School</th><th>Total Alloc</th><th>Brazil NC</th><th>Germany NC</th><th>Remaining</th></tr></thead><tbody><tr><td>🏫 UWC Atlantic College</td><td style="font-weight:600;">12</td><td><div class="alloc-cell"><strong>2</strong> alloc<br><span class="rem">✓ 2 remaining</span></div></td><td><div class="alloc-cell"><strong>3</strong> alloc<br><span class="rem">✓ 2 remaining</span></div></td><td><span style="background:#dcfce7;color:#166534;padding:2px 10px;border-radius:4px;font-weight:600;font-size:12px;">8</span></td></tr></tbody></table>
             </div>
-          </div>
-          <div style="padding:16px 20px;font-family:Arial,sans-serif;font-size:13px">
-            <div style="display:flex;gap:16px;margin-bottom:12px;align-items:center">
-              <div style="width:64px;height:76px;background:#e0e0e0;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#999;flex-shrink:0;text-align:center">Photo</div>
-              <div>
-                <div style="font-size:16px;font-weight:700;color:#111">Sofia Almeida</div>
-                <div style="color:#555;margin-top:2px">Brazil · Age 16 · Score: 35/40</div>
-                <div style="color:#003087;font-weight:600;margin-top:4px">Nominated: UWC Atlantic College — Place #4</div>
+          </main>
+          <!-- Modal -->
+          <div class="modal-overlay" style="position:absolute;">
+            <div class="modal">
+              <div class="modal-title">Allocate places — UWC Atlantic College × Brazil NC</div>
+              <div style="font-size:13px;color:#6b7280;margin-bottom:16px;">Current quota: <strong>2 allocated</strong> · <strong>2 remaining</strong>. Enter additional places to assign to this NC.</div>
+              <div style="margin-bottom:14px;">
+                <label class="zoho-label">Quota to allocate</label>
+                <input class="zoho-input" type="number" value="2" style="max-width:120px;">
               </div>
-            </div>
-            <div style="background:#f9f9f9;border-left:3px solid #003087;padding:10px 14px;font-size:12.5px;line-height:1.6;color:#333;margin-bottom:10px">Sofia co-founded "Código para Todas," reaching 340 girls in underserved São Paulo schools. Academic GPA 9.4/10. Panel interview: exceptional emotional intelligence. <strong>NC Recommendation: Highest-scoring Brazil candidate.</strong></div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;color:#555">
-              <div>📊 Academic: <strong style="color:#003087">9/10</strong></div>
-              <div>🤝 Community: <strong style="color:#1f9535">8/10</strong></div>
-              <div>💬 Communication: <strong style="color:#003087">9/10</strong></div>
-              <div>🌍 UWC Values: <strong style="color:#1f9535">9/10</strong></div>
-            </div>
-            <div style="margin-top:10px;font-size:12px;color:#555">References: ✅ Prof. Luciana Costa · ✅ Carlos Mendes &nbsp;|&nbsp; Parental Consent: ✅ Maria Almeida (18 Apr 2026)</div>
-          </div>
-        </div>
-        <!-- Decision panel -->
-        <div style="width:220px;flex-shrink:0">
-          <div style="background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden">
-            <div style="background:linear-gradient(135deg,#7c3aed,#4c1d95);padding:12px 14px;color:#fff;font-size:13px;font-weight:600">Admission Decision</div>
-            <div style="padding:14px">
-              <div style="font-size:12px;color:var(--uwc-grey-600);margin-bottom:12px">Review the pack then record your decision. The applicant and NC Admin will be notified automatically.</div>
-              <button class="btn-nav btn-nav--primary" style="width:100%;background:#10b981;border-color:#10b981;margin-bottom:8px;justify-content:center" onclick="showAcceptModal()">✓ Accept Nomination</button>
-              <button class="btn-nav" style="width:100%;color:var(--uwc-red);border-color:var(--uwc-red);justify-content:center">✕ Decline</button>
-              <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--uwc-grey-200)">
-                <div style="font-size:11px;color:var(--uwc-grey-500);font-weight:600;margin-bottom:6px">ON ACCEPTANCE:</div>
-                <div style="font-size:11.5px;color:var(--uwc-grey-600);line-height:1.6">✉ Email → Sofia Almeida<br>✉ Email → Ana Carvalho (NC)<br>✉ Email → Fatima Al-Rashid (IO)<br>📊 Stage → Placed<br>💼 Invoice → Business Central</div>
+              <div style="margin-bottom:14px;">
+                <label class="zoho-label">Reason / notes (optional)</label>
+                <textarea class="zoho-input" rows="2" style="resize:none;">High-quality shortlisted candidates from Brazil — requesting 2 additional Atlantic places for Cycle 2026.</textarea>
+              </div>
+              <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:6px;padding:10px 14px;font-size:12px;color:#0c4a6e;margin-bottom:4px;">
+                📋 <strong>Audit trail:</strong> This action will be logged as "Fatima Al-Rashid allocated 2 places to Brazil NC for Atlantic College — 28 May 2026 14:10."
+              </div>
+              <div class="modal-actions">
+                <button class="zoho-btn">Cancel</button>
+                <button class="zoho-btn zoho-btn--primary">✓ Confirm allocation</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <!-- Acceptance confirmation modal (shown inline) -->
-  <div id="accept-modal" style="display:none;margin-top:20px">
-    <div style="background:rgba(0,0,0,.32);border-radius:var(--uwc-radius-lg);padding:32px;display:flex;align-items:center;justify-content:center">
-      <div class="modal" style="width:440px">
-        <div class="modal__header" style="background:linear-gradient(90deg,#10b981,#059669)">
-          <span class="modal__title">Confirm: I accept this nomination</span>
-          <button class="modal__close" onclick="hideAcceptModal()">✕</button>
+    </section>
+
+    <!-- STEP 3 — Ana's NC dashboard, places available -->
+    <section class="screen" id="sc-2">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">NC Dashboard — Brazil</h1></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">🔔</button><span class="zoho-tb__org">BR</span></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">🏠</span>Home</a>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name">Brazil NC</span><span class="zoho-sb__teamspace-chev">⌄</span></div>
+            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">📁</span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item"><span class="zoho-sb__item-icon">◉</span>Contacts</a><a class="zoho-sb__item active"><span class="zoho-sb__item-icon">📑</span>Applications</a><a class="zoho-sb__item"><span class="zoho-sb__item-icon">🗂</span>Place Allocations</a></div></div>
+          </aside>
+          <main class="zoho-content" style="background:#f9fafb;overflow:auto;">
+            <div style="padding:18px 22px;">
+              <div style="margin-bottom:6px;font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.8px;font-weight:600;">Available Place Allocations · Cycle 2026</div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
+                <div class="dash-tile" style="border-left:4px solid #003087;">
+                  <div class="dash-tile__label">UWC Atlantic College</div>
+                  <div class="dash-tile__value">2 places available <span class="badge-new">NEW</span></div>
+                  <div class="dash-tile__sub">Just allocated by IO — Fatima Al-Rashid · 28 May 14:10</div>
+                  <div style="margin-top:10px;"><button class="zoho-btn zoho-btn--primary" style="font-size:12px;padding:5px 12px;">Nominate →</button></div>
+                </div>
+                <div class="dash-tile">
+                  <div class="dash-tile__label">UWC RC Nordic</div>
+                  <div class="dash-tile__value">1 place available</div>
+                  <div class="dash-tile__sub">Allocated 15 May 2026</div>
+                  <div style="margin-top:10px;"><button class="zoho-btn" style="font-size:12px;padding:5px 12px;">Nominate →</button></div>
+                </div>
+                <div class="dash-tile">
+                  <div class="dash-tile__label">UWC Mahindra College</div>
+                  <div class="dash-tile__value">1 place available</div>
+                  <div class="dash-tile__sub">Allocated 10 May 2026</div>
+                  <div style="margin-top:10px;"><button class="zoho-btn" style="font-size:12px;padding:5px 12px;">Nominate →</button></div>
+                </div>
+              </div>
+              <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;">
+                <div style="padding:12px 16px;border-bottom:1px solid #f0f2f5;font-size:14px;font-weight:500;color:#1f2937;">Shortlisted applications ready to nominate</div>
+                <table class="zoho-list">
+                  <thead><tr><th>Applicant</th><th>Stage</th><th>Avg score</th><th>Preferred school</th><th></th></tr></thead>
+                  <tbody>
+                    <tr style="background:#fffbeb;"><td class="zoho-list__name-link" style="font-weight:700;">Sofia Almeida</td><td><span class="zoho-pill zoho-pill--shortlist">Shortlisted</span></td><td><strong>8.6</strong></td><td>🏫 Atlantic College</td><td><button class="zoho-btn zoho-btn--primary" style="font-size:12px;padding:4px 10px;">Generate Pack</button></td></tr>
+                    <tr><td class="zoho-list__name-link">Lucas Ferreira</td><td><span class="zoho-pill zoho-pill--shortlist">Shortlisted</span></td><td>7.9</td><td>🏫 RC Nordic</td><td><button class="zoho-btn" style="font-size:12px;padding:4px 10px;">Generate Pack</button></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="zoho-smart-chat"><span class="zoho-smart-chat__placeholder">Here is your Smart Chat (Ctrl+Space)</span></div>
+          </main>
         </div>
-        <div class="modal__body">
-          <div class="alert alert--success" style="margin-bottom:14px">✅ <div>UWC Atlantic College will accept <strong>Sofia Almeida</strong> for the 2026 intake. This action is final and will trigger automated notifications to all parties.</div></div>
-          <div class="field-group">
-            <div class="field-cell"><div class="field-cell__label">Decision</div><div class="field-cell__value success">✓ Accept</div></div>
-            <div class="field-cell"><div class="field-cell__label">Place</div><div class="field-cell__value">#4 · Atlantic College</div></div>
-            <div class="field-cell"><div class="field-cell__label">Stage transition</div><div class="field-cell__value">Nominated → <strong>Placed</strong></div></div>
-            <div class="field-cell"><div class="field-cell__label">Decision by</div><div class="field-cell__value">Helen Richards</div></div>
+      </div>
+    </section>
+
+    <!-- STEP 4 — Sofia's application detail, Generate Nomination Pack -->
+    <section class="screen" id="sc-3">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">Applications</h1></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">🔔</button><span class="zoho-tb__org">BR</span></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">🏠</span>Home</a>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name">Brazil NC</span><span class="zoho-sb__teamspace-chev">⌄</span></div>
+            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">📁</span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item active"><span class="zoho-sb__item-icon">📑</span>Applications</a></div></div>
+          </aside>
+          <main class="zoho-content">
+            <div class="zoho-detail__hero">
+              <span class="zoho-detail__back">←</span>
+              <div class="zoho-detail__avatar" style="background:linear-gradient(135deg,#003087,#0ea5e9);">SA</div>
+              <div class="zoho-detail__name-block">
+                <div class="zoho-detail__name">APP-2026-00041 · Sofia Almeida</div>
+                <div class="zoho-detail__add-tags"><span class="zoho-pill zoho-pill--shortlist">Shortlisted</span></div>
+              </div>
+              <div class="zoho-detail__actions">
+                <span class="zoho-detail__last-update">Avg score: 8.6 · Consent received</span>
+                <button class="zoho-btn">⋯</button>
+              </div>
+            </div>
+            <div class="blueprint-strip">
+              <div class="bp-node bp-node--done">Submitted</div><div class="bp-arrow">→</div>
+              <div class="bp-node bp-node--done">Under Review</div><div class="bp-arrow">→</div>
+              <div class="bp-node bp-node--active">Shortlisted</div><div class="bp-arrow">→</div>
+              <div class="bp-node bp-node--todo">Nominated</div><div class="bp-arrow">→</div>
+              <div class="bp-node bp-node--todo">Placed</div>
+            </div>
+            <div class="zoho-detail__body" style="margin-top:8px;">
+              <aside class="zoho-detail__rail">
+                <div class="zoho-detail__rail-header">Related List</div>
+                <div class="zoho-detail__rail-item active"><span>Review Scores</span><span class="zoho-detail__rail-count">2</span></div>
+                <div class="zoho-detail__rail-item"><span>Documents</span><span class="zoho-detail__rail-count">3</span></div>
+                <div class="zoho-detail__rail-item"><span>Notes</span><span class="zoho-detail__rail-count">2</span></div>
+                <div class="zoho-detail__rail-item"><span>Nomination Pack</span><span class="zoho-detail__rail-count">—</span></div>
+              </aside>
+              <div class="zoho-detail__main">
+                <div class="zoho-detail__card">
+                  <div class="zoho-detail__card-title">Nomination Pack Generation</div>
+                  <div style="font-size:13px;color:#6b7280;margin-bottom:18px;">Generates a PDF nomination pack including reviewer scores, personal statement, references, parental consent, and NC panel recommendation. Sent directly to the selected school admissions portal.</div>
+                  <div style="display:flex;align-items:center;gap:14px;padding:16px 18px;background:#E8EEF6;border-radius:8px;margin-bottom:16px;">
+                    <div style="flex:1;">
+                      <div style="font-size:13px;font-weight:600;color:#003087;margin-bottom:2px;">Target school: UWC Atlantic College</div>
+                      <div style="font-size:12px;color:#5a6480;">Place #4 of 12 · Brazil NC quota — 2 available after IO allocation</div>
+                    </div>
+                    <span style="background:#dcfce7;color:#166534;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:500;">✓ Quota available</span>
+                  </div>
+                  <div style="display:flex;gap:12px;align-items:center;">
+                    <button class="zoho-btn zoho-btn--primary" style="padding:11px 24px;font-size:14px;">📄 Generate Nomination Pack</button>
+                    <div style="display:flex;align-items:center;gap:10px;color:#6b7280;font-size:13px;">
+                      <div class="spinner"></div>
+                      <span style="opacity:0;">Generating…</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="zoho-smart-chat"><span class="zoho-smart-chat__placeholder">Here is your Smart Chat (Ctrl+Space)</span></div>
+          </main>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 5 — UWC-branded PDF preview -->
+    <section class="screen" id="sc-4">
+      <div class="uwc-portal-shell">
+        <div class="uwc-portal-topbar">
+          <div class="uwc-portal-topbar__logo">UWC</div>
+          <div class="uwc-portal-topbar__title">UWC International — Nomination Pack PDF Preview</div>
+          <div style="margin-left:auto;display:flex;gap:8px;">
+            <button style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.35);color:#fff;padding:6px 14px;border-radius:4px;cursor:pointer;font-size:12px;">⬇ Download PDF</button>
+            <button style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.35);color:#fff;padding:6px 14px;border-radius:4px;cursor:pointer;font-size:12px;">📤 Send to School</button>
           </div>
         </div>
-        <div class="modal__footer">
-          <button class="btn-nav" onclick="hideAcceptModal()">Cancel</button>
-          <button class="btn-nav btn-nav--primary" style="background:#10b981;border-color:#10b981" onclick="confirmAccept()">✓ Confirm Acceptance</button>
+        <div class="uwc-portal-body" style="padding:24px;">
+          <div style="background:#fff;border:1px solid #e2e6ed;box-shadow:0 4px 12px rgba(0,0,0,0.08);max-width:760px;margin:0 auto;font-family:'DM Sans',sans-serif;">
+            <!-- PDF header -->
+            <div style="background:linear-gradient(90deg,#003087,#004A97);color:#fff;padding:24px 32px;border-bottom:4px solid #C8102E;">
+              <div style="font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:500;">UWC International</div>
+              <div style="font-size:13px;color:rgba(255,255,255,0.8);margin-top:4px;">Nomination Pack · Confidential — for school admissions use only</div>
+            </div>
+            <!-- PDF body -->
+            <div style="padding:30px 32px;font-size:12.5px;line-height:1.6;">
+              <!-- Applicant info -->
+              <div style="display:flex;gap:20px;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid #e2e6ed;">
+                <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#003087,#0ea5e9);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;flex-shrink:0;">SA</div>
+                <div>
+                  <div style="font-family:'Playfair Display',Georgia,serif;font-size:18px;color:#003087;font-weight:500;">Sofia Almeida</div>
+                  <div style="color:#5a6480;font-size:12px;margin-top:4px;">Date of birth: 15 August 2009 · Nationality: Brazilian · Passport: BR-4921-X</div>
+                  <div style="color:#5a6480;font-size:12px;">Email: sofia.almeida@example.com · Guardian: Maria Almeida</div>
+                </div>
+                <div style="margin-left:auto;text-align:right;">
+                  <div style="font-size:11px;color:#9aa3b8;margin-bottom:2px;">NC Reference</div>
+                  <div style="font-family:'DM Mono',monospace;font-size:12px;color:#003087;font-weight:600;">BR-2026-041</div>
+                </div>
+              </div>
+              <!-- Application summary -->
+              <div style="margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #e2e6ed;">
+                <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#9aa3b8;font-weight:600;margin-bottom:8px;">Application Summary</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;">
+                  <div><span style="color:#6b7280;">Programme:</span> <strong>UWC Brazil 2026 Selection</strong></div>
+                  <div><span style="color:#6b7280;">Submitted:</span> <strong>25 May 2026</strong></div>
+                  <div><span style="color:#6b7280;">Current stage:</span> <span style="background:#fefce8;color:#854d0e;padding:1px 8px;border-radius:3px;font-weight:500;">Shortlisted</span></div>
+                  <div><span style="color:#6b7280;">Target school:</span> <strong>UWC Atlantic College</strong></div>
+                </div>
+              </div>
+              <!-- Reviewer assessments -->
+              <div style="margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #e2e6ed;">
+                <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#9aa3b8;font-weight:600;margin-bottom:8px;">Reviewer Assessments</div>
+                <table style="width:100%;border-collapse:collapse;font-size:12px;">
+                  <thead><tr style="background:#f3f5fa;"><th style="padding:6px 10px;text-align:left;font-weight:500;color:#4b5563;">Reviewer</th><th style="padding:6px 10px;text-align:center;font-weight:500;color:#4b5563;">Academic</th><th style="padding:6px 10px;text-align:center;font-weight:500;color:#4b5563;">Leadership</th><th style="padding:6px 10px;text-align:center;font-weight:500;color:#4b5563;">Personal Statement</th><th style="padding:6px 10px;text-align:center;font-weight:500;color:#4b5563;"><strong>Average</strong></th></tr></thead>
+                  <tbody>
+                    <tr><td style="padding:6px 10px;">Clara Ramos</td><td style="padding:6px 10px;text-align:center;">9.0</td><td style="padding:6px 10px;text-align:center;">8.5</td><td style="padding:6px 10px;text-align:center;">8.75</td><td style="padding:6px 10px;text-align:center;"><strong>8.75</strong></td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:6px 10px;">Paulo Fonseca</td><td style="padding:6px 10px;text-align:center;">8.5</td><td style="padding:6px 10px;text-align:center;">8.0</td><td style="padding:6px 10px;text-align:center;">9.0</td><td style="padding:6px 10px;text-align:center;"><strong>8.50</strong></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- Personal statement excerpt -->
+              <div style="margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #e2e6ed;">
+                <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#9aa3b8;font-weight:600;margin-bottom:8px;">Personal Statement (excerpt)</div>
+                <div style="font-style:italic;color:#374151;line-height:1.7;font-size:12.5px;">"Growing up in São Paulo, I witnessed how access to quality education determines life trajectories. At UWC I hope to carry Brazil's cultural richness into a global classroom and return home with the tools to expand access for those who, unlike me, never had the chance to dream internationally."</div>
+              </div>
+              <!-- References -->
+              <div style="margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #e2e6ed;">
+                <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#9aa3b8;font-weight:600;margin-bottom:8px;">References</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;font-size:12px;">
+                  <div><strong>Dr. Helena Castro</strong><br><span style="color:#6b7280;">Physics teacher, Colégio São Luís</span></div>
+                  <div><strong>Marcos Dutra</strong><br><span style="color:#6b7280;">Community coordinator, Ação Social SP</span></div>
+                  <div><strong>Prof. Ana Beatriz Lima</strong><br><span style="color:#6b7280;">School principal</span></div>
+                </div>
+              </div>
+              <!-- Parental consent -->
+              <div style="margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #e2e6ed;">
+                <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#9aa3b8;font-weight:600;margin-bottom:8px;">Parental Consent</div>
+                <div style="font-size:12px;color:#374151;">Guardian: <strong>Maria Almeida</strong> (mother) · Status: <span style="color:#166534;font-weight:600;">Received</span> · 22 May 2026 14:32 · Digital signature on file</div>
+              </div>
+              <!-- NC recommendation -->
+              <div style="margin-bottom:18px;">
+                <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#9aa3b8;font-weight:600;margin-bottom:8px;">NC Panel Recommendation</div>
+                <div style="font-style:italic;color:#374151;font-size:12.5px;line-height:1.7;">"Sofia consistently demonstrated intellectual curiosity and genuine commitment to social change throughout our selection process. The Brazil NC panel unanimously recommends her nomination to UWC Atlantic College."</div>
+                <div style="margin-top:8px;font-size:12px;color:#6b7280;">— Ana Carvalho, NC Admin · UWC Brazil National Committee</div>
+              </div>
+              <!-- Footer -->
+              <div style="margin-top:24px;padding-top:14px;border-top:1px solid #e2e6ed;display:flex;justify-content:space-between;font-size:10.5px;color:#9aa3b8;">
+                <span>Pack v1.0 · Generated 28 May 2026 14:35 by Zoho CRM (Brazil NC)</span>
+                <span>NC ref BR-2026-041 · UWC International Confidential</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="badges-strip">
-    <span class="badge badge--auto">Stage: Nominated → Placed — single-click with full audit</span>
-    <span class="badge badge--api">Emails to 3 parties triggered simultaneously on accept</span>
-    <span class="badge badge--info">Business Central invoice created automatically on placement</span>
-  </div>
-</section>
+    </section>
 
-<!-- ===== SCREEN 8: FATIMA — PLACEMENT CONFIRMED ===== -->
-<section class="screen" id="sc-8">
-  <div class="screen-header">
-    <div>
-      <div class="role-switch-banner"><span class="role-switch-banner__badge">Role Switch</span> Back to <strong>Fatima Al-Rashid</strong> — IO Admissions · Global view</div>
-      <h1 class="screen-title">IO Dashboard — Placement Confirmed</h1>
-      <p class="screen-sub">Fatima sees Sofia's placement confirmed, the Business Central invoice generated, and the allocation grid updated. Atlantic → Brazil now shows 0/2 remaining.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(7)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(9)">Next →</button>
-    </div>
-  </div>
-  <div class="demo-mode-tag demo-mode-tag--zoho" style="margin-bottom:14px">⚙ Zoho CRM — IO Admissions Dashboard</div>
-  <div class="alert alert--success" style="margin-bottom:16px">✅ <strong>Sofia Almeida — Placement confirmed by Helen Richards (Atlantic College).</strong> Stage: Placed. Business Central invoice generated: <strong>INV-2026-0124</strong>. Email notifications delivered to Sofia, Ana Carvalho, and Fatima.</div>
-  <!-- Updated grid -->
-  <div class="card">
-    <div class="card__header"><span class="card__title">Place Allocation Matrix — Updated</span><span class="card__sub">After Sofia's placement · Atlantic → Brazil: 0/2 remaining</span></div>
-    <div class="card__body" style="padding:0;overflow-x:auto">
-      <table class="alloc-table">
-        <thead>
-          <tr>
-            <th>School</th>
-            <th>🇧🇷 Brazil NC</th>
-            <th>🇩🇪 Germany NC</th>
-            <th>🇰🇪 Kenya NC</th>
-            <th>🇮🇳 India NC</th>
-            <th>🇬🇧 UK NC</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="font-weight:600">UWC Atlantic College</td>
-            <td style="background:#fef2f2"><div class="alloc-cell"><span class="alloc-num">2</span><span class="alloc-slash">/</span><span class="alloc-zero">0 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">2</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-          </tr>
-          <tr>
-            <td style="font-weight:600">UWC Red Cross Nordic</td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">2 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">2</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">2 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">0</span><span class="alloc-slash">/</span><span class="alloc-rem">2 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">2</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-          </tr>
-          <tr>
-            <td style="font-weight:600">UWC Mahindra College</td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">2 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">0</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">1 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">2</span><span class="alloc-slash">/</span><span class="alloc-rem">0 rem</span></div></td>
-            <td><div class="alloc-cell"><span class="alloc-num">1</span><span class="alloc-slash">/</span><span class="alloc-rem">2 rem</span></div></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <!-- Invoice tile -->
-  <div class="grid-2">
-    <div class="card">
-      <div class="card__header"><span class="card__title">Sofia Almeida — Placement Record</span></div>
-      <div class="card__body">
-        <div class="field-group">
-          <div class="field-cell"><div class="field-cell__label">Applicant</div><div class="field-cell__value">Sofia Almeida</div></div>
-          <div class="field-cell"><div class="field-cell__label">Application ID</div><div class="field-cell__value">APP-2026-BR-001</div></div>
-          <div class="field-cell"><div class="field-cell__label">Placed at</div><div class="field-cell__value" style="color:var(--uwc-navy)">UWC Atlantic College</div></div>
-          <div class="field-cell"><div class="field-cell__label">Stage</div><div class="field-cell__value"><span class="pill pill--placed">Placed</span></div></div>
-          <div class="field-cell"><div class="field-cell__label">Accepted by</div><div class="field-cell__value">Helen Richards · 27 May 2026</div></div>
-          <div class="field-cell"><div class="field-cell__label">NC</div><div class="field-cell__value">UWC Brazil</div></div>
+    <!-- STEP 6 — Nominate Sofia modal -->
+    <section class="screen" id="sc-5">
+      <div class="zoho-shell" style="position:relative;">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">Applications</h1></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">🔔</button><span class="zoho-tb__org">BR</span></div>
+        </header>
+        <div class="zoho-body" style="position:relative;">
+          <aside class="zoho-sidebar">
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name">Brazil NC</span><span class="zoho-sb__teamspace-chev">⌄</span></div>
+            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">📁</span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item active"><span class="zoho-sb__item-icon">📑</span>Applications</a></div></div>
+          </aside>
+          <main class="zoho-content" style="opacity:0.38;pointer-events:none;overflow:auto;">
+            <div class="zoho-detail__hero">
+              <div class="zoho-detail__avatar" style="background:linear-gradient(135deg,#003087,#0ea5e9);">SA</div>
+              <div class="zoho-detail__name-block"><div class="zoho-detail__name">APP-2026-00041 · Sofia Almeida</div><div class="zoho-detail__add-tags"><span class="zoho-pill zoho-pill--shortlist">Shortlisted</span></div></div>
+            </div>
+          </main>
+          <!-- Modal -->
+          <div class="modal-overlay" style="position:absolute;">
+            <div class="modal" style="max-width:500px;">
+              <div class="modal-title">Nominate Sofia Almeida to UWC Atlantic College</div>
+              <div style="display:flex;gap:16px;margin-bottom:18px;">
+                <div style="flex:1;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:12px 14px;text-align:center;">
+                  <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">Place number</div>
+                  <div style="font-size:20px;font-weight:700;color:#003087;">#4 of 12</div>
+                </div>
+                <div style="flex:1;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:12px 14px;text-align:center;">
+                  <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">Brazil NC quota after</div>
+                  <div style="font-size:20px;font-weight:700;color:#10b981;">2 → 1</div>
+                  <div style="font-size:11px;color:#6b7280;">remaining</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:14px;margin-bottom:18px;align-items:center;">
+                <div style="flex:1;">
+                  <div style="font-size:12px;color:#6b7280;margin-bottom:4px;">Current stage</div>
+                  <span class="zoho-pill zoho-pill--shortlist" style="font-size:12px;padding:4px 12px;">Shortlisted</span>
+                </div>
+                <div style="font-size:18px;color:#9ca3af;">→</div>
+                <div style="flex:1;">
+                  <div style="font-size:12px;color:#6b7280;margin-bottom:4px;">After nomination</div>
+                  <span class="zoho-pill zoho-pill--nominate" style="font-size:12px;padding:4px 12px;">Nominated</span>
+                </div>
+              </div>
+              <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:6px;padding:10px 14px;font-size:12px;color:#166534;margin-bottom:6px;">
+                Nominating will send the pack to UWC Atlantic College admissions and notify Sofia via the applicant portal.
+              </div>
+              <div class="modal-actions">
+                <button class="zoho-btn">Cancel</button>
+                <button class="zoho-btn zoho-btn--primary">✓ Confirm Nomination</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card__header" style="background:linear-gradient(90deg,#059669,#047857)"><span class="card__title">Business Central — Invoice</span><span class="card__sub">Auto-generated on placement</span></div>
-      <div class="card__body">
-        <div style="font-family:var(--uwc-font-mono);font-size:22px;font-weight:700;color:#059669;margin-bottom:10px">INV-2026-0124</div>
-        <div class="field-group">
-          <div class="field-cell"><div class="field-cell__label">Invoice To</div><div class="field-cell__value">UWC Brazil National Committee</div></div>
-          <div class="field-cell"><div class="field-cell__label">Amount</div><div class="field-cell__value">CHF 4,200</div></div>
-          <div class="field-cell"><div class="field-cell__label">For</div><div class="field-cell__value">2026 NC Placement Fee — Atlantic</div></div>
-          <div class="field-cell"><div class="field-cell__label">Status</div><div class="field-cell__value success">Sent · Due 30 Jun 2026</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="badges-strip">
-    <span class="badge badge--auto">Business Central invoice auto-created on stage → Placed</span>
-    <span class="badge badge--api">Allocation grid reflects 0 remaining — prevents double-nomination</span>
-  </div>
-</section>
+    </section>
 
-<!-- ===== SCREEN 9: PACK TRACKER + FIELD REFERENCE ===== -->
-<section class="screen" id="sc-9">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">👤 Fatima Al-Rashid — IO Admissions · Global view</div>
-      <h1 class="screen-title">Pack Status Tracker &amp; Field Reference</h1>
-      <p class="screen-sub">IO-wide view of all nomination packs in flight, plus a field reference table for the Nomination Pack module and School Place Allocation module.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(8)">← Prev</button>
-      <button class="btn-nav" disabled>End ✓</button>
-    </div>
-  </div>
-  <div class="demo-mode-tag demo-mode-tag--zoho" style="margin-bottom:14px">⚙ Zoho CRM — IO Admissions · Pack Tracker</div>
-  <!-- Pack tracker -->
-  <div class="card">
-    <div class="card__header"><span class="card__title">Nomination Pack Tracker — Cycle 2026</span><span class="card__sub">All NCs · Live status</span></div>
-    <div class="card__body" style="padding:0">
-      <table class="pack-table">
-        <thead>
-          <tr>
-            <th>Applicant</th>
-            <th>NC</th>
-            <th>School</th>
-            <th>Pack Generated</th>
-            <th>Sent to School</th>
-            <th>School Decision</th>
-            <th>Stage</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Sofia Almeida</strong><br><span style="font-size:11px;color:var(--zoho-text-muted)">APP-2026-BR-001</span></td>
-            <td>Brazil</td>
-            <td>Atlantic College</td>
-            <td><span style="color:var(--uwc-green);font-size:12px">✓ 27 May</span></td>
-            <td><span style="color:var(--uwc-green);font-size:12px">✓ 27 May</span></td>
-            <td><span class="pill pill--accepted">Accepted</span></td>
-            <td><span class="pill pill--placed">Placed</span></td>
-          </tr>
-          <tr>
-            <td><strong>Kwame Asante</strong><br><span style="font-size:11px;color:var(--zoho-text-muted)">APP-2026-KE-007</span></td>
-            <td>Kenya</td>
-            <td>Atlantic College</td>
-            <td><span style="color:var(--uwc-green);font-size:12px">✓ 24 May</span></td>
-            <td><span style="color:var(--uwc-green);font-size:12px">✓ 24 May</span></td>
-            <td><span class="pill pill--reviewed">Under Review</span></td>
-            <td><span class="pill pill--nominated">Nominated</span></td>
-          </tr>
-          <tr>
-            <td><strong>Lena Fischer</strong><br><span style="font-size:11px;color:var(--zoho-text-muted)">APP-2026-DE-003</span></td>
-            <td>Germany</td>
-            <td>Atlantic College</td>
-            <td><span style="color:var(--uwc-green);font-size:12px">✓ 22 May</span></td>
-            <td><span style="color:var(--uwc-green);font-size:12px">✓ 22 May</span></td>
-            <td><span class="pill pill--reviewed">Under Review</span></td>
-            <td><span class="pill pill--nominated">Nominated</span></td>
-          </tr>
-          <tr>
-            <td><strong>Preethi Nair</strong><br><span style="font-size:11px;color:var(--zoho-text-muted)">APP-2026-IN-014</span></td>
-            <td>India</td>
-            <td>RC Nordic</td>
-            <td><span style="color:var(--uwc-green);font-size:12px">✓ 20 May</span></td>
-            <td><span style="color:var(--uwc-green);font-size:12px">✓ 20 May</span></td>
-            <td><span class="pill pill--sent">Sent</span></td>
-            <td><span class="pill pill--nominated">Nominated</span></td>
-          </tr>
-          <tr>
-            <td><strong>Miguel Santos</strong><br><span style="font-size:11px;color:var(--zoho-text-muted)">APP-2026-BR-002</span></td>
-            <td>Brazil</td>
-            <td>RC Nordic</td>
-            <td><span style="color:var(--uwc-grey-400);font-size:12px">— Pending</span></td>
-            <td><span style="color:var(--uwc-grey-400);font-size:12px">—</span></td>
-            <td><span style="font-size:12px;color:var(--uwc-grey-400)">—</span></td>
-            <td><span class="pill pill--shortlisted">Shortlisted</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <!-- Field reference -->
-  <div class="grid-2" style="gap:14px">
-    <div class="card">
-      <div class="card__header"><span class="card__title">Nomination Pack Module — Key Fields</span></div>
-      <div class="card__body" style="padding:0">
-        <table style="width:100%;border-collapse:collapse;font-size:12.5px">
-          <thead><tr style="background:var(--uwc-grey-50)">
-            <th style="padding:8px 14px;text-align:left;font-size:10.5px;font-weight:600;color:var(--uwc-grey-500);border-bottom:1px solid var(--uwc-grey-200)">Field</th>
-            <th style="padding:8px 14px;text-align:left;font-size:10.5px;font-weight:600;color:var(--uwc-grey-500);border-bottom:1px solid var(--uwc-grey-200)">Type</th>
-            <th style="padding:8px 14px;text-align:left;font-size:10.5px;font-weight:600;color:var(--uwc-grey-500);border-bottom:1px solid var(--uwc-grey-200)">Notes</th>
-          </tr></thead>
+    <!-- STEP 7 — Helen: school admissions portal, nominations list -->
+    <section class="screen" id="sc-6">
+      <div class="uwc-portal-shell">
+        <div class="uwc-portal-topbar">
+          <div class="uwc-portal-topbar__logo">UWC</div>
+          <div class="uwc-portal-topbar__title">UWC Atlantic College — Admissions Portal</div>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:10px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#7c3aed;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;">HR</div>
+            <span style="font-size:13px;color:rgba(255,255,255,0.8);">Helen Richards</span>
+          </div>
+        </div>
+        <div class="uwc-portal-layout">
+          <nav class="uwc-portal-sidebar">
+            <div class="uwc-portal-sidebar__section">Admissions</div>
+            <a class="uwc-portal-sidebar__item active"><span class="uwc-portal-sidebar__icon">📬</span> Incoming Nominations</a>
+            <a class="uwc-portal-sidebar__item"><span class="uwc-portal-sidebar__icon">✅</span> Accepted</a>
+            <a class="uwc-portal-sidebar__item"><span class="uwc-portal-sidebar__icon">❌</span> Declined</a>
+            <a class="uwc-portal-sidebar__item"><span class="uwc-portal-sidebar__icon">📊</span> Place Overview</a>
+            <div class="uwc-portal-sidebar__section" style="margin-top:8px;">Tools</div>
+            <a class="uwc-portal-sidebar__item"><span class="uwc-portal-sidebar__icon">📁</span> Nomination Packs</a>
+            <a class="uwc-portal-sidebar__item"><span class="uwc-portal-sidebar__icon">💬</span> Messages</a>
+          </nav>
+          <div class="uwc-portal-main">
+            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;margin-bottom:14px;">
+              <div style="padding:12px 18px;border-bottom:1px solid #f0f2f5;display:flex;align-items:center;gap:10px;">
+                <div style="font-size:14px;font-weight:600;color:#1f2937;">Incoming Nominations — Cycle 2026</div>
+                <span style="margin-left:auto;background:#003087;color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;">1 NEW</span>
+              </div>
+              <table class="zoho-list">
+                <thead><tr><th>Applicant</th><th>NC</th><th>Received</th><th>Pack</th><th>Status</th><th></th></tr></thead>
+                <tbody>
+                  <tr style="background:#fffbeb;">
+                    <td><span class="zoho-list__name-link" style="font-weight:700;">Sofia Almeida</span> <span class="badge-new">NEW</span></td>
+                    <td>🇧🇷 Brazil NC</td>
+                    <td>28 May 2026 14:38</td>
+                    <td><a href="#" style="color:#003087;font-size:12px;">📄 View Pack</a></td>
+                    <td><span class="zoho-pill zoho-pill--nominate">Nominated</span></td>
+                    <td><button class="zoho-btn zoho-btn--primary" style="font-size:12px;padding:4px 12px;">Review</button></td>
+                  </tr>
+                  <tr>
+                    <td class="zoho-list__name-link">Kwame Asante</td>
+                    <td>🇬🇭 Ghana NC</td>
+                    <td>22 May 2026 10:15</td>
+                    <td><a href="#" style="color:#003087;font-size:12px;">📄 View Pack</a></td>
+                    <td><span class="zoho-pill zoho-pill--nominate">Nominated</span></td>
+                    <td><button class="zoho-btn" style="font-size:12px;padding:4px 12px;">Review</button></td>
+                  </tr>
+                  <tr>
+                    <td class="zoho-list__name-link" style="text-decoration:line-through;color:#9ca3af;">Emma Fischer</td>
+                    <td>🇩🇪 Germany NC</td>
+                    <td>18 May 2026</td>
+                    <td><a href="#" style="color:#9ca3af;font-size:12px;">📄 Pack</a></td>
+                    <td><span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:500;">Declined</span></td>
+                    <td><span style="font-size:12px;color:#9ca3af;">—</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- Auto-task panel -->
+            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:16px 18px;">
+              <div style="font-size:13px;font-weight:600;color:#1f2937;margin-bottom:10px;">📋 Auto-task: Review pending nominations</div>
+              <div style="font-size:13px;color:#6b7280;">You have <strong>2</strong> nominations awaiting a decision. UWC Atlantic College target: respond within <strong style="color:#C8102E;">5 days</strong> of receipt.</div>
+              <div style="margin-top:10px;display:flex;gap:8px;">
+                <button class="uwc-portal-btn-primary" style="padding:8px 18px;font-size:13px;">Review Sofia Almeida →</button>
+                <button style="background:#fff;border:1px solid #d1d5db;color:#374151;padding:8px 16px;border-radius:8px;font-size:13px;cursor:pointer;">Review Kwame Asante →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 8 — Helen: Accept Sofia's nomination -->
+    <section class="screen" id="sc-7">
+      <div class="uwc-portal-shell" style="position:relative;">
+        <div class="uwc-portal-topbar">
+          <div class="uwc-portal-topbar__logo">UWC</div>
+          <div class="uwc-portal-topbar__title">UWC Atlantic College — Admissions Portal</div>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:10px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#7c3aed;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;">HR</div>
+            <span style="font-size:13px;color:rgba(255,255,255,0.8);">Helen Richards</span>
+          </div>
+        </div>
+        <div style="flex:1;overflow:auto;padding:24px;position:relative;">
+          <div style="max-width:700px;margin:0 auto;">
+            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:28px;margin-bottom:16px;">
+              <div style="font-family:'Playfair Display',Georgia,serif;font-size:20px;color:#003087;margin-bottom:14px;">Sofia Almeida — Nomination Review</div>
+              <div style="display:flex;gap:14px;margin-bottom:20px;align-items:flex-start;">
+                <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#003087,#0ea5e9);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;flex-shrink:0;">SA</div>
+                <div style="flex:1;font-size:13px;color:#374151;line-height:1.6;">
+                  <div><strong>Brazil NC</strong> · Received 28 May 2026 14:38 · NC ref: BR-2026-041</div>
+                  <div>Reviewer average: <strong>8.6 / 10</strong> · Personal statement reviewed · Parental consent: ✅ Received</div>
+                  <div><a href="#" style="color:#003087;">📄 Download Nomination Pack (PDF)</a></div>
+                </div>
+              </div>
+              <div style="display:flex;gap:12px;margin-bottom:18px;">
+                <button class="uwc-portal-btn-primary" style="flex:1;padding:14px;font-size:15px;">✓ Accept Nomination</button>
+                <button style="flex:1;background:#fff;border:2px solid #C8102E;color:#C8102E;padding:14px;border-radius:8px;font-weight:500;font-size:15px;cursor:pointer;">✗ Decline Nomination</button>
+              </div>
+              <!-- Confirmation sub-form -->
+              <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:14px 18px;font-size:13px;color:#166534;">
+                <strong>Confirming:</strong> "I, Helen Richards (School Admissions Director, UWC Atlantic College), accept Sofia Almeida's nomination for the 2026 intake." This will update the stage to <strong>Placed</strong> and trigger notification emails.
+              </div>
+            </div>
+          </div>
+          <!-- Toast -->
+          <div class="toast toast--success">
+            ✓ Stage updated to Placed. Emails sent to Sofia Almeida, Ana Carvalho, Fatima Al-Rashid, Akanksha Anand.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 9 — IO dashboard, Sofia placed, BC sync -->
+    <section class="screen" id="sc-8">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">IO Admissions Dashboard</h1></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">🔔</button><span class="zoho-tb__org">UWC</span></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">🏠</span>Home</a>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">IO</span><span class="zoho-sb__teamspace-name">IO Global</span><span class="zoho-sb__teamspace-chev">⌄</span></div>
+            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">🎓</span>Admissions<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item active"><span class="zoho-sb__item-icon">📊</span>IO Dashboard</a><a class="zoho-sb__item"><span class="zoho-sb__item-icon">🗂</span>Place Allocations</a><a class="zoho-sb__item"><span class="zoho-sb__item-icon">📑</span>Applications</a></div></div>
+          </aside>
+          <main class="zoho-content" style="background:#f9fafb;overflow:auto;">
+            <div style="padding:18px 22px;">
+              <!-- Sofia tile -->
+              <div style="margin-bottom:8px;font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.8px;font-weight:600;">Recently updated · Cycle 2026</div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
+                <div class="dash-tile" style="border-left:4px solid #10b981;">
+                  <div class="dash-tile__label">Sofia Almeida</div>
+                  <div class="dash-tile__value" style="color:#064e3b;font-size:15px;">🎓 Placed at Atlantic</div>
+                  <div class="dash-tile__sub">UWC Atlantic College · Place #4 · Brazil NC</div>
+                  <div style="margin-top:6px;font-size:11px;color:#166534;">Accepted by Helen Richards · 28 May 15:02</div>
+                </div>
+                <div class="dash-tile">
+                  <div class="dash-tile__label">Kwame Asante</div>
+                  <div class="dash-tile__value" style="font-size:15px;color:#854d0e;">Nominated</div>
+                  <div class="dash-tile__sub">UWC Atlantic College · Ghana NC · Pending school review</div>
+                </div>
+                <div class="dash-tile">
+                  <div class="dash-tile__label">Priya Sharma</div>
+                  <div class="dash-tile__value" style="font-size:15px;color:#854d0e;">Nominated</div>
+                  <div class="dash-tile__sub">UWC Mahindra College · India NC · Pending school review</div>
+                </div>
+              </div>
+              <!-- BC sync card -->
+              <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:16px 18px;display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+                <span style="font-size:22px;">🔗</span>
+                <div style="flex:1;">
+                  <div style="font-size:13px;font-weight:600;color:#1f2937;">Business Central Sync — Sofia Almeida</div>
+                  <div style="font-size:12px;color:#6b7280;margin-top:2px;">Invoice <strong>INV-2026-0124</strong> generated · Tuition &amp; boarding · UWC Atlantic College</div>
+                </div>
+                <span style="background:#dcfce7;color:#166534;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:500;">Synced ✓</span>
+              </div>
+              <!-- Updated allocation grid -->
+              <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;">
+                <div style="padding:12px 16px;border-bottom:1px solid #f0f2f5;font-size:14px;font-weight:500;color:#1f2937;">Updated Allocation Grid — Atlantic College × Brazil NC</div>
+                <div style="padding:14px 18px;display:flex;gap:24px;align-items:center;font-size:13px;">
+                  <div><span style="color:#6b7280;">Total allocated:</span> <strong>2</strong></div>
+                  <div><span style="color:#6b7280;">Used:</span> <strong style="color:#003087;">1</strong></div>
+                  <div><span style="color:#6b7280;">Remaining:</span> <strong style="color:#10b981;">1</strong></div>
+                  <div style="margin-left:auto;"><span style="background:#dcfce7;color:#166534;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:500;">1 place still available for Brazil NC</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="zoho-smart-chat"><span class="zoho-smart-chat__placeholder">Here is your Smart Chat (Ctrl+Space)</span></div>
+          </main>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 10 — Field reference appendix -->
+    <section class="screen" id="sc-9">
+      <div class="appendix">
+        <h1>Module field reference — Scenario D</h1>
+        <p>Key fields for Scenario D: IO place allocation → NC nomination → pack generation → school acceptance → stage Placed + Business Central sync.</p>
+
+        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:18px;">School Place Allocation module</h2>
+        <table class="ref-table">
+          <thead><tr><th>Field</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
           <tbody>
-            <tr><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100)">Pack Reference</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);font-family:var(--uwc-font-mono);font-size:11px">Text (auto)</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);color:var(--uwc-grey-500)">NOM-YYYY-NC-ID-SCH</td></tr>
-            <tr><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100)">Applicant (Lookup)</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);font-family:var(--uwc-font-mono);font-size:11px">Lookup → Apps</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);color:var(--uwc-grey-500)">Required</td></tr>
-            <tr><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100)">Nominated School</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);font-family:var(--uwc-font-mono);font-size:11px">Lookup → Schools</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);color:var(--uwc-grey-500)">Triggers quota update</td></tr>
-            <tr><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100)">Pack Status</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);font-family:var(--uwc-font-mono);font-size:11px">Picklist</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);color:var(--uwc-grey-500)">Sent / Reviewed / Accepted / Declined</td></tr>
-            <tr><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100)">School Decision</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);font-family:var(--uwc-font-mono);font-size:11px">Picklist</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);color:var(--uwc-grey-500)">Accept / Decline / Pending</td></tr>
-            <tr><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100)">Decision Date</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);font-family:var(--uwc-font-mono);font-size:11px">Date</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);color:var(--uwc-grey-500)">Auto-set on decision</td></tr>
-            <tr><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100)">PDF Attachment</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);font-family:var(--uwc-font-mono);font-size:11px">File (Zoho Docs)</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);color:var(--uwc-grey-500)">Auto-attached on generation</td></tr>
-            <tr><td style="padding:8px 14px">BC Invoice #</td><td style="padding:8px 14px;font-family:var(--uwc-font-mono);font-size:11px">Text (auto)</td><td style="padding:8px 14px;color:var(--uwc-grey-500)">Populated on Placed stage</td></tr>
+            <tr><td>School</td><td class="ft-name">School_Lookup</td><td><span class="ft-t ft-look">Lookup → School</span></td><td>UWC Atlantic / Nordic / Mahindra etc.</td></tr>
+            <tr><td>National Committee</td><td class="ft-name">NC_Lookup</td><td><span class="ft-t ft-look">Lookup → NC</span></td><td>Brazil / Germany / Kenya etc.</td></tr>
+            <tr><td>Cycle</td><td class="ft-name">Cycle</td><td><span class="ft-t ft-pick">Picklist</span></td><td>2026 / 2027 …</td></tr>
+            <tr><td>Places Allocated</td><td class="ft-name">Places_Allocated</td><td><span class="ft-t">Integer</span></td><td>Set by IO Admissions (Fatima)</td></tr>
+            <tr><td>Places Used</td><td class="ft-name">Places_Used</td><td><span class="ft-t ft-auto">Auto</span></td><td>Increments on each Nomination confirmed</td></tr>
+            <tr><td>Remaining</td><td class="ft-name">Places_Remaining</td><td><span class="ft-t ft-auto">Formula</span></td><td>Allocated − Used; shown in matrix view</td></tr>
           </tbody>
         </table>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card__header"><span class="card__title">School Place Allocation — Key Fields</span></div>
-      <div class="card__body" style="padding:0">
-        <table style="width:100%;border-collapse:collapse;font-size:12.5px">
-          <thead><tr style="background:var(--uwc-grey-50)">
-            <th style="padding:8px 14px;text-align:left;font-size:10.5px;font-weight:600;color:var(--uwc-grey-500);border-bottom:1px solid var(--uwc-grey-200)">Field</th>
-            <th style="padding:8px 14px;text-align:left;font-size:10.5px;font-weight:600;color:var(--uwc-grey-500);border-bottom:1px solid var(--uwc-grey-200)">Type</th>
-            <th style="padding:8px 14px;text-align:left;font-size:10.5px;font-weight:600;color:var(--uwc-grey-500);border-bottom:1px solid var(--uwc-grey-200)">Notes</th>
-          </tr></thead>
+
+        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:24px;">Nomination Pack module</h2>
+        <table class="ref-table">
+          <thead><tr><th>Field</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
           <tbody>
-            <tr><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100)">School (Lookup)</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);font-family:var(--uwc-font-mono);font-size:11px">Lookup → Schools</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);color:var(--uwc-grey-500)">Required</td></tr>
-            <tr><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100)">NC (Lookup)</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);font-family:var(--uwc-font-mono);font-size:11px">Lookup → NCs</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);color:var(--uwc-grey-500)">Required</td></tr>
-            <tr><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100)">Cycle</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);font-family:var(--uwc-font-mono);font-size:11px">Picklist</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);color:var(--uwc-grey-500)">2024 / 2025 / 2026</td></tr>
-            <tr><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100)">Places Allocated</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);font-family:var(--uwc-font-mono);font-size:11px">Integer</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);color:var(--uwc-grey-500)">Set by IO Admissions</td></tr>
-            <tr><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100)">Places Nominated</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);font-family:var(--uwc-font-mono);font-size:11px">Integer (auto)</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);color:var(--uwc-grey-500)">Increments on Nomination</td></tr>
-            <tr><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100)">Places Remaining</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);font-family:var(--uwc-font-mono);font-size:11px">Formula</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);color:var(--uwc-grey-500)">Allocated − Nominated</td></tr>
-            <tr><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100)">Allocated By</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);font-family:var(--uwc-font-mono);font-size:11px">Lookup → Users</td><td style="padding:8px 14px;border-bottom:1px solid var(--uwc-grey-100);color:var(--uwc-grey-500)">IO Admissions staff</td></tr>
-            <tr><td style="padding:8px 14px">Allocation Date</td><td style="padding:8px 14px;font-family:var(--uwc-font-mono);font-size:11px">DateTime (auto)</td><td style="padding:8px 14px;color:var(--uwc-grey-500)">Timestamp of allocation</td></tr>
+            <tr><td>Application</td><td class="ft-name">Application_Lookup</td><td><span class="ft-t ft-look">Lookup → Application</span></td><td>Parent application record</td></tr>
+            <tr><td>Target School</td><td class="ft-name">Target_School_Lookup</td><td><span class="ft-t ft-look">Lookup → School</span></td><td>School to receive the nomination</td></tr>
+            <tr><td>Pack Status</td><td class="ft-name">Pack_Status</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Draft / Generated / Sent / Acknowledged</td></tr>
+            <tr><td>Generated At</td><td class="ft-name">Generated_At</td><td><span class="ft-t ft-auto">DateTime</span></td><td>Auto-set on pack generation</td></tr>
+            <tr><td>NC Reference</td><td class="ft-name">NC_Reference</td><td><span class="ft-t">Text</span></td><td>e.g. BR-2026-041 — used on PDF footer</td></tr>
+            <tr><td>BC Invoice ID</td><td class="ft-name">BC_Invoice_ID</td><td><span class="ft-t ft-auto">Auto</span></td><td>Synced from Business Central on Placed stage</td></tr>
           </tbody>
         </table>
+
+        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:24px;">Stage transition map — Scenario D</h2>
+        <table class="ref-table">
+          <thead><tr><th>From stage</th><th>To stage</th><th>Actor</th><th>Trigger</th></tr></thead>
+          <tbody>
+            <tr><td>Shortlisted</td><td class="ft-name">Nominated</td><td>NC Admin (Ana)</td><td>IO allocates place quota → NC generates pack → NC confirms nomination</td></tr>
+            <tr><td>Nominated</td><td class="ft-name">Placed</td><td>School Director (Helen)</td><td>School accepts nomination in admissions portal</td></tr>
+            <tr><td>Nominated</td><td class="ft-name">Not Placed</td><td>School Director (Helen)</td><td>School declines nomination — NC must re-nominate if quota allows</td></tr>
+            <tr><td>Placed (auto)</td><td class="ft-name">BC Invoice created</td><td>System</td><td>Zoho webhook → Business Central on Placed stage entry</td></tr>
+          </tbody>
+        </table>
+
+        <div style="margin-top:28px;padding:16px 20px;background:#E8EEF6;border-radius:8px;font-size:12.5px;color:#003087;line-height:1.6;">
+          <b style="font-family:'Playfair Display',Georgia,serif;font-size:14px;">End of Scenario D.</b><br>
+          Full journey: IO allocates places → NC sees quota → generates nomination pack PDF → nominates to school → school accepts → stage Placed → Business Central invoice synced. Continue to <b><a href="05_scenario_E.html" style="color:#003087;text-decoration:underline;">Scenario E — School Onboarding</a></b>.
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="badges-strip">
-    <span class="badge badge--api">Pack Tracker: live view across all NC + school combinations</span>
-    <span class="badge badge--auto">Formula fields prevent over-nomination automatically</span>
-    <span class="badge badge--info">Scenario D complete — 10 steps · ~9 min demo</span>
-  </div>
-</section>
+    </section>
 
-</main>
-</div>
-
-<!-- Toast -->
-<div class="toast" id="global-toast" style="display:none">
-  <div class="toast__icon">✅</div>
-  <div>
-    <div class="toast__title" id="global-toast-title">Action completed</div>
-    <div class="toast__sub" id="global-toast-sub">Email sent to applicant, NC Admin, and IO Admissions.</div>
   </div>
 </div>
 
 <script>
+/* INLINE:sample-data.js */
 window.UWC = window.UWC || {};
 UWC.users = [
-  { id:'fatima', name:'Fatima Al-Rashid', initial:'FA', role:'IO Admissions', scope:'Global · Place allocation', badge:'ios' },
-  { id:'ana',    name:'Ana Carvalho',     initial:'AC', role:'NC Admin',       scope:'UWC Brazil only',          badge:'nc' },
-  { id:'helen',  name:'Helen Richards',   initial:'HR', role:'Admissions Director', scope:'UWC Atlantic only',   badge:'school' }
+  { id: 'visitor',  name: 'Public visitor',      initial: '🌐', role: 'Not signed in',       scope: 'Public portal only',             badge: 'visitor'   },
+  { id: 'sofia',    name: 'Sofia Almeida',        initial: 'SA', role: 'Applicant (Portal)',   scope: 'Her own application only',       badge: 'portal'    },
+  { id: 'maria',    name: 'Maria Almeida',        initial: 'MA', role: 'Guardian / Parent',    scope: "Sofia's consent form only",      badge: 'guardian'  },
+  { id: 'ana',      name: 'Ana Carvalho',         initial: 'AC', role: 'NC Admin — Brazil',    scope: 'UWC Brazil NC only',             badge: 'nc'        },
+  { id: 'io-mkt',   name: 'IO Marketing Staff',   initial: 'IM', role: 'Marketing & Comms',   scope: 'Source attribution · global read', badge: 'marketing' },
+  /* shared users needed by getRolesFor other scenarios */
+  { id: 'akanksha', name: 'Akanksha Anand',       initial: 'AA', role: 'IO Super Admin',       scope: 'Global · Full visibility',       badge: 'ios'       },
+  { id: 'marcus',   name: 'Marcus Weber',         initial: 'MW', role: 'NC Admin',             scope: 'UWC Germany only',               badge: 'nc'        },
+  { id: 'data-protection', name: 'Data Protection Lead', initial: 'DP', role: 'Compliance & GDPR', scope: 'Restricted record visibility', badge: 'dp' },
+  { id: 'clara',    name: 'Clara Ramos',          initial: 'CR', role: 'Reviewer',             scope: 'Brazil NC applications',         badge: 'reviewer'  },
+  { id: 'paulo',    name: 'Paulo Fonseca',        initial: 'PF', role: 'Reviewer',             scope: 'Brazil NC applications',         badge: 'reviewer'  },
+  { id: 'fatima',   name: 'Fatima Al-Rashid',     initial: 'FA', role: 'IO Admissions',        scope: 'Global · Place allocation',      badge: 'ios'       },
+  { id: 'helen',    name: 'Helen Richards',       initial: 'HR', role: 'School Admissions Director', scope: 'UWC Atlantic only',        badge: 'school'    }
 ];
-UWC.scenarioRoles = { D: ['fatima','ana','helen'] };
-UWC.getRolesFor = function(code){ return (UWC.scenarioRoles[code]||[]).map(function(id){ return UWC.users.find(function(u){ return u.id===id; }); }).filter(Boolean); };
+UWC.getRolesFor = function(code) {
+  var map = { A: ['marcus','ana','akanksha','data-protection'], B: ['visitor','sofia','maria','ana','io-mkt'], C: ['clara','paulo','ana','akanksha'], D: ['fatima','ana','helen'], E: ['akanksha','io-mkt'], F: ['akanksha'], G: ['io-mkt','akanksha'] };
+  return (map[code]||[]).map(function(id){ return UWC.users.find(function(u){return u.id===id;}); }).filter(Boolean);
+};
+/* /INLINE */
 
-/* Role Switcher */
-(function(){
-'use strict';
-window.RoleSwitcher={init:init,setRole:setRole,getRole:function(){return document.body.dataset.currentRole||'default';}};
-function init(opts){
-  var roles=opts.roles||[];
-  var defaultId=opts.defaultRoleId||(roles[0]&&roles[0].id);
-  var scenarioCode=opts.scenarioCode||'';
-  var dropdown=document.getElementById('role-switcher');
-  if(!dropdown)return;
-  dropdown.innerHTML='<button type="button" class="rs-trigger" id="rs-trigger" aria-expanded="false"><span class="rs-avatar" id="rs-avatar"></span><span class="rs-current"><span class="rs-name" id="rs-current-name">—</span><span class="rs-role" id="rs-current-role">—</span></span><span class="rs-chev">▾</span></button><div class="rs-menu" id="rs-menu" hidden><div class="rs-menu-header">View as · Scenario '+scenarioCode+'</div>'+roles.map(function(r){return '<button type="button" class="rs-option" data-role-id="'+r.id+'"><span class="rs-avatar rs-avatar--'+(r.badge||'default')+'">'+(r.initial||r.name[0])+'</span><span class="rs-opt-text"><span class="rs-opt-name">'+r.name+'</span><span class="rs-opt-role">'+r.role+'</span>'+(r.scope?'<span class="rs-opt-scope">'+r.scope+'</span>':'')+'</span><span class="rs-check">✓</span></button>';}).join('')+'<div class="rs-menu-footer">Switching role re-renders screen content.</div></div>';
-  var trigger=document.getElementById('rs-trigger');
-  var menu=document.getElementById('rs-menu');
-  trigger.addEventListener('click',function(e){e.stopPropagation();var open=!menu.hidden;menu.hidden=open;trigger.setAttribute('aria-expanded',String(!open));});
-  document.addEventListener('click',function(e){if(!dropdown.contains(e.target)){menu.hidden=true;trigger.setAttribute('aria-expanded','false');}});
-  Array.prototype.forEach.call(dropdown.querySelectorAll('.rs-option'),function(btn){btn.addEventListener('click',function(){var id=btn.dataset.roleId;var role=roles.find(function(r){return r.id===id;});setRole(id,role,roles);menu.hidden=true;trigger.setAttribute('aria-expanded','false');});});
-  var def=roles.find(function(r){return r.id===defaultId;});
-  setRole(defaultId,def,roles);
-  window.RoleSwitcher._roles=roles;
-}
-function setRole(id,role,roles){
-  document.body.dataset.currentRole=id;
-  var avatar=document.getElementById('rs-avatar');
-  var cn=document.getElementById('rs-current-name');
-  var cr=document.getElementById('rs-current-role');
-  if(avatar&&role){avatar.className='rs-avatar rs-avatar--'+(role.badge||'default');avatar.textContent=role.initial||role.name[0];}
-  if(cn&&role)cn.textContent=role.name;
-  if(cr&&role)cr.textContent=role.role+(role.scope?' · '+role.scope:'');
-  Array.prototype.forEach.call(document.querySelectorAll('.rs-option'),function(btn){btn.classList.toggle('active',btn.dataset.roleId===id);});
-  document.dispatchEvent(new CustomEvent('roleChanged',{detail:{roleId:id,role:role}}));
-}
-var style=document.createElement('style');
-style.textContent='#role-switcher{position:relative;font-family:var(--uwc-font-body,sans-serif)}.rs-trigger{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:5px 10px 5px 5px;border-radius:8px;cursor:pointer;font-size:12.5px;min-width:200px;text-align:left}.rs-trigger:hover{background:rgba(255,255,255,0.18)}.rs-avatar{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:11px;flex-shrink:0}.rs-avatar--ios{background:#003087}.rs-avatar--nc{background:#1f9535}.rs-avatar--school{background:#7c3aed}.rs-avatar--default{background:#6b7280}.rs-current{display:flex;flex-direction:column;line-height:1.2;flex:1}.rs-name{font-weight:500;color:#fff;font-size:12px}.rs-role{font-size:10.5px;color:rgba(255,255,255,0.6)}.rs-chev{color:rgba(255,255,255,0.6);font-size:10px;margin-left:2px}.rs-menu{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #e2e6ed;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);min-width:300px;z-index:100;overflow:hidden}.rs-menu-header{padding:10px 14px;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#6b7280;background:#f7f8fa;font-weight:600}.rs-menu-footer{padding:10px 14px;font-size:11px;color:#6b7280;border-top:1px solid #f0f2f5;background:#fafbfd}.rs-option{display:flex;align-items:center;gap:10px;padding:10px 14px;width:100%;background:#fff;border:none;border-bottom:1px solid #f0f2f5;cursor:pointer;text-align:left}.rs-option:hover{background:#f7f8fa}.rs-option.active{background:#E8EEF6}.rs-opt-text{flex:1;display:flex;flex-direction:column;line-height:1.3}.rs-opt-name{font-size:13px;font-weight:500;color:#0d1b3e}.rs-opt-role{font-size:11.5px;color:#5a6480}.rs-opt-scope{font-size:10.5px;color:#9aa3b8;font-style:italic}.rs-check{color:#003087;font-weight:600;opacity:0;font-size:14px}.rs-option.active .rs-check{opacity:1}';
-document.head.appendChild(style);
+/* INLINE:role-switcher.js */
+(function () {
+  'use strict';
+  window.RoleSwitcher = { init: init, setRole: setRole, getRole: function () { return document.body.dataset.currentRole || 'default'; } };
+  function init(opts) {
+    var roles = opts.roles || [], defaultId = opts.defaultRoleId || (roles[0] && roles[0].id), scenarioCode = opts.scenarioCode || '';
+    var dropdown = document.getElementById('role-switcher');
+    if (!dropdown) return;
+    dropdown.innerHTML = '<button type="button" class="rs-trigger" id="rs-trigger" aria-expanded="false"><span class="rs-avatar" id="rs-avatar"></span><span class="rs-current"><span class="rs-name" id="rs-current-name">—</span><span class="rs-role" id="rs-current-role">—</span></span><span class="rs-chev">▾</span></button><div class="rs-menu" id="rs-menu" hidden><div class="rs-menu-header">View as · Scenario ' + scenarioCode + '</div>' + roles.map(function (r) { return '<button type="button" class="rs-option" data-role-id="' + r.id + '"><span class="rs-avatar rs-avatar--' + (r.badge || 'default') + '">' + (r.initial || r.name[0]) + '</span><span class="rs-opt-text"><span class="rs-opt-name">' + r.name + '</span><span class="rs-opt-role">' + r.role + '</span>' + (r.scope ? '<span class="rs-opt-scope">' + r.scope + '</span>' : '') + '</span><span class="rs-check">✓</span></button>'; }).join('') + '<div class="rs-menu-footer">Switching role re-renders the screen showing what that user can see.</div></div>';
+    var trigger = document.getElementById('rs-trigger'), menu = document.getElementById('rs-menu');
+    trigger.addEventListener('click', function (e) { e.stopPropagation(); var open = !menu.hidden; menu.hidden = open; trigger.setAttribute('aria-expanded', String(!open)); });
+    document.addEventListener('click', function (e) { if (!dropdown.contains(e.target)) { menu.hidden = true; trigger.setAttribute('aria-expanded', 'false'); } });
+    Array.prototype.forEach.call(dropdown.querySelectorAll('.rs-option'), function (btn) { btn.addEventListener('click', function () { var id = btn.dataset.roleId; var role = roles.find(function (r) { return r.id === id; }); setRole(id, role, roles); menu.hidden = true; trigger.setAttribute('aria-expanded', 'false'); }); });
+    var def = roles.find(function (r) { return r.id === defaultId; });
+    setRole(defaultId, def, roles);
+  }
+  function setRole(id, role, roles) {
+    document.body.dataset.currentRole = id;
+    var avatar = document.getElementById('rs-avatar'), cn = document.getElementById('rs-current-name'), cr = document.getElementById('rs-current-role');
+    if (avatar && role) { avatar.className = 'rs-avatar rs-avatar--' + (role.badge || 'default'); avatar.textContent = role.initial || role.name[0]; }
+    if (cn && role) cn.textContent = role.name;
+    if (cr && role) cr.textContent = role.role;
+    Array.prototype.forEach.call(document.querySelectorAll('.rs-option'), function (btn) { btn.classList.toggle('active', btn.dataset.roleId === id); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-role-show]'), function (el) { el.hidden = el.dataset.roleShow.split(',').indexOf(id) === -1; });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-role-hide]'), function (el) { el.hidden = el.dataset.roleHide.split(',').indexOf(id) !== -1; });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-role-variant]'), function (el) { var variants = {}; el.dataset.roleVariant.split('|').forEach(function (pair) { var i = pair.indexOf(':'); if (i > -1) variants[pair.slice(0, i).trim()] = pair.slice(i + 1); }); if (variants[id]) { if (!el.dataset.roleVariantOriginal) el.dataset.roleVariantOriginal = el.textContent; el.textContent = variants[id]; } else if (el.dataset.roleVariantOriginal) { el.textContent = el.dataset.roleVariantOriginal; } });
+  }
 })();
+/* /INLINE */
 
-var TOTAL=10;
-var current=0;
-var stepRoles={0:'fatima',1:'fatima',2:'ana',3:'ana',4:'ana',5:'ana',6:'helen',7:'helen',8:'fatima',9:'fatima'};
-
-function go(i){
-  if(i<0||i>=TOTAL)return;
-  var screens=document.querySelectorAll('.screen');
-  Array.prototype.forEach.call(screens,function(s){s.classList.remove('active');});
-  var target=document.getElementById('sc-'+i);
-  if(target)target.classList.add('active');
-  for(var j=0;j<TOTAL;j++){var nav=document.getElementById('nav-'+j);if(!nav)continue;nav.classList.remove('active','done');if(j<i)nav.classList.add('done');if(j===i)nav.classList.add('active');}
-  var pct=Math.round(((i+1)/TOTAL)*100);
-  var counter=document.getElementById('step-counter');
-  if(counter)counter.textContent='Step '+(i+1)+' of '+TOTAL;
-  var progTxt=document.getElementById('progress-txt');
-  if(progTxt)progTxt.textContent='Step '+(i+1)+' of '+TOTAL;
-  var progFill=document.getElementById('progress-fill');
-  if(progFill)progFill.style.width=pct+'%';
-  var mainEl=document.getElementById('main');
-  if(mainEl)mainEl.scrollTop=0;
-  var roleId=stepRoles[i]||'fatima';
-  if(window.RoleSwitcher&&window.RoleSwitcher._roles){var roles=window.RoleSwitcher._roles;var role=roles.find(function(r){return r.id===roleId;});if(role)window.RoleSwitcher.setRole(roleId,role,roles);}
-  current=i;
+/* Scenario D driver */
+const TOTAL = 10;
+let step = 0;
+const stepCounterEl = document.getElementById('step-counter');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+function go(i) {
+  if (i < 0 || i >= TOTAL) return;
+  step = i;
+  document.querySelectorAll('.screen').forEach((s, j) => s.classList.toggle('active', j === i));
+  stepCounterEl.textContent = 'Step ' + (i + 1) + ' / ' + TOTAL;
+  prevBtn.disabled = i === 0;
+  nextBtn.disabled = i === TOTAL - 1;
 }
-
-function showSpinner(){
-  var btn=document.getElementById('gen-pack-btn');
-  if(btn){btn.disabled=true;btn.textContent='⏳ Generating…';}
-  var sp=document.getElementById('spinner-overlay');
-  if(sp)sp.style.display='block';
-  setTimeout(function(){go(4);},1800);
-}
-
-function showAcceptModal(){document.getElementById('accept-modal').style.display='block';}
-function hideAcceptModal(){document.getElementById('accept-modal').style.display='none';}
-function confirmAccept(){
-  hideAcceptModal();
-  var toast=document.getElementById('global-toast');
-  if(toast){toast.style.display='flex';setTimeout(function(){toast.style.display='none';},4000);}
-  setTimeout(function(){go(8);},600);
-}
-
-document.addEventListener('DOMContentLoaded',function(){
-  RoleSwitcher.init({scenarioCode:'D',defaultRoleId:'fatima',roles:UWC.getRolesFor('D')});
-  go(0);
+prevBtn.addEventListener('click', () => go(step - 1));
+nextBtn.addEventListener('click', () => go(step + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+  if (e.key === 'ArrowRight') go(step + 1);
+  if (e.key === 'ArrowLeft') go(step - 1);
 });
+RoleSwitcher.init({ scenarioCode: 'D', defaultRoleId: 'fatima', roles: UWC.getRolesFor('D') });
+go(0);
 </script>
 </body>
 </html>

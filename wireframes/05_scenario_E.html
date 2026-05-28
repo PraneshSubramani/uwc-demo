@@ -3,1549 +3,752 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scenario E — Governance Structure · UWC International Demo</title>
+<title>Scenario E — Governance · UWC Demo</title>
 <link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* === INLINE: uwc-tokens.css === */
-:root{--uwc-navy:#003087;--uwc-navy-deep:#001a4d;--uwc-navy-tint:#E8EEF6;--uwc-red:#C8102E;--uwc-red-tint:#fdeaea;--uwc-gold:#C8AB00;--uwc-green:#1f9535;--uwc-orange:#e85d0c;--uwc-navy-live:#004A97;--uwc-teal:#009482;--uwc-white:#ffffff;--uwc-grey-50:#f8f9fb;--uwc-grey-100:#f3f5fa;--uwc-grey-200:#e2e6ed;--uwc-grey-300:#c8cdd8;--uwc-grey-400:#9aa3b8;--uwc-grey-500:#6C757D;--uwc-grey-600:#5a6480;--uwc-grey-800:#0d1b3e;--uwc-font-title:'Playfair Display',Georgia,serif;--uwc-font-body:'DM Sans',system-ui,sans-serif;--uwc-font-mono:'DM Mono',ui-monospace,monospace;--uwc-fs-display:32px;--uwc-fs-h1:26px;--uwc-fs-h2:20px;--uwc-fs-h3:16px;--uwc-fs-body:14px;--uwc-fs-small:12.5px;--uwc-fs-tiny:11px;--uwc-fs-micro:10px;--uwc-sp-1:4px;--uwc-sp-2:8px;--uwc-sp-3:12px;--uwc-sp-4:16px;--uwc-sp-5:20px;--uwc-sp-6:24px;--uwc-sp-8:32px;--uwc-radius-sm:4px;--uwc-radius:8px;--uwc-radius-lg:12px;--uwc-radius-pill:999px;--uwc-shadow-sm:0 1px 2px rgba(0,0,0,0.04);--uwc-shadow:0 2px 8px rgba(0,48,135,0.08);--uwc-shadow-lg:0 8px 24px rgba(0,48,135,0.12);--uwc-tx-fast:120ms ease;--uwc-tx:200ms cubic-bezier(0.4,0,0.2,1)}
-html{box-sizing:border-box}*,*::before,*::after{box-sizing:inherit}
-body{margin:0;padding:0;font-family:var(--uwc-font-body);font-size:var(--uwc-fs-body);line-height:1.5;color:var(--uwc-grey-800);background:var(--uwc-grey-100);-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4,h5{font-family:var(--uwc-font-title);font-weight:500;line-height:1.2;margin:0}
-h1{font-size:var(--uwc-fs-h1)}h2{font-size:var(--uwc-fs-h2)}h3{font-size:var(--uwc-fs-h3)}
-a{color:var(--uwc-navy);text-decoration:none;transition:color var(--uwc-tx-fast)}
-a:hover{color:var(--uwc-red);text-decoration:underline}
-button{font-family:inherit}
+/* ====== Reset + base ====== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; background: #f3f5fa; color: #1f2937; -webkit-font-smoothing: antialiased; overflow: hidden; }
 
-/* === INLINE: zoho-tokens.css === */
-:root{--zoho-topbar-bg:#1c1f25;--zoho-topbar-text:#ffffff;--zoho-topbar-text-muted:rgba(255,255,255,0.55);--zoho-topbar-icon:#b9bcc7;--zoho-topbar-height:48px;--zoho-topbar-search-bg:rgba(255,255,255,0.08);--zoho-sidebar-bg:#f7f8fa;--zoho-sidebar-border:#e8eaed;--zoho-sidebar-text:#4a5568;--zoho-sidebar-section-text:#6b7280;--zoho-sidebar-active-bg:#e6efff;--zoho-sidebar-active-text:#2563eb;--zoho-sidebar-hover-bg:#eef1f7;--zoho-sidebar-width:225px;--zoho-content-bg:#ffffff;--zoho-content-alt:#f9fafb;--zoho-content-secondary:#f3f5fa;--zoho-border:#e5e7eb;--zoho-border-light:#f0f2f5;--zoho-divider:#ebeef2;--zoho-text:#1f2937;--zoho-text-secondary:#4b5563;--zoho-text-muted:#6b7280;--zoho-text-disabled:#9ca3af;--zoho-link:#2563eb;--zoho-link-hover:#1d4ed8;--zoho-primary:#3b6ef5;--zoho-primary-hover:#2563eb;--zoho-primary-text:#ffffff;--zoho-outline:#d1d5db;--zoho-outline-hover:#9ca3af;--zoho-pill-today-bg:#fef3c7;--zoho-pill-today-text:#92400e;--zoho-pill-recent-bg:#d1fae5;--zoho-pill-recent-text:#065f46;--zoho-pill-overdue-bg:#fee2e2;--zoho-pill-overdue-text:#991b1b;--zoho-pill-info-bg:#dbeafe;--zoho-pill-info-text:#1e40af;--zoho-success:#10b981;--zoho-warning:#f59e0b;--zoho-danger:#ef4444;--zoho-info:#3b82f6;--zoho-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Open Sans","Helvetica Neue",sans-serif;--zoho-fs-base:13px;--zoho-fs-sm:12px;--zoho-fs-xs:11px;--zoho-fs-lg:14px;--zoho-fs-xl:16px;--zoho-radius-sm:4px;--zoho-radius:6px;--zoho-radius-lg:8px}
+/* INLINE:demo-bar.css */
+.demo-bar { background: linear-gradient(90deg, #C8102E 0%, #a00d24 100%); color: #fff; height: 32px; display: flex; align-items: center; padding: 0 14px; gap: 14px; font-family: 'DM Sans', system-ui, sans-serif; font-size: 11.5px; position: relative; z-index: 200; box-shadow: 0 1px 0 rgba(0,0,0,0.1); }
+.demo-bar__brand { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase; font-size: 10px; color: rgba(255,255,255,0.95); }
+.demo-bar__brand::before { content: '▶'; font-size: 8px; color: rgba(255,255,255,0.7); }
+.demo-bar__scenario { color: rgba(255,255,255,0.85); font-weight: 500; }
+.demo-bar__divider { width: 1px; height: 16px; background: rgba(255,255,255,0.3); }
+.demo-bar__spacer { flex: 1; }
+.demo-bar__step { font-family: 'DM Mono', ui-monospace, monospace; font-size: 10.5px; color: rgba(255,255,255,0.85); padding: 3px 8px; background: rgba(255,255,255,0.12); border-radius: 4px; letter-spacing: 0.4px; }
+.demo-bar__nav { display: flex; gap: 2px; }
+.demo-bar__nav-btn { width: 24px; height: 22px; background: rgba(255,255,255,0.12); border: none; color: #fff; cursor: pointer; border-radius: 4px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; font-family: inherit; transition: background 120ms; }
+.demo-bar__nav-btn:hover:not(:disabled) { background: rgba(255,255,255,0.22); }
+.demo-bar__nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.demo-bar__home { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 11px; padding: 3px 8px; border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; transition: background 120ms; }
+.demo-bar__home:hover { background: rgba(255,255,255,0.12); color: #fff; }
+.demo-bar #role-switcher .rs-trigger { background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.3); padding: 3px 10px 3px 4px; font-size: 11px; min-width: 180px; height: 22px; }
+.demo-bar #role-switcher .rs-avatar { width: 18px; height: 18px; font-size: 9px; }
+.demo-bar #role-switcher .rs-name { font-size: 10.5px; }
+.demo-bar #role-switcher .rs-role { font-size: 9.5px; }
+.demo-bar #role-switcher .rs-chev { font-size: 8px; }
+/* /INLINE */
 
-/* === INLINE: components.css === */
-.shell{display:grid;grid-template-columns:280px 1fr;grid-template-rows:60px 1fr;min-height:100vh;background:var(--uwc-grey-100)}
-.topbar{grid-column:1/-1;background:var(--uwc-navy-deep);display:flex;align-items:center;padding:0 20px;gap:16px;border-bottom:3px solid var(--uwc-red);color:#fff}
-.topbar__brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
-.topbar__logo{font-family:var(--uwc-font-title);font-size:18px;font-weight:600;color:#fff;letter-spacing:.3px}
-.topbar__demo-badge{background:var(--uwc-red);color:#fff;font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;padding:3px 10px;border-radius:var(--uwc-radius-sm)}
-.topbar__divider{width:1px;height:22px;background:rgba(255,255,255,.18)}
-.topbar__scenario{font-size:12.5px;color:rgba(255,255,255,.7)}
-.topbar__scenario strong{color:#fff;font-weight:500}
-.topbar__center{flex:1}
-.topbar__right{margin-left:auto;display:flex;align-items:center;gap:14px}
-.topbar__step-counter{font-size:11.5px;color:rgba(255,255,255,.6);font-family:var(--uwc-font-mono);letter-spacing:.6px;padding:4px 10px;border:1px solid rgba(255,255,255,.15);border-radius:var(--uwc-radius-sm)}
-.sidebar{background:#fff;border-right:1px solid var(--uwc-grey-200);padding:18px 0;overflow-y:auto}
-.sidebar__label{font-size:var(--uwc-fs-micro);font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--uwc-grey-400);padding:10px 18px 8px}
-.sidebar__item{display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer;margin:0 8px 2px;border-radius:var(--uwc-radius);transition:background var(--uwc-tx-fast)}
-.sidebar__item:hover{background:var(--uwc-grey-100)}
-.sidebar__item.active{background:var(--uwc-navy-tint);border-left:3px solid var(--uwc-navy);padding-left:11px}
-.sidebar__num{width:24px;height:24px;border-radius:50%;background:var(--uwc-grey-200);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--uwc-grey-600);flex-shrink:0;transition:background var(--uwc-tx-fast),color var(--uwc-tx-fast)}
-.sidebar__item.active .sidebar__num{background:var(--uwc-navy);color:#fff}
-.sidebar__item.done .sidebar__num{background:var(--uwc-green);color:#fff}
-.sidebar__item.done .sidebar__label-text{color:var(--uwc-grey-400)}
-.sidebar__label-text{font-size:12.5px;color:var(--uwc-grey-600);line-height:1.3}
-.sidebar__item.active .sidebar__label-text{color:var(--uwc-navy);font-weight:500}
-.sidebar__progress{margin:16px;padding:12px;background:var(--uwc-grey-100);border-radius:var(--uwc-radius)}
-.sidebar__progress-label{font-size:11.5px;color:var(--uwc-grey-600);display:flex;justify-content:space-between;margin-bottom:8px}
-.sidebar__progress-track{height:4px;background:var(--uwc-grey-200);border-radius:var(--uwc-radius-pill);overflow:hidden}
-.sidebar__progress-fill{height:4px;background:var(--uwc-navy);border-radius:var(--uwc-radius-pill);transition:width var(--uwc-tx)}
-.main{overflow-y:auto;padding:28px 32px;background:var(--uwc-grey-100)}
-.screen{display:none;max-width:1240px}
-.screen.active{display:block;animation:fadeIn 240ms ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.screen-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;gap:16px}
-.screen-title{font-family:var(--uwc-font-title);font-size:var(--uwc-fs-display);font-weight:500;color:var(--uwc-grey-800);line-height:1.15;max-width:800px}
-.screen-sub{font-size:var(--uwc-fs-body);color:var(--uwc-grey-600);margin-top:6px;line-height:1.5;max-width:800px}
-.step-nav{display:flex;gap:8px;flex-shrink:0}
-.btn-nav{padding:8px 16px;font-size:12.5px;font-weight:500;font-family:var(--uwc-font-body);border:1px solid var(--uwc-grey-300);border-radius:var(--uwc-radius);background:#fff;color:var(--uwc-grey-600);cursor:pointer;transition:all var(--uwc-tx-fast)}
-.btn-nav:hover:not(:disabled){background:var(--uwc-grey-100);border-color:var(--uwc-grey-400)}
-.btn-nav:disabled{opacity:.4;cursor:not-allowed}
-.btn-nav--primary{background:var(--uwc-navy);color:#fff;border-color:var(--uwc-navy)}
-.btn-nav--primary:hover:not(:disabled){background:var(--uwc-navy-deep);border-color:var(--uwc-navy-deep)}
-.card{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;margin-bottom:16px;box-shadow:var(--uwc-shadow-sm)}
-.card__header{background:var(--uwc-navy);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
-.card__title{color:#fff;font-size:13.5px;font-weight:500}
-.card__sub{color:rgba(255,255,255,.55);font-size:11.5px;font-family:var(--uwc-font-mono)}
-.card__body{padding:16px 18px}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px}
-.alert{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--uwc-radius);font-size:12.5px;line-height:1.5;margin-bottom:12px}
-.alert:last-child{margin-bottom:0}
-.alert--info{background:var(--uwc-navy-tint);color:var(--uwc-navy);border:1px solid #93c5fd}
-.alert--warning{background:#fffbeb;color:#78350f;border:1px solid #fbbf24}
-.alert--demo-note{background:#faf5ff;color:#581c87;border:1px solid #d8b4fe}
-.pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:500;padding:3px 10px;border-radius:var(--uwc-radius-pill);border:1px solid transparent}
-.pill::before{content:'';width:6px;height:6px;border-radius:50%}
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px}
-.stat-tile{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius);padding:14px}
-.stat-tile__label{font-size:11px;color:var(--uwc-grey-500);margin-bottom:4px;font-weight:500}
-.stat-tile__value{font-family:var(--uwc-font-title);font-size:24px;font-weight:600;color:var(--uwc-navy);line-height:1.1}
-.badge{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:500;padding:3px 8px;border-radius:var(--uwc-radius-sm);font-family:var(--uwc-font-mono)}
-.badge--api{background:#dbeafe;color:#1e40af}
-.badge--auto{background:#dcfce7;color:#166534}
-.badge--gate{background:#fee2e2;color:#991b1b}
-.badge--info{background:var(--uwc-navy-tint);color:var(--uwc-navy)}
-.role-context{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;background:var(--uwc-navy-tint);color:var(--uwc-navy);border-radius:var(--uwc-radius-pill);font-size:12px;font-weight:500;margin-bottom:14px}
-.badges-strip{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
-.demo-mode-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:4px 10px;border-radius:var(--uwc-radius-pill);border:1px dashed}
-.demo-mode-tag--zoho{color:#2563eb;border-color:#93c5fd;background:#eff6ff}
-.demo-mode-tag--uwc{color:var(--uwc-navy);border-color:var(--uwc-navy);background:var(--uwc-navy-tint)}
+.app { height: 100vh; display: grid; grid-template-rows: 32px 1fr; }
+.stage { overflow: hidden; padding: 0; }
+.screen { display: none; height: 100%; }
+.screen.active { display: block; animation: fadeIn 250ms ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* Zoho mode classes */
-.zoho-mode{font-family:var(--zoho-font);font-size:var(--zoho-fs-base);color:var(--zoho-text);background:var(--zoho-content-bg)}
-.zoho-topbar{height:var(--zoho-topbar-height);background:var(--zoho-topbar-bg);color:var(--zoho-topbar-text);display:flex;align-items:center;padding:0 16px;position:sticky;top:0;z-index:50;gap:16px}
-.zoho-topbar__logo{display:flex;align-items:center;gap:8px;font-weight:500;font-size:14px}
-.zoho-topbar__logo-icon{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#8b5cf6,#3b82f6);display:inline-block}
-.zoho-topbar__search{background:var(--zoho-topbar-search-bg);border:1px solid rgba(255,255,255,.12);border-radius:var(--zoho-radius);padding:6px 12px;color:var(--zoho-topbar-text-muted);font-size:var(--zoho-fs-sm);width:320px;margin:0 auto}
-.zoho-topbar__right{margin-left:auto;display:flex;align-items:center;gap:10px}
-.zoho-topbar__org{width:32px;height:32px;border-radius:50%;background:#f7d427;color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px}
-.zoho-shell{display:grid;grid-template-columns:var(--zoho-sidebar-width) 1fr;min-height:calc(100vh - var(--zoho-topbar-height))}
-.zoho-sidebar{background:var(--zoho-sidebar-bg);border-right:1px solid var(--zoho-sidebar-border);padding:12px 0;overflow-y:auto}
-.zoho-sidebar__group{padding:0 8px;margin-bottom:4px}
-.zoho-sidebar__item{display:flex;align-items:center;gap:10px;padding:7px 10px;font-size:var(--zoho-fs-base);color:var(--zoho-sidebar-text);cursor:pointer;border-radius:var(--zoho-radius);transition:background var(--uwc-tx-fast)}
-.zoho-sidebar__item:hover{background:var(--zoho-sidebar-hover-bg)}
-.zoho-sidebar__item.active{background:var(--zoho-sidebar-active-bg);color:var(--zoho-sidebar-active-text);font-weight:500}
-.zoho-main{padding:0;overflow-y:auto;background:var(--zoho-content-bg)}
-.zoho-page-header{padding:14px 20px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;gap:12px}
-.zoho-page-title{font-size:16px;font-weight:600;color:var(--zoho-text)}
-.zoho-page-tools{padding:10px 20px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;gap:8px;background:#fff;position:sticky;top:0;z-index:5}
-.zoho-page-tools__right{margin-left:auto;display:flex;gap:8px}
-.zoho-btn{padding:7px 14px;font-size:var(--zoho-fs-base);border-radius:var(--zoho-radius);border:1px solid var(--zoho-outline);background:#fff;color:var(--zoho-text);cursor:pointer;font-family:var(--zoho-font);transition:all var(--uwc-tx-fast);display:inline-flex;align-items:center;gap:6px}
-.zoho-btn--primary{background:var(--zoho-primary);color:#fff;border-color:var(--zoho-primary)}
-.zoho-pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:var(--zoho-radius-sm);font-size:var(--zoho-fs-xs);font-weight:500}
-.zoho-pill--active{background:#d1fae5;color:#065f46}
-.zoho-pill--expired{background:#fee2e2;color:#991b1b}
-.zoho-pill--vacancy{background:#fef3c7;color:#92400e}
-.zoho-detail__hero{display:flex;align-items:center;gap:14px;padding:14px 20px;background:#fff;border-bottom:1px solid var(--zoho-border-light)}
-.zoho-detail__avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#003087,#004A97);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px}
-.zoho-detail__name{font-size:18px;font-weight:600}
-.zoho-detail__actions{margin-left:auto;display:flex;gap:8px}
-.zoho-detail__sections{padding:16px 20px}
-.zoho-detail__section{background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);margin-bottom:16px;overflow:hidden}
-.zoho-detail__section-header{padding:12px 16px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;justify-content:space-between}
-.zoho-detail__section-title{font-size:var(--zoho-fs-base);font-weight:600}
-.zoho-detail__section-body{padding:12px 16px}
-.zoho-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;font-size:var(--zoho-fs-base)}
-.zoho-field{display:flex;gap:12px;align-items:baseline}
-.zoho-field__label{width:140px;flex-shrink:0;color:var(--zoho-text-muted);text-align:right;font-size:var(--zoho-fs-sm)}
-.zoho-field__value{flex:1;color:var(--zoho-text)}
+/* INLINE:zoho-tokens.css */
+:root { --zoho-sidebar-width: 225px; }
+.zoho-shell { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; color: #1f2937; background: #fff; display: grid; grid-template-rows: 52px 1fr; height: 100%; overflow: hidden; }
+.zoho-topbar { background: #fff; border-bottom: 1px solid #e5e7eb; display: grid; grid-template-columns: 235px 1fr auto; align-items: stretch; height: 52px; }
+.zoho-tb__brand { display: flex; align-items: center; gap: 8px; padding: 0 14px; border-right: 1px solid #e5e7eb; }
+.zoho-tb__logo { width: 22px; height: 22px; border-radius: 50%; background: conic-gradient(from 0deg, #f43f5e, #ec4899, #a855f7, #6366f1, #3b82f6, #06b6d4, #f43f5e); position: relative; flex-shrink: 0; }
+.zoho-tb__logo::after { content: ''; position: absolute; inset: 4px; background: #fff; border-radius: 50%; }
+.zoho-tb__logo::before { content: ''; position: absolute; inset: 7px; background: linear-gradient(135deg, #ec4899 0%, #a855f7 50%, #3b82f6 100%); border-radius: 50%; z-index: 1; }
+.zoho-tb__name { font-size: 14px; font-weight: 500; color: #1f2937; }
+.zoho-tb__panel-toggle { margin-left: auto; background: none; border: none; color: #6b7280; font-size: 16px; cursor: pointer; padding: 4px 6px; border-radius: 4px; }
+.zoho-tb__center { display: flex; align-items: center; gap: 18px; padding: 0 18px; min-width: 0; }
+.zoho-tb__module { font-size: 17px; font-weight: 500; color: #1f2937; margin: 0; white-space: nowrap; }
+.zoho-tb__search { display: flex; align-items: center; gap: 8px; background: #f3f5fa; border: 1px solid transparent; border-radius: 6px; padding: 6px 12px; flex: 1; max-width: 360px; margin-left: auto; }
+.zoho-tb__search-icon { color: #9ca3af; font-size: 13px; }
+.zoho-tb__search input { background: transparent; border: none; outline: none; font-size: 12px; color: #1f2937; flex: 1; font-family: inherit; }
+.zoho-tb__search input::placeholder { color: #9ca3af; }
+.zoho-tb__icons { display: flex; align-items: center; gap: 4px; padding: 0 14px; }
+.zoho-tb__icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: transparent; border: none; color: #6b7280; cursor: pointer; font-size: 15px; position: relative; transition: background 120ms; }
+.zoho-tb__icon:hover { background: #eef1f7; color: #1f2937; }
+.zoho-tb__icon--plus { border: 1.5px solid #7c3aed; color: #7c3aed; font-weight: 600; }
+.zoho-tb__icon--zia { background: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #a855f7 100%); color: #fff; font-size: 11px; font-weight: 700; }
+.zoho-tb__icon--bell::after { content: ''; position: absolute; top: 8px; right: 9px; width: 6px; height: 6px; background: #ef4444; border-radius: 50%; border: 1.5px solid #fff; }
+.zoho-tb__org { width: 32px; height: 32px; border-radius: 50%; background: #fbd926; color: #1f2937; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; letter-spacing: -0.3px; margin-left: 6px; position: relative; cursor: pointer; }
+.zoho-tb__waffle { display: grid; grid-template-columns: repeat(3, 4px); gap: 2px; width: auto; padding: 0 6px; }
+.zoho-tb__waffle span { width: 4px; height: 4px; background: #6b7280; border-radius: 1px; }
+.zoho-body { display: grid; grid-template-columns: 225px 1fr; height: 100%; overflow: hidden; }
+.zoho-sidebar { background: #f7f8fa; border-right: 1px solid #e8eaed; overflow-y: auto; padding: 8px 0; font-size: 13px; }
+.zoho-sb__item { display: flex; align-items: center; gap: 10px; padding: 7px 14px; color: #4a5568; cursor: pointer; transition: background 120ms; text-decoration: none; font-size: 13px; }
+.zoho-sb__item:hover { background: #eef1f7; }
+.zoho-sb__item.active { background: #e6efff; color: #2563eb; font-weight: 500; border-right: 2px solid #2563eb; padding-right: 12px; }
+.zoho-sb__item-icon { width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.zoho-sb__teamspace { margin: 12px 10px; padding: 10px 12px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.zoho-sb__teamspace-icon { width: 22px; height: 22px; color: #fff; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+.zoho-sb__teamspace-name { font-weight: 500; color: #1f2937; flex: 1; }
+.zoho-sb__teamspace-chev { color: #6b7280; font-size: 10px; }
+.zoho-content { background: #fff; overflow: auto; position: relative; }
+.zoho-page-strip { display: flex; align-items: center; gap: 12px; padding: 10px 22px; border-bottom: 1px solid #f0f2f5; background: #fff; }
+.zoho-page-strip__view { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; background: #eef1f7; border-radius: 6px; font-size: 13px; color: #1f2937; cursor: pointer; font-weight: 500; }
+.zoho-toolbar { display: flex; align-items: center; gap: 6px; padding: 8px 22px; border-bottom: 1px solid #f0f2f5; background: #fff; }
+.zoho-toolbar__btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: transparent; border: 1px solid transparent; border-radius: 6px; font-size: 13px; color: #1f2937; cursor: pointer; font-family: inherit; }
+.zoho-toolbar__btn:hover { background: #eef1f7; }
+.zoho-toolbar__divider { width: 1px; height: 20px; background: #e5e7eb; margin: 0 4px; }
+.zoho-toolbar__spacer { flex: 1; }
+.zoho-detail__hero { display: flex; align-items: center; gap: 16px; padding: 16px 22px; background: #fff; border-bottom: 1px solid #f0f2f5; }
+.zoho-detail__back { color: #6b7280; font-size: 18px; cursor: pointer; padding: 4px; }
+.zoho-detail__avatar { width: 44px; height: 44px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 16px; flex-shrink: 0; }
+.zoho-detail__name-block { flex: 1; }
+.zoho-detail__name { font-size: 19px; font-weight: 600; color: #1f2937; }
+.zoho-detail__add-tags { font-size: 12px; margin-top: 2px; }
+.zoho-detail__actions { display: flex; align-items: center; gap: 8px; }
+.zoho-detail__last-update { font-size: 12px; color: #6b7280; margin-right: 12px; }
+.zoho-tabs { display: inline-flex; background: #eef1f7; border-radius: 6px; padding: 3px; gap: 0; margin: 14px 22px 0; }
+.zoho-tabs__tab { padding: 6px 22px; font-size: 13px; color: #6b7280; cursor: pointer; border-radius: 4px; font-weight: 500; }
+.zoho-tabs__tab.active { background: #fff; color: #1f2937; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+.zoho-detail__main { padding: 16px 22px; background: #f9fafb; min-height: 100%; overflow: auto; }
+.zoho-detail__card { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 18px 22px; margin-bottom: 14px; }
+.zoho-detail__card-title { font-size: 13px; font-weight: 600; color: #1f2937; margin-bottom: 14px; }
+.zoho-fields-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 28px; font-size: 13px; }
+.zoho-field-row { display: flex; align-items: baseline; gap: 16px; }
+.zoho-field-row__label { min-width: 130px; text-align: right; color: #6b7280; font-size: 12px; flex-shrink: 0; }
+.zoho-field-row__value { color: #1f2937; flex: 1; font-size: 13px; word-break: break-word; }
+.zoho-btn { padding: 7px 14px; font-size: 13px; border-radius: 6px; border: 1px solid #d1d5db; background: #fff; color: #1f2937; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 6px; transition: all 120ms; }
+.zoho-btn--primary { background: #3b6ef5; color: #fff; border-color: #3b6ef5; font-weight: 500; }
+.zoho-btn--primary:hover { background: #2563eb; }
+.zoho-input { width: 100%; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; font-family: inherit; color: #1f2937; background: #fff; }
+.zoho-textarea { min-height: 80px; resize: vertical; padding: 10px 12px; }
+.zoho-label { display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px; font-weight: 500; }
+.zoho-pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+.zoho-pill--active { background: #ecfdf5; color: #064e3b; }
+.zoho-pill--expired { background: #fee2e2; color: #991b1b; }
+.zoho-pill--board { background: #ede9fe; color: #5b21b6; }
+.zoho-pill--committee { background: #e0f2fe; color: #075985; }
+.zoho-pill--advisory { background: #fff7ed; color: #9a3412; }
+.zoho-smart-chat { position: absolute; bottom: 0; left: 225px; right: 0; background: #fff; border-top: 1px solid #e5e7eb; padding: 6px 22px; display: flex; align-items: center; gap: 12px; font-size: 12px; color: #6b7280; z-index: 4; }
+.zoho-smart-chat__placeholder { flex: 1; }
+.zoho-smart-chat__icon { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; color: #6b7280; font-size: 13px; cursor: pointer; }
+.zoho-list { width: 100%; border-collapse: collapse; font-size: 13px; }
+.zoho-list th { padding: 10px 16px; text-align: left; font-size: 12px; font-weight: 500; color: #4b5563; border-bottom: 1px solid #e5e7eb; white-space: nowrap; background: #fff; }
+.zoho-list td { padding: 12px 16px; border-bottom: 1px solid #f0f2f5; color: #1f2937; vertical-align: middle; }
+.zoho-list tr:hover td { background: #f9fafb; }
+.zoho-list__name-link { color: #2563eb; cursor: pointer; }
+.zoho-helper-tag { display: inline-flex; align-items: center; gap: 5px; background: #ede9fe; color: #5b21b6; font-size: 10.5px; padding: 2px 8px; border-radius: 999px; font-weight: 500; }
+.zoho-helper-tag::before { content: '👁'; font-size: 11px; }
+/* /INLINE */
 
-/* Data table */
-.data-table{width:100%;border-collapse:collapse;font-size:var(--zoho-fs-base)}
-.data-table th{background:var(--zoho-content-alt);padding:9px 14px;text-align:left;font-size:var(--zoho-fs-xs);font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--zoho-text-muted);border-bottom:1px solid var(--zoho-border)}
-.data-table td{padding:10px 14px;border-bottom:1px solid var(--zoho-border-light);color:var(--zoho-text);vertical-align:middle}
-.data-table tr:last-child td{border-bottom:none}
-.data-table tr:hover td{background:var(--zoho-content-alt)}
-.data-table .link{color:var(--zoho-link);cursor:pointer;font-weight:500}
+/* role-switcher */
+#role-switcher { position: relative; font-family: 'DM Sans', sans-serif; }
+.rs-trigger { display: flex; align-items: center; gap: 8px; color: #fff; cursor: pointer; text-align: left; }
+.rs-avatar { border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-weight: 600; flex-shrink: 0; }
+.rs-avatar--ios { background: #003087; } .rs-avatar--nc { background: #1f9535; } .rs-avatar--reviewer { background: #e85d0c; } .rs-avatar--default { background: #6b7280; }
+.rs-current { display: flex; flex-direction: column; line-height: 1.2; flex: 1; }
+.rs-name { font-weight: 500; color: #fff; }
+.rs-role { color: rgba(255,255,255,0.6); }
+.rs-chev { color: rgba(255,255,255,0.6); margin-left: 2px; }
+.rs-menu { position: absolute; top: calc(100% + 6px); right: 0; background: #fff; border: 1px solid #e2e6ed; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); min-width: 300px; z-index: 100; overflow: hidden; }
+.rs-menu-header { padding: 10px 14px; font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: #6b7280; background: #f7f8fa; font-weight: 600; }
+.rs-menu-footer { padding: 10px 14px; font-size: 11px; color: #6b7280; border-top: 1px solid #f0f2f5; background: #fafbfd; line-height: 1.4; }
+.rs-option { display: flex; align-items: center; gap: 10px; padding: 10px 14px; width: 100%; background: #fff; border: none; border-bottom: 1px solid #f0f2f5; cursor: pointer; text-align: left; }
+.rs-option:hover { background: #f7f8fa; }
+.rs-option.active { background: #E8EEF6; }
+.rs-option .rs-avatar { width: 32px; height: 32px; font-size: 12px; }
+.rs-opt-text { flex: 1; display: flex; flex-direction: column; line-height: 1.3; }
+.rs-opt-name { font-size: 13px; font-weight: 500; color: #0d1b3e; }
+.rs-opt-role { font-size: 11.5px; color: #5a6480; }
+.rs-opt-scope { font-size: 10.5px; color: #9aa3b8; font-style: italic; }
+.rs-check { color: #003087; font-weight: 600; opacity: 0; font-size: 14px; }
+.rs-option.active .rs-check { opacity: 1; }
 
-/* Form fields */
-.form-section{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;margin-bottom:16px}
-.form-section__header{background:var(--uwc-grey-50);border-bottom:1px solid var(--uwc-grey-200);padding:12px 18px}
-.form-section__title{font-size:13.5px;font-weight:600;color:var(--uwc-grey-800)}
-.form-section__body{padding:18px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.form-field{margin-bottom:14px}
-.form-field:last-child{margin-bottom:0}
-.form-label{display:block;font-size:12px;font-weight:500;color:var(--uwc-grey-600);margin-bottom:5px}
-.form-label .req{color:var(--uwc-red)}
-.form-input{width:100%;background:#fff;border:1.5px solid var(--uwc-grey-300);border-radius:var(--uwc-radius-sm);padding:9px 12px;font-size:13.5px;font-family:var(--uwc-font-body);color:var(--uwc-grey-800);outline:none}
-.form-select{width:100%;background:#fff;border:1.5px solid var(--uwc-grey-300);border-radius:var(--uwc-radius-sm);padding:9px 12px;font-size:13.5px;font-family:var(--uwc-font-body);color:var(--uwc-grey-800);outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa3b8' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
-.form-textarea{width:100%;background:#fff;border:1.5px solid var(--uwc-grey-300);border-radius:var(--uwc-radius-sm);padding:10px 12px;font-size:13.5px;font-family:var(--uwc-font-body);color:var(--uwc-grey-800);outline:none;resize:vertical;min-height:90px}
-.form-helper{font-size:11px;color:var(--uwc-grey-400);margin-top:4px}
-.lookup-field{display:flex;gap:8px;align-items:center}
-.lookup-field input{flex:1}
-.lookup-field__btn{padding:9px 14px;background:var(--uwc-grey-100);border:1.5px solid var(--uwc-grey-300);border-radius:var(--uwc-radius-sm);font-size:12px;color:var(--uwc-grey-600);cursor:pointer;white-space:nowrap}
+/* Appendix */
+.appendix { background: #fff; padding: 30px 40px; height: 100%; overflow: auto; }
+.appendix h1 { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; color: #003087; font-size: 24px; margin-bottom: 6px; }
+.appendix p { color: #5a6480; font-size: 13px; margin-bottom: 22px; }
+.ref-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.ref-table th { background: #003087; color: #fff; padding: 8px 14px; text-align: left; font-size: 11px; font-weight: 500; }
+.ref-table td { padding: 8px 14px; border-bottom: 1px solid #e2e6ed; vertical-align: top; }
+.ref-table tr:nth-child(even) td { background: #f8f9fb; }
+.ft-name { font-family: 'DM Mono', monospace; font-size: 11px; color: #5a6480; }
+.ft-t { display: inline-block; padding: 2px 7px; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 10px; background: #f3f5fa; color: #5a6480; }
+.ft-pick { background: #f0f4ff; color: #1e3a8a; } .ft-look { background: #f0fdf4; color: #166534; } .ft-auto { background: #fef3c7; color: #92400e; }
 
 /* Modal overlay */
-.modal-overlay{background:rgba(0,0,0,.35);position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center}
-.modal{background:#fff;border-radius:var(--uwc-radius-lg);box-shadow:var(--uwc-shadow-lg);width:520px;max-width:calc(100vw - 32px);overflow:hidden}
-.modal__header{background:var(--uwc-navy);padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
-.modal__title{color:#fff;font-size:15px;font-weight:600;font-family:var(--uwc-font-title)}
-.modal__close{background:transparent;border:none;color:rgba(255,255,255,.6);font-size:18px;cursor:pointer;line-height:1}
-.modal__body{padding:20px}
-.modal__footer{padding:12px 20px;border-top:1px solid var(--uwc-grey-200);display:flex;justify-content:flex-end;gap:8px;background:var(--uwc-grey-50)}
+.modal-overlay { position: absolute; inset: 0; background: rgba(0,10,30,0.45); display: flex; align-items: center; justify-content: center; z-index: 20; }
+.modal-card { background: #fff; border-radius: 10px; padding: 24px 28px; width: 520px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto; }
+.modal-card__title { font-size: 15px; font-weight: 600; color: #0d1b3e; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; }
+.modal-card__close { color: #9ca3af; cursor: pointer; font-size: 18px; background: none; border: none; }
+.modal-field { margin-bottom: 14px; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; padding-top: 16px; border-top: 1px solid #f0f2f5; }
 
-/* Tab bar */
-.tab-bar{display:flex;border-bottom:2px solid var(--zoho-border);margin-bottom:0;background:#fff}
-.tab-item{padding:10px 18px;font-size:var(--zoho-fs-base);color:var(--zoho-text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all var(--uwc-tx-fast)}
-.tab-item:hover{color:var(--zoho-text)}
-.tab-item.active{color:var(--zoho-link);border-bottom-color:var(--zoho-link);font-weight:500}
+/* KPI cards */
+.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
+.kpi-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px 18px; }
+.kpi-card__val { font-size: 28px; font-weight: 700; color: #003087; font-family: 'Playfair Display', Georgia, serif; line-height: 1; }
+.kpi-card__val--warn { color: #d97706; }
+.kpi-card__val--danger { color: #C8102E; }
+.kpi-card__label { font-size: 11.5px; color: #6b7280; margin-top: 4px; }
 
-/* Ref table */
-.ref-table{width:100%;border-collapse:collapse;font-size:12.5px}
-.ref-table th{background:var(--uwc-navy-tint);padding:8px 12px;text-align:left;font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--uwc-navy);border:1px solid var(--uwc-grey-200)}
-.ref-table td{padding:8px 12px;border:1px solid var(--uwc-grey-200);color:var(--uwc-grey-800);vertical-align:top}
-.ref-table tr:nth-child(even) td{background:var(--uwc-grey-50)}
-.ref-table .mono{font-family:var(--uwc-font-mono);font-size:11px;color:var(--uwc-navy)}
-.ref-table .tag{display:inline-block;font-size:10px;padding:1px 6px;border-radius:3px;font-family:var(--uwc-font-mono)}
-.ref-tag-req{background:#fdeaea;color:#991b1b}
-.ref-tag-auto{background:#dcfce7;color:#166534}
-.ref-tag-lookup{background:#dbeafe;color:#1e40af}
+/* Filter chips */
+.filter-chips { display: flex; gap: 6px; }
+.chip { padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1.5px solid #d1d5db; color: #4b5563; background: #fff; }
+.chip.active { background: #003087; color: #fff; border-color: #003087; }
 
-/* ===== COMPETENCY MATRIX (Step 6 — the WOW moment) ===== */
-.matrix-wrap{overflow-x:auto;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);background:#fff;box-shadow:var(--uwc-shadow)}
-.comp-matrix{border-collapse:collapse;width:100%;min-width:680px;font-size:12.5px}
-.comp-matrix thead th{background:var(--uwc-navy-deep);color:#fff;padding:10px 8px;text-align:center;font-weight:500;font-size:11px;border-right:1px solid rgba(255,255,255,.12);position:sticky;top:0;z-index:2;white-space:nowrap}
-.comp-matrix thead th.row-header{text-align:left;min-width:190px;padding-left:14px;background:var(--uwc-navy)}
-.comp-matrix thead th .member-name{font-size:11px;font-weight:600}
-.comp-matrix thead th .member-role{font-size:10px;color:rgba(255,255,255,.55);margin-top:2px}
-.comp-matrix thead th .member-status{font-size:9px;padding:1px 5px;border-radius:3px;margin-top:3px;display:inline-block}
-.ms-current{background:rgba(31,149,53,.3);color:#a7f3c0}
-.ms-expired{background:rgba(200,16,46,.3);color:#fca5a5}
-.comp-matrix tbody tr td{padding:8px 10px;border-bottom:1px solid var(--uwc-grey-200);border-right:1px solid var(--uwc-grey-200);text-align:center;transition:background var(--uwc-tx-fast)}
-.comp-matrix tbody tr:hover td{background:var(--uwc-grey-50)}
-.comp-matrix tbody tr td.row-label{text-align:left;padding-left:14px;color:var(--uwc-grey-800);font-size:12.5px;font-weight:500;background:#fff;position:sticky;left:0;z-index:1;border-right:2px solid var(--uwc-grey-200)}
-.comp-matrix tbody tr.gap-row td{background:#fff5f5}
-.comp-matrix tbody tr.gap-row td.row-label{background:#fff5f5;border-left:3px solid var(--uwc-red)}
-.comp-tick{color:#16a34a;font-size:16px;font-weight:700}
-.comp-empty{color:var(--uwc-grey-200);font-size:14px}
-.gap-tag{display:inline-flex;align-items:center;gap:3px;font-size:9.5px;font-weight:600;color:#991b1b;background:#fee2e2;border:1px solid #fca5a5;border-radius:3px;padding:1px 5px;margin-left:6px;vertical-align:middle}
-.matrix-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
-.matrix-stat{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius);padding:14px 16px;text-align:center}
-.matrix-stat__value{font-family:var(--uwc-font-title);font-size:28px;font-weight:600;line-height:1}
-.matrix-stat__label{font-size:11.5px;color:var(--uwc-grey-500);margin-top:4px}
-.matrix-stat--ok .matrix-stat__value{color:var(--uwc-green)}
-.matrix-stat--warn .matrix-stat__value{color:var(--uwc-red)}
-.matrix-stat--pct .matrix-stat__value{color:var(--uwc-navy)}
-.matrix-legend{display:flex;gap:16px;margin-bottom:12px;font-size:11.5px;color:var(--uwc-grey-600)}
-.matrix-legend span{display:inline-flex;align-items:center;gap:5px}
+/* Competency matrix */
+.comp-matrix { border-collapse: collapse; font-size: 11.5px; width: 100%; }
+.comp-matrix th { position: sticky; top: 0; z-index: 2; background: #003087; color: #fff; padding: 8px 10px; text-align: center; font-weight: 500; font-size: 11px; white-space: nowrap; border-right: 1px solid rgba(255,255,255,0.2); }
+.comp-matrix th.comp-label-h { text-align: left; min-width: 190px; }
+.comp-matrix td { padding: 7px 10px; border-bottom: 1px solid #f0f2f5; border-right: 1px solid #f0f2f5; text-align: center; vertical-align: middle; background: #fff; }
+.comp-matrix td.comp-label { text-align: left; font-size: 12px; color: #1f2937; font-weight: 400; border-right: 2px solid #e5e7eb; }
+.comp-matrix td.comp-label.gap { color: #991b1b; font-weight: 600; background: #fff8f8; border-left: 3px solid #f87171; }
+.comp-matrix tr:hover td { background: #f9fafb; }
+.comp-matrix tr:hover td.comp-label.gap { background: #fff0f0; }
+.comp-check { color: #16a34a; font-size: 15px; font-weight: 700; }
+.comp-empty { color: #d1d5db; font-size: 13px; }
+.comp-expired { color: #16a34a; opacity: 0.4; font-size: 15px; font-weight: 700; }
+.comp-member-head { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.comp-member-initials { width: 26px; height: 26px; border-radius: 50%; background: #003087; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; margin-bottom: 1px; }
+.comp-member-name { font-size: 9.5px; line-height: 1.2; max-width: 68px; text-align: center; }
+.comp-member-status { font-size: 8px; padding: 1px 4px; border-radius: 2px; margin-top: 1px; }
+.cms-current { background: rgba(22,163,74,0.25); color: #a7f3c0; }
+.cms-expired { background: rgba(239,68,68,0.25); color: #fca5a5; }
 
-/* Body KPI card */
-.body-card{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--uwc-shadow-sm)}
-.body-card__name{font-size:14px;font-weight:600;color:var(--uwc-grey-800)}
-.body-card__type{font-size:11px;font-family:var(--uwc-font-mono);color:var(--uwc-grey-500);text-transform:uppercase;letter-spacing:.5px}
-.body-card__kpis{display:flex;gap:12px;margin-top:4px}
-.body-card__kpi{text-align:center}
-.body-card__kpi-val{font-family:var(--uwc-font-title);font-size:22px;font-weight:600;color:var(--uwc-navy);line-height:1}
-.body-card__kpi-lbl{font-size:10px;color:var(--uwc-grey-400);margin-top:2px}
-.body-card__action{margin-top:6px;padding:7px 0;background:var(--uwc-navy-tint);border:1px solid var(--uwc-navy);border-radius:var(--uwc-radius-sm);color:var(--uwc-navy);font-size:12px;font-weight:500;text-align:center;cursor:pointer}
-.body-card__gap{background:#fff5f5;border:1px solid #fca5a5;border-radius:var(--uwc-radius-sm);padding:5px 8px;font-size:11px;color:#991b1b;margin-top:2px}
+/* Gap panel */
+.gap-panel { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px 16px; overflow-y: auto; height: 100%; }
+.gap-panel__title { font-size: 12px; font-weight: 700; color: #991b1b; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.gap-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid #fee2e2; }
+.gap-item:last-child { border-bottom: none; }
+.gap-item__icon { width: 28px; height: 28px; background: #fee2e2; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+.gap-item__text { font-size: 12px; color: #991b1b; font-weight: 500; line-height: 1.4; }
+.gap-item__sub { font-size: 11px; color: #b91c1c; margin-top: 2px; }
 </style>
 </head>
 <body>
-<div class="shell">
 
-<!-- TOPBAR -->
-<header class="topbar">
-  <div class="topbar__brand">
-    <div style="width:32px;height:32px;border-radius:50%;background:#fff;color:var(--uwc-navy);display:flex;align-items:center;justify-content:center;font-family:var(--uwc-font-title);font-weight:700;font-size:11px;flex-shrink:0">UWC</div>
-    <span class="topbar__logo">UWC International</span>
-    <span class="topbar__demo-badge">DEMO</span>
-  </div>
-  <div class="topbar__divider"></div>
-  <div class="topbar__scenario"><strong>Scenario E</strong> · Governance Structure and Body Management</div>
-  <div class="topbar__center"></div>
-  <div class="topbar__right">
+<div class="app">
+  <!-- ============ DEMO BAR ============ -->
+  <div class="demo-bar">
+    <a href="00_index.html" class="demo-bar__home">&#8592; All scenarios</a>
+    <span class="demo-bar__brand">Demo Mode</span>
+    <span class="demo-bar__divider"></span>
+    <span class="demo-bar__scenario"><b>Scenario E</b> &#183; Governance Structure &#183; Body Management</span>
+    <span class="demo-bar__spacer"></span>
     <div id="role-switcher"></div>
-    <div class="topbar__step-counter" id="step-counter">Step 1 of 8</div>
-  </div>
-</header>
-
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="sidebar__label">Scenario E · Governance</div>
-  <div class="sidebar__item active" id="nav-0" onclick="go(0)">
-    <div class="sidebar__num">1</div>
-    <div class="sidebar__label-text">Governance Bodies list</div>
-  </div>
-  <div class="sidebar__item" id="nav-1" onclick="go(1)">
-    <div class="sidebar__num">2</div>
-    <div class="sidebar__label-text">Create new Governance Body</div>
-  </div>
-  <div class="sidebar__item" id="nav-2" onclick="go(2)">
-    <div class="sidebar__num">3</div>
-    <div class="sidebar__label-text">Board detail — member roster</div>
-  </div>
-  <div class="sidebar__item" id="nav-3" onclick="go(3)">
-    <div class="sidebar__num">4</div>
-    <div class="sidebar__label-text">Add Member workflow</div>
-  </div>
-  <div class="sidebar__item" id="nav-4" onclick="go(4)">
-    <div class="sidebar__num">5</div>
-    <div class="sidebar__label-text">Historical membership view</div>
-  </div>
-  <div class="sidebar__item" id="nav-5" onclick="go(5)">
-    <div class="sidebar__num">6</div>
-    <div class="sidebar__label-text">Competency Matrix ★</div>
-  </div>
-  <div class="sidebar__item" id="nav-6" onclick="go(6)">
-    <div class="sidebar__num">7</div>
-    <div class="sidebar__label-text">Network-wide summary</div>
-  </div>
-  <div class="sidebar__item" id="nav-7" onclick="go(7)">
-    <div class="sidebar__num">8</div>
-    <div class="sidebar__label-text">CRM field reference</div>
-  </div>
-  <div class="sidebar__progress">
-    <div class="sidebar__progress-label">
-      <span>Progress</span>
-      <span id="progress-txt">Step 1 of 8</span>
-    </div>
-    <div class="sidebar__progress-track">
-      <div class="sidebar__progress-fill" id="progress-fill" style="width:12.5%"></div>
-    </div>
-  </div>
-</aside>
-
-<!-- MAIN -->
-<main class="main" id="main">
-
-<!-- ===== SCREEN 0: GOVERNANCE BODIES LIST ===== -->
-<section class="screen active" id="sc-0">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">🏛 Akanksha Anand — IO Super Admin · Global visibility</div>
-      <h1 class="screen-title">Governance Bodies</h1>
-      <p class="screen-sub">Custom module listing all formal governance structures across UWC International. Akanksha opens the module to review active bodies and spot any vacancies.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" disabled>← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(1)">Next →</button>
+    <span class="demo-bar__divider"></span>
+    <span class="demo-bar__step" id="step-counter">Step 1 / 8</span>
+    <div class="demo-bar__nav">
+      <button class="demo-bar__nav-btn" id="prev-btn" title="Previous">&#8249;</button>
+      <button class="demo-bar__nav-btn" id="next-btn" title="Next">&#8250;</button>
     </div>
   </div>
 
-  <div class="card" style="overflow:visible">
-    <!-- Zoho-mode chrome -->
-    <div class="zoho-topbar" style="border-radius:var(--uwc-radius-lg) var(--uwc-radius-lg) 0 0">
-      <div class="zoho-topbar__logo">
-        <span class="zoho-topbar__logo-icon"></span>
-        Zoho CRM — UWC International
-      </div>
-      <div class="zoho-topbar__search">🔍 Search Governance Bodies…</div>
-      <div class="zoho-topbar__right">
-        <div class="zoho-topbar__org">AA</div>
-      </div>
-    </div>
-    <!-- Zoho inner shell -->
-    <div class="zoho-shell" style="min-height:420px">
-      <div class="zoho-sidebar">
-        <div class="zoho-sidebar__group">
-          <div class="zoho-sidebar__item">📋 Contacts</div>
-          <div class="zoho-sidebar__item">🏢 Organisations</div>
-          <div class="zoho-sidebar__item">📁 Applications</div>
-          <div class="zoho-sidebar__item active">🏛 Governance Bodies</div>
-          <div class="zoho-sidebar__item">👥 Memberships</div>
-          <div class="zoho-sidebar__item">🌐 Nat. Committees</div>
+  <!-- ============ STAGE ============ -->
+  <div class="stage" id="stage">
+
+    <!-- ===== STEP 1: Governance Bodies list view ===== -->
+    <section class="screen active" id="sc-0">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">&#9634;</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">Governance</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">&#128269;</span><input placeholder="Search governance bodies"></div></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">&#128276;</button><button class="zoho-tb__icon">&#128197;</button><button class="zoho-tb__icon">&#9881;</button><span class="zoho-tb__org">UWC</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127968;</span>Home</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128202;</span>Reports</a>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon" style="background:#003087;">IO</span><span class="zoho-sb__teamspace-name">IO Global</span><span class="zoho-sb__teamspace-chev">&#8964;</span></div>
+            <a class="zoho-sb__item active"><span class="zoho-sb__item-icon">&#127963;</span>Governance</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128101;</span>Contacts</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128209;</span>Applications</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128206;</span>Memberships</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128203;</span>Competency Matrix</a>
+          </aside>
+          <main class="zoho-content">
+            <div class="zoho-page-strip">
+              <div class="zoho-page-strip__view">All Governance Bodies &#8964;</div>
+              <span style="font-size:12px;color:#6b7280;margin-left:4px;">4 records</span>
+              <span style="flex:1;"></span>
+              <span class="zoho-helper-tag">Akanksha sees all bodies — global scope</span>
+            </div>
+            <div class="zoho-toolbar">
+              <button class="zoho-toolbar__btn">&#9660; Filter</button>
+              <button class="zoho-toolbar__btn">&#8645; Sort</button>
+              <span class="zoho-toolbar__divider"></span>
+              <span class="zoho-toolbar__spacer"></span>
+              <button class="zoho-btn zoho-btn--primary">+ New Body</button>
+            </div>
+            <table class="zoho-list">
+              <thead><tr><th><input type="checkbox"></th><th>Body Name</th><th>Type</th><th>Members</th><th>Active Members</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td><input type="checkbox"></td><td class="zoho-list__name-link">UWC International Board</td><td><span class="zoho-pill zoho-pill--board">Board</span></td><td>5</td><td>3</td><td><span class="zoho-pill zoho-pill--active">Active</span></td></tr>
+                <tr><td><input type="checkbox"></td><td class="zoho-list__name-link">Audit &amp; Risk Committee</td><td><span class="zoho-pill zoho-pill--committee">Committee</span></td><td>4</td><td>4</td><td><span class="zoho-pill zoho-pill--active">Active</span></td></tr>
+                <tr><td><input type="checkbox"></td><td class="zoho-list__name-link">Nominations Committee</td><td><span class="zoho-pill zoho-pill--committee">Committee</span></td><td>3</td><td>3</td><td><span class="zoho-pill zoho-pill--active">Active</span></td></tr>
+                <tr><td><input type="checkbox"></td><td class="zoho-list__name-link">Risk Advisory Group</td><td><span class="zoho-pill zoho-pill--advisory">Advisory</span></td><td>5</td><td>5</td><td><span class="zoho-pill zoho-pill--active">Active</span></td></tr>
+              </tbody>
+            </table>
+            <div class="zoho-smart-chat"><span class="zoho-smart-chat__placeholder">Smart Chat (Ctrl+Space)</span><div style="display:flex;gap:4px;"><span class="zoho-smart-chat__icon">&#128172;</span><span class="zoho-smart-chat__icon">&#128276;</span></div></div>
+          </main>
         </div>
       </div>
-      <div class="zoho-main">
-        <div class="zoho-page-header">
-          <span class="zoho-page-title">Governance Bodies</span>
-          <span class="zoho-pill" style="background:#ede9fe;color:#5b21b6;font-size:10.5px;padding:3px 9px;border-radius:4px">Custom Module</span>
+    </section>
+
+    <!-- ===== STEP 2: Create new Governance Body ===== -->
+    <section class="screen" id="sc-1">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">&#9634;</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">Governance</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">&#128269;</span><input placeholder="Search governance bodies"></div></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon">&#9881;</button><span class="zoho-tb__org">UWC</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127968;</span>Home</a>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon" style="background:#003087;">IO</span><span class="zoho-sb__teamspace-name">IO Global</span><span class="zoho-sb__teamspace-chev">&#8964;</span></div>
+            <a class="zoho-sb__item active"><span class="zoho-sb__item-icon">&#127963;</span>Governance</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128206;</span>Memberships</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128203;</span>Competency Matrix</a>
+          </aside>
+          <main class="zoho-content" style="position:relative;">
+            <div style="opacity:0.3;pointer-events:none;padding:22px;">
+              <table class="zoho-list"><thead><tr><th>Body Name</th><th>Type</th><th>Members</th><th>Status</th></tr></thead><tbody>
+                <tr><td>UWC International Board</td><td><span class="zoho-pill zoho-pill--board">Board</span></td><td>5</td><td><span class="zoho-pill zoho-pill--active">Active</span></td></tr>
+              </tbody></table>
+            </div>
+            <div class="modal-overlay">
+              <div class="modal-card">
+                <div class="modal-card__title"><span>&#127963; Create Governance Body</span><button class="modal-card__close">&#215;</button></div>
+                <div class="modal-field">
+                  <label class="zoho-label">Body Name <span style="color:#C8102E;">*</span></label>
+                  <input class="zoho-input" value="Finance &amp; Investment Committee" style="border-color:#3b6ef5;">
+                </div>
+                <div class="modal-field">
+                  <label class="zoho-label">Type <span style="color:#C8102E;">*</span></label>
+                  <select class="zoho-input" style="cursor:pointer;"><option>Board</option><option selected>Committee</option><option>Advisory</option></select>
+                </div>
+                <div class="modal-field">
+                  <label class="zoho-label">Purpose</label>
+                  <textarea class="zoho-input zoho-textarea">Oversight of UWC International financial strategy, investments, and audit compliance.</textarea>
+                </div>
+                <div class="modal-field">
+                  <label class="zoho-label">Parent Body</label>
+                  <div style="position:relative;"><input class="zoho-input" value="UWC International Board" style="padding-right:36px;"><span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#9ca3af;font-size:13px;">&#128279;</span></div>
+                </div>
+                <div class="modal-field">
+                  <label class="zoho-label">Created Date</label>
+                  <input class="zoho-input" type="date" value="2026-05-28">
+                </div>
+                <div class="modal-actions"><button class="zoho-btn">Cancel</button><button class="zoho-btn zoho-btn--primary">Save</button></div>
+              </div>
+            </div>
+          </main>
         </div>
-        <div class="zoho-page-tools">
-          <button class="zoho-btn zoho-btn--primary" onclick="go(1)">+ New Body</button>
-          <button class="zoho-btn">Filter</button>
-          <button class="zoho-btn">Export</button>
-          <div class="zoho-page-tools__right">
-            <span style="font-size:12px;color:var(--zoho-text-muted)">4 records</span>
-          </div>
+      </div>
+    </section>
+
+    <!-- ===== STEP 3: Board detail view ===== -->
+    <section class="screen" id="sc-2">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">&#9634;</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">Governance</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">&#128269;</span><input placeholder="Search records"></div></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon">&#9881;</button><span class="zoho-tb__org">UWC</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127968;</span>Home</a>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon" style="background:#003087;">IO</span><span class="zoho-sb__teamspace-name">IO Global</span><span class="zoho-sb__teamspace-chev">&#8964;</span></div>
+            <a class="zoho-sb__item active"><span class="zoho-sb__item-icon">&#127963;</span>Governance</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128206;</span>Memberships</a>
+          </aside>
+          <main class="zoho-content">
+            <div class="zoho-detail__hero">
+              <span class="zoho-detail__back">&#8592;</span>
+              <div class="zoho-detail__avatar" style="background:linear-gradient(135deg,#003087,#3b6ef5);font-size:12px;">IB</div>
+              <div class="zoho-detail__name-block">
+                <div class="zoho-detail__name">UWC International Board</div>
+                <div class="zoho-detail__add-tags"><span class="zoho-pill zoho-pill--board">Board</span> &nbsp;<span class="zoho-pill zoho-pill--active">Active</span></div>
+              </div>
+              <div class="zoho-detail__actions"><button class="zoho-btn">&#9998; Edit</button><button class="zoho-btn">&#8943;</button></div>
+            </div>
+            <div class="zoho-tabs"><span class="zoho-tabs__tab active">Overview</span><span class="zoho-tabs__tab">Members</span><span class="zoho-tabs__tab">History</span><span class="zoho-tabs__tab">Competency Matrix</span></div>
+            <div class="zoho-detail__main" style="margin-top:14px;">
+              <div class="zoho-detail__card">
+                <div class="zoho-detail__card-title">Body Information</div>
+                <div class="zoho-fields-grid">
+                  <div class="zoho-field-row"><span class="zoho-field-row__label">Type</span><span class="zoho-field-row__value"><span class="zoho-pill zoho-pill--board">Board</span></span></div>
+                  <div class="zoho-field-row"><span class="zoho-field-row__label">Members</span><span class="zoho-field-row__value">5</span></div>
+                  <div class="zoho-field-row"><span class="zoho-field-row__label">Purpose</span><span class="zoho-field-row__value">Governance of UWC International</span></div>
+                  <div class="zoho-field-row"><span class="zoho-field-row__label">Active Members</span><span class="zoho-field-row__value">3</span></div>
+                  <div class="zoho-field-row"><span class="zoho-field-row__label">Parent Body</span><span class="zoho-field-row__value" style="color:#9ca3af;font-style:italic;">— (Top-level)</span></div>
+                  <div class="zoho-field-row"><span class="zoho-field-row__label">Established</span><span class="zoho-field-row__value">1962</span></div>
+                </div>
+              </div>
+              <div class="zoho-detail__card">
+                <div class="zoho-detail__card-title" style="display:flex;align-items:center;justify-content:space-between;"><span>Members</span><button class="zoho-btn zoho-btn--primary" style="font-size:12px;padding:5px 10px;">+ Add Member</button></div>
+                <table class="zoho-list">
+                  <thead><tr><th>Name</th><th>Role</th><th>Term Expires</th><th>Status</th></tr></thead>
+                  <tbody>
+                    <tr><td class="zoho-list__name-link">Dame Catherine Prior</td><td>Chair</td><td>Dec 2026</td><td><span class="zoho-pill zoho-pill--active">Active</span></td></tr>
+                    <tr><td class="zoho-list__name-link">Dr Ravi Menon</td><td>Trustee</td><td>Mar 2025</td><td><span class="zoho-pill zoho-pill--expired">&#9888; EXPIRED</span></td></tr>
+                    <tr><td class="zoho-list__name-link">Sarah Okonkwo</td><td>Secretary</td><td>Aug 2027</td><td><span class="zoho-pill zoho-pill--active">Active</span></td></tr>
+                    <tr><td class="zoho-list__name-link">Thomas Berger</td><td>Trustee</td><td>Dec 2024</td><td><span class="zoho-pill zoho-pill--expired">&#9888; EXPIRED</span></td></tr>
+                    <tr><td class="zoho-list__name-link">Amina Hassan</td><td>Trustee</td><td>Sep 2028</td><td><span class="zoho-pill zoho-pill--active">Active</span></td></tr>
+                  </tbody>
+                </table>
+                <div style="margin-top:10px;padding:8px 12px;background:#fff8f0;border:1px solid #fde68a;border-radius:6px;font-size:12px;color:#92400e;">&#9888;&nbsp;<b>2 expired terms</b> require renewal: Dr Ravi Menon (Mar 2025) and Thomas Berger (Dec 2024).</div>
+              </div>
+            </div>
+          </main>
         </div>
-        <table class="data-table" style="margin:0">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Members</th>
-              <th>Vacancies / Gaps</th>
-              <th>Status</th>
-            </tr>
-          </thead>
+      </div>
+    </section>
+
+    <!-- ===== STEP 4: Add Member modal ===== -->
+    <section class="screen" id="sc-3">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">&#9634;</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">Governance</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">&#128269;</span><input placeholder="Search records"></div></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon">&#9881;</button><span class="zoho-tb__org">UWC</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127968;</span>Home</a>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon" style="background:#003087;">IO</span><span class="zoho-sb__teamspace-name">IO Global</span><span class="zoho-sb__teamspace-chev">&#8964;</span></div>
+            <a class="zoho-sb__item active"><span class="zoho-sb__item-icon">&#127963;</span>Governance</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128206;</span>Memberships</a>
+          </aside>
+          <main class="zoho-content" style="position:relative;">
+            <div style="opacity:0.3;pointer-events:none;padding:22px 22px 0;">
+              <div class="zoho-detail__card"><div class="zoho-detail__card-title">UWC International Board — Members</div></div>
+            </div>
+            <div class="modal-overlay">
+              <div class="modal-card">
+                <div class="modal-card__title"><span>&#128101; Add Member — UWC International Board</span><button class="modal-card__close">&#215;</button></div>
+                <div class="modal-field">
+                  <label class="zoho-label">Contact <span style="color:#C8102E;">*</span></label>
+                  <div style="position:relative;"><input class="zoho-input" value="Dr Elena Vasquez" style="border-color:#3b6ef5;padding-right:36px;"><span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#3b6ef5;font-size:13px;">&#128279;</span></div>
+                  <div style="margin-top:6px;background:#f0f4ff;border:1px solid #c7d2fe;border-radius:6px;padding:8px 12px;font-size:12px;">
+                    <div style="font-weight:600;color:#1e3a8a;">Dr Elena Vasquez</div>
+                    <div style="color:#5a6480;margin-top:2px;">Director of International Partnerships · Geneva, Switzerland</div>
+                    <div style="margin-top:4px;display:flex;gap:6px;flex-wrap:wrap;"><span style="background:#e0f2fe;color:#075985;padding:1px 7px;border-radius:3px;font-size:11px;">Marketing &amp; Communications</span><span style="background:#e0f2fe;color:#075985;padding:1px 7px;border-radius:3px;font-size:11px;">Youth Engagement</span></div>
+                  </div>
+                </div>
+                <div class="modal-field">
+                  <label class="zoho-label">Role <span style="color:#C8102E;">*</span></label>
+                  <select class="zoho-input" style="cursor:pointer;"><option>Chair</option><option>Vice-Chair</option><option selected>Trustee</option><option>Secretary</option><option>Treasurer</option><option>Advisor</option></select>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+                  <div class="modal-field" style="margin-bottom:0;">
+                    <label class="zoho-label">Appointed Date <span style="color:#C8102E;">*</span></label>
+                    <input class="zoho-input" type="date" value="2026-06-01">
+                  </div>
+                  <div class="modal-field" style="margin-bottom:0;">
+                    <label class="zoho-label">Term Length</label>
+                    <select class="zoho-input" style="cursor:pointer;"><option>1 year</option><option>2 years</option><option selected>3 years</option><option>4 years</option></select>
+                  </div>
+                </div>
+                <div style="margin-top:10px;background:#f0fdf4;border:1px solid #86efac;border-radius:6px;padding:8px 12px;font-size:12px;color:#166534;">&#9432;&nbsp;Term Expires: <b>01 Jun 2029</b> (auto-calculated)</div>
+                <div class="modal-actions"><button class="zoho-btn">Cancel</button><button class="zoho-btn zoho-btn--primary">Save Member</button></div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STEP 5: Historical membership view ===== -->
+    <section class="screen" id="sc-4">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">&#9634;</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">Governance</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">&#128269;</span><input placeholder="Search records"></div></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon">&#9881;</button><span class="zoho-tb__org">UWC</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127968;</span>Home</a>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon" style="background:#003087;">IO</span><span class="zoho-sb__teamspace-name">IO Global</span><span class="zoho-sb__teamspace-chev">&#8964;</span></div>
+            <a class="zoho-sb__item active"><span class="zoho-sb__item-icon">&#127963;</span>Governance</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128206;</span>Memberships</a>
+          </aside>
+          <main class="zoho-content">
+            <div class="zoho-detail__hero">
+              <span class="zoho-detail__back">&#8592;</span>
+              <div class="zoho-detail__avatar" style="background:linear-gradient(135deg,#003087,#3b6ef5);font-size:12px;">IB</div>
+              <div class="zoho-detail__name-block"><div class="zoho-detail__name">UWC International Board</div><div class="zoho-detail__add-tags"><span class="zoho-pill zoho-pill--board">Board</span></div></div>
+              <div class="zoho-detail__actions"><button class="zoho-btn">Export CSV</button></div>
+            </div>
+            <div class="zoho-tabs"><span class="zoho-tabs__tab">Overview</span><span class="zoho-tabs__tab">Members</span><span class="zoho-tabs__tab active">History</span><span class="zoho-tabs__tab">Competency Matrix</span></div>
+            <div class="zoho-detail__main" style="margin-top:14px;">
+              <div class="zoho-detail__card">
+                <div class="zoho-detail__card-title" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                  <span>All-Time Membership — UWC International Board</span>
+                  <div class="filter-chips"><span class="chip">Current</span><span class="chip">Historical</span><span class="chip active">All</span></div>
+                </div>
+                <table class="zoho-list">
+                  <thead><tr><th>Name</th><th>Role</th><th>Period</th><th>Duration</th><th>Status</th></tr></thead>
+                  <tbody>
+                    <tr><td class="zoho-list__name-link">Dame Catherine Prior</td><td>Chair</td><td>Jan 2022 — Dec 2026</td><td>4 yrs</td><td><span class="zoho-pill zoho-pill--active">Active</span></td></tr>
+                    <tr><td class="zoho-list__name-link">Sarah Okonkwo</td><td>Secretary</td><td>Sep 2023 — Aug 2027</td><td>4 yrs</td><td><span class="zoho-pill zoho-pill--active">Active</span></td></tr>
+                    <tr><td class="zoho-list__name-link">Amina Hassan</td><td>Trustee</td><td>Oct 2024 — Sep 2028</td><td>4 yrs</td><td><span class="zoho-pill zoho-pill--active">Active</span></td></tr>
+                    <tr style="opacity:0.72;"><td class="zoho-list__name-link">Dr Ravi Menon</td><td>Trustee</td><td>Mar 2021 — Mar 2025</td><td>4 yrs</td><td><span class="zoho-pill zoho-pill--expired">EXPIRED</span></td></tr>
+                    <tr style="opacity:0.72;"><td class="zoho-list__name-link">Thomas Berger</td><td>Trustee</td><td>Jan 2020 — Dec 2024</td><td>4 yrs</td><td><span class="zoho-pill zoho-pill--expired">EXPIRED</span></td></tr>
+                    <tr style="opacity:0.5;font-style:italic;"><td style="color:#6b7280;">Prof Lara Watson</td><td style="color:#6b7280;">Trustee</td><td style="color:#6b7280;">2018 — 2022</td><td style="color:#6b7280;">4 yrs</td><td><span style="background:#f3f4f6;color:#6b7280;padding:2px 8px;border-radius:4px;font-size:11px;">Term Ended</span></td></tr>
+                    <tr style="opacity:0.5;font-style:italic;"><td style="color:#6b7280;">Sir James Thornton</td><td style="color:#6b7280;">Chair</td><td style="color:#6b7280;">2016 — 2022</td><td style="color:#6b7280;">6 yrs</td><td><span style="background:#f3f4f6;color:#6b7280;padding:2px 8px;border-radius:4px;font-size:11px;">Term Ended</span></td></tr>
+                    <tr style="opacity:0.5;font-style:italic;"><td style="color:#6b7280;">Dr Priya Nair</td><td style="color:#6b7280;">Secretary</td><td style="color:#6b7280;">2019 — 2023</td><td style="color:#6b7280;">4 yrs</td><td><span style="background:#f3f4f6;color:#6b7280;padding:2px 8px;border-radius:4px;font-size:11px;">Term Ended</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STEP 6: Competency matrix — CENTREPIECE ===== -->
+    <section class="screen" id="sc-5">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">&#9634;</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">Governance · Competency Matrix</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">&#128269;</span><input placeholder="Filter competencies…"></div></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon">&#9881;</button><span class="zoho-tb__org">UWC</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127968;</span>Home</a>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon" style="background:#003087;">IO</span><span class="zoho-sb__teamspace-name">IO Global</span><span class="zoho-sb__teamspace-chev">&#8964;</span></div>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127963;</span>Governance</a>
+            <a class="zoho-sb__item active"><span class="zoho-sb__item-icon">&#128203;</span>Competency Matrix</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128206;</span>Memberships</a>
+          </aside>
+          <main class="zoho-content" style="display:flex;flex-direction:column;overflow:hidden;">
+            <div style="padding:10px 22px 8px;border-bottom:1px solid #f0f2f5;background:#fff;display:flex;align-items:center;gap:12px;flex-shrink:0;">
+              <span style="font-weight:600;font-size:13px;color:#003087;">&#127963; UWC International Board</span>
+              <span style="font-size:12px;color:#6b7280;">5 members · 16 required competencies · 3 gaps</span>
+              <span style="flex:1;"></span>
+              <button class="zoho-btn" style="font-size:12px;">Export</button>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 220px;gap:0;flex:1;overflow:hidden;">
+              <div style="overflow:auto;padding:16px 0 16px 22px;">
+                <table class="comp-matrix">
+                  <thead>
+                    <tr>
+                      <th class="comp-label-h">Competency</th>
+                      <th><div class="comp-member-head"><div class="comp-member-initials">CP</div><div class="comp-member-name">Dame Catherine Prior</div><div class="comp-member-status cms-current">CURRENT · Dec 2026</div></div></th>
+                      <th><div class="comp-member-head" style="opacity:0.55;"><div class="comp-member-initials" style="background:#6b7280;">RM</div><div class="comp-member-name">Dr Ravi Menon</div><div class="comp-member-status cms-expired">EXPIRED · Mar 2025</div></div></th>
+                      <th><div class="comp-member-head"><div class="comp-member-initials">SO</div><div class="comp-member-name">Sarah Okonkwo</div><div class="comp-member-status cms-current">CURRENT · Aug 2027</div></div></th>
+                      <th><div class="comp-member-head" style="opacity:0.55;"><div class="comp-member-initials" style="background:#6b7280;">TB</div><div class="comp-member-name">Thomas Berger</div><div class="comp-member-status cms-expired">EXPIRED · Dec 2024</div></div></th>
+                      <th><div class="comp-member-head"><div class="comp-member-initials">AH</div><div class="comp-member-name">Amina Hassan</div><div class="comp-member-status cms-current">CURRENT · Sep 2028</div></div></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="comp-label">Governance</td><td><span class="comp-check">&#10003;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td></tr>
+                    <tr><td class="comp-label">Finance</td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-expired">&#10003;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td></tr>
+                    <tr><td class="comp-label">Legal</td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-check">&#10003;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td></tr>
+                    <tr><td class="comp-label">HR</td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-check">&#10003;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td></tr>
+                    <tr><td class="comp-label">Safeguarding</td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-check">&#10003;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td></tr>
+                    <tr><td class="comp-label">Education Policy</td><td><span class="comp-check">&#10003;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td></tr>
+                    <tr><td class="comp-label">Fundraising</td><td><span class="comp-check">&#10003;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td></tr>
+                    <tr><td class="comp-label">International Relations</td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-expired">&#10003;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td></tr>
+                    <tr><td class="comp-label">Digital Transformation</td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-expired">&#10003;</span></td><td><span class="comp-empty">&#8211;</span></td></tr>
+                    <tr><td class="comp-label">Technology</td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-expired">&#10003;</span></td><td><span class="comp-empty">&#8211;</span></td></tr>
+                    <tr><td class="comp-label">Climate</td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-check">&#10003;</span></td></tr>
+                    <tr><td class="comp-label">Sustainability</td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-check">&#10003;</span></td></tr>
+                    <tr><td class="comp-label gap">Marketing &amp; Communications</td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td></tr>
+                    <tr><td class="comp-label gap">Youth Engagement</td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td></tr>
+                    <tr><td class="comp-label">Africa Region</td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-check">&#10003;</span></td></tr>
+                    <tr><td class="comp-label gap">Asia-Pacific Regional Expertise</td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td><td><span class="comp-empty">&#8211;</span></td></tr>
+                  </tbody>
+                </table>
+                <div style="margin-top:8px;font-size:11px;color:#9ca3af;">&#9432; Faded &#10003; = expired member — competency on record but term ended</div>
+              </div>
+              <!-- Gap panel -->
+              <div style="padding:16px 16px 16px 0;overflow:hidden;">
+                <div class="gap-panel">
+                  <div class="gap-panel__title">&#9888; Competency Gaps</div>
+                  <div style="font-size:11.5px;color:#6b7280;margin-bottom:12px;">3 required competencies have no current member coverage.</div>
+                  <div class="gap-item"><div class="gap-item__icon">&#128241;</div><div><div class="gap-item__text">Marketing &amp; Communications</div><div class="gap-item__sub">0 of 5 members hold this</div></div></div>
+                  <div class="gap-item"><div class="gap-item__icon">&#127775;</div><div><div class="gap-item__text">Youth Engagement</div><div class="gap-item__sub">0 of 5 members hold this</div></div></div>
+                  <div class="gap-item"><div class="gap-item__icon">&#127758;</div><div><div class="gap-item__text">Asia-Pacific Regional Expertise</div><div class="gap-item__sub">0 of 5 members hold this</div></div></div>
+                  <div style="margin-top:14px;padding-top:12px;border-top:1px solid #fee2e2;">
+                    <button class="zoho-btn zoho-btn--primary" style="width:100%;justify-content:center;font-size:12px;">&#128101; Find candidates</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STEP 7: Network-wide summary report ===== -->
+    <section class="screen" id="sc-6">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">&#9634;</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">Governance · Summary Report</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">&#128269;</span><input placeholder="Search reports"></div></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon">&#9881;</button><span class="zoho-tb__org">UWC</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127968;</span>Home</a>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon" style="background:#003087;">IO</span><span class="zoho-sb__teamspace-name">IO Global</span><span class="zoho-sb__teamspace-chev">&#8964;</span></div>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127963;</span>Governance</a>
+            <a class="zoho-sb__item active"><span class="zoho-sb__item-icon">&#128202;</span>Reports</a>
+          </aside>
+          <main class="zoho-content">
+            <div class="zoho-detail__main" style="padding-top:20px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+                <div>
+                  <div style="font-size:17px;font-weight:600;color:#0d1b3e;font-family:'Playfair Display',Georgia,serif;">Governance Network Summary</div>
+                  <div style="font-size:12px;color:#6b7280;margin-top:2px;">Generated 28 May 2026 &nbsp;·&nbsp; IO Super Admin view</div>
+                </div>
+                <div style="display:flex;gap:8px;"><button class="zoho-btn">&#128196; Export PDF</button><button class="zoho-btn zoho-btn--primary">&#128257; Refresh</button></div>
+              </div>
+              <div class="kpi-row">
+                <div class="kpi-card"><div class="kpi-card__val">4</div><div class="kpi-card__label">Active governance bodies</div></div>
+                <div class="kpi-card"><div class="kpi-card__val">17</div><div class="kpi-card__label">Active members across all bodies</div></div>
+                <div class="kpi-card"><div class="kpi-card__val kpi-card__val--warn">2</div><div class="kpi-card__label">Expired terms requiring renewal</div></div>
+                <div class="kpi-card"><div class="kpi-card__val kpi-card__val--danger">3</div><div class="kpi-card__label">Competency gaps — Board</div></div>
+              </div>
+              <div class="zoho-detail__card">
+                <div class="zoho-detail__card-title">Body-by-Body Summary</div>
+                <table class="zoho-list">
+                  <thead><tr><th>Body</th><th>Type</th><th>Active Members</th><th>Expired Terms</th><th>Next Renewal</th><th>Action Items</th></tr></thead>
+                  <tbody>
+                    <tr><td class="zoho-list__name-link">UWC International Board</td><td><span class="zoho-pill zoho-pill--board">Board</span></td><td>3 <span style="color:#9ca3af;font-size:11px;">/ 5</span></td><td><span style="color:#991b1b;font-weight:600;">2</span></td><td>Dec 2026 (Chair)</td><td><span style="color:#991b1b;font-size:12px;">Renew 2 terms · Fill 3 gaps</span></td></tr>
+                    <tr><td class="zoho-list__name-link">Audit &amp; Risk Committee</td><td><span class="zoho-pill zoho-pill--committee">Committee</span></td><td>4 <span style="color:#9ca3af;font-size:11px;">/ 4</span></td><td style="color:#16a34a;">0</td><td>Mar 2027</td><td><span style="color:#6b7280;font-size:12px;">None</span></td></tr>
+                    <tr><td class="zoho-list__name-link">Nominations Committee</td><td><span class="zoho-pill zoho-pill--committee">Committee</span></td><td>3 <span style="color:#9ca3af;font-size:11px;">/ 3</span></td><td style="color:#16a34a;">0</td><td>Jun 2027</td><td><span style="color:#6b7280;font-size:12px;">None</span></td></tr>
+                    <tr><td class="zoho-list__name-link">Risk Advisory Group</td><td><span class="zoho-pill zoho-pill--advisory">Advisory</span></td><td>5 <span style="color:#9ca3af;font-size:11px;">/ 5</span></td><td style="color:#16a34a;">0</td><td>Sep 2027</td><td><span style="color:#6b7280;font-size:12px;">None</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STEP 8: Appendix ===== -->
+    <section class="screen" id="sc-7">
+      <div class="appendix">
+        <h1>Module field reference &#8212; Scenario E</h1>
+        <p>Field-level model for modules touched in Scenario E: Governance Body, Governance Membership, and Competency. Every <code style="font-family:'DM Mono',monospace;background:#E8EEF6;color:#003087;padding:1px 6px;border-radius:3px;">API name</code> matches the live Zoho org schema.</p>
+
+        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:18px;">Governance Body module</h2>
+        <table class="ref-table">
+          <thead><tr><th>Field label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
           <tbody>
-            <tr>
-              <td><span class="link" onclick="go(2)">UWC International Board</span></td>
-              <td><span style="font-family:var(--uwc-font-mono);font-size:11px;color:#7c3aed">Board</span></td>
-              <td>5</td>
-              <td><span style="color:#991b1b;font-size:12px;font-weight:600">3 gaps</span> <span style="font-size:11px;color:var(--zoho-text-muted)">(2 expired terms)</span></td>
-              <td><span class="zoho-pill zoho-pill--vacancy">⚠ Vacancy</span></td>
-            </tr>
-            <tr>
-              <td><span class="link">Audit &amp; Risk Committee</span></td>
-              <td><span style="font-family:var(--uwc-font-mono);font-size:11px;color:#0369a1">Committee</span></td>
-              <td>4</td>
-              <td><span style="color:#991b1b;font-size:12px;font-weight:600">1 gap</span></td>
-              <td><span class="zoho-pill zoho-pill--active">● Active</span></td>
-            </tr>
-            <tr>
-              <td><span class="link">Nominations Committee</span></td>
-              <td><span style="font-family:var(--uwc-font-mono);font-size:11px;color:#0369a1">Committee</span></td>
-              <td>3</td>
-              <td>None</td>
-              <td><span class="zoho-pill zoho-pill--active">● Active</span></td>
-            </tr>
-            <tr>
-              <td><span class="link">Risk Advisory Group</span></td>
-              <td><span style="font-family:var(--uwc-font-mono);font-size:11px;color:#059669">Advisory</span></td>
-              <td>4</td>
-              <td><span style="color:#991b1b;font-size:12px;font-weight:600">1 gap</span></td>
-              <td><span class="zoho-pill zoho-pill--active">● Active</span></td>
-            </tr>
+            <tr><td>Body Name</td><td class="ft-name">Body_Name</td><td><span class="ft-t">Single-line text</span></td><td>Required; unique per organisation</td></tr>
+            <tr><td>Type</td><td class="ft-name">Body_Type</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Board · Committee · Advisory</td></tr>
+            <tr><td>Purpose</td><td class="ft-name">Body_Purpose</td><td><span class="ft-t">Multi-line text</span></td><td>Governance mandate description</td></tr>
+            <tr><td>Parent Body</td><td class="ft-name">Parent_Body</td><td><span class="ft-t ft-look">Lookup &#8594; Governance Body</span></td><td>Self-referential; null for top-level bodies</td></tr>
+            <tr><td>Status</td><td class="ft-name">Body_Status</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Active · Dormant · Dissolved</td></tr>
           </tbody>
         </table>
-      </div>
-    </div>
-  </div>
 
-  <div class="badges-strip">
-    <span class="badge badge--info">Custom module: Governance Body</span>
-    <span class="badge badge--auto">Vacancy auto-calculated from expired member terms</span>
-    <span class="badge badge--gate">IO Super Admin sees all 4 bodies; NC roles see none</span>
-  </div>
-</section>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:24px;">Governance Membership module</h2>
+        <table class="ref-table">
+          <thead><tr><th>Field label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Contact</td><td class="ft-name">Member_Contact</td><td><span class="ft-t ft-look">Lookup &#8594; Contacts</span></td><td>Required; links to the person record</td></tr>
+            <tr><td>Governance Body</td><td class="ft-name">Governance_Body</td><td><span class="ft-t ft-look">Lookup &#8594; Governance Body</span></td><td>Required; the body this membership belongs to</td></tr>
+            <tr><td>Role</td><td class="ft-name">Member_Role</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Chair · Vice-Chair · Trustee · Secretary · Treasurer · Advisor</td></tr>
+            <tr><td>Appointed Date</td><td class="ft-name">Appointed_Date</td><td><span class="ft-t">Date</span></td><td>Start of term; required</td></tr>
+            <tr><td>Term Expires</td><td class="ft-name">Term_Expires</td><td><span class="ft-t ft-auto">Date · Auto</span></td><td>Appointed_Date + Term_Length; drives renewal alerts</td></tr>
+          </tbody>
+        </table>
 
-<!-- ===== SCREEN 1: CREATE GOVERNANCE BODY ===== -->
-<section class="screen" id="sc-1">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">🏛 Akanksha Anand — IO Super Admin</div>
-      <h1 class="screen-title">Create New Governance Body</h1>
-      <p class="screen-sub">Akanksha clicks "+ New Body" to register a new governance structure. The form captures core fields — name, type, purpose, established date, and reporting line.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(0)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(2)">Next →</button>
-    </div>
-  </div>
+        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:24px;">Competency module</h2>
+        <table class="ref-table">
+          <thead><tr><th>Field label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Competency Name</td><td class="ft-name">Competency_Name</td><td><span class="ft-t">Single-line text</span></td><td>16 required competencies defined at IO level</td></tr>
+            <tr><td>Category</td><td class="ft-name">Competency_Category</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Governance · Finance · Legal · Technical · Regional · Sector</td></tr>
+            <tr><td>Required for Board</td><td class="ft-name">Required_Board</td><td><span class="ft-t">Boolean</span></td><td>TRUE = appears in competency matrix gap analysis</td></tr>
+            <tr><td>Contact Competencies</td><td class="ft-name">Contact_Competencies</td><td><span class="ft-t ft-look">Multi-lookup &#8594; Contacts</span></td><td>People who hold this competency; used for candidate finder</td></tr>
+            <tr><td>Gap Count</td><td class="ft-name">Gap_Count</td><td><span class="ft-t ft-auto">Integer · Auto</span></td><td>Bodies requiring this competency with no current member coverage</td></tr>
+          </tbody>
+        </table>
 
-  <div class="card">
-    <div class="card__header">
-      <span class="card__title">New Governance Body</span>
-      <span class="card__sub">Governance Bodies · Create record</span>
-    </div>
-    <div class="card__body">
-      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
-        <span class="demo-mode-tag demo-mode-tag--zoho">Zoho CRM — Create Form</span>
-      </div>
-      <div class="form-section">
-        <div class="form-section__header"><div class="form-section__title">Body Details</div></div>
-        <div class="form-section__body">
-          <div class="form-grid">
-            <div class="form-field">
-              <label class="form-label">Body Name <span class="req">*</span></label>
-              <input class="form-input" placeholder="e.g. Finance Subcommittee" value="">
-            </div>
-            <div class="form-field">
-              <label class="form-label">Type <span class="req">*</span></label>
-              <select class="form-select">
-                <option value="">— Select type —</option>
-                <option>Board</option>
-                <option>Committee</option>
-                <option>Advisory</option>
-              </select>
-            </div>
-            <div class="form-field" style="grid-column:1/-1">
-              <label class="form-label">Purpose / Mandate</label>
-              <textarea class="form-textarea" placeholder="Describe the mandate and primary responsibilities of this governance body…"></textarea>
-            </div>
-            <div class="form-field">
-              <label class="form-label">Established Date</label>
-              <input class="form-input" type="date" value="">
-              <div class="form-helper">Used for tenure calculations and anniversary reporting.</div>
-            </div>
-            <div class="form-field">
-              <label class="form-label">Reporting To</label>
-              <div class="lookup-field">
-                <input class="form-input" placeholder="Search governance body…">
-                <button class="lookup-field__btn">🔍 Lookup</button>
-              </div>
-              <div class="form-helper">Leave blank if this body reports directly to UWC International Board.</div>
-            </div>
-          </div>
+        <div style="margin-top:28px;padding:16px 20px;background:#E8EEF6;border-radius:8px;font-size:12.5px;color:#003087;line-height:1.6;">
+          <b style="font-family:'Playfair Display',Georgia,serif;font-size:14px;">End of Scenario E.</b><br>
+          Covers: governance body creation and management, membership lifecycle (appoint, renew, expire), historical membership view, and the competency gap matrix centrepiece. Continue to <b>Scenario F</b> for alumni engagement.
         </div>
       </div>
-      <div style="display:flex;justify-content:flex-end;gap:10px;padding-top:8px">
-        <button class="btn-nav" onclick="go(0)">Cancel</button>
-        <button class="btn-nav btn-nav--primary" onclick="go(2)">Save &amp; Open Record →</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="badges-strip">
-    <span class="badge badge--auto">Established Date → auto-computes tenure at save</span>
-    <span class="badge badge--lookup">Reporting To → lookup to Governance Body (self-referential)</span>
-  </div>
-</section>
-
-<!-- ===== SCREEN 2: BOARD DETAIL RECORD ===== -->
-<section class="screen" id="sc-2">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">🏛 Akanksha Anand — IO Super Admin</div>
-      <h1 class="screen-title">UWC International Board</h1>
-      <p class="screen-sub">Record detail view. The member roster shows all 5 trustees with term status — 2 are expired (red), 3 are current (green). Akanksha can see at a glance who needs succession action.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(1)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(3)">Next →</button>
-    </div>
-  </div>
-
-  <div class="card" style="overflow:visible">
-    <div class="zoho-topbar" style="border-radius:var(--uwc-radius-lg) var(--uwc-radius-lg) 0 0">
-      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM — Governance Bodies</div>
-      <div class="zoho-topbar__right"><div class="zoho-topbar__org">AA</div></div>
-    </div>
-
-    <!-- Detail hero -->
-    <div class="zoho-detail__hero">
-      <div class="zoho-detail__avatar" style="width:52px;height:52px;font-size:20px;border-radius:10px">🏛</div>
-      <div>
-        <div class="zoho-detail__name">UWC International Board</div>
-        <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
-          <span style="font-family:var(--uwc-font-mono);font-size:11px;background:#ede9fe;color:#5b21b6;padding:2px 8px;border-radius:4px">Board</span>
-          <span class="zoho-pill zoho-pill--vacancy">⚠ 2 expired terms</span>
-          <span class="zoho-pill" style="background:#fff5f5;color:#991b1b;font-weight:600">3 competency gaps</span>
-        </div>
-      </div>
-      <div class="zoho-detail__actions">
-        <button class="zoho-btn">Edit</button>
-        <button class="zoho-btn zoho-btn--primary" onclick="go(3)">+ Add Member</button>
-      </div>
-    </div>
-
-    <div class="zoho-detail__sections">
-      <!-- Fields -->
-      <div class="zoho-detail__section">
-        <div class="zoho-detail__section-header"><span class="zoho-detail__section-title">Body Details</span></div>
-        <div class="zoho-detail__section-body">
-          <div class="zoho-fields">
-            <div class="zoho-field"><span class="zoho-field__label">Body Name</span><span class="zoho-field__value">UWC International Board</span></div>
-            <div class="zoho-field"><span class="zoho-field__label">Type</span><span class="zoho-field__value">Board</span></div>
-            <div class="zoho-field"><span class="zoho-field__label">Established</span><span class="zoho-field__value">1 January 2000</span></div>
-            <div class="zoho-field"><span class="zoho-field__label">Reporting To</span><span class="zoho-field__value" style="color:var(--zoho-text-muted)">— (apex body)</span></div>
-            <div class="zoho-field" style="grid-column:1/-1"><span class="zoho-field__label">Purpose</span><span class="zoho-field__value">Governance of UWC International; sets strategy, financial oversight, and safeguarding policy.</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Member roster -->
-      <div class="zoho-detail__section">
-        <div class="zoho-detail__section-header">
-          <span class="zoho-detail__section-title">Member Roster</span>
-          <button class="zoho-btn zoho-btn--primary" style="font-size:11.5px;padding:5px 12px" onclick="go(3)">+ Add Member</button>
-        </div>
-        <div class="zoho-detail__section-body" style="padding:0">
-          <table class="data-table" style="margin:0">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Appointed</th>
-                <th>Term Expires</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Dame Catherine Prior</strong></td>
-                <td>Chair</td>
-                <td>1 Jan 2022</td>
-                <td>31 Dec 2026</td>
-                <td><span class="zoho-pill zoho-pill--active">● Current</span></td>
-              </tr>
-              <tr style="background:#fff5f5">
-                <td><strong>Dr Ravi Menon</strong></td>
-                <td>Trustee</td>
-                <td>1 Mar 2021</td>
-                <td><span style="color:#991b1b;font-weight:600">31 Mar 2025 ⚠</span></td>
-                <td><span class="zoho-pill zoho-pill--expired">✕ EXPIRED</span></td>
-              </tr>
-              <tr>
-                <td><strong>Sarah Okonkwo</strong></td>
-                <td>Secretary</td>
-                <td>1 Sep 2023</td>
-                <td>31 Aug 2027</td>
-                <td><span class="zoho-pill zoho-pill--active">● Current</span></td>
-              </tr>
-              <tr style="background:#fff5f5">
-                <td><strong>Thomas Berger</strong></td>
-                <td>Trustee</td>
-                <td>1 Jan 2020</td>
-                <td><span style="color:#991b1b;font-weight:600">31 Dec 2024 ⚠</span></td>
-                <td><span class="zoho-pill zoho-pill--expired">✕ EXPIRED</span></td>
-              </tr>
-              <tr>
-                <td><strong>Amina Hassan</strong></td>
-                <td>Trustee</td>
-                <td>1 Oct 2024</td>
-                <td>30 Sep 2028</td>
-                <td><span class="zoho-pill zoho-pill--active">● Current</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="badges-strip">
-    <span class="badge badge--gate">Term Expires < today → auto-flag EXPIRED; alert fires if not renewed within 30 days</span>
-    <span class="badge badge--auto">Competency gaps computed from board member tags vs required list</span>
-  </div>
-</section>
-
-<!-- ===== SCREEN 3: ADD MEMBER WORKFLOW ===== -->
-<section class="screen" id="sc-3">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">🏛 Akanksha Anand — IO Super Admin</div>
-      <h1 class="screen-title">Add Member to Board</h1>
-      <p class="screen-sub">Akanksha clicks "+ Add Member" from the Board detail record. A modal form opens — she selects a Contact, assigns a role, sets appointment date, and the system computes the term expiry.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(2)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(4)">Next →</button>
-    </div>
-  </div>
-
-  <!-- Dimmed board record behind modal -->
-  <div style="position:relative">
-    <div style="opacity:.35;pointer-events:none">
-      <div class="card">
-        <div style="padding:14px 20px;font-size:14px;font-weight:600;border-bottom:1px solid var(--uwc-grey-200)">UWC International Board — Member Roster</div>
-        <div style="padding:12px 20px;font-size:13px;color:var(--zoho-text-muted)">[ record content dimmed — modal in focus ]</div>
-      </div>
-    </div>
-
-    <!-- Modal -->
-    <div style="position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;padding-top:20px;z-index:10">
-      <div class="modal">
-        <div class="modal__header">
-          <span class="modal__title">Add Board Member</span>
-          <button class="modal__close" onclick="go(2)">✕</button>
-        </div>
-        <div class="modal__body">
-          <div class="form-field">
-            <label class="form-label">Contact (lookup) <span class="req">*</span></label>
-            <div class="lookup-field">
-              <input class="form-input" value="New candidate name…" style="background:var(--uwc-navy-tint);border-color:#93c5fd;color:var(--uwc-navy)">
-              <button class="lookup-field__btn">🔍</button>
-            </div>
-            <div class="form-helper">Links to an existing Contact record in Zoho CRM.</div>
-          </div>
-          <div class="form-grid" style="margin-top:4px">
-            <div class="form-field">
-              <label class="form-label">Role <span class="req">*</span></label>
-              <select class="form-select">
-                <option>Chair</option>
-                <option selected>Trustee</option>
-                <option>Secretary</option>
-                <option>Member</option>
-              </select>
-            </div>
-            <div class="form-field">
-              <label class="form-label">Appointment Date <span class="req">*</span></label>
-              <input class="form-input" type="date" value="2026-06-01">
-            </div>
-            <div class="form-field">
-              <label class="form-label">Term Duration (years) <span class="req">*</span></label>
-              <select class="form-select">
-                <option>1 year</option>
-                <option>2 years</option>
-                <option selected>3 years</option>
-                <option>4 years</option>
-              </select>
-            </div>
-            <div class="form-field">
-              <label class="form-label">Term Expires</label>
-              <input class="form-input" value="31 May 2029" style="background:var(--uwc-grey-50);color:var(--uwc-grey-500)" readonly>
-              <div class="form-helper">Auto-computed from Appointment Date + Term Duration.</div>
-            </div>
-          </div>
-        </div>
-        <div class="modal__footer">
-          <button class="btn-nav" onclick="go(2)">Cancel</button>
-          <button class="btn-nav btn-nav--primary" onclick="go(4)">Save Member →</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="badges-strip">
-    <span class="badge badge--auto">Term Expires = Appointment Date + Term Duration (formula field)</span>
-    <span class="badge badge--api">Contact lookup → Governance Membership junction record created on save</span>
-  </div>
-</section>
-
-<!-- ===== SCREEN 4: HISTORICAL MEMBERSHIP VIEW ===== -->
-<section class="screen" id="sc-4">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">🏛 Akanksha Anand — IO Super Admin</div>
-      <h1 class="screen-title">Historical Membership</h1>
-      <p class="screen-sub">Tabbed view on the Board record — "Current" shows 3 active members; "Past Terms" shows the 2 expired trustees. Historical records are preserved, never deleted.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(3)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(5)">Next →</button>
-    </div>
-  </div>
-
-  <div class="card" style="overflow:visible">
-    <div class="zoho-topbar" style="border-radius:var(--uwc-radius-lg) var(--uwc-radius-lg) 0 0">
-      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> UWC International Board — Memberships</div>
-      <div class="zoho-topbar__right"><div class="zoho-topbar__org">AA</div></div>
-    </div>
-
-    <div style="padding:0 20px">
-      <div class="tab-bar" style="margin-top:0">
-        <div class="tab-item active" id="tab-current" onclick="switchTab('current')">Current Members <span style="background:#d1fae5;color:#065f46;font-size:10px;padding:1px 7px;border-radius:10px;margin-left:4px">3</span></div>
-        <div class="tab-item" id="tab-past" onclick="switchTab('past')">Past Terms <span style="background:#fee2e2;color:#991b1b;font-size:10px;padding:1px 7px;border-radius:10px;margin-left:4px">2</span></div>
-      </div>
-    </div>
-
-    <!-- Current tab -->
-    <div id="tab-panel-current" style="padding:0 20px 16px">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Appointed</th>
-            <th>Term Expires</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Dame Catherine Prior</strong></td>
-            <td>Chair</td>
-            <td>1 Jan 2022</td>
-            <td>31 Dec 2026</td>
-            <td><span class="zoho-pill zoho-pill--active">● Current</span></td>
-          </tr>
-          <tr>
-            <td><strong>Sarah Okonkwo</strong></td>
-            <td>Secretary</td>
-            <td>1 Sep 2023</td>
-            <td>31 Aug 2027</td>
-            <td><span class="zoho-pill zoho-pill--active">● Current</span></td>
-          </tr>
-          <tr>
-            <td><strong>Amina Hassan</strong></td>
-            <td>Trustee</td>
-            <td>1 Oct 2024</td>
-            <td>30 Sep 2028</td>
-            <td><span class="zoho-pill zoho-pill--active">● Current</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Past tab (hidden) -->
-    <div id="tab-panel-past" style="padding:0 20px 16px;display:none">
-      <div class="alert alert--warning" style="margin:12px 0 8px">
-        ⚠ These trustees have passed their term end date. Succession planning required.
-      </div>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Appointed</th>
-            <th>Term Ended</th>
-            <th>Status</th>
-            <th>Competencies (on departure)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:#fff5f5">
-            <td><strong>Dr Ravi Menon</strong></td>
-            <td>Trustee</td>
-            <td>1 Mar 2021</td>
-            <td><strong>31 Mar 2025</strong></td>
-            <td><span class="zoho-pill zoho-pill--expired">Term ended</span></td>
-            <td><span style="font-size:11.5px;color:var(--zoho-text-muted)">Finance · International Relations</span></td>
-          </tr>
-          <tr style="background:#fff5f5">
-            <td><strong>Thomas Berger</strong></td>
-            <td>Trustee</td>
-            <td>1 Jan 2020</td>
-            <td><strong>31 Dec 2024</strong></td>
-            <td><span class="zoho-pill zoho-pill--expired">Term ended</span></td>
-            <td><span style="font-size:11.5px;color:var(--zoho-text-muted)">Digital Transformation · Technology</span></td>
-          </tr>
-        </tbody>
-      </table>
-      <div style="margin-top:12px;padding:10px 14px;background:var(--uwc-navy-tint);border-radius:var(--uwc-radius-sm);font-size:12.5px;color:var(--uwc-navy)">
-        ℹ Membership records are <strong>never deleted</strong>. Past terms are preserved for audit and institutional memory.
-      </div>
-    </div>
-  </div>
-
-  <div class="badges-strip">
-    <span class="badge badge--auto">Current / Past split driven by Term Expires field vs today's date</span>
-    <span class="badge badge--api">Competency tags copied to historical record snapshot on transition</span>
-    <span class="badge badge--gate">Audit trail: no deletions — status field transitions only</span>
-  </div>
-</section>
-
-<!-- ===== SCREEN 5: COMPETENCY MATRIX ===== -->
-<section class="screen" id="sc-5">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">🎯 Akanksha Anand — IO Super Admin · UWC-branded view</div>
-      <h1 class="screen-title">Board Competency Matrix</h1>
-      <p class="screen-sub">Visual map of all 16 required competencies against the 5 board members. Three rows flagged as <strong style="color:#991b1b">GAP</strong> — the board is missing Marketing &amp; Communications, Youth Engagement, and Asia-Pacific Regional Expertise.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(4)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(6)">Next →</button>
-    </div>
-  </div>
-
-  <!-- Stats row -->
-  <div class="matrix-stats">
-    <div class="matrix-stat matrix-stat--ok">
-      <div class="matrix-stat__value">13</div>
-      <div class="matrix-stat__label">of 16 competencies covered</div>
-    </div>
-    <div class="matrix-stat matrix-stat--warn">
-      <div class="matrix-stat__value">3</div>
-      <div class="matrix-stat__label">critical gaps identified</div>
-    </div>
-    <div class="matrix-stat matrix-stat--pct">
-      <div class="matrix-stat__value">81%</div>
-      <div class="matrix-stat__label">coverage rate</div>
-    </div>
-  </div>
-
-  <div class="alert alert--warning">
-    ⚠ <strong>Succession priority:</strong> 3 competency gaps identified — Marketing &amp; Communications, Youth Engagement, and Asia-Pacific Regional Expertise are not held by any current board member. 2 expired trustees held Finance and Digital Transformation — those competencies now show partial coverage risk.
-  </div>
-
-  <div class="matrix-legend">
-    <span>✓ <strong style="color:#16a34a">Covered</strong> — competency held by this member</span>
-    <span style="margin-left:12px">· <span style="color:var(--uwc-grey-300)">—</span> Not held</span>
-    <span style="margin-left:12px"><span style="background:#fff5f5;border:1px solid #fca5a5;padding:1px 5px;border-radius:3px;font-size:11px;color:#991b1b">GAP</span> No board member holds this competency</span>
-  </div>
-
-  <div class="matrix-wrap">
-    <table class="comp-matrix">
-      <thead>
-        <tr>
-          <th class="row-header">Required Competency</th>
-          <th>
-            <div class="member-name">Dame Catherine Prior</div>
-            <div class="member-role">Chair</div>
-            <div class="member-status ms-current">CURRENT · exp Dec 2026</div>
-          </th>
-          <th>
-            <div class="member-name">Dr Ravi Menon</div>
-            <div class="member-role">Trustee</div>
-            <div class="member-status ms-expired">EXPIRED · Mar 2025</div>
-          </th>
-          <th>
-            <div class="member-name">Sarah Okonkwo</div>
-            <div class="member-role">Secretary</div>
-            <div class="member-status ms-current">CURRENT · exp Aug 2027</div>
-          </th>
-          <th>
-            <div class="member-name">Thomas Berger</div>
-            <div class="member-role">Trustee</div>
-            <div class="member-status ms-expired">EXPIRED · Dec 2024</div>
-          </th>
-          <th>
-            <div class="member-name">Amina Hassan</div>
-            <div class="member-role">Trustee</div>
-            <div class="member-status ms-current">CURRENT · exp Sep 2028</div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="row-label">Governance</td>
-          <td><span class="comp-tick">✓</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-        </tr>
-        <tr>
-          <td class="row-label">Finance</td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-tick" style="opacity:.45">✓</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-        </tr>
-        <tr>
-          <td class="row-label">Legal</td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-tick">✓</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-        </tr>
-        <tr>
-          <td class="row-label">HR</td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-tick">✓</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-        </tr>
-        <tr>
-          <td class="row-label">Safeguarding</td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-tick">✓</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-        </tr>
-        <tr>
-          <td class="row-label">Education Policy</td>
-          <td><span class="comp-tick">✓</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-        </tr>
-        <tr>
-          <td class="row-label">Fundraising</td>
-          <td><span class="comp-tick">✓</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-        </tr>
-        <tr>
-          <td class="row-label">International Relations</td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-tick" style="opacity:.45">✓</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-        </tr>
-        <tr>
-          <td class="row-label">Digital Transformation</td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-tick" style="opacity:.45">✓</span></td>
-          <td><span class="comp-empty">—</span></td>
-        </tr>
-        <tr>
-          <td class="row-label">Technology</td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-tick" style="opacity:.45">✓</span></td>
-          <td><span class="comp-empty">—</span></td>
-        </tr>
-        <tr>
-          <td class="row-label">Climate</td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-tick">✓</span></td>
-        </tr>
-        <tr>
-          <td class="row-label">Sustainability</td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-tick">✓</span></td>
-        </tr>
-        <tr>
-          <td class="row-label">Africa Region</td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-tick">✓</span></td>
-        </tr>
-        <!-- GAP rows -->
-        <tr class="gap-row">
-          <td class="row-label">Marketing &amp; Communications<span class="gap-tag">GAP</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-        </tr>
-        <tr class="gap-row">
-          <td class="row-label">Youth Engagement<span class="gap-tag">GAP</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-        </tr>
-        <tr class="gap-row">
-          <td class="row-label">Asia-Pacific Regional Expertise<span class="gap-tag">GAP</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-          <td><span class="comp-empty">—</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div style="margin-top:10px;font-size:11.5px;color:var(--uwc-grey-500)">
-    ⚠ Faded ticks (expired members) count as partial coverage risk — competency present on record but member term has ended.
-  </div>
-
-  <div class="badges-strip">
-    <span class="badge badge--gate">3 GAP rows — intentional per Build Plan §2.4</span>
-    <span class="badge badge--auto">Matrix auto-regenerates when member competency tags update</span>
-    <span class="badge badge--info">Expired member ticks shown at 45% opacity — risk indicator</span>
-  </div>
-</section>
-
-<!-- ===== SCREEN 6: NETWORK-WIDE GOVERNANCE SUMMARY ===== -->
-<section class="screen" id="sc-6">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">🏛 Akanksha Anand — IO Super Admin</div>
-      <h1 class="screen-title">Network-wide Governance Summary</h1>
-      <p class="screen-sub">Dashboard view across all 4 governance bodies — member counts, vacancy alerts, upcoming term expiries in next 90 days, and quick-action buttons for succession planning.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(5)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(7)">Next →</button>
-    </div>
-  </div>
-
-  <!-- KPI summary strip -->
-  <div class="grid-4" style="margin-bottom:20px">
-    <div class="stat-tile">
-      <div class="stat-tile__label">Governance Bodies</div>
-      <div class="stat-tile__value">4</div>
-    </div>
-    <div class="stat-tile">
-      <div class="stat-tile__label">Total Trustees / Members</div>
-      <div class="stat-tile__value">16</div>
-    </div>
-    <div class="stat-tile" style="border-color:#fca5a5">
-      <div class="stat-tile__label" style="color:#991b1b">Expired Terms</div>
-      <div class="stat-tile__value" style="color:#991b1b">2</div>
-    </div>
-    <div class="stat-tile" style="border-color:#fbbf24">
-      <div class="stat-tile__label" style="color:#92400e">Expiring (next 90 days)</div>
-      <div class="stat-tile__value" style="color:#92400e">1</div>
-    </div>
-  </div>
-
-  <!-- Body cards -->
-  <div class="grid-2" style="margin-bottom:16px">
-
-    <div class="body-card" style="border-color:#fca5a5;border-width:2px">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <div>
-          <div class="body-card__name">UWC International Board</div>
-          <div class="body-card__type">Board</div>
-        </div>
-        <span class="zoho-pill zoho-pill--expired" style="flex-shrink:0">⚠ Action needed</span>
-      </div>
-      <div class="body-card__kpis">
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val">5</div>
-          <div class="body-card__kpi-lbl">Members</div>
-        </div>
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val" style="color:#991b1b">2</div>
-          <div class="body-card__kpi-lbl">Expired</div>
-        </div>
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val" style="color:#991b1b">3</div>
-          <div class="body-card__kpi-lbl">Comp. Gaps</div>
-        </div>
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val" style="color:#d97706">1</div>
-          <div class="body-card__kpi-lbl">Exp. ≤90 days</div>
-        </div>
-      </div>
-      <div class="body-card__gap">⚠ Gaps: Marketing &amp; Comms · Youth Engagement · Asia-Pacific</div>
-      <div class="body-card__action" onclick="go(5)">📋 Schedule succession review →</div>
-    </div>
-
-    <div class="body-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <div>
-          <div class="body-card__name">Audit &amp; Risk Committee</div>
-          <div class="body-card__type">Committee</div>
-        </div>
-        <span class="zoho-pill zoho-pill--active">● Active</span>
-      </div>
-      <div class="body-card__kpis">
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val">4</div>
-          <div class="body-card__kpi-lbl">Members</div>
-        </div>
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val" style="color:var(--uwc-green)">0</div>
-          <div class="body-card__kpi-lbl">Expired</div>
-        </div>
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val" style="color:#d97706">1</div>
-          <div class="body-card__kpi-lbl">Comp. Gap</div>
-        </div>
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val">0</div>
-          <div class="body-card__kpi-lbl">Exp. ≤90 days</div>
-        </div>
-      </div>
-      <div class="body-card__gap">⚠ Gap: Cybersecurity</div>
-      <div class="body-card__action">📋 View full record →</div>
-    </div>
-
-    <div class="body-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <div>
-          <div class="body-card__name">Nominations Committee</div>
-          <div class="body-card__type">Committee</div>
-        </div>
-        <span class="zoho-pill zoho-pill--active">● Active</span>
-      </div>
-      <div class="body-card__kpis">
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val">3</div>
-          <div class="body-card__kpi-lbl">Members</div>
-        </div>
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val" style="color:var(--uwc-green)">0</div>
-          <div class="body-card__kpi-lbl">Expired</div>
-        </div>
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val" style="color:var(--uwc-green)">0</div>
-          <div class="body-card__kpi-lbl">Comp. Gaps</div>
-        </div>
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val">0</div>
-          <div class="body-card__kpi-lbl">Exp. ≤90 days</div>
-        </div>
-      </div>
-      <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:var(--uwc-radius-sm);padding:5px 8px;font-size:11px;color:#166534;margin-top:2px">✓ All competencies covered — no gaps</div>
-      <div class="body-card__action">📋 View full record →</div>
-    </div>
-
-    <div class="body-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <div>
-          <div class="body-card__name">Risk Advisory Group</div>
-          <div class="body-card__type">Advisory</div>
-        </div>
-        <span class="zoho-pill zoho-pill--active">● Active</span>
-      </div>
-      <div class="body-card__kpis">
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val">4</div>
-          <div class="body-card__kpi-lbl">Members</div>
-        </div>
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val" style="color:var(--uwc-green)">0</div>
-          <div class="body-card__kpi-lbl">Expired</div>
-        </div>
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val" style="color:#d97706">1</div>
-          <div class="body-card__kpi-lbl">Comp. Gap</div>
-        </div>
-        <div class="body-card__kpi">
-          <div class="body-card__kpi-val">0</div>
-          <div class="body-card__kpi-lbl">Exp. ≤90 days</div>
-        </div>
-      </div>
-      <div class="body-card__gap">⚠ Gap: Climate Risk</div>
-      <div class="body-card__action">📋 View full record →</div>
-    </div>
+    </section>
 
   </div>
+</div>
 
-  <div class="alert alert--demo-note">
-    🎯 <strong>Demo talking point:</strong> click "Schedule succession review for UWC International Board" above to step back to the Competency Matrix and discuss recruitment priorities with the committee.
-  </div>
-
-  <div class="badges-strip">
-    <span class="badge badge--auto">Dashboard auto-refreshes vacancy + gap counts from live member records</span>
-    <span class="badge badge--gate">IO Super Admin sees all bodies; NC roles see none (field-level security)</span>
-  </div>
-</section>
-
-<!-- ===== SCREEN 7: CRM FIELD REFERENCE ===== -->
-<section class="screen" id="sc-7">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">📋 IO CRM Administrator — Field Reference</div>
-      <h1 class="screen-title">CRM Field Reference — Governance</h1>
-      <p class="screen-sub">Data model reference for Zoho CRM implementation. Three modules: Governance Body, Governance Membership (junction), and Competency tags on Contact records.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(6)">← Prev</button>
-      <button class="btn-nav" disabled>End of Scenario E</button>
-    </div>
-  </div>
-
-  <!-- Module 1: Governance Body -->
-  <div class="card">
-    <div class="card__header">
-      <span class="card__title">Module: Governance Body</span>
-      <span class="card__sub">Custom module · 9 fields</span>
-    </div>
-    <div class="card__body" style="padding:0">
-      <table class="ref-table">
-        <thead>
-          <tr>
-            <th>Field Name</th>
-            <th>API Name</th>
-            <th>Type</th>
-            <th>Required</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Body Name</td>
-            <td class="mono">Body_Name</td>
-            <td>Text (255)</td>
-            <td><span class="tag ref-tag-req">Required</span></td>
-            <td>Full formal name of governance body</td>
-          </tr>
-          <tr>
-            <td>Type</td>
-            <td class="mono">Body_Type</td>
-            <td>Picklist</td>
-            <td><span class="tag ref-tag-req">Required</span></td>
-            <td>Board · Committee · Advisory</td>
-          </tr>
-          <tr>
-            <td>Purpose</td>
-            <td class="mono">Body_Purpose</td>
-            <td>Text Area (2000)</td>
-            <td></td>
-            <td>Mandate and primary responsibilities</td>
-          </tr>
-          <tr>
-            <td>Established Date</td>
-            <td class="mono">Established_Date</td>
-            <td>Date</td>
-            <td></td>
-            <td>Used for tenure duration calculation</td>
-          </tr>
-          <tr>
-            <td>Reporting To</td>
-            <td class="mono">Reporting_To</td>
-            <td><span class="tag ref-tag-lookup">Lookup</span></td>
-            <td></td>
-            <td>Self-referential → Governance Body</td>
-          </tr>
-          <tr>
-            <td>Active Member Count</td>
-            <td class="mono">Active_Member_Count</td>
-            <td>Integer</td>
-            <td></td>
-            <td><span class="tag ref-tag-auto">Auto</span> Rollup from Memberships where Status=Current</td>
-          </tr>
-          <tr>
-            <td>Vacancy Status</td>
-            <td class="mono">Vacancy_Status</td>
-            <td>Picklist</td>
-            <td></td>
-            <td><span class="tag ref-tag-auto">Auto</span> Active · Vacancy — set by workflow on expired term</td>
-          </tr>
-          <tr>
-            <td>Competency Gap Count</td>
-            <td class="mono">Competency_Gap_Count</td>
-            <td>Integer</td>
-            <td></td>
-            <td><span class="tag ref-tag-auto">Auto</span> Formula: Required – Covered</td>
-          </tr>
-          <tr>
-            <td>Coverage Rate %</td>
-            <td class="mono">Coverage_Rate</td>
-            <td>Percentage</td>
-            <td></td>
-            <td><span class="tag ref-tag-auto">Auto</span> Covered / Total × 100</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Module 2: Governance Membership -->
-  <div class="card">
-    <div class="card__header">
-      <span class="card__title">Module: Governance Membership</span>
-      <span class="card__sub">Junction module · Contact ↔ Governance Body</span>
-    </div>
-    <div class="card__body" style="padding:0">
-      <table class="ref-table">
-        <thead>
-          <tr>
-            <th>Field Name</th>
-            <th>API Name</th>
-            <th>Type</th>
-            <th>Required</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Contact</td>
-            <td class="mono">Contact</td>
-            <td><span class="tag ref-tag-lookup">Lookup</span></td>
-            <td><span class="tag ref-tag-req">Required</span></td>
-            <td>Links to Zoho CRM Contact record</td>
-          </tr>
-          <tr>
-            <td>Governance Body</td>
-            <td class="mono">Governance_Body</td>
-            <td><span class="tag ref-tag-lookup">Lookup</span></td>
-            <td><span class="tag ref-tag-req">Required</span></td>
-            <td>Links to Governance Body record</td>
-          </tr>
-          <tr>
-            <td>Role</td>
-            <td class="mono">Member_Role</td>
-            <td>Picklist</td>
-            <td><span class="tag ref-tag-req">Required</span></td>
-            <td>Chair · Trustee · Secretary · Member</td>
-          </tr>
-          <tr>
-            <td>Appointment Date</td>
-            <td class="mono">Appointment_Date</td>
-            <td>Date</td>
-            <td><span class="tag ref-tag-req">Required</span></td>
-            <td>Date trustee/member formally took up post</td>
-          </tr>
-          <tr>
-            <td>Term Duration</td>
-            <td class="mono">Term_Duration_Years</td>
-            <td>Integer</td>
-            <td><span class="tag ref-tag-req">Required</span></td>
-            <td>1 – 4 years (picklist in UI)</td>
-          </tr>
-          <tr>
-            <td>Term Expires</td>
-            <td class="mono">Term_Expires</td>
-            <td>Date</td>
-            <td></td>
-            <td><span class="tag ref-tag-auto">Auto</span> Appointment_Date + Term_Duration_Years</td>
-          </tr>
-          <tr>
-            <td>Status</td>
-            <td class="mono">Membership_Status</td>
-            <td>Picklist</td>
-            <td></td>
-            <td><span class="tag ref-tag-auto">Auto</span> Current · Expired — daily scheduled workflow</td>
-          </tr>
-          <tr>
-            <td>Competencies</td>
-            <td class="mono">Competencies</td>
-            <td>Multi-select Picklist</td>
-            <td></td>
-            <td>Snapshot copy from Contact at time of appointment</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Module 3: Contact competencies -->
-  <div class="card">
-    <div class="card__header">
-      <span class="card__title">Contact Field: Competencies (for board members)</span>
-      <span class="card__sub">Existing Contact module — additional field for governance use</span>
-    </div>
-    <div class="card__body" style="padding:0">
-      <table class="ref-table">
-        <thead>
-          <tr>
-            <th>Field Name</th>
-            <th>API Name</th>
-            <th>Type</th>
-            <th>Values</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Governance Competencies</td>
-            <td class="mono">Governance_Competencies</td>
-            <td>Multi-select Picklist</td>
-            <td style="font-size:11.5px;color:var(--uwc-grey-600)">Governance · Finance · Legal · HR · Safeguarding · Education Policy · Fundraising · International Relations · Digital Transformation · Technology · Climate · Sustainability · Marketing &amp; Communications · Youth Engagement · Africa Region · Asia-Pacific Regional Expertise</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="badges-strip">
-    <span class="badge badge--auto">Status field transitions via scheduled daily workflow — no manual updates</span>
-    <span class="badge badge--api">Competency matrix rendered via Zoho Analytics dashboard widget</span>
-    <span class="badge badge--gate">Governance modules visible to IO Super Admin + IO CRM Admin only</span>
-  </div>
-</section>
-
-</main><!-- /main -->
-</div><!-- /shell -->
-
+<!-- ====== SCRIPTS ====== -->
 <script>
-/* === INLINE: sample-data (Scenario E subset) === */
+/* INLINE:sample-data.js */
 window.UWC = window.UWC || {};
 UWC.users = [
-  { id: 'akanksha', name: 'Akanksha Anand', initial: 'AA', role: 'IO Super Admin', scope: 'Global · Full visibility', badge: 'ios', email: 'akanksha.anand@uwcio.uwc.org' },
-  { id: 'io-crm',   name: 'IO CRM Administrator', initial: 'CR', role: 'CRM Admin', scope: 'Governance + NC data', badge: 'ios', email: 'crm.admin@uwcio.uwc.org' }
+  { id: 'akanksha', name: 'Akanksha Anand',       initial: 'AA', role: 'IO Super Admin',  scope: 'Global · Full visibility',  badge: 'ios' },
+  { id: 'io-crm',  name: 'IO CRM Administrator',  initial: 'CR', role: 'CRM Admin',        scope: 'Governance + NC data',      badge: 'ios' },
+  { id: 'ana',     name: 'Ana Carvalho',           initial: 'AC', role: 'NC Admin',         scope: 'UWC Brazil only',           badge: 'nc'  },
+  { id: 'clara',   name: 'Clara Ramos',            initial: 'CR', role: 'NC Reviewer',      scope: 'Assigned applications only',badge: 'reviewer' },
+  { id: 'paulo',   name: 'Paulo Fonseca',          initial: 'PF', role: 'NC Reviewer',      scope: 'Assigned applications only',badge: 'reviewer' }
 ];
-UWC.scenarioRoles = { E: ['akanksha', 'io-crm'] };
 UWC.getRolesFor = function(code) {
-  return (UWC.scenarioRoles[code] || []).map(function(id) {
-    return UWC.users.find(function(u) { return u.id === id; });
-  }).filter(Boolean);
+  var map = {
+    A: ['marcus','ana','akanksha','data-protection'],
+    B: ['visitor','sofia','maria','ana','io-mkt'],
+    C: ['clara','paulo','ana','akanksha'],
+    D: ['fatima','ana','helen'],
+    E: ['akanksha','io-crm'],
+    F: ['akanksha','grace'],
+    G: ['io-mkt','akanksha','jonathan']
+  };
+  return (map[code] || []).map(function(id){ return UWC.users.find(function(u){ return u.id === id; }); }).filter(Boolean);
 };
+UWC.competenciesRequired = ['Governance','Finance','Legal','HR','Safeguarding','Education Policy','Fundraising','International Relations','Digital Transformation','Technology','Climate','Sustainability','Marketing & Communications','Youth Engagement','Africa Region','Asia-Pacific Regional Expertise'];
+/* /INLINE */
 
-/* === INLINE: role-switcher.js === */
-(function(){
-'use strict';
-window.RoleSwitcher = { init: init, setRole: setRole, getRole: function(){ return document.body.dataset.currentRole || 'default'; } };
-function init(opts){
-  var roles = opts.roles || [];
-  var defaultId = opts.defaultRoleId || (roles[0] && roles[0].id);
-  var scenarioCode = opts.scenarioCode || '';
-  var dropdown = document.getElementById('role-switcher');
-  if(!dropdown){ console.warn('[RoleSwitcher] #role-switcher not found'); return; }
-  dropdown.innerHTML =
-    '<button type="button" class="rs-trigger" id="rs-trigger" aria-expanded="false">'+
-      '<span class="rs-avatar" id="rs-avatar"></span>'+
-      '<span class="rs-current">'+
-        '<span class="rs-name" id="rs-current-name">—</span>'+
-        '<span class="rs-role" id="rs-current-role">—</span>'+
-      '</span>'+
-      '<span class="rs-chev">▾</span>'+
-    '</button>'+
-    '<div class="rs-menu" id="rs-menu" hidden>'+
-      '<div class="rs-menu-header">View as · Scenario '+scenarioCode+'</div>'+
-      roles.map(function(r){
-        return '<button type="button" class="rs-option" data-role-id="'+r.id+'">'+
-          '<span class="rs-avatar rs-avatar--'+(r.badge||'default')+'">'+(r.initial||r.name[0])+'</span>'+
-          '<span class="rs-opt-text">'+
-            '<span class="rs-opt-name">'+r.name+'</span>'+
-            '<span class="rs-opt-role">'+r.role+'</span>'+
-            (r.scope ? '<span class="rs-opt-scope">'+r.scope+'</span>' : '')+
-          '</span>'+
-          '<span class="rs-check">✓</span>'+
-        '</button>';
-      }).join('')+
-      '<div class="rs-menu-footer">Switching role re-renders screen content for that perspective.</div>'+
-    '</div>';
-  var trigger = document.getElementById('rs-trigger');
-  var menu = document.getElementById('rs-menu');
-  trigger.addEventListener('click', function(e){ e.stopPropagation(); var open=!menu.hidden; menu.hidden=open; trigger.setAttribute('aria-expanded',String(!open)); });
-  document.addEventListener('click', function(e){ if(!dropdown.contains(e.target)){ menu.hidden=true; trigger.setAttribute('aria-expanded','false'); } });
-  Array.prototype.forEach.call(dropdown.querySelectorAll('.rs-option'), function(btn){
-    btn.addEventListener('click', function(){
-      var id = btn.dataset.roleId;
-      var role = roles.find(function(r){ return r.id===id; });
-      setRole(id, role, roles);
-      menu.hidden = true;
-      trigger.setAttribute('aria-expanded','false');
-    });
-  });
-  var def = roles.find(function(r){ return r.id===defaultId; });
-  setRole(defaultId, def, roles);
-  window.RoleSwitcher._roles = roles;
-}
-function setRole(id, role, roles){
-  document.body.dataset.currentRole = id;
-  var avatar = document.getElementById('rs-avatar');
-  var cn = document.getElementById('rs-current-name');
-  var cr = document.getElementById('rs-current-role');
-  if(avatar && role){ avatar.className='rs-avatar rs-avatar--'+(role.badge||'default'); avatar.textContent=role.initial||role.name[0]; }
-  if(cn && role) cn.textContent = role.name;
-  if(cr && role) cr.textContent = role.role + (role.scope ? ' · '+role.scope : '');
-  Array.prototype.forEach.call(document.querySelectorAll('.rs-option'), function(btn){ btn.classList.toggle('active', btn.dataset.roleId===id); });
-  document.dispatchEvent(new CustomEvent('roleChanged',{detail:{roleId:id,role:role}}));
-}
-var style = document.createElement('style');
-style.textContent =
-  '#role-switcher{position:relative;font-family:var(--uwc-font-body,sans-serif)}'+
-  '.rs-trigger{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:5px 10px 5px 5px;border-radius:8px;cursor:pointer;font-size:12.5px;min-width:200px;text-align:left}'+
-  '.rs-trigger:hover{background:rgba(255,255,255,0.18)}'+
-  '.rs-avatar{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:11px;flex-shrink:0}'+
-  '.rs-avatar--ios{background:#003087}.rs-avatar--nc{background:#1f9535}.rs-avatar--reviewer{background:#e85d0c}.rs-avatar--dp{background:#C8102E}.rs-avatar--school{background:#7c3aed}.rs-avatar--portal{background:#0ea5e9}.rs-avatar--marketing{background:#ec4899}.rs-avatar--guardian{background:#f59e0b}.rs-avatar--default{background:#6b7280}'+
-  '.rs-current{display:flex;flex-direction:column;line-height:1.2;flex:1}.rs-name{font-weight:500;color:#fff;font-size:12px}.rs-role{font-size:10.5px;color:rgba(255,255,255,0.6)}'+
-  '.rs-chev{color:rgba(255,255,255,0.6);font-size:10px;margin-left:2px}'+
-  '.rs-menu{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #e2e6ed;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);min-width:300px;z-index:100;overflow:hidden}'+
-  '.rs-menu-header{padding:10px 14px;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#6b7280;background:#f7f8fa;font-weight:600}'+
-  '.rs-menu-footer{padding:10px 14px;font-size:11px;color:#6b7280;border-top:1px solid #f0f2f5;background:#fafbfd;line-height:1.4}'+
-  '.rs-option{display:flex;align-items:center;gap:10px;padding:10px 14px;width:100%;background:#fff;border:none;border-bottom:1px solid #f0f2f5;cursor:pointer;text-align:left}'+
-  '.rs-option:hover{background:#f7f8fa}.rs-option.active{background:#E8EEF6}'+
-  '.rs-opt-text{flex:1;display:flex;flex-direction:column;line-height:1.3}'+
-  '.rs-opt-name{font-size:13px;font-weight:500;color:#0d1b3e}'+
-  '.rs-opt-role{font-size:11.5px;color:#5a6480}'+
-  '.rs-opt-scope{font-size:10.5px;color:#9aa3b8;font-style:italic}'+
-  '.rs-check{color:#003087;font-weight:600;opacity:0;font-size:14px}'+
-  '.rs-option.active .rs-check{opacity:1}';
-document.head.appendChild(style);
+/* INLINE:role-switcher.js */
+(function () {
+  'use strict';
+  window.RoleSwitcher = { init: init, setRole: setRole, getRole: function () { return document.body.dataset.currentRole || 'default'; } };
+  function init(opts) {
+    var roles = opts.roles || [], defaultId = opts.defaultRoleId || (roles[0] && roles[0].id), scenarioCode = opts.scenarioCode || '';
+    var dropdown = document.getElementById('role-switcher');
+    if (!dropdown) return;
+    dropdown.innerHTML = '<button type="button" class="rs-trigger" id="rs-trigger" aria-expanded="false"><span class="rs-avatar" id="rs-avatar"></span><span class="rs-current"><span class="rs-name" id="rs-current-name">—</span><span class="rs-role" id="rs-current-role">—</span></span><span class="rs-chev">▾</span></button><div class="rs-menu" id="rs-menu" hidden><div class="rs-menu-header">View as · Scenario ' + scenarioCode + '</div>' + roles.map(function (r) { return '<button type="button" class="rs-option" data-role-id="' + r.id + '"><span class="rs-avatar rs-avatar--' + (r.badge || 'default') + '">' + (r.initial || r.name[0]) + '</span><span class="rs-opt-text"><span class="rs-opt-name">' + r.name + '</span><span class="rs-opt-role">' + r.role + '</span>' + (r.scope ? '<span class="rs-opt-scope">' + r.scope + '</span>' : '') + '</span><span class="rs-check">&#10003;</span></button>'; }).join('') + '<div class="rs-menu-footer">Switching role re-renders the screen showing what that user can see.</div></div>';
+    var trigger = document.getElementById('rs-trigger'), menu = document.getElementById('rs-menu');
+    trigger.addEventListener('click', function (e) { e.stopPropagation(); var open = !menu.hidden; menu.hidden = open; trigger.setAttribute('aria-expanded', String(!open)); });
+    document.addEventListener('click', function (e) { if (!dropdown.contains(e.target)) { menu.hidden = true; trigger.setAttribute('aria-expanded', 'false'); } });
+    Array.prototype.forEach.call(dropdown.querySelectorAll('.rs-option'), function (btn) { btn.addEventListener('click', function () { var id = btn.dataset.roleId; var role = roles.find(function (r) { return r.id === id; }); setRole(id, role, roles); menu.hidden = true; trigger.setAttribute('aria-expanded', 'false'); }); });
+    var def = roles.find(function (r) { return r.id === defaultId; });
+    setRole(defaultId, def, roles);
+  }
+  function setRole(id, role, roles) {
+    document.body.dataset.currentRole = id;
+    var avatar = document.getElementById('rs-avatar'), cn = document.getElementById('rs-current-name'), cr = document.getElementById('rs-current-role');
+    if (avatar && role) { avatar.className = 'rs-avatar rs-avatar--' + (role.badge || 'default'); avatar.textContent = role.initial || role.name[0]; }
+    if (cn && role) cn.textContent = role.name;
+    if (cr && role) cr.textContent = role.role;
+    Array.prototype.forEach.call(document.querySelectorAll('.rs-option'), function (btn) { btn.classList.toggle('active', btn.dataset.roleId === id); });
+  }
 })();
+/* /INLINE */
 
-/* === SCENARIO E LOGIC === */
-var TOTAL = 8;
-var current = 0;
-
-var stepRoles = {
-  0: 'akanksha', 1: 'akanksha', 2: 'akanksha',
-  3: 'akanksha', 4: 'akanksha', 5: 'akanksha',
-  6: 'akanksha', 7: 'io-crm'
-};
-
+/* Scenario E driver */
+const TOTAL = 8;
+let step = 0;
+const stepCounterEl = document.getElementById('step-counter');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
 function go(i) {
   if (i < 0 || i >= TOTAL) return;
-  var screens = document.querySelectorAll('.screen');
-  Array.prototype.forEach.call(screens, function(s){ s.classList.remove('active'); });
-  var target = document.getElementById('sc-' + i);
-  if (target) target.classList.add('active');
-  for (var j = 0; j < TOTAL; j++) {
-    var nav = document.getElementById('nav-' + j);
-    if (!nav) continue;
-    nav.classList.remove('active', 'done');
-    if (j < i) nav.classList.add('done');
-    if (j === i) nav.classList.add('active');
-  }
-  var pct = Math.round(((i + 1) / TOTAL) * 100);
-  var counter = document.getElementById('step-counter');
-  if (counter) counter.textContent = 'Step ' + (i + 1) + ' of ' + TOTAL;
-  var progTxt = document.getElementById('progress-txt');
-  if (progTxt) progTxt.textContent = 'Step ' + (i + 1) + ' of ' + TOTAL;
-  var progFill = document.getElementById('progress-fill');
-  if (progFill) progFill.style.width = pct + '%';
-  var mainEl = document.getElementById('main');
-  if (mainEl) mainEl.scrollTop = 0;
-  var roleId = stepRoles[i] || 'akanksha';
-  if (window.RoleSwitcher && window.RoleSwitcher._roles) {
-    var roles = window.RoleSwitcher._roles;
-    var role = roles.find(function(r){ return r.id === roleId; });
-    if (role) window.RoleSwitcher.setRole(roleId, role, roles);
-  }
-  current = i;
+  step = i;
+  document.querySelectorAll('.screen').forEach((s, j) => s.classList.toggle('active', j === i));
+  stepCounterEl.textContent = 'Step ' + (i + 1) + ' / ' + TOTAL;
+  prevBtn.disabled = i === 0;
+  nextBtn.disabled = i === TOTAL - 1;
 }
-
-function switchTab(tab) {
-  var cur = document.getElementById('tab-panel-current');
-  var past = document.getElementById('tab-panel-past');
-  var tabCur = document.getElementById('tab-current');
-  var tabPast = document.getElementById('tab-past');
-  if (tab === 'current') {
-    cur.style.display = ''; past.style.display = 'none';
-    tabCur.classList.add('active'); tabPast.classList.remove('active');
-  } else {
-    cur.style.display = 'none'; past.style.display = '';
-    tabPast.classList.add('active'); tabCur.classList.remove('active');
-  }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  RoleSwitcher.init({
-    scenarioCode: 'E',
-    defaultRoleId: 'akanksha',
-    roles: UWC.getRolesFor('E')
-  });
-  go(0);
+prevBtn.addEventListener('click', () => go(step - 1));
+nextBtn.addEventListener('click', () => go(step + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+  if (e.key === 'ArrowRight') go(step + 1);
+  if (e.key === 'ArrowLeft') go(step - 1);
 });
+
+RoleSwitcher.init({ scenarioCode: 'E', defaultRoleId: 'akanksha', roles: UWC.getRolesFor('E') });
+go(0);
 </script>
+
 </body>
 </html>

@@ -3,1342 +3,1075 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scenario F — NC Management & Volunteer Oversight · UWC International Demo</title>
+<title>Scenario F — NC Management · UWC Demo</title>
 <link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* === TOKENS === */
-:root{--uwc-navy:#003087;--uwc-navy-deep:#001a4d;--uwc-navy-tint:#E8EEF6;--uwc-red:#C8102E;--uwc-red-tint:#fdeaea;--uwc-gold:#C8AB00;--uwc-green:#1f9535;--uwc-orange:#e85d0c;--uwc-navy-live:#004A97;--uwc-teal:#009482;--uwc-white:#ffffff;--uwc-grey-50:#f8f9fb;--uwc-grey-100:#f3f5fa;--uwc-grey-200:#e2e6ed;--uwc-grey-300:#c8cdd8;--uwc-grey-400:#9aa3b8;--uwc-grey-500:#6C757D;--uwc-grey-600:#5a6480;--uwc-grey-800:#0d1b3e;--uwc-font-title:'Playfair Display',Georgia,serif;--uwc-font-body:'DM Sans',system-ui,sans-serif;--uwc-font-mono:'DM Mono',ui-monospace,monospace;--uwc-fs-display:32px;--uwc-fs-h1:26px;--uwc-fs-h2:20px;--uwc-fs-h3:16px;--uwc-fs-body:14px;--uwc-fs-small:12.5px;--uwc-fs-tiny:11px;--uwc-fs-micro:10px;--uwc-sp-1:4px;--uwc-sp-2:8px;--uwc-sp-3:12px;--uwc-sp-4:16px;--uwc-sp-5:20px;--uwc-sp-6:24px;--uwc-sp-8:32px;--uwc-radius-sm:4px;--uwc-radius:8px;--uwc-radius-lg:12px;--uwc-radius-pill:999px;--uwc-shadow-sm:0 1px 2px rgba(0,0,0,0.04);--uwc-shadow:0 2px 8px rgba(0,48,135,0.08);--uwc-shadow-lg:0 8px 24px rgba(0,48,135,0.12);--uwc-tx-fast:120ms ease;--uwc-tx:200ms cubic-bezier(0.4,0,0.2,1)}
-:root{--zoho-topbar-bg:#1c1f25;--zoho-topbar-text:#ffffff;--zoho-topbar-text-muted:rgba(255,255,255,0.55);--zoho-topbar-height:48px;--zoho-topbar-search-bg:rgba(255,255,255,0.08);--zoho-sidebar-bg:#f7f8fa;--zoho-sidebar-border:#e8eaed;--zoho-sidebar-text:#4a5568;--zoho-sidebar-active-bg:#e6efff;--zoho-sidebar-active-text:#2563eb;--zoho-sidebar-hover-bg:#eef1f7;--zoho-sidebar-width:220px;--zoho-content-bg:#ffffff;--zoho-content-alt:#f9fafb;--zoho-border:#e5e7eb;--zoho-border-light:#f0f2f5;--zoho-text:#1f2937;--zoho-text-secondary:#4b5563;--zoho-text-muted:#6b7280;--zoho-link:#2563eb;--zoho-primary:#3b6ef5;--zoho-outline:#d1d5db;--zoho-success:#10b981;--zoho-warning:#f59e0b;--zoho-danger:#ef4444;--zoho-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;--zoho-fs-base:13px;--zoho-fs-sm:12px;--zoho-fs-xs:11px;--zoho-radius:6px;--zoho-radius-sm:4px}
-html{box-sizing:border-box}*,*::before,*::after{box-sizing:inherit}
-body{margin:0;padding:0;font-family:var(--uwc-font-body);font-size:var(--uwc-fs-body);line-height:1.5;color:var(--uwc-grey-800);background:var(--uwc-grey-100);-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4,h5{font-family:var(--uwc-font-title);font-weight:500;line-height:1.2;margin:0}
-h1{font-size:var(--uwc-fs-h1)}h2{font-size:var(--uwc-fs-h2)}h3{font-size:var(--uwc-fs-h3)}
-a{color:var(--uwc-navy);text-decoration:none}button{font-family:inherit}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; background: #f3f5fa; color: #1f2937; -webkit-font-smoothing: antialiased; overflow: hidden; }
 
-/* === SHELL === */
-.shell{display:grid;grid-template-columns:280px 1fr;grid-template-rows:60px 1fr;min-height:100vh;background:var(--uwc-grey-100)}
-.topbar{grid-column:1/-1;background:var(--uwc-navy-deep);display:flex;align-items:center;padding:0 20px;gap:16px;border-bottom:3px solid var(--uwc-red);color:#fff}
-.topbar__brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
-.topbar__logo{font-family:var(--uwc-font-title);font-size:18px;font-weight:600;color:#fff;letter-spacing:.3px}
-.topbar__demo-badge{background:var(--uwc-red);color:#fff;font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;padding:3px 10px;border-radius:var(--uwc-radius-sm)}
-.topbar__divider{width:1px;height:22px;background:rgba(255,255,255,.18)}
-.topbar__scenario{font-size:12.5px;color:rgba(255,255,255,.7)}
-.topbar__scenario strong{color:#fff;font-weight:500}
-.topbar__center{flex:1}
-.topbar__right{margin-left:auto;display:flex;align-items:center;gap:14px}
-.topbar__step-counter{font-size:11.5px;color:rgba(255,255,255,.6);font-family:var(--uwc-font-mono);letter-spacing:.6px;padding:4px 10px;border:1px solid rgba(255,255,255,.15);border-radius:var(--uwc-radius-sm)}
-.sidebar{background:#fff;border-right:1px solid var(--uwc-grey-200);padding:18px 0;overflow-y:auto}
-.sidebar__label{font-size:var(--uwc-fs-micro);font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--uwc-grey-400);padding:10px 18px 8px}
-.sidebar__item{display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer;margin:0 8px 2px;border-radius:var(--uwc-radius);transition:background var(--uwc-tx-fast)}
-.sidebar__item:hover{background:var(--uwc-grey-100)}
-.sidebar__item.active{background:var(--uwc-navy-tint);border-left:3px solid var(--uwc-navy);padding-left:11px}
-.sidebar__num{width:24px;height:24px;border-radius:50%;background:var(--uwc-grey-200);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--uwc-grey-600);flex-shrink:0}
-.sidebar__item.active .sidebar__num{background:var(--uwc-navy);color:#fff}
-.sidebar__item.done .sidebar__num{background:var(--uwc-green);color:#fff}
-.sidebar__item.done .sidebar__label-text{color:var(--uwc-grey-400)}
-.sidebar__label-text{font-size:12.5px;color:var(--uwc-grey-600);line-height:1.3}
-.sidebar__item.active .sidebar__label-text{color:var(--uwc-navy);font-weight:500}
-.sidebar__progress{margin:16px;padding:12px;background:var(--uwc-grey-100);border-radius:var(--uwc-radius)}
-.sidebar__progress-label{font-size:11.5px;color:var(--uwc-grey-600);display:flex;justify-content:space-between;margin-bottom:8px}
-.sidebar__progress-track{height:4px;background:var(--uwc-grey-200);border-radius:var(--uwc-radius-pill);overflow:hidden}
-.sidebar__progress-fill{height:4px;background:var(--uwc-navy);border-radius:var(--uwc-radius-pill);transition:width var(--uwc-tx)}
-.main{overflow-y:auto;padding:28px 32px;background:var(--uwc-grey-100)}
-.screen{display:none;max-width:1200px}
-.screen.active{display:block;animation:fadeIn 240ms ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.screen-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;gap:16px}
-.screen-title{font-family:var(--uwc-font-title);font-size:var(--uwc-fs-display);font-weight:500;color:var(--uwc-grey-800);line-height:1.15}
-.screen-sub{font-size:var(--uwc-fs-body);color:var(--uwc-grey-600);margin-top:6px;line-height:1.5;max-width:760px}
-.step-nav{display:flex;gap:8px;flex-shrink:0}
-.btn-nav{padding:8px 16px;font-size:12.5px;font-weight:500;font-family:var(--uwc-font-body);border:1px solid var(--uwc-grey-300);border-radius:var(--uwc-radius);background:#fff;color:var(--uwc-grey-600);cursor:pointer;transition:all var(--uwc-tx-fast)}
-.btn-nav:hover:not(:disabled){background:var(--uwc-grey-100);border-color:var(--uwc-grey-400)}
-.btn-nav:disabled{opacity:.4;cursor:not-allowed}
-.btn-nav--primary{background:var(--uwc-navy);color:#fff;border-color:var(--uwc-navy)}
-.btn-nav--primary:hover:not(:disabled){background:var(--uwc-navy-deep);border-color:var(--uwc-navy-deep)}
-.card{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;margin-bottom:16px;box-shadow:var(--uwc-shadow-sm)}
-.card__header{background:var(--uwc-navy);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
-.card__title{color:#fff;font-size:13.5px;font-weight:500}
-.card__sub{color:rgba(255,255,255,.55);font-size:11.5px;font-family:var(--uwc-font-mono)}
-.card__body{padding:16px 18px}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.alert{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--uwc-radius);font-size:12.5px;line-height:1.5;margin-bottom:12px}
-.alert--info{background:var(--uwc-navy-tint);color:var(--uwc-navy);border:1px solid #93c5fd}
-.alert--success{background:#f0fdf4;color:#14532d;border:1px solid #86efac}
-.alert--warning{background:#fffbeb;color:#78350f;border:1px solid #fbbf24}
-.alert--error{background:var(--uwc-red-tint);color:#7f1d1d;border:1px solid #fca5a5}
-.badge{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:500;padding:3px 8px;border-radius:var(--uwc-radius-sm);font-family:var(--uwc-font-mono)}
-.badge--api{background:#dbeafe;color:#1e40af}
-.badge--auto{background:#dcfce7;color:#166534}
-.badge--gate{background:#fee2e2;color:#991b1b}
-.badge--info{background:var(--uwc-navy-tint);color:var(--uwc-navy)}
-.badge--warn{background:#fef3c7;color:#92400e}
-.badges-strip{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
-.role-context{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;background:var(--uwc-navy-tint);color:var(--uwc-navy);border-radius:var(--uwc-radius-pill);font-size:12px;font-weight:500;margin-bottom:14px}
-.pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:500;padding:3px 10px;border-radius:var(--uwc-radius-pill);border:1px solid transparent}
-.pill--green{background:#dcfce7;color:#166534;border-color:#86efac}
-.pill--amber{background:#fef3c7;color:#92400e;border-color:#fbbf24}
-.pill--red{background:#fee2e2;color:#991b1b;border-color:#fca5a5}
-.pill--blue{background:#dbeafe;color:#1e40af;border-color:#93c5fd}
-.pill--grey{background:#f3f4f6;color:#4b5563;border-color:#d1d5db}
+.demo-bar { background: linear-gradient(90deg, #C8102E 0%, #a00d24 100%); color: #fff; height: 32px; display: flex; align-items: center; padding: 0 14px; gap: 14px; font-family: 'DM Sans', system-ui, sans-serif; font-size: 11.5px; position: relative; z-index: 200; box-shadow: 0 1px 0 rgba(0,0,0,0.1); }
+.demo-bar__brand { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase; font-size: 10px; color: rgba(255,255,255,0.95); }
+.demo-bar__brand::before { content: '▶'; font-size: 8px; color: rgba(255,255,255,0.7); }
+.demo-bar__scenario { color: rgba(255,255,255,0.85); font-weight: 500; }
+.demo-bar__divider { width: 1px; height: 16px; background: rgba(255,255,255,0.3); }
+.demo-bar__spacer { flex: 1; }
+.demo-bar__step { font-family: 'DM Mono', ui-monospace, monospace; font-size: 10.5px; color: rgba(255,255,255,0.85); padding: 3px 8px; background: rgba(255,255,255,0.12); border-radius: 4px; letter-spacing: 0.4px; }
+.demo-bar__nav { display: flex; gap: 2px; }
+.demo-bar__nav-btn { width: 24px; height: 22px; background: rgba(255,255,255,0.12); border: none; color: #fff; cursor: pointer; border-radius: 4px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; font-family: inherit; transition: background 120ms; }
+.demo-bar__nav-btn:hover:not(:disabled) { background: rgba(255,255,255,0.22); }
+.demo-bar__nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.demo-bar__home { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 11px; padding: 3px 8px; border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; transition: background 120ms; }
+.demo-bar__home:hover { background: rgba(255,255,255,0.12); color: #fff; }
+.demo-bar #role-switcher .rs-trigger { background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.3); padding: 3px 10px 3px 4px; font-size: 11px; min-width: 180px; height: 22px; }
+.demo-bar #role-switcher .rs-avatar { width: 18px; height: 18px; font-size: 9px; }
+.demo-bar #role-switcher .rs-name { font-size: 10.5px; }
+.demo-bar #role-switcher .rs-role { font-size: 9.5px; }
+.demo-bar #role-switcher .rs-chev { font-size: 8px; }
 
-/* Zoho mode */
-.zoho-topbar{height:var(--zoho-topbar-height);background:var(--zoho-topbar-bg);color:var(--zoho-topbar-text);display:flex;align-items:center;padding:0 16px;position:sticky;top:0;z-index:50;gap:16px}
-.zoho-topbar__logo{display:flex;align-items:center;gap:8px;font-weight:500;font-size:14px}
-.zoho-topbar__logo-icon{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#8b5cf6,#3b82f6);display:inline-block}
-.zoho-topbar__search{background:var(--zoho-topbar-search-bg);border:1px solid rgba(255,255,255,.12);border-radius:var(--zoho-radius);padding:6px 12px;color:var(--zoho-topbar-text-muted);font-size:var(--zoho-fs-sm);width:280px;margin:0 auto}
-.zoho-topbar__right{margin-left:auto;display:flex;align-items:center;gap:10px}
-.zoho-topbar__org{width:32px;height:32px;border-radius:50%;background:#f7d427;color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px}
-.zoho-shell{display:grid;grid-template-columns:var(--zoho-sidebar-width) 1fr;min-height:calc(100vh - var(--zoho-topbar-height))}
-.zoho-sidebar{background:var(--zoho-sidebar-bg);border-right:1px solid var(--zoho-sidebar-border);padding:12px 0}
-.zoho-sidebar__group{padding:0 8px;margin-bottom:4px}
-.zoho-sidebar__item{display:flex;align-items:center;gap:10px;padding:7px 10px;font-size:var(--zoho-fs-base);color:var(--zoho-sidebar-text);cursor:pointer;border-radius:var(--zoho-radius);transition:background var(--uwc-tx-fast)}
-.zoho-sidebar__item:hover{background:var(--zoho-sidebar-hover-bg)}
-.zoho-sidebar__item.active{background:var(--zoho-sidebar-active-bg);color:var(--zoho-sidebar-active-text);font-weight:500}
-.zoho-main{overflow-y:auto;background:var(--zoho-content-bg)}
-.zoho-page-header{padding:14px 20px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;gap:12px}
-.zoho-page-title{font-size:16px;font-weight:600;color:var(--zoho-text)}
-.zoho-page-tools{padding:10px 20px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;gap:8px;background:#fff;position:sticky;top:0;z-index:5}
-.zoho-page-tools__right{margin-left:auto;display:flex;gap:8px}
-.zoho-btn{padding:7px 14px;font-size:var(--zoho-fs-base);border-radius:var(--zoho-radius);border:1px solid var(--zoho-outline);background:#fff;color:var(--zoho-text);cursor:pointer;font-family:var(--zoho-font);display:inline-flex;align-items:center;gap:6px}
-.zoho-btn--primary{background:var(--zoho-primary);color:#fff;border-color:var(--zoho-primary)}
-.zoho-btn--warn{background:#fef3c7;color:#92400e;border-color:#fbbf24}
-.zoho-btn--danger{background:#fee2e2;color:#991b1b;border-color:#fca5a5}
-.zoho-detail__hero{display:flex;align-items:center;gap:14px;padding:14px 20px;background:#fff;border-bottom:1px solid var(--zoho-border-light)}
-.zoho-detail__avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px}
-.zoho-detail__name{font-size:18px;font-weight:600}
-.zoho-detail__actions{margin-left:auto;display:flex;gap:8px}
-.zoho-detail__sections{padding:16px 20px}
-.zoho-detail__section{background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);margin-bottom:16px;overflow:hidden}
-.zoho-detail__section-header{padding:12px 16px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;justify-content:space-between}
-.zoho-detail__section-title{font-size:var(--zoho-fs-base);font-weight:600}
-.zoho-detail__section-body{padding:12px 16px}
-.zoho-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px}
-.zoho-field{display:flex;gap:12px;align-items:baseline}
-.zoho-field__label{width:130px;flex-shrink:0;color:var(--zoho-text-muted);text-align:right;font-size:var(--zoho-fs-sm)}
-.zoho-field__value{flex:1;color:var(--zoho-text)}
-.zoho-kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;padding:16px 20px}
-.zoho-kpi{background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);padding:16px}
-.zoho-kpi__label{font-size:var(--zoho-fs-base);color:var(--zoho-text-secondary);margin-bottom:8px}
-.zoho-kpi__value{font-size:26px;font-weight:600;color:var(--zoho-text)}
+.app { height: 100vh; display: grid; grid-template-rows: 32px 1fr; }
+.stage { overflow: hidden; padding: 0; }
+.screen { display: none; height: 100%; }
+.screen.active { display: block; animation: fadeIn 250ms ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* NC tile grid */
-.nc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;padding:16px 20px}
-.nc-tile{background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);padding:14px;cursor:pointer;transition:box-shadow var(--uwc-tx-fast)}
-.nc-tile:hover{box-shadow:var(--uwc-shadow)}
-.nc-tile__flag{width:32px;height:22px;border-radius:2px;object-fit:cover;display:block;margin-bottom:8px}
-.nc-tile__name{font-size:13px;font-weight:600;color:var(--zoho-text);margin-bottom:2px}
-.nc-tile__country{font-size:11.5px;color:var(--zoho-text-muted);margin-bottom:8px}
-.nc-tile__meta{display:flex;justify-content:space-between;align-items:center}
-.nc-tile--green{border-left:3px solid var(--uwc-green)}
-.nc-tile--amber{border-left:3px solid var(--uwc-gold)}
-.nc-tile--red{border-left:3px solid var(--uwc-red)}
+:root { --zoho-sidebar-width: 225px; }
+.zoho-shell { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; color: #1f2937; background: #fff; display: grid; grid-template-rows: 52px 1fr; height: 100%; overflow: hidden; }
+.zoho-topbar { background: #fff; border-bottom: 1px solid #e5e7eb; display: grid; grid-template-columns: 235px 1fr auto; align-items: stretch; height: 52px; }
+.zoho-tb__brand { display: flex; align-items: center; gap: 8px; padding: 0 14px; border-right: 1px solid #e5e7eb; }
+.zoho-tb__logo { width: 22px; height: 22px; border-radius: 50%; background: conic-gradient(from 0deg, #f43f5e, #ec4899, #a855f7, #6366f1, #3b82f6, #06b6d4, #f43f5e); position: relative; flex-shrink: 0; }
+.zoho-tb__logo::after { content: ''; position: absolute; inset: 4px; background: #fff; border-radius: 50%; }
+.zoho-tb__logo::before { content: ''; position: absolute; inset: 7px; background: linear-gradient(135deg, #ec4899 0%, #a855f7 50%, #3b82f6 100%); border-radius: 50%; z-index: 1; }
+.zoho-tb__name { font-size: 14px; font-weight: 500; color: #1f2937; }
+.zoho-tb__panel-toggle { margin-left: auto; background: none; border: none; color: #6b7280; font-size: 16px; cursor: pointer; padding: 4px 6px; border-radius: 4px; }
+.zoho-tb__center { display: flex; align-items: center; gap: 18px; padding: 0 18px; min-width: 0; }
+.zoho-tb__module { font-size: 17px; font-weight: 500; color: #1f2937; margin: 0; white-space: nowrap; }
+.zoho-tb__search { display: flex; align-items: center; gap: 8px; background: #f3f5fa; border: 1px solid transparent; border-radius: 6px; padding: 6px 12px; flex: 1; max-width: 360px; margin-left: auto; }
+.zoho-tb__search-icon { color: #9ca3af; font-size: 13px; }
+.zoho-tb__search input { background: transparent; border: none; outline: none; font-size: 12px; color: #1f2937; flex: 1; font-family: inherit; }
+.zoho-tb__search input::placeholder { color: #9ca3af; }
+.zoho-tb__icons { display: flex; align-items: center; gap: 4px; padding: 0 14px; }
+.zoho-tb__icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: transparent; border: none; color: #6b7280; cursor: pointer; font-size: 15px; position: relative; transition: background 120ms; }
+.zoho-tb__icon:hover { background: #eef1f7; color: #1f2937; }
+.zoho-tb__icon--plus { border: 1.5px solid #7c3aed; color: #7c3aed; font-weight: 600; }
+.zoho-tb__icon--plus:hover { background: #ede9fe; color: #7c3aed; }
+.zoho-tb__icon--zia { background: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #a855f7 100%); color: #fff; font-size: 11px; font-weight: 700; }
+.zoho-tb__icon--zia:hover { color: #fff; }
+.zoho-tb__icon--bell::after { content: ''; position: absolute; top: 8px; right: 9px; width: 6px; height: 6px; background: #ef4444; border-radius: 50%; border: 1.5px solid #fff; }
+.zoho-tb__org { width: 32px; height: 32px; border-radius: 50%; background: #fbd926; color: #1f2937; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; letter-spacing: -0.3px; margin-left: 6px; position: relative; cursor: pointer; }
+.zoho-tb__org::after { content: '1'; position: absolute; top: -3px; right: -3px; width: 14px; height: 14px; background: #7c3aed; color: #fff; font-size: 9px; font-weight: 600; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1.5px solid #fff; }
+.zoho-tb__waffle { display: grid; grid-template-columns: repeat(3, 4px); gap: 2px; width: auto; padding: 0 6px; }
+.zoho-tb__waffle span { width: 4px; height: 4px; background: #6b7280; border-radius: 1px; }
+.zoho-body { display: grid; grid-template-columns: 225px 1fr; height: 100%; overflow: hidden; }
+.zoho-sidebar { background: #f7f8fa; border-right: 1px solid #e8eaed; overflow-y: auto; padding: 8px 0; font-size: 13px; }
+.zoho-sb__item { display: flex; align-items: center; gap: 10px; padding: 7px 14px; color: #4a5568; cursor: pointer; transition: background 120ms; text-decoration: none; font-size: 13px; }
+.zoho-sb__item:hover { background: #eef1f7; }
+.zoho-sb__item.active { background: #e6efff; color: #2563eb; font-weight: 500; border-right: 2px solid #2563eb; padding-right: 12px; }
+.zoho-sb__item-icon { width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.zoho-sb__teamspace { margin: 12px 10px; padding: 10px 12px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.zoho-sb__teamspace-icon { width: 22px; height: 22px; color: #fff; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+.zoho-sb__teamspace-name { font-weight: 500; color: #1f2937; flex: 1; }
+.zoho-sb__teamspace-chev { color: #6b7280; font-size: 10px; }
+.zoho-content { background: #fff; overflow: auto; position: relative; }
+.zoho-page-strip { display: flex; align-items: center; gap: 12px; padding: 10px 22px; border-bottom: 1px solid #f0f2f5; background: #fff; }
+.zoho-page-strip__view { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; background: #eef1f7; border-radius: 6px; font-size: 13px; color: #1f2937; cursor: pointer; font-weight: 500; }
+.zoho-toolbar { display: flex; align-items: center; gap: 6px; padding: 8px 22px; border-bottom: 1px solid #f0f2f5; background: #fff; }
+.zoho-toolbar__btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: transparent; border: 1px solid transparent; border-radius: 6px; font-size: 13px; color: #1f2937; cursor: pointer; font-family: inherit; }
+.zoho-toolbar__btn:hover { background: #eef1f7; }
+.zoho-toolbar__divider { width: 1px; height: 20px; background: #e5e7eb; margin: 0 4px; }
+.zoho-toolbar__view-icon { width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; cursor: pointer; color: #6b7280; font-size: 14px; }
+.zoho-toolbar__view-icon.active { background: #ede9fe; color: #7c3aed; }
+.zoho-toolbar__spacer { flex: 1; }
+.zoho-detail__hero { display: flex; align-items: center; gap: 16px; padding: 16px 22px; background: #fff; border-bottom: 1px solid #f0f2f5; }
+.zoho-detail__back { color: #6b7280; font-size: 18px; cursor: pointer; padding: 4px; }
+.zoho-detail__avatar { width: 44px; height: 44px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 16px; flex-shrink: 0; }
+.zoho-detail__name-block { flex: 1; }
+.zoho-detail__name { font-size: 19px; font-weight: 600; color: #1f2937; }
+.zoho-detail__add-tags { font-size: 12px; margin-top: 4px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.zoho-detail__actions { display: flex; align-items: center; gap: 8px; }
+.zoho-detail__last-update { font-size: 12px; color: #6b7280; margin-right: 12px; }
+.zoho-tabs { display: inline-flex; background: #eef1f7; border-radius: 6px; padding: 3px; gap: 0; margin: 14px 22px 0; }
+.zoho-tabs__tab { padding: 6px 18px; font-size: 13px; color: #6b7280; cursor: pointer; border-radius: 4px; font-weight: 500; }
+.zoho-tabs__tab.active { background: #fff; color: #1f2937; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+.zoho-detail__body { display: grid; grid-template-columns: 200px 1fr; gap: 0; }
+.zoho-detail__rail { background: #fff; border-right: 1px solid #f0f2f5; padding: 16px 14px; font-size: 13px; overflow-y: auto; }
+.zoho-detail__rail-header { font-size: 12px; font-weight: 600; color: #1f2937; margin-bottom: 8px; }
+.zoho-detail__rail-item { display: flex; align-items: center; gap: 8px; padding: 5px 0; color: #4b5563; cursor: pointer; }
+.zoho-detail__rail-item:hover { color: #2563eb; }
+.zoho-detail__rail-item.active { color: #2563eb; font-weight: 500; }
+.zoho-detail__rail-count { margin-left: auto; background: #eef1f7; color: #6b7280; font-size: 11px; padding: 1px 7px; border-radius: 999px; }
+.zoho-detail__main { padding: 16px 22px; background: #f9fafb; overflow: auto; }
+.zoho-detail__card { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 18px 22px; margin-bottom: 14px; }
+.zoho-detail__card-title { font-size: 13px; font-weight: 600; color: #1f2937; margin-bottom: 14px; }
+.zoho-fields-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 28px; font-size: 13px; }
+.zoho-field-row { display: flex; align-items: baseline; gap: 12px; }
+.zoho-field-row__label { min-width: 120px; text-align: right; color: #6b7280; font-size: 12px; flex-shrink: 0; }
+.zoho-field-row__value { color: #1f2937; flex: 1; font-size: 13px; word-break: break-word; }
+.zoho-field-row__value.link { color: #2563eb; }
+.zoho-btn { padding: 7px 14px; font-size: 13px; border-radius: 6px; border: 1px solid #d1d5db; background: #fff; color: #1f2937; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 6px; transition: all 120ms; font-weight: 400; }
+.zoho-btn:hover { background: #eef1f7; }
+.zoho-btn--primary { background: #3b6ef5; color: #fff; border-color: #3b6ef5; font-weight: 500; }
+.zoho-btn--primary:hover { background: #2563eb; }
+.zoho-btn--danger { background: #C8102E; color: #fff; border-color: #C8102E; font-weight: 500; }
+.zoho-pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+.zoho-pill--active { background: #dcfce7; color: #166534; }
+.zoho-pill--danger { background: #fee2e2; color: #991b1b; }
+.zoho-pill--amber { background: #fef3c7; color: #92400e; }
+.zoho-pill--blue { background: #dbeafe; color: #1e3a8a; }
+.zoho-list { width: 100%; border-collapse: collapse; font-size: 13px; }
+.zoho-list th { padding: 10px 16px; text-align: left; font-size: 12px; font-weight: 500; color: #4b5563; border-bottom: 1px solid #e5e7eb; white-space: nowrap; background: #fff; }
+.zoho-list td { padding: 11px 16px; border-bottom: 1px solid #f0f2f5; color: #1f2937; vertical-align: middle; }
+.zoho-list tr:hover td { background: #f9fafb; }
+.zoho-list__name-link { color: #2563eb; cursor: pointer; }
+.zoho-helper-tag { display: inline-flex; align-items: center; gap: 5px; background: #ede9fe; color: #5b21b6; font-size: 10.5px; padding: 2px 8px; border-radius: 999px; font-weight: 500; }
+.zoho-helper-tag::before { content: '👁'; font-size: 11px; }
 
-/* Data table */
-.data-table{width:100%;border-collapse:collapse;font-size:var(--zoho-fs-base)}
-.data-table th{background:#f7f8fa;padding:9px 12px;text-align:left;font-size:var(--zoho-fs-xs);font-weight:600;color:var(--zoho-text-muted);border-bottom:1px solid var(--zoho-border);text-transform:uppercase;letter-spacing:.5px}
-.data-table td{padding:10px 12px;border-bottom:1px solid var(--zoho-border-light);color:var(--zoho-text)}
-.data-table tr:last-child td{border-bottom:none}
-.data-table tr:hover td{background:#fafafa}
+#role-switcher { position: relative; font-family: 'DM Sans', sans-serif; }
+.rs-trigger { display: flex; align-items: center; gap: 8px; color: #fff; cursor: pointer; text-align: left; }
+.rs-avatar { border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-weight: 600; flex-shrink: 0; }
+.rs-avatar--ios { background: #003087; } .rs-avatar--nc { background: #1f9535; } .rs-avatar--reviewer { background: #e85d0c; } .rs-avatar--default { background: #6b7280; }
+.rs-current { display: flex; flex-direction: column; line-height: 1.2; flex: 1; }
+.rs-name { font-weight: 500; color: #fff; }
+.rs-role { color: rgba(255,255,255,0.6); }
+.rs-chev { color: rgba(255,255,255,0.6); margin-left: 2px; }
+.rs-menu { position: absolute; top: calc(100% + 6px); right: 0; background: #fff; border: 1px solid #e2e6ed; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); min-width: 300px; z-index: 100; overflow: hidden; }
+.rs-menu-header { padding: 10px 14px; font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: #6b7280; background: #f7f8fa; font-weight: 600; }
+.rs-menu-footer { padding: 10px 14px; font-size: 11px; color: #6b7280; border-top: 1px solid #f0f2f5; background: #fafbfd; line-height: 1.4; }
+.rs-option { display: flex; align-items: center; gap: 10px; padding: 10px 14px; width: 100%; background: #fff; border: none; border-bottom: 1px solid #f0f2f5; cursor: pointer; text-align: left; }
+.rs-option:hover { background: #f7f8fa; }
+.rs-option.active { background: #E8EEF6; }
+.rs-option .rs-avatar { width: 32px; height: 32px; font-size: 12px; }
+.rs-opt-text { flex: 1; display: flex; flex-direction: column; line-height: 1.3; }
+.rs-opt-name { font-size: 13px; font-weight: 500; color: #0d1b3e; }
+.rs-opt-role { font-size: 11.5px; color: #5a6480; }
+.rs-opt-scope { font-size: 10.5px; color: #9aa3b8; font-style: italic; }
+.rs-check { color: #003087; font-weight: 600; opacity: 0; font-size: 14px; }
+.rs-option.active .rs-check { opacity: 1; }
 
-/* Portal (Grace) mode */
-.nc-portal{border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)}
-.nc-portal__topbar{background:linear-gradient(90deg,#0a5c2f 0%,#1f9535 60%,#2db84a 100%);padding:14px 22px;display:flex;align-items:center;justify-content:space-between;color:#fff}
-.nc-portal__brand{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600}
-.nc-portal__mark{width:32px;height:32px;border-radius:50%;background:#fff;color:#0a5c2f;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;font-family:var(--uwc-font-title)}
-.nc-portal__user{display:flex;align-items:center;gap:10px;font-size:12.5px}
-.nc-portal__nav{background:#fff;border-bottom:1px solid var(--uwc-grey-200);display:flex;gap:0}
-.nc-portal__nav-item{padding:11px 18px;font-size:13px;font-weight:500;color:var(--uwc-grey-600);cursor:pointer;border-bottom:2px solid transparent}
-.nc-portal__nav-item.active{color:#0a5c2f;border-bottom-color:#0a5c2f}
-.nc-portal__body{background:var(--uwc-grey-50);padding:20px}
-.stat-tile{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius);padding:14px}
-.stat-tile__label{font-size:11px;color:var(--uwc-grey-500);margin-bottom:4px;font-weight:500}
-.stat-tile__value{font-family:var(--uwc-font-title);font-size:24px;font-weight:600;color:var(--uwc-navy);line-height:1.1}
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px}
+/* NC Chair Portal */
+.uwc-portal-shell { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13.5px; color: #1f2937; background: #f0f4f8; display: grid; grid-template-rows: 56px 1fr; height: 100%; overflow: hidden; }
+.portal-topbar { background: #003087; color: #fff; display: flex; align-items: center; gap: 16px; padding: 0 24px; height: 56px; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
+.portal-topbar__logo { width: 30px; height: 30px; border-radius: 6px; background: #fff; display: flex; align-items: center; justify-content: center; color: #003087; font-weight: 700; font-size: 12px; flex-shrink: 0; }
+.portal-topbar__title { font-size: 15px; font-weight: 600; letter-spacing: 0.2px; }
+.portal-topbar__sub { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 1px; }
+.portal-topbar__spacer { flex: 1; }
+.portal-topbar__user { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: rgba(255,255,255,0.85); }
+.portal-topbar__avatar { width: 32px; height: 32px; border-radius: 50%; background: #1f9535; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0; }
+.portal-body { display: grid; grid-template-columns: 200px 1fr; height: 100%; overflow: hidden; }
+.portal-sidebar { background: #fff; border-right: 1px solid #dce3ec; overflow-y: auto; padding: 14px 0; }
+.portal-nav__item { display: flex; align-items: center; gap: 10px; padding: 9px 18px; color: #4a5568; cursor: pointer; transition: background 120ms; font-size: 13.5px; text-decoration: none; }
+.portal-nav__item:hover { background: #f0f4f8; }
+.portal-nav__item.active { background: #e8f0fe; color: #003087; font-weight: 600; border-right: 3px solid #003087; }
+.portal-nav__icon { font-size: 16px; flex-shrink: 0; }
+.portal-content { overflow: auto; padding: 20px 24px; }
+.portal-card { background: #fff; border: 1px solid #dce3ec; border-radius: 10px; padding: 18px 22px; margin-bottom: 14px; }
+.portal-card__title { font-size: 14px; font-weight: 600; color: #003087; margin-bottom: 12px; }
+.portal-kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+.portal-kpi { background: #fff; border: 1px solid #dce3ec; border-radius: 8px; padding: 14px 18px; }
+.portal-kpi__val { font-size: 24px; font-weight: 700; color: #003087; margin-bottom: 2px; }
+.portal-kpi__label { font-size: 11.5px; color: #6b7280; }
 
-/* Field reference table */
-.ref-section{margin-bottom:28px}
-.ref-section__title{font-family:var(--uwc-font-title);font-size:16px;font-weight:600;color:var(--uwc-navy);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--uwc-navy-tint)}
-.ref-table{width:100%;border-collapse:collapse;font-size:13px}
-.ref-table th{background:var(--uwc-navy);color:#fff;padding:9px 12px;text-align:left;font-size:11.5px;font-weight:500;letter-spacing:.3px}
-.ref-table td{padding:9px 12px;border-bottom:1px solid var(--uwc-grey-200);vertical-align:top}
-.ref-table tr:nth-child(even) td{background:var(--uwc-grey-50)}
-.ref-table tr:last-child td{border-bottom:none}
+/* IO Health Dashboard */
+.health-dash { padding: 20px 24px; background: #f9fafb; height: 100%; overflow: auto; }
+.health-kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 18px; }
+.health-kpi { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px 18px; }
+.health-kpi__val { font-size: 26px; font-weight: 700; color: #003087; margin-bottom: 2px; }
+.health-kpi__label { font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; }
+.health-kpi--warn .health-kpi__val { color: #d97706; }
+.health-kpi--danger .health-kpi__val { color: #dc2626; }
+.nc-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.nc-tile { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 8px; padding: 11px 13px; cursor: pointer; transition: all 140ms; }
+.nc-tile:hover { border-color: #93c5fd; box-shadow: 0 2px 8px rgba(59,130,246,0.12); }
+.nc-tile--green { border-color: #6ee7b7; }
+.nc-tile--amber { border-color: #fbbf24; background: #fffbeb; }
+.nc-tile__flag { font-size: 17px; margin-bottom: 3px; }
+.nc-tile__name { font-size: 11.5px; font-weight: 600; color: #1f2937; }
+.nc-tile__stat { font-size: 10.5px; color: #6b7280; margin-top: 1px; }
+.nc-tile__badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 4px; margin-top: 4px; }
+.nc-tile__badge--green { background: #dcfce7; color: #166534; }
+.nc-tile__badge--amber { background: #fef3c7; color: #92400e; }
+.nc-tile__badge--more { background: #f3f4f6; color: #4b5563; }
+.map-placeholder { background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 50%, #dcfce7 100%); border: 1px solid #e5e7eb; border-radius: 10px; height: 148px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; position: relative; overflow: hidden; }
+.map-dot { position: absolute; width: 9px; height: 9px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+.map-dot--green { background: #10b981; }
+.map-dot--amber { background: #f59e0b; }
+.drill-panel { background: #fff; border: 1.5px solid #fbbf24; border-radius: 10px; padding: 16px 20px; margin-top: 16px; }
+.drill-panel__title { font-size: 13px; font-weight: 700; color: #92400e; margin-bottom: 12px; }
 
-/* SVG bar chart */
-.chart-wrap{background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);padding:16px;margin-bottom:16px}
-.chart-title{font-size:13px;font-weight:600;color:var(--zoho-text);margin-bottom:12px}
+/* Appendix */
+.appendix { background: #fff; padding: 28px 40px; height: 100%; overflow: auto; }
+.appendix h1 { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; color: #003087; font-size: 24px; margin-bottom: 6px; }
+.appendix p { color: #5a6480; font-size: 13px; margin-bottom: 20px; }
+.appendix h2 { font-family: 'Playfair Display', Georgia, serif; color: #003087; font-size: 17px; margin-bottom: 8px; margin-top: 18px; }
+.ref-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 24px; }
+.ref-table th { background: #003087; color: #fff; padding: 8px 14px; text-align: left; font-size: 11px; font-weight: 500; }
+.ref-table td { padding: 8px 14px; border-bottom: 1px solid #e2e6ed; vertical-align: top; }
+.ref-table tr:nth-child(even) td { background: #f8f9fb; }
+.ft-name { font-family: 'DM Mono', monospace; font-size: 11px; color: #5a6480; }
+.ft-t { display: inline-block; padding: 2px 7px; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 10px; background: #f3f5fa; color: #5a6480; }
+.ft-pick { background: #f0f4ff; color: #1e3a8a; } .ft-look { background: #f0fdf4; color: #166534; } .ft-auto { background: #fef3c7; color: #92400e; }
 </style>
 </head>
 <body>
-<div class="shell">
 
-<!-- TOPBAR -->
-<header class="topbar">
-  <div class="topbar__brand">
-    <div style="width:32px;height:32px;border-radius:50%;background:#fff;color:var(--uwc-navy);display:flex;align-items:center;justify-content:center;font-family:var(--uwc-font-title);font-weight:700;font-size:11px;flex-shrink:0">UWC</div>
-    <span class="topbar__logo">UWC International</span>
-    <span class="topbar__demo-badge">DEMO</span>
-  </div>
-  <div class="topbar__divider"></div>
-  <div class="topbar__scenario"><strong>Scenario F</strong> · NC Management &amp; Volunteer Oversight</div>
-  <div class="topbar__center"></div>
-  <div class="topbar__right">
+<div class="app">
+  <div class="demo-bar">
+    <a href="00_index.html" class="demo-bar__home">&#8592; All scenarios</a>
+    <span class="demo-bar__brand">Demo Mode</span>
+    <span class="demo-bar__divider"></span>
+    <span class="demo-bar__scenario"><b>Scenario F</b> &#183; NC Management &#183; Volunteer Oversight &#183; Network Health</span>
+    <span class="demo-bar__spacer"></span>
     <div id="role-switcher"></div>
-    <div class="topbar__step-counter" id="step-counter">Step 1 of 8</div>
-  </div>
-</header>
-
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="sidebar__label">Scenario F · Journey</div>
-  <div class="sidebar__item active" id="nav-0" onclick="go(0)">
-    <div class="sidebar__num">1</div>
-    <div class="sidebar__label-text">All NCs list view</div>
-  </div>
-  <div class="sidebar__item" id="nav-1" onclick="go(1)">
-    <div class="sidebar__num">2</div>
-    <div class="sidebar__label-text">UWC Kenya NC record</div>
-  </div>
-  <div class="sidebar__item" id="nav-2" onclick="go(2)">
-    <div class="sidebar__num">3</div>
-    <div class="sidebar__label-text">Kenya volunteer roster</div>
-  </div>
-  <div class="sidebar__item" id="nav-3" onclick="go(3)">
-    <div class="sidebar__num">4</div>
-    <div class="sidebar__label-text">Daniel Kimani's training record</div>
-  </div>
-  <div class="sidebar__item" id="nav-4" onclick="go(4)">
-    <div class="sidebar__num">5</div>
-    <div class="sidebar__label-text">Grace's NC Chair portal</div>
-  </div>
-  <div class="sidebar__item" id="nav-5" onclick="go(5)">
-    <div class="sidebar__num">6</div>
-    <div class="sidebar__label-text">MoU obligations — Kenya</div>
-  </div>
-  <div class="sidebar__item" id="nav-6" onclick="go(6)">
-    <div class="sidebar__num">7</div>
-    <div class="sidebar__label-text">IO NC-health dashboard</div>
-  </div>
-  <div class="sidebar__item" id="nav-7" onclick="go(7)">
-    <div class="sidebar__num">8</div>
-    <div class="sidebar__label-text">CRM field reference</div>
-  </div>
-  <div class="sidebar__progress">
-    <div class="sidebar__progress-label">
-      <span>Progress</span>
-      <span id="progress-txt">Step 1 of 8</span>
-    </div>
-    <div class="sidebar__progress-track">
-      <div class="sidebar__progress-fill" id="progress-fill" style="width:12.5%"></div>
-    </div>
-  </div>
-</aside>
-
-<!-- MAIN -->
-<main class="main" id="main">
-
-<!-- ===== SCREEN 0: ALL NCs LIST ===== -->
-<section class="screen active" id="sc-0">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">👤 Akanksha Anand — IO Super Admin · Global visibility</div>
-      <h1 class="screen-title">National Committees — Global Overview</h1>
-      <p class="screen-sub">Akanksha opens the National Committees module in Zoho CRM. A tile grid shows all 150 NCs. Health colouring: green = healthy, amber = 1 issue, red = multiple issues. Kenya is amber — MoU overdue + training expired.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" disabled>← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(1)">Next →</button>
+    <span class="demo-bar__divider"></span>
+    <span class="demo-bar__step" id="step-counter">Step 1 / 8</span>
+    <div class="demo-bar__nav">
+      <button class="demo-bar__nav-btn" id="prev-btn" title="Previous">&#8249;</button>
+      <button class="demo-bar__nav-btn" id="next-btn" title="Next">&#8250;</button>
     </div>
   </div>
 
-  <!-- Zoho chrome -->
-  <div style="border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
-    <div class="zoho-topbar">
-      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
-      <div class="zoho-topbar__search">🔍 &nbsp;Search National Committees...</div>
-      <div class="zoho-topbar__right">
-        <span style="font-size:12px;color:rgba(255,255,255,.6)">UWC International</span>
-        <div class="zoho-topbar__org">AA</div>
-      </div>
-    </div>
-    <div class="zoho-shell">
-      <div class="zoho-sidebar">
-        <div class="zoho-sidebar__group">
-          <div class="zoho-sidebar__item">🏠 Home</div>
-          <div class="zoho-sidebar__item">👥 Applicants</div>
-          <div class="zoho-sidebar__item">📁 Programmes</div>
-          <div class="zoho-sidebar__item active">🌍 National Committees</div>
-          <div class="zoho-sidebar__item">🎓 Governance</div>
-          <div class="zoho-sidebar__item">📊 Reports</div>
-          <div class="zoho-sidebar__item">⚙️ Settings</div>
-        </div>
-      </div>
-      <div class="zoho-main">
-        <div class="zoho-page-header">
-          <span class="zoho-page-title">National Committees</span>
-          <span style="background:#dbeafe;color:#1e40af;font-size:11px;padding:2px 9px;border-radius:999px;font-weight:600;margin-left:8px">150 total</span>
-        </div>
-        <div class="zoho-page-tools">
-          <button class="zoho-btn zoho-btn--primary">+ New NC</button>
-          <button class="zoho-btn">🗺 Map view</button>
-          <button class="zoho-btn" style="background:var(--zoho-sidebar-active-bg);color:var(--zoho-sidebar-active-text)">⊞ Grid view</button>
-          <button class="zoho-btn">⬇ Export</button>
-          <div class="zoho-page-tools__right">
-            <span style="font-size:12px;color:var(--zoho-text-muted)">Filter: All regions</span>
-            <button class="zoho-btn">▾ Filter</button>
-          </div>
-        </div>
+  <div class="stage" id="stage">
 
-        <!-- NC tiles -->
-        <div class="nc-grid">
-          <!-- Brazil — green -->
-          <div class="nc-tile nc-tile--green" onclick="go(1)" style="border-left-color:var(--uwc-green)">
-            <img class="nc-tile__flag" src="_shared/assets/uwc-brand/flags/br.svg" alt="Brazil">
-            <div class="nc-tile__name">UWC Brazil NC</div>
-            <div class="nc-tile__country">Brazil · South America</div>
-            <div class="nc-tile__meta">
-              <span class="pill pill--green" style="font-size:10.5px;padding:2px 7px">● Healthy</span>
-              <span style="font-size:11px;color:var(--zoho-text-muted)">47 apps</span>
+    <!-- STEP 1: All NCs list -->
+    <section class="screen active" id="sc-0">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">&#9634;</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">National Committees</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">&#128269;</span><input placeholder="Search NCs"></div></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">&#128276;</button><button class="zoho-tb__icon">&#128197;</button><button class="zoho-tb__icon">&#128100;</button><button class="zoho-tb__icon">&#9881;</button><span class="zoho-tb__org">IO</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127968;</span>Home</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128202;</span>Reports</a>
+            <div class="zoho-sb__teamspace"><div class="zoho-sb__teamspace-icon" style="background:#003087;">IO</div><span class="zoho-sb__teamspace-name">IO &#183; Global</span><span class="zoho-sb__teamspace-chev">&#8964;</span></div>
+            <a class="zoho-sb__item active"><span class="zoho-sb__item-icon">&#127760;</span>National Committees</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128100;</span>NC Volunteers</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128203;</span>MoU Obligations</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127891;</span>Programmes</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128737;</span>Safeguarding</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128202;</span>NC Health Dash</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128209;</span>Applications</a>
+          </aside>
+          <main class="zoho-content">
+            <div class="zoho-page-strip">
+              <div class="zoho-page-strip__view">All National Committees &#8964;</div>
+              <span style="font-size:12px;color:#6b7280;margin-left:4px;">152 records</span>
+              <span style="flex:1;"></span>
+              <span class="zoho-helper-tag">Akanksha sees all 152 NCs globally</span>
             </div>
-          </div>
-          <!-- Germany — green -->
-          <div class="nc-tile nc-tile--green">
-            <img class="nc-tile__flag" src="_shared/assets/uwc-brand/flags/de.svg" alt="Germany">
-            <div class="nc-tile__name">UWC Germany NC</div>
-            <div class="nc-tile__country">Germany · Europe</div>
-            <div class="nc-tile__meta">
-              <span class="pill pill--green" style="font-size:10.5px;padding:2px 7px">● Healthy</span>
-              <span style="font-size:11px;color:var(--zoho-text-muted)">14 apps</span>
+            <div class="zoho-toolbar">
+              <button class="zoho-toolbar__btn">&#9660; Filter</button>
+              <button class="zoho-toolbar__btn">&#8645; Sort</button>
+              <button class="zoho-toolbar__btn">&#127760; Region</button>
+              <span class="zoho-toolbar__divider"></span>
+              <span class="zoho-toolbar__view-icon active">&#9776;</span>
+              <span class="zoho-toolbar__view-icon">&#9638;</span>
+              <span class="zoho-toolbar__spacer"></span>
+              <button class="zoho-btn zoho-btn--primary">+ New NC</button>
             </div>
-          </div>
-          <!-- Kenya — AMBER -->
-          <div class="nc-tile nc-tile--amber" onclick="go(1)" style="border-left-color:var(--uwc-gold);background:#fffbeb">
-            <img class="nc-tile__flag" src="_shared/assets/uwc-brand/flags/ke.svg" alt="Kenya">
-            <div class="nc-tile__name">UWC Kenya NC</div>
-            <div class="nc-tile__country">Kenya · Africa</div>
-            <div class="nc-tile__meta">
-              <span class="pill pill--amber" style="font-size:10.5px;padding:2px 7px">⚠ 2 issues</span>
-              <span style="font-size:11px;color:var(--zoho-text-muted)">28 apps</span>
-            </div>
-            <div style="margin-top:8px;font-size:10.5px;color:#92400e;background:#fef3c7;padding:4px 7px;border-radius:4px">MoU overdue · Training expired</div>
-          </div>
-          <!-- India — green -->
-          <div class="nc-tile nc-tile--green">
-            <img class="nc-tile__flag" src="_shared/assets/uwc-brand/flags/in.svg" alt="India">
-            <div class="nc-tile__name">UWC India NC</div>
-            <div class="nc-tile__country">India · Asia-Pacific</div>
-            <div class="nc-tile__meta">
-              <span class="pill pill--green" style="font-size:10.5px;padding:2px 7px">● Healthy</span>
-              <span style="font-size:11px;color:var(--zoho-text-muted)">62 apps</span>
-            </div>
-          </div>
-          <!-- UK — green -->
-          <div class="nc-tile nc-tile--green">
-            <img class="nc-tile__flag" src="_shared/assets/uwc-brand/flags/gb.svg" alt="UK">
-            <div class="nc-tile__name">UWC UK NC</div>
-            <div class="nc-tile__country">United Kingdom · Europe</div>
-            <div class="nc-tile__meta">
-              <span class="pill pill--green" style="font-size:10.5px;padding:2px 7px">● Healthy</span>
-              <span style="font-size:11px;color:var(--zoho-text-muted)">19 apps</span>
-            </div>
-          </div>
-          <!-- +145 more -->
-          <div class="nc-tile" style="background:var(--uwc-grey-50);border:2px dashed var(--uwc-grey-300);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:110px">
-            <div style="font-size:28px;font-weight:700;color:var(--uwc-grey-400)">+145</div>
-            <div style="font-size:12px;color:var(--uwc-grey-500);margin-top:4px">more NCs</div>
-            <div style="font-size:10.5px;color:var(--uwc-grey-400);margin-top:2px">across all regions</div>
-          </div>
-        </div>
-
-        <!-- Summary bar -->
-        <div style="padding:12px 20px;border-top:1px solid var(--zoho-border-light);display:flex;gap:24px;background:#f9fafb">
-          <span style="font-size:12px;color:var(--zoho-text-muted)">● <strong style="color:#166534">142</strong> healthy</span>
-          <span style="font-size:12px;color:var(--zoho-text-muted)">⚠ <strong style="color:#92400e">5</strong> amber</span>
-          <span style="font-size:12px;color:var(--zoho-text-muted)">✖ <strong style="color:#991b1b">3</strong> at-risk</span>
-          <span style="font-size:12px;color:var(--zoho-text-muted);margin-left:auto">23 overdue MoU items · 17 training gaps</span>
+            <table class="zoho-list">
+              <thead><tr><th><input type="checkbox"></th><th>NC Name</th><th>Country</th><th>Status</th><th>Members</th><th>Programmes</th><th>MoU Health</th><th>Last Updated</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox"></td>
+                  <td class="zoho-list__name-link">UWC Brazil</td>
+                  <td>Brazil</td>
+                  <td><span class="zoho-pill zoho-pill--active">Active</span></td>
+                  <td>18</td><td>1</td>
+                  <td><span style="color:#10b981;font-weight:600;">&#9679; Good</span></td>
+                  <td>22 May 2026</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox"></td>
+                  <td class="zoho-list__name-link">UWC Germany</td>
+                  <td>Germany</td>
+                  <td><span class="zoho-pill zoho-pill--active">Active</span></td>
+                  <td>22</td><td>2</td>
+                  <td><span style="color:#10b981;font-weight:600;">&#9679; Good</span></td>
+                  <td>20 May 2026</td>
+                </tr>
+                <tr style="background:#fffbeb;">
+                  <td><input type="checkbox"></td>
+                  <td><span class="zoho-list__name-link">UWC Kenya</span> &nbsp;<span style="background:#fee2e2;color:#991b1b;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;">MoU OVERDUE</span></td>
+                  <td>Kenya</td>
+                  <td><span class="zoho-pill zoho-pill--active">Active</span></td>
+                  <td>9</td><td>1</td>
+                  <td><span style="color:#d97706;font-weight:600;">&#9679; Attention</span></td>
+                  <td>28 May 2026</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox"></td>
+                  <td class="zoho-list__name-link">UWC India</td>
+                  <td>India</td>
+                  <td><span class="zoho-pill zoho-pill--active">Active</span></td>
+                  <td>31</td><td>3</td>
+                  <td><span style="color:#10b981;font-weight:600;">&#9679; Good</span></td>
+                  <td>18 May 2026</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox"></td>
+                  <td class="zoho-list__name-link">UWC UK</td>
+                  <td>United Kingdom</td>
+                  <td><span class="zoho-pill zoho-pill--active">Active</span></td>
+                  <td>14</td><td>2</td>
+                  <td><span style="color:#10b981;font-weight:600;">&#9679; Good</span></td>
+                  <td>15 May 2026</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="padding:10px 22px;font-size:12px;color:#9ca3af;">Showing 5 of 152 National Committees &#183; <span style="color:#2563eb;cursor:pointer;">Load all</span></div>
+          </main>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="badges-strip">
-    <span class="badge badge--info">150 NCs across 5 regions</span>
-    <span class="badge badge--warn">Kenya: amber — MoU overdue + 2 training issues</span>
-    <span class="badge badge--auto">Health score auto-computed from MoU + training compliance</span>
-  </div>
-</section>
-
-<!-- ===== SCREEN 1: KENYA NC RECORD ===== -->
-<section class="screen" id="sc-1">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">👤 Akanksha Anand — IO Super Admin</div>
-      <h1 class="screen-title">UWC Kenya National Committee</h1>
-      <p class="screen-sub">Akanksha opens the Kenya NC record. Grace Omondi is the Chair. The record shows key contacts, linked governance, active programme, and 9 volunteers. An amber health banner flags outstanding compliance items.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(0)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(2)">Next →</button>
-    </div>
-  </div>
-
-  <div style="border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
-    <div class="zoho-topbar">
-      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
-      <div class="zoho-topbar__search">🔍 &nbsp;National Committees › UWC Kenya NC</div>
-      <div class="zoho-topbar__right">
-        <div class="zoho-topbar__org">AA</div>
-      </div>
-    </div>
-    <div class="zoho-shell">
-      <div class="zoho-sidebar">
-        <div class="zoho-sidebar__group">
-          <div class="zoho-sidebar__item">🏠 Home</div>
-          <div class="zoho-sidebar__item active">🌍 National Committees</div>
-          <div class="zoho-sidebar__item">📋 NC Volunteers</div>
-          <div class="zoho-sidebar__item">📄 MoU Obligations</div>
-          <div class="zoho-sidebar__item">📁 Programmes</div>
-        </div>
-      </div>
-      <div class="zoho-main">
-        <!-- Health banner -->
-        <div style="background:#fffbeb;border-bottom:2px solid #fbbf24;padding:10px 20px;display:flex;align-items:center;gap:10px">
-          <span style="font-size:16px">⚠️</span>
-          <span style="font-size:12.5px;color:#78350f;font-weight:500">Compliance alert: Annual Report 2026 overdue · 2 volunteers with expired/missing Safeguarding training</span>
-          <button class="zoho-btn zoho-btn--warn" style="margin-left:auto;font-size:11.5px;padding:5px 12px">View issues</button>
-        </div>
-
-        <!-- Hero -->
-        <div class="zoho-detail__hero">
-          <img src="_shared/assets/uwc-brand/flags/ke.svg" alt="Kenya" style="width:52px;height:36px;border-radius:3px;object-fit:cover;border:1px solid var(--uwc-grey-200)">
-          <div>
-            <div class="zoho-detail__name">UWC Kenya National Committee</div>
-            <div style="font-size:12.5px;color:var(--zoho-text-muted);margin-top:2px">Kenya · Africa Region · <span class="pill pill--green" style="font-size:11px;padding:1px 7px">Active</span></div>
-          </div>
-          <div class="zoho-detail__actions">
-            <button class="zoho-btn">Edit</button>
-            <button class="zoho-btn zoho-btn--primary">Send MoU Reminder</button>
-          </div>
-        </div>
-
-        <div class="zoho-detail__sections">
-          <!-- Basic info -->
-          <div class="zoho-detail__section">
-            <div class="zoho-detail__section-header">
-              <span class="zoho-detail__section-title">NC Details</span>
-            </div>
-            <div class="zoho-detail__section-body">
-              <div class="zoho-fields">
-                <div class="zoho-field"><span class="zoho-field__label">NC Name</span><span class="zoho-field__value">UWC Kenya National Committee</span></div>
-                <div class="zoho-field"><span class="zoho-field__label">Country</span><span class="zoho-field__value">Kenya</span></div>
-                <div class="zoho-field"><span class="zoho-field__label">Status</span><span class="zoho-field__value"><span class="pill pill--green" style="font-size:11px">Active</span></span></div>
-                <div class="zoho-field"><span class="zoho-field__label">Region</span><span class="zoho-field__value">Africa</span></div>
-                <div class="zoho-field"><span class="zoho-field__label">NC Chair</span><span class="zoho-field__value" style="color:var(--zoho-link)">Grace Omondi</span></div>
-                <div class="zoho-field"><span class="zoho-field__label">Active Volunteers</span><span class="zoho-field__value"><strong>9</strong></span></div>
-                <div class="zoho-field"><span class="zoho-field__label">Apps This Cycle</span><span class="zoho-field__value">28</span></div>
-                <div class="zoho-field"><span class="zoho-field__label">MoU Status</span><span class="zoho-field__value"><span class="pill pill--amber" style="font-size:11px">⚠ Annual report OVERDUE</span></span></div>
+    <!-- STEP 2: UWC Kenya record detail -->
+    <section class="screen" id="sc-1">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">&#9634;</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">National Committees</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">&#128269;</span><input placeholder="Search records"></div></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">&#128276;</button><button class="zoho-tb__icon">&#128100;</button><button class="zoho-tb__icon">&#9881;</button><span class="zoho-tb__org">IO</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127968;</span>Home</a>
+            <div class="zoho-sb__teamspace"><div class="zoho-sb__teamspace-icon" style="background:#003087;">IO</div><span class="zoho-sb__teamspace-name">IO &#183; Global</span><span class="zoho-sb__teamspace-chev">&#8964;</span></div>
+            <a class="zoho-sb__item active"><span class="zoho-sb__item-icon">&#127760;</span>National Committees</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128100;</span>NC Volunteers</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128203;</span>MoU Obligations</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127891;</span>Programmes</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128202;</span>NC Health Dash</a>
+          </aside>
+          <main class="zoho-content">
+            <div class="zoho-detail__hero">
+              <span class="zoho-detail__back">&#8592;</span>
+              <div class="zoho-detail__avatar" style="background:linear-gradient(135deg,#003087,#1f9535);">KE</div>
+              <div class="zoho-detail__name-block">
+                <div class="zoho-detail__name">UWC Kenya</div>
+                <div class="zoho-detail__add-tags">
+                  <span class="zoho-pill zoho-pill--active">Active</span>
+                  <span class="zoho-pill zoho-pill--danger">MoU OVERDUE</span>
+                </div>
+              </div>
+              <div class="zoho-detail__actions">
+                <span class="zoho-detail__last-update">Updated 28 May 2026 &#183; Akanksha Anand</span>
+                <button class="zoho-btn zoho-btn--primary">Send reminder</button>
+                <button class="zoho-btn">&#8943;</button>
               </div>
             </div>
-          </div>
-
-          <!-- Key Contacts -->
-          <div class="zoho-detail__section">
-            <div class="zoho-detail__section-header">
-              <span class="zoho-detail__section-title">Key Contacts (3)</span>
-              <button class="zoho-btn" style="font-size:11.5px;padding:4px 10px">+ Add</button>
+            <div class="zoho-tabs">
+              <span class="zoho-tabs__tab active">Overview</span>
+              <span class="zoho-tabs__tab">Volunteers</span>
+              <span class="zoho-tabs__tab">MoU Obligations</span>
+              <span class="zoho-tabs__tab">Programmes</span>
+              <span class="zoho-tabs__tab">Timeline</span>
             </div>
-            <div class="zoho-detail__section-body" style="padding:0">
-              <table class="data-table">
-                <thead><tr><th>Name</th><th>Role</th><th>Email</th><th>Training</th></tr></thead>
+            <div class="zoho-detail__body" style="margin-top:14px;">
+              <aside class="zoho-detail__rail">
+                <div class="zoho-detail__rail-header">Related Lists</div>
+                <div class="zoho-detail__rail-item active"><span>NC Details</span></div>
+                <div class="zoho-detail__rail-item"><span>Volunteers</span><span class="zoho-detail__rail-count">3</span></div>
+                <div class="zoho-detail__rail-item"><span>MoU Obligations</span><span class="zoho-detail__rail-count">4</span></div>
+                <div class="zoho-detail__rail-item"><span>Programmes</span><span class="zoho-detail__rail-count">1</span></div>
+                <div class="zoho-detail__rail-item"><span>Governance Body</span><span class="zoho-detail__rail-count">1</span></div>
+              </aside>
+              <div class="zoho-detail__main">
+                <div class="zoho-detail__card">
+                  <div class="zoho-detail__card-title">NC Details</div>
+                  <div class="zoho-fields-grid">
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Country</div><div class="zoho-field-row__value">Kenya</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Status</div><div class="zoho-field-row__value"><span class="zoho-pill zoho-pill--active">Active</span></div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">NC Chair</div><div class="zoho-field-row__value link">Grace Omondi</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Members</div><div class="zoho-field-row__value">9</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Established</div><div class="zoho-field-row__value">1996</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Region</div><div class="zoho-field-row__value">Africa</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Governance Body</div><div class="zoho-field-row__value link">Africa Regional Advisory</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">MoU Health</div><div class="zoho-field-row__value"><span style="color:#d97706;font-weight:600;">&#9679; Attention Required</span></div></div>
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+                  <div class="zoho-detail__card" style="padding:14px 18px;">
+                    <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Volunteers</div>
+                    <div style="font-size:24px;font-weight:700;color:#003087;">3</div>
+                    <div style="font-size:12px;color:#2563eb;cursor:pointer;margin-top:4px;">View roster &#8594;</div>
+                  </div>
+                  <div class="zoho-detail__card" style="padding:14px 18px;border-color:#fbbf24;">
+                    <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">MoU Obligations</div>
+                    <div style="font-size:24px;font-weight:700;color:#d97706;">4</div>
+                    <div style="font-size:12px;color:#dc2626;cursor:pointer;margin-top:4px;">1 overdue &#8594;</div>
+                  </div>
+                  <div class="zoho-detail__card" style="padding:14px 18px;">
+                    <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Programmes</div>
+                    <div style="font-size:24px;font-weight:700;color:#003087;">1</div>
+                    <div style="font-size:12px;color:#2563eb;cursor:pointer;margin-top:4px;">View &#8594;</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3: Volunteer roster for Kenya -->
+    <section class="screen" id="sc-2">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">&#9634;</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">NC Volunteers</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">&#128269;</span><input placeholder="Search volunteers"></div></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">&#128276;</button><button class="zoho-tb__icon">&#128100;</button><button class="zoho-tb__icon">&#9881;</button><span class="zoho-tb__org">IO</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127968;</span>Home</a>
+            <div class="zoho-sb__teamspace"><div class="zoho-sb__teamspace-icon" style="background:#003087;">IO</div><span class="zoho-sb__teamspace-name">IO &#183; Global</span><span class="zoho-sb__teamspace-chev">&#8964;</span></div>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127760;</span>National Committees</a>
+            <a class="zoho-sb__item active"><span class="zoho-sb__item-icon">&#128100;</span>NC Volunteers</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128203;</span>MoU Obligations</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128202;</span>NC Health Dash</a>
+          </aside>
+          <main class="zoho-content">
+            <div class="zoho-page-strip">
+              <span style="font-size:12px;color:#6b7280;cursor:pointer;">&#8592; UWC Kenya</span>
+              <span style="color:#9ca3af;padding:0 6px;">/</span>
+              <div class="zoho-page-strip__view">Volunteers &#8964;</div>
+              <span style="font-size:12px;color:#6b7280;margin-left:4px;">3 records</span>
+              <span style="flex:1;"></span>
+              <span class="zoho-helper-tag">Safeguarding training status visible to IO Super Admin</span>
+            </div>
+            <div class="zoho-toolbar">
+              <button class="zoho-toolbar__btn">&#9660; Filter</button>
+              <button class="zoho-toolbar__btn">&#8645; Sort by training status</button>
+              <span class="zoho-toolbar__spacer"></span>
+              <button class="zoho-btn zoho-btn--primary">+ Add volunteer</button>
+            </div>
+            <table class="zoho-list">
+              <thead><tr><th><input type="checkbox"></th><th>Name</th><th>Role</th><th>Safeguarding Training</th><th>Status</th><th>Member Since</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox"></td>
+                  <td class="zoho-list__name-link">Grace Omondi</td>
+                  <td>Chair</td>
+                  <td style="font-size:12px;color:#4b5563;">Completed 14 Jan 2024 &middot; Expires 14 Jan 2026</td>
+                  <td><span class="zoho-pill zoho-pill--active">CURRENT</span></td>
+                  <td>2020</td>
+                  <td><button class="zoho-btn" style="font-size:12px;padding:4px 10px;">Renew training</button></td>
+                </tr>
+                <tr style="background:#fff5f5;">
+                  <td><input type="checkbox"></td>
+                  <td class="zoho-list__name-link">Daniel Kimani</td>
+                  <td>Selection Coordinator</td>
+                  <td style="font-size:12px;color:#dc2626;font-weight:500;">Completed 03 Mar 2023 &middot; Expired 03 Mar 2025</td>
+                  <td><span class="zoho-pill zoho-pill--danger">EXPIRED</span></td>
+                  <td>2018</td>
+                  <td><button class="zoho-btn zoho-btn--danger" style="font-size:12px;padding:4px 10px;">Renew training</button></td>
+                </tr>
+                <tr style="background:#fff5f5;">
+                  <td><input type="checkbox"></td>
+                  <td class="zoho-list__name-link">Aisha Waweru</td>
+                  <td>Reviewer</td>
+                  <td style="font-size:12px;color:#dc2626;font-style:italic;">Not recorded</td>
+                  <td><span class="zoho-pill zoho-pill--danger">MISSING</span></td>
+                  <td>2022</td>
+                  <td><button class="zoho-btn" style="font-size:12px;padding:4px 10px;">Add training record</button></td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="padding:12px 22px;background:#fff7ed;border-top:1px solid #fed7aa;font-size:12.5px;color:#9a3412;display:flex;align-items:center;gap:8px;">
+              <span style="font-size:16px;">&#9888;</span>
+              <span><b>2 volunteers have safeguarding training issues.</b> Volunteers with expired or missing training cannot be assigned to selection panels until records are updated.</span>
+              <button class="zoho-btn" style="margin-left:auto;font-size:12px;border-color:#f97316;color:#9a3412;white-space:nowrap;">Send bulk reminder</button>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 4: Daniel Kimani Training Record -->
+    <section class="screen" id="sc-3">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">&#9634;</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">NC Volunteers</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">&#128269;</span><input placeholder="Search records"></div></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">&#128276;</button><button class="zoho-tb__icon">&#128100;</button><button class="zoho-tb__icon">&#9881;</button><span class="zoho-tb__org">IO</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127968;</span>Home</a>
+            <div class="zoho-sb__teamspace"><div class="zoho-sb__teamspace-icon" style="background:#003087;">IO</div><span class="zoho-sb__teamspace-name">IO &#183; Global</span><span class="zoho-sb__teamspace-chev">&#8964;</span></div>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127760;</span>National Committees</a>
+            <a class="zoho-sb__item active"><span class="zoho-sb__item-icon">&#128100;</span>NC Volunteers</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128203;</span>MoU Obligations</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128202;</span>NC Health Dash</a>
+          </aside>
+          <main class="zoho-content">
+            <div class="zoho-detail__hero">
+              <span class="zoho-detail__back">&#8592;</span>
+              <div class="zoho-detail__avatar" style="background:linear-gradient(135deg,#1e3a8a,#3b82f6);">DK</div>
+              <div class="zoho-detail__name-block">
+                <div class="zoho-detail__name">Daniel Kimani</div>
+                <div class="zoho-detail__add-tags">
+                  <span class="zoho-pill zoho-pill--blue">Selection Coordinator</span>
+                  <span class="zoho-pill zoho-pill--danger">&#128683; Training EXPIRED</span>
+                </div>
+              </div>
+              <div class="zoho-detail__actions">
+                <span class="zoho-detail__last-update">UWC Kenya &middot; Member since 2018</span>
+                <button class="zoho-btn zoho-btn--danger">Send renewal invitation</button>
+                <button class="zoho-btn">&#8943;</button>
+              </div>
+            </div>
+            <div class="zoho-tabs">
+              <span class="zoho-tabs__tab active">Training Record</span>
+              <span class="zoho-tabs__tab">Assignments</span>
+              <span class="zoho-tabs__tab">Notes</span>
+            </div>
+            <div class="zoho-detail__body" style="margin-top:14px;">
+              <aside class="zoho-detail__rail">
+                <div class="zoho-detail__rail-header">Record Details</div>
+                <div class="zoho-detail__rail-item active"><span>Training Record</span></div>
+                <div class="zoho-detail__rail-item"><span>Panel Assignments</span><span class="zoho-detail__rail-count">4</span></div>
+                <div class="zoho-detail__rail-item"><span>Email History</span><span class="zoho-detail__rail-count">2</span></div>
+              </aside>
+              <div class="zoho-detail__main">
+                <div style="background:#fee2e2;border:1.5px solid #f87171;border-radius:8px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:flex-start;gap:12px;">
+                  <span style="font-size:20px;flex-shrink:0;margin-top:2px;">&#128683;</span>
+                  <div>
+                    <div style="font-size:13px;font-weight:700;color:#991b1b;margin-bottom:4px;">Safeguarding training has expired</div>
+                    <div style="font-size:12px;color:#b91c1c;line-height:1.5;">Expired on 03 Mar 2025. Daniel Kimani cannot be assigned to selection panels until renewal is completed. Use "Send renewal invitation" to trigger the IO online training portal.</div>
+                  </div>
+                </div>
+                <div class="zoho-detail__card">
+                  <div class="zoho-detail__card-title">Safeguarding Training Record</div>
+                  <div class="zoho-fields-grid">
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Volunteer</div><div class="zoho-field-row__value link">Daniel Kimani</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">NC</div><div class="zoho-field-row__value link">UWC Kenya</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Training Type</div><div class="zoho-field-row__value">Safeguarding</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Provider</div><div class="zoho-field-row__value">UWC IO Online Portal</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Completed</div><div class="zoho-field-row__value">03 Mar 2023</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Expires</div><div class="zoho-field-row__value" style="color:#dc2626;font-weight:600;">03 Mar 2025</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Status</div><div class="zoho-field-row__value"><span class="zoho-pill zoho-pill--danger">EXPIRED</span></div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Certificate</div><div class="zoho-field-row__value link">CERT-KE-2023-DK.pdf</div></div>
+                  </div>
+                  <div style="margin-top:18px;padding-top:14px;border-top:1px solid #f0f2f5;display:flex;gap:8px;justify-content:flex-end;">
+                    <button class="zoho-btn">Log manual completion</button>
+                    <button class="zoho-btn zoho-btn--danger">Send renewal invitation</button>
+                  </div>
+                </div>
+                <div class="zoho-detail__card">
+                  <div class="zoho-detail__card-title">Renewal Workflow Status</div>
+                  <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12px;">
+                    <span style="background:#f3f4f6;color:#4b5563;padding:5px 12px;border-radius:4px;border:1px solid #e5e7eb;">Expired <span style="color:#9ca3af;margin-left:4px;">03 Mar 2025</span></span>
+                    <span style="color:#9ca3af;">&#8594;</span>
+                    <span style="background:#fee2e2;color:#991b1b;padding:5px 12px;border-radius:4px;border:1px solid #fca5a5;">Auto-flag raised <span style="color:#9ca3af;margin-left:4px;">04 Mar 2025</span></span>
+                    <span style="color:#9ca3af;">&#8594;</span>
+                    <span style="background:#fef3c7;color:#92400e;padding:5px 12px;border-radius:4px;border:1px dashed #fcd34d;">Awaiting renewal <span style="color:#9ca3af;margin-left:4px;">pending</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 5: NC Chair portal (Grace Omondi) -->
+    <section class="screen" id="sc-4">
+      <div class="uwc-portal-shell">
+        <header class="portal-topbar">
+          <div class="portal-topbar__logo">UWC</div>
+          <div>
+            <div class="portal-topbar__title">UWC Kenya &mdash; National Committee Portal</div>
+            <div class="portal-topbar__sub">NC Chair dashboard &middot; 2026 cycle</div>
+          </div>
+          <div class="portal-topbar__spacer"></div>
+          <div class="portal-topbar__user">
+            <span>Grace Omondi</span>
+            <div class="portal-topbar__avatar">GO</div>
+          </div>
+        </header>
+        <div class="portal-body">
+          <nav class="portal-sidebar">
+            <a class="portal-nav__item active"><span class="portal-nav__icon">&#127968;</span>Dashboard</a>
+            <a class="portal-nav__item"><span class="portal-nav__icon">&#128100;</span>My Volunteers</a>
+            <a class="portal-nav__item"><span class="portal-nav__icon">&#128203;</span>MoU Obligations</a>
+            <a class="portal-nav__item"><span class="portal-nav__icon">&#128209;</span>Applications</a>
+            <a class="portal-nav__item"><span class="portal-nav__icon">&#127891;</span>Programmes</a>
+            <a class="portal-nav__item"><span class="portal-nav__icon">&#128197;</span>Events</a>
+            <a class="portal-nav__item"><span class="portal-nav__icon">&#128274;</span>Safeguarding</a>
+          </nav>
+          <div class="portal-content">
+            <div class="portal-kpi-row">
+              <div class="portal-kpi">
+                <div class="portal-kpi__val">9</div>
+                <div class="portal-kpi__label">NC Members</div>
+              </div>
+              <div class="portal-kpi" style="border-color:#fbbf24;">
+                <div class="portal-kpi__val" style="color:#d97706;">2</div>
+                <div class="portal-kpi__label">Training Issues</div>
+              </div>
+              <div class="portal-kpi" style="border-color:#fca5a5;">
+                <div class="portal-kpi__val" style="color:#dc2626;">1</div>
+                <div class="portal-kpi__label">MoU Overdue</div>
+              </div>
+            </div>
+            <div class="portal-card">
+              <div class="portal-card__title">&#128100; Volunteers &mdash; UWC Kenya</div>
+              <table class="zoho-list">
+                <thead><tr><th>Name</th><th>Role</th><th>Training</th><th>Status</th></tr></thead>
                 <tbody>
                   <tr>
-                    <td style="font-weight:500;color:var(--zoho-link)">Grace Omondi</td>
-                    <td>NC Chair</td>
-                    <td>g.omondi@uwckenya.org</td>
-                    <td><span class="pill pill--green" style="font-size:10.5px">Current</span></td>
+                    <td style="font-weight:500;">Grace Omondi</td>
+                    <td>Chair</td>
+                    <td style="font-size:12px;color:#4b5563;">Valid until 14 Jan 2026</td>
+                    <td><span class="zoho-pill zoho-pill--active">CURRENT</span></td>
                   </tr>
-                  <tr>
-                    <td style="font-weight:500;color:var(--zoho-link)">Daniel Kimani</td>
+                  <tr style="background:#fff5f5;">
+                    <td style="font-weight:500;">Daniel Kimani</td>
                     <td>Selection Coordinator</td>
-                    <td>d.kimani@uwckenya.org</td>
-                    <td><span class="pill pill--red" style="font-size:10.5px">Expired</span></td>
+                    <td style="font-size:12px;color:#dc2626;">Expired 03 Mar 2025</td>
+                    <td><span class="zoho-pill zoho-pill--danger">EXPIRED</span></td>
                   </tr>
-                  <tr>
-                    <td style="font-weight:500;color:var(--zoho-link)">Aisha Waweru</td>
+                  <tr style="background:#fff5f5;">
+                    <td style="font-weight:500;">Aisha Waweru</td>
                     <td>Reviewer</td>
-                    <td>a.waweru@uwckenya.org</td>
-                    <td><span class="pill pill--red" style="font-size:10.5px">Missing</span></td>
+                    <td style="font-size:12px;color:#dc2626;font-style:italic;">Not recorded</td>
+                    <td><span class="zoho-pill zoho-pill--danger">MISSING</span></td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          </div>
-
-          <div class="grid-2">
-            <!-- Linked Governance -->
-            <div class="zoho-detail__section" style="margin-bottom:0">
-              <div class="zoho-detail__section-header">
-                <span class="zoho-detail__section-title">Linked Governance</span>
+            <div class="portal-card" style="border-color:#fca5a5;">
+              <div class="portal-card__title" style="color:#dc2626;">&#9888; MoU Obligations &mdash; Action Required</div>
+              <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;">
+                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#f0fdf4;border-radius:6px;">
+                  <span style="color:#10b981;font-size:16px;">&#10003;</span>
+                  <span>Annual Report (Q1 2026)</span>
+                  <span style="margin-left:auto;color:#10b981;font-size:12px;font-weight:500;">Submitted on time</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#fee2e2;border-radius:6px;border:1px solid #fca5a5;">
+                  <span style="color:#dc2626;font-size:16px;">&#9888;</span>
+                  <span style="font-weight:600;">Annual Report (Q2 2026)</span>
+                  <span style="margin-left:auto;color:#dc2626;font-size:12px;font-weight:700;">OVERDUE since 31 March</span>
+                </div>
               </div>
-              <div class="zoho-detail__section-body">
-                <div style="display:flex;align-items:center;gap:10px;padding:8px 0">
-                  <span style="font-size:18px">🛡</span>
+              <div style="margin-top:12px;">
+                <button class="zoho-btn zoho-btn--primary">Submit Q2 Annual Report</button>
+              </div>
+            </div>
+            <div class="portal-card">
+              <div class="portal-card__title">&#128197; Upcoming Events</div>
+              <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:#4b5563;">
+                <div style="display:flex;gap:12px;padding:6px 0;border-bottom:1px solid #f0f2f5;">
+                  <span style="font-family:'DM Mono',monospace;font-size:11px;color:#6b7280;min-width:80px;">15 Jun 2026</span>
+                  <span>Selection Panel — UWC East Africa shortlist</span>
+                </div>
+                <div style="display:flex;gap:12px;padding:6px 0;">
+                  <span style="font-family:'DM Mono',monospace;font-size:11px;color:#6b7280;min-width:80px;">30 Jun 2026</span>
+                  <span>Annual Membership Data submission deadline</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 6: MoU obligations panel (Grace's view) -->
+    <section class="screen" id="sc-5">
+      <div class="uwc-portal-shell">
+        <header class="portal-topbar">
+          <div class="portal-topbar__logo">UWC</div>
+          <div>
+            <div class="portal-topbar__title">UWC Kenya &mdash; National Committee Portal</div>
+            <div class="portal-topbar__sub">MoU Obligations &middot; 2026 cycle</div>
+          </div>
+          <div class="portal-topbar__spacer"></div>
+          <div class="portal-topbar__user">
+            <span>Grace Omondi</span>
+            <div class="portal-topbar__avatar">GO</div>
+          </div>
+        </header>
+        <div class="portal-body">
+          <nav class="portal-sidebar">
+            <a class="portal-nav__item"><span class="portal-nav__icon">&#127968;</span>Dashboard</a>
+            <a class="portal-nav__item"><span class="portal-nav__icon">&#128100;</span>My Volunteers</a>
+            <a class="portal-nav__item active"><span class="portal-nav__icon">&#128203;</span>MoU Obligations</a>
+            <a class="portal-nav__item"><span class="portal-nav__icon">&#128209;</span>Applications</a>
+            <a class="portal-nav__item"><span class="portal-nav__icon">&#127891;</span>Programmes</a>
+            <a class="portal-nav__item"><span class="portal-nav__icon">&#128197;</span>Events</a>
+            <a class="portal-nav__item"><span class="portal-nav__icon">&#128274;</span>Safeguarding</a>
+          </nav>
+          <div class="portal-content">
+            <div style="margin-bottom:16px;">
+              <div style="font-size:18px;font-weight:700;color:#003087;margin-bottom:4px;">MoU Obligations &mdash; UWC Kenya</div>
+              <div style="font-size:12.5px;color:#6b7280;">Your Memorandum of Understanding with UWC International requires the following submissions and compliance actions.</div>
+            </div>
+            <div class="portal-card" style="padding:0;overflow:hidden;">
+              <table style="width:100%;border-collapse:collapse;font-size:13.5px;">
+                <thead>
+                  <tr style="background:#003087;color:#fff;">
+                    <th style="padding:11px 18px;text-align:left;font-size:12px;font-weight:500;">Obligation</th>
+                    <th style="padding:11px 18px;text-align:left;font-size:12px;font-weight:500;">Due Date</th>
+                    <th style="padding:11px 18px;text-align:left;font-size:12px;font-weight:500;">Status</th>
+                    <th style="padding:11px 18px;text-align:left;font-size:12px;font-weight:500;">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid #e5e7eb;">
+                    <td style="padding:13px 18px;">
+                      <div style="font-weight:600;">Annual Report (Q1 2026)</div>
+                      <div style="font-size:11.5px;color:#6b7280;margin-top:2px;">Summary of NC activities, finances, and membership</div>
+                    </td>
+                    <td style="padding:13px 18px;color:#4b5563;">31 Jan 2026</td>
+                    <td style="padding:13px 18px;"><span style="background:#dcfce7;color:#166534;padding:3px 10px;border-radius:4px;font-size:11.5px;font-weight:600;">&#10003; Submitted</span></td>
+                    <td style="padding:13px 18px;"><a href="#" style="color:#2563eb;font-size:12.5px;">View submission</a></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid #e5e7eb;background:#fff5f5;">
+                    <td style="padding:13px 18px;">
+                      <div style="font-weight:700;color:#dc2626;">Annual Report (Q2 2026)</div>
+                      <div style="font-size:11.5px;color:#b91c1c;margin-top:2px;font-weight:600;">OVERDUE since 31 March</div>
+                    </td>
+                    <td style="padding:13px 18px;color:#dc2626;font-weight:700;">31 Mar 2026</td>
+                    <td style="padding:13px 18px;"><span class="zoho-pill zoho-pill--danger" style="font-size:11.5px;padding:3px 10px;">&#9888; OVERDUE</span></td>
+                    <td style="padding:13px 18px;"><button class="zoho-btn zoho-btn--danger" style="font-size:12px;padding:5px 12px;">Submit now</button></td>
+                  </tr>
+                  <tr style="border-bottom:1px solid #e5e7eb;">
+                    <td style="padding:13px 18px;">
+                      <div style="font-weight:600;">Code of Conduct Training</div>
+                      <div style="font-size:11.5px;color:#6b7280;margin-top:2px;">All active volunteers must complete annually</div>
+                    </td>
+                    <td style="padding:13px 18px;color:#4b5563;">28 Feb 2026</td>
+                    <td style="padding:13px 18px;"><span style="background:#dcfce7;color:#166534;padding:3px 10px;border-radius:4px;font-size:11.5px;font-weight:600;">&#10003; Complete</span></td>
+                    <td style="padding:13px 18px;"><a href="#" style="color:#2563eb;font-size:12.5px;">View records</a></td>
+                  </tr>
+                  <tr>
+                    <td style="padding:13px 18px;">
+                      <div style="font-weight:600;">Membership Data Update</div>
+                      <div style="font-size:11.5px;color:#6b7280;margin-top:2px;">Annual roster, roles, and contact information</div>
+                    </td>
+                    <td style="padding:13px 18px;color:#d97706;font-weight:600;">30 Jun 2026</td>
+                    <td style="padding:13px 18px;"><span class="zoho-pill zoho-pill--amber" style="font-size:11.5px;padding:3px 10px;">&#8987; Due in 33 days</span></td>
+                    <td style="padding:13px 18px;"><button class="zoho-btn" style="font-size:12px;padding:5px 12px;">Start update</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="margin-top:14px;padding:12px 16px;background:#E8EEF6;border-radius:8px;font-size:12.5px;color:#003087;line-height:1.6;">
+              <b>Need help?</b> Contact your IO regional liaison at <span style="color:#2563eb;">africa-liaison@uwc.net</span> or log a query via this portal.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 7: IO NC-health dashboard -->
+    <section class="screen" id="sc-6">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">&#9634;</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">NC Health Dashboard</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">&#128269;</span><input placeholder="Search NCs"></div></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">&#128276;</button><button class="zoho-tb__icon">&#128100;</button><button class="zoho-tb__icon">&#9881;</button><span class="zoho-tb__org">IO</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
+        </header>
+        <div class="zoho-body">
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127968;</span>Home</a>
+            <div class="zoho-sb__teamspace"><div class="zoho-sb__teamspace-icon" style="background:#003087;">IO</div><span class="zoho-sb__teamspace-name">IO &#183; Global</span><span class="zoho-sb__teamspace-chev">&#8964;</span></div>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127760;</span>National Committees</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128100;</span>NC Volunteers</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#128203;</span>MoU Obligations</a>
+            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">&#127891;</span>Programmes</a>
+            <a class="zoho-sb__item active"><span class="zoho-sb__item-icon">&#128202;</span>NC Health Dash</a>
+          </aside>
+          <main class="zoho-content" style="background:#f9fafb;">
+            <div class="health-dash">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                <div>
+                  <div style="font-size:16px;font-weight:700;color:#003087;">Global NC Network Health</div>
+                  <div style="font-size:12px;color:#6b7280;">Live snapshot &middot; 28 May 2026 &middot; Akanksha Anand</div>
+                </div>
+                <div style="display:flex;gap:8px;">
+                  <button class="zoho-btn" style="font-size:12px;">&#8645; Export</button>
+                  <button class="zoho-btn" style="font-size:12px;">&#128197; Date range</button>
+                  <button class="zoho-btn zoho-btn--primary" style="font-size:12px;">&#128229; Send digest</button>
+                </div>
+              </div>
+
+              <div class="health-kpi-row">
+                <div class="health-kpi">
+                  <div class="health-kpi__val">152</div>
+                  <div class="health-kpi__label">Active NCs</div>
+                </div>
+                <div class="health-kpi">
+                  <div class="health-kpi__val">1,847</div>
+                  <div class="health-kpi__label">Active Volunteers</div>
+                </div>
+                <div class="health-kpi health-kpi--warn">
+                  <div class="health-kpi__val">23</div>
+                  <div class="health-kpi__label">Outstanding MoUs</div>
+                </div>
+                <div class="health-kpi health-kpi--danger">
+                  <div class="health-kpi__val">47</div>
+                  <div class="health-kpi__label">Expired Training</div>
+                </div>
+              </div>
+
+              <!-- Map placeholder -->
+              <div class="map-placeholder">
+                <div class="map-dot map-dot--green" style="top:35%;left:48%;"></div>
+                <div class="map-dot map-dot--green" style="top:29%;left:45%;"></div>
+                <div class="map-dot map-dot--green" style="top:62%;left:27%;"></div>
+                <div class="map-dot map-dot--amber" style="top:58%;left:57%;"></div>
+                <div class="map-dot map-dot--green" style="top:42%;left:72%;"></div>
+                <div class="map-dot map-dot--green" style="top:26%;left:22%;"></div>
+                <div class="map-dot map-dot--green" style="top:22%;left:56%;"></div>
+                <div class="map-dot map-dot--green" style="top:44%;left:65%;"></div>
+                <div class="map-dot map-dot--green" style="top:68%;left:80%;"></div>
+                <div class="map-dot map-dot--green" style="top:33%;left:88%;"></div>
+                <div class="map-dot map-dot--green" style="top:50%;left:40%;"></div>
+                <div style="position:absolute;top:10px;left:14px;font-size:11px;font-weight:500;color:#374151;">&#127760; Interactive NC Map &mdash; 152 NCs</div>
+                <div style="position:absolute;bottom:10px;right:14px;font-size:11px;color:#6b7280;display:flex;gap:12px;">
+                  <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#10b981;margin-right:4px;vertical-align:middle;"></span>Good</span>
+                  <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span>Attention</span>
+                </div>
+              </div>
+
+              <div style="font-size:13px;font-weight:600;color:#003087;margin-bottom:10px;">National Committees</div>
+              <div class="nc-grid">
+                <div class="nc-tile nc-tile--green">
+                  <div class="nc-tile__flag">&#127463;&#127479;</div>
+                  <div class="nc-tile__name">UWC Brazil</div>
+                  <div class="nc-tile__stat">18 volunteers</div>
+                  <div class="nc-tile__badge nc-tile__badge--green">&#10003; Good</div>
+                </div>
+                <div class="nc-tile nc-tile--green">
+                  <div class="nc-tile__flag">&#127465;&#127466;</div>
+                  <div class="nc-tile__name">UWC Germany</div>
+                  <div class="nc-tile__stat">22 volunteers</div>
+                  <div class="nc-tile__badge nc-tile__badge--green">&#10003; Good</div>
+                </div>
+                <div class="nc-tile nc-tile--amber">
+                  <div class="nc-tile__flag">&#127472;&#127466;</div>
+                  <div class="nc-tile__name" style="color:#92400e;">UWC Kenya</div>
+                  <div class="nc-tile__stat">9 volunteers</div>
+                  <div class="nc-tile__badge nc-tile__badge--amber">&#9888; Attention</div>
+                </div>
+                <div class="nc-tile nc-tile--green">
+                  <div class="nc-tile__flag">&#127470;&#127475;</div>
+                  <div class="nc-tile__name">UWC India</div>
+                  <div class="nc-tile__stat">31 volunteers</div>
+                  <div class="nc-tile__badge nc-tile__badge--green">&#10003; Good</div>
+                </div>
+                <div class="nc-tile nc-tile--green">
+                  <div class="nc-tile__flag">&#127468;&#127463;</div>
+                  <div class="nc-tile__name">UWC UK</div>
+                  <div class="nc-tile__stat">14 volunteers</div>
+                  <div class="nc-tile__badge nc-tile__badge--green">&#10003; Good</div>
+                </div>
+                <div class="nc-tile" style="opacity:0.6;cursor:default;border-style:dashed;">
+                  <div class="nc-tile__flag" style="font-size:15px;color:#9ca3af;">&#8943;</div>
+                  <div class="nc-tile__name" style="color:#6b7280;">+148 more</div>
+                  <div class="nc-tile__stat">all regions</div>
+                  <div class="nc-tile__badge nc-tile__badge--more">View all &#8594;</div>
+                </div>
+              </div>
+
+              <!-- Kenya drill-down -->
+              <div class="drill-panel">
+                <div class="drill-panel__title">&#9888; UWC Kenya &mdash; Drill-down: Health Issues</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
                   <div>
-                    <div style="font-size:13px;font-weight:500;color:var(--zoho-link)">Risk Advisory Group</div>
-                    <div style="font-size:11px;color:var(--zoho-text-muted)">Quarterly risk review &amp; scenario planning</div>
+                    <div style="font-size:11.5px;font-weight:600;color:#4b5563;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.4px;">Volunteers (3)</div>
+                    <div style="display:flex;flex-direction:column;gap:7px;font-size:12.5px;">
+                      <div style="display:flex;align-items:center;gap:8px;">
+                        <span style="background:#dcfce7;color:#166534;padding:1px 7px;border-radius:4px;font-size:11px;font-weight:600;">CURRENT</span>
+                        <span>Grace Omondi &middot; Chair</span>
+                      </div>
+                      <div style="display:flex;align-items:center;gap:8px;">
+                        <span class="zoho-pill zoho-pill--danger" style="font-size:11px;padding:1px 7px;">EXPIRED</span>
+                        <span>Daniel Kimani &middot; Coordinator</span>
+                      </div>
+                      <div style="display:flex;align-items:center;gap:8px;">
+                        <span class="zoho-pill zoho-pill--danger" style="font-size:11px;padding:1px 7px;">MISSING</span>
+                        <span>Aisha Waweru &middot; Reviewer</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-size:11.5px;font-weight:600;color:#4b5563;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.4px;">MoU Obligations</div>
+                    <div style="display:flex;flex-direction:column;gap:7px;font-size:12.5px;">
+                      <div style="display:flex;align-items:center;gap:8px;color:#dc2626;font-weight:600;">
+                        <span style="font-size:15px;">&#9888;</span>
+                        <span>Annual Report Q2 &mdash; OVERDUE since 31 March</span>
+                      </div>
+                      <div style="display:flex;align-items:center;gap:8px;color:#92400e;">
+                        <span style="font-size:13px;">&#9650;</span>
+                        <span>Membership Data due in 33 days</span>
+                      </div>
+                    </div>
+                    <div style="margin-top:10px;">
+                      <button class="zoho-btn zoho-btn--danger" style="font-size:12px;padding:5px 12px;">Send IO reminder</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- Programmes -->
-            <div class="zoho-detail__section" style="margin-bottom:0">
-              <div class="zoho-detail__section-header">
-                <span class="zoho-detail__section-title">Programmes</span>
-              </div>
-              <div class="zoho-detail__section-body">
-                <div style="display:flex;align-items:center;gap:10px;padding:8px 0">
-                  <span style="font-size:18px">📁</span>
-                  <div>
-                    <div style="font-size:13px;font-weight:500;color:var(--zoho-link)">UWC Kenya 2026 Selection</div>
-                    <div style="font-size:11px;color:var(--zoho-text-muted)">Deadline: 15 May 2026 · 28 applicants</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          </main>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="badges-strip">
-    <span class="badge badge--info">NC record — Grace Omondi as Chair</span>
-    <span class="badge badge--warn">Amber health: MoU overdue + 2 training gaps</span>
-    <span class="badge badge--auto">Risk Advisory Group linked via Governance module</span>
-  </div>
-</section>
+    <!-- STEP 8: Appendix -->
+    <section class="screen" id="sc-7">
+      <div class="appendix">
+        <h1>Module field reference &mdash; Scenario F</h1>
+        <p>Field-level model for modules in Scenario F: NC Account, NC Volunteer, Training Record, and MoU Obligation. Every <code style="font-family:'DM Mono',monospace;background:#E8EEF6;color:#003087;padding:1px 6px;border-radius:3px;">API name</code> maps to the Zoho CRM implementation.</p>
 
-<!-- ===== SCREEN 2: VOLUNTEER ROSTER ===== -->
-<section class="screen" id="sc-2">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">👤 Akanksha Anand — IO Super Admin</div>
-      <h1 class="screen-title">Kenya Volunteer Roster</h1>
-      <p class="screen-sub">The NC Volunteers related list for Kenya shows all 3 volunteers with training status colour-coded. Grace is current; Daniel's Safeguarding expired March 2025; Aisha's is missing entirely.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(1)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(3)">Next →</button>
-    </div>
-  </div>
-
-  <div style="border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
-    <div class="zoho-topbar">
-      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
-      <div class="zoho-topbar__search">🔍 &nbsp;UWC Kenya NC › NC Volunteers</div>
-      <div class="zoho-topbar__right"><div class="zoho-topbar__org">AA</div></div>
-    </div>
-    <div style="min-height:380px;background:#fff">
-      <div class="zoho-page-header">
-        <span class="zoho-page-title">NC Volunteers — UWC Kenya</span>
-        <span style="background:#dbeafe;color:#1e40af;font-size:11px;padding:2px 9px;border-radius:999px;font-weight:600;margin-left:8px">3 volunteers</span>
-      </div>
-      <div class="zoho-page-tools">
-        <button class="zoho-btn zoho-btn--primary">+ Add Volunteer</button>
-        <button class="zoho-btn">⬇ Export</button>
-        <div class="zoho-page-tools__right">
-          <button class="zoho-btn" style="background:#fef3c7;color:#92400e;border-color:#fbbf24">⚠ 2 training issues</button>
-        </div>
-      </div>
-
-      <div style="padding:16px 20px">
-        <div class="alert alert--warning" style="margin-bottom:16px">
-          <span style="font-size:16px">⚠️</span>
-          <div><strong>Compliance gap:</strong> 2 of 3 volunteers have Safeguarding training issues. Volunteers cannot serve in selection until training is renewed or completed.</div>
-        </div>
-
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Volunteer</th>
-              <th>Role</th>
-              <th>Tenure Start</th>
-              <th>Training Type</th>
-              <th>Completed</th>
-              <th>Expires</th>
-              <th>Status</th>
-              <th></th>
-            </tr>
-          </thead>
+        <h2>NC Account module</h2>
+        <table class="ref-table">
+          <thead><tr><th>Field label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
           <tbody>
-            <tr>
-              <td>
-                <div style="display:flex;align-items:center;gap:8px">
-                  <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#1f9535,#2db84a);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">GO</div>
-                  <span style="font-weight:500;color:var(--zoho-link)">Grace Omondi</span>
-                </div>
-              </td>
-              <td>NC Chair</td>
-              <td>Jan 2020</td>
-              <td>Safeguarding</td>
-              <td>14 Jan 2024</td>
-              <td>14 Jan 2026</td>
-              <td><span class="pill pill--green" style="font-size:10.5px">✓ CURRENT</span></td>
-              <td><button class="zoho-btn" style="font-size:11px;padding:3px 9px">View</button></td>
-            </tr>
-            <tr style="background:#fffbeb">
-              <td>
-                <div style="display:flex;align-items:center;gap:8px">
-                  <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#e85d0c,#f97316);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">DK</div>
-                  <span style="font-weight:500;color:var(--zoho-link)" onclick="go(3)">Daniel Kimani</span>
-                </div>
-              </td>
-              <td>Selection Coordinator</td>
-              <td>Mar 2021</td>
-              <td>Safeguarding</td>
-              <td>03 Mar 2023</td>
-              <td style="color:#991b1b;font-weight:600">03 Mar 2025</td>
-              <td><span class="pill pill--red" style="font-size:10.5px">✖ EXPIRED</span></td>
-              <td><button class="zoho-btn zoho-btn--warn" style="font-size:11px;padding:3px 9px" onclick="go(3)">Renew</button></td>
-            </tr>
-            <tr style="background:#fef2f2">
-              <td>
-                <div style="display:flex;align-items:center;gap:8px">
-                  <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#C8102E,#e53e5a);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">AW</div>
-                  <span style="font-weight:500;color:var(--zoho-link)">Aisha Waweru</span>
-                </div>
-              </td>
-              <td>Reviewer</td>
-              <td>Jun 2023</td>
-              <td>Safeguarding</td>
-              <td style="color:#991b1b">—</td>
-              <td style="color:#991b1b">—</td>
-              <td><span class="pill pill--red" style="font-size:10.5px">✖ MISSING</span></td>
-              <td><button class="zoho-btn zoho-btn--danger" style="font-size:11px;padding:3px 9px">Assign</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <div class="badges-strip">
-    <span class="badge badge--auto">Training status auto-computed from expiry date vs today</span>
-    <span class="badge badge--gate">EXPIRED / MISSING blocks volunteer from selection workflow</span>
-    <span class="badge badge--info">Grace: CURRENT · Daniel: EXPIRED Mar 2025 · Aisha: MISSING</span>
-  </div>
-</section>
-
-<!-- ===== SCREEN 3: DANIEL KIMANI TRAINING RECORD ===== -->
-<section class="screen" id="sc-3">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">👤 Akanksha Anand — IO Super Admin</div>
-      <h1 class="screen-title">Daniel Kimani — Training Record</h1>
-      <p class="screen-sub">Akanksha opens Daniel's training detail. The Safeguarding certification expired March 2025. A red banner prompts renewal. Past training history is shown below.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(2)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(4)">Next →</button>
-    </div>
-  </div>
-
-  <div style="border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
-    <div class="zoho-topbar">
-      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
-      <div class="zoho-topbar__search">🔍 &nbsp;NC Volunteers › Daniel Kimani › Training Records</div>
-      <div class="zoho-topbar__right"><div class="zoho-topbar__org">AA</div></div>
-    </div>
-    <div style="background:#fff;min-height:420px">
-      <!-- Expired banner -->
-      <div style="background:#fee2e2;border-bottom:2px solid #fca5a5;padding:12px 20px;display:flex;align-items:center;gap:12px">
-        <span style="font-size:20px">🚨</span>
-        <div>
-          <div style="font-weight:600;font-size:13.5px;color:#991b1b">Safeguarding Training EXPIRED — renewal required</div>
-          <div style="font-size:12px;color:#b91c1c;margin-top:2px">Expired 03 Mar 2025 · Daniel Kimani cannot participate in applicant selection until renewed.</div>
-        </div>
-        <button class="zoho-btn" style="margin-left:auto;background:var(--uwc-red);color:#fff;border-color:var(--uwc-red);font-weight:600">Renew Training</button>
-      </div>
-
-      <!-- Hero -->
-      <div class="zoho-detail__hero">
-        <div class="zoho-detail__avatar" style="background:linear-gradient(135deg,#e85d0c,#f97316)">DK</div>
-        <div>
-          <div class="zoho-detail__name">Daniel Kimani</div>
-          <div style="font-size:12.5px;color:var(--zoho-text-muted)">Selection Coordinator · UWC Kenya NC · Member since Mar 2021</div>
-        </div>
-        <div class="zoho-detail__actions">
-          <button class="zoho-btn">Edit</button>
-          <button class="zoho-btn">Email volunteer</button>
-        </div>
-      </div>
-
-      <div class="zoho-detail__sections">
-        <!-- Current training record -->
-        <div class="zoho-detail__section">
-          <div class="zoho-detail__section-header">
-            <span class="zoho-detail__section-title">Current Training Record</span>
-            <span class="pill pill--red" style="font-size:11px">EXPIRED</span>
-          </div>
-          <div class="zoho-detail__section-body">
-            <div class="zoho-fields">
-              <div class="zoho-field"><span class="zoho-field__label">Training Type</span><span class="zoho-field__value">Safeguarding (Level 2)</span></div>
-              <div class="zoho-field"><span class="zoho-field__label">Issuing Body</span><span class="zoho-field__value">UWC IO Compliance Team</span></div>
-              <div class="zoho-field"><span class="zoho-field__label">Completed</span><span class="zoho-field__value">03 March 2023</span></div>
-              <div class="zoho-field"><span class="zoho-field__label">Expiry Date</span><span class="zoho-field__value" style="color:#991b1b;font-weight:600">03 March 2025 ⚠</span></div>
-              <div class="zoho-field"><span class="zoho-field__label">Days Overdue</span><span class="zoho-field__value" style="color:#991b1b;font-weight:600">~450 days</span></div>
-              <div class="zoho-field"><span class="zoho-field__label">Certificate</span><span class="zoho-field__value" style="color:var(--zoho-link)">SG-KE-2023-047.pdf</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Training history -->
-        <div class="zoho-detail__section">
-          <div class="zoho-detail__section-header">
-            <span class="zoho-detail__section-title">Training History</span>
-            <button class="zoho-btn" style="font-size:11.5px;padding:4px 10px">+ Log training</button>
-          </div>
-          <div class="zoho-detail__section-body" style="padding:0">
-            <table class="data-table">
-              <thead><tr><th>Training Type</th><th>Completed</th><th>Expired</th><th>Status</th><th>Certificate</th></tr></thead>
-              <tbody>
-                <tr style="background:#fef2f2">
-                  <td>Safeguarding (Level 2)</td>
-                  <td>03 Mar 2023</td>
-                  <td style="color:#991b1b;font-weight:500">03 Mar 2025</td>
-                  <td><span class="pill pill--red" style="font-size:10.5px">EXPIRED</span></td>
-                  <td style="color:var(--zoho-link)">SG-KE-2023-047.pdf</td>
-                </tr>
-                <tr>
-                  <td>Safeguarding (Level 1)</td>
-                  <td>15 Mar 2021</td>
-                  <td>15 Mar 2023</td>
-                  <td><span class="pill pill--grey" style="font-size:10.5px">Superseded</span></td>
-                  <td style="color:var(--zoho-link)">SG-KE-2021-012.pdf</td>
-                </tr>
-                <tr>
-                  <td>Child Protection Policy</td>
-                  <td>01 Apr 2021</td>
-                  <td>N/A</td>
-                  <td><span class="pill pill--green" style="font-size:10.5px">Valid</span></td>
-                  <td style="color:var(--zoho-link)">CPP-KE-2021.pdf</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="badges-strip">
-    <span class="badge badge--gate">Expired Mar 2025 — blocks selection participation</span>
-    <span class="badge badge--api">Training record linked from NC Volunteer module</span>
-    <span class="badge badge--auto">Renewal CTA triggers email to Daniel + IO compliance log</span>
-  </div>
-</section>
-
-<!-- ===== SCREEN 4: GRACE'S NC CHAIR PORTAL ===== -->
-<section class="screen" id="sc-4">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">👤 Grace Omondi — NC Chair, Kenya · Portal view</div>
-      <h1 class="screen-title">Grace's NC Chair Portal</h1>
-      <p class="screen-sub">Role switches to Grace Omondi. She sees a distinct green-gradient portal — not Zoho — showing her volunteer compliance dashboard, MoU obligations, and a "Submit Annual Report" CTA.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(3)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(5)">Next →</button>
-    </div>
-  </div>
-
-  <div class="nc-portal">
-    <!-- Green portal topbar -->
-    <div class="nc-portal__topbar">
-      <div class="nc-portal__brand">
-        <div class="nc-portal__mark">UWC</div>
-        <div>
-          <div style="font-size:14px;font-weight:600">UWC Kenya NC Chair Portal</div>
-          <div style="font-size:10.5px;opacity:.7;font-weight:400">National Committee Management</div>
-        </div>
-      </div>
-      <div class="nc-portal__user">
-        <div style="text-align:right">
-          <div style="font-weight:600;font-size:13px">Grace Omondi</div>
-          <div style="font-size:10.5px;opacity:.7">NC Chair · Kenya</div>
-        </div>
-        <div style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">GO</div>
-        <button style="padding:5px 14px;border:1px solid rgba(255,255,255,.4);border-radius:4px;background:transparent;color:#fff;font-size:12px;cursor:pointer">Sign out</button>
-      </div>
-    </div>
-
-    <!-- Portal nav -->
-    <div class="nc-portal__nav">
-      <div class="nc-portal__nav-item active">Overview</div>
-      <div class="nc-portal__nav-item">My Volunteers</div>
-      <div class="nc-portal__nav-item">MoU Obligations</div>
-      <div class="nc-portal__nav-item">Annual Report</div>
-      <div class="nc-portal__nav-item">Programme 2026</div>
-    </div>
-
-    <div class="nc-portal__body">
-      <!-- Overdue alert -->
-      <div class="alert alert--error" style="margin-bottom:16px">
-        <span style="font-size:18px">🚨</span>
-        <div>
-          <strong>Annual Report 2026 is overdue.</strong> Please submit as soon as possible. Non-submission may affect Kenya's programme approval for 2027.
-        </div>
-        <button class="zoho-btn" style="margin-left:auto;flex-shrink:0;background:#C8102E;color:#fff;border-color:#C8102E;font-weight:600" onclick="go(5)">Submit Annual Report →</button>
-      </div>
-
-      <!-- KPI tiles -->
-      <div class="stat-grid">
-        <div class="stat-tile">
-          <div class="stat-tile__label">Active Volunteers</div>
-          <div class="stat-tile__value" style="color:var(--uwc-green)">9</div>
-        </div>
-        <div class="stat-tile">
-          <div class="stat-tile__label">Training Current</div>
-          <div class="stat-tile__value" style="color:var(--uwc-green)">1</div>
-        </div>
-        <div class="stat-tile">
-          <div class="stat-tile__label">Training Issues</div>
-          <div class="stat-tile__value" style="color:var(--uwc-red)">2</div>
-        </div>
-        <div class="stat-tile">
-          <div class="stat-tile__label">MoU Items Overdue</div>
-          <div class="stat-tile__value" style="color:var(--uwc-red)">1</div>
-        </div>
-        <div class="stat-tile">
-          <div class="stat-tile__label">Programme 2026</div>
-          <div class="stat-tile__value" style="font-size:18px;color:var(--uwc-navy)">Active</div>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <!-- Volunteer compliance -->
-        <div class="card">
-          <div class="card__header" style="background:#0a5c2f">
-            <span class="card__title">Volunteers Under My Purview</span>
-            <span class="card__sub">3 volunteers</span>
-          </div>
-          <div class="card__body" style="padding:0">
-            <table class="data-table">
-              <thead><tr><th>Name</th><th>Role</th><th>Safeguarding</th></tr></thead>
-              <tbody>
-                <tr>
-                  <td style="font-weight:500">Grace Omondi <span style="font-size:10px;background:#dcfce7;color:#166534;padding:1px 6px;border-radius:3px;margin-left:4px">You</span></td>
-                  <td>NC Chair</td>
-                  <td><span class="pill pill--green" style="font-size:10.5px">Current</span></td>
-                </tr>
-                <tr style="background:#fffbeb">
-                  <td style="font-weight:500">Daniel Kimani</td>
-                  <td>Selection Coord.</td>
-                  <td><span class="pill pill--red" style="font-size:10.5px">Expired</span></td>
-                </tr>
-                <tr style="background:#fef2f2">
-                  <td style="font-weight:500">Aisha Waweru</td>
-                  <td>Reviewer</td>
-                  <td><span class="pill pill--red" style="font-size:10.5px">Missing</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- MoU summary -->
-        <div class="card">
-          <div class="card__header" style="background:#0a5c2f">
-            <span class="card__title">MoU Obligations</span>
-            <span class="card__sub">1 overdue</span>
-          </div>
-          <div class="card__body" style="padding:0">
-            <table class="data-table">
-              <thead><tr><th>Item</th><th>Status</th></tr></thead>
-              <tbody>
-                <tr>
-                  <td>Annual Report 2025</td>
-                  <td><span class="pill pill--green" style="font-size:10.5px">✓ Submitted</span></td>
-                </tr>
-                <tr style="background:#fef2f2">
-                  <td style="font-weight:500">Annual Report 2026</td>
-                  <td><span class="pill pill--red" style="font-size:10.5px">OVERDUE</span></td>
-                </tr>
-                <tr>
-                  <td>Volunteer Handbook Ack.</td>
-                  <td><span class="pill pill--amber" style="font-size:10.5px">Pending</span></td>
-                </tr>
-                <tr>
-                  <td>Insurance Certificate</td>
-                  <td><span class="pill pill--green" style="font-size:10.5px">✓ Submitted</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="badges-strip">
-    <span class="badge badge--info">Portal mode — distinct from Zoho CRM chrome</span>
-    <span class="badge badge--gate">Annual Report 2026 overdue — CTA prominent</span>
-    <span class="badge badge--auto">Grace sees only her NC's data — scoped to Kenya</span>
-  </div>
-</section>
-
-<!-- ===== SCREEN 5: MoU OBLIGATIONS ===== -->
-<section class="screen" id="sc-5">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">👤 Akanksha Anand — IO Super Admin</div>
-      <h1 class="screen-title">MoU Obligations — UWC Kenya NC</h1>
-      <p class="screen-sub">Back in Akanksha's Zoho view. The MoU Obligations panel for Kenya shows 4 items: 2 submitted, 1 overdue (red), 1 pending. Linked documents are attached where available.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(4)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(6)">Next →</button>
-    </div>
-  </div>
-
-  <div style="border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
-    <div class="zoho-topbar">
-      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
-      <div class="zoho-topbar__search">🔍 &nbsp;UWC Kenya NC › MoU Obligations</div>
-      <div class="zoho-topbar__right"><div class="zoho-topbar__org">AA</div></div>
-    </div>
-    <div style="background:#fff;min-height:380px">
-      <div class="zoho-page-header">
-        <img src="_shared/assets/uwc-brand/flags/ke.svg" alt="Kenya" style="width:28px;height:19px;border-radius:2px">
-        <span class="zoho-page-title">MoU Obligations · UWC Kenya NC</span>
-        <span style="background:#fee2e2;color:#991b1b;font-size:11px;padding:2px 9px;border-radius:999px;font-weight:600;margin-left:8px">1 OVERDUE</span>
-      </div>
-      <div class="zoho-page-tools">
-        <button class="zoho-btn zoho-btn--primary">+ Add Obligation</button>
-        <button class="zoho-btn">Send reminder to Grace</button>
-        <div class="zoho-page-tools__right">
-          <span style="font-size:12px;color:var(--zoho-text-muted)">4 items · Cycle 2025–2026</span>
-        </div>
-      </div>
-
-      <div style="padding:16px 20px">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Obligation</th>
-              <th>Cycle</th>
-              <th>Due Date</th>
-              <th>Submitted</th>
-              <th>Status</th>
-              <th>Document</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="font-weight:500">Annual Report 2025</td>
-              <td>2024–2025</td>
-              <td>31 Jan 2025</td>
-              <td>28 Jan 2025</td>
-              <td><span class="pill pill--green" style="font-size:10.5px">✓ Submitted</span></td>
-              <td style="color:var(--zoho-link)">📄 annual-report-ke-2025.pdf</td>
-              <td><button class="zoho-btn" style="font-size:11px;padding:3px 9px">View</button></td>
-            </tr>
-            <tr style="background:#fef2f2">
-              <td style="font-weight:600;color:#991b1b">Annual Report 2026</td>
-              <td>2025–2026</td>
-              <td style="color:#991b1b;font-weight:600">31 Jan 2026</td>
-              <td style="color:#991b1b">—</td>
-              <td><span class="pill pill--red" style="font-size:10.5px">✖ OVERDUE</span></td>
-              <td style="color:var(--zoho-text-muted)">No document</td>
-              <td><button class="zoho-btn zoho-btn--danger" style="font-size:11px;padding:3px 9px">Chase</button></td>
-            </tr>
-            <tr style="background:#fffbeb">
-              <td style="font-weight:500">Volunteer Handbook Acknowledgement</td>
-              <td>2025–2026</td>
-              <td>01 Mar 2026</td>
-              <td style="color:#92400e">—</td>
-              <td><span class="pill pill--amber" style="font-size:10.5px">⏳ Pending</span></td>
-              <td style="color:var(--zoho-text-muted)">Awaiting upload</td>
-              <td><button class="zoho-btn" style="font-size:11px;padding:3px 9px">Remind</button></td>
-            </tr>
-            <tr>
-              <td style="font-weight:500">Insurance Certificate</td>
-              <td>2025–2026</td>
-              <td>15 Feb 2026</td>
-              <td>10 Feb 2026</td>
-              <td><span class="pill pill--green" style="font-size:10.5px">✓ Submitted</span></td>
-              <td style="color:var(--zoho-link)">📄 insurance-ke-2026.pdf</td>
-              <td><button class="zoho-btn" style="font-size:11px;padding:3px 9px">View</button></td>
-            </tr>
+            <tr><td>NC Name</td><td class="ft-name">NC_Name</td><td><span class="ft-t">Text</span></td><td>Full name, e.g. "UWC Kenya"</td></tr>
+            <tr><td>Country</td><td class="ft-name">Country</td><td><span class="ft-t ft-pick">Picklist</span></td><td>ISO country list; drives regional grouping</td></tr>
+            <tr><td>Status</td><td class="ft-name">NC_Status</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Active &#183; Suspended &#183; Observer &#183; Inactive</td></tr>
+            <tr><td>NC Chair</td><td class="ft-name">NC_Chair_Lookup</td><td><span class="ft-t ft-look">Lookup &#8594; NC Volunteer</span></td><td>One active Chair per NC</td></tr>
+            <tr><td>Members</td><td class="ft-name">Member_Count</td><td><span class="ft-t ft-auto">Integer &#183; Auto</span></td><td>Roll-up from NC Volunteer records</td></tr>
+            <tr><td>Established</td><td class="ft-name">Established_Year</td><td><span class="ft-t">Integer</span></td><td>Year NC was formally established</td></tr>
+            <tr><td>Governance Body</td><td class="ft-name">Governance_Body_Lookup</td><td><span class="ft-t ft-look">Lookup &#8594; Governance Bodies</span></td><td>Regional advisory body link</td></tr>
+            <tr><td>MoU Health</td><td class="ft-name">MoU_Health</td><td><span class="ft-t ft-auto">Formula</span></td><td>Good / Attention / Critical — computed from overdue MoU Obligations roll-up</td></tr>
           </tbody>
         </table>
 
-        <div class="alert alert--info" style="margin-top:16px">
-          <span>ℹ️</span>
-          <div>Grace Omondi was last emailed about the overdue Annual Report on <strong>12 May 2026</strong>. An automated reminder is scheduled for <strong>1 Jun 2026</strong> if still unsubmitted.</div>
+        <h2>NC Volunteer module</h2>
+        <table class="ref-table">
+          <thead><tr><th>Field label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Full Name</td><td class="ft-name">Full_Name</td><td><span class="ft-t">Text</span></td><td>First + Last name</td></tr>
+            <tr><td>Role</td><td class="ft-name">Volunteer_Role</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Chair &#183; Admin &#183; Selection Coordinator &#183; Reviewer &#183; Observer</td></tr>
+            <tr><td>NC</td><td class="ft-name">NC_Lookup</td><td><span class="ft-t ft-look">Lookup &#8594; NC Account</span></td><td>Parent NC; controls data visibility scope</td></tr>
+            <tr><td>Training Status</td><td class="ft-name">Training_Status</td><td><span class="ft-t ft-auto">Formula</span></td><td>CURRENT &#183; EXPIRED &#183; MISSING — derived from linked Training Records</td></tr>
+            <tr><td>Member Since</td><td class="ft-name">Member_Since</td><td><span class="ft-t">Date</span></td><td>Date joined the NC</td></tr>
+            <tr><td>Portal Access</td><td class="ft-name">Portal_Role</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Chair &#183; Member &#183; None — drives NC Portal permissions</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Training Record module</h2>
+        <table class="ref-table">
+          <thead><tr><th>Field label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Volunteer</td><td class="ft-name">Volunteer_Lookup</td><td><span class="ft-t ft-look">Lookup &#8594; NC Volunteer</span></td><td>The volunteer this record belongs to</td></tr>
+            <tr><td>Training Type</td><td class="ft-name">Training_Type</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Safeguarding &#183; Code of Conduct &#183; Selection Process &#183; GDPR</td></tr>
+            <tr><td>Completed</td><td class="ft-name">Completed_Date</td><td><span class="ft-t">Date</span></td><td>Date training was completed</td></tr>
+            <tr><td>Expires</td><td class="ft-name">Expiry_Date</td><td><span class="ft-t ft-auto">Date &#183; Auto</span></td><td>Completed + 2 years for Safeguarding; other types vary</td></tr>
+            <tr><td>Status</td><td class="ft-name">Training_Status</td><td><span class="ft-t ft-auto">Formula</span></td><td>CURRENT &#183; EXPIRED &#183; MISSING (no record at all)</td></tr>
+            <tr><td>Certificate</td><td class="ft-name">Certificate_Attachment</td><td><span class="ft-t">File</span></td><td>PDF upload; required for manual completion logging</td></tr>
+          </tbody>
+        </table>
+
+        <h2>MoU Obligation module</h2>
+        <table class="ref-table">
+          <thead><tr><th>Field label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Obligation Name</td><td class="ft-name">Obligation_Name</td><td><span class="ft-t">Text</span></td><td>e.g. "Annual Report Q2 2026"</td></tr>
+            <tr><td>NC</td><td class="ft-name">NC_Lookup</td><td><span class="ft-t ft-look">Lookup &#8594; NC Account</span></td><td>Parent NC record</td></tr>
+            <tr><td>Due Date</td><td class="ft-name">Due_Date</td><td><span class="ft-t">Date</span></td><td>Deadline for submission</td></tr>
+            <tr><td>Status</td><td class="ft-name">Obligation_Status</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Pending &#183; Submitted &#183; Overdue &#183; Waived</td></tr>
+            <tr><td>Submitted On</td><td class="ft-name">Submitted_On</td><td><span class="ft-t ft-auto">DateTime &#183; Auto</span></td><td>Timestamp when NC submitted via portal</td></tr>
+            <tr><td>Overdue Days</td><td class="ft-name">Overdue_Days</td><td><span class="ft-t ft-auto">Formula</span></td><td>TODAY() - Due_Date when Status=Overdue; drives MoU Health roll-up on NC Account</td></tr>
+          </tbody>
+        </table>
+
+        <div style="margin-top:24px;padding:16px 20px;background:#E8EEF6;border-radius:8px;font-size:12.5px;color:#003087;line-height:1.6;">
+          <b style="font-family:'Playfair Display',Georgia,serif;font-size:14px;">End of Scenario F.</b><br>
+          Covers: IO NC list view with MoU health colouring, UWC Kenya record detail, volunteer safeguarding training roster (Grace CURRENT / Daniel EXPIRED / Aisha MISSING), role-switch to NC Chair portal (MoU obligations with Annual Report Q2 OVERDUE since 31 March), and IO NC Health Dashboard with global KPIs and Kenya drill-down. Continue to <b>Scenario G</b> for alumni and programme management.
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
+</div>
 
-  <div class="badges-strip">
-    <span class="badge badge--gate">Annual Report 2026 overdue — 1 Jan 2026 deadline missed</span>
-    <span class="badge badge--auto">Automated reminders scheduled via workflow rule</span>
-    <span class="badge badge--api">Document links stored as attachments on MoU record</span>
-  </div>
-</section>
-
-<!-- ===== SCREEN 6: IO NC-HEALTH DASHBOARD ===== -->
-<section class="screen" id="sc-6">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">👤 Akanksha Anand — IO Super Admin</div>
-      <h1 class="screen-title">IO NC-Health Dashboard</h1>
-      <p class="screen-sub">Akanksha's global Zoho dashboard. KPI tiles show cohort-wide compliance. A regional bar chart shows volunteer counts and at-risk NCs by region. Kenya is highlighted in Africa.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(5)">← Prev</button>
-      <button class="btn-nav btn-nav--primary" onclick="go(7)">Next →</button>
-    </div>
-  </div>
-
-  <div style="border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
-    <div class="zoho-topbar">
-      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
-      <div class="zoho-topbar__search">🔍 &nbsp;Dashboards › NC Health Overview</div>
-      <div class="zoho-topbar__right"><div class="zoho-topbar__org">AA</div></div>
-    </div>
-    <div style="background:#f9fafb;min-height:500px">
-
-      <!-- KPI grid -->
-      <div class="zoho-kpi-grid">
-        <div class="zoho-kpi">
-          <div class="zoho-kpi__label">Total NCs</div>
-          <div class="zoho-kpi__value">150</div>
-          <div style="font-size:11px;color:var(--zoho-text-muted);margin-top:4px">Active worldwide</div>
-        </div>
-        <div class="zoho-kpi">
-          <div class="zoho-kpi__label">Active Volunteers</div>
-          <div class="zoho-kpi__value" style="color:#166534">142</div>
-          <div style="font-size:11px;color:#166534;margin-top:4px">Cohort-wide</div>
-        </div>
-        <div class="zoho-kpi" style="background:#fffbeb;border-color:#fbbf24">
-          <div class="zoho-kpi__label">Overdue MoU Items</div>
-          <div class="zoho-kpi__value" style="color:#92400e">23</div>
-          <div style="font-size:11px;color:#92400e;margin-top:4px">Across 18 NCs</div>
-        </div>
-        <div class="zoho-kpi" style="background:#fef2f2;border-color:#fca5a5">
-          <div class="zoho-kpi__label">Missing Safeguarding</div>
-          <div class="zoho-kpi__value" style="color:#991b1b">17</div>
-          <div style="font-size:11px;color:#991b1b;margin-top:4px">Training gap</div>
-        </div>
-        <div class="zoho-kpi" style="background:#fef2f2;border-color:#fca5a5">
-          <div class="zoho-kpi__label">NCs At-Risk</div>
-          <div class="zoho-kpi__value" style="color:#991b1b">8</div>
-          <div style="font-size:11px;color:#991b1b;margin-top:4px">Compliance flags</div>
-        </div>
-      </div>
-
-      <div style="padding:0 20px 20px">
-        <!-- Bar chart by region -->
-        <div class="chart-wrap">
-          <div class="chart-title">Active Volunteers &amp; At-Risk NCs by Region</div>
-          <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
-            <!-- Axes -->
-            <line x1="60" y1="10" x2="60" y2="175" stroke="#e5e7eb" stroke-width="1"/>
-            <line x1="60" y1="175" x2="680" y2="175" stroke="#e5e7eb" stroke-width="1"/>
-            <!-- Grid lines -->
-            <line x1="60" y1="140" x2="680" y2="140" stroke="#f0f2f5" stroke-width="1" stroke-dasharray="4,3"/>
-            <line x1="60" y1="105" x2="680" y2="105" stroke="#f0f2f5" stroke-width="1" stroke-dasharray="4,3"/>
-            <line x1="60" y1="70" x2="680" y2="70" stroke="#f0f2f5" stroke-width="1" stroke-dasharray="4,3"/>
-            <line x1="60" y1="35" x2="680" y2="35" stroke="#f0f2f5" stroke-width="1" stroke-dasharray="4,3"/>
-            <!-- Y labels -->
-            <text x="50" y="178" text-anchor="end" font-size="10" fill="#9ca3af">0</text>
-            <text x="50" y="143" text-anchor="end" font-size="10" fill="#9ca3af">10</text>
-            <text x="50" y="108" text-anchor="end" font-size="10" fill="#9ca3af">20</text>
-            <text x="50" y="73" text-anchor="end" font-size="10" fill="#9ca3af">30</text>
-            <text x="50" y="38" text-anchor="end" font-size="10" fill="#9ca3af">40</text>
-
-            <!-- Europe: 42 vols, 1 at-risk -->
-            <rect x="80" y="52" width="30" height="123" rx="3" fill="#003087"/>
-            <rect x="113" y="161" width="30" height="14" rx="3" fill="#C8102E" opacity=".75"/>
-            <text x="111" y="192" text-anchor="middle" font-size="10" fill="#6b7280">Europe</text>
-            <text x="95" y="48" text-anchor="middle" font-size="10" fill="#003087" font-weight="600">42</text>
-            <text x="128" y="158" text-anchor="middle" font-size="9" fill="#C8102E">1</text>
-
-            <!-- Africa: 28 vols, 3 at-risk — Kenya highlighted -->
-            <rect x="210" y="77" width="30" height="98" rx="3" fill="#003087"/>
-            <rect x="243" y="133" width="30" height="42" rx="3" fill="#C8102E" opacity=".75"/>
-            <text x="241" y="192" text-anchor="middle" font-size="10" fill="#6b7280">Africa</text>
-            <text x="225" y="73" text-anchor="middle" font-size="10" fill="#003087" font-weight="600">28</text>
-            <text x="258" y="129" text-anchor="middle" font-size="9" fill="#C8102E">3</text>
-            <!-- Kenya label -->
-            <rect x="198" y="58" width="54" height="18" rx="9" fill="#fef3c7" stroke="#fbbf24" stroke-width="1"/>
-            <text x="225" y="70" text-anchor="middle" font-size="9" fill="#92400e" font-weight="600">⚠ Kenya</text>
-
-            <!-- Asia-Pacific: 38 vols, 2 at-risk -->
-            <rect x="340" y="63" width="30" height="112" rx="3" fill="#003087"/>
-            <rect x="373" y="147" width="30" height="28" rx="3" fill="#C8102E" opacity=".75"/>
-            <text x="371" y="192" text-anchor="middle" font-size="10" fill="#6b7280">Asia-Pac</text>
-            <text x="355" y="59" text-anchor="middle" font-size="10" fill="#003087" font-weight="600">38</text>
-            <text x="388" y="143" text-anchor="middle" font-size="9" fill="#C8102E">2</text>
-
-            <!-- Americas: 22 vols, 1 at-risk -->
-            <rect x="470" y="98" width="30" height="77" rx="3" fill="#003087"/>
-            <rect x="503" y="161" width="30" height="14" rx="3" fill="#C8102E" opacity=".75"/>
-            <text x="501" y="192" text-anchor="middle" font-size="10" fill="#6b7280">Americas</text>
-            <text x="485" y="94" text-anchor="middle" font-size="10" fill="#003087" font-weight="600">22</text>
-            <text x="518" y="158" text-anchor="middle" font-size="9" fill="#C8102E">1</text>
-
-            <!-- SWANA: 12 vols, 1 at-risk -->
-            <rect x="600" y="133" width="30" height="42" rx="3" fill="#003087"/>
-            <rect x="633" y="161" width="30" height="14" rx="3" fill="#C8102E" opacity=".75"/>
-            <text x="631" y="192" text-anchor="middle" font-size="10" fill="#6b7280">SWANA</text>
-            <text x="615" y="129" text-anchor="middle" font-size="10" fill="#003087" font-weight="600">12</text>
-            <text x="648" y="158" text-anchor="middle" font-size="9" fill="#C8102E">1</text>
-
-            <!-- Legend -->
-            <rect x="80" y="205" width="12" height="8" rx="2" fill="#003087"/>
-            <text x="96" y="213" font-size="10" fill="#6b7280">Active volunteers</text>
-            <rect x="200" y="205" width="12" height="8" rx="2" fill="#C8102E" opacity=".75"/>
-            <text x="216" y="213" font-size="10" fill="#6b7280">At-risk NCs</text>
-          </svg>
-        </div>
-
-        <!-- At-risk NCs table -->
-        <div class="chart-wrap">
-          <div class="chart-title">At-Risk NCs — Top 5 by Compliance Score</div>
-          <table class="data-table">
-            <thead><tr><th>NC</th><th>Region</th><th>Issues</th><th>MoU Overdue</th><th>Training Gaps</th><th>Score</th></tr></thead>
-            <tbody>
-              <tr style="background:#fffbeb">
-                <td style="font-weight:500;display:flex;align-items:center;gap:6px">
-                  <img src="_shared/assets/uwc-brand/flags/ke.svg" alt="KE" style="width:20px;height:14px;border-radius:1px;object-fit:cover">UWC Kenya NC
-                </td>
-                <td>Africa</td>
-                <td><span class="pill pill--amber" style="font-size:10.5px">2 issues</span></td>
-                <td style="color:#991b1b">1 (Annual Report)</td>
-                <td style="color:#991b1b">2 (Daniel, Aisha)</td>
-                <td><div style="display:flex;align-items:center;gap:6px"><div style="height:6px;background:#e5e7eb;border-radius:3px;flex:1"><div style="height:6px;width:48%;background:#f59e0b;border-radius:3px"></div></div><span style="font-size:11px;color:#92400e;font-weight:600">48</span></div></td>
-              </tr>
-              <tr>
-                <td style="font-weight:500">UWC Nigeria NC</td>
-                <td>Africa</td>
-                <td><span class="pill pill--red" style="font-size:10.5px">3 issues</span></td>
-                <td style="color:#991b1b">2</td>
-                <td style="color:#991b1b">4</td>
-                <td><div style="display:flex;align-items:center;gap:6px"><div style="height:6px;background:#e5e7eb;border-radius:3px;flex:1"><div style="height:6px;width:30%;background:#ef4444;border-radius:3px"></div></div><span style="font-size:11px;color:#991b1b;font-weight:600">30</span></div></td>
-              </tr>
-              <tr>
-                <td style="font-weight:500">UWC Bolivia NC</td>
-                <td>Americas</td>
-                <td><span class="pill pill--amber" style="font-size:10.5px">2 issues</span></td>
-                <td style="color:#991b1b">1</td>
-                <td style="color:#991b1b">1</td>
-                <td><div style="display:flex;align-items:center;gap:6px"><div style="height:6px;background:#e5e7eb;border-radius:3px;flex:1"><div style="height:6px;width:52%;background:#f59e0b;border-radius:3px"></div></div><span style="font-size:11px;color:#92400e;font-weight:600">52</span></div></td>
-              </tr>
-              <tr>
-                <td style="font-weight:500">UWC Myanmar NC</td>
-                <td>Asia-Pacific</td>
-                <td><span class="pill pill--amber" style="font-size:10.5px">2 issues</span></td>
-                <td style="color:#991b1b">1</td>
-                <td style="color:#991b1b">2</td>
-                <td><div style="display:flex;align-items:center;gap:6px"><div style="height:6px;background:#e5e7eb;border-radius:3px;flex:1"><div style="height:6px;width:44%;background:#f59e0b;border-radius:3px"></div></div><span style="font-size:11px;color:#92400e;font-weight:600">44</span></div></td>
-              </tr>
-              <tr>
-                <td style="font-weight:500">UWC Syria NC</td>
-                <td>SWANA</td>
-                <td><span class="pill pill--amber" style="font-size:10.5px">1 issue</span></td>
-                <td>0</td>
-                <td style="color:#991b1b">3</td>
-                <td><div style="display:flex;align-items:center;gap:6px"><div style="height:6px;background:#e5e7eb;border-radius:3px;flex:1"><div style="height:6px;width:58%;background:#f59e0b;border-radius:3px"></div></div><span style="font-size:11px;color:#92400e;font-weight:600">58</span></div></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="badges-strip">
-    <span class="badge badge--info">150 NCs · 142 active volunteers cohort-wide</span>
-    <span class="badge badge--warn">23 overdue MoU items · 17 missing safeguarding trainings</span>
-    <span class="badge badge--gate">8 NCs at-risk — drill-down by region available</span>
-  </div>
-</section>
-
-<!-- ===== SCREEN 7: FIELD REFERENCE ===== -->
-<section class="screen" id="sc-7">
-  <div class="screen-header">
-    <div>
-      <div class="role-context">📋 CRM Field Reference — Scenario F modules</div>
-      <h1 class="screen-title">Field Reference — NC &amp; Volunteer Modules</h1>
-      <p class="screen-sub">Field tables for all four modules surfaced in Scenario F: National Committee, NC Volunteer, Training Record, MoU Obligation.</p>
-    </div>
-    <div class="step-nav">
-      <button class="btn-nav" onclick="go(6)">← Prev</button>
-      <button class="btn-nav" disabled>Done ✓</button>
-    </div>
-  </div>
-
-  <!-- National Committee -->
-  <div class="ref-section">
-    <div class="ref-section__title">National Committee</div>
-    <table class="ref-table">
-      <thead><tr><th>Field</th><th>Type</th><th>Values / Notes</th></tr></thead>
-      <tbody>
-        <tr><td>NC Name</td><td>Text</td><td>Full name e.g. "UWC Kenya National Committee"</td></tr>
-        <tr><td>Country</td><td>Lookup</td><td>Links to Country master</td></tr>
-        <tr><td>Country Code</td><td>Text (2)</td><td>ISO 3166-1 alpha-2, used for flag SVG path</td></tr>
-        <tr><td>Region</td><td>Picklist</td><td>Europe · Africa · Asia-Pacific · Americas · SWANA</td></tr>
-        <tr><td>Status</td><td>Picklist</td><td>Active · Suspended · Inactive · Observer</td></tr>
-        <tr><td>NC Chair</td><td>Lookup → NC Volunteer</td><td>Primary contact for all IO comms</td></tr>
-        <tr><td>Active Volunteers</td><td>Roll-up (count)</td><td>Count of linked NC Volunteers with status Active</td></tr>
-        <tr><td>Applications This Cycle</td><td>Roll-up (count)</td><td>Count from linked Programme applicants</td></tr>
-        <tr><td>MoU Status</td><td>Formula</td><td>Worst-case of linked MoU Obligation statuses</td></tr>
-        <tr><td>Health Score</td><td>Formula (0–100)</td><td>Computed from MoU + training compliance; &lt;60 = at-risk</td></tr>
-        <tr><td>Linked Governance</td><td>Multi-lookup → Governance Body</td><td>Risk Advisory Group etc.</td></tr>
-        <tr><td>Current Programme</td><td>Lookup → Programme</td><td>Current cycle's selection programme</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- NC Volunteer -->
-  <div class="ref-section">
-    <div class="ref-section__title">NC Volunteer</div>
-    <table class="ref-table">
-      <thead><tr><th>Field</th><th>Type</th><th>Values / Notes</th></tr></thead>
-      <tbody>
-        <tr><td>Volunteer Name</td><td>Text</td><td>Full name</td></tr>
-        <tr><td>Email</td><td>Email</td><td>Primary contact</td></tr>
-        <tr><td>National Committee</td><td>Lookup → NC</td><td>Parent NC record</td></tr>
-        <tr><td>Role</td><td>Picklist</td><td>NC Chair · Selection Coordinator · Reviewer · Observer</td></tr>
-        <tr><td>Tenure Start</td><td>Date</td><td>Date role began</td></tr>
-        <tr><td>Tenure End</td><td>Date</td><td>Optional — blank if ongoing</td></tr>
-        <tr><td>Safeguarding Status</td><td>Formula</td><td>CURRENT / EXPIRED / MISSING — computed from Training Record</td></tr>
-        <tr><td>Latest Training Expiry</td><td>Roll-up (max date)</td><td>Highest expiry date from linked Training Records</td></tr>
-        <tr><td>Blocks Selection</td><td>Formula (boolean)</td><td>True if Safeguarding Status ≠ CURRENT</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Training Record -->
-  <div class="ref-section">
-    <div class="ref-section__title">Training Record</div>
-    <table class="ref-table">
-      <thead><tr><th>Field</th><th>Type</th><th>Values / Notes</th></tr></thead>
-      <tbody>
-        <tr><td>Volunteer</td><td>Lookup → NC Volunteer</td><td>Parent volunteer</td></tr>
-        <tr><td>Training Type</td><td>Picklist</td><td>Safeguarding (L1) · Safeguarding (L2) · Child Protection Policy · DBS/PVG</td></tr>
-        <tr><td>Issuing Body</td><td>Text</td><td>e.g. "UWC IO Compliance Team"</td></tr>
-        <tr><td>Completed Date</td><td>Date</td><td>Date training was completed</td></tr>
-        <tr><td>Expiry Date</td><td>Date</td><td>Null = does not expire</td></tr>
-        <tr><td>Status</td><td>Formula</td><td>CURRENT / EXPIRED / MISSING — based on Expiry Date vs today</td></tr>
-        <tr><td>Days Overdue</td><td>Formula (integer)</td><td>Max(0, today − Expiry Date)</td></tr>
-        <tr><td>Certificate File</td><td>Attachment</td><td>PDF certificate upload</td></tr>
-        <tr><td>Certificate Ref</td><td>Text</td><td>e.g. "SG-KE-2023-047"</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- MoU Obligation -->
-  <div class="ref-section">
-    <div class="ref-section__title">MoU Obligation</div>
-    <table class="ref-table">
-      <thead><tr><th>Field</th><th>Type</th><th>Values / Notes</th></tr></thead>
-      <tbody>
-        <tr><td>National Committee</td><td>Lookup → NC</td><td>Parent NC</td></tr>
-        <tr><td>Obligation Name</td><td>Text</td><td>e.g. "Annual Report 2026"</td></tr>
-        <tr><td>Cycle</td><td>Text</td><td>e.g. "2025–2026"</td></tr>
-        <tr><td>Due Date</td><td>Date</td><td>Contractual deadline</td></tr>
-        <tr><td>Submitted Date</td><td>Date</td><td>Actual submission date — null if outstanding</td></tr>
-        <tr><td>Status</td><td>Formula / Picklist</td><td>Submitted · Pending · OVERDUE (auto if past due + not submitted)</td></tr>
-        <tr><td>Linked Document</td><td>Attachment / URL</td><td>Uploaded PDF or external link</td></tr>
-        <tr><td>Reminder Sent</td><td>DateTime</td><td>Last automated reminder timestamp</td></tr>
-        <tr><td>Next Reminder</td><td>Date</td><td>Scheduled next chase date (workflow-set)</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="badges-strip">
-    <span class="badge badge--info">4 modules · 37 fields total</span>
-    <span class="badge badge--auto">Health Score, Safeguarding Status, Blocks Selection — all formula fields</span>
-    <span class="badge badge--api">Roll-ups on NC record aggregate volunteer + MoU child data</span>
-  </div>
-</section>
-
-</main>
-</div><!-- /shell -->
-
+<!-- SCRIPTS -->
 <script>
 window.UWC = window.UWC || {};
 UWC.users = [
-  { id: 'akanksha', name: 'Akanksha Anand', initial: 'AA', role: 'IO Super Admin', scope: 'Global · Full visibility', badge: 'ios', email: 'akanksha.anand@uwcio.uwc.org' },
-  { id: 'grace',    name: 'Grace Omondi',   initial: 'GO', role: 'NC Chair',       scope: 'UWC Kenya only',          badge: 'nc',  email: 'g.omondi@uwckenya.org' }
+  { id: 'akanksha', name: 'Akanksha Anand', initial: 'AA', role: 'IO Super Admin', scope: 'Global · Full visibility', badge: 'ios' },
+  { id: 'grace',    name: 'Grace Omondi',   initial: 'GO', role: 'NC Chair',       scope: 'UWC Kenya only',          badge: 'nc'  },
+  { id: 'ana',      name: 'Ana Carvalho',   initial: 'AC', role: 'NC Admin',       scope: 'UWC Brazil only',         badge: 'nc'  },
+  { id: 'clara',    name: 'Clara Ramos',    initial: 'CR', role: 'NC Reviewer',    scope: 'Assigned applications',   badge: 'reviewer' }
 ];
-UWC.scenarioRoles = { F: ['akanksha','grace'] };
 UWC.getRolesFor = function(code) {
-  return (UWC.scenarioRoles[code]||[]).map(function(id){ return UWC.users.find(function(u){ return u.id===id; }); }).filter(Boolean);
+  var map = {
+    A: ['marcus','ana','akanksha','data-protection'],
+    B: ['visitor','sofia','maria','ana','io-mkt'],
+    C: ['clara','paulo','ana','akanksha'],
+    D: ['fatima','ana','helen'],
+    E: ['akanksha','io-crm'],
+    F: ['akanksha','grace'],
+    G: ['io-mkt','akanksha','jonathan']
+  };
+  return (map[code] || []).map(function(id){ return UWC.users.find(function(u){ return u.id === id; }); }).filter(Boolean);
 };
 
-/* Role switcher */
-(function(){
-'use strict';
-window.RoleSwitcher={init:init,setRole:setRole,getRole:function(){return document.body.dataset.currentRole||'default';}};
-function init(opts){
-  var roles=opts.roles||[];var defaultId=opts.defaultRoleId||(roles[0]&&roles[0].id);var scenarioCode=opts.scenarioCode||'';
-  var dropdown=document.getElementById('role-switcher');
-  if(!dropdown)return;
-  dropdown.innerHTML='<button type="button" class="rs-trigger" id="rs-trigger" aria-expanded="false"><span class="rs-avatar" id="rs-avatar"></span><span class="rs-current"><span class="rs-name" id="rs-current-name">—</span><span class="rs-role" id="rs-current-role">—</span></span><span class="rs-chev">▾</span></button><div class="rs-menu" id="rs-menu" hidden><div class="rs-menu-header">View as · Scenario '+scenarioCode+'</div>'+
-  roles.map(function(r){return '<button type="button" class="rs-option" data-role-id="'+r.id+'"><span class="rs-avatar rs-avatar--'+(r.badge||'default')+'">'+(r.initial||r.name[0])+'</span><span class="rs-opt-text"><span class="rs-opt-name">'+r.name+'</span><span class="rs-opt-role">'+r.role+'</span>'+(r.scope?'<span class="rs-opt-scope">'+r.scope+'</span>':'')+'</span><span class="rs-check">✓</span></button>';}).join('')+
-  '<div class="rs-menu-footer">Switching role re-renders screen content.</div></div>';
-  var trigger=document.getElementById('rs-trigger');var menu=document.getElementById('rs-menu');
-  trigger.addEventListener('click',function(e){e.stopPropagation();var open=!menu.hidden;menu.hidden=open;trigger.setAttribute('aria-expanded',String(!open));});
-  document.addEventListener('click',function(e){if(!dropdown.contains(e.target)){menu.hidden=true;trigger.setAttribute('aria-expanded','false');}});
-  Array.prototype.forEach.call(dropdown.querySelectorAll('.rs-option'),function(btn){btn.addEventListener('click',function(){var id=btn.dataset.roleId;var role=roles.find(function(r){return r.id===id;});setRole(id,role,roles);menu.hidden=true;trigger.setAttribute('aria-expanded','false');});});
-  var def=roles.find(function(r){return r.id===defaultId;});setRole(defaultId,def,roles);window.RoleSwitcher._roles=roles;
-}
-function setRole(id,role,roles){
-  document.body.dataset.currentRole=id;
-  var avatar=document.getElementById('rs-avatar');var cn=document.getElementById('rs-current-name');var cr=document.getElementById('rs-current-role');
-  if(avatar&&role){avatar.className='rs-avatar rs-avatar--'+(role.badge||'default');avatar.textContent=role.initial||role.name[0];}
-  if(cn&&role)cn.textContent=role.name;if(cr&&role)cr.textContent=role.role+(role.scope?' · '+role.scope:'');
-  Array.prototype.forEach.call(document.querySelectorAll('.rs-option'),function(btn){btn.classList.toggle('active',btn.dataset.roleId===id);});
-  document.dispatchEvent(new CustomEvent('roleChanged',{detail:{roleId:id,role:role}}));
-}
-var style=document.createElement('style');
-style.textContent='#role-switcher{position:relative;font-family:var(--uwc-font-body,sans-serif)}.rs-trigger{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:5px 10px 5px 5px;border-radius:8px;cursor:pointer;font-size:12.5px;min-width:200px;text-align:left}.rs-trigger:hover{background:rgba(255,255,255,0.18)}.rs-avatar{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:11px;flex-shrink:0}.rs-avatar--ios{background:#003087}.rs-avatar--nc{background:#1f9535}.rs-current{display:flex;flex-direction:column;line-height:1.2;flex:1}.rs-name{font-weight:500;color:#fff;font-size:12px}.rs-role{font-size:10.5px;color:rgba(255,255,255,0.6)}.rs-chev{color:rgba(255,255,255,0.6);font-size:10px;margin-left:2px}.rs-menu{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #e2e6ed;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);min-width:280px;z-index:100;overflow:hidden}.rs-menu-header{padding:10px 14px;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#6b7280;background:#f7f8fa;font-weight:600}.rs-menu-footer{padding:10px 14px;font-size:11px;color:#6b7280;border-top:1px solid #f0f2f5;background:#fafbfd}.rs-option{display:flex;align-items:center;gap:10px;padding:10px 14px;width:100%;background:#fff;border:none;border-bottom:1px solid #f0f2f5;cursor:pointer;text-align:left}.rs-option:hover{background:#f7f8fa}.rs-option.active{background:#E8EEF6}.rs-opt-text{flex:1;display:flex;flex-direction:column;line-height:1.3}.rs-opt-name{font-size:13px;font-weight:500;color:#0d1b3e}.rs-opt-role{font-size:11.5px;color:#5a6480}.rs-opt-scope{font-size:10.5px;color:#9aa3b8;font-style:italic}.rs-check{color:#003087;font-weight:600;opacity:0;font-size:14px}.rs-option.active .rs-check{opacity:1}';
-document.head.appendChild(style);
+(function () {
+  'use strict';
+  window.RoleSwitcher = { init: init, setRole: setRole, getRole: function () { return document.body.dataset.currentRole || 'default'; } };
+  function init(opts) {
+    var roles = opts.roles || [], defaultId = opts.defaultRoleId || (roles[0] && roles[0].id), scenarioCode = opts.scenarioCode || '';
+    var dropdown = document.getElementById('role-switcher');
+    if (!dropdown) return;
+    dropdown.innerHTML = '<button type="button" class="rs-trigger" id="rs-trigger" aria-expanded="false"><span class="rs-avatar" id="rs-avatar"></span><span class="rs-current"><span class="rs-name" id="rs-current-name">—</span><span class="rs-role" id="rs-current-role">—</span></span><span class="rs-chev">▾</span></button><div class="rs-menu" id="rs-menu" hidden><div class="rs-menu-header">View as · Scenario ' + scenarioCode + '</div>' + roles.map(function (r) {
+      return '<button type="button" class="rs-option" data-role-id="' + r.id + '"><span class="rs-avatar rs-avatar--' + (r.badge || 'default') + '">' + (r.initial || r.name[0]) + '</span><span class="rs-opt-text"><span class="rs-opt-name">' + r.name + '</span><span class="rs-opt-role">' + r.role + '</span>' + (r.scope ? '<span class="rs-opt-scope">' + r.scope + '</span>' : '') + '</span><span class="rs-check">✓</span></button>';
+    }).join('') + '<div class="rs-menu-footer">Switching role re-renders the screen showing what that user can see.</div></div>';
+    var trigger = document.getElementById('rs-trigger'), menu = document.getElementById('rs-menu');
+    trigger.addEventListener('click', function (e) { e.stopPropagation(); var open = !menu.hidden; menu.hidden = open; trigger.setAttribute('aria-expanded', String(!open)); });
+    document.addEventListener('click', function (e) { if (!dropdown.contains(e.target)) { menu.hidden = true; trigger.setAttribute('aria-expanded', 'false'); } });
+    Array.prototype.forEach.call(dropdown.querySelectorAll('.rs-option'), function (btn) {
+      btn.addEventListener('click', function () { var id = btn.dataset.roleId; var role = roles.find(function (r) { return r.id === id; }); setRole(id, role, roles); menu.hidden = true; trigger.setAttribute('aria-expanded', 'false'); });
+    });
+    var def = roles.find(function (r) { return r.id === defaultId; });
+    setRole(defaultId, def, roles);
+  }
+  function setRole(id, role, roles) {
+    document.body.dataset.currentRole = id;
+    var avatar = document.getElementById('rs-avatar'), cn = document.getElementById('rs-current-name'), cr = document.getElementById('rs-current-role');
+    if (avatar && role) { avatar.className = 'rs-avatar rs-avatar--' + (role.badge || 'default'); avatar.textContent = role.initial || role.name[0]; }
+    if (cn && role) cn.textContent = role.name;
+    if (cr && role) cr.textContent = role.role;
+    Array.prototype.forEach.call(document.querySelectorAll('.rs-option'), function (btn) { btn.classList.toggle('active', btn.dataset.roleId === id); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-role-show]'), function (el) { el.hidden = el.dataset.roleShow.split(',').indexOf(id) === -1; });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-role-hide]'), function (el) { el.hidden = el.dataset.roleHide.split(',').indexOf(id) !== -1; });
+  }
 })();
 
-/* Navigation */
-var TOTAL=8, current=0;
-var stepRoles={0:'akanksha',1:'akanksha',2:'akanksha',3:'akanksha',4:'grace',5:'akanksha',6:'akanksha',7:'akanksha'};
-
-function go(i){
-  if(i<0||i>=TOTAL)return;
-  Array.prototype.forEach.call(document.querySelectorAll('.screen'),function(s){s.classList.remove('active');});
-  var target=document.getElementById('sc-'+i);if(target)target.classList.add('active');
-  for(var j=0;j<TOTAL;j++){var nav=document.getElementById('nav-'+j);if(!nav)continue;nav.classList.remove('active','done');if(j<i)nav.classList.add('done');if(j===i)nav.classList.add('active');}
-  var pct=Math.round(((i+1)/TOTAL)*100);
-  var counter=document.getElementById('step-counter');if(counter)counter.textContent='Step '+(i+1)+' of '+TOTAL;
-  var progTxt=document.getElementById('progress-txt');if(progTxt)progTxt.textContent='Step '+(i+1)+' of '+TOTAL;
-  var progFill=document.getElementById('progress-fill');if(progFill)progFill.style.width=pct+'%';
-  var mainEl=document.getElementById('main');if(mainEl)mainEl.scrollTop=0;
-  var roleId=stepRoles[i]||'akanksha';
-  if(window.RoleSwitcher&&window.RoleSwitcher._roles){var roles=window.RoleSwitcher._roles;var role=roles.find(function(r){return r.id===roleId;});if(role)window.RoleSwitcher.setRole(roleId,role,roles);}
-  current=i;
+const TOTAL = 8;
+let step = 0;
+const stepCounterEl = document.getElementById('step-counter');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+function go(i) {
+  if (i < 0 || i >= TOTAL) return;
+  step = i;
+  document.querySelectorAll('.screen').forEach((s, j) => s.classList.toggle('active', j === i));
+  stepCounterEl.textContent = 'Step ' + (i + 1) + ' / ' + TOTAL;
+  prevBtn.disabled = i === 0;
+  nextBtn.disabled = i === TOTAL - 1;
 }
-
-document.addEventListener('DOMContentLoaded',function(){
-  RoleSwitcher.init({scenarioCode:'F',defaultRoleId:'akanksha',roles:UWC.getRolesFor('F')});
-  go(0);
+prevBtn.addEventListener('click', () => go(step - 1));
+nextBtn.addEventListener('click', () => go(step + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+  if (e.key === 'ArrowRight') go(step + 1);
+  if (e.key === 'ArrowLeft') go(step - 1);
 });
+
+RoleSwitcher.init({ scenarioCode: 'F', defaultRoleId: 'akanksha', roles: UWC.getRolesFor('F') });
+go(0);
 </script>
 </body>
 </html>
