@@ -296,6 +296,316 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 </head>
 <body>
 
+<style>
+  .icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    stroke-width: 1.75;
+    stroke: currentColor;
+    fill: none;
+  }
+  .icon--sm { width: 14px; height: 14px; }
+  .icon--md { width: 18px; height: 18px; }
+  .icon--lg { width: 24px; height: 24px; }
+  .icon--xl { width: 32px; height: 32px; }
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+
+    <!-- ===== Authentication / Status ===== -->
+
+    <symbol id="icon-check" viewBox="0 0 24 24">
+      <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-check-circle" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.75" fill="none"/>
+      <path d="M8 12.5l2.5 2.5L16 9.5" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-x-circle" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.75" fill="none"/>
+      <path d="M15 9l-6 6M9 9l6 6" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-alert-triangle" viewBox="0 0 24 24">
+      <path d="M12 3.5L2.5 20h19L12 3.5z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="12" y1="10" x2="12" y2="14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <circle cx="12" cy="17" r="0.5" stroke="currentColor" stroke-width="1.5" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="icon-info-circle" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.75" fill="none"/>
+      <line x1="12" y1="11" x2="12" y2="16.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <circle cx="12" cy="8" r="0.5" stroke="currentColor" stroke-width="1.5" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="icon-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.75" fill="none"/>
+      <path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-lock" viewBox="0 0 24 24">
+      <rect x="4.5" y="11" width="15" height="10" rx="1.5" stroke="currentColor" stroke-width="1.75" fill="none"/>
+      <path d="M8 11V7.5a4 4 0 0 1 8 0V11" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round"/>
+      <circle cx="12" cy="15.5" r="1" stroke="currentColor" stroke-width="1.5" fill="none"/>
+    </symbol>
+
+    <symbol id="icon-unlock" viewBox="0 0 24 24">
+      <rect x="4.5" y="11" width="15" height="10" rx="1.5" stroke="currentColor" stroke-width="1.75" fill="none"/>
+      <path d="M8 11V7.5a4 4 0 0 1 7.5-2" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round"/>
+      <circle cx="12" cy="15.5" r="1" stroke="currentColor" stroke-width="1.5" fill="none"/>
+    </symbol>
+
+    <symbol id="icon-shield" viewBox="0 0 24 24">
+      <path d="M12 3l8 3v6c0 4.5-3.2 8.4-8 9.5-4.8-1.1-8-5-8-9.5V6l8-3z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-eye" viewBox="0 0 24 24">
+      <path d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7S2.5 12 2.5 12z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.75" fill="none"/>
+    </symbol>
+
+    <symbol id="icon-eye-off" viewBox="0 0 24 24">
+      <path d="M3 3l18 18" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round"/>
+      <path d="M10.6 6.2A9.6 9.6 0 0 1 12 6c6 0 9.5 6 9.5 6a17 17 0 0 1-2.8 3.5M6.2 7.7A17 17 0 0 0 2.5 12s3.5 6 9.5 6a9.6 9.6 0 0 0 4.3-1" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- ===== Navigation / Layout ===== -->
+
+    <symbol id="icon-arrow-right" viewBox="0 0 24 24">
+      <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <polyline points="14 6 20 12 14 18" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-arrow-left" viewBox="0 0 24 24">
+      <line x1="20" y1="12" x2="4" y2="12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <polyline points="10 6 4 12 10 18" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-chevron-right" viewBox="0 0 24 24">
+      <polyline points="9 6 15 12 9 18" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-chevron-left" viewBox="0 0 24 24">
+      <polyline points="15 6 9 12 15 18" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-chevron-down" viewBox="0 0 24 24">
+      <polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-chevron-up" viewBox="0 0 24 24">
+      <polyline points="6 15 12 9 18 15" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-home" viewBox="0 0 24 24">
+      <path d="M3.5 11L12 4l8.5 7" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M5.5 9.5V20h13V9.5" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M10 20v-5h4v5" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-menu" viewBox="0 0 24 24">
+      <line x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <line x1="4" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-x" viewBox="0 0 24 24">
+      <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-search" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.75" fill="none"/>
+      <line x1="16" y1="16" x2="20.5" y2="20.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-filter" viewBox="0 0 24 24">
+      <path d="M3.5 5h17l-6.5 8v6l-4 2v-8L3.5 5z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-refresh" viewBox="0 0 24 24">
+      <polyline points="20 4 20 9 15 9" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="4 20 4 15 9 15" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M20 9a8 8 0 0 0-14.5-2.5M4 15a8 8 0 0 0 14.5 2.5" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-plus" viewBox="0 0 24 24">
+      <line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-more-horizontal" viewBox="0 0 24 24">
+      <circle cx="6" cy="12" r="1.25" stroke="currentColor" stroke-width="1.5" fill="currentColor"/>
+      <circle cx="12" cy="12" r="1.25" stroke="currentColor" stroke-width="1.5" fill="currentColor"/>
+      <circle cx="18" cy="12" r="1.25" stroke="currentColor" stroke-width="1.5" fill="currentColor"/>
+    </symbol>
+
+    <!-- ===== People / Communication ===== -->
+
+    <symbol id="icon-user" viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.75" fill="none"/>
+      <path d="M4 20.5c.5-4 4-6.5 8-6.5s7.5 2.5 8 6.5" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-user-plus" viewBox="0 0 24 24">
+      <circle cx="10" cy="8" r="4" stroke="currentColor" stroke-width="1.75" fill="none"/>
+      <path d="M2.5 20.5c.5-4 3.5-6.5 7.5-6.5 1.5 0 2.9.4 4 1" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="19" y1="14" x2="19" y2="20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <line x1="16" y1="17" x2="22" y2="17" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-users" viewBox="0 0 24 24">
+      <circle cx="9" cy="8" r="3.5" stroke="currentColor" stroke-width="1.75" fill="none"/>
+      <path d="M2.5 20c.5-3.5 3-5.5 6.5-5.5s6 2 6.5 5.5" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M16 4.5a3.5 3.5 0 0 1 0 7" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round"/>
+      <path d="M17.5 14.5c2.5.5 4 2.5 4 5.5" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-mail" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.75" fill="none"/>
+      <polyline points="3.5 6.5 12 13 20.5 6.5" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-message-circle" viewBox="0 0 24 24">
+      <path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 20.5l1.5-5A8.5 8.5 0 1 1 21 11.5z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-phone" viewBox="0 0 24 24">
+      <path d="M21 16.5v3a1.5 1.5 0 0 1-1.7 1.5A18.5 18.5 0 0 1 3 4.7 1.5 1.5 0 0 1 4.5 3h3a1.5 1.5 0 0 1 1.5 1.3c.1.9.3 1.8.6 2.7a1.5 1.5 0 0 1-.4 1.6L8 9.7a14 14 0 0 0 6.3 6.3l1.1-1.1a1.5 1.5 0 0 1 1.6-.4c.9.3 1.8.5 2.7.6A1.5 1.5 0 0 1 21 16.5z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-bell" viewBox="0 0 24 24">
+      <path d="M6 9a6 6 0 0 1 12 0c0 5 2 6.5 2 6.5H4S6 14 6 9z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M10.5 19a1.5 1.5 0 0 0 3 0" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-help-circle" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.75" fill="none"/>
+      <path d="M9.3 9.3a2.8 2.8 0 0 1 5.4.9c0 1.8-2.7 2.7-2.7 2.7" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="12" cy="17" r="0.5" stroke="currentColor" stroke-width="1.5" fill="currentColor"/>
+    </symbol>
+
+    <!-- ===== Documents / Files ===== -->
+
+    <symbol id="icon-file-text" viewBox="0 0 24 24">
+      <path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8l-5-5z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="14 3 14 8 19 8" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="8.5" y1="13" x2="15.5" y2="13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <line x1="8.5" y1="16.5" x2="15.5" y2="16.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <line x1="8.5" y1="9.5" x2="11" y2="9.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-file-check" viewBox="0 0 24 24">
+      <path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8l-5-5z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="14 3 14 8 19 8" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M8.5 14.5l2 2 4-4.5" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-upload-cloud" viewBox="0 0 24 24">
+      <path d="M6.5 18A4.5 4.5 0 0 1 6 9.1a6 6 0 0 1 11.6 1.4A4 4 0 0 1 17 18" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="9 13 12 10 15 13" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="12" y1="10" x2="12" y2="20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-download" viewBox="0 0 24 24">
+      <path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="7 11 12 16 17 11" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="12" y1="4" x2="12" y2="16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-paperclip" viewBox="0 0 24 24">
+      <path d="M20 12l-8.5 8.5a5 5 0 1 1-7-7L13 5a3.5 3.5 0 0 1 5 5l-8.5 8.5a2 2 0 1 1-2.8-2.8L14.5 8.5" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-folder" viewBox="0 0 24 24">
+      <path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- ===== Education / UWC-specific ===== -->
+
+    <symbol id="icon-globe" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.75" fill="none"/>
+      <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-book-open" viewBox="0 0 24 24">
+      <path d="M2.5 5.5h6a3.5 3.5 0 0 1 3.5 3.5v11a2.5 2.5 0 0 0-2.5-2.5h-7v-12z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M21.5 5.5h-6a3.5 3.5 0 0 0-3.5 3.5v11a2.5 2.5 0 0 1 2.5-2.5h7v-12z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-graduation-cap" viewBox="0 0 24 24">
+      <path d="M2 9l10-4.5L22 9l-10 4.5L2 9z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="22" y1="9" x2="22" y2="14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-calendar" viewBox="0 0 24 24">
+      <rect x="3.5" y="5" width="17" height="15.5" rx="1.5" stroke="currentColor" stroke-width="1.75" fill="none"/>
+      <line x1="3.5" y1="10" x2="20.5" y2="10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-map-pin" viewBox="0 0 24 24">
+      <path d="M19 10.5C19 16 12 21.5 12 21.5S5 16 5 10.5a7 7 0 0 1 14 0z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="12" cy="10.5" r="2.5" stroke="currentColor" stroke-width="1.75" fill="none"/>
+    </symbol>
+
+    <symbol id="icon-edit" viewBox="0 0 24 24">
+      <path d="M11 4H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-6" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-save" viewBox="0 0 24 24">
+      <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="17 21 17 13 7 13 7 21" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="7 3 7 8 15 8" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-trash" viewBox="0 0 24 24">
+      <polyline points="3 6 5 6 21 6" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M19 6l-1 13.5A2 2 0 0 1 16 21H8a2 2 0 0 1-2-1.5L5 6" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9 6V4a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 4v2" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="10" y1="10.5" x2="10" y2="16.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <line x1="14" y1="10.5" x2="14" y2="16.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-star" viewBox="0 0 24 24">
+      <polygon points="12 3 14.6 9 21 9.6 16 14 17.5 20.5 12 17 6.5 20.5 8 14 3 9.6 9.4 9" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-trending-up" viewBox="0 0 24 24">
+      <polyline points="3 17 9 11 13 15 21 7" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="15 7 21 7 21 13" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-bar-chart" viewBox="0 0 24 24">
+      <line x1="6" y1="20" x2="6" y2="13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <line x1="12" y1="20" x2="12" y2="8" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <line x1="18" y1="20" x2="18" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+      <line x1="3.5" y1="20.5" x2="20.5" y2="20.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="icon-activity" viewBox="0 0 24 24">
+      <polyline points="3 12 7 12 10 4 14 20 17 12 21 12" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="icon-settings" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.75" fill="none"/>
+      <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1A2 2 0 1 1 4.3 17l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.6 9 1.7 1.7 0 0 0 4.3 7.2l-.1-.1A2 2 0 1 1 7 4.3l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1A2 2 0 1 1 19.7 7l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+  </defs>
+</svg>
+
+
 <div class="app">
   <div class="stage" id="stage">
 
@@ -442,7 +752,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
             <p class="lp-hero__sub">Join 11,000+ students from 150+ countries at 18 UWC schools and colleges around the world. The 2026/27 application cycle closes on 30 November 2026.</p>
             <div class="lp-hero__ctas">
               <button class="lp-btn-primary-large" onclick="window.go && window.go(1)">Start your application →</button>
-              <button class="lp-btn-ghost-light" onclick="window.go && window.go(2)">Already started? Sign in</button>
+              <button class="lp-btn-ghost-light" onclick="window.go && window.go(3)">Already started? Sign in</button>
             </div>
           </div>
           <div class="lp-hero__scroll-hint">Scroll to explore</div>
@@ -469,17 +779,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
               <div class="lp-step__title">Check eligibility</div>
               <div class="lp-step__desc">Three quick questions — your age, nationality, and country of residence — to make sure UWC is open to you for this cycle.</div>
             </div>
-            <div class="lp-step" onclick="window.go && window.go(2)">
+            <div class="lp-step" onclick="window.go && window.go(3)">
               <div class="lp-step__num">2</div>
               <div class="lp-step__title">Create your account</div>
               <div class="lp-step__desc">Verify your email and set up your private applicant portal. You can save your progress and return any time before the deadline.</div>
             </div>
-            <div class="lp-step" onclick="window.go && window.go(4)">
+            <div class="lp-step" onclick="window.go && window.go(5)">
               <div class="lp-step__num">3</div>
               <div class="lp-step__title">Complete your application</div>
               <div class="lp-step__desc">Six sections covering personal information, academic background, your personal statement, documents, guardian consent and declaration.</div>
             </div>
-            <div class="lp-step" onclick="window.go && window.go(3)">
+            <div class="lp-step" onclick="window.go && window.go(4)">
               <div class="lp-step__num">4</div>
               <div class="lp-step__title">Submit &amp; track</div>
               <div class="lp-step__desc">Submit before 30 November 2026. Your National Committee will guide you through eligibility review, interview and place allocation.</div>
@@ -544,8 +854,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
               <div>
                 <div class="lp-footer__col-title">Applicants</div>
                 <a class="lp-footer__link" onclick="window.go && window.go(1)">Check eligibility</a>
-                <a class="lp-footer__link" onclick="window.go && window.go(2)">Create account</a>
-                <a class="lp-footer__link" onclick="window.go && window.go(2)">Sign in</a>
+                <a class="lp-footer__link" onclick="window.go && window.go(3)">Create account</a>
+                <a class="lp-footer__link" onclick="window.go && window.go(3)">Sign in</a>
                 <a class="lp-footer__link">Application FAQ</a>
                 <a class="lp-footer__link">Scholarships</a>
               </div>
@@ -740,7 +1050,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
           </div>
           <div class="elig-outcome__actions">
             <button class="elig-outcome__btn elig-outcome__btn--ghost" onclick="document.getElementById('elig-card-form').hidden=false;document.getElementById('elig-outcome-pass').hidden=true;document.getElementById('elig-outcome-guardian').hidden=true;document.getElementById('elig-outcome-fail').hidden=true;">← Re-check</button>
-            <button class="elig-outcome__btn elig-outcome__btn--primary" onclick="window.go && window.go(2)">Proceed to registration →</button>
+            <button class="elig-outcome__btn elig-outcome__btn--primary" onclick="window.go && window.go(3)">Proceed to registration →</button>
           </div>
         </div>
 
@@ -755,7 +1065,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
           </div>
           <div class="elig-outcome__actions">
             <button class="elig-outcome__btn elig-outcome__btn--ghost" onclick="document.getElementById('elig-card-form').hidden=false;document.getElementById('elig-outcome-pass').hidden=true;document.getElementById('elig-outcome-guardian').hidden=true;document.getElementById('elig-outcome-fail').hidden=true;">← Re-check</button>
-            <button class="elig-outcome__btn elig-outcome__btn--primary" onclick="window.go && window.go(2)">Continue with guardian email →</button>
+            <button class="elig-outcome__btn elig-outcome__btn--primary" onclick="window.go && window.go(3)">Continue with guardian email →</button>
           </div>
         </div>
 
@@ -875,6 +1185,93 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         })();
       </script>
     </section>
+    <section class="screen" id="sc-signin">
+  <div class="auth-shell">
+    <div class="auth-card" role="region" aria-labelledby="auth-signin-title">
+
+      <div class="auth-card-logo">
+        <span class="auth-card-logo-mark" aria-hidden="true">UWC</span>
+        <span class="auth-card-logo-text">UWC International - Applicant Portal</span>
+      </div>
+
+      <h1 id="auth-signin-title">Sign in to your account</h1>
+      <p class="auth-sub">Welcome back. Continue your UWC application.</p>
+
+      <form id="auth-signin-form" novalidate autocomplete="on">
+
+        <div class="auth-field" data-field="email">
+          <label for="auth-signin-email">Email or username <span class="auth-req">*</span></label>
+          <div class="auth-input-wrap">
+            <input
+              id="auth-signin-email"
+              name="email"
+              type="email"
+              autocomplete="username"
+              placeholder="you@example.com"
+              spellcheck="false"
+              required
+            />
+          </div>
+          <div class="auth-field-error" id="auth-signin-email-error" aria-live="polite"></div>
+        </div>
+
+        <div class="auth-field has-eye" data-field="password">
+          <label for="auth-signin-password">Password <span class="auth-req">*</span></label>
+          <div class="auth-input-wrap">
+            <input
+              id="auth-signin-password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Enter your password"
+              required
+            />
+            <button
+              type="button"
+              class="auth-eye"
+              data-eye-target="auth-signin-password"
+              aria-label="Show password"
+              aria-pressed="false"
+            >
+              <svg aria-hidden="true"><use href="#icon-eye"/></svg>
+            </button>
+          </div>
+          <div class="auth-field-error" id="auth-signin-password-error" aria-live="polite"></div>
+        </div>
+
+        <div class="auth-row">
+          <label class="auth-check">
+            <input type="checkbox" id="auth-signin-remember" />
+            <span>Remember me</span>
+          </label>
+          <button type="button" class="auth-link" id="auth-signin-forgot">Forgot password?</button>
+        </div>
+
+        <button type="submit" class="auth-btn auth-btn-primary" id="auth-signin-submit">
+          <span>Sign in</span>
+          <svg aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+        </button>
+
+      </form>
+
+      <div class="auth-divider"><span>or</span></div>
+
+      <p class="auth-foot">
+        Don&rsquo;t have an account yet?
+        <button type="button" class="auth-link" onclick="window.go(3)">Create one &rarr;</button>
+      </p>
+
+      <div style="text-align:center;">
+        <button type="button" class="auth-back" onclick="window.go(0)">
+          &larr; Back to home
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
     <!-- REGISTRATION — create account -->
     <section class="screen" id="sc-2">
       <div class="uwc-portal-shell">
@@ -914,7 +1311,46 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
           </div>
         </div>
       </div>
-    </section>
+    
+<div class="auth-success" id="sc-2-success" hidden>
+  <div class="auth-success-icon" aria-hidden="true">
+    <svg><use href="#icon-check"/></svg>
+  </div>
+  <h2>Account created successfully!</h2>
+  <p class="auth-sub">Welcome, Sofia! Your applicant portal is ready.</p>
+
+  <div class="auth-success-id">
+    <svg aria-hidden="true"><use href="#icon-check"/></svg>
+    <div class="auth-success-id-body">
+      <span class="auth-success-id-label">Your reference</span>
+      <span class="auth-success-id-value">UWC-APP-2026-SA-4729</span>
+    </div>
+  </div>
+
+  <div class="auth-success-id">
+    <svg aria-hidden="true"><use href="#icon-mail"/></svg>
+    <div class="auth-success-id-body">
+      <span class="auth-success-id-label">Verification email sent</span>
+      We&rsquo;ve sent a verification email to
+      <strong>sofia.almeida@example.com</strong> &mdash; you can verify any time
+      from your portal.
+    </div>
+  </div>
+
+  <div class="auth-success-actions">
+    <button type="button" class="auth-btn auth-btn-navy" onclick="window.go(4)">
+      <span>Go to my portal</span>
+      <svg aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+    </button>
+    <button type="button" class="auth-btn auth-btn-ghost" onclick="window.go(2)">
+      Continue to sign in instead
+    </button>
+  </div>
+</div>
+
+
+
+  </section>
 
     <!-- APPLICANT DASHBOARD -->
     <section class="screen" id="sc-3">
@@ -943,7 +1379,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
             <a class="uwc-portal-sidebar__item"><span class="uwc-portal-sidebar__icon">💬</span> Messages</a>
             <a class="uwc-portal-sidebar__item"><span class="uwc-portal-sidebar__icon">❓</span> FAQ</a>
           </nav>
-          <div class="uwc-portal-main">
+          <div class="uwc-portal-main"><div class="tab-section" data-portal-section="dashboard">
+
             <div class="progress-card">
               <div class="progress-card__info">
                 <div class="progress-card__title">Welcome, Sofia!</div>
@@ -970,8 +1407,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
               </div>
               <div class="checklist-item">
                 <div class="checklist-icon checklist-icon--prog">✎</div>
-                <div class="checklist-label" style="cursor:pointer;color:#003087;font-weight:500;" onclick="window.go && window.go(4)">Personal Statement →</div>
-                <div class="checklist-status cs-prog" style="cursor:pointer;" onclick="window.go && window.go(4)">In progress</div>
+                <div class="checklist-label" style="cursor:pointer;color:#003087;font-weight:500;" onclick="window.go && window.go(5)">Personal Statement →</div>
+                <div class="checklist-status cs-prog" style="cursor:pointer;" onclick="window.go && window.go(5)">In progress</div>
               </div>
               <div class="checklist-item">
                 <div class="checklist-icon checklist-icon--todo">○</div>
@@ -984,14 +1421,561 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
                 <div class="checklist-status cs-todo">Not started</div>
               </div>
               <div style="margin-top:18px;padding:13px 16px;background:#fffbeb;border-radius:8px;font-size:13px;color:#92400e;border:1px solid #fde68a;">
-                ⚠ Parental consent has not yet been received. The application cannot be submitted without the guardian's signature. <a href="#" onclick="window.go(5);return false;" style="color:#003087;font-weight:600;text-decoration:underline;margin-left:4px;">Preview guardian view →</a>
+                ⚠ Parental consent has not yet been received. The application cannot be submitted without the guardian's signature. <a href="#" onclick="window.go(6);return false;" style="color:#003087;font-weight:600;text-decoration:underline;margin-left:4px;">Preview guardian view →</a>
               </div>
               <div style="margin-top:16px;display:flex;gap:10px;">
-                <button onclick="window.go && window.go(4)" class="uwc-portal-btn-primary" style="flex:1;padding:12px;font-size:14px;font-weight:600;">Continue application →</button>
+                <button onclick="window.go && window.go(5)" class="uwc-portal-btn-primary" style="flex:1;padding:12px;font-size:14px;font-weight:600;">Continue application →</button>
                 <button style="background:#fff;color:#003087;border:1px solid #003087;padding:12px 18px;border-radius:8px;font-size:13.5px;cursor:pointer;font-weight:500;">View timeline</button>
               </div>
             </div>
-          </div>
+          
+</div>
+
+<div class="tab-section" data-portal-section="documents" hidden>
+  <div class="tab-section-header">
+    <div class="tab-section-header-left">
+      <h2 class="tab-section-title">Documents</h2>
+      <p class="tab-section-subtitle">4 of 4 required documents uploaded</p>
+    </div>
+    <div class="tab-section-header-actions">
+      <button type="button" class="tab-btn tab-btn-primary" data-role-variant="upload">
+        <svg class="icon"><use href="#icon-upload-cloud"/></svg>
+        Upload
+      </button>
+    </div>
+  </div>
+
+  <div class="tab-doc-grid">
+
+    <!-- Doc 1: Passport -->
+    <article class="tab-doc-card">
+      <div class="tab-doc-card-head">
+        <div class="tab-doc-icon-wrap">
+          <svg class="icon icon-lg"><use href="#icon-file-text"/></svg>
+        </div>
+        <div class="tab-doc-meta">
+          <h3 class="tab-doc-name">Passport scan.pdf</h3>
+          <p class="tab-doc-info">2.1 MB &middot; uploaded 25 May 2026, 14:18</p>
+        </div>
+      </div>
+      <div class="tab-doc-status-row">
+        <span class="tab-pill tab-pill-verified">
+          <svg class="icon" style="width:11px;height:11px"><use href="#icon-check"/></svg>
+          Verified
+        </span>
+      </div>
+      <div class="tab-doc-actions">
+        <button type="button" class="tab-doc-action" data-role-variant="preview">
+          <svg class="icon"><use href="#icon-eye"/></svg>
+          Preview
+        </button>
+        <button type="button" class="tab-doc-action" data-role-variant="download">
+          <svg class="icon"><use href="#icon-download"/></svg>
+          Download
+        </button>
+        <button type="button" class="tab-doc-action" data-role-variant="replace">
+          <svg class="icon"><use href="#icon-upload-cloud"/></svg>
+          Replace
+        </button>
+      </div>
+    </article>
+
+    <!-- Doc 2: Transcript -->
+    <article class="tab-doc-card">
+      <div class="tab-doc-card-head">
+        <div class="tab-doc-icon-wrap">
+          <svg class="icon icon-lg"><use href="#icon-file-text"/></svg>
+        </div>
+        <div class="tab-doc-meta">
+          <h3 class="tab-doc-name">Col&eacute;gio Bandeirantes &mdash; 2025 transcript.pdf</h3>
+          <p class="tab-doc-info">1.8 MB &middot; uploaded 25 May 2026, 14:22</p>
+        </div>
+      </div>
+      <div class="tab-doc-status-row">
+        <span class="tab-pill tab-pill-verified">
+          <svg class="icon" style="width:11px;height:11px"><use href="#icon-check"/></svg>
+          Verified
+        </span>
+      </div>
+      <div class="tab-doc-actions">
+        <button type="button" class="tab-doc-action" data-role-variant="preview">
+          <svg class="icon"><use href="#icon-eye"/></svg>
+          Preview
+        </button>
+        <button type="button" class="tab-doc-action" data-role-variant="download">
+          <svg class="icon"><use href="#icon-download"/></svg>
+          Download
+        </button>
+        <button type="button" class="tab-doc-action" data-role-variant="replace">
+          <svg class="icon"><use href="#icon-upload-cloud"/></svg>
+          Replace
+        </button>
+      </div>
+    </article>
+
+    <!-- Doc 3: Recommendation -->
+    <article class="tab-doc-card">
+      <div class="tab-doc-card-head">
+        <div class="tab-doc-icon-wrap">
+          <svg class="icon icon-lg"><use href="#icon-file-text"/></svg>
+        </div>
+        <div class="tab-doc-meta">
+          <h3 class="tab-doc-name">Recommendation &mdash; Maria Santos (English teacher).pdf</h3>
+          <p class="tab-doc-info">412 KB &middot; uploaded 26 May 2026, 09:35</p>
+        </div>
+      </div>
+      <div class="tab-doc-status-row">
+        <span class="tab-pill tab-pill-pending">
+          <svg class="icon" style="width:11px;height:11px"><use href="#icon-clock"/></svg>
+          Pending review
+        </span>
+      </div>
+      <div class="tab-doc-actions">
+        <button type="button" class="tab-doc-action" data-role-variant="preview">
+          <svg class="icon"><use href="#icon-eye"/></svg>
+          Preview
+        </button>
+        <button type="button" class="tab-doc-action" data-role-variant="download">
+          <svg class="icon"><use href="#icon-download"/></svg>
+          Download
+        </button>
+        <button type="button" class="tab-doc-action" data-role-variant="replace">
+          <svg class="icon"><use href="#icon-upload-cloud"/></svg>
+          Replace
+        </button>
+      </div>
+    </article>
+
+    <!-- Doc 4: Guardian consent -->
+    <article class="tab-doc-card">
+      <div class="tab-doc-card-head">
+        <div class="tab-doc-icon-wrap">
+          <svg class="icon icon-lg"><use href="#icon-file-text"/></svg>
+        </div>
+        <div class="tab-doc-meta">
+          <h3 class="tab-doc-name">Guardian consent.pdf</h3>
+          <p class="tab-doc-info">624 KB &middot; uploaded 27 May 2026, 14:28</p>
+        </div>
+      </div>
+      <div class="tab-doc-status-row">
+        <span class="tab-pill tab-pill-verified">
+          <svg class="icon" style="width:11px;height:11px"><use href="#icon-check"/></svg>
+          Verified
+        </span>
+        <span class="tab-doc-extra-note">signed by Maria Almeida</span>
+      </div>
+      <div class="tab-doc-actions">
+        <button type="button" class="tab-doc-action" data-role-variant="preview">
+          <svg class="icon"><use href="#icon-eye"/></svg>
+          Preview
+        </button>
+        <button type="button" class="tab-doc-action" data-role-variant="download">
+          <svg class="icon"><use href="#icon-download"/></svg>
+          Download
+        </button>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Drop zone -->
+  <div class="tab-dropzone" data-role-variant="dropzone" role="button" tabindex="0">
+    <svg class="tab-dropzone-icon"><use href="#icon-upload-cloud"/></svg>
+    <p class="tab-dropzone-text"><strong>Drag files here to upload</strong>, or click to browse</p>
+    <p class="tab-dropzone-hint">PDF, JPG or PNG &middot; max 10 MB per file</p>
+  </div>
+
+  <!-- Info box -->
+  <div class="tab-info-box">
+    <svg class="icon"><use href="#icon-check"/></svg>
+    <div>
+      <strong>Accepted formats:</strong> PDF, JPG, PNG. Max 10 MB per file. Documents are encrypted in transit and at rest, and are only accessible to your National Committee reviewers and UWC International staff.
+    </div>
+  </div>
+</div>
+<div class="tab-section" data-portal-section="references" hidden>
+  <div class="tab-section-header">
+    <div class="tab-section-header-left">
+      <h2 class="tab-section-title">References</h2>
+      <p class="tab-section-subtitle">2 of 2 referees nominated</p>
+    </div>
+    <div class="tab-section-header-actions">
+      <button type="button" class="tab-btn tab-btn-secondary" data-role-variant="add-referee">
+        <svg class="icon"><use href="#icon-edit"/></svg>
+        Add referee
+      </button>
+    </div>
+  </div>
+
+  <div class="tab-ref-list">
+
+    <!-- Ref 1: Maria Santos -->
+    <article class="tab-ref-card">
+      <div class="tab-ref-avatar">MS</div>
+      <div class="tab-ref-body">
+        <h3 class="tab-ref-name">Maria Santos</h3>
+        <p class="tab-ref-role">English teacher &middot; Col&eacute;gio Bandeirantes</p>
+        <p class="tab-ref-contact">
+          <svg class="icon"><use href="#icon-mail"/></svg>
+          santos.m@bandeirantes.edu.br &middot; invited 22 May 2026
+        </p>
+        <p class="tab-ref-status-line">
+          <span class="tab-pill tab-pill-progress">
+            <svg class="icon" style="width:11px;height:11px"><use href="#icon-clock"/></svg>
+            In progress
+          </span>
+          <span class="tab-ref-status-text">Reference started 24 May 2026</span>
+        </p>
+        <div class="tab-ref-actions">
+          <button type="button" class="tab-btn tab-btn-secondary tab-btn-sm" data-role-variant="remind">
+            <svg class="icon"><use href="#icon-bell"/></svg>
+            Send reminder
+          </button>
+          <button type="button" class="tab-btn tab-btn-ghost tab-btn-sm" data-role-variant="resend-invite">
+            <svg class="icon"><use href="#icon-mail"/></svg>
+            Resend invitation
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Ref 2: Prof. Antonio Costa -->
+    <article class="tab-ref-card">
+      <div class="tab-ref-avatar">AC</div>
+      <div class="tab-ref-body">
+        <h3 class="tab-ref-name">Prof. Antonio Costa</h3>
+        <p class="tab-ref-role">Counsellor &middot; Col&eacute;gio Bandeirantes</p>
+        <p class="tab-ref-contact">
+          <svg class="icon"><use href="#icon-mail"/></svg>
+          costa.a@bandeirantes.edu.br &middot; invited 22 May 2026
+        </p>
+        <p class="tab-ref-status-line">
+          <span class="tab-pill tab-pill-submitted">
+            <svg class="icon" style="width:11px;height:11px"><use href="#icon-check"/></svg>
+            Submitted
+          </span>
+          <span class="tab-ref-status-text">Completed 26 May 2026</span>
+        </p>
+        <div class="tab-ref-actions">
+          <button type="button" class="tab-btn tab-btn-secondary tab-btn-sm" data-role-variant="preview-ref">
+            <svg class="icon"><use href="#icon-eye"/></svg>
+            Preview submitted reference
+          </button>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Info note -->
+  <div class="tab-info-box">
+    <svg class="icon"><use href="#icon-user"/></svg>
+    <div>
+      <strong>UWC Brazil requires 2 references</strong> &mdash; 1 academic (teacher) and 1 character (counsellor or community leader). Referees receive a secure link to complete their reference online; you cannot see the content of submitted references, but you can see whether they have been started or completed.
+    </div>
+  </div>
+</div>
+<div class="tab-section" data-portal-section="status" hidden>
+  <div class="tab-section-header">
+    <div class="tab-section-header-left">
+      <h2 class="tab-section-title">Application status</h2>
+      <p class="tab-section-subtitle">Track your application through every stage of the 2026/27 cycle</p>
+    </div>
+    <div class="tab-section-header-actions">
+      <span class="tab-status-ref-id">
+        <svg class="icon"><use href="#icon-file-text"/></svg>
+        UWC-2026-BR-00127
+      </span>
+    </div>
+  </div>
+
+  <!-- Current stage card -->
+  <div class="tab-status-current">
+    <p class="tab-status-current-label">Currently</p>
+    <h3 class="tab-status-current-stage">Eligibility Review &middot; Brazil NC</h3>
+    <p class="tab-status-current-eta">Expected decision by 12 June 2026</p>
+    <div class="tab-status-reviewer">
+      <div class="tab-status-reviewer-avatar">AC</div>
+      <div class="tab-status-reviewer-text">
+        <small>Your assigned reviewer</small>
+        <strong>Ana Carvalho</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stepper -->
+  <div class="tab-status-stepper-wrap">
+    <p class="tab-status-stepper-title">Application timeline</p>
+    <div class="tab-status-stepper">
+
+      <div class="tab-status-step tab-status-step-done">
+        <div class="tab-status-step-circle">
+          <svg class="icon" style="width:14px;height:14px"><use href="#icon-check"/></svg>
+        </div>
+        <p class="tab-status-step-label">Submitted</p>
+        <p class="tab-status-step-meta">27 May 2026</p>
+      </div>
+
+      <div class="tab-status-step tab-status-step-current">
+        <div class="tab-status-step-circle">2</div>
+        <p class="tab-status-step-label">Eligibility Review</p>
+        <p class="tab-status-step-meta">Brazil NC reviewing</p>
+      </div>
+
+      <div class="tab-status-step tab-status-step-future">
+        <div class="tab-status-step-circle">3</div>
+        <p class="tab-status-step-label">Local Selection</p>
+        <p class="tab-status-step-meta">8&ndash;15 June</p>
+      </div>
+
+      <div class="tab-status-step tab-status-step-future">
+        <div class="tab-status-step-circle">4</div>
+        <p class="tab-status-step-label">Local Interview</p>
+        <p class="tab-status-step-meta">In-person or video</p>
+      </div>
+
+      <div class="tab-status-step tab-status-step-future">
+        <div class="tab-status-step-circle">5</div>
+        <p class="tab-status-step-label">National Selection</p>
+        <p class="tab-status-step-meta">Final selection panel</p>
+      </div>
+
+      <div class="tab-status-step tab-status-step-future">
+        <div class="tab-status-step-circle">6</div>
+        <p class="tab-status-step-label">NC Decision</p>
+        <p class="tab-status-step-meta">Mid July</p>
+      </div>
+
+      <div class="tab-status-step tab-status-step-future">
+        <div class="tab-status-step-circle">7</div>
+        <p class="tab-status-step-label">Place Allocation</p>
+        <p class="tab-status-step-meta">Aug/Sep</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- What happens next -->
+  <div class="tab-status-next">
+    <h3 class="tab-status-next-title">
+      <svg class="icon icon-lg"><use href="#icon-chevron-right"/></svg>
+      What happens next
+    </h3>
+    <ul class="tab-status-next-list">
+      <li>
+        <svg class="icon"><use href="#icon-check"/></svg>
+        <span>Your Brazil NC reviewer <strong>Ana Carvalho</strong> will check your application against the eligibility criteria for the 2026/27 cycle.</span>
+      </li>
+      <li>
+        <svg class="icon"><use href="#icon-check"/></svg>
+        <span>You&rsquo;ll receive an <strong>email with next steps within 5 working days</strong> &mdash; check your inbox and the Messages tab.</span>
+      </li>
+      <li>
+        <svg class="icon"><use href="#icon-check"/></svg>
+        <span>If selected, you&rsquo;ll be invited to a <strong>Local Interview in S&atilde;o Paulo (8&ndash;15 June)</strong>. Plan to be available on those dates.</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Notification preference -->
+  <div class="tab-status-pref">
+    <div class="tab-status-pref-label">
+      <svg class="icon icon-lg" style="color:#003087"><use href="#icon-bell"/></svg>
+      <span>Email me when my application status changes</span>
+    </div>
+    <div class="tab-toggle" role="switch" aria-checked="true" tabindex="0" data-role-variant="status-notify"></div>
+  </div>
+</div>
+<div class="tab-section" data-portal-section="messages" hidden>
+  <div class="tab-section-header">
+    <div class="tab-section-header-left">
+      <h2 class="tab-section-title">
+        Messages
+        <span class="tab-msg-badge-unread">2 unread</span>
+      </h2>
+      <p class="tab-section-subtitle">Communications from UWC International and your National Committee</p>
+    </div>
+    <div class="tab-section-header-actions">
+      <button type="button" class="tab-btn tab-btn-secondary tab-btn-disabled" data-role-variant="compose" title="Coming soon">
+        <svg class="icon"><use href="#icon-edit"/></svg>
+        Compose
+      </button>
+    </div>
+  </div>
+
+  <div class="tab-msg-list">
+
+    <!-- Msg 1: Brazil NC - NEW -->
+    <article class="tab-msg-card tab-msg-card-unread" role="button" tabindex="0">
+      <div class="tab-msg-avatar tab-msg-avatar-uwc">BR</div>
+      <div class="tab-msg-body">
+        <div class="tab-msg-row1">
+          <h3 class="tab-msg-sender">
+            Brazil National Committee
+            <span class="tab-pill tab-pill-new">New</span>
+          </h3>
+          <span class="tab-msg-timestamp">27 May 2026, 14:32</span>
+        </div>
+        <p class="tab-msg-subject">Application received</p>
+        <p class="tab-msg-preview">Hi Sofia, we&rsquo;ve received your application for the 2026/27 cycle. Our team will begin&hellip;</p>
+      </div>
+    </article>
+
+    <!-- Msg 2: UWC International -->
+    <article class="tab-msg-card" role="button" tabindex="0">
+      <div class="tab-msg-avatar tab-msg-avatar-uwc">UI</div>
+      <div class="tab-msg-body">
+        <div class="tab-msg-row1">
+          <h3 class="tab-msg-sender">UWC International Office</h3>
+          <span class="tab-msg-timestamp">25 May 2026, 09:00</span>
+        </div>
+        <p class="tab-msg-subject">Welcome to your applicant portal</p>
+        <p class="tab-msg-preview">Dear Sofia, welcome! Your portal is your home for the application process &mdash; here you&rsquo;ll&hellip;</p>
+      </div>
+    </article>
+
+    <!-- Msg 3: Ana Carvalho - NEW -->
+    <article class="tab-msg-card tab-msg-card-unread" role="button" tabindex="0">
+      <div class="tab-msg-avatar">AC</div>
+      <div class="tab-msg-body">
+        <div class="tab-msg-row1">
+          <h3 class="tab-msg-sender">
+            Ana Carvalho &middot; Brazil NC
+            <span class="tab-pill tab-pill-new">New</span>
+          </h3>
+          <span class="tab-msg-timestamp">24 May 2026, 16:42</span>
+        </div>
+        <p class="tab-msg-subject">Your application looks great &mdash; one quick question</p>
+        <p class="tab-msg-preview">Hi Sofia, just a quick note about your personal statement &mdash; the section on your community&hellip;</p>
+      </div>
+    </article>
+
+    <!-- Msg 4: System -->
+    <article class="tab-msg-card" role="button" tabindex="0">
+      <div class="tab-msg-avatar tab-msg-avatar-system">
+        <svg class="icon icon-lg"><use href="#icon-check"/></svg>
+      </div>
+      <div class="tab-msg-body">
+        <div class="tab-msg-row1">
+          <h3 class="tab-msg-sender">System</h3>
+          <span class="tab-msg-timestamp">22 May 2026, 10:18</span>
+        </div>
+        <p class="tab-msg-subject">Account verification</p>
+        <p class="tab-msg-preview">Your email has been verified successfully. You can now access all parts of your applicant portal.</p>
+      </div>
+    </article>
+
+  </div>
+</div>
+<div class="tab-section" data-portal-section="faq" hidden>
+  <div class="tab-section-header">
+    <div class="tab-section-header-left">
+      <h2 class="tab-section-title">Frequently Asked Questions</h2>
+      <p class="tab-section-subtitle">Answers to common questions about UWC, selection, and the application process</p>
+    </div>
+    <div class="tab-section-header-actions">
+      <div class="tab-faq-search-wrap">
+        <svg class="icon"><use href="#icon-search"/></svg>
+        <input type="search" class="tab-faq-search" placeholder="Search FAQ&hellip;" aria-label="Search FAQ" data-role-variant="faq-search"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-faq-list">
+
+    <details class="tab-faq-item">
+      <summary>
+        <span>What is UWC and how is it different from other schools?</span>
+        <svg class="icon icon-lg"><use href="#icon-chevron-down"/></svg>
+      </summary>
+      <div class="tab-faq-answer">
+        <p><strong>UWC (United World Colleges)</strong> is a global movement of 18 schools and colleges across four continents, plus 130+ National Committees in 150+ countries. UWC offers the <strong>International Baccalaureate Diploma</strong> combined with experiential learning rooted in service, outdoor education and creativity.</p>
+        <p>Students are selected to reflect the diversity of the world &mdash; typically 80+ nationalities per campus &mdash; and live together in residence. The mission is to make education a force to unite people, nations and cultures for peace and a sustainable future.</p>
+      </div>
+    </details>
+
+    <details class="tab-faq-item">
+      <summary>
+        <span>How much does UWC cost? Are scholarships available?</span>
+        <svg class="icon icon-lg"><use href="#icon-chevron-down"/></svg>
+      </summary>
+      <div class="tab-faq-answer">
+        <p>Most students receive financial assistance. Scholarships are funded by individual donors, foundations, corporations and government partners, and are awarded by the National Committee in your country of residence.</p>
+        <p>The Brazil National Committee considers <strong>financial need as part of the selection process</strong> &mdash; please complete the financial information section of your application honestly. Selection is not affected by need; the level of scholarship awarded is determined separately, after a place has been offered.</p>
+      </div>
+    </details>
+
+    <details class="tab-faq-item">
+      <summary>
+        <span>How are students selected?</span>
+        <svg class="icon icon-lg"><use href="#icon-chevron-down"/></svg>
+      </summary>
+      <div class="tab-faq-answer">
+        <p>Each National Committee runs its own selection process, which typically includes a <strong>written application, interviews, and group activities</strong>. The process is committee-led and based on <strong>potential, motivation, and fit with UWC values</strong> &mdash; not solely academic grades.</p>
+        <p>Brazil&rsquo;s 2026/27 process has three rounds: Eligibility Review, Local Selection (interview + group activities in S&atilde;o Paulo), and National Selection (final panel).</p>
+      </div>
+    </details>
+
+    <details class="tab-faq-item">
+      <summary>
+        <span>What happens after I submit my application?</span>
+        <svg class="icon icon-lg"><use href="#icon-chevron-down"/></svg>
+      </summary>
+      <div class="tab-faq-answer">
+        <p>Your application enters <strong>Eligibility Review (1&ndash;2 weeks)</strong>. If eligible, you&rsquo;ll be invited to a <strong>Local Selection round</strong> with interviews and group activities (June). <strong>National Selection</strong> happens in July. <strong>Place allocation</strong> &mdash; the specific UWC school you&rsquo;ll attend &mdash; is confirmed by mid-August.</p>
+        <p>You can track every stage in the <strong>Application status</strong> tab of this portal.</p>
+      </div>
+    </details>
+
+    <details class="tab-faq-item">
+      <summary>
+        <span>Can I choose which UWC school I attend?</span>
+        <svg class="icon icon-lg"><use href="#icon-chevron-down"/></svg>
+      </summary>
+      <div class="tab-faq-answer">
+        <p>You can <strong>indicate preferences</strong> in your application, but final school assignment is determined by the National Committee and UWC International based on fit and availability. Most NCs prioritise fit (campus programme, location, community match) over preference.</p>
+        <p>Each of the 18 UWC schools has its own character &mdash; some are larger, some focus more on outdoor education, some are urban. We encourage applicants to be open to any campus.</p>
+      </div>
+    </details>
+
+    <details class="tab-faq-item">
+      <summary>
+        <span>What if my circumstances change during the application process?</span>
+        <svg class="icon icon-lg"><use href="#icon-chevron-down"/></svg>
+      </summary>
+      <div class="tab-faq-answer">
+        <p>Update your portal immediately and notify your National Committee at <a href="mailto:brazil@uwc.org">brazil@uwc.org</a>. Significant changes &mdash; e.g. moving country, a change in family financial situation, a health update &mdash; may affect your application.</p>
+        <p><strong>Contact us early.</strong> We can usually accommodate changes that are flagged in good time; we cannot fix things we don&rsquo;t know about.</p>
+      </div>
+    </details>
+
+    <details class="tab-faq-item">
+      <summary>
+        <span>What documents do I need to upload?</span>
+        <svg class="icon icon-lg"><use href="#icon-chevron-down"/></svg>
+      </summary>
+      <div class="tab-faq-answer">
+        <p>For Brazil applicants in the 2026/27 cycle, you need:</p>
+        <p>1. <strong>Passport scan</strong> (photo page only). 2. <strong>School transcript</strong> covering the last 2 academic years. 3. <strong>Recommendation letter</strong> from a teacher who knows you well. 4. <strong>Guardian consent</strong> (signed by your parent or legal guardian if you&rsquo;re under 18).</p>
+        <p>The <strong>Documents tab</strong> in this portal lists exactly what&rsquo;s needed and accepts PDF, JPG or PNG up to 10 MB each.</p>
+      </div>
+    </details>
+
+    <details class="tab-faq-item">
+      <summary>
+        <span>Who can I contact if I have problems with my application?</span>
+        <svg class="icon icon-lg"><use href="#icon-chevron-down"/></svg>
+      </summary>
+      <div class="tab-faq-answer">
+        <p>Email your National Committee directly at <a href="mailto:brazil@uwc.org">brazil@uwc.org</a>, or use the <strong>Messages tab</strong> to send a question that will be routed to your reviewer.</p>
+        <p>For technical portal issues (login problems, upload failures, missing data), email <a href="mailto:support@uwc.org">support@uwc.org</a> with your reference number (<strong>UWC-2026-BR-00127</strong>) in the subject line.</p>
+      </div>
+    </details>
+
+  </div>
+</div>
+
+</div>
         </div>
       </div>
     </section>
@@ -1759,8 +2743,988 @@ UWC.getRolesFor = function(code) {
 })();
 
 
+/*
+ * UWC International Applicant Portal — Interactive Wiring Module
+ * ---------------------------------------------------------------
+ * Self-contained vanilla JS that wires every currently-dead interactive
+ * element in the portal HTML demo. IIFE-scoped; exposes only window.UWCModal.
+ *
+ * Assumes window.UWCToast(msg, {kind}) exists (falls back to alert()).
+ * Assumes window.go(n) exists for screen navigation.
+ *
+ * UK English throughout (authorisation, organisation, etc.)
+ */
+
+(function () {
+  'use strict';
+
+  // ============================================================
+  // Helpers
+  // ============================================================
+  function $(sel, root) {
+    try {
+      return (root || document).querySelector(sel);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function $$(sel, root) {
+    try {
+      return Array.prototype.slice.call((root || document).querySelectorAll(sel));
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function toast(msg, kind) {
+    if (window.UWCToast) {
+      window.UWCToast(msg, { kind: kind || 'ok' });
+    } else {
+      try { alert(msg); } catch (e) { /* noop */ }
+    }
+  }
+
+  function textOf(el) {
+    return (el && (el.textContent || el.innerText) || '').trim();
+  }
+
+  function textMatches(el, needle) {
+    if (!el) return false;
+    var t = textOf(el).toLowerCase();
+    return t.indexOf(String(needle).toLowerCase()) !== -1;
+  }
+
+  function findByText(selector, needle, root) {
+    var nodes = $$(selector, root);
+    for (var i = 0; i < nodes.length; i++) {
+      if (textMatches(nodes[i], needle)) return nodes[i];
+    }
+    return null;
+  }
+
+  function findAllByText(selector, needle, root) {
+    var nodes = $$(selector, root);
+    var out = [];
+    for (var i = 0; i < nodes.length; i++) {
+      if (textMatches(nodes[i], needle)) out.push(nodes[i]);
+    }
+    return out;
+  }
+
+  function closest(el, predicate) {
+    while (el && el !== document) {
+      if (predicate(el)) return el;
+      el = el.parentNode;
+    }
+    return null;
+  }
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function injectStylesOnce(id, css) {
+    if (document.getElementById(id)) return;
+    var st = document.createElement('style');
+    st.id = id;
+    st.appendChild(document.createTextNode(css));
+    document.head.appendChild(st);
+  }
+
+  // ============================================================
+  // Modal helper (window.UWCModal)
+  // ============================================================
+  window.UWCModal = (function () {
+    var current = null;
+    var onCloseCb = null;
+    var escHandler = null;
+
+    function ensureStyles() {
+      injectStylesOnce('uwc-modal-styles', [
+        '.uwc-modal-backdrop{position:fixed;inset:0;background:rgba(10,22,55,0.55);',
+        '  display:flex;align-items:center;justify-content:center;z-index:9999;',
+        '  opacity:0;transition:opacity .2s ease;padding:24px;}',
+        '.uwc-modal-backdrop.is-open{opacity:1;}',
+        '.uwc-modal-card{background:#fff;border-radius:12px;max-width:640px;width:100%;',
+        '  max-height:88vh;display:flex;flex-direction:column;overflow:hidden;',
+        '  box-shadow:0 20px 60px rgba(0,0,0,0.25);transform:translateY(8px);',
+        '  transition:transform .2s ease;font-family:inherit;}',
+        '.uwc-modal-backdrop.is-open .uwc-modal-card{transform:translateY(0);}',
+        '.uwc-modal-header{background:#0a1637;color:#fff;padding:16px 22px;',
+        '  display:flex;align-items:center;justify-content:space-between;gap:12px;}',
+        '.uwc-modal-title{font-size:15px;font-weight:600;letter-spacing:.2px;margin:0;}',
+        '.uwc-modal-close{background:transparent;border:0;color:#fff;font-size:22px;',
+        '  line-height:1;cursor:pointer;padding:4px 8px;border-radius:6px;}',
+        '.uwc-modal-close:hover{background:rgba(255,255,255,0.12);}',
+        '.uwc-modal-body{padding:22px 24px;overflow:auto;color:#1a2340;font-size:14px;line-height:1.5;}',
+        '.uwc-timeline{position:relative;margin:4px 0 4px 6px;padding-left:22px;}',
+        '.uwc-timeline:before{content:"";position:absolute;left:5px;top:6px;bottom:6px;',
+        '  width:2px;background:#0a1637;opacity:.18;}',
+        '.uwc-timeline-item{position:relative;padding:0 0 18px 4px;}',
+        '.uwc-timeline-item:last-child{padding-bottom:0;}',
+        '.uwc-timeline-item:before{content:"";position:absolute;left:-22px;top:4px;',
+        '  width:12px;height:12px;border-radius:50%;background:#0a1637;',
+        '  box-shadow:0 0 0 3px #fff;}',
+        '.uwc-timeline-when{font-size:12px;color:#5a6478;font-weight:500;}',
+        '.uwc-timeline-what{font-size:14px;color:#0a1637;margin-top:2px;}'
+      ].join('\n'));
+    }
+
+    function close() {
+      if (!current) return;
+      var node = current;
+      current = null;
+      var cb = onCloseCb;
+      onCloseCb = null;
+      node.classList.remove('is-open');
+      if (escHandler) {
+        document.removeEventListener('keydown', escHandler);
+        escHandler = null;
+      }
+      setTimeout(function () {
+        if (node && node.parentNode) node.parentNode.removeChild(node);
+        if (typeof cb === 'function') {
+          try { cb(); } catch (e) { /* noop */ }
+        }
+      }, 200);
+    }
+
+    function open(opts) {
+      ensureStyles();
+      opts = opts || {};
+      if (current) close();
+
+      var backdrop = document.createElement('div');
+      backdrop.className = 'uwc-modal-backdrop';
+      backdrop.setAttribute('role', 'dialog');
+      backdrop.setAttribute('aria-modal', 'true');
+
+      var card = document.createElement('div');
+      card.className = 'uwc-modal-card';
+
+      var header = document.createElement('div');
+      header.className = 'uwc-modal-header';
+      var h = document.createElement('h2');
+      h.className = 'uwc-modal-title';
+      h.textContent = opts.title || '';
+      var x = document.createElement('button');
+      x.className = 'uwc-modal-close';
+      x.type = 'button';
+      x.setAttribute('aria-label', 'Close');
+      x.innerHTML = '&times;';
+      header.appendChild(h);
+      header.appendChild(x);
+
+      var body = document.createElement('div');
+      body.className = 'uwc-modal-body';
+      if (typeof opts.html === 'string') {
+        body.innerHTML = opts.html;
+      } else if (opts.html && opts.html.nodeType === 1) {
+        body.appendChild(opts.html);
+      }
+
+      card.appendChild(header);
+      card.appendChild(body);
+      backdrop.appendChild(card);
+
+      x.addEventListener('click', close);
+      backdrop.addEventListener('click', function (e) {
+        if (e.target === backdrop) close();
+      });
+      escHandler = function (e) {
+        if (e.key === 'Escape' || e.keyCode === 27) close();
+      };
+      document.addEventListener('keydown', escHandler);
+
+      document.body.appendChild(backdrop);
+      current = backdrop;
+      onCloseCb = opts.onClose || null;
+
+      // Force reflow then animate in
+      // eslint-disable-next-line no-unused-expressions
+      backdrop.offsetWidth;
+      backdrop.classList.add('is-open');
+
+      return backdrop;
+    }
+
+    return { open: open, close: close };
+  })();
+
+  // ============================================================
+  // 1. View Timeline button (Sofia dashboard)
+  // ============================================================
+  function wireViewTimeline() {
+    var events = [
+      { when: 'Today 14:32',          what: 'Application submitted via portal' },
+      { when: 'Today 14:32',          what: 'Eligibility check PASS (auto)' },
+      { when: 'Today 14:32',          what: 'Assigned to Brazil National Committee (auto)' },
+      { when: '26 May 2026 19:14',    what: 'Personal statement saved as draft' },
+      { when: '25 May 2026 16:42',    what: 'Passport scan uploaded' },
+      { when: '22 May 2026 10:18',    what: 'Account created via portal' }
+    ];
+
+    function buildHtml() {
+      var items = events.map(function (e) {
+        return [
+          '<div class="uwc-timeline-item">',
+          '  <div class="uwc-timeline-when">', escapeHtml(e.when), '</div>',
+          '  <div class="uwc-timeline-what">', escapeHtml(e.what), '</div>',
+          '</div>'
+        ].join('');
+      }).join('');
+      return '<div class="uwc-timeline">' + items + '</div>';
+    }
+
+    function findTriggers() {
+      var scope = $('#sc-3') || document;
+      var triggers = [];
+      var candidates = $$('button, a', scope);
+      for (var i = 0; i < candidates.length; i++) {
+        var t = textOf(candidates[i]).toLowerCase();
+        if (t === 'view timeline' || t === 'view timeline ›' || t.indexOf('view timeline') !== -1) {
+          triggers.push(candidates[i]);
+        }
+      }
+      return triggers;
+    }
+
+    function onClick(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      window.UWCModal.open({
+        title: 'Application timeline · UWC-2026-BR-00127',
+        html: buildHtml()
+      });
+    }
+
+    findTriggers().forEach(function (btn) {
+      if (btn.__uwcWired) return;
+      btn.__uwcWired = true;
+      btn.addEventListener('click', onClick);
+    });
+  }
+
+  // ============================================================
+  // 2. Edit buttons on form sections (Personal, Academic, etc.)
+  // ============================================================
+  function wireFormEditButtons() {
+    injectStylesOnce('uwc-edit-styles', [
+      '.uwc-edit-input{display:block;width:100%;padding:8px 10px;border:1px solid #c9cfdc;',
+      '  border-radius:6px;font:inherit;color:#0a1637;background:#fff;box-sizing:border-box;}',
+      '.uwc-edit-input:focus{outline:none;border-color:#0a1637;box-shadow:0 0 0 2px rgba(10,22,55,0.12);}',
+      '.uwc-edit-actions{display:flex;gap:8px;margin-top:14px;}',
+      '.uwc-edit-actions button{padding:8px 16px;border-radius:6px;border:1px solid transparent;',
+      '  font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;}',
+      '.uwc-edit-save{background:#0a1637;color:#fff;}',
+      '.uwc-edit-save:hover{background:#162454;}',
+      '.uwc-edit-cancel{background:#fff;color:#0a1637;border-color:#c9cfdc;}',
+      '.uwc-edit-cancel:hover{background:#f3f5fa;}'
+    ].join('\n'));
+
+    var editButtons = findAllByText('button', 'Edit');
+
+    editButtons.forEach(function (btn) {
+      if (btn.__uwcWired) return;
+      // Only wire if inside a <details> section of the application form
+      var details = closest(btn, function (el) { return el.tagName === 'DETAILS'; });
+      if (!details) return;
+      btn.__uwcWired = true;
+
+      btn.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        enterEditMode(details, btn);
+      });
+    });
+
+    function collectFields(details) {
+      // Find display-style key/value rows: dl > dt+dd, or labeled rows, or .row pairs
+      var fields = [];
+
+      // Pattern 1: <dl><dt>Label</dt><dd>Value</dd></dl>
+      $$('dl', details).forEach(function (dl) {
+        var children = dl.children;
+        for (var i = 0; i < children.length - 1; i++) {
+          if (children[i].tagName === 'DT' && children[i + 1].tagName === 'DD') {
+            fields.push({
+              label: textOf(children[i]),
+              valueEl: children[i + 1],
+              type: 'dd'
+            });
+          }
+        }
+      });
+
+      // Pattern 2: rows with .label / .value or data-label
+      $$('[data-field]', details).forEach(function (row) {
+        var label = row.getAttribute('data-field-label') || row.getAttribute('data-field');
+        fields.push({
+          label: label,
+          valueEl: row,
+          type: 'div'
+        });
+      });
+
+      // Pattern 3: bold-label format like <p><strong>Label:</strong> Value</p>
+      if (fields.length === 0) {
+        $$('p, li, div', details).forEach(function (row) {
+          var strong = row.querySelector(':scope > strong');
+          if (!strong) return;
+          var label = textOf(strong).replace(/[: ]\s*$/, '');
+          // Value is everything in row after the strong
+          var valueText = textOf(row).replace(textOf(strong), '').replace(/^[:\s ]+/, '');
+          if (!valueText) return;
+          fields.push({
+            label: label,
+            valueEl: row,
+            valueText: valueText,
+            strongEl: strong,
+            type: 'inline'
+          });
+        });
+      }
+
+      return fields;
+    }
+
+    function enterEditMode(details, editBtn) {
+      if (details.__uwcEditing) return;
+      details.__uwcEditing = true;
+      // Ensure section is open
+      if (!details.open) details.open = true;
+
+      var fields = collectFields(details);
+      var snapshot = [];
+
+      fields.forEach(function (f) {
+        var currentText;
+        if (f.type === 'inline') {
+          currentText = f.valueText;
+        } else {
+          currentText = textOf(f.valueEl);
+        }
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'uwc-edit-input';
+        input.value = currentText;
+        input.setAttribute('aria-label', f.label || 'Field');
+
+        if (f.type === 'inline') {
+          // Replace text after strong with input
+          var parent = f.valueEl;
+          snapshot.push({
+            field: f,
+            input: input,
+            originalHtml: parent.innerHTML
+          });
+          // Clear text nodes after strong, append input
+          var strong = f.strongEl;
+          var node = strong.nextSibling;
+          while (node) {
+            var next = node.nextSibling;
+            parent.removeChild(node);
+            node = next;
+          }
+          parent.appendChild(document.createTextNode(' '));
+          parent.appendChild(input);
+        } else {
+          snapshot.push({
+            field: f,
+            input: input,
+            originalHtml: f.valueEl.innerHTML
+          });
+          f.valueEl.innerHTML = '';
+          f.valueEl.appendChild(input);
+        }
+      });
+
+      // Hide the Edit button, add Save/Cancel
+      editBtn.style.display = 'none';
+      var actions = document.createElement('div');
+      actions.className = 'uwc-edit-actions uwc-edit-actions--injected';
+      var save = document.createElement('button');
+      save.type = 'button';
+      save.className = 'uwc-edit-save';
+      save.textContent = 'Save changes';
+      var cancel = document.createElement('button');
+      cancel.type = 'button';
+      cancel.className = 'uwc-edit-cancel';
+      cancel.textContent = 'Cancel';
+      actions.appendChild(save);
+      actions.appendChild(cancel);
+
+      // Insert actions near the Edit button
+      if (editBtn.parentNode) {
+        editBtn.parentNode.insertBefore(actions, editBtn.nextSibling);
+      } else {
+        details.appendChild(actions);
+      }
+
+      function cleanup() {
+        actions.parentNode && actions.parentNode.removeChild(actions);
+        editBtn.style.display = '';
+        details.__uwcEditing = false;
+      }
+
+      cancel.addEventListener('click', function (e) {
+        e.preventDefault();
+        snapshot.forEach(function (s) {
+          if (s.field.type === 'inline') {
+            s.field.valueEl.innerHTML = s.originalHtml;
+          } else {
+            s.field.valueEl.innerHTML = s.originalHtml;
+          }
+        });
+        cleanup();
+      });
+
+      save.addEventListener('click', function (e) {
+        e.preventDefault();
+        snapshot.forEach(function (s) {
+          var newVal = s.input.value;
+          if (s.field.type === 'inline') {
+            // Rebuild: strong + space + new text
+            var strong = s.field.strongEl;
+            var parent = s.field.valueEl;
+            parent.innerHTML = '';
+            parent.appendChild(strong);
+            parent.appendChild(document.createTextNode(' ' + newVal));
+          } else {
+            s.field.valueEl.innerHTML = '';
+            s.field.valueEl.appendChild(document.createTextNode(newVal));
+          }
+        });
+        cleanup();
+        var sectionLabel = sectionLabelOf(details);
+        toast(sectionLabel + ' updated', 'ok');
+      });
+    }
+
+    function sectionLabelOf(details) {
+      var summary = details.querySelector('summary');
+      var label = summary ? textOf(summary) : '';
+      // Strip leading numbers / icons
+      label = label.replace(/^\s*\d+[.)]?\s*/, '').replace(/\s*\(.*?\)\s*$/, '').trim();
+      if (!label) label = 'Section';
+      // Remove trailing status words
+      label = label.replace(/\s+(Complete|Incomplete|In progress|Locked)$/i, '').trim();
+      return label || 'Personal information';
+    }
+  }
+
+  // ============================================================
+  // 3. Save & exit button (application form footer)
+  // ============================================================
+  function wireSaveAndExit() {
+    var candidates = $$('button, a');
+    candidates.forEach(function (el) {
+      var t = textOf(el).toLowerCase();
+      if (t === 'save & exit' || t === 'save and exit' || t === 'save & exit') {
+        if (el.__uwcWired) return;
+        el.__uwcWired = true;
+        el.addEventListener('click', function (e) {
+          e.preventDefault();
+          toast('Application saved. Resume any time from your portal.', 'ok');
+          if (typeof window.go === 'function') {
+            setTimeout(function () {
+              try { window.go(4); } catch (err) { /* noop */ }
+            }, 250);
+          }
+        });
+      }
+    });
+  }
+
+  // ============================================================
+  // 4. ← Back to Academic button (Section 3 footer)
+  // ============================================================
+  function wireBackToAcademic() {
+    var candidates = $$('button, a');
+    candidates.forEach(function (el) {
+      var t = textOf(el).toLowerCase();
+      if (t.indexOf('back to academic') === -1) return;
+      if (el.__uwcWired) return;
+      el.__uwcWired = true;
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        var currentDetails = closest(el, function (n) { return n.tagName === 'DETAILS'; });
+        if (currentDetails) currentDetails.open = false;
+
+        var allDetails = $$('details');
+        var academic = null;
+        for (var i = 0; i < allDetails.length; i++) {
+          var summary = allDetails[i].querySelector('summary');
+          if (summary && textOf(summary).toLowerCase().indexOf('academic') !== -1) {
+            academic = allDetails[i];
+            break;
+          }
+        }
+        if (academic) {
+          academic.open = true;
+          try {
+            academic.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } catch (err) {
+            academic.scrollIntoView();
+          }
+        }
+      });
+    });
+  }
+
+  // ============================================================
+  // 5. Upload Documents (dashed-border drop area)
+  // ============================================================
+  function wireFileUpload() {
+    injectStylesOnce('uwc-upload-styles', [
+      '.uwc-upload-list{list-style:none;margin:14px 0 0;padding:0;}',
+      '.uwc-upload-list li{display:flex;align-items:center;gap:8px;padding:8px 12px;',
+      '  background:#eef7ee;border:1px solid #c7e1c8;border-radius:6px;',
+      '  margin-bottom:6px;color:#1f4d27;font-size:13px;}',
+      '.uwc-upload-list .uwc-upload-tick{color:#2e7d32;font-weight:700;}',
+      '.uwc-upload-zone{cursor:pointer;}'
+    ].join('\n'));
+
+    function findZones() {
+      var zones = [];
+      // Look for elements whose text mentions "Upload your documents" or dashed border zones
+      var allCandidates = $$('div, section, label, button, a');
+      for (var i = 0; i < allCandidates.length; i++) {
+        var el = allCandidates[i];
+        var t = textOf(el).toLowerCase();
+        // Heuristic: must contain phrase but not be a huge container
+        if (t.indexOf('upload your documents') !== -1 || t.indexOf('drag & drop') !== -1 ||
+            t.indexOf('drag and drop') !== -1 || t.indexOf('click to upload') !== -1) {
+          // Avoid picking ancestor containers — only smallest matching element
+          var hasChildMatch = false;
+          for (var j = 0; j < allCandidates.length; j++) {
+            if (j === i) continue;
+            if (el.contains(allCandidates[j])) {
+              var ct = textOf(allCandidates[j]).toLowerCase();
+              if (ct.indexOf('upload your documents') !== -1) {
+                hasChildMatch = true;
+                break;
+              }
+            }
+          }
+          if (!hasChildMatch) zones.push(el);
+        }
+      }
+      // Also check explicit data-attr
+      $$('[data-upload-zone]').forEach(function (z) {
+        if (zones.indexOf(z) === -1) zones.push(z);
+      });
+      return zones;
+    }
+
+    findZones().forEach(function (zone) {
+      if (zone.__uwcWired) return;
+      zone.__uwcWired = true;
+      zone.classList.add('uwc-upload-zone');
+
+      // Create hidden file input
+      var input = document.createElement('input');
+      input.type = 'file';
+      input.multiple = true;
+      input.accept = '.pdf,.jpg,.jpeg,.png';
+      input.style.position = 'absolute';
+      input.style.left = '-9999px';
+      input.style.opacity = '0';
+      input.style.width = '1px';
+      input.style.height = '1px';
+      document.body.appendChild(input);
+
+      // Create or find list container
+      var list = zone.parentNode && zone.parentNode.querySelector('.uwc-upload-list');
+      if (!list) {
+        list = document.createElement('ul');
+        list.className = 'uwc-upload-list';
+        if (zone.parentNode) {
+          zone.parentNode.insertBefore(list, zone.nextSibling);
+        }
+      }
+
+      zone.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        input.click();
+      });
+
+      input.addEventListener('change', function () {
+        var files = input.files;
+        if (!files || files.length === 0) return;
+        var count = files.length;
+        for (var i = 0; i < files.length; i++) {
+          var li = document.createElement('li');
+          var tick = document.createElement('span');
+          tick.className = 'uwc-upload-tick';
+          tick.textContent = '✓';
+          var name = document.createElement('span');
+          name.textContent = files[i].name;
+          li.appendChild(tick);
+          li.appendChild(name);
+          list.appendChild(li);
+        }
+        toast('Uploaded ' + count + ' file' + (count === 1 ? '' : 's'), 'ok');
+        input.value = '';
+      });
+    });
+  }
+
+  // ============================================================
+  // 6. Mark consent received (Parent/Guardian Section 5)
+  // ============================================================
+  function wireConsentMark() {
+    injectStylesOnce('uwc-consent-styles', [
+      '.uwc-consent-success{background:#eef7ee;border:1px solid #c7e1c8;color:#1f4d27;',
+      '  padding:12px 14px;border-radius:8px;font-size:13px;margin:8px 0;font-weight:500;}',
+      '.uwc-consent-mark-btn{margin-left:10px;padding:6px 12px;border-radius:6px;',
+      '  border:1px solid #0a1637;background:#fff;color:#0a1637;font-size:12px;',
+      '  cursor:pointer;font-family:inherit;font-weight:600;}',
+      '.uwc-consent-mark-btn:hover{background:#0a1637;color:#fff;}',
+      '.uwc-section-unlocked{border-color:#0a1637 !important;opacity:1 !important;}',
+      '.uwc-section-unlocked summary{cursor:pointer !important;}'
+    ].join('\n'));
+
+    // Find amber warning text "Awaiting consent from Maria"
+    function findWarning() {
+      var nodes = $$('div, section, p, aside');
+      for (var i = 0; i < nodes.length; i++) {
+        var t = textOf(nodes[i]).toLowerCase();
+        if (t.indexOf('awaiting consent from maria') !== -1 ||
+            t.indexOf('awaiting consent') !== -1) {
+          // Find the smallest container
+          var found = nodes[i];
+          for (var j = 0; j < nodes.length; j++) {
+            if (j === i) continue;
+            if (found.contains(nodes[j])) {
+              var ct = textOf(nodes[j]).toLowerCase();
+              if (ct.indexOf('awaiting consent') !== -1 && nodes[j] !== found) {
+                found = nodes[j];
+              }
+            }
+          }
+          return found;
+        }
+      }
+      return null;
+    }
+
+    var warning = findWarning();
+    if (!warning || warning.__uwcWired) return;
+    warning.__uwcWired = true;
+
+    // Add the Mark consent received button next to the Send reminder link
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'uwc-consent-mark-btn';
+    btn.textContent = 'Mark consent received (demo)';
+
+    var reminder = findByText('a, button', 'send reminder', warning);
+    if (reminder && reminder.parentNode) {
+      reminder.parentNode.insertBefore(btn, reminder.nextSibling);
+    } else {
+      warning.appendChild(btn);
+    }
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      // Replace warning with green success block
+      var success = document.createElement('div');
+      success.className = 'uwc-consent-success';
+      success.innerHTML = '✓ Guardian consent received from Maria Almeida ' +
+                          '<small>(signed 27 May 2026)</small>';
+      if (warning.parentNode) {
+        warning.parentNode.replaceChild(success, warning);
+      }
+
+      // Find Section 5 details, mark its summary with green tick
+      var sec5 = closest(success, function (el) { return el.tagName === 'DETAILS'; });
+      if (sec5) {
+        var summary5 = sec5.querySelector('summary');
+        if (summary5) {
+          // Look for any status indicator inside summary (a span / em / small)
+          var statusEl = summary5.querySelector('.uwc-status, .status, [data-status]');
+          if (statusEl) {
+            statusEl.innerHTML = '✓';
+            statusEl.style.color = '#2e7d32';
+          } else {
+            // Append a tick
+            var tick = document.createElement('span');
+            tick.style.color = '#2e7d32';
+            tick.style.fontWeight = '700';
+            tick.style.marginLeft = '8px';
+            tick.textContent = '✓';
+            summary5.appendChild(tick);
+          }
+        }
+      }
+
+      // Unlock Section 6 (Declaration)
+      var allDetails = $$('details');
+      var sec6 = null;
+      for (var i = 0; i < allDetails.length; i++) {
+        var s = allDetails[i].querySelector('summary');
+        if (s && textOf(s).toLowerCase().indexOf('declaration') !== -1) {
+          sec6 = allDetails[i];
+          break;
+        }
+      }
+      if (sec6) {
+        sec6.classList.add('uwc-section-unlocked');
+        sec6.style.borderColor = '#0a1637';
+        sec6.style.opacity = '1';
+        sec6.style.pointerEvents = 'auto';
+        var sum6 = sec6.querySelector('summary');
+        if (sum6) {
+          sum6.style.cursor = 'pointer';
+          // Replace lock icon with section number
+          var lockSelectors = ['.lock', '.locked', '[data-locked]', '.uwc-lock'];
+          var lockEl = null;
+          for (var k = 0; k < lockSelectors.length; k++) {
+            lockEl = sum6.querySelector(lockSelectors[k]);
+            if (lockEl) break;
+          }
+          if (lockEl) {
+            lockEl.textContent = '6';
+            lockEl.classList.remove('locked');
+          } else {
+            // Replace lock emoji in summary text
+            var html = sum6.innerHTML;
+            html = html.replace(/🔒/g, '6');  // padlock emoji
+            html = html.replace(/&#128274;/g, '6');
+            sum6.innerHTML = html;
+          }
+          // Allow opening
+          sum6.addEventListener('click', function (ev) {
+            // Native details handles this; we just ensure no preventDefault elsewhere
+          });
+        }
+      }
+
+      toast('Guardian consent recorded', 'ok');
+    });
+  }
+
+  // ============================================================
+  // 7. Maria — Submit authorisation button (sc-6)
+  // ============================================================
+  function wireMariaSubmit() {
+    injectStylesOnce('uwc-maria-styles', [
+      '.uwc-maria-success-overlay{position:fixed;inset:0;background:rgba(10,22,55,0.6);',
+      '  display:flex;align-items:center;justify-content:center;z-index:9998;',
+      '  opacity:0;transition:opacity .25s ease;padding:24px;}',
+      '.uwc-maria-success-overlay.is-open{opacity:1;}',
+      '.uwc-maria-success-card{background:#fff;border-radius:12px;max-width:440px;width:100%;',
+      '  padding:36px 30px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25);',
+      '  transform:translateY(8px);transition:transform .25s ease;}',
+      '.uwc-maria-success-overlay.is-open .uwc-maria-success-card{transform:translateY(0);}',
+      '.uwc-maria-success-tick{font-size:48px;color:#2e7d32;margin-bottom:12px;line-height:1;}',
+      '.uwc-maria-success-title{font-size:18px;font-weight:600;color:#0a1637;margin:0 0 8px;}',
+      '.uwc-maria-success-text{font-size:14px;color:#5a6478;margin:0;}',
+      '.uwc-maria-submitted{background:#2e7d32 !important;color:#fff !important;',
+      '  border-color:#2e7d32 !important;cursor:not-allowed !important;}'
+    ].join('\n'));
+
+    var scope = $('#sc-6') || document;
+    var btn = null;
+    var candidates = $$('button, a', scope);
+    for (var i = 0; i < candidates.length; i++) {
+      var t = textOf(candidates[i]).toLowerCase();
+      if (t.indexOf('submit authorisation') !== -1 || t.indexOf('submit authorization') !== -1) {
+        btn = candidates[i];
+        break;
+      }
+    }
+    if (!btn || btn.__uwcWired) return;
+    btn.__uwcWired = true;
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      toast('Authorisation submitted. Sofia will be notified by email.', 'ok');
+      btn.disabled = true;
+      btn.classList.add('uwc-maria-submitted');
+      btn.textContent = '✓ Authorisation submitted';
+
+      setTimeout(function () {
+        var overlay = document.createElement('div');
+        overlay.className = 'uwc-maria-success-overlay';
+        overlay.innerHTML = [
+          '<div class="uwc-maria-success-card">',
+          '  <div class="uwc-maria-success-tick">✓</div>',
+          '  <h2 class="uwc-maria-success-title">Thank you, Maria.</h2>',
+          '  <p class="uwc-maria-success-text">You may close this page.</p>',
+          '</div>'
+        ].join('');
+        document.body.appendChild(overlay);
+        // eslint-disable-next-line no-unused-expressions
+        overlay.offsetWidth;
+        overlay.classList.add('is-open');
+      }, 2000);
+    });
+  }
+
+  // ============================================================
+  // 8. Maria — Save draft button (sc-6)
+  // ============================================================
+  function wireMariaSaveDraft() {
+    var scope = $('#sc-6') || document;
+    var candidates = $$('button, a', scope);
+    for (var i = 0; i < candidates.length; i++) {
+      var t = textOf(candidates[i]).toLowerCase();
+      if (t === 'save draft' || t.indexOf('save draft') !== -1) {
+        var btn = candidates[i];
+        if (btn.__uwcWired) continue;
+        btn.__uwcWired = true;
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          toast('Draft saved. You can return any time using the link in your email.', 'ok');
+        });
+      }
+    }
+  }
+
+  // ============================================================
+  // 9. Sofia dashboard sidebar tabs
+  // ============================================================
+  function wireSidebarTabs() {
+    var items = $$('.uwc-portal-sidebar__item');
+    if (items.length === 0) return;
+
+    var keyMap = {
+      'dashboard': 'dashboard',
+      'application form': 'application',
+      'application': 'application',
+      'documents': 'documents',
+      'references': 'references',
+      'status': 'status',
+      'messages': 'messages',
+      'faq': 'faq'
+    };
+
+    function keyOf(item) {
+      // First check explicit data attr
+      var k = item.getAttribute('data-portal-target');
+      if (k) return k;
+      var label = textOf(item).toLowerCase().replace(/^\W+/, '').trim();
+      // Strip any emoji-only prefix
+      label = label.replace(/^[\s ]+/, '');
+      // Try direct match
+      if (keyMap[label]) return keyMap[label];
+      // Try matching first word
+      var keys = Object.keys(keyMap);
+      for (var i = 0; i < keys.length; i++) {
+        if (label.indexOf(keys[i]) !== -1) return keyMap[keys[i]];
+      }
+      return null;
+    }
+
+    function showSection(key) {
+      var sections = $$('[data-portal-section]');
+      if (sections.length === 0) return;
+      sections.forEach(function (s) {
+        if (s.getAttribute('data-portal-section') === key) {
+          s.style.display = '';
+          s.removeAttribute('hidden');
+        } else {
+          s.style.display = 'none';
+        }
+      });
+    }
+
+    items.forEach(function (item) {
+      if (item.__uwcWired) return;
+      item.__uwcWired = true;
+      var key = keyOf(item);
+      item.addEventListener('click', function (e) {
+        if (!key) return;
+        e.preventDefault();
+        items.forEach(function (it) { it.classList.remove('active'); });
+        item.classList.add('active');
+        showSection(key);
+      });
+    });
+  }
+
+  // ============================================================
+  // 12. Continue application button — verify already-wired
+  // ============================================================
+  function wireContinueApplication() {
+    var scope = $('#sc-3') || document;
+    var candidates = $$('button, a', scope);
+    for (var i = 0; i < candidates.length; i++) {
+      var t = textOf(candidates[i]).toLowerCase();
+      if (t === 'continue application' || t.indexOf('continue application') !== -1) {
+        var btn = candidates[i];
+        if (btn.__uwcWired) continue;
+        // Only wire if there's no existing onclick / href
+        var hasHandler = btn.onclick || (btn.getAttribute && btn.getAttribute('onclick'));
+        if (hasHandler) {
+          btn.__uwcWired = true;
+          continue;
+        }
+        btn.__uwcWired = true;
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (typeof window.go === 'function') {
+            try { window.go(5); } catch (err) { /* noop */ }
+          }
+        });
+      }
+    }
+  }
+
+  // ============================================================
+  // Init
+  // ============================================================
+  function init() {
+    try { wireViewTimeline(); }        catch (e) { /* noop */ }
+    try { wireFormEditButtons(); }     catch (e) { /* noop */ }
+    try { wireSaveAndExit(); }         catch (e) { /* noop */ }
+    try { wireBackToAcademic(); }      catch (e) { /* noop */ }
+    try { wireFileUpload(); }          catch (e) { /* noop */ }
+    try { wireConsentMark(); }         catch (e) { /* noop */ }
+    try { wireMariaSubmit(); }         catch (e) { /* noop */ }
+    try { wireMariaSaveDraft(); }      catch (e) { /* noop */ }
+    try { wireSidebarTabs(); }         catch (e) { /* noop */ }
+    try { wireContinueApplication(); } catch (e) { /* noop */ }
+  }
+
+  // Re-run wiring on any dynamic screen changes (best effort)
+  function watchForDynamicContent() {
+    if (!window.MutationObserver) return;
+    var debounceTimer = null;
+    var observer = new MutationObserver(function () {
+      if (debounceTimer) clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(init, 120);
+    });
+    try {
+      observer.observe(document.body, { childList: true, subtree: true });
+    } catch (e) { /* noop */ }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      init();
+      watchForDynamicContent();
+    });
+  } else {
+    setTimeout(function () {
+      init();
+      watchForDynamicContent();
+    }, 0);
+  }
+})();
+
+
 /* Scenario B driver */
-const TOTAL = 6;
+const TOTAL = 7;
 let step = 0;
 const stepCounterEl = document.getElementById('step-counter');
 const prevBtn = document.getElementById('prev-btn');  // may be null after demo-bar removal
@@ -1783,6 +3747,376 @@ document.addEventListener('keydown', (e) => {
 RoleSwitcher.init({ scenarioCode: 'B', defaultRoleId: 'visitor', roles: UWC.getRolesFor('B') });
 window.go = go;
 go(0);
+</script>
+<script>
+(function () {
+  'use strict';
+
+  // ---------- seeded demo credentials ----------
+  var SOFIA_CREDS = {
+    email: 'sofia.almeida@example.com',
+    password: 'uwc2026!',
+    firstName: 'Sofia',
+    lastName: 'Almeida'
+  };
+
+  // ---------- toast helper (uses window.UWCToast if available) ----------
+  function toast(message, kind) {
+    if (window.UWCToast && typeof window.UWCToast === 'function') {
+      try { window.UWCToast(message, kind || 'info'); return; } catch (e) {}
+    }
+    if (window.UWCToast && typeof window.UWCToast.show === 'function') {
+      try { window.UWCToast.show(message, kind || 'info'); return; } catch (e) {}
+    }
+    // fallback
+    var el = document.getElementById('auth-fallback-toast');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'auth-fallback-toast';
+      el.className = 'auth-toast';
+      document.body.appendChild(el);
+    }
+    el.textContent = message;
+    el.classList.add('show');
+    clearTimeout(el._t);
+    el._t = setTimeout(function () { el.classList.remove('show'); }, 3200);
+  }
+
+  // ---------- validators ----------
+  function isEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v || '').trim());
+  }
+  function isStrongPassword(v) {
+    var s = String(v || '');
+    return s.length >= 8 && /[A-Za-z]/.test(s) && /[0-9]/.test(s);
+  }
+
+  // ---------- field-level error helper ----------
+  function setError(fieldEl, msg) {
+    if (!fieldEl) return;
+    var err = fieldEl.querySelector('.auth-field-error');
+    if (msg) {
+      fieldEl.classList.add('has-error');
+      if (err) err.textContent = msg;
+    } else {
+      fieldEl.classList.remove('has-error');
+      if (err) err.textContent = '';
+    }
+  }
+  function shake(el) {
+    if (!el) return;
+    el.classList.remove('auth-shake');
+    // force reflow so the animation can replay
+    void el.offsetWidth;
+    el.classList.add('auth-shake');
+  }
+
+  // ---------- sparkles ----------
+  function sparkle(host) {
+    if (!host) return;
+    var rect = host.getBoundingClientRect();
+    var n = 14;
+    for (var i = 0; i < n; i++) {
+      var s = document.createElement('span');
+      s.className = 'auth-sparkle';
+      var x = rect.left + rect.width / 2 + window.scrollX;
+      var y = rect.top + 32 + window.scrollY;
+      s.style.left = x + 'px';
+      s.style.top = y + 'px';
+      var angle = (Math.PI * 2 * i) / n;
+      var dist = 60 + Math.random() * 40;
+      s.style.setProperty('--sx', (Math.cos(angle) * dist) + 'px');
+      s.style.setProperty('--sy', (Math.sin(angle) * dist - 20) + 'px');
+      s.style.background = (i % 2 === 0) ? '#ffd84d' : '#1f8a3f';
+      document.body.appendChild(s);
+      (function (el) { setTimeout(function () { el.remove(); }, 1300); })(s);
+    }
+  }
+
+  // ---------- show/hide password toggle wiring ----------
+  function wireEyeToggles(root) {
+    var btns = (root || document).querySelectorAll('.auth-eye');
+    btns.forEach(function (btn) {
+      if (btn._wired) return;
+      btn._wired = true;
+      btn.addEventListener('click', function () {
+        var id = btn.getAttribute('data-eye-target');
+        var input = document.getElementById(id);
+        if (!input) return;
+        var showing = input.type === 'text';
+        input.type = showing ? 'password' : 'text';
+        btn.setAttribute('aria-pressed', String(!showing));
+        btn.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+      });
+    });
+  }
+
+  // ---------- sign-in form wiring ----------
+  function wireSignIn() {
+    var form = document.getElementById('auth-signin-form');
+    if (!form || form._wired) return;
+    form._wired = true;
+
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var emailEl = document.getElementById('auth-signin-email');
+      var passEl = document.getElementById('auth-signin-password');
+      var email = emailEl ? emailEl.value.trim() : '';
+      var pass = passEl ? passEl.value : '';
+      window.UWCAuth.signIn(email, pass);
+    });
+
+    var forgot = document.getElementById('auth-signin-forgot');
+    if (forgot) {
+      forgot.addEventListener('click', function () {
+        alert('A password reset link will be emailed to you.');
+      });
+    }
+
+    // clear errors on input
+    ['auth-signin-email', 'auth-signin-password'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('input', function () {
+        setError(el.closest('.auth-field'), '');
+      });
+    });
+  }
+
+  // ---------- registration (sc-2) form wiring ----------
+  function findRegistrationForm() {
+    var sc2 = document.getElementById('sc-2');
+    if (!sc2) return null;
+    return sc2.querySelector('#sc-2-form, form');
+  }
+
+  function wireRegistration() {
+    var sc2 = document.getElementById('sc-2');
+    if (!sc2) return;
+    var form = findRegistrationForm();
+    if (!form || form._wired) return;
+    form._wired = true;
+
+    // Make sure the registration form has an id so we can hide it on success.
+    if (!form.id) form.id = 'sc-2-form';
+
+    // Best-effort: also tag the immediate card wrapper so we can fade it.
+    var formCard = form.closest('.auth-card, .card, .portal-card, .registration-card') || form.parentElement;
+
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var data = collectFormData(form);
+      var ok = validateRegistration(form, data);
+      if (!ok) {
+        shake(form);
+        toast('Please fix the highlighted fields.', 'error');
+        return;
+      }
+      // success path
+      window.UWCAuth.signUp(data);
+    });
+
+    // Live error clearing
+    form.querySelectorAll('input, select, textarea').forEach(function (input) {
+      input.addEventListener('input', function () {
+        setError(input.closest('.auth-field') || input.parentElement, '');
+      });
+      input.addEventListener('change', function () {
+        setError(input.closest('.auth-field') || input.parentElement, '');
+      });
+    });
+
+    // Stash the card for later hiding
+    form._cardWrap = formCard;
+  }
+
+  function collectFormData(form) {
+    function val(selector) {
+      var el = form.querySelector(selector);
+      if (!el) return '';
+      if (el.type === 'checkbox') return el.checked;
+      return el.value;
+    }
+    return {
+      firstName:        val('[name="firstName"], [name="first_name"], #firstName, #first-name'),
+      lastName:         val('[name="lastName"], [name="last_name"], #lastName, #last-name'),
+      email:            val('[name="email"], #email'),
+      password:         val('[name="password"], #password'),
+      confirmPassword:  val('[name="confirmPassword"], [name="confirm_password"], #confirmPassword, #confirm-password'),
+      terms:            val('[name="terms"], [name="agree"], #terms, #agree')
+    };
+  }
+
+  function fieldOf(form, names) {
+    for (var i = 0; i < names.length; i++) {
+      var el = form.querySelector(names[i]);
+      if (el) return el.closest('.auth-field') || el.parentElement;
+    }
+    return null;
+  }
+
+  function validateRegistration(form, d) {
+    var ok = true;
+
+    var fn = fieldOf(form, ['[name="firstName"]','[name="first_name"]','#firstName','#first-name']);
+    if (!String(d.firstName || '').trim()) { setError(fn, 'First name is required.'); ok = false; }
+    else setError(fn, '');
+
+    var ln = fieldOf(form, ['[name="lastName"]','[name="last_name"]','#lastName','#last-name']);
+    if (!String(d.lastName || '').trim()) { setError(ln, 'Last name is required.'); ok = false; }
+    else setError(ln, '');
+
+    var em = fieldOf(form, ['[name="email"]','#email']);
+    if (!String(d.email || '').trim()) { setError(em, 'Email is required.'); ok = false; }
+    else if (!isEmail(d.email)) { setError(em, 'Please enter a valid email address.'); ok = false; }
+    else setError(em, '');
+
+    var pw = fieldOf(form, ['[name="password"]','#password']);
+    if (!d.password) { setError(pw, 'Password is required.'); ok = false; }
+    else if (!isStrongPassword(d.password)) {
+      setError(pw, 'Use at least 8 characters with a letter and a number.');
+      ok = false;
+    } else setError(pw, '');
+
+    var cpw = fieldOf(form, ['[name="confirmPassword"]','[name="confirm_password"]','#confirmPassword','#confirm-password']);
+    if (cpw) {
+      if (!d.confirmPassword) { setError(cpw, 'Please confirm your password.'); ok = false; }
+      else if (d.confirmPassword !== d.password) { setError(cpw, 'Passwords do not match.'); ok = false; }
+      else setError(cpw, '');
+    }
+
+    // Terms checkbox - if present and unchecked, fail.
+    var termsEl = form.querySelector('[name="terms"], [name="agree"], #terms, #agree');
+    if (termsEl && termsEl.type === 'checkbox' && !termsEl.checked) {
+      var tWrap = termsEl.closest('.auth-field, label, .form-row') || termsEl.parentElement;
+      if (tWrap) tWrap.classList.add('has-error');
+      toast('Please accept the terms to continue.', 'error');
+      ok = false;
+    }
+
+    return ok;
+  }
+
+  function showRegistrationSuccess() {
+    var sc2 = document.getElementById('sc-2');
+    if (!sc2) return;
+    var form = findRegistrationForm();
+    var success = document.getElementById('sc-2-success');
+    if (form) {
+      var card = form._cardWrap || form.closest('.auth-card, .card, .portal-card, .registration-card') || form.parentElement;
+      if (card) card.style.display = 'none';
+      else form.style.display = 'none';
+    }
+    if (success) {
+      success.hidden = false;
+      success.style.display = '';
+      // sparkle around the success icon
+      requestAnimationFrame(function () {
+        var icon = success.querySelector('.auth-success-icon');
+        sparkle(icon);
+      });
+    }
+  }
+
+  // ---------- public API ----------
+  window.UWCAuth = {
+    /**
+     * Sign in. Compares against Sofia's seeded credentials.
+     * @param {string} email
+     * @param {string} password
+     */
+    signIn: function (email, password) {
+      var emailField = document.getElementById('auth-signin-email');
+      var passField = document.getElementById('auth-signin-password');
+      var emailWrap = emailField ? emailField.closest('.auth-field') : null;
+      var passWrap = passField ? passField.closest('.auth-field') : null;
+
+      var e = String(email || '').trim().toLowerCase();
+      var p = String(password || '');
+
+      if (!e && !p) {
+        setError(emailWrap, 'Email is required.');
+        setError(passWrap, 'Password is required.');
+        shake(document.getElementById('auth-signin-form'));
+        toast('Please enter email and password.', 'error');
+        return false;
+      }
+      if (!e) {
+        setError(emailWrap, 'Email is required.');
+        shake(emailWrap);
+        toast('Please enter email and password.', 'error');
+        return false;
+      }
+      if (!p) {
+        setError(passWrap, 'Password is required.');
+        shake(passWrap);
+        toast('Please enter email and password.', 'error');
+        return false;
+      }
+      if (!isEmail(e)) {
+        setError(emailWrap, 'Please enter a valid email address.');
+        shake(emailWrap);
+        return false;
+      }
+
+      // Compare against Sofia
+      if (e === SOFIA_CREDS.email.toLowerCase() && p === SOFIA_CREDS.password) {
+        setError(emailWrap, '');
+        setError(passWrap, '');
+        toast('Signed in as Sofia Almeida', 'success');
+        // small delay so the toast is visible before navigation
+        setTimeout(function () {
+          if (typeof window.go === 'function') window.go(4);
+        }, 250);
+        return true;
+      }
+
+      // wrong credentials
+      setError(passWrap, 'Email or password is incorrect.');
+      shake(document.getElementById('auth-signin-form'));
+      toast('Email or password incorrect. Try sofia.almeida@example.com / uwc2026!', 'error');
+      return false;
+    },
+
+    /**
+     * Sign up. Validates the form and reveals the success card.
+     * @param {object} formData
+     */
+    signUp: function (formData) {
+      // If called externally (no DOM form), still validate basics.
+      formData = formData || {};
+      var basicOk =
+        String(formData.firstName || '').trim() &&
+        String(formData.lastName || '').trim() &&
+        isEmail(formData.email) &&
+        isStrongPassword(formData.password) &&
+        (formData.confirmPassword === undefined || formData.confirmPassword === formData.password);
+
+      if (!basicOk) {
+        toast('Please complete all required fields correctly.', 'error');
+        return false;
+      }
+      showRegistrationSuccess();
+      toast('Account created. Welcome to UWC.', 'success');
+      return true;
+    },
+
+    /** expose seeded creds for the integrator/demo hint */
+    _seed: SOFIA_CREDS
+  };
+
+  // ---------- DOM ready ----------
+  function init() {
+    wireEyeToggles(document);
+    wireSignIn();
+    wireRegistration();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 </script>
 </body>
 </html>
