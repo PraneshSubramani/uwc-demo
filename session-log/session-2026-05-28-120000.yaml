@@ -1,0 +1,35 @@
+session_id: "session-2026-05-28-120000"
+timestamp: "2026-05-28 12:00:00"
+duration: "N/A"
+branch: "master"
+commit_hash: "1d3493d4395ad2bec7774d9eed6155c8f4de024e"
+commit_message: |
+  docs: add UWC demo planning meeting transcript
+
+  Add meeting transcript from 27 May covering demo strategy
+  discussions for UWC project including:
+  - Portal registration flow for student applications
+  - National Committee (NC) module architecture decisions
+  - Data modelling approach for governance bodies
+  - Decision to use wireframe/HTML demos vs live CRM
+  - Scenario-based demo planning (A through G)
+
+files_changed:
+  - file: "docs/#UWC-27 May.txt"
+    status: "added"
+    lines_added: 1
+    lines_deleted: 0
+
+changes_summary: |
+  Added the UWC demo planning meeting transcript from 27 May to the
+  docs directory. This transcript captures key architectural and demo
+  strategy decisions for the UWC project.
+
+key_changes:
+  - "Added meeting transcript covering UWC demo planning session"
+  - "Transcript includes decisions on portal flow, NC module design, and wireframe demo approach"
+  - "File added to docs directory for project documentation"
+
+notes: |
+  Single untracked file was staged, committed, and pushed to the remote
+  master branch. No other changes were pending.
