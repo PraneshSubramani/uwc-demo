@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UWC International – CRM & Applications Platform Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#003087;--navy-deep:#001a4d;--navy-light:#E8EEF6;--red:#C8102E;--red-light:#fdeaea;--gold:#C8AB00;--green:#1f9535;--orange:#e85d0c;--white:#fff;--border:#e2e6ed;--border-s:#c8cdd8;--tx:#0d1b3e;--ts:#5a6480;--tm:#9aa3b8;--surf:#f3f5fa}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#eef1f7;color:var(--tx);min-height:100vh}
+.shell{display:grid;grid-template-columns:260px 1fr;grid-template-rows:58px 1fr;min-height:100vh}
+.topbar{grid-column:1/-1;background:var(--navy-deep);display:flex;align-items:center;padding:0 24px;gap:16px;border-bottom:2px solid var(--red)}
+.topbar-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:#fff}
+.topbar-divider{width:1px;height:20px;background:rgba(255,255,255,.15)}
+.topbar-sub{font-size:10px;color:rgba(255,255,255,.4);letter-spacing:1.8px;text-transform:uppercase}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.demo-badge{background:var(--red);color:#fff;font-size:10px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;padding:4px 10px;border-radius:2px}
+.a2z-tag{font-size:11px;color:rgba(255,255,255,.4);font-family:'DM Mono',monospace}
+.sidebar{background:var(--white);border-right:1px solid var(--border);padding:16px 0;overflow-y:auto}
+.sslabel{font-size:9px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;color:var(--tm);padding:12px 16px 6px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:8px 14px;cursor:pointer;transition:all .15s;margin:0 8px 1px;border-radius:8px}
+.nav-item:hover{background:var(--surf)}
+.nav-item.active{background:var(--navy-light);border-left:3px solid var(--navy);padding-left:11px}
+.nav-item.done .nav-num{background:var(--green);color:#fff}
+.nav-item.done .nav-label{color:var(--tm)}
+.nav-num{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:var(--ts);flex-shrink:0;transition:all .15s}
+.nav-item.active .nav-num{background:var(--navy);color:#fff}
+.nav-label{font-size:12.5px;color:var(--ts);line-height:1.3}
+.nav-item.active .nav-label{color:var(--navy);font-weight:500}
+.sp-wrap{margin:16px;padding:12px;background:var(--surf);border-radius:10px}
+.sp-label{font-size:11px;color:var(--ts);margin-bottom:8px;display:flex;justify-content:space-between}
+.sp-track{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.sp-fill{height:4px;background:var(--navy);border-radius:2px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.main{overflow-y:auto;padding:28px 32px;background:#eef1f7}
+.screen{display:none}
+.screen.active{display:block;animation:fi .25s ease}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.shd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px;gap:16px}
+.stitle{font-family:'Playfair Display',serif;font-size:22px;font-weight:500;line-height:1.2}
+.ssub{font-size:13px;color:var(--ts);margin-top:4px;line-height:1.5}
+.snav{display:flex;gap:8px;flex-shrink:0}
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.card:last-child{margin-bottom:0}
+.ch{background:var(--navy);padding:11px 16px;display:flex;align-items:center;justify-content:space-between}
+.cht{color:#fff;font-size:13px;font-weight:500}
+.chs{color:rgba(255,255,255,.5);font-size:11px}
+.cb{padding:14px 16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px}
+.pill::before{content:'';width:6px;height:6px;border-radius:50%}
+.p-reg{background:var(--navy-light);color:var(--navy)}.p-reg::before{background:var(--navy)}
+.p-prog{background:#dbeafe;color:#1e40af}.p-prog::before{background:#3b82f6}
+.p-sub{background:var(--navy);color:#fff}.p-sub::before{background:#fff}
+.p-rev{background:#fff3e0;color:#7a3500}.p-rev::before{background:var(--orange)}
+.p-short{background:#fefce8;color:#713f12}.p-short::before{background:var(--gold)}
+.p-nom{background:#f0fdf4;color:#14532d}.p-nom::before{background:var(--green)}
+.p-placed{background:#ecfdf5;color:#064e3b}.p-placed::before{background:#059669}
+.p-dec{background:var(--red-light);color:#7f1d1d}.p-dec::before{background:var(--red)}
+.al{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border-radius:8px;font-size:12.5px;margin-bottom:12px;line-height:1.5}
+.al:last-child{margin-bottom:0}
+.al-w{background:#fffbeb;border:1px solid #fbbf24;color:#78350f}
+.al-ok{background:#f0fdf4;border:1px solid #86efac;color:#14532d}
+.al-i{background:var(--navy-light);border:1px solid #93c5fd;color:var(--navy)}
+.al-e{background:var(--red-light);border:1px solid #fca5a5;color:#7f1d1d}
+.br{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.badge{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:500;padding:3px 8px;border-radius:4px;font-family:'DM Mono',monospace}
+.b-api{background:#dbeafe;color:#1e40af}.b-auto{background:#dcfce7;color:#166534}.b-gate{background:#fee2e2;color:#991b1b}.b-inf{background:var(--navy-light);color:var(--navy)}
+.tli{display:flex;gap:12px;padding:8px 16px}
+.tldw{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.tld{width:9px;height:9px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.tll{width:1px;background:var(--border);flex:1;margin-top:4px;min-height:14px}
+.tla{font-size:12.5px;font-weight:500;color:var(--tx)}
+.tlm{font-size:11px;color:var(--tm);margin-top:1px}
+.fg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.fc{padding:9px 13px;border-bottom:1px solid var(--border);border-right:1px solid var(--border)}
+.fc:nth-child(even){border-right:none}
+.fc.full{grid-column:1/-1;border-right:none}
+.fc:last-child,.fc:nth-last-child(2):nth-child(odd){border-bottom:none}
+.fl{font-size:9.5px;font-weight:500;letter-spacing:.9px;text-transform:uppercase;color:var(--tm);margin-bottom:2px}
+.fv{font-size:13px;font-weight:500;color:var(--tx)}
+.fv.sm{font-size:12px;font-weight:400;color:var(--ts)}
+.fv.gr{color:#166534}.fv.bl{color:var(--navy)}.fv.rd{color:var(--red)}
+.sbar{background:var(--surf);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5px 14px;font-size:9.5px;font-weight:500;letter-spacing:1.1px;text-transform:uppercase;color:var(--tm)}
+.pframe{border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.ptb{background:var(--navy);padding:11px 18px;display:flex;align-items:center;justify-content:space-between}
+.ptb-brand{color:#fff;font-size:13.5px;font-weight:500;display:flex;align-items:center;gap:8px}
+.ptb-user{display:flex;align-items:center;gap:7px}
+.av-sm{width:27px;height:27px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:#fff}
+.puname{font-size:11.5px;color:rgba(255,255,255,.75)}
+.lsw{display:flex;gap:4px}
+.lb{font-size:10px;padding:3px 8px;border-radius:4px;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.55);cursor:pointer;background:transparent;font-family:'DM Sans',sans-serif}
+.lb.on{background:rgba(255,255,255,.2);color:#fff;border-color:rgba(255,255,255,.5)}
+.pbody{background:var(--surf);padding:18px}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center}
+.stn{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--navy)}
+.stl{font-size:10.5px;color:var(--tm);margin-top:2px}
+.pw{margin-bottom:14px}
+.pt{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ts);margin-bottom:4px}
+.ptrack{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.pfill{height:5px;border-radius:3px}
+.stabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
+.stab{font-size:11px;padding:4px 11px;border-radius:20px;border:1px solid var(--border);cursor:pointer;font-weight:500}
+.st-done{background:#f0fdf4;color:#166534;border-color:#86efac}
+.st-active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.st-pend{background:var(--surf);color:var(--tm)}
+.ff{margin-bottom:13px}
+.flabel{font-size:11.5px;color:var(--ts);margin-bottom:4px;display:block}
+.req{color:var(--red)}
+.nc-note{font-size:10.5px;background:var(--navy-light);color:var(--navy);padding:4px 8px;border-radius:4px;margin-bottom:5px}
+.finput{width:100%;background:var(--white);border:1px solid var(--border-s);border-radius:7px;padding:9px 12px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--tx);resize:none;outline:none;transition:border .15s}
+.finput:focus{border-color:var(--navy)}
+.finput.pre{background:var(--navy-light);border-color:#93c5fd;color:var(--navy)}
+.asave{font-size:11px;color:#166534;background:#f0fdf4;border:1px solid #86efac;border-radius:6px;padding:6px 10px;margin-top:6px}
+.btn-p{background:var(--navy);color:#fff;border:none;border-radius:7px;padding:10px 20px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s;width:100%;margin-top:8px}
+.btn-p:hover{background:var(--navy-deep)}
+.btn-r{background:var(--red);color:#fff;border:none;border-radius:7px;padding:10px 20px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%;margin-top:8px;transition:background .15s}
+.btn-r:hover{background:#a00d24}
+.btn-o{background:transparent;color:var(--navy);border:1px solid var(--navy);border-radius:7px;padding:8px 16px;font-size:12.5px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.btn-o:hover{background:var(--navy-light)}
+.btn-n{padding:8px 16px;font-size:12px;font-weight:500;font-family:'DM Sans',sans-serif;border:1px solid var(--border-s);border-radius:6px;background:var(--white);color:var(--ts);cursor:pointer;transition:all .15s}
+.btn-n:hover{background:var(--surf)}
+.btn-n.pri{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn-n.pri:hover{background:var(--navy-deep)}
+.ew{background:var(--surf);border-radius:12px;padding:16px}
+.ecard{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;max-width:540px;margin:0 auto}
+.eh{background:var(--navy);padding:18px 22px;text-align:center}
+.eht{font-family:'Playfair Display',serif;font-size:18px;color:#fff}
+.ehs{font-size:10px;color:rgba(255,255,255,.45);margin-top:3px;letter-spacing:.8px;text-transform:uppercase}
+.emeta{padding:10px 18px;background:var(--surf);border-bottom:1px solid var(--border);font-size:11px;color:var(--ts);display:flex;flex-wrap:wrap;gap:10px}
+.emeta strong{color:var(--tx)}
+.ebody{padding:18px 22px}
+.ebody p{font-size:13px;color:var(--ts);line-height:1.65;margin-bottom:10px}
+.ebody p strong{color:var(--tx)}
+.ecta{text-align:center;margin:18px 0}
+.cta-btn{background:var(--red);color:#fff;border:none;border-radius:7px;padding:12px 26px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s}
+.cta-btn:hover{background:#a00d24}
+.efooter{padding:10px 18px;background:var(--surf);border-top:1px solid var(--border);font-size:10.5px;color:var(--tm)}
+.gl{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:14px}
+.gh{background:var(--surf);padding:7px 13px;display:grid;grid-template-columns:1fr 120px;font-size:9.5px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--tm)}
+.gr{display:grid;grid-template-columns:1fr 120px;padding:9px 13px;border-top:1px solid var(--border);align-items:center}
+.grl{font-size:12.5px;color:var(--tx)}
+.gpass{font-size:11px;font-weight:500;color:#166534;background:#dcfce7;padding:3px 10px;border-radius:20px;text-align:center}
+.ft{width:100%;border-collapse:collapse;font-size:12.5px}
+.ft th{background:var(--navy);color:#fff;padding:8px 13px;text-align:left;font-size:11px;font-weight:500;letter-spacing:.5px}
+.ft td{padding:8px 13px;border-bottom:1px solid var(--border);vertical-align:top}
+.ft tr:nth-child(even) td{background:var(--surf)}
+.ft tr:last-child td{border-bottom:none}
+.ft-name{font-weight:500;color:var(--tx);font-family:'DM Mono',monospace;font-size:11.5px}
+.ft-t{font-size:10px;padding:2px 6px;border-radius:3px;font-weight:500;font-family:'DM Mono',monospace}
+.ft-txt{background:#f3e8ff;color:#6b21a8}.ft-pick{background:#dcfce7;color:#14532d}.ft-look{background:#fef9c3;color:#854d0e}.ft-bool{background:#e0f2fe;color:#075985}.ft-auto{background:#fce7f3;color:#831843}.ft-form{background:#ffe4e6;color:#9f1239}
+.ft-sec td{background:#001a4d!important;color:#fff;font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;padding:5px 13px}
+.pdfcard{background:var(--surf);border:1px solid var(--border);border-radius:8px;padding:11px;display:flex;align-items:center;gap:11px}
+.pdficon{width:36px;height:36px;background:var(--red);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;font-size:16px}
+.at{width:100%;border-collapse:collapse;font-size:12.5px}
+.at th{background:var(--surf);padding:7px 12px;text-align:left;font-size:9.5px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--tm);border-bottom:1px solid var(--border)}
+.at td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+.at tr:last-child td{border-bottom:none}
+.at tr:hover td{background:var(--surf)}
+.hlr td{background:var(--navy-light)}
+.fb{font-size:10.5px;font-weight:500;color:var(--red);background:var(--red-light);padding:2px 7px;border-radius:4px}
+.al-link{font-size:11.5px;color:var(--navy);font-weight:500;cursor:pointer;text-decoration:underline;text-decoration-style:dotted}
+.scrd{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:11px;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.btn-acc{background:#166534;color:#fff;border:none;border-radius:6px;padding:7px 13px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-dec{background:transparent;color:#991b1b;border:1px solid #fca5a5;border-radius:6px;padding:7px 13px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-left:5px}
+.placed-banner{background:var(--navy);border-radius:10px;padding:18px;text-align:center;margin-bottom:14px}
+.pb-t{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin-bottom:6px}
+.pb-s{font-size:12.5px;color:rgba(255,255,255,.65)}
+.pb-sc{font-size:14px;font-weight:500;color:#fff;margin-top:8px;padding:7px 16px;background:rgba(255,255,255,.15);border-radius:6px;display:inline-block}
+.mod-bar{background:var(--white);border:1px solid var(--border);border-radius:12px 12px 0 0;border-bottom:none;padding:13px 18px;display:flex;align-items:center;gap:13px}
+.mod-av{width:38px;height:38px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:#fff;flex-shrink:0}
+.mod-nm{font-size:15px;font-weight:500;color:var(--tx)}
+.mod-rf{font-size:11px;color:var(--tm);font-family:'DM Mono',monospace}
+.mod-body{border:1px solid var(--border);border-radius:0 0 12px 12px;overflow:hidden}
+/* CRM WIDGET */
+.crm-backdrop{background:#1a2035;border-radius:12px;padding:0;overflow:hidden;margin-bottom:14px}
+.crm-appbar{background:#1a2035;padding:10px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(255,255,255,.08)}
+.crm-dot{width:10px;height:10px;border-radius:50%}
+.crm-apptitle{color:rgba(255,255,255,.45);font-size:11px;font-family:'DM Mono',monospace;margin-left:6px}
+.crm-win{background:#f5f7ff;border-radius:0 0 12px 12px;overflow:hidden}
+.crm-nb{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;display:flex}
+.crm-tab{padding:11px 16px;font-size:12px;color:var(--tm);cursor:pointer;border-bottom:2px solid transparent;font-weight:500;transition:all .15s}
+.crm-tab.on{color:var(--navy);border-bottom-color:var(--navy)}
+.crm-lhd{background:#fff;padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px}
+.crm-lav{width:42px;height:42px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;color:#fff;flex-shrink:0}
+.crm-lnm{font-size:16px;font-weight:500;color:var(--tx)}
+.crm-lsb{font-size:11.5px;color:var(--tm);margin-top:2px}
+.crm-lbody{padding:16px 20px;display:grid;grid-template-columns:1fr 300px;gap:16px;background:var(--surf)}
+.crm-fp{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+.crm-ft{background:var(--surf);padding:8px 14px;font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--tm);border-bottom:1px solid var(--border)}
+.crm-fr{display:flex;padding:8px 14px;border-bottom:1px solid var(--border);gap:8px}
+.crm-fr:last-child{border-bottom:none}
+.crm-fk{font-size:11px;color:var(--tm);width:120px;flex-shrink:0;padding-top:1px}
+.crm-fv{font-size:12.5px;color:var(--tx);font-weight:500}
+.crm-ap{display:flex;flex-direction:column;gap:10px}
+.crm-bpnl{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px}
+.crm-bpt{font-size:11px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;color:var(--tm);margin-bottom:10px}
+.crm-abtn{width:100%;background:var(--navy);color:#fff;border:none;border-radius:7px;padding:10px 14px;font-size:12.5px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:7px;transition:background .15s}
+.crm-abtn:hover{background:var(--navy-deep)}
+.crm-abtn.sec{background:transparent;color:var(--ts);border:1px solid var(--border)}
+.crm-abtn.sec:hover{background:var(--surf)}
+/* WIDGET MODAL */
+.woverlay{background:rgba(15,25,50,.55);padding:16px}
+.wmodal{background:#fff;border-radius:12px;overflow:hidden;max-width:560px;margin:0 auto;border:1px solid var(--border)}
+.wmh{background:var(--navy);padding:14px 18px;display:flex;align-items:center;justify-content:space-between}
+.wmht{color:#fff;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px}
+.wmcl{color:rgba(255,255,255,.6);font-size:20px;cursor:pointer;background:none;border:none;line-height:1}
+.wmb{padding:18px}
+.wmsc{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:13px;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.wmav{width:40px;height:40px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:#fff;flex-shrink:0}
+.wmfg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.wmf{background:var(--surf);border-radius:7px;padding:9px 12px}
+.wmfl{font-size:10px;color:var(--tm);margin-bottom:2px;font-weight:500;letter-spacing:.5px;text-transform:uppercase}
+.wmfv{font-size:12.5px;font-weight:500;color:var(--tx)}
+.wmfv.bl{color:var(--navy)}.wmfv.rd{color:var(--red)}
+.wmdiv{border:none;border-top:1px solid var(--border);margin:14px 0}
+.wmsect{font-size:11px;font-weight:500;color:var(--ts);margin-bottom:8px;letter-spacing:.5px;text-transform:uppercase}
+.wmprev{background:var(--navy-light);border:1px solid #93c5fd;border-radius:8px;padding:12px;margin-bottom:14px}
+.wmprevl{font-size:10px;font-weight:500;color:var(--navy);letter-spacing:.8px;text-transform:uppercase;margin-bottom:6px}
+.wmft{padding:12px 18px;background:var(--surf);border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;align-items:center}
+.wm-send{background:var(--red);color:#fff;border:none;border-radius:7px;padding:10px 20px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:7px;transition:background .15s}
+.wm-send:hover{background:#a00d24}
+.wm-cancel{background:transparent;color:var(--ts);border:1px solid var(--border);border-radius:7px;padding:10px 16px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.sent-wrap{text-align:center;padding:28px 20px}
+.sent-icon{width:52px;height:52px;border-radius:50%;background:#dcfce7;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:24px}
+.sent-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--tx);margin-bottom:6px}
+.sent-sub{font-size:13px;color:var(--ts);line-height:1.6}
+.sent-det{background:var(--surf);border:1px solid var(--border);border-radius:8px;padding:12px;margin:14px 0;text-align:left}
+.sdr{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px}
+.sdr:last-child{border-bottom:none}
+.sdk{color:var(--tm)}.sdv{color:var(--tx);font-weight:500}
+@media(max-width:900px){.shell{grid-template-columns:1fr}.sidebar{display:none}.main{padding:16px}.two,.three{grid-template-columns:1fr}.sg{grid-template-columns:1fr 1fr}.crm-lbody{grid-template-columns:1fr}.wmfg{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+  <span class="topbar-logo">UWC International</span>
+  <span class="topbar-divider"></span>
+  <span class="topbar-sub">CRM &amp; Applications Platform</span>
+  <div class="topbar-right"><span class="demo-badge">Live Demo</span><span class="a2z-tag">A2Z Cloud · May 2026</span></div>
+</header>
+<nav class="sidebar" id="sidebar">
+  <div class="sslabel">Demo journey</div>
+  <div class="nav-item active" id="nav-0" onclick="go(0)"><div class="nav-num">1</div><div class="nav-label">CRM Lead record</div></div>
+  <div class="nav-item" id="nav-1" onclick="go(1)"><div class="nav-num">2</div><div class="nav-label">Invite widget &amp; send</div></div>
+  <div class="nav-item" id="nav-2" onclick="go(2)"><div class="nav-num">3</div><div class="nav-label">Invitation email</div></div>
+  <div class="nav-item" id="nav-3" onclick="go(3)"><div class="nav-num">4</div><div class="nav-label">Portal landing page</div></div>
+  <div class="nav-item" id="nav-4" onclick="go(4)"><div class="nav-num">5</div><div class="nav-label">Eligibility check</div></div>
+  <div class="nav-item" id="nav-5" onclick="go(5)"><div class="nav-num">6</div><div class="nav-label">Student dashboard</div></div>
+  <div class="nav-item" id="nav-6" onclick="go(6)"><div class="nav-num">7</div><div class="nav-label">Application form</div></div>
+  <div class="nav-item" id="nav-7" onclick="go(7)"><div class="nav-num">8</div><div class="nav-label">Submit &amp; gate check</div></div>
+  <div class="nav-item" id="nav-8" onclick="go(8)"><div class="nav-num">9</div><div class="nav-label">CRM record created</div></div>
+  <div class="nav-item" id="nav-9" onclick="go(9)"><div class="nav-num">10</div><div class="nav-label">NC Admin dashboard</div></div>
+  <div class="nav-item" id="nav-10" onclick="go(10)"><div class="nav-num">11</div><div class="nav-label">Reviewer scoring</div></div>
+  <div class="nav-item" id="nav-11" onclick="go(11)"><div class="nav-num">12</div><div class="nav-label">Shortlisted &amp; email</div></div>
+  <div class="nav-item" id="nav-12" onclick="go(12)"><div class="nav-num">13</div><div class="nav-label">Nomination pack</div></div>
+  <div class="nav-item" id="nav-13" onclick="go(13)"><div class="nav-num">14</div><div class="nav-label">School decision</div></div>
+  <div class="nav-item" id="nav-14" onclick="go(14)"><div class="nav-num">15</div><div class="nav-label">Placement confirmed</div></div>
+  <div class="nav-item" id="nav-15" onclick="go(15)"><div class="nav-num">16</div><div class="nav-label">Final CRM record</div></div>
+  <div class="sslabel">Reference</div>
+  <div class="nav-item" id="nav-16" onclick="go(16)"><div class="nav-num" style="background:#1e40af;color:#fff;font-size:9px">REF</div><div class="nav-label">CRM field list</div></div>
+  <div class="sp-wrap">
+    <div class="sp-label"><span>Progress</span><span id="prog-txt">Step 1 of 17</span></div>
+    <div class="sp-track"><div class="sp-fill" id="sp-fill" style="width:6%"></div></div>
+  </div>
+</nav>
+<main class="main" id="main">
+<!-- SCREEN 0: CRM LEAD RECORD -->
+<div class="screen active" id="sc-0">
+  <div class="shd">
+    <div><div class="stitle">Step 1 – CRM Lead record (NC Admin view)</div><div class="ssub">Ana Carvalho opens Sofia Almeida's Lead record in Zoho CRM, reviews the details, then clicks the custom "Send Application Invite" button to open the widget.</div></div>
+    <div class="snav"><button class="btn-n pri" onclick="go(1)">Next →</button></div>
+  </div>
+  <div class="crm-backdrop">
+    <div class="crm-appbar">
+      <div class="crm-dot" style="background:#ff5f56"></div><div class="crm-dot" style="background:#ffbd2e"></div><div class="crm-dot" style="background:#27c93f"></div>
+      <span class="crm-apptitle">zoho.com/crm · Leads · Sofia Almeida</span>
+    </div>
+    <div class="crm-win">
+      <div class="crm-nb">
+        <div class="crm-tab on">Lead Details</div><div class="crm-tab">Timeline</div><div class="crm-tab">Related</div><div class="crm-tab">Notes</div>
+      </div>
+      <div class="crm-lhd">
+        <div class="crm-lav">SA</div>
+        <div><div class="crm-lnm">Sofia Almeida</div><div class="crm-lsb">Lead · UWC Brazil NC · Added 15 Mar 2026 by Ana Carvalho</div></div>
+        <div style="margin-left:auto;display:flex;align-items:center;gap:10px"><span class="pill p-reg">Registered</span><span style="font-size:11px;color:var(--tm);font-family:'DM Mono',monospace">APP-2026-BR-001</span></div>
+      </div>
+      <div class="crm-lbody">
+        <div>
+          <div class="crm-fp">
+            <div class="crm-ft">Personal details</div>
+            <div class="crm-fr"><span class="crm-fk">Full name</span><span class="crm-fv">Sofia Almeida</span></div>
+            <div class="crm-fr"><span class="crm-fk">Email</span><span class="crm-fv" style="color:var(--navy)">sofia.almeida@email.com.br</span></div>
+            <div class="crm-fr"><span class="crm-fk">Date of birth</span><span class="crm-fv">14 March 2010 (age 16)</span></div>
+            <div class="crm-fr"><span class="crm-fk">Country</span><span class="crm-fv">Brazil</span></div>
+            <div class="crm-fr"><span class="crm-fk">Citizenship</span><span class="crm-fv">Brazilian</span></div>
+            <div class="crm-fr"><span class="crm-fk">NC</span><span class="crm-fv">UWC Brazil National Committee</span></div>
+          </div>
+          <div class="crm-fp">
+            <div class="crm-ft">Eligibility &amp; nomination</div>
+            <div class="crm-fr"><span class="crm-fk">Age check</span><span class="crm-fv" style="color:#166534">✓ Eligible (age 16)</span></div>
+            <div class="crm-fr"><span class="crm-fk">Nomination ref</span><span class="crm-fv" style="font-family:'DM Mono',monospace;font-size:12px">UWC-BR-2026-NOM-041</span></div>
+            <div class="crm-fr"><span class="crm-fk">Programme</span><span class="crm-fv">Brazil 2026 Cycle</span></div>
+            <div class="crm-fr"><span class="crm-fk">Deadline</span><span class="crm-fv">30 April 2026</span></div>
+            <div class="crm-fr"><span class="crm-fk">Invite status</span><span class="crm-fv" style="color:#92400e">Not yet sent</span></div>
+          </div>
+        </div>
+        <div class="crm-ap">
+          <div class="crm-bpnl">
+            <div class="crm-bpt">Actions</div>
+            <button class="crm-abtn" style="background:var(--red)" onclick="go(1)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Send Application Invite
+            </button>
+            <button class="crm-abtn sec">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Edit lead
+            </button>
+          </div>
+          <div class="crm-bpnl">
+            <div class="crm-bpt">Recent activity</div>
+            <div style="font-size:11.5px;color:var(--ts);line-height:1.6">
+              <div style="padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--tm)">15 Mar</span> · Lead created by Ana Carvalho</div>
+              <div style="padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--tm)">20 Mar</span> · Eligibility verified</div>
+              <div style="padding:5px 0"><span style="color:var(--tm)">01 Apr</span> · Nomination ref assigned</div>
+            </div>
+          </div>
+          <div class="al al-i" style="margin-bottom:0"><span>💡</span><span>Click <strong>"Send Application Invite"</strong> to open the widget and preview the invitation before sending.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="br"><span class="badge b-inf">Ana Carvalho – Brazil NC only – Germany NC hidden</span><span class="badge b-auto">Custom button triggers Zoho CRM Widget SDK</span><span class="badge b-gate">Button only visible when Invite_Status = "Not yet sent"</span></div>
+</div>
+
+<!-- SCREEN 1: INVITE WIDGET -->
+<div class="screen" id="sc-1">
+  <div class="shd">
+    <div><div class="stitle">Step 2 – Invite widget opens inside CRM</div><div class="ssub">The Zoho CRM Widget (built with Widget SDK + Deluge) opens over the Lead record. All fields auto-populate from CRM. Ana previews the email and clicks Send.</div></div>
+    <div class="snav"><button class="btn-n" onclick="go(0)">← Prev</button><button class="btn-n pri" onclick="go(2)">Next →</button></div>
+  </div>
+  <div class="crm-backdrop">
+    <div class="crm-appbar"><div class="crm-dot" style="background:#ff5f56"></div><div class="crm-dot" style="background:#ffbd2e"></div><div class="crm-dot" style="background:#27c93f"></div><span class="crm-apptitle" style="margin-left:6px">zoho.com/crm · Widget: Send Application Invite · Sofia Almeida</span></div>
+    <div style="opacity:.25;pointer-events:none;padding:10px 16px 0;background:var(--surf)"><div style="height:36px;background:#fff;border-radius:6px;border:1px solid var(--border)"></div></div>
+    <div class="woverlay">
+      <div class="wmodal" id="w-normal">
+        <div class="wmh">
+          <div class="wmht"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Send Application Invite</div>
+          <button class="wmcl" onclick="go(0)">×</button>
+        </div>
+        <div class="wmb">
+          <div class="wmsc">
+            <div class="wmav">SA</div>
+            <div><div style="font-size:14px;font-weight:500;color:var(--tx)">Sofia Almeida</div><div style="font-size:11.5px;color:var(--tm);margin-top:2px">APP-2026-BR-001 · UWC Brazil National Committee</div></div>
+            <span class="pill p-reg" style="margin-left:auto">Registered</span>
+          </div>
+          <div class="wmsect">Application details (auto-populated from CRM Lead record)</div>
+          <div class="wmfg">
+            <div class="wmf"><div class="wmfl">Applicant email</div><div class="wmfv bl">sofia.almeida@email.com.br</div></div>
+            <div class="wmf"><div class="wmfl">Programme</div><div class="wmfv">Brazil 2026 Cycle</div></div>
+            <div class="wmf"><div class="wmfl">NC Admin</div><div class="wmfv">Ana Carvalho</div></div>
+            <div class="wmf"><div class="wmfl">Submission deadline</div><div class="wmfv rd">30 April 2026</div></div>
+            <div class="wmf"><div class="wmfl">Nomination reference</div><div class="wmfv" style="font-family:'DM Mono',monospace;font-size:11px">UWC-BR-2026-NOM-041</div></div>
+            <div class="wmf"><div class="wmfl">Portal language</div><div class="wmfv">Português</div></div>
+          </div>
+          <hr class="wmdiv">
+          <div class="wmsect">Email preview</div>
+          <div class="wmprev">
+            <div class="wmprevl">Subject</div>
+            <div style="font-size:12.5px;font-weight:500;color:var(--navy);margin-bottom:8px">Apply to UWC International – your invitation</div>
+            <hr style="border:none;border-top:1px solid #93c5fd;margin:8px 0">
+            <div class="wmprevl">Body</div>
+            <div style="font-size:12px;color:var(--navy);line-height:1.6">Olá <strong>Sofia</strong>,<br><br>The <strong>UWC Brazil National Committee</strong> has invited you to apply for the 2026–27 cycle.<br><br>Deadline: <strong>30 April 2026</strong> · Ref: <strong>UWC-BR-2026-NOM-041</strong><br><br>A unique secure link is included in the sent email.</div>
+          </div>
+          <div class="al al-w" style="margin-bottom:0"><span>⚠️</span><span>Once sent, <strong>Invite_Status</strong> updates to "Sent" and this button is disabled permanently to prevent duplicate invitations.</span></div>
+        </div>
+        <div class="wmft">
+          <button class="wm-cancel" onclick="go(0)">Cancel</button>
+          <button class="wm-send" onclick="showSent()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Send invitation now</button>
+        </div>
+      </div>
+      <div class="wmodal" id="w-sent" style="display:none">
+        <div class="wmh"><div class="wmht">Invitation sent successfully</div></div>
+        <div class="wmb">
+          <div class="sent-wrap">
+            <div class="sent-icon">✓</div>
+            <div class="sent-title">Invitation sent to Sofia Almeida</div>
+            <div class="sent-sub">The CRM record has been updated automatically.</div>
+            <div class="sent-det">
+              <div class="sdr"><span class="sdk">Sent to</span><span class="sdv">sofia.almeida@email.com.br</span></div>
+              <div class="sdr"><span class="sdk">Sent at</span><span class="sdv">01 Apr 2026, 09:14</span></div>
+              <div class="sdr"><span class="sdk">Invite_Status (CRM)</span><span class="sdv" style="color:#166534">Updated → Sent</span></div>
+              <div class="sdr"><span class="sdk">Portal token</span><span class="sdv" style="font-family:'DM Mono',monospace;font-size:11px">uwc-tkn-2026-br-041-…</span></div>
+              <div class="sdr"><span class="sdk">Audit log</span><span class="sdv" style="color:#166534">Written to Lead record</span></div>
+              <div class="sdr"><span class="sdk">CRM Application record</span><span class="sdv" style="color:#166534">Created · Stage = Registered</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="wmft"><button class="wm-send" style="background:var(--navy)" onclick="go(2)">View invitation email →</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="br"><span class="badge b-auto">Widget built with Zoho CRM Widget SDK – client script + server Deluge</span><span class="badge b-api">Fields auto-populated via ZOHO.CRM.API.getRecord()</span><span class="badge b-gate">Send button disabled after first use – no duplicate invites</span><span class="badge b-auto">On send: Invite_Status → Sent · audit log · Application record created at Registered</span></div>
+</div>
+
+<!-- SCREEN 2: INVITATION EMAIL -->
+<div class="screen" id="sc-2">
+  <div class="shd">
+    <div><div class="stitle">Step 3 – Invitation email received by Sofia</div><div class="ssub">Sofia receives the personalised invitation email generated by the CRM widget. Unique secure portal link, NC reference, and expiry date included.</div></div>
+    <div class="snav"><button class="btn-n" onclick="go(1)">← Prev</button><button class="btn-n pri" onclick="go(3)">Next →</button></div>
+  </div>
+  <div class="two">
+    <div class="ew">
+      <div class="ecard">
+        <div class="eh"><div class="eht">UWC International</div><div class="ehs">2026 Application Cycle · UWC Brazil NC</div></div>
+        <div class="emeta"><span><strong>From:</strong> applications@uwc.org</span><span><strong>To:</strong> sofia.almeida@email.com.br</span><span><strong>Subject:</strong> Apply to UWC International – your invitation</span><span><strong>Date:</strong> 1 Apr 2026, 09:14</span></div>
+        <div class="ebody">
+          <p>Olá Sofia,</p>
+          <p>The <strong>UWC Brazil National Committee</strong> has invited you to apply for a place at a UWC school for the 2026–27 academic year.</p>
+          <p>Your progress is saved automatically so you can complete it across multiple sessions. The deadline is <strong>30 April 2026</strong>.</p>
+          <div class="ecta"><button class="cta-btn" onclick="go(3)">Começar minha candidatura →</button></div>
+          <div class="al al-i"><span>🔒</span><span>This link is personal to you. Do not share it. Reference: <strong>UWC-BR-2026-NOM-041</strong> · Expires 30 April 2026.</span></div>
+        </div>
+        <div class="efooter">UWC Brazil NC · Ana Carvalho · Portal: uwc-apply.catalyst.zoho.com · Auto-sent by CRM widget</div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="ch"><div class="cht">What happened in CRM on send</div></div>
+        <div style="padding:2px 0">
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#003087"></div><div class="tll"></div></div><div><div class="tla">Invite_Status field → "Sent"</div><div class="tlm">Button permanently disabled on Lead record</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#1f9535"></div><div class="tll"></div></div><div><div class="tla">Unique secure token generated</div><div class="tlm">Stored in Catalyst Datastore · 30-day expiry</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#3b82f6"></div><div class="tll"></div></div><div><div class="tla">Application record created in CRM</div><div class="tlm">Stage: Registered · Blueprint entry point created</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#8b5cf6"></div></div><div><div class="tla">Audit log written to Lead record</div><div class="tlm">Sent by: Ana Carvalho · 01 Apr 2026, 09:14</div></div></div>
+        </div>
+      </div>
+      <div class="al al-e" style="margin-top:12px"><span>🔒</span><span>Token is single-use and tied to this applicant's email. If forwarded and a different email tries to register, Catalyst token validation rejects the attempt.</span></div>
+    </div>
+  </div>
+  <div class="br"><span class="badge b-auto">Email sent by Deluge via Zoho Mail API – not manual</span><span class="badge b-api">Unique token embedded in URL – validated by Catalyst on click</span><span class="badge b-auto">CRM Application record created at Registered stage simultaneously</span></div>
+</div>
+
+<!-- SCREEN 3: PORTAL LANDING -->
+<div class="screen" id="sc-3">
+  <div class="shd">
+    <div><div class="stitle">Step 4 – Portal landing page</div><div class="ssub">Sofia clicks the link and arrives at the branded Zoho Catalyst portal. Language selector active, UWC branding, eligibility CTA.</div></div>
+    <div class="snav"><button class="btn-n" onclick="go(2)">← Prev</button><button class="btn-n pri" onclick="go(4)">Next →</button></div>
+  </div>
+  <div class="pframe">
+    <div class="ptb"><div class="ptb-brand"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>UWC International</div><div class="lsw"><button class="lb on">EN</button><button class="lb">PT</button><button class="lb">ES</button></div></div>
+    <div class="pbody">
+      <div style="text-align:center;padding:20px 0 24px;max-width:440px;margin:0 auto">
+        <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--tx);margin-bottom:8px">Apply to UWC International</div>
+        <div style="font-size:13px;color:var(--ts);margin-bottom:18px">2026 Application Cycle · Deadline: 30 April 2026</div>
+        <div class="al al-i" style="text-align:left"><span>ℹ️</span><span>You must be aged 15–17 and nominated by a UWC National Committee. The check below confirms your eligibility before account creation.</span></div>
+        <button class="btn-r" onclick="go(4)">Check eligibility &amp; start application</button>
+        <div style="margin-top:12px;font-size:12.5px;color:var(--ts)">Already started? <span style="color:var(--navy);cursor:pointer;text-decoration:underline">Log in to continue</span></div>
+      </div>
+      <div class="three" style="max-width:440px;margin:0 auto">
+        <div class="stat"><div class="stn" style="font-size:20px">18</div><div class="stl">UWC schools worldwide</div></div>
+        <div class="stat"><div class="stn" style="font-size:20px">150+</div><div class="stl">Countries represented</div></div>
+        <div class="stat"><div class="stn" style="font-size:20px">80+</div><div class="stl">National committees</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="br"><span class="badge b-inf">Zoho Catalyst hosted – no CRM licence for applicant</span><span class="badge b-inf">Branding: #003087 header · #C8102E CTA</span><span class="badge b-auto">Language selector stores locale for all form pages</span></div>
+</div>
+<!-- SCREEN 4: ELIGIBILITY -->
+<div class="screen" id="sc-4">
+  <div class="shd"><div><div class="stitle">Step 5 – Eligibility gate</div><div class="ssub">Catalyst serverless function validates age 15–17, country, and citizenship. Hard block for ineligible – no CRM record created.</div></div><div class="snav"><button class="btn-n" onclick="go(3)">← Prev</button><button class="btn-n pri" onclick="go(5)">Next →</button></div></div>
+  <div class="two">
+    <div class="pframe">
+      <div class="ptb"><div class="ptb-brand">Eligibility check</div><div class="lsw"><button class="lb on">PT</button></div></div>
+      <div class="pbody">
+        <div style="font-size:13px;font-weight:500;color:var(--tx);margin-bottom:13px">Verificação de elegibilidade</div>
+        <div class="ff"><label class="flabel">País de residência <span class="req">*</span></label><input class="finput pre" value="Brasil / Brazil" readonly></div>
+        <div class="two" style="gap:10px"><div class="ff"><label class="flabel">Data de nascimento <span class="req">*</span></label><input class="finput pre" value="14 March 2010 (age 16)" readonly></div><div class="ff"><label class="flabel">Cidadania <span class="req">*</span></label><input class="finput pre" value="Brazilian" readonly></div></div>
+        <div class="ff"><label class="flabel">NC nomination reference</label><input class="finput pre" value="UWC-BR-2026-NOM-041" readonly></div>
+        <div class="al al-ok"><span>✅</span><div><strong>Eligible</strong> · Age 16 · Nominated by UWC Brazil NC · Proceeding to account creation</div></div>
+        <button class="btn-r" onclick="go(5)">Criar conta e iniciar candidatura →</button>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:12px"><div class="ch"><div class="cht">Ineligible – blocked</div></div><div class="cb"><div class="al al-e" style="margin-bottom:0"><span>🚫</span><div>Age outside 15–17. Flow stops. No CRM record. No auth account created.</div></div></div></div>
+      <div class="card"><div class="ch"><div class="cht">On eligibility pass – 3 actions</div></div>
+        <div style="padding:2px 0">
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#003087"></div><div class="tll"></div></div><div><div class="tla">Catalyst auth account created</div><div class="tlm">JWT session issued · persistent login enabled</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#1f9535"></div><div class="tll"></div></div><div><div class="tla">CRM Application record updated</div><div class="tlm">Catalyst_User_ID stored · Stage = Registered</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#3b82f6"></div></div><div><div class="tla">Blueprint: Registered → In Progress</div><div class="tlm">Gate: account verified + eligibility passed = true</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="br"><span class="badge b-gate">Age 15–17 enforced in Catalyst serverless function before account creation</span><span class="badge b-api">CRM record linked to Catalyst auth via Catalyst_User_ID</span><span class="badge b-auto">Blueprint moves to In Progress automatically on pass</span></div>
+</div>
+
+<!-- SCREEN 5: STUDENT DASHBOARD -->
+<div class="screen" id="sc-5">
+  <div class="shd"><div><div class="stitle">Step 6 – Student dashboard</div><div class="ssub">Sofia's authenticated view. Stage, progress and alerts read live from Zoho CRM on every login via REST API.</div></div><div class="snav"><button class="btn-n" onclick="go(4)">← Prev</button><button class="btn-n pri" onclick="go(6)">Next →</button></div></div>
+  <div class="pframe">
+    <div class="ptb"><div class="ptb-brand">UWC International · My Application</div><div class="ptb-user"><div class="av-sm">SA</div><span class="puname">Sofia Almeida</span></div></div>
+    <div class="pbody">
+      <div class="sg" style="max-width:560px;margin:0 auto 14px">
+        <div class="stat"><div class="stn">60%</div><div class="stl">Form complete</div></div>
+        <div class="stat"><div style="margin-bottom:4px"><span class="pill p-prog">In Progress</span></div><div class="stl">Blueprint stage</div></div>
+        <div class="stat"><div class="stn" style="color:var(--red)">14</div><div class="stl">Days remaining</div></div>
+      </div>
+      <div style="max-width:560px;margin:0 auto">
+        <div class="pw"><div class="pt"><span>Application progress</span><span>3 of 5 sections</span></div><div class="ptrack"><div class="pfill" style="width:60%;background:var(--navy)"></div></div></div>
+        <div class="stabs"><div class="stab st-done">✓ Personal details</div><div class="stab st-done">✓ Education</div><div class="stab st-done">✓ Personal statement</div><div class="stab st-active">Activities &amp; interests</div><div class="stab st-pend">Documents &amp; consent</div></div>
+        <div class="al al-w"><span>⚠️</span><span>Parental consent required before submission. Maria Almeida has been sent a consent request.</span></div>
+        <button class="btn-r" onclick="go(6)">Continuar candidatura →</button>
+        <div style="margin-top:10px;font-size:12px;color:var(--tm);text-align:center">Your progress is saved automatically.</div>
+      </div>
+    </div>
+  </div>
+  <div class="br"><span class="badge b-api">Stage and progress read from CRM via GET /Applications/{id} on every login</span><span class="badge b-auto">Consent alert driven by CRM field: Parental_Consent_Status</span><span class="badge b-gate">Submit blocked until all 4 Blueprint gate conditions pass</span></div>
+</div>
+
+<!-- SCREEN 6: APPLICATION FORM -->
+<div class="screen" id="sc-6">
+  <div class="shd"><div><div class="stitle">Step 7 – Application form (Portuguese)</div><div class="ssub">Multi-section form in Portuguese. Auto-saves to Zoho CRM via PATCH API. NC local question dynamically pulled from CRM Programme record.</div></div><div class="snav"><button class="btn-n" onclick="go(5)">← Prev</button><button class="btn-n pri" onclick="go(7)">Next →</button></div></div>
+  <div class="two">
+    <div class="pframe">
+      <div class="ptb"><div class="ptb-brand">Atividades – Section 4 of 5</div><div class="lsw"><button class="lb on">PT</button></div></div>
+      <div class="pbody">
+        <div class="ptrack" style="margin-bottom:12px"><div class="pfill" style="width:60%;background:var(--navy)"></div></div>
+        <div class="ff"><label class="flabel">Atividades extracurriculares <span class="req">*</span></label><textarea class="finput" style="height:72px">Membro do grupo de teatro escolar e coordenadora de debates. Voluntária ensinando matemática para crianças.</textarea></div>
+        <div class="ff"><label class="flabel">Liderança e iniciativa <span class="req">*</span></label><textarea class="finput" style="height:62px">Organizei campanha arrecadando 300 livros para comunidades rurais em 2025.</textarea></div>
+        <div class="ff"><label class="flabel">Pergunta local do NC <span class="req">*</span></label><div class="nc-note">📌 Brazil NC · "Descreva uma situação em que você ajudou a resolver um conflito"</div><textarea class="finput" style="height:58px" placeholder="Escreva aqui…"></textarea></div>
+        <div class="ff"><label class="flabel">Escola preferida (opcional)</label><select class="finput"><option>UWC Atlantic College – Wales, UK</option><option>UWC Red Cross Nordic – Norway</option><option>UWC Mahindra College – India</option></select></div>
+        <div class="asave">💾 Auto-saving to Zoho CRM every 30 seconds via PATCH API</div>
+        <div style="display:flex;gap:8px;margin-top:10px"><button class="btn-o" style="flex:0 0 auto">← Voltar</button><button class="btn-r" style="flex:1;margin-top:0" onclick="go(7)">Salvar e continuar →</button></div>
+      </div>
+    </div>
+    <div>
+      <div class="card"><div class="ch"><div class="cht">Portal field → CRM API mapping</div><div class="chs">PATCH /Applications/{id}</div></div>
+        <div style="padding:0"><table class="ft"><thead><tr><th>Portal label (PT)</th><th>CRM API name</th><th>Type</th></tr></thead><tbody>
+          <tr><td>Atividades extracurriculares</td><td class="ft-name">Extracurricular_Activities</td><td><span class="ft-t ft-txt">Multi-line</span></td></tr>
+          <tr><td>Liderança e iniciativa</td><td class="ft-name">Leadership_Statement</td><td><span class="ft-t ft-txt">Multi-line</span></td></tr>
+          <tr><td>Pergunta local NC</td><td class="ft-name">NC_Local_Question_Answer</td><td><span class="ft-t ft-txt">Multi-line</span></td></tr>
+          <tr><td>Escola preferida</td><td class="ft-name">Preferred_School</td><td><span class="ft-t ft-look">Lookup</span></td></tr>
+          <tr><td>Form % complete</td><td class="ft-name">Form_Completion_Pct</td><td><span class="ft-t ft-form">Formula</span></td></tr>
+        </tbody></table></div>
+      </div>
+      <div class="al al-i" style="margin-top:12px"><span>💡</span><span>NC question text fetched from Programme record in CRM. Each NC customises their question without code changes.</span></div>
+    </div>
+  </div>
+  <div class="br"><span class="badge b-api">PATCH /Applications/{id} on every section save</span><span class="badge b-auto">NC question pulled from CRM Programme record dynamically</span><span class="badge b-inf">School dropdown from CRM School records via API</span></div>
+</div>
+
+<!-- SCREEN 7: SUBMIT GATE -->
+<div class="screen" id="sc-7">
+  <div class="shd"><div><div class="stitle">Step 8 – Submit &amp; Blueprint gate check</div><div class="ssub">All 4 gate conditions checked by CRM Blueprint before Submitted stage is allowed.</div></div><div class="snav"><button class="btn-n" onclick="go(6)">← Prev</button><button class="btn-n pri" onclick="go(8)">Next →</button></div></div>
+  <div class="two">
+    <div class="pframe">
+      <div class="ptb"><div class="ptb-brand">Documentos e envio – Section 5 of 5</div><div class="lsw"><button class="lb on">PT</button></div></div>
+      <div class="pbody">
+        <div style="font-size:13px;font-weight:500;margin-bottom:12px">Verificação antes do envio</div>
+        <div class="gl"><div class="gh"><span>Gate condition</span><span>Status</span></div>
+          <div class="gr"><span class="grl">All mandatory fields complete</span><span class="gpass">✓ Pass</span></div>
+          <div class="gr"><span class="grl">Parental consent – Maria Almeida</span><span class="gpass">Received 15 Apr</span></div>
+          <div class="gr"><span class="grl">Supporting document uploaded</span><span class="gpass">academic_transcript.pdf</span></div>
+          <div class="gr"><span class="grl">Within programme window</span><span class="gpass">14 days remaining</span></div>
+        </div>
+        <div class="al al-ok"><span>✅</span><div><strong>All conditions met.</strong> Ready to submit.</div></div>
+        <div class="al al-w"><span>⚠️</span><span>Cannot edit after submission without requesting a re-open from the NC Admin.</span></div>
+        <button class="btn-r" onclick="go(8)">Enviar candidatura definitivamente →</button>
+      </div>
+    </div>
+    <div>
+      <div class="card"><div class="ch"><div class="cht">4 automated actions on submission</div></div>
+        <div style="padding:2px 0">
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#003087"></div><div class="tll"></div></div><div><div class="tla">Stage: In Progress → Submitted</div><div class="tlm">Blueprint transition · Submitted_Date auto-set</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#3b82f6"></div><div class="tll"></div></div><div><div class="tla">Email to NC Admin: Ana Carvalho</div><div class="tlm">"New application from Sofia Almeida is ready for review"</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#8b5cf6"></div><div class="tll"></div></div><div><div class="tla">Task created for NC Admin</div><div class="tlm">"Assign reviewers" · Due in 3 working days</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#1f9535"></div></div><div><div class="tla">Audit log entry written</div><div class="tlm">sofia.almeida@portal · 16 Apr 2026, 14:32</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="br"><span class="badge b-gate">Blueprint gate: all 4 conditions checked before transition allowed</span><span class="badge b-api">Stage moves to Submitted via CRM API on confirm</span><span class="badge b-auto">4 workflow automations fire simultaneously</span></div>
+</div>
+
+<!-- SCREEN 8: CRM RECORD -->
+<div class="screen" id="sc-8">
+  <div class="shd"><div><div class="stitle">Step 9 – CRM Application record</div><div class="ssub">Every field Sofia submitted via the portal is now a native Zoho CRM field. Complete audit trail.</div></div><div class="snav"><button class="btn-n" onclick="go(7)">← Prev</button><button class="btn-n pri" onclick="go(9)">Next →</button></div></div>
+  <div class="mod-bar"><div class="mod-av">SA</div><div><div class="mod-nm">Sofia Almeida</div><div class="mod-rf">APP-2026-BR-001 · Created via Catalyst portal API</div></div><div style="margin-left:auto;display:flex;gap:10px;align-items:center"><span class="pill p-sub">Submitted</span><button class="btn-o" style="font-size:11px;padding:5px 11px">Edit</button></div></div>
+  <div class="mod-body">
+    <div class="sbar">Application details</div>
+    <div class="fg" style="border:none;border-radius:0">
+      <div class="fc"><div class="fl">Full name</div><div class="fv">Sofia Almeida</div></div>
+      <div class="fc"><div class="fl">Date of birth</div><div class="fv">14 March 2010 (age 16)</div></div>
+      <div class="fc"><div class="fl">NC</div><div class="fv bl">UWC Brazil NC</div></div>
+      <div class="fc"><div class="fl">Submitted date</div><div class="fv">16 Apr 2026 (auto-set)</div></div>
+      <div class="fc"><div class="fl">Parental consent</div><div class="fv gr">Received – 15 Apr 2026</div></div>
+      <div class="fc"><div class="fl">Blueprint stage</div><div class="fv"><span class="pill p-sub">Submitted</span></div></div>
+      <div class="fc"><div class="fl">Preferred school</div><div class="fv">UWC Atlantic College</div></div>
+      <div class="fc"><div class="fl">Safeguarding flag</div><div class="fv gr">None</div></div>
+      <div class="fc full"><div class="fl">Personal statement</div><div class="fv sm">Cresci em São Paulo e desde cedo aprendi a valorizar a diversidade das pessoas ao meu redor...</div></div>
+    </div>
+    <div class="sbar">Audit trail</div>
+    <div style="padding:2px 0">
+      <div class="tli"><div class="tldw"><div class="tld" style="background:#003087"></div><div class="tll"></div></div><div><div class="tla">Application submitted via portal</div><div class="tlm">16 Apr 2026, 14:32 · sofia.almeida@portal</div></div></div>
+      <div class="tli"><div class="tldw"><div class="tld" style="background:#1f9535"></div><div class="tll"></div></div><div><div class="tla">Stage: In Progress → Submitted</div><div class="tlm">Blueprint auto-transition</div></div></div>
+      <div class="tli"><div class="tldw"><div class="tld" style="background:#3b82f6"></div><div class="tll"></div></div><div><div class="tla">Email sent to Ana Carvalho (NC Admin)</div><div class="tlm">Workflow automation</div></div></div>
+      <div class="tli"><div class="tldw"><div class="tld" style="background:#8b5cf6"></div></div><div><div class="tla">Task: Assign reviewers – due 21 Apr 2026</div><div class="tlm">Workflow automation</div></div></div>
+    </div>
+  </div>
+  <div class="br"><span class="badge b-api">All portal fields written to CRM via REST API</span><span class="badge b-auto">4 automated actions fired on submission</span><span class="badge b-gate">Immutable audit trail: who · what · when</span></div>
+</div>
+
+<!-- SCREEN 9: NC ADMIN DASHBOARD -->
+<div class="screen" id="sc-9">
+  <div class="shd"><div><div class="stitle">Step 10 – NC Admin dashboard</div><div class="ssub">Ana Carvalho in Zoho CRM. Germany NC completely hidden by territory rules.</div></div><div class="snav"><button class="btn-n" onclick="go(8)">← Prev</button><button class="btn-n pri" onclick="go(10)">Next →</button></div></div>
+  <div class="mod-bar" style="border-radius:12px 12px 0 0;border-bottom:none">
+    <div style="width:32px;height:32px;border-radius:8px;background:var(--navy);display:flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+    <div><div class="mod-nm">NC Dashboard – UWC Brazil 2026</div><div class="mod-rf">Ana Carvalho · NC Admin – Brazil only · Germany NC hidden</div></div>
+  </div>
+  <div class="mod-body">
+    <div style="padding:14px">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px">
+        <div class="stat" style="padding:10px"><div class="stn" style="font-size:20px">14</div><div class="stl">Total applications</div></div>
+        <div class="stat" style="padding:10px"><div class="stn" style="font-size:20px;color:#1e40af">6</div><div class="stl">Under review</div></div>
+        <div class="stat" style="padding:10px"><div class="stn" style="font-size:20px;color:#78350f">3</div><div class="stl">Pending assign</div></div>
+        <div class="stat" style="padding:10px"><div class="stn" style="font-size:20px;color:var(--red)">14</div><div class="stl">Days to deadline</div></div>
+      </div>
+      <table class="at"><thead><tr><th>Applicant</th><th>Country</th><th>Age</th><th>Stage</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr class="hlr"><td><strong style="color:var(--navy)">Sofia Almeida</strong></td><td>Brazil</td><td>16</td><td><span class="pill p-sub" style="font-size:10px">Submitted</span></td><td><span class="al-link">Assign reviewers</span></td></tr>
+        <tr><td>Miguel Santos</td><td>Portugal</td><td>17</td><td><span class="pill p-rev" style="font-size:10px">Under Review</span></td><td><span class="fb">⚠️ Safeguard flag</span></td></tr>
+        <tr><td>Preethi Nair</td><td>India</td><td>16</td><td><span class="pill p-prog" style="font-size:10px">In Progress</span></td><td style="font-size:11px;color:#78350f">Consent pending</td></tr>
+        <tr><td>Amara Diallo</td><td>Guinea</td><td>17</td><td><span class="pill p-short" style="font-size:10px">Shortlisted</span></td><td style="font-size:11px;color:var(--green)">Panel decision pending</td></tr>
+      </tbody></table>
+    </div>
+    <div class="sbar">Active task</div>
+    <div style="padding:12px 14px"><div class="al al-w" style="margin-bottom:0"><span>📋</span><div><strong>Task:</strong> Assign Sofia Almeida to reviewers · Due 21 Apr 2026 · Auto-created by Blueprint workflow</div></div></div>
+  </div>
+  <div class="br"><span class="badge b-gate">Ana cannot see Germany NC data – CRM Territory rule enforced</span><span class="badge b-auto">Dashboard from CRM list views and Zoho Analytics</span></div>
+</div>
+
+<!-- SCREEN 10: REVIEWER SCORING -->
+<div class="screen" id="sc-10">
+  <div class="shd"><div><div class="stitle">Step 11 – Reviewer scoring (blind review)</div><div class="ssub">Clara Ramos logs into the Catalyst reviewer portal. Paulo Fonseca's scores are hidden until both submit.</div></div><div class="snav"><button class="btn-n" onclick="go(9)">← Prev</button><button class="btn-n pri" onclick="go(11)">Next →</button></div></div>
+  <div class="two">
+    <div class="pframe">
+      <div class="ptb"><div class="ptb-brand">Reviewer Portal</div><div class="ptb-user"><div class="av-sm">CR</div><span class="puname">Clara Ramos</span></div></div>
+      <div class="pbody">
+        <div class="al al-i"><span>🔒</span><span><strong>Blind review active.</strong> You cannot see Paulo Fonseca's scores until both reviewers have submitted.</span></div>
+        <div style="font-size:13px;font-weight:500;margin-bottom:12px">Scoring: Sofia Almeida · APP-2026-BR-001</div>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 11px;background:var(--white);border:1px solid var(--border);border-radius:7px"><span style="font-size:12.5px;color:var(--ts)">Academic potential</span><span style="font-size:16px;font-weight:600">8/10</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 11px;background:var(--white);border:1px solid var(--border);border-radius:7px"><span style="font-size:12.5px;color:var(--ts)">Community engagement</span><span style="font-size:16px;font-weight:600">9/10</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 11px;background:var(--white);border:1px solid var(--border);border-radius:7px"><span style="font-size:12.5px;color:var(--ts)">Communication skills</span><span style="font-size:16px;font-weight:600">7/10</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 11px;background:var(--white);border:1px solid var(--border);border-radius:7px"><span style="font-size:12.5px;color:var(--ts)">Commitment to UWC values</span><span style="font-size:16px;font-weight:600">9/10</span></div>
+        </div>
+        <div class="ff"><label class="flabel">Overall recommendation <span class="req">*</span></label><select class="finput"><option>Yes – recommend for nomination</option><option>Conditional</option><option>No</option></select></div>
+        <div style="margin-bottom:10px"><div style="font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--tm);font-weight:500;margin-bottom:6px">Paulo Fonseca's scores</div><div style="background:var(--surf);border:1px dashed var(--border-s);border-radius:8px;padding:10px;text-align:center;font-size:11px;color:var(--tm)">🔒 Hidden until both reviewers submit</div></div>
+        <button class="btn-r" onclick="go(11)">Submit my review →</button>
+      </div>
+    </div>
+    <div>
+      <div class="card"><div class="ch"><div class="cht">Blind review – technical mechanism</div></div>
+        <div style="padding:2px 0">
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#8b5cf6"></div><div class="tll"></div></div><div><div class="tla">Clara submits → Review_Count = 1</div><div class="tlm">Visible_to_NC_Admin = false on both score records</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#f59e0b"></div><div class="tll"></div></div><div><div class="tla">Paulo submits → Review_Count = 2</div><div class="tlm">Workflow: All_Reviews_Complete = true</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#1f9535"></div></div><div><div class="tla">Both score records: Visible_to_NC_Admin = true</div><div class="tlm">Blueprint gate unlocked for NC Admin</div></div></div>
+        </div>
+      </div>
+      <div class="al al-e" style="margin-top:12px"><span>🔴</span><span><strong>Critical test (29 May):</strong> Log as Paulo → confirm Clara's scores hidden → submit → log as IO Super Admin → confirm both now visible.</span></div>
+    </div>
+  </div>
+  <div class="br"><span class="badge b-gate">Visible_to_NC_Admin = false until Review_Count reaches 2</span><span class="badge b-api">Scores submitted via portal → CRM Review_Scores subform</span><span class="badge b-auto">Workflow increments counter and checks threshold on each submit</span></div>
+</div>
+
+<!-- SCREEN 11: SHORTLISTED + EMAIL -->
+<div class="screen" id="sc-11">
+  <div class="shd"><div><div class="stitle">Step 12 – Shortlisted &amp; congratulations email</div><div class="ssub">Ana records the panel decision and transitions Blueprint to Shortlisted. The congratulations email fires automatically – no scores included.</div></div><div class="snav"><button class="btn-n" onclick="go(10)">← Prev</button><button class="btn-n pri" onclick="go(12)">Next →</button></div></div>
+  <div class="two">
+    <div class="ew">
+      <div class="ecard">
+        <div class="eh"><div class="eht">UWC International</div><div class="ehs">Application update · 2026 cycle</div></div>
+        <div class="emeta"><span><strong>From:</strong> applications@uwc.org</span><span><strong>To:</strong> sofia.almeida@email.com.br</span><span><strong>Subject:</strong> You have been shortlisted by UWC Brazil NC</span><span><strong>Date:</strong> 20 May 2026, 15:04</span></div>
+        <div class="ebody">
+          <p>Dear Sofia,</p>
+          <p>Congratulations! You have been <strong>shortlisted</strong> by the <strong>UWC Brazil National Committee</strong> for the 2026–27 application cycle.</p>
+          <p>Your application has passed the review stage and you are being considered for a place at a UWC school. The next step is nomination, during which the NC will confirm your place allocation.</p>
+          <div class="ecta"><button class="cta-btn" onclick="go(5)">Log in to check my status →</button></div>
+          <div class="al al-i"><span>🔒</span><span><strong>Note:</strong> No scores or reviewer comments are included in this email. This protects reviewer confidentiality.</span></div>
+        </div>
+        <div class="efooter">UWC Brazil NC · Ana Carvalho · Ref: APP-2026-BR-001 · Auto-sent on Blueprint → Shortlisted</div>
+      </div>
+    </div>
+    <div>
+      <div class="card"><div class="ch"><div class="cht">What changed in CRM on Shortlisted transition</div></div>
+        <div style="padding:2px 0">
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#C8AB00"></div><div class="tll"></div></div><div><div class="tla">Stage → Shortlisted</div><div class="tlm">Blueprint · Ana Carvalho · 20 May 2026</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#003087"></div><div class="tll"></div></div><div><div class="tla">Congratulations email sent to Sofia</div><div class="tlm">Workflow auto-fired · No scores in email</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#1f9535"></div><div class="tll"></div></div><div><div class="tla">Panel_Decision = Shortlisted written to CRM</div><div class="tlm">Panel_Decision_Date = 20 May 2026</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#8b5cf6"></div></div><div><div class="tla">Portal dashboard reads Shortlisted on next login</div><div class="tlm">GET /Applications/{id} – no manual portal update needed</div></div></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:0">
+        <div class="ch"><div class="cht">Student portal journey bar updated</div></div>
+        <div class="cb" style="padding:12px">
+          <div class="stabs" style="margin-bottom:8px">
+            <div class="stab st-done">✓ Applied</div><div class="stab st-done">✓ Under review</div><div class="stab st-active">Shortlisted</div><div class="stab st-pend">Nominated</div><div class="stab st-pend">Placed</div>
+          </div>
+          <div class="al al-ok" style="margin-bottom:0"><span>⭐</span><span>Sofia's dashboard shows "Shortlisted" on next login – no manual portal update needed.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="br"><span class="badge b-auto">Email auto-sent by workflow on Blueprint → Shortlisted</span><span class="badge b-gate">No scores in email – reviewer confidentiality enforced</span><span class="badge b-api">Portal stage updates automatically from CRM on next login</span></div>
+</div>
+
+<!-- SCREEN 12: NOMINATION PACK -->
+<div class="screen" id="sc-12">
+  <div class="shd"><div><div class="stitle">Step 13 – Nomination pack generated</div><div class="ssub">NC Admin clicks "Generate Nomination Pack" on the Application record. Deluge compiles all data and calls Zoho Writer merge to produce a UWC-branded PDF.</div></div><div class="snav"><button class="btn-n" onclick="go(11)">← Prev</button><button class="btn-n pri" onclick="go(13)">Next →</button></div></div>
+  <div class="two">
+    <div>
+      <div class="card" style="margin-bottom:12px">
+        <div class="ch"><div class="cht">Nomination pack generator</div><div class="chs">Custom button on Application record</div></div>
+        <div class="cb">
+          <div style="background:var(--surf);border:1px solid var(--border);border-radius:8px;padding:11px;margin-bottom:11px">
+            <div style="font-size:11.5px;font-weight:500;margin-bottom:7px">Sofia Almeida · APP-2026-BR-001</div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:12px;color:var(--ts)">Stage</span><span class="pill p-short" style="font-size:10px">Shortlisted</span></div>
+            <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:var(--ts)">All reviews complete</span><span style="font-size:12px;font-weight:500;color:#166534">True</span></div>
+          </div>
+          <button style="background:var(--navy);color:#fff;border:none;border-radius:7px;padding:10px 14px;font-size:12.5px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%;display:flex;align-items:center;justify-content:center;gap:8px">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Generate nomination pack (PDF)
+          </button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ch"><div class="cht">Pack contents compiled by Deluge</div></div>
+        <div style="padding:0">
+          <div style="padding:8px 13px;border-bottom:1px solid var(--border);font-size:12.5px">✓&nbsp; Personal details from Contact record</div>
+          <div style="padding:8px 13px;border-bottom:1px solid var(--border);font-size:12.5px">✓&nbsp; Form summary – statement, activities, NC question</div>
+          <div style="padding:8px 13px;border-bottom:1px solid var(--border);font-size:12.5px">✓&nbsp; Assessment scores (only if All_Reviews_Complete = true)</div>
+          <div style="padding:8px 13px;border-bottom:1px solid var(--border);font-size:12.5px">✓&nbsp; Referee statement from portal</div>
+          <div style="padding:8px 13px;border-bottom:1px solid var(--border);font-size:12.5px">✓&nbsp; Parental consent – Maria Almeida · 15 Apr 2026</div>
+          <div style="padding:8px 13px;font-size:12.5px">✓&nbsp; Panel decision – Shortlisted · 20 May 2026</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="margin-bottom:12px">
+        <div style="font-size:11.5px;font-weight:500;color:var(--ts);margin-bottom:7px">Generated PDF</div>
+        <div class="pdfcard"><div class="pdficon">📄</div><div><div style="font-size:12.5px;font-weight:500">nomination_pack_sofia_almeida_2026.pdf</div><div style="font-size:11px;color:var(--tm);margin-top:2px">Generated 20 May 2026 · UWC branding · 4 pages</div></div></div>
+      </div>
+      <div class="card">
+        <div class="ch"><div class="cht">3 automated actions after generation</div></div>
+        <div style="padding:2px 0">
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#003087"></div><div class="tll"></div></div><div><div class="tla">PDF attached to Application record in CRM</div><div class="tlm">Visible to IO Admissions and NC Admin</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#1f9535"></div><div class="tll"></div></div><div><div class="tla">Email sent to Helen Richards</div><div class="tlm">"Nomination received for Sofia Almeida from UWC Brazil NC"</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#8b5cf6"></div></div><div><div class="tla">Task for Helen Richards</div><div class="tlm">"Review nomination" · Due in 5 working days</div></div></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:0">
+        <div class="ch"><div class="cht">Blueprint gate: Shortlisted → Nominated</div></div>
+        <div style="padding:0">
+          <div style="padding:8px 13px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px">Panel_Decision = Shortlisted</span><span style="font-size:11px;background:#dcfce7;color:#166534;padding:2px 8px;border-radius:10px;font-weight:500">Pass</span></div>
+          <div style="padding:8px 13px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px">School_Nominated not empty</span><span style="font-size:11px;background:#dcfce7;color:#166534;padding:2px 8px;border-radius:10px;font-weight:500">Pass</span></div>
+          <div style="padding:8px 13px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px">Places_Remaining &gt; 0 (UWC Atlantic)</span><span style="font-size:11px;background:#dcfce7;color:#166534;padding:2px 8px;border-radius:10px;font-weight:500">8 remaining</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="br"><span class="badge b-auto">Deluge compiles all fields + calls Zoho Writer merge API</span><span class="badge b-gate">Scores only included if All_Reviews_Complete = true</span><span class="badge b-auto">3 actions fire automatically: attach PDF · email school · create task</span></div>
+</div>
+
+<!-- SCREEN 13: SCHOOL DECISION -->
+<div class="screen" id="sc-13">
+  <div class="shd"><div><div class="stitle">Step 14 – School admissions decision</div><div class="ssub">Helen Richards (UWC Atlantic College) receives the nomination email and logs into the admissions portal. She sees only her school's nominations.</div></div><div class="snav"><button class="btn-n" onclick="go(12)">← Prev</button><button class="btn-n pri" onclick="go(14)">Next →</button></div></div>
+  <div class="two">
+    <div>
+      <div style="background:var(--surf);border-radius:10px;padding:13px;margin-bottom:12px">
+        <div style="font-size:11px;font-weight:500;color:var(--ts);margin-bottom:8px">Email to Helen Richards</div>
+        <div class="ecard" style="max-width:100%">
+          <div class="eh" style="padding:10px 14px"><div class="eht" style="font-size:13px">UWC International – Nomination received</div></div>
+          <div class="emeta"><span><strong>To:</strong> h.richards@uwcatlantic.org</span><span><strong>Date:</strong> 20 May 2026, 15:06</span></div>
+          <div class="ebody" style="padding:11px 14px">
+            <p>Dear Helen, a nomination has been received for <strong>Sofia Almeida</strong> from <strong>UWC Brazil NC</strong> for a place at <strong>UWC Atlantic College</strong>.</p>
+            <div class="pdfcard" style="margin:8px 0"><div class="pdficon" style="width:28px;height:28px;font-size:13px">📄</div><div><div style="font-size:11.5px;font-weight:500">nomination_pack_sofia_almeida_2026.pdf</div></div></div>
+            <p style="font-size:12px">Please log in to the admissions portal to review and respond within 5 working days.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="pframe">
+        <div class="ptb"><div class="ptb-brand">School Admissions – UWC Atlantic College</div></div>
+        <div class="pbody">
+          <div style="font-size:11.5px;font-weight:500;margin-bottom:8px">Pending nominations</div>
+          <div class="scrd" style="background:#f0fdf4;border-color:#86efac">
+            <div style="flex:1"><div style="font-size:13px;font-weight:500">Sofia Almeida</div><div style="font-size:11px;color:var(--ts);margin-top:2px">Brazil · Age 16 · UWC Brazil NC · 20 May 2026</div><div style="font-size:11px;margin-top:3px;color:var(--navy);cursor:pointer;text-decoration:underline dotted">View nomination pack PDF</div></div>
+            <div><button class="btn-acc" onclick="go(14)">Accept place</button><button class="btn-dec">Decline</button></div>
+          </div>
+          <div class="scrd">
+            <div style="flex:1"><div style="font-size:13px;font-weight:500">Kwame Asante</div><div style="font-size:11px;color:var(--ts);margin-top:2px">Ghana · Age 17 · UWC Kenya NC · 18 May 2026</div></div>
+            <div><button class="btn-acc">Accept place</button><button class="btn-dec">Decline</button></div>
+          </div>
+          <div class="al al-i" style="margin-top:10px"><span>👁️</span><span>Helen sees only UWC Atlantic nominations. No other schools, NC records, or scores. CRM profile restriction enforced.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="br"><span class="badge b-auto">Email to Helen auto-sent when nomination pack generated</span><span class="badge b-gate">Helen's CRM profile: UWC Atlantic only – all other data hidden</span><span class="badge b-api">Accept/Decline triggers Blueprint → Placed or Declined</span></div>
+</div>
+
+<!-- SCREEN 14: PLACEMENT -->
+<div class="screen" id="sc-14">
+  <div class="shd"><div><div class="stitle">Step 15 – Placement confirmed</div><div class="ssub">Helen accepts the nomination. Blueprint moves to Placed. Five automated actions fire instantly including Sofia's placement confirmation email.</div></div><div class="snav"><button class="btn-n" onclick="go(13)">← Prev</button><button class="btn-n pri" onclick="go(15)">Next →</button></div></div>
+  <div class="placed-banner">
+    <div class="pb-t">Place confirmed – Sofia Almeida</div>
+    <div class="pb-s">UWC Atlantic College accepted the nomination · Blueprint → Placed</div>
+    <div class="pb-sc">UWC Atlantic College, Wales, UK · 2026–27</div>
+  </div>
+  <div class="two">
+    <div class="ew">
+      <div class="ecard">
+        <div class="eh"><div class="eht" style="font-size:15px">Your place is confirmed</div><div class="ehs">UWC Atlantic College · 2026–27</div></div>
+        <div class="emeta"><span><strong>To:</strong> sofia.almeida@email.com.br</span><span><strong>Date:</strong> 27 May 2026</span></div>
+        <div class="ebody">
+          <p>Dear Sofia, we are thrilled to confirm that you have been offered a place at <strong>UWC Atlantic College</strong> for the 2026–27 academic year.</p>
+          <div class="al al-ok"><span>✅</span><div><strong>Next steps included:</strong> Acceptance deadline · Onboarding documents · Admissions contact details</div></div>
+          <p style="font-size:11.5px;color:var(--tm)">Auto-sent by CRM workflow on Blueprint → Placed transition</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card"><div class="ch"><div class="cht">5 automated actions on Placed transition</div></div>
+        <div style="padding:2px 0">
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#059669"></div><div class="tll"></div></div><div><div class="tla">Stage: Nominated → Placed</div><div class="tlm">Blueprint · Helen Richards (School Admissions)</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#003087"></div><div class="tll"></div></div><div><div class="tla">Placement confirmation email sent to Sofia</div><div class="tlm">School details, next steps, acceptance deadline</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#1f9535"></div><div class="tll"></div></div><div><div class="tla">Places_Remaining decremented on school record</div><div class="tlm">UWC Atlantic: 8 → 7 remaining (formula field)</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#8b5cf6"></div><div class="tll"></div></div><div><div class="tla">Scholar record created (same individual record)</div><div class="tlm">No duplicate – lifecycle continues from application record</div></div></div>
+          <div class="tli"><div class="tldw"><div class="tld" style="background:#C8AB00"></div></div><div><div class="tla">Notification to Ana Carvalho (NC Admin)</div><div class="tlm">"Sofia Almeida placed at UWC Atlantic College"</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="br"><span class="badge b-auto">5 automated actions fire simultaneously on Placed transition</span><span class="badge b-api">Places_Remaining formula field auto-updates on school record</span><span class="badge b-inf">Individual record continues as scholar – no duplicate created</span></div>
+</div>
+
+<!-- SCREEN 15: FINAL AUDIT TRAIL -->
+<div class="screen" id="sc-15">
+  <div class="shd"><div><div class="stitle">Step 16 – Final CRM record &amp; full audit trail</div><div class="ssub">Complete immutable record from invitation widget to placement. Every action timestamped with user identity. IO Super Admin view.</div></div><div class="snav"><button class="btn-n" onclick="go(14)">← Prev</button><button class="btn-n pri" onclick="go(16)">Field reference →</button></div></div>
+  <div class="mod-bar"><div class="mod-av">SA</div><div><div class="mod-nm">Sofia Almeida · APP-2026-BR-001</div><div class="mod-rf">Akanksha Anand (IO Super Admin) · Full global visibility</div></div><div style="margin-left:auto"><span class="pill p-placed">Placed</span></div></div>
+  <div class="mod-body">
+    <div class="sbar">Final application state</div>
+    <div class="fg" style="border:none;border-radius:0">
+      <div class="fc"><div class="fl">Stage</div><div class="fv"><span class="pill p-placed">Placed</span></div></div>
+      <div class="fc"><div class="fl">School placed</div><div class="fv bl">UWC Atlantic College</div></div>
+      <div class="fc"><div class="fl">Panel decision</div><div class="fv gr">Shortlisted · 20 May 2026</div></div>
+      <div class="fc"><div class="fl">Placement confirmed</div><div class="fv gr">27 May 2026</div></div>
+      <div class="fc"><div class="fl">All reviews complete</div><div class="fv gr">True</div></div>
+      <div class="fc"><div class="fl">Nomination pack</div><div class="fv bl">📎 nomination_pack_sofia_almeida_2026.pdf</div></div>
+    </div>
+    <div class="sbar">Complete audit trail – widget invite to placement</div>
+    <div style="padding:2px 0">
+      <div class="tli"><div class="tldw"><div class="tld" style="background:#6b7280"></div><div class="tll"></div></div><div><div class="tla">Lead created in CRM by Ana Carvalho</div><div class="tlm">15 Mar 2026 · Eligibility verified · Invite_Status = Not yet sent</div></div></div>
+      <div class="tli"><div class="tldw"><div class="tld" style="background:#C8102E"></div><div class="tll"></div></div><div><div class="tla">Widget opened on Lead record – invite previewed &amp; sent</div><div class="tlm">01 Apr 2026, 09:14 · CRM Widget SDK · Invite_Status → Sent · Application record created · audit logged</div></div></div>
+      <div class="tli"><div class="tldw"><div class="tld" style="background:#3b82f6"></div><div class="tll"></div></div><div><div class="tla">Sofia registered via portal · eligibility passed · In Progress</div><div class="tlm">02 Apr 2026 · Catalyst auth created · CRM linked via Catalyst_User_ID</div></div></div>
+      <div class="tli"><div class="tldw"><div class="tld" style="background:#8b5cf6"></div><div class="tll"></div></div><div><div class="tla">Application submitted · 4 automations fired</div><div class="tlm">16 Apr 2026, 14:32 · All Blueprint gate conditions passed</div></div></div>
+      <div class="tli"><div class="tldw"><div class="tld" style="background:#f59e0b"></div><div class="tll"></div></div><div><div class="tla">Assigned to Clara Ramos + Paulo Fonseca for blind review</div><div class="tlm">17 Apr 2026 · Ana Carvalho · Submitted → Under Review</div></div></div>
+      <div class="tli"><div class="tldw"><div class="tld" style="background:#ec4899"></div><div class="tll"></div></div><div><div class="tla">Both reviews submitted · All_Reviews_Complete = true · scores unlocked</div><div class="tlm">18–20 Apr 2026 · Review_Count = 2 · Visible_to_NC_Admin flipped to true</div></div></div>
+      <div class="tli"><div class="tldw"><div class="tld" style="background:#C8AB00"></div><div class="tll"></div></div><div><div class="tla">Panel decision: Shortlisted · congratulations email sent</div><div class="tlm">20 May 2026 · Under Review → Shortlisted · No scores in email</div></div></div>
+      <div class="tli"><div class="tldw"><div class="tld" style="background:#1f9535"></div><div class="tll"></div></div><div><div class="tla">Nomination pack generated · email sent to Helen Richards</div><div class="tlm">20 May 2026 · Deluge + Zoho Writer · Shortlisted → Nominated</div></div></div>
+      <div class="tli"><div class="tldw"><div class="tld" style="background:#059669"></div></div><div><div class="tla">UWC Atlantic accepted · placement confirmed · Sofia notified · scholar record created</div><div class="tlm">27 May 2026 · Helen Richards · Nominated → Placed · 5 automations fired</div></div></div>
+    </div>
+  </div>
+  <div class="br"><span class="badge b-gate">Complete immutable audit trail – from CRM widget invite to placement</span><span class="badge b-inf">Individual record continues as scholar – one record for life</span><span class="badge b-auto">Every action timestamped with user identity and source</span></div>
+</div>
+
+<!-- SCREEN 16: FIELD REFERENCE -->
+<div class="screen" id="sc-16">
+  <div class="shd"><div><div class="stitle">CRM field reference – Applications module</div><div class="ssub">All custom fields required in Zoho CRM. Create these before building the Blueprint – gate conditions reference these exact API names.</div></div><div class="snav"><button class="btn-n" onclick="go(15)">← Back to demo</button></div></div>
+  <div class="card">
+    <div style="padding:0"><table class="ft">
+      <thead><tr><th>Field label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr class="ft-sec"><td colspan="4">Invitation &amp; tracking</td></tr>
+        <tr><td>Invite status</td><td class="ft-name">Invite_Status</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Not yet sent · Sent · Expired. Button disabled when = Sent.</td></tr>
+        <tr><td>Invite sent at</td><td class="ft-name">Invite_Sent_At</td><td><span class="ft-t ft-auto">DateTime</span></td><td>Auto-set by widget Deluge on send</td></tr>
+        <tr><td>Invite sent by</td><td class="ft-name">Invite_Sent_By</td><td><span class="ft-t ft-look">Lookup</span></td><td>Lookup to Users – written by widget</td></tr>
+        <tr><td>Catalyst user ID</td><td class="ft-name">Catalyst_User_ID</td><td><span class="ft-t ft-txt">Text</span></td><td>Links CRM record to Catalyst auth account</td></tr>
+        <tr><td>NC nomination ref</td><td class="ft-name">NC_Nomination_Reference</td><td><span class="ft-t ft-txt">Text</span></td><td>e.g. UWC-BR-2026-NOM-041</td></tr>
+        <tr class="ft-sec"><td colspan="4">Applicant identity</td></tr>
+        <tr><td>Full name</td><td class="ft-name">Name</td><td><span class="ft-t ft-txt">Text</span></td><td>System field</td></tr>
+        <tr><td>Email address</td><td class="ft-name">Email</td><td><span class="ft-t ft-txt">Email</span></td><td>Portal login email</td></tr>
+        <tr><td>Date of birth</td><td class="ft-name">Date_of_Birth</td><td><span class="ft-t">Date</span></td><td>Field-level security: hidden from Data Protection Lead</td></tr>
+        <tr><td>Country of residence</td><td class="ft-name">Country_of_Residence</td><td><span class="ft-t ft-txt">Text</span></td><td>From eligibility check</td></tr>
+        <tr><td>Citizenship</td><td class="ft-name">Citizenship</td><td><span class="ft-t ft-txt">Text</span></td><td></td></tr>
+        <tr><td>Application language</td><td class="ft-name">Application_Language</td><td><span class="ft-t ft-pick">Picklist</span></td><td>English · Português · Español</td></tr>
+        <tr class="ft-sec"><td colspan="4">Application lifecycle</td></tr>
+        <tr><td>Blueprint stage</td><td class="ft-name">Stage</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Registered · In Progress · Submitted · Under Review · Shortlisted · Nominated · Placed · Declined · Withdrawn · Waitlisted</td></tr>
+        <tr><td>Submitted date</td><td class="ft-name">Submitted_Date</td><td><span class="ft-t ft-auto">DateTime</span></td><td>Auto-set by Blueprint transition workflow</td></tr>
+        <tr><td>All reviews complete</td><td class="ft-name">All_Reviews_Complete</td><td><span class="ft-t ft-bool">Checkbox</span></td><td>Flips to true when Review_Count reaches 2. Unlocks score visibility.</td></tr>
+        <tr><td>Review count</td><td class="ft-name">Review_Count</td><td><span class="ft-t ft-auto">Integer</span></td><td>Incremented by workflow on each reviewer submit</td></tr>
+        <tr><td>Panel decision</td><td class="ft-name">Panel_Decision</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Shortlisted · Not Progressed</td></tr>
+        <tr><td>Panel decision date</td><td class="ft-name">Panel_Decision_Date</td><td><span class="ft-t">Date</span></td><td></td></tr>
+        <tr><td>Decline reason</td><td class="ft-name">Decline_Reason</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Required gate for Any → Declined</td></tr>
+        <tr><td>Form completion %</td><td class="ft-name">Form_Completion_Pct</td><td><span class="ft-t ft-form">Formula</span></td><td>Integer. Shown on student dashboard.</td></tr>
+        <tr class="ft-sec"><td colspan="4">Relationships</td></tr>
+        <tr><td>National Committee</td><td class="ft-name">NC_Name</td><td><span class="ft-t ft-look">Lookup</span></td><td>Lookup to Accounts (NC record type)</td></tr>
+        <tr><td>School nominated</td><td class="ft-name">School_Nominated</td><td><span class="ft-t ft-look">Lookup</span></td><td>Lookup to Accounts (School record type)</td></tr>
+        <tr><td>Preferred school</td><td class="ft-name">Preferred_School</td><td><span class="ft-t ft-look">Lookup</span></td><td>Set by applicant in portal – advisory only</td></tr>
+        <tr><td>Guardian / parent</td><td class="ft-name">Guardian_Contact</td><td><span class="ft-t ft-look">Lookup</span></td><td>Lookup to Contacts · Relationship = Mother/Father/Guardian</td></tr>
+        <tr class="ft-sec"><td colspan="4">Consent &amp; safeguarding</td></tr>
+        <tr><td>Parental consent status</td><td class="ft-name">Parental_Consent_Status</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Pending · Received · Waived. Blueprint gate for In Progress → Submitted.</td></tr>
+        <tr><td>Parental consent date</td><td class="ft-name">Parental_Consent_Date</td><td><span class="ft-t ft-auto">DateTime</span></td><td>Auto-set when consent received</td></tr>
+        <tr><td>Safeguarding flag</td><td class="ft-name">Safeguarding_Flag_Status</td><td><span class="ft-t ft-pick">Picklist</span></td><td>None · Under Review · Resolved. Must be None to progress to Shortlisted.</td></tr>
+        <tr class="ft-sec"><td colspan="4">Form responses (written via API)</td></tr>
+        <tr><td>Personal statement</td><td class="ft-name">Personal_Statement</td><td><span class="ft-t ft-txt">Multi-line</span></td><td>Max 800 words</td></tr>
+        <tr><td>Education background</td><td class="ft-name">Education_Background</td><td><span class="ft-t ft-txt">Multi-line</span></td><td></td></tr>
+        <tr><td>Extracurricular activities</td><td class="ft-name">Extracurricular_Activities</td><td><span class="ft-t ft-txt">Multi-line</span></td><td></td></tr>
+        <tr><td>Leadership statement</td><td class="ft-name">Leadership_Statement</td><td><span class="ft-t ft-txt">Multi-line</span></td><td></td></tr>
+        <tr><td>NC local question answer</td><td class="ft-name">NC_Local_Question_Answer</td><td><span class="ft-t ft-txt">Multi-line</span></td><td>Question text from Programme record</td></tr>
+        <tr><td>Unlock reason</td><td class="ft-name">Unlock_Reason</td><td><span class="ft-t ft-txt">Text</span></td><td>Required when NC Admin uses Application Unlock action</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <div class="ch"><div class="cht">Review Scores subform fields</div></div>
+    <div style="padding:0"><table class="ft">
+      <thead><tr><th>Field label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Reviewer</td><td class="ft-name">Reviewer</td><td><span class="ft-t ft-look">Lookup</span></td><td>Lookup to CRM Users</td></tr>
+        <tr><td>Academic potential</td><td class="ft-name">Score_Academic</td><td><span class="ft-t">Integer</span></td><td>1–10</td></tr>
+        <tr><td>Community engagement</td><td class="ft-name">Score_Community</td><td><span class="ft-t">Integer</span></td><td>1–10</td></tr>
+        <tr><td>Communication skills</td><td class="ft-name">Score_Communication</td><td><span class="ft-t">Integer</span></td><td>1–10</td></tr>
+        <tr><td>UWC values commitment</td><td class="ft-name">Score_Values</td><td><span class="ft-t">Integer</span></td><td>1–10</td></tr>
+        <tr><td>Overall recommendation</td><td class="ft-name">Overall_Recommendation</td><td><span class="ft-t ft-pick">Picklist</span></td><td>Yes · Conditional · No</td></tr>
+        <tr><td>Submitted at</td><td class="ft-name">Submitted_At</td><td><span class="ft-t ft-auto">DateTime</span></td><td>Auto-set on reviewer submit</td></tr>
+        <tr><td>Visible to NC Admin</td><td class="ft-name">Visible_to_NC_Admin</td><td><span class="ft-t ft-bool">Checkbox</span></td><td>false until All_Reviews_Complete = true — this is the blind review lock</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="br"><span class="badge b-gate">All fields must exist in CRM before building the Blueprint</span><span class="badge b-api">API name = exact field name used in all Catalyst REST API calls</span><span class="badge b-auto">Formula and auto-set fields managed entirely by CRM workflows</span></div>
+</div>
+
+</main>
+</div>
+<script>
+const TOTAL=17;
+function go(i){
+  document.querySelectorAll('.screen').forEach((s,j)=>s.classList.toggle('active',j===i));
+  document.querySelectorAll('.nav-item').forEach((n,j)=>{
+    n.classList.remove('active','done');
+    if(j===i)n.classList.add('active');
+    else if(j<i)n.classList.add('done');
+  });
+  const pct=Math.round(((i+1)/TOTAL)*100);
+  document.getElementById('sp-fill').style.width=pct+'%';
+  document.getElementById('prog-txt').textContent='Step '+(i+1)+' of '+TOTAL;
+  document.getElementById('main').scrollTop=0;
+  if(i!==1){
+    var wn=document.getElementById('w-normal');
+    var ws=document.getElementById('w-sent');
+    if(wn)wn.style.display='block';
+    if(ws)ws.style.display='none';
+  }
+}
+function showSent(){
+  document.getElementById('w-normal').style.display='none';
+  document.getElementById('w-sent').style.display='block';
+}
+</script>
+</body>
+</html>
