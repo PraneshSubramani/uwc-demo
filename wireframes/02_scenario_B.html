@@ -298,7 +298,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 
 <div class="app">
     <span class="demo-bar__divider"></span>
-    <span class="demo-bar__step" id="step-counter">Step 1 / 11</span>
+    <span class="demo-bar__step" id="step-counter">Step 1 / 12</span>
     <div class="demo-bar__nav">
       <button class="demo-bar__nav-btn" id="prev-btn" title="Previous">‹</button>
       <button class="demo-bar__nav-btn" id="next-btn" title="Next">›</button>
@@ -433,10 +433,555 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
             <a class="lp-nav__link" onclick="document.getElementById('lp-schools').scrollIntoView({behavior:'smooth'})">Our schools</a>
             <a class="lp-nav__link" onclick="document.getElementById('lp-footer').scrollIntoView({behavior:'smooth'})">Find a National Committee</a>
           </div>
-          <div class="lp-nav__role" title="Demo: switch viewpoint">
-            <span style="font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#9ca3af;">View as</span>
-            <span class="lp-nav__role-badge">👤 Public visitor</span>
-          </div>
+          <!-- ============================================================
+     UWC International — Role Switcher Widget (Scenario B)
+     Self-contained: STYLE + HTML + SCRIPT
+     ============================================================ -->
+
+<!-- Block 1: STYLE -->
+<style>
+  /* ============================================================
+     Role Switcher — all classes prefixed .rs-
+     ============================================================ */
+  #uwc-role-switcher,
+  #uwc-role-switcher * {
+    box-sizing: border-box;
+  }
+
+  .rs-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.2;
+  }
+
+  .rs-label {
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: #6b7280;
+    margin-right: 8px;
+    font-weight: 600;
+  }
+
+  .rs-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    padding: 6px 14px 6px 6px;
+    background: #ffffff;
+    cursor: pointer;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+    font-family: inherit;
+    color: #0d1b3e;
+  }
+
+  .rs-trigger:hover {
+    border-color: #003087;
+  }
+
+  .rs-trigger:focus-visible {
+    outline: none;
+    border-color: #003087;
+    box-shadow: 0 0 0 3px rgba(0, 48, 135, 0.18);
+  }
+
+  .rs-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #003087;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 11px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    letter-spacing: 0.3px;
+  }
+
+  .rs-name {
+    font-weight: 600;
+    color: #0d1b3e;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .rs-role {
+    color: #6b7280;
+    font-size: 11.5px;
+    margin-left: 4px;
+    white-space: nowrap;
+  }
+
+  .rs-role::before {
+    content: "·";
+    margin-right: 6px;
+    color: #d1d5db;
+  }
+
+  .rs-chev {
+    color: #9ca3af;
+    font-size: 10px;
+    margin-left: 4px;
+    transition: transform 150ms ease;
+    display: inline-block;
+  }
+
+  .rs-trigger[aria-expanded="true"] .rs-chev {
+    transform: rotate(180deg);
+  }
+
+  .rs-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 320px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    padding: 6px;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    animation: rs-menu-in 150ms ease both;
+  }
+
+  .rs-menu[hidden] {
+    display: none;
+  }
+
+  @keyframes rs-menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .rs-option {
+    width: 100%;
+    text-align: left;
+    padding: 10px 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    border-left: 3px solid transparent;
+    transition: background-color 100ms ease, border-color 100ms ease;
+    font-family: inherit;
+    color: #0d1b3e;
+  }
+
+  .rs-option:hover {
+    background: #f3f5fa;
+  }
+
+  .rs-option.active {
+    background: #E8EEF6;
+    border-left-color: #003087;
+  }
+
+  .rs-option:focus-visible {
+    outline: none;
+    background: #f3f5fa;
+    box-shadow: inset 0 0 0 2px rgba(0, 48, 135, 0.25);
+  }
+
+  .rs-option__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #003087;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    letter-spacing: 0.3px;
+  }
+
+  .rs-option__main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .rs-option__name {
+    font-weight: 600;
+    color: #0d1b3e;
+    font-size: 13.5px;
+  }
+
+  .rs-option__role {
+    color: #6b7280;
+    font-size: 11.5px;
+  }
+
+  .rs-option__scope {
+    color: #9ca3af;
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  .rs-option__check {
+    margin-left: auto;
+    color: #16a34a;
+    font-size: 16px;
+    font-weight: 700;
+    visibility: hidden;
+    flex-shrink: 0;
+  }
+
+  .rs-option.active .rs-option__check {
+    visibility: visible;
+  }
+</style>
+
+<!-- Block 2: HTML WIDGET -->
+<div id="uwc-role-switcher" class="rs-wrap" data-default-role="visitor">
+  <div class="rs-label">View as</div>
+  <button class="rs-trigger" type="button" aria-expanded="false" aria-haspopup="listbox">
+    <span class="rs-avatar" id="rs-avatar">&#128100;</span>
+    <span class="rs-name" id="rs-name">Public visitor</span>
+    <span class="rs-role" id="rs-role">Not signed in</span>
+    <span class="rs-chev">&#9662;</span>
+  </button>
+  <div class="rs-menu" id="rs-menu" hidden role="listbox">
+    <!-- 6 options injected by JS -->
+  </div>
+</div>
+
+<!-- Block 3: SCRIPT -->
+<script>
+(function () {
+  'use strict';
+
+  /* ------------------------------------------------------------
+     Roles
+     ------------------------------------------------------------ */
+  var ROLES = [
+    { id: 'visitor',  name: 'Public visitor',     initial: '👤', role: 'Not signed in',      scope: 'Public portal pages',      badge: '#9ca3af' },
+    { id: 'sofia',    name: 'Sofia Almeida',      initial: 'SA',           role: 'Applicant (Portal)', scope: 'Her own application',      badge: '#003087' },
+    { id: 'maria',    name: 'Maria Almeida',      initial: 'MA',           role: 'Guardian / Parent',  scope: "Sofia's consent only",     badge: '#f59e0b' },
+    { id: 'ana',      name: 'Ana Carvalho',       initial: 'AC',           role: 'NC Admin — Brazil',  scope: 'UWC Brazil NC only',       badge: '#0ea5e9' },
+    { id: 'io-mkt',   name: 'IO Marketing Staff', initial: 'IM',           role: 'Marketing & Comms',  scope: 'Global · Read-only',       badge: '#8b5cf6' },
+    { id: 'akanksha', name: 'Akanksha Anand',     initial: 'AA',           role: 'IO Super Admin',     scope: 'Global · Full visibility', badge: '#c8102e' }
+  ];
+
+  var ROLE_LANDING_INDEX = {
+    'visitor':  0,
+    'sofia':    3,
+    'maria':    8,
+    'ana':      5,
+    'io-mkt':   10,
+    'akanksha': 5
+  };
+
+  /* ------------------------------------------------------------
+     State + DOM refs
+     ------------------------------------------------------------ */
+  var rootEl = null;
+  var triggerEl = null;
+  var menuEl = null;
+  var avatarEl = null;
+  var nameEl = null;
+  var roleEl = null;
+  var currentRoleId = 'visitor';
+
+  function getRoleById(id) {
+    for (var i = 0; i < ROLES.length; i++) {
+      if (ROLES[i].id === id) return ROLES[i];
+    }
+    return null;
+  }
+
+  /* ------------------------------------------------------------
+     Menu population
+     ------------------------------------------------------------ */
+  function buildMenu() {
+    if (!menuEl) return;
+    menuEl.innerHTML = '';
+    for (var i = 0; i < ROLES.length; i++) {
+      var r = ROLES[i];
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'rs-option';
+      btn.setAttribute('role', 'option');
+      btn.setAttribute('data-role-id', r.id);
+
+      var av = document.createElement('span');
+      av.className = 'rs-option__avatar';
+      av.style.background = r.badge;
+      av.textContent = r.initial;
+      btn.appendChild(av);
+
+      var main = document.createElement('span');
+      main.className = 'rs-option__main';
+
+      var nm = document.createElement('span');
+      nm.className = 'rs-option__name';
+      nm.textContent = r.name;
+      main.appendChild(nm);
+
+      var rl = document.createElement('span');
+      rl.className = 'rs-option__role';
+      rl.textContent = r.role;
+      main.appendChild(rl);
+
+      var sc = document.createElement('span');
+      sc.className = 'rs-option__scope';
+      sc.textContent = r.scope;
+      main.appendChild(sc);
+
+      btn.appendChild(main);
+
+      var chk = document.createElement('span');
+      chk.className = 'rs-option__check';
+      chk.textContent = '✓';
+      btn.appendChild(chk);
+
+      btn.addEventListener('click', (function (roleId) {
+        return function () {
+          setRole(roleId);
+          closeMenu();
+        };
+      })(r.id));
+
+      menuEl.appendChild(btn);
+    }
+  }
+
+  /* ------------------------------------------------------------
+     Open / Close
+     ------------------------------------------------------------ */
+  function openMenu() {
+    if (!menuEl || !triggerEl) return;
+    menuEl.hidden = false;
+    triggerEl.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMenu() {
+    if (!menuEl || !triggerEl) return;
+    menuEl.hidden = true;
+    triggerEl.setAttribute('aria-expanded', 'false');
+  }
+
+  function toggleMenu() {
+    if (!menuEl) return;
+    if (menuEl.hidden) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
+  }
+
+  function onDocClick(e) {
+    if (!rootEl) return;
+    if (rootEl.contains(e.target)) return;
+    closeMenu();
+  }
+
+  function onDocKey(e) {
+    if (e.key === 'Escape' || e.keyCode === 27) {
+      closeMenu();
+    }
+  }
+
+  /* ------------------------------------------------------------
+     setRole — the critical chrome-swap logic
+     ------------------------------------------------------------ */
+  function setRole(id) {
+    var r = getRoleById(id);
+    if (!r) return;
+    currentRoleId = id;
+
+    // (a) body dataset
+    document.body.dataset.currentRole = id;
+
+    // (b) trigger button updates
+    if (avatarEl) {
+      avatarEl.textContent = r.initial;
+      avatarEl.style.background = r.badge;
+    }
+    if (nameEl) nameEl.textContent = r.name;
+    if (roleEl) roleEl.textContent = r.role;
+
+    // (c) menu active option
+    if (menuEl) {
+      var opts = menuEl.querySelectorAll('.rs-option');
+      for (var i = 0; i < opts.length; i++) {
+        if (opts[i].getAttribute('data-role-id') === id) {
+          opts[i].classList.add('active');
+        } else {
+          opts[i].classList.remove('active');
+        }
+      }
+    }
+
+    // (d) data-role-show / data-role-hide
+    applyShowHide(id);
+
+    // (e) data-role-variant text swaps (LEAF ELEMENTS ONLY)
+    applyVariants(id);
+
+    // (f) Role-aware landing
+    var target = ROLE_LANDING_INDEX[id];
+    if (typeof target === 'number' && typeof window.go === 'function') {
+      try {
+        window.go(target);
+      } catch (err) {
+        console.warn('[RoleSwitcherB] window.go threw:', err);
+      }
+    }
+
+    // (g) Dispatch event
+    try {
+      window.dispatchEvent(new CustomEvent('roleChanged', { detail: { role: id } }));
+    } catch (err) {
+      // Fallback for old browsers
+      var ev = document.createEvent('CustomEvent');
+      ev.initCustomEvent('roleChanged', false, false, { role: id });
+      window.dispatchEvent(ev);
+    }
+  }
+
+  /* ------------------------------------------------------------
+     Show / Hide helpers
+     ------------------------------------------------------------ */
+  function listContains(csv, id) {
+    if (!csv) return false;
+    var parts = csv.split(',');
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i].trim() === id) return true;
+    }
+    return false;
+  }
+
+  function applyShowHide(id) {
+    var showEls = document.querySelectorAll('[data-role-show]');
+    for (var i = 0; i < showEls.length; i++) {
+      var csv = showEls[i].getAttribute('data-role-show');
+      showEls[i].hidden = !listContains(csv, id);
+    }
+    var hideEls = document.querySelectorAll('[data-role-hide]');
+    for (var j = 0; j < hideEls.length; j++) {
+      var csv2 = hideEls[j].getAttribute('data-role-hide');
+      hideEls[j].hidden = listContains(csv2, id);
+    }
+  }
+
+  /* ------------------------------------------------------------
+     Variant text swap — LEAF ELEMENTS ONLY
+     Format: "ana:Brazil NC|io-mkt:Global|akanksha:All"
+     SAFETY: skip if element has child elements (tbody-clobber guard)
+     ------------------------------------------------------------ */
+  function parseVariantSpec(spec) {
+    var out = {};
+    if (!spec) return out;
+    var pairs = spec.split('|');
+    for (var i = 0; i < pairs.length; i++) {
+      var p = pairs[i];
+      var idx = p.indexOf(':');
+      if (idx === -1) continue;
+      var key = p.substring(0, idx).trim();
+      var val = p.substring(idx + 1);
+      if (key) out[key] = val;
+    }
+    return out;
+  }
+
+  function applyVariants(id) {
+    var els = document.querySelectorAll('[data-role-variant]');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+
+      // SAFETY GUARD — prevent api_dad66f29c2257f26 tbody-clobber bug
+      if (el.childElementCount > 0) {
+        console.warn('[RoleSwitcherB] role-variant skipped on container:', el);
+        continue;
+      }
+
+      // Store original on first run
+      if (typeof el.dataset.roleVariantOriginal === 'undefined') {
+        el.dataset.roleVariantOriginal = el.textContent;
+      }
+
+      var spec = parseVariantSpec(el.getAttribute('data-role-variant'));
+      if (Object.prototype.hasOwnProperty.call(spec, id)) {
+        el.textContent = spec[id];
+      } else {
+        el.textContent = el.dataset.roleVariantOriginal;
+      }
+    }
+  }
+
+  /* ------------------------------------------------------------
+     Public API
+     ------------------------------------------------------------ */
+  function getRole() {
+    return currentRoleId;
+  }
+
+  function init() {
+    rootEl = document.getElementById('uwc-role-switcher');
+    if (!rootEl) return;
+    triggerEl = rootEl.querySelector('.rs-trigger');
+    menuEl = rootEl.querySelector('#rs-menu');
+    avatarEl = rootEl.querySelector('#rs-avatar');
+    nameEl = rootEl.querySelector('#rs-name');
+    roleEl = rootEl.querySelector('#rs-role');
+
+    buildMenu();
+
+    if (triggerEl) {
+      triggerEl.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggleMenu();
+      });
+    }
+
+    document.addEventListener('click', onDocClick);
+    document.addEventListener('keydown', onDocKey);
+
+    var def = rootEl.getAttribute('data-default-role') || 'visitor';
+    setRole(def);
+  }
+
+  /* ------------------------------------------------------------
+     Expose + auto-init
+     ------------------------------------------------------------ */
+  window.RoleSwitcherB = {
+    setRole: setRole,
+    getRole: getRole,
+    init: init
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
           <div class="lp-nav__actions">
             <button class="lp-btn-ghost" onclick="window.go && window.go(2)">Sign in</button>
             <button class="lp-btn-primary" onclick="window.go && window.go(1)">Apply now →</button>
@@ -962,60 +1507,1791 @@ Finally, I want to be challenged. I want to be the least experienced person in a
       </div>
     </section>
 
-    <!-- STEP 6 — Ana (NC Admin Brazil) — Zoho Leads list, Sofia highlighted pre-conversion -->
+    <!-- STEP 6 — Ana / IO-Mkt / Akanksha: Applications Kanban (CRM staff view) -->
     <section class="screen" id="sc-4">
-      <div class="zoho-shell">
-        <header class="zoho-topbar">
-          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
-          <div class="zoho-tb__center"><h1 class="zoho-tb__module">Leads</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">🔍</span><input placeholder="Search records"></div></div>
-          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus">+</button><button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell">🔔</button><button class="zoho-tb__icon">📅</button><button class="zoho-tb__icon">👤</button><button class="zoho-tb__icon">⚙</button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon zoho-tb__waffle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></button></div>
-        </header>
-        <div class="zoho-body">
-          <aside class="zoho-sidebar">
-            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">🏠</span>Home</a>
-            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">📊</span>Reports</a>
-            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name" data-role-variant="ana:Brazil NC|io-mkt:CRM Global">Brazil NC</span><span class="zoho-sb__teamspace-chev">⌄</span><span class="zoho-sb__teamspace-more">⋯</span></div>
-            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">📁</span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item active"><span class="zoho-sb__item-icon">◐</span>Leads</a><a class="zoho-sb__item"><span class="zoho-sb__item-icon">◉</span>Contacts</a><a class="zoho-sb__item"><span class="zoho-sb__item-icon">📑</span>Applications</a></div></div>
-            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">🎓</span>Programmes</a>
-            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">🌐</span>National Committees</a>
-          </aside>
-          <main class="zoho-content">
-            <div class="zoho-page-strip">
-              <div class="zoho-page-strip__view" data-role-variant="ana:Brazil NC Leads ⌄|io-mkt:All Leads ⌄">Brazil NC Leads ⌄</div>
-              <span class="zoho-helper-tag" style="margin-left:auto;">Lead → Contact auto-conversion fires on portal e-mail verification</span>
-            </div>
-            <div class="zoho-toolbar">
-              <button class="zoho-toolbar__btn">▼ Filter</button>
-              <button class="zoho-toolbar__btn">↕ Sort</button>
-              <span class="zoho-toolbar__divider"></span>
-              <span class="zoho-toolbar__view-icon active">☰</span>
-              <span class="zoho-toolbar__view-icon">▦</span>
-              <span class="zoho-toolbar__spacer"></span>
-              <button class="zoho-toolbar__cta">New Lead</button><button class="zoho-toolbar__cta-split">▾</button>
-            </div>
-            <table class="zoho-list">
-              <thead><tr><th><input type="checkbox"></th><th>Nome</th><th>E-mail</th><th>Country</th><th>Criado em</th><th>Origem</th><th>Estado</th><th></th></tr></thead>
-              <tbody>
-                <tr><td><input type="checkbox"></td><td class="zoho-list__name-link">Lucas Ferreira</td><td>l.ferreira@example.com</td><td>🇧🇷 Brazil</td><td>22 May 2026</td><td><span class="tag tag--blue">Website</span></td><td><span class="zoho-pill zoho-pill--qual">Qualified</span></td><td>⋯</td></tr>
-                <tr><td><input type="checkbox"></td><td class="zoho-list__name-link">Isabela Costa</td><td>i.costa@example.com</td><td>🇧🇷 Brazil</td><td>24 May 2026</td><td><span class="tag tag--orange">Partner School</span></td><td><span class="zoho-pill zoho-pill--review">New</span></td><td>⋯</td></tr>
-                <tr class="conv-row"><td><input type="checkbox" checked></td><td class="zoho-list__name-link" style="font-weight:700;color:#003087;">Sofia Almeida</td><td>sofia.almeida@example.com</td><td>🇧🇷 Brazil</td><td>27 May 2026</td><td><span class="tag tag--green">Portal</span></td><td><span class="zoho-pill" style="background:#dbeafe;color:#1e3a8a;">Email verified</span></td><td>
-                  <div class="conv-btn-wrap">
-                    <button class="conv-btn">Convert → Contato</button>
-                    <div class="conv-tooltip">Converting a Lead to Contact automatically creates a record linked to the Brazil National Committee. The portal has already verified the email — conversion happens via Zoho webhook at registration.</div>
-                  </div>
-                </td></tr>
-                <tr><td><input type="checkbox"></td><td class="zoho-list__name-link">Pedro Nunes</td><td>p.nunes@example.com</td><td>🇧🇷 Brazil</td><td>25 May 2026</td><td><span class="tag tag--orange">Social Media</span></td><td><span class="zoho-pill zoho-pill--review">New</span></td><td>⋯</td></tr>
-                <tr><td><input type="checkbox"></td><td class="zoho-list__name-link">Mariana Souza</td><td>m.souza@example.com</td><td>🇧🇷 Brazil</td><td>26 May 2026</td><td><span class="tag tag--blue">NC Website</span></td><td><span class="zoho-pill zoho-pill--qual">Qualified</span></td><td>⋯</td></tr>
-              </tbody>
-            </table>
-            <div style="padding:10px 22px;font-size:12px;color:#6b7280;">5 leads · filtrado: Brazil NC</div>
-            <div class="zoho-smart-chat"><span class="zoho-smart-chat__placeholder">Here is your Smart Chat (Ctrl+Space)</span><div class="zoho-smart-chat__icons"><span class="zoho-smart-chat__icon">💬</span><span class="zoho-smart-chat__icon">🔔</span></div></div>
-          </main>
+<style>
+  .zoho-shell {
+    --zoho-topbar-bg: #1c1f25;
+    --zoho-sidebar-bg: #f7f8fa;
+    --zoho-sidebar-active-bg: #e6efff;
+    --zoho-primary: #3b6ef5;
+    --zoho-content-bg: #ffffff;
+    --zoho-border: #e5e7eb;
+    --zoho-sidebar-width: 225px;
+    --zoho-topbar-height: 48px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif;
+    color: #1f2937;
+    background: #ffffff;
+    border: 1px solid var(--zoho-border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  }
+  .zoho-shell *, .zoho-shell *::before, .zoho-shell *::after { box-sizing: border-box; }
+
+  .zoho-topbar {
+    height: var(--zoho-topbar-height);
+    background: var(--zoho-topbar-bg);
+    color: #f3f4f6;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 14px;
+    font-size: 13px;
+  }
+  .zoho-topbar__logo {
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 600; letter-spacing: 0.3px;
+  }
+  .zoho-topbar__logo-mark {
+    width: 22px; height: 22px; border-radius: 4px;
+    background: linear-gradient(135deg, #e53935 0%, #d32f2f 100%);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+  }
+  .zoho-topbar__nav {
+    display: flex; gap: 18px; margin-left: 6px;
+    color: #c7cbd1; font-size: 13px;
+  }
+  .zoho-topbar__nav span { cursor: default; }
+  .zoho-topbar__nav span.is-active { color: #ffffff; font-weight: 500; position: relative; }
+  .zoho-topbar__nav span.is-active::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -16px;
+    height: 2px; background: var(--zoho-primary);
+  }
+  .zoho-topbar__search {
+    flex: 1; max-width: 420px; margin-left: auto;
+    background: #2a2e36; border: 1px solid #353a44;
+    border-radius: 4px; height: 30px;
+    display: flex; align-items: center; padding: 0 10px;
+    color: #9ca3af; font-size: 12.5px; gap: 8px;
+  }
+  .zoho-topbar__icons { display: flex; align-items: center; gap: 14px; color: #c7cbd1; font-size: 14px; }
+  .zoho-topbar__icon { cursor: default; }
+  .zoho-topbar__org-pill {
+    background: #2a2e36; border: 1px solid #353a44;
+    padding: 4px 10px; border-radius: 12px; font-size: 12px;
+    color: #e5e7eb; display: flex; align-items: center; gap: 6px;
+  }
+  .zoho-topbar__org-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #10b981;
+  }
+  .zoho-topbar__user {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: linear-gradient(135deg, #3b6ef5, #2553d1);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600;
+  }
+
+  .zoho-body {
+    display: grid;
+    grid-template-columns: var(--zoho-sidebar-width) 1fr;
+    min-height: 720px;
+    background: var(--zoho-content-bg);
+  }
+
+  .zoho-sidebar {
+    background: var(--zoho-sidebar-bg);
+    border-right: 1px solid var(--zoho-border);
+    padding: 12px 8px;
+    font-size: 13px;
+  }
+  .zoho-sb__group-label {
+    text-transform: uppercase; letter-spacing: 0.6px;
+    color: #6b7280; font-size: 10.5px; font-weight: 600;
+    padding: 10px 10px 6px;
+  }
+  .zoho-sb__item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px; border-radius: 6px;
+    color: #374151; text-decoration: none; cursor: default;
+    margin-bottom: 2px;
+  }
+  .zoho-sb__item:hover { background: #eef0f3; }
+  .zoho-sb__item.is-active {
+    background: var(--zoho-sidebar-active-bg);
+    color: var(--zoho-primary);
+    font-weight: 600;
+  }
+  .zoho-sb__icon {
+    width: 18px; text-align: center; font-size: 14px; color: inherit;
+  }
+
+  .zoho-content {
+    background: var(--zoho-content-bg);
+    padding: 0;
+    display: flex; flex-direction: column;
+    min-width: 0;
+  }
+
+  .kb-controls {
+    padding: 14px 20px 12px;
+    border-bottom: 1px solid var(--zoho-border);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+  }
+  .kb-controls__left { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  .kb-title {
+    font-size: 17px; font-weight: 500; color: #111827;
+    margin: 0; line-height: 1.2;
+  }
+  .kb-view-picker {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 10px; border-radius: 4px;
+    border: 1px solid var(--zoho-border); background: #fafbfc;
+    font-size: 12.5px; color: #1f2937; cursor: default;
+  }
+  .kb-record-count {
+    font-size: 12px; color: #6b7280; margin-left: 4px;
+  }
+  .kb-controls__right { display: flex; align-items: center; gap: 8px; }
+  .kb-btn {
+    border: 1px solid var(--zoho-border);
+    background: #ffffff;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 12.5px;
+    color: #374151;
+    cursor: default;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .kb-btn:hover { background: #f9fafb; }
+  .kb-btn--primary {
+    background: var(--zoho-primary);
+    border-color: var(--zoho-primary);
+    color: #fff;
+  }
+  .kb-btn--primary:hover { background: #2553d1; }
+
+  .kb-meta-strip {
+    padding: 8px 20px;
+    background: #fafbfc;
+    border-bottom: 1px solid var(--zoho-border);
+    font-size: 12px; color: #4b5563;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .kb-meta-pill {
+    background: #ffffff; border: 1px solid var(--zoho-border);
+    padding: 3px 9px; border-radius: 12px; font-size: 11.5px;
+    color: #374151;
+  }
+  .kb-meta-pill--role { border-color: #c7d8ff; background: #eef3ff; color: #2553d1; font-weight: 500; }
+
+  .kb-board-wrap {
+    flex: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background: #f4f6f9;
+    padding: 16px;
+  }
+  .kb-board {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    min-width: max-content;
+  }
+  .kb-col {
+    width: 260px;
+    flex: 0 0 260px;
+    background: #ffffff;
+    border: 1px solid var(--zoho-border);
+    border-radius: 6px;
+    display: flex; flex-direction: column;
+    max-height: 640px;
+    overflow: hidden;
+  }
+  .kb-col__header {
+    padding: 10px 12px 9px;
+    border-top: 3px solid #6366f1;
+    border-bottom: 1px solid var(--zoho-border);
+    background: #fafbfc;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .kb-col__title {
+    font-size: 12.5px; font-weight: 600;
+    color: #111827; text-transform: uppercase; letter-spacing: 0.4px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .kb-col__count {
+    font-size: 11px; color: #6b7280; font-weight: 500;
+    background: #f3f4f6; border-radius: 10px;
+    padding: 1px 8px;
+  }
+  .kb-col__subtitle {
+    font-size: 10.5px; color: #9ca3af; font-weight: 500;
+  }
+  .kb-col__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex; flex-direction: column; gap: 12px;
+    background: #fbfcfd;
+  }
+  .kb-col__empty {
+    font-size: 11.5px; color: #9ca3af; text-align: center;
+    padding: 24px 8px; font-style: italic;
+  }
+
+  .kb-card {
+    background: #ffffff;
+    border: 1px solid var(--zoho-border);
+    border-radius: 6px;
+    padding: 10px 11px;
+    min-height: 140px;
+    display: flex; flex-direction: column;
+    gap: 6px;
+    position: relative;
+    cursor: default;
+    transition: box-shadow 120ms ease, transform 120ms ease;
+  }
+  .kb-card:hover {
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+    border-color: #cdd5df;
+  }
+  .kb-card:hover .kb-card__view { opacity: 1; }
+  .kb-card--sofia {
+    border-left: 3px solid #003087;
+    box-shadow: 0 2px 10px rgba(0, 48, 135, 0.10);
+    cursor: pointer;
+  }
+  .kb-card--sofia:hover {
+    box-shadow: 0 6px 18px rgba(0, 48, 135, 0.18);
+    transform: translateY(-1px);
+  }
+  .kb-card--dimmed { opacity: 0.55; }
+
+  .kb-card__top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 8px;
+  }
+  .kb-card__name {
+    font-size: 13px; font-weight: 600; color: #111827;
+    line-height: 1.25;
+  }
+  .kb-card__priority {
+    width: 8px; height: 8px; border-radius: 50%;
+    flex-shrink: 0; margin-top: 5px;
+  }
+  .kb-card__meta {
+    font-size: 11.5px; color: #4b5563;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .kb-card__chips {
+    display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px;
+  }
+  .kb-chip {
+    font-size: 10.5px; font-weight: 500;
+    padding: 2px 7px; border-radius: 10px;
+    background: #eef2ff; color: #4338ca;
+    border: 1px solid #e0e7ff;
+  }
+  .kb-chip--brazil { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+  .kb-chip--global { background: #dbeafe; color: #1e40af; border-color: #bfdbfe; }
+  .kb-chip--safeguard { background: #fee2e2; color: #b91c1c; border-color: #fecaca; }
+
+  .kb-card__date {
+    font-size: 11px; color: #6b7280;
+    margin-top: auto;
+  }
+  .kb-card__bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 6px; border-top: 1px dashed #eef0f3;
+  }
+  .kb-card__avatar {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    color: #fff; display: inline-flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 600;
+  }
+  .kb-card__avatar--ana { background: linear-gradient(135deg, #3b6ef5, #2553d1); }
+  .kb-card__avatar--rg { background: linear-gradient(135deg, #10b981, #047857); }
+  .kb-card__avatar--lc { background: linear-gradient(135deg, #f59e0b, #b45309); }
+  .kb-card__avatar--mk { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+  .kb-card__view {
+    font-size: 11px; color: var(--zoho-primary); font-weight: 500;
+    opacity: 0; transition: opacity 120ms ease;
+  }
+  .kb-card__new-badge {
+    position: absolute; top: -7px; right: -6px;
+    background: #003087; color: #fff;
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.5px;
+    padding: 2px 7px; border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 48, 135, 0.25);
+  }
+  .kb-card__safeguard {
+    display: inline-flex; align-items: center; gap: 3px;
+    background: #fee2e2; color: #b91c1c;
+    font-size: 10px; font-weight: 600;
+    padding: 1px 6px; border-radius: 8px;
+    border: 1px solid #fecaca;
+  }
+
+  .kb-board-wrap::-webkit-scrollbar { height: 10px; }
+  .kb-board-wrap::-webkit-scrollbar-track { background: #eceff3; }
+  .kb-board-wrap::-webkit-scrollbar-thumb { background: #cbd2db; border-radius: 5px; }
+  .kb-col__body::-webkit-scrollbar { width: 6px; }
+  .kb-col__body::-webkit-scrollbar-thumb { background: #d6dbe2; border-radius: 3px; }
+</style>
+
+<div class="zoho-shell">
+
+  <header class="zoho-topbar">
+    <div class="zoho-topbar__logo">
+      <div class="zoho-topbar__logo-mark">Z</div>
+      <span>Zoho CRM</span>
+    </div>
+    <div class="zoho-topbar__nav">
+      <span>Home</span>
+      <span>Leads</span>
+      <span>Contacts</span>
+      <span class="is-active">Applications</span>
+      <span>Programmes</span>
+      <span>Reports</span>
+      <span>Analytics</span>
+    </div>
+    <div class="zoho-topbar__search">
+      <span>&#128269;</span>
+      <span>Search applications, contacts, programmes...</span>
+    </div>
+    <div class="zoho-topbar__icons">
+      <span class="zoho-topbar__icon" title="Add">&#43;</span>
+      <span class="zoho-topbar__icon" title="Zia">&#10024;</span>
+      <span class="zoho-topbar__icon" title="Notifications">&#128276;</span>
+      <span class="zoho-topbar__icon" title="Calendar">&#128197;</span>
+      <span class="zoho-topbar__icon" title="Settings">&#9881;</span>
+      <div class="zoho-topbar__org-pill">
+        <span class="zoho-topbar__org-dot"></span>
+        <span>UWC International</span>
+      </div>
+      <div class="zoho-topbar__user" title="Ana Ribeiro">AR</div>
+      <span class="zoho-topbar__icon" title="Apps">&#9866;</span>
+    </div>
+  </header>
+
+  <div class="zoho-body">
+
+    <aside class="zoho-sidebar">
+      <div class="zoho-sb__group-label">CRM</div>
+      <a class="zoho-sb__item"><span class="zoho-sb__icon">&#8962;</span><span>Home</span></a>
+      <a class="zoho-sb__item"><span class="zoho-sb__icon">&#128100;</span><span>Contacts</span></a>
+      <a class="zoho-sb__item"><span class="zoho-sb__icon">&#128203;</span><span>Leads</span></a>
+      <a class="zoho-sb__item is-active"><span class="zoho-sb__icon">&#127891;</span><span>Applications</span></a>
+      <a class="zoho-sb__item"><span class="zoho-sb__icon">&#127760;</span><span>Programmes</span></a>
+
+      <div class="zoho-sb__group-label">INSIGHTS</div>
+      <a class="zoho-sb__item"><span class="zoho-sb__icon">&#128202;</span><span>Reports</span></a>
+      <a class="zoho-sb__item"><span class="zoho-sb__icon">&#128200;</span><span>Analytics</span></a>
+
+      <div class="zoho-sb__group-label">ADMIN</div>
+      <a class="zoho-sb__item"><span class="zoho-sb__icon">&#9881;</span><span>Setup</span></a>
+    </aside>
+
+    <main class="zoho-content">
+
+      <div class="kb-controls">
+        <div class="kb-controls__left">
+          <h1 class="kb-title">Applications</h1>
+          <div class="kb-view-picker">
+            <span data-role-variant="ana:Brazil NC Applications|io-mkt:Global Applications|akanksha:All Applications">Brazil NC Applications</span>
+            <span>&#9662;</span>
+          </div>
+          <span class="kb-record-count">15 records</span>
+        </div>
+        <div class="kb-controls__right">
+          <button class="kb-btn"><span>&#9783;</span><span>Filter</span></button>
+          <button class="kb-btn"><span>&#8645;</span><span>Sort</span></button>
+          <button class="kb-btn"><span>&#8635;</span><span>Refresh</span></button>
+          <button class="kb-btn kb-btn--primary"><span>&#43;</span><span>Add Application</span></button>
         </div>
       </div>
+
+      <div class="kb-meta-strip">
+        <span class="kb-meta-pill kb-meta-pill--role">Role: National Committee &mdash; Brazil</span>
+        <span class="kb-meta-pill">Cycle: 2026 Intake</span>
+        <span class="kb-meta-pill">Last sync: 2 min ago</span>
+        <span style="margin-left: auto; color: #6b7280;">Kanban view &#9662;</span>
+      </div>
+
+      <div class="kb-board-wrap">
+        <div class="kb-board">
+
+          <section class="kb-col">
+            <div class="kb-col__header" style="border-top-color: #6366f1;">
+              <div class="kb-col__title"><span>Submitted</span><span class="kb-col__count">4</span></div>
+              <div class="kb-col__subtitle">Application received</div>
+            </div>
+            <div class="kb-col__body">
+
+              <article class="kb-card">
+                <div class="kb-card__top">
+                  <div class="kb-card__name">Preethi Nair</div>
+                  <span class="kb-card__priority" style="background: #f59e0b;"></span>
+                </div>
+                <div class="kb-card__meta">&#127470;&#127475; India &middot; 16y</div>
+                <div class="kb-card__chips"><span class="kb-chip kb-chip--global">India NC</span></div>
+                <div class="kb-card__date">Submitted 26 May 2026</div>
+                <div class="kb-card__bottom">
+                  <div class="kb-card__avatar kb-card__avatar--mk">MK</div>
+                  <span class="kb-card__view">View &rarr;</span>
+                </div>
+              </article>
+
+              <article class="kb-card">
+                <div class="kb-card__top">
+                  <div class="kb-card__name">Miguel Santos</div>
+                  <span class="kb-card__priority" style="background: #ef4444;"></span>
+                </div>
+                <div class="kb-card__meta">&#127477;&#127481;&rarr;&#127463;&#127479; Portugal &rarr; Brazil &middot; 17y</div>
+                <div class="kb-card__chips">
+                  <span class="kb-chip kb-chip--brazil">Brazil NC</span>
+                  <span class="kb-chip kb-chip--safeguard">&#9888; Safeguarding</span>
+                </div>
+                <div class="kb-card__date">Submitted 25 May 2026</div>
+                <div class="kb-card__bottom">
+                  <div class="kb-card__avatar kb-card__avatar--ana">AR</div>
+                  <span class="kb-card__view">View &rarr;</span>
+                </div>
+              </article>
+
+              <article class="kb-card">
+                <div class="kb-card__top">
+                  <div class="kb-card__name">Lucas Ferreira</div>
+                  <span class="kb-card__priority" style="background: #10b981;"></span>
+                </div>
+                <div class="kb-card__meta">&#127463;&#127479; Brazil</div>
+                <div class="kb-card__chips"><span class="kb-chip kb-chip--brazil">Brazil NC</span></div>
+                <div class="kb-card__date">Submitted 24 May 2026</div>
+                <div class="kb-card__bottom">
+                  <div class="kb-card__avatar kb-card__avatar--ana">AR</div>
+                  <span class="kb-card__view">View &rarr;</span>
+                </div>
+              </article>
+
+              <article class="kb-card">
+                <div class="kb-card__top">
+                  <div class="kb-card__name">Isabela Costa</div>
+                  <span class="kb-card__priority" style="background: #10b981;"></span>
+                </div>
+                <div class="kb-card__meta">&#127463;&#127479; Brazil</div>
+                <div class="kb-card__chips"><span class="kb-chip kb-chip--brazil">Brazil NC</span></div>
+                <div class="kb-card__date">Submitted 23 May 2026</div>
+                <div class="kb-card__bottom">
+                  <div class="kb-card__avatar kb-card__avatar--ana">AR</div>
+                  <span class="kb-card__view">View &rarr;</span>
+                </div>
+              </article>
+
+            </div>
+          </section>
+
+          <section class="kb-col">
+            <div class="kb-col__header" style="border-top-color: #003087;">
+              <div class="kb-col__title"><span>Eligibility Review</span><span class="kb-col__count">3</span></div>
+              <div class="kb-col__subtitle">NC verifies criteria</div>
+            </div>
+            <div class="kb-col__body">
+
+              <article class="kb-card kb-card--sofia" onclick="window.go && window.go(6)">
+                <span class="kb-card__new-badge">NEW</span>
+                <div class="kb-card__top">
+                  <div class="kb-card__name">Sofia Almeida</div>
+                  <span class="kb-card__priority" style="background: #f59e0b;" title="Priority: Medium-High"></span>
+                </div>
+                <div class="kb-card__meta">&#127463;&#127479; Brazil &middot; 16y</div>
+                <div class="kb-card__chips">
+                  <span class="kb-chip kb-chip--brazil">Brazil NC</span>
+                  <span class="kb-chip">Scholarship</span>
+                </div>
+                <div class="kb-card__date">Submitted 27 May 2026</div>
+                <div class="kb-card__bottom">
+                  <div class="kb-card__avatar kb-card__avatar--ana" title="Ana Ribeiro">AR</div>
+                  <span class="kb-card__view">Open &rarr;</span>
+                </div>
+              </article>
+
+              <article class="kb-card">
+                <div class="kb-card__top">
+                  <div class="kb-card__name">Pedro Nunes</div>
+                  <span class="kb-card__priority" style="background: #f59e0b;"></span>
+                </div>
+                <div class="kb-card__meta">&#127463;&#127479; Brazil &middot; 17y</div>
+                <div class="kb-card__chips"><span class="kb-chip kb-chip--brazil">Brazil NC</span></div>
+                <div class="kb-card__date">Submitted 22 May 2026</div>
+                <div class="kb-card__bottom">
+                  <div class="kb-card__avatar kb-card__avatar--ana">AR</div>
+                  <span class="kb-card__view">View &rarr;</span>
+                </div>
+              </article>
+
+              <article class="kb-card">
+                <div class="kb-card__top">
+                  <div class="kb-card__name">Mariana Souza</div>
+                  <span class="kb-card__priority" style="background: #10b981;"></span>
+                </div>
+                <div class="kb-card__meta">&#127463;&#127479; Brazil &middot; 16y</div>
+                <div class="kb-card__chips"><span class="kb-chip kb-chip--brazil">Brazil NC</span></div>
+                <div class="kb-card__date">Submitted 21 May 2026</div>
+                <div class="kb-card__bottom">
+                  <div class="kb-card__avatar kb-card__avatar--ana">AR</div>
+                  <span class="kb-card__view">View &rarr;</span>
+                </div>
+              </article>
+
+            </div>
+          </section>
+
+          <section class="kb-col">
+            <div class="kb-col__header" style="border-top-color: #0ea5e9;">
+              <div class="kb-col__title"><span>Local Selection</span><span class="kb-col__count">2</span></div>
+              <div class="kb-col__subtitle">Regional shortlist</div>
+            </div>
+            <div class="kb-col__body">
+
+              <article class="kb-card">
+                <div class="kb-card__top">
+                  <div class="kb-card__name">Lena Fischer</div>
+                  <span class="kb-card__priority" style="background: #10b981;"></span>
+                </div>
+                <div class="kb-card__meta">&#127465;&#127466; Germany &middot; 16y</div>
+                <div class="kb-card__chips"><span class="kb-chip kb-chip--global">Germany NC</span></div>
+                <div class="kb-card__date">Submitted 18 May 2026</div>
+                <div class="kb-card__bottom">
+                  <div class="kb-card__avatar kb-card__avatar--lc">LC</div>
+                  <span class="kb-card__view">View &rarr;</span>
+                </div>
+              </article>
+
+              <article class="kb-card">
+                <div class="kb-card__top">
+                  <div class="kb-card__name">Helen Richards</div>
+                  <span class="kb-card__priority" style="background: #f59e0b;"></span>
+                </div>
+                <div class="kb-card__meta">&#127468;&#127463; United Kingdom &middot; 17y</div>
+                <div class="kb-card__chips"><span class="kb-chip kb-chip--global">UK NC</span></div>
+                <div class="kb-card__date">Submitted 17 May 2026</div>
+                <div class="kb-card__bottom">
+                  <div class="kb-card__avatar kb-card__avatar--rg">RG</div>
+                  <span class="kb-card__view">View &rarr;</span>
+                </div>
+              </article>
+
+            </div>
+          </section>
+
+          <section class="kb-col">
+            <div class="kb-col__header" style="border-top-color: #8b5cf6;">
+              <div class="kb-col__title"><span>Interview</span><span class="kb-col__count">2</span></div>
+              <div class="kb-col__subtitle">Scheduled with panel</div>
+            </div>
+            <div class="kb-col__body">
+
+              <article class="kb-card">
+                <div class="kb-card__top">
+                  <div class="kb-card__name">Amara Diallo</div>
+                  <span class="kb-card__priority" style="background: #ef4444;"></span>
+                </div>
+                <div class="kb-card__meta">&#127468;&#127475;&rarr;&#127465;&#127466; Guinea &rarr; Germany &middot; 17y</div>
+                <div class="kb-card__chips">
+                  <span class="kb-chip kb-chip--global">Germany NC</span>
+                  <span class="kb-chip">Refugee</span>
+                </div>
+                <div class="kb-card__date">Submitted 14 May 2026</div>
+                <div class="kb-card__bottom">
+                  <div class="kb-card__avatar kb-card__avatar--lc">LC</div>
+                  <span class="kb-card__view">View &rarr;</span>
+                </div>
+              </article>
+
+              <article class="kb-card">
+                <div class="kb-card__top">
+                  <div class="kb-card__name">James Yamashita</div>
+                  <span class="kb-card__priority" style="background: #10b981;"></span>
+                </div>
+                <div class="kb-card__meta">&#127471;&#127477; Japan &middot; 16y</div>
+                <div class="kb-card__chips"><span class="kb-chip kb-chip--global">Japan NC</span></div>
+                <div class="kb-card__date">Submitted 12 May 2026</div>
+                <div class="kb-card__bottom">
+                  <div class="kb-card__avatar kb-card__avatar--mk">MK</div>
+                  <span class="kb-card__view">View &rarr;</span>
+                </div>
+              </article>
+
+            </div>
+          </section>
+
+          <section class="kb-col">
+            <div class="kb-col__header" style="border-top-color: #f59e0b;">
+              <div class="kb-col__title"><span>National Selection</span><span class="kb-col__count">1</span></div>
+              <div class="kb-col__subtitle">NC final ranking</div>
+            </div>
+            <div class="kb-col__body">
+
+              <article class="kb-card">
+                <div class="kb-card__top">
+                  <div class="kb-card__name">Kwame Asante</div>
+                  <span class="kb-card__priority" style="background: #ef4444;"></span>
+                </div>
+                <div class="kb-card__meta">&#127468;&#127469;&rarr;&#127472;&#127466; Ghana &rarr; Kenya &middot; 17y</div>
+                <div class="kb-card__chips">
+                  <span class="kb-chip kb-chip--global">Kenya NC</span>
+                  <span class="kb-chip">Bursary</span>
+                </div>
+                <div class="kb-card__date">Submitted 08 May 2026</div>
+                <div class="kb-card__bottom">
+                  <div class="kb-card__avatar kb-card__avatar--rg">RG</div>
+                  <span class="kb-card__view">View &rarr;</span>
+                </div>
+              </article>
+
+            </div>
+          </section>
+
+          <section class="kb-col">
+            <div class="kb-col__header" style="border-top-color: #ec4899;">
+              <div class="kb-col__title"><span>Pending Place</span><span class="kb-col__count">1</span></div>
+              <div class="kb-col__subtitle">Awaiting college match</div>
+            </div>
+            <div class="kb-col__body">
+
+              <article class="kb-card">
+                <div class="kb-card__top">
+                  <div class="kb-card__name">Elif Yildiz</div>
+                  <span class="kb-card__priority" style="background: #f59e0b;"></span>
+                </div>
+                <div class="kb-card__meta">&#127481;&#127479; Turkey &middot; 16y</div>
+                <div class="kb-card__chips"><span class="kb-chip kb-chip--global">Turkey NC</span></div>
+                <div class="kb-card__date">Submitted 02 May 2026</div>
+                <div class="kb-card__bottom">
+                  <div class="kb-card__avatar kb-card__avatar--mk">MK</div>
+                  <span class="kb-card__view">View &rarr;</span>
+                </div>
+              </article>
+
+            </div>
+          </section>
+
+          <section class="kb-col">
+            <div class="kb-col__header" style="border-top-color: #10b981;">
+              <div class="kb-col__title"><span>Place Offered</span><span class="kb-col__count">1</span></div>
+              <div class="kb-col__subtitle">Offer letter sent</div>
+            </div>
+            <div class="kb-col__body">
+
+              <article class="kb-card">
+                <div class="kb-card__top">
+                  <div class="kb-card__name">Anaya Patel</div>
+                  <span class="kb-card__priority" style="background: #10b981;"></span>
+                </div>
+                <div class="kb-card__meta">&#127470;&#127475; India &middot; 17y</div>
+                <div class="kb-card__chips">
+                  <span class="kb-chip kb-chip--global">India NC</span>
+                  <span class="kb-chip">UWC Atlantic</span>
+                </div>
+                <div class="kb-card__date">Submitted 28 Apr 2026</div>
+                <div class="kb-card__bottom">
+                  <div class="kb-card__avatar kb-card__avatar--rg">RG</div>
+                  <span class="kb-card__view">View &rarr;</span>
+                </div>
+              </article>
+
+            </div>
+          </section>
+
+          <section class="kb-col">
+            <div class="kb-col__header" style="border-top-color: #16a34a;">
+              <div class="kb-col__title"><span>Place Accepted</span><span class="kb-col__count">0</span></div>
+              <div class="kb-col__subtitle">Candidate confirmed</div>
+            </div>
+            <div class="kb-col__body">
+              <div class="kb-col__empty">No applications at this stage</div>
+            </div>
+          </section>
+
+          <section class="kb-col">
+            <div class="kb-col__header" style="border-top-color: #15803d;">
+              <div class="kb-col__title"><span>Confirmed</span><span class="kb-col__count">0</span></div>
+              <div class="kb-col__subtitle">Enrolment finalised</div>
+            </div>
+            <div class="kb-col__body">
+              <div class="kb-col__empty">No applications at this stage</div>
+            </div>
+          </section>
+
+          <section class="kb-col">
+            <div class="kb-col__header" style="border-top-color: #9ca3af;">
+              <div class="kb-col__title"><span>Withdrawn</span><span class="kb-col__count">1</span></div>
+              <div class="kb-col__subtitle">No longer active</div>
+            </div>
+            <div class="kb-col__body">
+
+              <article class="kb-card kb-card--dimmed">
+                <div class="kb-card__top">
+                  <div class="kb-card__name">Chen Wei</div>
+                  <span class="kb-card__priority" style="background: #9ca3af;"></span>
+                </div>
+                <div class="kb-card__meta">&#127464;&#127475; China &middot; 16y</div>
+                <div class="kb-card__chips"><span class="kb-chip kb-chip--global">China NC</span></div>
+                <div class="kb-card__date">Withdrawn 19 May 2026</div>
+                <div class="kb-card__bottom">
+                  <div class="kb-card__avatar">CW</div>
+                  <span class="kb-card__view">View &rarr;</span>
+                </div>
+              </article>
+
+            </div>
+          </section>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
     </section>
 
-    <!-- STEP 7 — Ana: Contacts list, Sofia now converted -->
+    <!-- STEP 7 — Application Detail (5 tabs: Overview/Timeline/Documents/Audit/Source) -->
+<section class="screen" id="sc-app-detail">
+  <style>
+    #sc-app-detail {
+      --zoho-topbar-bg: #1c1f25;
+      --zoho-sidebar-bg: #f7f8fa;
+      --zoho-sidebar-active-bg: #e6efff;
+      --zoho-primary: #3b6ef5;
+      --zoho-content-bg: #ffffff;
+      --zoho-border: #e5e7eb;
+      --ad-navy: #1c2a4a;
+      --ad-navy-soft: #2a3a5f;
+      --ad-text: #1c1f25;
+      --ad-muted: #6b7280;
+      --ad-success: #16a34a;
+      --ad-danger: #dc2626;
+      --ad-warn: #d97706;
+      --ad-bg: #f7f8fa;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif;
+      color: var(--ad-text);
+      background: var(--ad-bg);
+      min-height: 100vh;
+    }
+    #sc-app-detail .ad-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 28px;
+      background: var(--zoho-content-bg);
+      border-bottom: 1px solid var(--zoho-border);
+      font-size: 13px;
+      color: var(--ad-muted);
+    }
+    #sc-app-detail .ad-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: transparent;
+      border: 1px solid var(--zoho-border);
+      border-radius: 6px;
+      color: var(--ad-text);
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    #sc-app-detail .ad-back-btn:hover {
+      background: var(--zoho-sidebar-bg);
+    }
+    #sc-app-detail .ad-breadcrumb a {
+      color: var(--ad-muted);
+      text-decoration: none;
+    }
+    #sc-app-detail .ad-breadcrumb .ad-crumb-sep {
+      color: #c7cbd1;
+    }
+    #sc-app-detail .ad-breadcrumb .ad-crumb-current {
+      color: var(--ad-text);
+      font-weight: 500;
+    }
+    #sc-app-detail .ad-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 24px 28px;
+      background: var(--zoho-content-bg);
+      border-bottom: 1px solid var(--zoho-border);
+    }
+    #sc-app-detail .ad-header-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    #sc-app-detail .ad-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--ad-navy);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    #sc-app-detail .ad-name {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 0 6px;
+      color: var(--ad-text);
+      line-height: 1.2;
+    }
+    #sc-app-detail .ad-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--ad-muted);
+    }
+    #sc-app-detail .ad-role-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      background: #f1f3f7;
+      border: 1px solid var(--zoho-border);
+      border-radius: 12px;
+      font-size: 12px;
+      color: var(--ad-navy-soft);
+    }
+    #sc-app-detail .ad-status-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      background: var(--ad-navy);
+      color: #fff;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    #sc-app-detail .ad-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #sc-app-detail .ad-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+      background: #fff;
+      color: var(--ad-text);
+      transition: all 0.15s;
+    }
+    #sc-app-detail .ad-btn-primary {
+      background: var(--ad-navy);
+      color: #fff;
+      border-color: var(--ad-navy);
+    }
+    #sc-app-detail .ad-btn-primary:hover {
+      background: var(--ad-navy-soft);
+    }
+    #sc-app-detail .ad-btn-ghost-danger {
+      background: #fff;
+      color: var(--ad-danger);
+      border-color: #f3c2c2;
+    }
+    #sc-app-detail .ad-btn-ghost-danger:hover {
+      background: #fef2f2;
+    }
+    #sc-app-detail .ad-btn-ghost {
+      background: #fff;
+      color: var(--ad-text);
+      border-color: var(--zoho-border);
+    }
+    #sc-app-detail .ad-btn-ghost:hover {
+      background: var(--zoho-sidebar-bg);
+    }
+    #sc-app-detail .ad-btn-icon {
+      padding: 8px 10px;
+    }
+    #sc-app-detail .ad-tabs {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 0 28px;
+      background: var(--zoho-content-bg);
+      border-bottom: 1px solid var(--zoho-border);
+    }
+    #sc-app-detail .ad-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 18px;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--ad-muted);
+      font-weight: 500;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+    #sc-app-detail .ad-tab:hover {
+      color: var(--ad-text);
+    }
+    #sc-app-detail .ad-tab.active {
+      color: var(--ad-navy);
+      border-bottom-color: var(--ad-navy);
+    }
+    #sc-app-detail .ad-tab-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      background: var(--ad-danger);
+      color: #fff;
+      border-radius: 9px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    #sc-app-detail .ad-content {
+      padding: 24px 28px;
+    }
+    #sc-app-detail .ad-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 20px;
+    }
+    #sc-app-detail .ad-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    #sc-app-detail .ad-card {
+      background: var(--zoho-content-bg);
+      border: 1px solid var(--zoho-border);
+      border-radius: 8px;
+      padding: 18px 20px;
+    }
+    #sc-app-detail .ad-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ad-text);
+      margin: 0 0 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    #sc-app-detail .ad-field-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f3f7;
+      font-size: 13px;
+    }
+    #sc-app-detail .ad-field-row:last-child {
+      border-bottom: none;
+    }
+    #sc-app-detail .ad-field-label {
+      color: var(--ad-muted);
+      flex-shrink: 0;
+    }
+    #sc-app-detail .ad-field-value {
+      color: var(--ad-text);
+      text-align: right;
+      font-weight: 500;
+    }
+    #sc-app-detail .ad-essay-preview {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #374151;
+      margin: 0 0 12px;
+      font-style: italic;
+    }
+    #sc-app-detail .ad-link {
+      color: var(--zoho-primary);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    #sc-app-detail .ad-link:hover {
+      text-decoration: underline;
+    }
+    #sc-app-detail .ad-essay-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--ad-muted);
+      margin-top: 8px;
+    }
+    #sc-app-detail .ad-word-count {
+      color: var(--ad-success);
+      font-weight: 500;
+    }
+    #sc-app-detail .ad-stage-chain {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    #sc-app-detail .ad-stage-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: #f1f3f7;
+      color: var(--ad-muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    #sc-app-detail .ad-stage-pill.active {
+      background: var(--ad-navy);
+      color: #fff;
+    }
+    #sc-app-detail .ad-stage-pill.done {
+      background: #e6f4ea;
+      color: var(--ad-success);
+    }
+    #sc-app-detail .ad-stage-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+    #sc-app-detail .ad-mini-avatar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #f59e0b;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    #sc-app-detail .ad-flag-clear {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      background: #e6f4ea;
+      border-radius: 6px;
+      color: var(--ad-success);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    #sc-app-detail .ad-flag-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--ad-success);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    #sc-app-detail .ad-timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+    #sc-app-detail .ad-timeline::before {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--zoho-border);
+    }
+    #sc-app-detail .ad-tl-event {
+      position: relative;
+      padding: 12px 0;
+      border-bottom: 1px solid #f1f3f7;
+    }
+    #sc-app-detail .ad-tl-event:last-child {
+      border-bottom: none;
+    }
+    #sc-app-detail .ad-tl-dot {
+      position: absolute;
+      left: -23px;
+      top: 16px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--ad-navy);
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px var(--zoho-border);
+    }
+    #sc-app-detail .ad-tl-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--ad-muted);
+      margin-bottom: 4px;
+    }
+    #sc-app-detail .ad-tl-icon {
+      width: 14px;
+      height: 14px;
+      color: var(--ad-muted);
+    }
+    #sc-app-detail .ad-tl-text {
+      font-size: 13px;
+      color: var(--ad-text);
+      line-height: 1.5;
+    }
+    #sc-app-detail .ad-tl-actor {
+      color: var(--ad-navy);
+      font-weight: 500;
+    }
+    #sc-app-detail .ad-docs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    #sc-app-detail .ad-doc-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px;
+      background: var(--zoho-content-bg);
+      border: 1px solid var(--zoho-border);
+      border-radius: 8px;
+    }
+    #sc-app-detail .ad-doc-icon {
+      width: 40px;
+      height: 48px;
+      background: #f1f3f7;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    #sc-app-detail .ad-doc-body {
+      flex: 1;
+      min-width: 0;
+    }
+    #sc-app-detail .ad-doc-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ad-text);
+      margin: 0 0 4px;
+    }
+    #sc-app-detail .ad-doc-meta {
+      font-size: 12px;
+      color: var(--ad-muted);
+      margin: 0 0 8px;
+    }
+    #sc-app-detail .ad-doc-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    #sc-app-detail .ad-doc-status.verified {
+      background: #e6f4ea;
+      color: var(--ad-success);
+    }
+    #sc-app-detail .ad-doc-status.pending {
+      background: #fef3c7;
+      color: var(--ad-warn);
+    }
+    #sc-app-detail .ad-audit-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    #sc-app-detail .ad-audit-table th {
+      text-align: left;
+      padding: 10px 12px;
+      background: var(--zoho-sidebar-bg);
+      border-bottom: 1px solid var(--zoho-border);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ad-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    #sc-app-detail .ad-audit-table td {
+      padding: 12px;
+      border-bottom: 1px solid #f1f3f7;
+      color: var(--ad-text);
+    }
+    #sc-app-detail .ad-audit-table tr:last-child td {
+      border-bottom: none;
+    }
+    #sc-app-detail .ad-audit-action {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #f1f3f7;
+      font-size: 12px;
+      color: var(--ad-navy-soft);
+    }
+    #sc-app-detail .ad-attr-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    #sc-app-detail .ad-attr-card {
+      background: var(--zoho-content-bg);
+      border: 1px solid var(--zoho-border);
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+    #sc-app-detail .ad-attr-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--ad-muted);
+      margin: 0 0 6px;
+      font-weight: 600;
+    }
+    #sc-app-detail .ad-attr-value {
+      font-size: 14px;
+      color: var(--ad-text);
+      margin: 0;
+      line-height: 1.5;
+    }
+    #sc-app-detail .ad-attr-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #f1f3f7;
+      border-radius: 4px;
+      font-size: 12px;
+      color: var(--ad-navy-soft);
+      margin-right: 4px;
+      margin-bottom: 4px;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    #sc-app-detail .ad-funnel {
+      display: flex;
+      align-items: stretch;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    #sc-app-detail .ad-funnel-step {
+      flex: 1;
+      padding: 14px 10px;
+      background: var(--ad-navy);
+      color: #fff;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 500;
+      position: relative;
+    }
+    #sc-app-detail .ad-funnel-step:nth-child(1) { opacity: 1; }
+    #sc-app-detail .ad-funnel-step:nth-child(2) { opacity: 0.85; }
+    #sc-app-detail .ad-funnel-step:nth-child(3) { opacity: 0.7; }
+    #sc-app-detail .ad-funnel-step:nth-child(4) { opacity: 0.55; }
+    #sc-app-detail .ad-funnel-count {
+      display: block;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 2px;
+      font-family: "Playfair Display", Georgia, serif;
+    }
+    #sc-app-detail .ad-path {
+      font-size: 13px;
+      color: var(--ad-text);
+      line-height: 1.7;
+    }
+    #sc-app-detail .ad-path-step {
+      display: inline-block;
+      padding: 3px 10px;
+      background: #e6efff;
+      color: var(--ad-navy);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      margin: 2px 0;
+    }
+    #sc-app-detail .ad-path-arrow {
+      color: var(--ad-muted);
+      margin: 0 4px;
+    }
+  </style>
+
+  <div class="ad-breadcrumb">
+    <button class="ad-back-btn" onclick="window.go && window.go(5)">
+      <span>&larr;</span>
+      <span>Back to Applications</span>
+    </button>
+    <span class="ad-crumb-sep">/</span>
+    <a href="#" onclick="window.go && window.go(5); return false;">Applications</a>
+    <span class="ad-crumb-sep">/</span>
+    <span class="ad-crumb-current">Sofia Almeida</span>
+  </div>
+
+  <div class="ad-header">
+    <div class="ad-header-left">
+      <div class="ad-avatar">SA</div>
+      <div>
+        <h1 class="ad-name">Sofia Maria Almeida</h1>
+        <div class="ad-meta-row">
+          <span class="ad-role-tag">Applicant &middot; Brazil NC</span>
+          <span class="ad-status-pill">Eligibility Review</span>
+        </div>
+      </div>
+    </div>
+    <div class="ad-actions">
+      <button class="ad-btn ad-btn-primary">
+        <span>&#10003;</span>
+        <span>Approve eligibility</span>
+      </button>
+      <button class="ad-btn ad-btn-ghost-danger">
+        <span>&times;</span>
+        <span>Reject</span>
+      </button>
+      <button class="ad-btn ad-btn-ghost">Edit</button>
+      <button class="ad-btn ad-btn-ghost ad-btn-icon" aria-label="More options">&middot;&middot;&middot;</button>
+    </div>
+  </div>
+
+  <div class="ad-tabs">
+    <button class="ad-tab active" data-tab-btn="overview" onclick="switchTab('overview', this)">Overview</button>
+    <button class="ad-tab" data-tab-btn="timeline" onclick="switchTab('timeline', this)">Timeline</button>
+    <button class="ad-tab" data-tab-btn="documents" onclick="switchTab('documents', this)">
+      <span>Documents</span>
+      <span class="ad-tab-badge">1</span>
+    </button>
+    <button class="ad-tab" data-tab-btn="audit" onclick="switchTab('audit', this)">Audit log</button>
+    <button class="ad-tab" data-tab-btn="source" onclick="switchTab('source', this)">Source attribution</button>
+  </div>
+
+  <div class="ad-content">
+
+    <!-- OVERVIEW TAB -->
+    <div data-tab-panel="overview">
+      <div class="ad-grid">
+        <div class="ad-col">
+          <div class="ad-card">
+            <h3 class="ad-card-title">Personal information</h3>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Full name</span>
+              <span class="ad-field-value">Sofia Maria Almeida</span>
+            </div>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Preferred name</span>
+              <span class="ad-field-value">Sofia</span>
+            </div>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Date of birth</span>
+              <span class="ad-field-value">14 March 2009 (16 years)</span>
+            </div>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Gender</span>
+              <span class="ad-field-value">Female</span>
+            </div>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Nationality</span>
+              <span class="ad-field-value">&#127463;&#127479; Brazilian</span>
+            </div>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Passport number</span>
+              <span class="ad-field-value">FH 832 491</span>
+            </div>
+          </div>
+
+          <div class="ad-card">
+            <h3 class="ad-card-title">Academic background</h3>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Current school</span>
+              <span class="ad-field-value">Colegio Bandeirantes, Sao Paulo</span>
+            </div>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Year of study</span>
+              <span class="ad-field-value">10th grade (Ensino Medio Year 1)</span>
+            </div>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Average grade</span>
+              <span class="ad-field-value">9.4 / 10 (top 5% of cohort)</span>
+            </div>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Languages</span>
+              <span class="ad-field-value">Portuguese (native), English (C1), Spanish (B2)</span>
+            </div>
+          </div>
+
+          <div class="ad-card">
+            <h3 class="ad-card-title">Personal statement preview</h3>
+            <p class="ad-essay-preview">
+              "I first heard about UWC at the age of twelve, when my school librarian &mdash; a former UWC Adriatic student &mdash; described an evening in Duino where her dormitory of fifteen students represented twelve countries..."
+            </p>
+            <a href="#" class="ad-link">Read full statement &rarr;</a>
+          </div>
+
+          <div class="ad-card">
+            <h3 class="ad-card-title">Local NC questions</h3>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Brazil NC essay topic</span>
+              <span class="ad-field-value">How would you contribute to social mobility in Brazil after UWC?</span>
+            </div>
+            <div class="ad-essay-meta">
+              <span>Word count</span>
+              <span class="ad-word-count">498 / 500 &#10003;</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ad-col">
+          <div class="ad-card">
+            <h3 class="ad-card-title">Application status</h3>
+            <div class="ad-stage-chain">
+              <div class="ad-stage-pill done">
+                <span class="ad-stage-dot"></span>
+                <span>Application submitted</span>
+              </div>
+              <div class="ad-stage-pill active">
+                <span class="ad-stage-dot"></span>
+                <span>Eligibility Review</span>
+              </div>
+              <div class="ad-stage-pill">
+                <span class="ad-stage-dot"></span>
+                <span>NC shortlisting</span>
+              </div>
+              <div class="ad-stage-pill">
+                <span class="ad-stage-dot"></span>
+                <span>Interview</span>
+              </div>
+              <div class="ad-stage-pill">
+                <span class="ad-stage-dot"></span>
+                <span>Selection committee</span>
+              </div>
+              <div class="ad-stage-pill">
+                <span class="ad-stage-dot"></span>
+                <span>Offer issued</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ad-card">
+            <h3 class="ad-card-title">Risk flags</h3>
+            <div class="ad-flag-clear">
+              <span class="ad-flag-icon">&#10003;</span>
+              <span>0 flags &middot; All clear</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ad-col">
+          <div class="ad-card">
+            <h3 class="ad-card-title">Quick stats</h3>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Application ID</span>
+              <span class="ad-field-value">UWC-2026-BR-00127</span>
+            </div>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Submitted</span>
+              <span class="ad-field-value">27 May 2026, 14:32 GMT</span>
+            </div>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Source</span>
+              <span class="ad-field-value">Portal &middot; Organic</span>
+            </div>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Brazil NC assignee</span>
+              <span class="ad-field-value">
+                <span class="ad-mini-avatar">AC</span>Ana Carvalho
+              </span>
+            </div>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Locale</span>
+              <span class="ad-field-value">pt-BR / en-GB</span>
+            </div>
+            <div class="ad-field-row">
+              <span class="ad-field-label">Time in stage</span>
+              <span class="ad-field-value">14 hours</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIMELINE TAB -->
+    <div data-tab-panel="timeline" hidden>
+      <div class="ad-card">
+        <h3 class="ad-card-title">Activity timeline</h3>
+        <div class="ad-timeline">
+          <div class="ad-tl-event">
+            <span class="ad-tl-dot"></span>
+            <div class="ad-tl-meta">
+              <span>&#9998;</span>
+              <span>27 May 2026, 14:32 GMT</span>
+            </div>
+            <div class="ad-tl-text">
+              Application submitted via portal by <span class="ad-tl-actor">Sofia Almeida</span>.
+            </div>
+          </div>
+          <div class="ad-tl-event">
+            <span class="ad-tl-dot"></span>
+            <div class="ad-tl-meta">
+              <span>&#9998;</span>
+              <span>27 May 2026, 14:32 GMT</span>
+            </div>
+            <div class="ad-tl-text">
+              Eligibility flag set to <strong>PASS</strong> by <span class="ad-tl-actor">System (auto)</span>.
+            </div>
+          </div>
+          <div class="ad-tl-event">
+            <span class="ad-tl-dot"></span>
+            <div class="ad-tl-meta">
+              <span>&#9998;</span>
+              <span>27 May 2026, 14:32 GMT</span>
+            </div>
+            <div class="ad-tl-text">
+              Assigned to <strong>Brazil NC</strong> by <span class="ad-tl-actor">System (auto)</span>.
+            </div>
+          </div>
+          <div class="ad-tl-event">
+            <span class="ad-tl-dot"></span>
+            <div class="ad-tl-meta">
+              <span>&#9998;</span>
+              <span>27 May 2026, 14:30 GMT</span>
+            </div>
+            <div class="ad-tl-text">
+              Section 6 (Declaration) signed by <span class="ad-tl-actor">Sofia Almeida</span>.
+            </div>
+          </div>
+          <div class="ad-tl-event">
+            <span class="ad-tl-dot"></span>
+            <div class="ad-tl-meta">
+              <span>&#9998;</span>
+              <span>27 May 2026, 14:28 GMT</span>
+            </div>
+            <div class="ad-tl-text">
+              Guardian consent received from <span class="ad-tl-actor">Maria Almeida</span>.
+            </div>
+          </div>
+          <div class="ad-tl-event">
+            <span class="ad-tl-dot"></span>
+            <div class="ad-tl-meta">
+              <span>&#9998;</span>
+              <span>26 May 2026, 19:14 GMT</span>
+            </div>
+            <div class="ad-tl-text">
+              Section 3 (Personal Statement) updated from <em>draft v3</em> to <em>final</em> by <span class="ad-tl-actor">Sofia Almeida</span>.
+            </div>
+          </div>
+          <div class="ad-tl-event">
+            <span class="ad-tl-dot"></span>
+            <div class="ad-tl-meta">
+              <span>&#9998;</span>
+              <span>25 May 2026, 16:42 GMT</span>
+            </div>
+            <div class="ad-tl-text">
+              Documents uploaded (passport, transcript, recommendation) by <span class="ad-tl-actor">Sofia Almeida</span>.
+            </div>
+          </div>
+          <div class="ad-tl-event">
+            <span class="ad-tl-dot"></span>
+            <div class="ad-tl-meta">
+              <span>&#9998;</span>
+              <span>22 May 2026, 10:18 GMT</span>
+            </div>
+            <div class="ad-tl-text">
+              Application created via portal registration by <span class="ad-tl-actor">Sofia Almeida</span>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCUMENTS TAB -->
+    <div data-tab-panel="documents" hidden>
+      <div class="ad-docs-grid">
+        <div class="ad-doc-card">
+          <div class="ad-doc-icon">&#128196;</div>
+          <div class="ad-doc-body">
+            <p class="ad-doc-name">Passport scan.pdf</p>
+            <p class="ad-doc-meta">2.1 MB &middot; 25 May 2026</p>
+            <span class="ad-doc-status verified">&#10003; Verified</span>
+          </div>
+        </div>
+        <div class="ad-doc-card">
+          <div class="ad-doc-icon">&#128196;</div>
+          <div class="ad-doc-body">
+            <p class="ad-doc-name">School transcript.pdf</p>
+            <p class="ad-doc-meta">1.8 MB &middot; 25 May 2026</p>
+            <span class="ad-doc-status verified">&#10003; Verified</span>
+          </div>
+        </div>
+        <div class="ad-doc-card">
+          <div class="ad-doc-icon">&#128196;</div>
+          <div class="ad-doc-body">
+            <p class="ad-doc-name">Recommendation letter.pdf</p>
+            <p class="ad-doc-meta">0.4 MB &middot; 25 May 2026</p>
+            <span class="ad-doc-status pending">&#8987; Pending review</span>
+          </div>
+        </div>
+        <div class="ad-doc-card">
+          <div class="ad-doc-icon">&#128196;</div>
+          <div class="ad-doc-body">
+            <p class="ad-doc-name">Guardian consent.pdf</p>
+            <p class="ad-doc-meta">0.6 MB &middot; 27 May 2026</p>
+            <span class="ad-doc-status verified">&#10003; Verified (Maria Almeida)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUDIT LOG TAB -->
+    <div data-tab-panel="audit" hidden>
+      <div class="ad-card" style="padding: 0; overflow: hidden;">
+        <table class="ad-audit-table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>User</th>
+              <th>Action</th>
+              <th>Resource</th>
+              <th>IP address</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>28 May 2026, 09:14 GMT</td>
+              <td>Ana Carvalho</td>
+              <td><span class="ad-audit-action">VIEW</span></td>
+              <td>Application UWC-2026-BR-00127</td>
+              <td>189.42.118.7</td>
+            </tr>
+            <tr>
+              <td>28 May 2026, 09:12 GMT</td>
+              <td>Ana Carvalho</td>
+              <td><span class="ad-audit-action">VIEW</span></td>
+              <td>Document: Passport scan.pdf</td>
+              <td>189.42.118.7</td>
+            </tr>
+            <tr>
+              <td>28 May 2026, 08:47 GMT</td>
+              <td>IO Marketing</td>
+              <td><span class="ad-audit-action">VIEW</span></td>
+              <td>Source attribution panel</td>
+              <td>83.149.71.22</td>
+            </tr>
+            <tr>
+              <td>27 May 2026, 22:03 GMT</td>
+              <td>Akanksha Sharma</td>
+              <td><span class="ad-audit-action">EXPORT</span></td>
+              <td>Application PDF (full)</td>
+              <td>103.21.244.96</td>
+            </tr>
+            <tr>
+              <td>27 May 2026, 16:18 GMT</td>
+              <td>Ana Carvalho</td>
+              <td><span class="ad-audit-action">UPDATE</span></td>
+              <td>Stage: Submitted &rarr; Eligibility Review</td>
+              <td>189.42.118.7</td>
+            </tr>
+            <tr>
+              <td>27 May 2026, 14:32 GMT</td>
+              <td>System</td>
+              <td><span class="ad-audit-action">CREATE</span></td>
+              <td>Application UWC-2026-BR-00127</td>
+              <td>10.0.0.4 (internal)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SOURCE ATTRIBUTION TAB -->
+    <div data-tab-panel="source" hidden>
+      <div class="ad-attr-grid">
+        <div class="ad-attr-card">
+          <p class="ad-attr-label">First touch</p>
+          <p class="ad-attr-value">12 May 2026 &middot; UWC Brazil Instagram post <span class="ad-attr-tag">#UWC2026</span></p>
+        </div>
+        <div class="ad-attr-card">
+          <p class="ad-attr-label">Last touch</p>
+          <p class="ad-attr-value">22 May 2026 &middot; Direct visit to www.uwc.org/apply</p>
+        </div>
+        <div class="ad-attr-card" style="grid-column: span 2;">
+          <p class="ad-attr-label">Conversion path</p>
+          <p class="ad-path">
+            <span class="ad-path-step">Instagram</span>
+            <span class="ad-path-arrow">&rarr;</span>
+            <span class="ad-path-step">Email signup</span>
+            <span class="ad-path-arrow">&rarr;</span>
+            <span class="ad-path-step">3 portal visits</span>
+            <span class="ad-path-arrow">&rarr;</span>
+            <span class="ad-path-step">Registration</span>
+            <span class="ad-path-arrow">&rarr;</span>
+            <span class="ad-path-step">Application</span>
+          </p>
+        </div>
+        <div class="ad-attr-card" style="grid-column: span 2;">
+          <p class="ad-attr-label">UTM tags</p>
+          <p class="ad-attr-value">
+            <span class="ad-attr-tag">utm_source=instagram</span>
+            <span class="ad-attr-tag">utm_medium=organic</span>
+            <span class="ad-attr-tag">utm_campaign=brazil-nc-2026</span>
+            <span class="ad-attr-tag">utm_content=alumni-story-3</span>
+          </p>
+        </div>
+        <div class="ad-attr-card" style="grid-column: span 2;">
+          <p class="ad-attr-label">Funnel</p>
+          <div class="ad-funnel">
+            <div class="ad-funnel-step">
+              <span class="ad-funnel-count">1,247</span>
+              Instagram impressions
+            </div>
+            <div class="ad-funnel-step">
+              <span class="ad-funnel-count">84</span>
+              Portal visits
+            </div>
+            <div class="ad-funnel-step">
+              <span class="ad-funnel-count">12</span>
+              Registrations
+            </div>
+            <div class="ad-funnel-step">
+              <span class="ad-funnel-count">1</span>
+              Submitted application
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function switchTab(name, el) {
+      var detail = document.getElementById('sc-app-detail');
+      if (!detail) return;
+      detail.querySelectorAll('[data-tab-panel]').forEach(function(p) {
+        p.hidden = (p.dataset.tabPanel !== name);
+      });
+      detail.querySelectorAll('[data-tab-btn]').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.tabBtn === name);
+      });
+    }
+  </script>
+</section>
+
+
+    <!-- STEP 8 — Ana: Contacts list, Sofia now converted -->
     <section class="screen" id="sc-5">
       <div class="zoho-shell">
         <header class="zoho-topbar">
@@ -1057,7 +3333,7 @@ Finally, I want to be challenged. I want to be the least experienced person in a
       </div>
     </section>
 
-    <!-- STEP 8 — Maria's guardian consent portal -->
+    <!-- STEP 9 — Maria's guardian consent portal -->
     <section class="screen" id="sc-6">
       <div class="uwc-portal-shell">
         <div class="uwc-portal-topbar">
@@ -1113,7 +3389,7 @@ Finally, I want to be challenged. I want to be the least experienced person in a
       </div>
     </section>
 
-    <!-- STEP 9 — Sofia's Application in Zoho after submit -->
+    <!-- STEP 10 — Sofia's Application in Zoho after submit -->
     <section class="screen" id="sc-7">
       <div class="zoho-shell">
         <header class="zoho-topbar">
@@ -1182,7 +3458,7 @@ Finally, I want to be challenged. I want to be the least experienced person in a
       </div>
     </section>
 
-    <!-- STEP 10 — IO Marketing: source attribution dashboard -->
+    <!-- STEP 11 — IO Marketing: source attribution dashboard -->
     <section class="screen" id="sc-8">
       <div class="zoho-shell">
         <header class="zoho-topbar">
@@ -1242,7 +3518,7 @@ Finally, I want to be challenged. I want to be the least experienced person in a
       </div>
     </section>
 
-    <!-- STEP 11 — CRM field reference appendix -->
+    <!-- STEP 12 — CRM field reference appendix -->
     <section class="screen" id="sc-9">
       <div class="appendix">
         <h1>Module field reference — Scenario B</h1>
@@ -1371,8 +3647,443 @@ UWC.getRolesFor = function(code) {
 })();
 /* /INLINE */
 
+(function () {
+  'use strict';
+
+  /* ============================================================
+   * UWC International — Form Validation + Wizard Navigation
+   * Self-contained vanilla JS module.
+   * Globals: UWCValidate, UWCWizard, UWCToast, UWCEligibility, UWCSubmit
+   * ============================================================ */
+
+  /* ---------- CSS Injection ---------- */
+  var CSS = ''
+    + '.uwc-field{position:relative;margin-bottom:14px;}'
+    + '.uwc-field input,.uwc-field textarea,.uwc-field select{transition:border-color 150ms ease,box-shadow 150ms ease;}'
+    + '.uwc-field--focus input,.uwc-field--focus textarea,.uwc-field--focus select{border:1.5px solid #003087;box-shadow:0 0 0 3px rgba(0,48,135,0.12);}'
+    + '.uwc-field--err input,.uwc-field--err textarea,.uwc-field--err select{border:1.5px solid #c8102e;}'
+    + '.uwc-field--ok input,.uwc-field--ok textarea,.uwc-field--ok select{border:1.5px solid #16a34a;}'
+    + '.uwc-field--ok::after{content:"\\2713";position:absolute;right:10px;top:32px;color:#16a34a;font-weight:700;pointer-events:none;}'
+    + '.uwc-field__msg{font-size:12px;margin-top:4px;min-height:14px;line-height:1.2;}'
+    + '.uwc-field--err .uwc-field__msg{color:#c8102e;}'
+    + '.uwc-field--ok .uwc-field__msg{color:#16a34a;}'
+    + '@keyframes uwc-shake{0%{transform:translateX(0);}25%{transform:translateX(-4px);}50%{transform:translateX(4px);}75%{transform:translateX(-2px);}100%{transform:translateX(0);}}'
+    + '.uwc-shake{animation:uwc-shake 200ms ease;}'
+    + '#uwc-toast-container{position:fixed;bottom:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:8px;pointer-events:none;}'
+    + '.uwc-toast{padding:12px 16px;border-radius:8px;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,0.18);font-size:14px;max-width:340px;pointer-events:auto;opacity:0;transform:translateY(8px);transition:opacity 180ms ease,transform 180ms ease;}'
+    + '.uwc-toast--show{opacity:1;transform:translateY(0);}'
+    + '.uwc-toast--err{background:#c8102e;}'
+    + '.uwc-toast--ok{background:#16a34a;}'
+    + '.uwc-toast--info{background:#003087;}'
+    + '.uwc-wizard-progress{display:flex;gap:8px;align-items:center;margin:12px 0 20px;}'
+    + '.uwc-wizard-dot{width:28px;height:28px;border-radius:50%;background:#e5e7eb;color:#6b7280;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;transition:background 180ms ease,color 180ms ease;}'
+    + '.uwc-wizard-dot--active{background:#003087;color:#fff;}'
+    + '.uwc-wizard-dot--complete{background:#16a34a;color:#fff;}'
+    + '.uwc-wizard-line{flex:1;height:2px;background:#e5e7eb;}'
+    + '.uwc-wizard-line--complete{background:#16a34a;}';
+
+  function injectCSS() {
+    if (document.getElementById('uwc-style')) return;
+    var s = document.createElement('style');
+    s.id = 'uwc-style';
+    s.type = 'text/css';
+    s.appendChild(document.createTextNode(CSS));
+    document.head.appendChild(s);
+  }
+
+  /* ---------- Validators ---------- */
+  var UWCValidate = {
+    required: function (v) {
+      return (v != null && String(v).trim() !== '') || 'This field is required';
+    },
+    email: function (v) {
+      return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v) || 'Enter a valid email address';
+    },
+    age14_19: function (yob) {
+      var a = 2026 - parseInt(yob, 10);
+      return (a >= 14 && a <= 19) || 'Applicants must be aged 14-19 at time of application (you are ' + a + ')';
+    },
+    minWords: function (n) {
+      return function (v) {
+        var w = (v || '').trim().split(/\s+/).filter(Boolean).length;
+        return w >= n || ('Minimum ' + n + ' words (' + w + ' so far)');
+      };
+    },
+    maxWords: function (n) {
+      return function (v) {
+        var w = (v || '').trim().split(/\s+/).filter(Boolean).length;
+        return w <= n || ('Maximum ' + n + ' words (' + w + ' written)');
+      };
+    },
+    minLength: function (n) {
+      return function (v) {
+        return (v && v.length >= n) || ('Minimum ' + n + ' characters');
+      };
+    },
+    match: function (re, msg) {
+      return function (v) {
+        return re.test(v) || msg;
+      };
+    }
+  };
+
+  /* ---------- Validator spec parser ---------- */
+  function parseSpec(spec) {
+    var parts = String(spec || '').split('|').map(function (s) { return s.trim(); }).filter(Boolean);
+    var validators = [];
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      var colon = p.indexOf(':');
+      var name, arg;
+      if (colon === -1) { name = p; arg = null; }
+      else { name = p.slice(0, colon); arg = p.slice(colon + 1); }
+      var fn = UWCValidate[name];
+      if (typeof fn !== 'function') continue;
+      if (arg == null) {
+        validators.push(fn);
+      } else {
+        var argVal = isNaN(Number(arg)) ? arg : Number(arg);
+        validators.push(fn(argVal));
+      }
+    }
+    return validators;
+  }
+
+  /* ---------- Field wrapping + state ---------- */
+  function wrapField(input) {
+    var parent = input.parentNode;
+    if (parent && parent.classList && parent.classList.contains('uwc-field')) {
+      return parent;
+    }
+    var wrap = document.createElement('div');
+    wrap.className = 'uwc-field';
+    parent.insertBefore(wrap, input);
+    wrap.appendChild(input);
+    var msg = document.createElement('div');
+    msg.className = 'uwc-field__msg';
+    wrap.appendChild(msg);
+    return wrap;
+  }
+
+  function setFieldState(wrap, state, message) {
+    wrap.classList.remove('uwc-field--ok', 'uwc-field--err', 'uwc-field--focus');
+    if (state) wrap.classList.add('uwc-field--' + state);
+    var msg = wrap.querySelector('.uwc-field__msg');
+    if (msg) msg.textContent = message || '';
+  }
+
+  function runValidators(value, validators) {
+    for (var i = 0; i < validators.length; i++) {
+      var r = validators[i](value);
+      if (r !== true) return { ok: false, msg: r };
+    }
+    return { ok: true, msg: '' };
+  }
+
+  UWCValidate.wire = function (scope) {
+    if (!scope) return;
+    var fields = scope.querySelectorAll('[data-validate]');
+    for (var i = 0; i < fields.length; i++) {
+      (function (field) {
+        var spec = field.getAttribute('data-validate');
+        var validators = parseSpec(spec);
+        var wrap = wrapField(field);
+
+        field.addEventListener('focus', function () {
+          wrap.classList.remove('uwc-field--err');
+          wrap.classList.add('uwc-field--focus');
+        });
+        field.addEventListener('blur', function () {
+          wrap.classList.remove('uwc-field--focus');
+          var res = runValidators(field.value, validators);
+          if (res.ok) setFieldState(wrap, 'ok', '');
+          else setFieldState(wrap, 'err', res.msg);
+        });
+        field.addEventListener('input', function () {
+          if (wrap.classList.contains('uwc-field--err')) {
+            wrap.classList.remove('uwc-field--err');
+            var msg = wrap.querySelector('.uwc-field__msg');
+            if (msg) msg.textContent = '';
+          }
+        });
+
+        field._uwcValidators = validators;
+        field._uwcWrap = wrap;
+      })(fields[i]);
+    }
+  };
+
+  UWCValidate.validateScope = function (scope) {
+    var fields = scope.querySelectorAll('[data-validate]');
+    var firstErr = null;
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i];
+      var validators = f._uwcValidators || parseSpec(f.getAttribute('data-validate'));
+      var wrap = f._uwcWrap || wrapField(f);
+      var res = runValidators(f.value, validators);
+      if (res.ok) setFieldState(wrap, 'ok', '');
+      else {
+        setFieldState(wrap, 'err', res.msg);
+        if (!firstErr) firstErr = f;
+      }
+    }
+    return { ok: !firstErr, firstError: firstErr };
+  };
+
+  UWCValidate.collect = function (scope) {
+    var data = {};
+    var fields = scope.querySelectorAll('input[name], textarea[name], select[name]');
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i];
+      if (f.type === 'checkbox') data[f.name] = !!f.checked;
+      else if (f.type === 'radio') { if (f.checked) data[f.name] = f.value; }
+      else data[f.name] = f.value;
+    }
+    return data;
+  };
+
+  /* ---------- Toast ---------- */
+  function getToastContainer() {
+    var c = document.getElementById('uwc-toast-container');
+    if (!c) {
+      c = document.createElement('div');
+      c.id = 'uwc-toast-container';
+      document.body.appendChild(c);
+    }
+    return c;
+  }
+
+  function UWCToast(msg, opts) {
+    opts = opts || {};
+    var kind = opts.kind || 'info';
+    var dur = opts.durationMs || 3000;
+    var c = getToastContainer();
+    while (c.children.length >= 4) c.removeChild(c.firstChild);
+    var t = document.createElement('div');
+    t.className = 'uwc-toast uwc-toast--' + kind;
+    t.textContent = msg;
+    c.appendChild(t);
+    setTimeout(function () { t.classList.add('uwc-toast--show'); }, 10);
+    setTimeout(function () {
+      t.classList.remove('uwc-toast--show');
+      setTimeout(function () { if (t.parentNode) t.parentNode.removeChild(t); }, 220);
+    }, dur);
+  }
+
+  /* ---------- Wizard ---------- */
+  var wizards = {};
+
+  function renderProgress(container, total, current) {
+    var prog = container.querySelector('[data-wizard-progress]');
+    if (!prog) return;
+    prog.innerHTML = '';
+    prog.classList.add('uwc-wizard-progress');
+    for (var i = 0; i < total; i++) {
+      var dot = document.createElement('div');
+      dot.className = 'uwc-wizard-dot';
+      if (i < current) dot.classList.add('uwc-wizard-dot--complete');
+      else if (i === current) dot.classList.add('uwc-wizard-dot--active');
+      dot.textContent = (i < current) ? '✓' : String(i + 1);
+      prog.appendChild(dot);
+      if (i < total - 1) {
+        var line = document.createElement('div');
+        line.className = 'uwc-wizard-line';
+        if (i < current) line.classList.add('uwc-wizard-line--complete');
+        prog.appendChild(line);
+      }
+    }
+  }
+
+  function showStep(container, idx) {
+    var steps = container.querySelectorAll('[data-wizard-step]');
+    for (var i = 0; i < steps.length; i++) {
+      if (i === idx) steps[i].removeAttribute('hidden');
+      else steps[i].setAttribute('hidden', '');
+    }
+    renderProgress(container, steps.length, idx);
+  }
+
+  var UWCWizard = {
+    start: function (containerId, opts) {
+      var container = document.getElementById(containerId);
+      if (!container) return;
+      opts = opts || {};
+      var steps = container.querySelectorAll('[data-wizard-step]');
+      if (!steps.length) return;
+      wizards[containerId] = { current: 0, total: steps.length, opts: opts, container: container };
+      showStep(container, 0);
+
+      var nextBtns = container.querySelectorAll('[data-wizard-next]');
+      for (var i = 0; i < nextBtns.length; i++) {
+        nextBtns[i].addEventListener('click', function (e) {
+          e.preventDefault();
+          UWCWizard.next(containerId);
+        });
+      }
+      var backBtns = container.querySelectorAll('[data-wizard-back]');
+      for (var j = 0; j < backBtns.length; j++) {
+        backBtns[j].addEventListener('click', function (e) {
+          e.preventDefault();
+          UWCWizard.back(containerId);
+        });
+      }
+    },
+    next: function (containerId) {
+      var w = wizards[containerId];
+      if (!w) return;
+      var steps = w.container.querySelectorAll('[data-wizard-step]');
+      var currentStep = steps[w.current];
+      var result = UWCValidate.validateScope(currentStep);
+      if (!result.ok) {
+        UWCToast('Please complete the highlighted fields', { kind: 'err' });
+        currentStep.classList.remove('uwc-shake');
+        void currentStep.offsetWidth;
+        currentStep.classList.add('uwc-shake');
+        if (result.firstError && typeof result.firstError.scrollIntoView === 'function') {
+          result.firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          try { result.firstError.focus(); } catch (e) {}
+        }
+        return;
+      }
+      if (w.current >= w.total - 1) {
+        if (typeof w.opts.onFinish === 'function') {
+          var data = UWCValidate.collect(w.container);
+          w.opts.onFinish(data, w.container);
+        }
+        return;
+      }
+      w.current += 1;
+      showStep(w.container, w.current);
+    },
+    back: function (containerId) {
+      var w = wizards[containerId];
+      if (!w) return;
+      if (w.current <= 0) return;
+      w.current -= 1;
+      showStep(w.container, w.current);
+    },
+    goto: function (containerId, stepIdx) {
+      var w = wizards[containerId];
+      if (!w) return;
+      if (stepIdx < 0 || stepIdx >= w.total) return;
+      w.current = stepIdx;
+      showStep(w.container, w.current);
+    }
+  };
+
+  /* ---------- Eligibility ---------- */
+  var UWCEligibility = {
+    evaluate: function (yob, nationality, residency) {
+      var age = 2026 - parseInt(yob, 10);
+      if (isNaN(age) || age < 14 || age > 19) return 'ineligible';
+      if (age < 16) return 'guardian-required';
+      return 'pass';
+    }
+  };
+
+  /* ---------- Submission ---------- */
+  function addDays(date, days) {
+    var d = new Date(date.getTime());
+    d.setDate(d.getDate() + days);
+    return d;
+  }
+
+  function pad2(n) { n = String(n); return n.length < 2 ? '0' + n : n; }
+
+  function isoDate(d) {
+    return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+  }
+
+  function pad5(n) {
+    n = String(n);
+    while (n.length < 5) n = '0' + n;
+    return n;
+  }
+
+  var NAT_CODE = {
+    brazil: 'BR', brazilian: 'BR', india: 'IN', indian: 'IN',
+    'united kingdom': 'GB', uk: 'GB', british: 'GB',
+    'united states': 'US', usa: 'US', american: 'US',
+    canada: 'CA', canadian: 'CA', china: 'CN', chinese: 'CN',
+    japan: 'JP', japanese: 'JP', germany: 'DE', german: 'DE',
+    france: 'FR', french: 'FR', spain: 'ES', spanish: 'ES'
+  };
+
+  function natCode(nat) {
+    if (!nat) return 'XX';
+    var key = String(nat).toLowerCase().trim();
+    if (NAT_CODE[key]) return NAT_CODE[key];
+    return key.replace(/[^a-z]/g, '').slice(0, 2).toUpperCase() || 'XX';
+  }
+
+  var UWCSubmit = {
+    application: function (formData) {
+      var rand = Math.floor(10000 + Math.random() * 90000);
+      var nat = (formData && (formData.nationality || formData.nat || formData.country)) || '';
+      var code = natCode(nat);
+      var id = 'UWC-2026-' + code + '-' + pad5(rand);
+      var now = new Date();
+      var timeline = [
+        { stage: 'Submitted', date: isoDate(now), status: 'complete' },
+        { stage: 'Eligibility review', date: isoDate(now), status: 'in-progress' },
+        { stage: 'Local interview', date: isoDate(addDays(now, 14)), status: 'pending' },
+        { stage: 'National selection', date: isoDate(addDays(now, 35)), status: 'pending' },
+        { stage: 'Place decision', date: isoDate(addDays(now, 75)), status: 'pending' }
+      ];
+      return {
+        id: id,
+        submittedAt: now.toISOString(),
+        status: 'Submitted',
+        timeline: timeline
+      };
+    }
+  };
+
+  /* ---------- Auto-init on DOMContentLoaded ---------- */
+  function init() {
+    injectCSS();
+
+    var allValidated = document.querySelectorAll('[data-validate]');
+    var scopes = [];
+    for (var i = 0; i < allValidated.length; i++) {
+      var f = allValidated[i];
+      var scope = (f.closest && f.closest('form, [data-form-scope]')) || document.body;
+      if (scopes.indexOf(scope) === -1) scopes.push(scope);
+    }
+    for (var j = 0; j < scopes.length; j++) {
+      UWCValidate.wire(scopes[j]);
+    }
+
+    var wizardEls = document.querySelectorAll('[data-wizard]');
+    for (var k = 0; k < wizardEls.length; k++) {
+      var el = wizardEls[k];
+      if (!el.id) el.id = 'uwc-wizard-' + k;
+      var finishName = el.getAttribute('data-wizard-finish');
+      var opts = {};
+      if (finishName && typeof window[finishName] === 'function') {
+        opts.onFinish = window[finishName];
+      }
+      UWCWizard.start(el.id, opts);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  /* ---------- Expose globals ---------- */
+  window.UWCValidate = UWCValidate;
+  window.UWCWizard = UWCWizard;
+  window.UWCToast = UWCToast;
+  window.UWCEligibility = UWCEligibility;
+  window.UWCSubmit = UWCSubmit;
+})();
+
+
 /* Scenario B driver */
-const TOTAL = 11;
+const TOTAL = 12;
 let step = 0;
 const stepCounterEl = document.getElementById('step-counter');
 const prevBtn = document.getElementById('prev-btn');  // may be null after demo-bar removal
