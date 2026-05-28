@@ -12,7 +12,7 @@
 /* ====== Reset + base ====== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; background: #f3f5fa; color: #1f2937; -webkit-font-smoothing: antialiased; overflow: hidden; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; background: #f3f5fa; color: #1f2937; -webkit-font-smoothing: antialiased; overflow-x: hidden; overflow-y: auto; }
 
 /* INLINE:demo-bar.css */
 .demo-bar { background: linear-gradient(90deg, #C8102E 0%, #a00d24 100%); color: #fff; height: 32px; display: flex; align-items: center; padding: 0 14px; gap: 14px; font-family: 'DM Sans', system-ui, sans-serif; font-size: 11.5px; position: relative; z-index: 200; box-shadow: 0 1px 0 rgba(0,0,0,0.1); }
@@ -37,8 +37,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 /* /INLINE */
 
 .app { height: 100vh; display: grid; grid-template-rows: 32px 1fr; }
-.stage { overflow: hidden; padding: 0; }
-.screen { display: none; height: 100%; }
+.stage { overflow: visible; padding: 0; min-height: 100vh; }
+.screen { display: none; min-height: 100vh; }
 .screen.active { display: block; animation: fadeIn 250ms ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
@@ -70,7 +70,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .zoho-tb__org::after { content: '1'; position: absolute; top: -3px; right: -3px; width: 14px; height: 14px; background: #7c3aed; color: #fff; font-size: 9px; font-weight: 600; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1.5px solid #fff; }
 .zoho-tb__waffle { display: grid; grid-template-columns: repeat(3, 4px); gap: 2px; width: auto; padding: 0 6px; }
 .zoho-tb__waffle span { width: 4px; height: 4px; background: #6b7280; border-radius: 1px; }
-.zoho-body { display: grid; grid-template-columns: 225px 1fr; height: 100%; overflow: hidden; }
+.zoho-body { display: grid; grid-template-columns: 225px 1fr; min-height: calc(100vh - 52px); }
 .zoho-sidebar { background: #f7f8fa; border-right: 1px solid #e8eaed; overflow-y: auto; padding: 8px 0; font-size: 13px; }
 .zoho-sb__item { display: flex; align-items: center; gap: 10px; padding: 7px 14px; color: #4a5568; cursor: pointer; transition: background 120ms; text-decoration: none; font-size: 13px; }
 .zoho-sb__item:hover { background: #eef1f7; }
@@ -188,14 +188,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .rs-option.active .rs-check { opacity: 1; }
 
 /* UWC Portal shell */
-.uwc-portal-shell { background: #f3f5fa; height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+.uwc-portal-shell { background: #f3f5fa; min-height: 100vh; display: flex; flex-direction: column; overflow: visible; }
 .uwc-portal-topbar { background: linear-gradient(90deg, #003087 0%, #004A97 100%); color: #fff; padding: 14px 24px; display: flex; align-items: center; gap: 16px; border-bottom: 3px solid #C8102E; flex-shrink: 0; }
 .uwc-portal-topbar__logo { width: 40px; height: 40px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #003087; font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 13px; flex-shrink: 0; }
 .uwc-portal-topbar__title { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: 17px; }
 .uwc-portal-topbar__lang { margin-left: auto; display: flex; gap: 4px; }
 .uwc-portal-topbar__lang-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; }
 .uwc-portal-topbar__lang-btn.active { background: rgba(255,255,255,0.2); color: #fff; border-color: rgba(255,255,255,0.6); }
-.uwc-portal-body { flex: 1; overflow-y: auto; padding: 24px; }
+.uwc-portal-body { flex: 1; padding: 24px; }
 .uwc-portal-content { max-width: 920px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 32px; box-shadow: 0 2px 8px rgba(0,48,135,0.06); }
 .uwc-portal-h1 { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: 26px; color: #003087; margin-bottom: 8px; }
 .uwc-portal-h2 { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: 18px; color: #0d1b3e; margin-bottom: 6px; }
@@ -203,7 +203,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .uwc-portal-btn-primary { background: #003087; color: #fff; border: none; padding: 12px 22px; border-radius: 8px; font-weight: 500; font-size: 14px; cursor: pointer; }
 
 /* Portal sidebar layout */
-.uwc-portal-layout { display: grid; grid-template-columns: 220px 1fr; flex: 1; overflow: hidden; }
+.uwc-portal-layout { display: grid; grid-template-columns: 220px 1fr; flex: 1; min-height: calc(100vh - 56px); }
 .uwc-portal-sidebar { background: #fff; border-right: 1px solid #e5e7eb; padding: 20px 0; overflow-y: auto; }
 .uwc-portal-sidebar__section { padding: 8px 20px 4px; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: #9ca3af; font-weight: 600; }
 .uwc-portal-sidebar__item { display: flex; align-items: center; gap: 10px; padding: 9px 20px; color: #4a5568; cursor: pointer; font-size: 14px; text-decoration: none; }
@@ -297,13 +297,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 <body>
 
 <div class="app">
-  <div class="demo-bar">
-    <a href="00_index.html" class="demo-bar__home">← All scenarios</a>
-    <span class="demo-bar__brand">Demo Mode</span>
-    <span class="demo-bar__divider"></span>
-    <span class="demo-bar__scenario"><b>Scenario B</b> · Applicant Registration · Eligibility · Form Submission</span>
-    <span class="demo-bar__spacer"></span>
-    <div id="role-switcher"></div>
     <span class="demo-bar__divider"></span>
     <span class="demo-bar__step" id="step-counter">Step 1 / 11</span>
     <div class="demo-bar__nav">
@@ -314,39 +307,283 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 
   <div class="stage" id="stage">
 
-    <!-- STEP 1 — UWC portal landing (public visitor) -->
+    <!-- STEP 1 — UWC International landing page (full-viewport, public visitor) -->
     <section class="screen active" id="sc-0">
-      <div class="uwc-portal-shell">
-        <div class="uwc-portal-topbar">
-          <div class="uwc-portal-topbar__logo">UWC</div>
-          <span class="uwc-portal-topbar__title">Apply to UWC International — 2026 Application Cycle</span>
-          <div class="uwc-portal-topbar__lang">
-            <button class="uwc-portal-topbar__lang-btn active">EN</button>
-            <button class="uwc-portal-topbar__lang-btn">PT</button>
-            <button class="uwc-portal-topbar__lang-btn">ES</button>
+      <style>
+        /* === Landing-only styles, namespaced with .lp- prefix === */
+        .lp-wrap { background: #fff; min-height: 100vh; color: #0d1b3e; }
+        .lp-nav { position: sticky; top: 0; z-index: 100; height: 72px; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; padding: 0 40px; gap: 36px; }
+        .lp-nav__logo { display: flex; align-items: center; gap: 10px; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 22px; color: #003087; letter-spacing: -0.5px; }
+        .lp-nav__logo-mark { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #003087 0%, #004A97 100%); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; }
+        .lp-nav__links { display: flex; gap: 28px; flex: 1; }
+        .lp-nav__link { color: #4b5563; font-size: 14px; font-weight: 500; text-decoration: none; cursor: pointer; transition: color 120ms; }
+        .lp-nav__link:hover { color: #003087; }
+        .lp-nav__role { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #6b7280; }
+        .lp-nav__role-badge { background: #E8EEF6; color: #003087; padding: 4px 10px; border-radius: 999px; font-weight: 600; font-size: 11.5px; letter-spacing: 0.3px; }
+        .lp-nav__actions { display: flex; gap: 12px; align-items: center; }
+        .lp-btn-ghost { background: transparent; color: #003087; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 8px; transition: background 120ms; }
+        .lp-btn-ghost:hover { background: #E8EEF6; }
+        .lp-btn-primary { background: #c8102e; color: #fff; border: none; padding: 12px 26px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 8px; transition: background 120ms; box-shadow: 0 2px 8px rgba(200,16,46,0.25); }
+        .lp-btn-primary:hover { background: #a00d24; }
+        .lp-btn-primary-large { background: #c8102e; color: #fff; border: none; padding: 16px 36px; font-size: 16px; font-weight: 600; cursor: pointer; border-radius: 10px; box-shadow: 0 4px 16px rgba(200,16,46,0.35); transition: all 200ms; }
+        .lp-btn-primary-large:hover { background: #a00d24; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,16,46,0.4); }
+        .lp-btn-ghost-light { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.6); padding: 14px 32px; font-size: 16px; font-weight: 600; cursor: pointer; border-radius: 10px; transition: all 200ms; }
+        .lp-btn-ghost-light:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
+
+        /* HERO — full viewport minus 72px nav */
+        .lp-hero { position: relative; min-height: calc(100vh - 72px); display: flex; align-items: center; justify-content: center; overflow: hidden; background: linear-gradient(135deg, #001a4d 0%, #003087 100%); }
+        .lp-hero__bg { position: absolute; inset: 0; background-image: url('../_shared/assets/uwc-brand/hero-students-flags.jpeg'); background-size: cover; background-position: center 35%; opacity: 0.45; }
+        .lp-hero__overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,26,77,0.7) 0%, rgba(0,48,135,0.55) 60%, rgba(0,148,130,0.4) 100%); }
+        .lp-hero__content { position: relative; max-width: 920px; padding: 0 32px; text-align: center; z-index: 2; }
+        .lp-hero__eyebrow { display: inline-block; color: #C8AB00; font-size: 13px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 24px; padding: 6px 18px; border: 1px solid rgba(200,171,0,0.5); border-radius: 999px; background: rgba(200,171,0,0.08); }
+        .lp-hero__headline { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(40px, 6vw, 68px); line-height: 1.05; font-weight: 500; color: #fff; margin: 0 0 24px; letter-spacing: -1px; text-shadow: 0 4px 24px rgba(0,0,0,0.25); }
+        .lp-hero__sub { font-size: clamp(16px, 1.6vw, 19px); line-height: 1.55; color: rgba(255,255,255,0.92); max-width: 680px; margin: 0 auto 40px; }
+        .lp-hero__ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .lp-hero__scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .lp-hero__scroll-hint::after { content: '↓'; font-size: 18px; animation: lp-bounce 2s ease infinite; }
+        @keyframes lp-bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+        /* STATS STRIP — overlapping hero */
+        .lp-stats { max-width: 1180px; margin: -56px auto 0; padding: 0 32px; position: relative; z-index: 3; }
+        .lp-stats__card { background: #fff; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,48,135,0.18); display: grid; grid-template-columns: repeat(4, 1fr); padding: 28px; gap: 0; }
+        .lp-stats__item { text-align: center; padding: 8px 14px; position: relative; }
+        .lp-stats__item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 14%; bottom: 14%; width: 1px; background: #e5e7eb; }
+        .lp-stats__num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 600; color: #003087; line-height: 1; }
+        .lp-stats__label { font-size: 13px; color: #6b7280; margin-top: 6px; font-weight: 500; }
+
+        /* HOW TO APPLY */
+        .lp-section { max-width: 1180px; margin: 0 auto; padding: 96px 32px; }
+        .lp-section__eyebrow { text-align: center; color: #003087; font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 12px; }
+        .lp-section__title { text-align: center; font-family: 'Playfair Display', Georgia, serif; font-size: clamp(30px, 3.5vw, 44px); font-weight: 500; color: #0d1b3e; line-height: 1.15; margin: 0 auto 18px; max-width: 700px; letter-spacing: -0.5px; }
+        .lp-section__lede { text-align: center; font-size: 17px; line-height: 1.6; color: #5a6480; max-width: 640px; margin: 0 auto 56px; }
+
+        .lp-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; }
+        .lp-steps::before { content: ''; position: absolute; top: 32px; left: 12.5%; right: 12.5%; height: 2px; background: repeating-linear-gradient(90deg, #c8cdd8 0, #c8cdd8 6px, transparent 6px, transparent 12px); z-index: 0; }
+        .lp-step { background: #fff; padding: 28px 22px 24px; border-radius: 14px; border: 1px solid #e5e7eb; position: relative; z-index: 1; transition: all 200ms; cursor: pointer; }
+        .lp-step:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,48,135,0.12); border-color: #003087; }
+        .lp-step__num { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #003087, #004A97); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; margin: 0 auto 16px; box-shadow: 0 4px 12px rgba(0,48,135,0.3); }
+        .lp-step__title { font-size: 16px; font-weight: 600; color: #0d1b3e; margin-bottom: 8px; text-align: center; }
+        .lp-step__desc { font-size: 13.5px; line-height: 1.55; color: #6b7280; text-align: center; }
+        .lp-steps-cta { text-align: center; margin-top: 48px; }
+
+        /* WHY UWC */
+        .lp-why { background: #f8f9fb; padding: 96px 32px; }
+        .lp-why__grid { max-width: 1180px; margin: 56px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+        .lp-why__card { background: #fff; padding: 36px 28px; border-radius: 14px; border: 1px solid #e5e7eb; transition: all 200ms; }
+        .lp-why__card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,48,135,0.1); }
+        .lp-why__icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 22px; }
+        .lp-why__icon--1 { background: #E8EEF6; }
+        .lp-why__icon--2 { background: #fef3c7; }
+        .lp-why__icon--3 { background: #dcfce7; }
+        .lp-why__card-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; color: #0d1b3e; margin-bottom: 12px; }
+        .lp-why__card-desc { font-size: 14.5px; line-height: 1.65; color: #5a6480; }
+
+        /* SCHOOLS row */
+        .lp-schools { max-width: 1240px; margin: 0 auto; padding: 96px 32px 64px; }
+        .lp-schools__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; }
+        .lp-school { background: linear-gradient(135deg, #003087 0%, #004A97 100%); border-radius: 14px; padding: 28px 22px; color: #fff; position: relative; overflow: hidden; transition: transform 200ms; cursor: pointer; min-height: 180px; display: flex; flex-direction: column; justify-content: space-between; }
+        .lp-school:hover { transform: translateY(-4px); }
+        .lp-school::before { content: ''; position: absolute; top: -40px; right: -40px; width: 140px; height: 140px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+        .lp-school__flag { font-size: 32px; margin-bottom: 14px; position: relative; z-index: 1; }
+        .lp-school__name { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; line-height: 1.25; margin-bottom: 4px; position: relative; z-index: 1; }
+        .lp-school__country { font-size: 12.5px; opacity: 0.75; position: relative; z-index: 1; }
+        .lp-school__year { font-size: 11px; opacity: 0.6; margin-top: 8px; position: relative; z-index: 1; font-family: 'DM Mono', ui-monospace, monospace; }
+
+        /* FOOTER */
+        .lp-footer { background: #001a4d; color: rgba(255,255,255,0.7); padding: 64px 32px 28px; }
+        .lp-footer__inner { max-width: 1180px; margin: 0 auto; }
+        .lp-footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
+        .lp-footer__brand-name { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; color: #fff; margin: 14px 0 12px; }
+        .lp-footer__brand-tag { font-size: 13.5px; line-height: 1.65; }
+        .lp-footer__col-title { color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; }
+        .lp-footer__link { display: block; color: rgba(255,255,255,0.65); font-size: 13.5px; margin-bottom: 10px; text-decoration: none; cursor: pointer; transition: color 120ms; }
+        .lp-footer__link:hover { color: #fff; }
+        .lp-footer__bottom { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px; display: flex; justify-content: space-between; font-size: 12.5px; flex-wrap: wrap; gap: 16px; }
+
+        @media (max-width: 900px) {
+          .lp-nav { padding: 0 20px; gap: 16px; }
+          .lp-nav__links { display: none; }
+          .lp-stats__card { grid-template-columns: repeat(2, 1fr); gap: 14px 0; }
+          .lp-stats__item:nth-child(2)::after { display: none; }
+          .lp-steps { grid-template-columns: 1fr 1fr; }
+          .lp-steps::before { display: none; }
+          .lp-why__grid { grid-template-columns: 1fr; }
+          .lp-schools__grid { grid-template-columns: 1fr 1fr; }
+          .lp-footer__grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+        @media (max-width: 560px) {
+          .lp-hero__ctas { flex-direction: column; align-items: stretch; padding: 0 24px; }
+          .lp-steps { grid-template-columns: 1fr; }
+          .lp-schools__grid { grid-template-columns: 1fr; }
+          .lp-footer__grid { grid-template-columns: 1fr; }
+        }
+      </style>
+
+      <div class="lp-wrap">
+
+        <!-- NAV -->
+        <nav class="lp-nav">
+          <div class="lp-nav__logo">
+            <div class="lp-nav__logo-mark">UWC</div>
+            <span>UWC International</span>
           </div>
-        </div>
-        <div style="position:relative;height:210px;flex-shrink:0;overflow:hidden;">
-          <img src="../_shared/assets/uwc-brand/hero-students-flags.jpeg" alt="UWC students" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
-          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,48,135,0.5) 0%,rgba(0,48,135,0.78) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 32px;gap:10px;">
-            <div style="font-family:'Playfair Display',Georgia,serif;font-size:30px;color:#fff;font-weight:500;text-shadow:0 2px 8px rgba(0,0,0,0.25);">Make Education a Force to Unite Peoples</div>
-            <div style="color:rgba(255,255,255,0.85);font-size:15px;">Applications open for the 2026 cycle · 18 UWC schools · 150+ countries</div>
+          <div class="lp-nav__links">
+            <a class="lp-nav__link" onclick="document.getElementById('lp-how').scrollIntoView({behavior:'smooth'})">How to apply</a>
+            <a class="lp-nav__link" onclick="document.getElementById('lp-why').scrollIntoView({behavior:'smooth'})">Why UWC</a>
+            <a class="lp-nav__link" onclick="document.getElementById('lp-schools').scrollIntoView({behavior:'smooth'})">Our schools</a>
+            <a class="lp-nav__link" onclick="document.getElementById('lp-footer').scrollIntoView({behavior:'smooth'})">Find a National Committee</a>
           </div>
-        </div>
-        <div class="uwc-portal-body" data-role-variant="visitor:public|sofia:sofia-dash|maria:guardian|ana:nc-view|io-mkt:mkt-view">
-          <div class="uwc-portal-content" style="max-width:580px;text-align:center;">
-            <div class="uwc-portal-h1" style="margin-bottom:10px;">Comece sua candidatura</div>
-            <div class="uwc-portal-sub" style="margin-bottom:28px;">Escolha como quer continuar. Se ainda não tem conta, verifique primeiro a sua elegibilidade.</div>
-            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:22px;">
-              <button class="uwc-portal-btn-primary" style="padding:14px 36px;font-size:15px;">Sign in</button>
-              <button style="background:#fff;color:#003087;border:2px solid #003087;padding:14px 36px;border-radius:8px;font-weight:500;font-size:15px;cursor:pointer;">Registrar</button>
+          <div class="lp-nav__role" title="Demo: switch viewpoint">
+            <span style="font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#9ca3af;">View as</span>
+            <span class="lp-nav__role-badge">👤 Public visitor</span>
+          </div>
+          <div class="lp-nav__actions">
+            <button class="lp-btn-ghost" onclick="window.go && window.go(2)">Sign in</button>
+            <button class="lp-btn-primary" onclick="window.go && window.go(1)">Apply now →</button>
+          </div>
+        </nav>
+
+        <!-- HERO -->
+        <section class="lp-hero">
+          <div class="lp-hero__bg"></div>
+          <div class="lp-hero__overlay"></div>
+          <div class="lp-hero__content">
+            <div class="lp-hero__eyebrow">Applications open · September 2026 entry</div>
+            <h1 class="lp-hero__headline">Make education a force to unite peoples, nations and cultures.</h1>
+            <p class="lp-hero__sub">Join 11,000+ students from 150+ countries at 18 UWC schools and colleges around the world. The 2026/27 application cycle closes on 30 November 2026.</p>
+            <div class="lp-hero__ctas">
+              <button class="lp-btn-primary-large" onclick="window.go && window.go(1)">Start your application →</button>
+              <button class="lp-btn-ghost-light" onclick="window.go && window.go(2)">Already started? Sign in</button>
             </div>
-            <a href="#" style="color:#003087;font-size:13px;text-decoration:underline;">✓ Verificar elegibilidade primeiro</a>
-            <div style="margin-top:28px;padding-top:20px;border-top:1px solid #e5e7eb;display:flex;justify-content:center;gap:36px;font-size:12px;color:#6b7280;">
-              <span>🌍 150+ países</span><span>🎓 18 escolas UWC</span><span>📅 Ciclo encerra 30 Nov 2026</span>
-            </div>
+          </div>
+          <div class="lp-hero__scroll-hint">Scroll to explore</div>
+        </section>
+
+        <!-- STATS STRIP -->
+        <div class="lp-stats">
+          <div class="lp-stats__card">
+            <div class="lp-stats__item"><div class="lp-stats__num">60+</div><div class="lp-stats__label">Years of impact</div></div>
+            <div class="lp-stats__item"><div class="lp-stats__num">18</div><div class="lp-stats__label">UWC schools</div></div>
+            <div class="lp-stats__item"><div class="lp-stats__num">150+</div><div class="lp-stats__label">Countries represented</div></div>
+            <div class="lp-stats__item"><div class="lp-stats__num">11k+</div><div class="lp-stats__label">Alumni worldwide</div></div>
           </div>
         </div>
+
+        <!-- HOW TO APPLY -->
+        <section class="lp-section" id="lp-how">
+          <div class="lp-section__eyebrow">How it works</div>
+          <h2 class="lp-section__title">Your path to UWC in four steps</h2>
+          <p class="lp-section__lede">A clear, supported journey from your first question to the day you arrive on campus. Most applicants complete the form across 2-3 sittings.</p>
+          <div class="lp-steps">
+            <div class="lp-step" onclick="window.go && window.go(1)">
+              <div class="lp-step__num">1</div>
+              <div class="lp-step__title">Check eligibility</div>
+              <div class="lp-step__desc">Three quick questions — your age, nationality, and country of residence — to make sure UWC is open to you for this cycle.</div>
+            </div>
+            <div class="lp-step" onclick="window.go && window.go(2)">
+              <div class="lp-step__num">2</div>
+              <div class="lp-step__title">Create your account</div>
+              <div class="lp-step__desc">Verify your email and set up your private applicant portal. You can save your progress and return any time before the deadline.</div>
+            </div>
+            <div class="lp-step" onclick="window.go && window.go(4)">
+              <div class="lp-step__num">3</div>
+              <div class="lp-step__title">Complete your application</div>
+              <div class="lp-step__desc">Six sections covering personal information, academic background, your personal statement, documents, guardian consent and declaration.</div>
+            </div>
+            <div class="lp-step" onclick="window.go && window.go(3)">
+              <div class="lp-step__num">4</div>
+              <div class="lp-step__title">Submit &amp; track</div>
+              <div class="lp-step__desc">Submit before 30 November 2026. Your National Committee will guide you through eligibility review, interview and place allocation.</div>
+            </div>
+          </div>
+          <div class="lp-steps-cta">
+            <button class="lp-btn-primary-large" onclick="window.go && window.go(1)">Check eligibility now →</button>
+          </div>
+        </section>
+
+        <!-- WHY UWC -->
+        <section class="lp-why" id="lp-why">
+          <div class="lp-section__eyebrow">Why UWC</div>
+          <h2 class="lp-section__title">An education like no other</h2>
+          <p class="lp-section__lede">Since 1962 UWC has educated young people who go on to build understanding across the differences that divide our world.</p>
+          <div class="lp-why__grid" style="max-width:1180px;margin:56px auto 0;">
+            <div class="lp-why__card">
+              <div class="lp-why__icon lp-why__icon--1">🌍</div>
+              <div class="lp-why__card-title">Genuinely diverse</div>
+              <div class="lp-why__card-desc">Every UWC class is selected to reflect the world — students from 80+ nationalities live, learn and disagree together for two transformative years.</div>
+            </div>
+            <div class="lp-why__card">
+              <div class="lp-why__icon lp-why__icon--2">💡</div>
+              <div class="lp-why__card-title">Academically transformative</div>
+              <div class="lp-why__card-desc">The full IB Diploma combined with experiential learning — service, outdoor education, creativity — develops the whole person, not just the student.</div>
+            </div>
+            <div class="lp-why__card">
+              <div class="lp-why__icon lp-why__icon--3">🤝</div>
+              <div class="lp-why__card-title">Connected for life</div>
+              <div class="lp-why__card-desc">UWC alumni are 65,000-strong across every continent — a network that becomes home, mentor and collaborator for the rest of your career.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCHOOLS -->
+        <section class="lp-schools" id="lp-schools">
+          <div class="lp-section__eyebrow">Where you could go</div>
+          <h2 class="lp-section__title">Explore our 18 schools and colleges</h2>
+          <p class="lp-section__lede">From the Welsh coast to the Indian Ghats, the Adriatic to Costa Rica — discover the campus that fits your spirit.</p>
+          <div class="lp-schools__grid">
+            <div class="lp-school"><div class="lp-school__flag">🇬🇧</div><div><div class="lp-school__name">UWC Atlantic</div><div class="lp-school__country">Wales, United Kingdom</div><div class="lp-school__year">Est. 1962</div></div></div>
+            <div class="lp-school"><div class="lp-school__flag">🇮🇳</div><div><div class="lp-school__name">UWC Mahindra</div><div class="lp-school__country">Pune, India</div><div class="lp-school__year">Est. 1997</div></div></div>
+            <div class="lp-school"><div class="lp-school__flag">🇨🇦</div><div><div class="lp-school__name">Pearson UWC</div><div class="lp-school__country">Vancouver Island, Canada</div><div class="lp-school__year">Est. 1974</div></div></div>
+            <div class="lp-school"><div class="lp-school__flag">🇳🇱</div><div><div class="lp-school__name">UWC Maastricht</div><div class="lp-school__country">Maastricht, Netherlands</div><div class="lp-school__year">Est. 2009</div></div></div>
+            <div class="lp-school"><div class="lp-school__flag">🇮🇹</div><div><div class="lp-school__name">UWC Adriatic</div><div class="lp-school__country">Duino, Italy</div><div class="lp-school__year">Est. 1982</div></div></div>
+            <div class="lp-school"><div class="lp-school__flag">🇨🇷</div><div><div class="lp-school__name">UWC Costa Rica</div><div class="lp-school__country">San José, Costa Rica</div><div class="lp-school__year">Est. 2006</div></div></div>
+            <div class="lp-school"><div class="lp-school__flag">🇧🇦</div><div><div class="lp-school__name">UWC Mostar</div><div class="lp-school__country">Mostar, Bosnia &amp; Herzegovina</div><div class="lp-school__year">Est. 2006</div></div></div>
+            <div class="lp-school"><div class="lp-school__flag">🇳🇴</div><div><div class="lp-school__name">UWC Red Cross Nordic</div><div class="lp-school__country">Flekke, Norway</div><div class="lp-school__year">Est. 1995</div></div></div>
+          </div>
+          <div style="text-align:center;margin-top:40px;"><a class="lp-nav__link" style="font-size:14px;font-weight:600;color:#003087;cursor:pointer;text-decoration:underline;">See all 18 schools →</a></div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="lp-footer" id="lp-footer">
+          <div class="lp-footer__inner">
+            <div class="lp-footer__grid">
+              <div>
+                <div class="lp-nav__logo-mark" style="width:42px;height:42px;font-size:14px;">UWC</div>
+                <div class="lp-footer__brand-name">UWC International</div>
+                <div class="lp-footer__brand-tag">Making education a force to unite peoples, nations and cultures for peace and a sustainable future. Registered charity in England &amp; Wales (313690).</div>
+              </div>
+              <div>
+                <div class="lp-footer__col-title">Applicants</div>
+                <a class="lp-footer__link" onclick="window.go && window.go(1)">Check eligibility</a>
+                <a class="lp-footer__link" onclick="window.go && window.go(2)">Create account</a>
+                <a class="lp-footer__link" onclick="window.go && window.go(2)">Sign in</a>
+                <a class="lp-footer__link">Application FAQ</a>
+                <a class="lp-footer__link">Scholarships</a>
+              </div>
+              <div>
+                <div class="lp-footer__col-title">UWC</div>
+                <a class="lp-footer__link">About us</a>
+                <a class="lp-footer__link">Our schools</a>
+                <a class="lp-footer__link">National Committees</a>
+                <a class="lp-footer__link">Educational model</a>
+                <a class="lp-footer__link">News &amp; stories</a>
+              </div>
+              <div>
+                <div class="lp-footer__col-title">Support</div>
+                <a class="lp-footer__link">Contact</a>
+                <a class="lp-footer__link">Donate</a>
+                <a class="lp-footer__link">Privacy notice</a>
+                <a class="lp-footer__link">Cookie policy</a>
+                <a class="lp-footer__link">GDPR rights</a>
+              </div>
+            </div>
+            <div class="lp-footer__bottom">
+              <div>© 2026 United World Colleges (International) Limited. All rights reserved.</div>
+              <div>Made with care · Brussels · London · Geneva</div>
+            </div>
+          </div>
+        </footer>
+
       </div>
     </section>
 
@@ -355,7 +592,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
       <div class="uwc-portal-shell">
         <div class="uwc-portal-topbar">
           <div class="uwc-portal-topbar__logo">UWC</div>
-          <span class="uwc-portal-topbar__title">Verificação de Elegibilidade</span>
+          <span class="uwc-portal-topbar__title">Eligibility check</span>
           <div class="uwc-portal-topbar__lang">
             <button class="uwc-portal-topbar__lang-btn">PT</button>
             <button class="uwc-portal-topbar__lang-btn active">EN</button>
@@ -364,26 +601,26 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         </div>
         <div class="uwc-portal-body">
           <div class="uwc-portal-content" style="max-width:580px;">
-            <div class="uwc-portal-h1" style="margin-bottom:6px;">Verificar elegibilidade</div>
-            <div class="uwc-portal-sub" style="margin-bottom:24px;">Para candidatar-se ao Ciclo 2026, deve ter entre 15 e 17 anos em 1 de setembro de 2026.</div>
+            <div class="uwc-portal-h1" style="margin-bottom:6px;">Check eligibility</div>
+            <div class="uwc-portal-sub" style="margin-bottom:24px;">To apply for the 2026 Cycle, you must be between 15 and 17 years old by 1 September 2026.</div>
             <div class="portal-banner portal-banner--error">
               <span style="font-size:22px;flex-shrink:0;">🚫</span>
               <div>
-                <div style="font-weight:600;margin-bottom:4px;">Você não atende ao requisito de idade</div>
-                Com a data de nascimento informada você terá <b>14 anos</b> em 01/09/2026. O mínimo exigido é 15 anos. Não é possível criar uma conta neste ciclo.<br><br>
-                Você poderá candidatar-se no <b>Ciclo 2027</b>. Ative os alertas abaixo para ser notificada quando as inscrições abrirem.
+                <div style="font-weight:600;margin-bottom:4px;">You don't meet the age requirement</div>
+                With the date of birth provided you will be <b>14 years old</b> on 01/09/2026. The minimum required is 15 years. You cannot create an account in this cycle.<br><br>
+                You may apply in the <b>2027 Cycle</b>. Enable the alerts below to be notified when applications open.
               </div>
             </div>
             <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:20px 24px;margin-bottom:22px;">
               <div class="portal-row--full">
-                <label class="portal-label">Data de nascimento</label>
-                <input class="portal-input error" type="text" value="12 fev 2012" readonly>
-                <div style="font-size:12px;color:#C8102E;margin-top:6px;display:flex;align-items:center;gap:5px;"><span>⚠</span> Idade em 01/09/2026: <b>14 anos</b> — abaixo do mínimo de 15.</div>
+                <label class="portal-label">Date of birth</label>
+                <input class="portal-input error" type="text" value="12 Feb 2012" readonly>
+                <div style="font-size:12px;color:#C8102E;margin-top:6px;display:flex;align-items:center;gap:5px;"><span>⚠</span> Age on 01/09/2026: <b>14 years</b> — below the minimum of 15.</div>
               </div>
             </div>
             <div style="display:flex;gap:10px;flex-wrap:wrap;">
-              <button style="background:#f3f5fa;color:#374151;border:1px solid #d1d5db;padding:11px 20px;border-radius:8px;font-size:14px;cursor:pointer;">← Voltar ao início</button>
-              <button style="background:#003087;color:#fff;border:none;padding:11px 22px;border-radius:8px;font-size:14px;cursor:pointer;font-weight:500;">📧 Alertar para Ciclo 2027</button>
+              <button style="background:#f3f5fa;color:#374151;border:1px solid #d1d5db;padding:11px 20px;border-radius:8px;font-size:14px;cursor:pointer;">← Back to start</button>
+              <button style="background:#003087;color:#fff;border:none;padding:11px 22px;border-radius:8px;font-size:14px;cursor:pointer;font-weight:500;">📧 Notify me for 2027 Cycle</button>
             </div>
           </div>
         </div>
@@ -404,14 +641,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         </div>
         <div class="uwc-portal-body">
           <div class="uwc-portal-content" style="max-width:620px;">
-            <div class="uwc-portal-h1" style="margin-bottom:6px;">Criar conta</div>
-            <div class="uwc-portal-sub" style="margin-bottom:24px;">Elegibilidade confirmada <span style="color:#166534;font-weight:600;">✓</span> — nascida em <b>15 ago 2009</b> · terá <b>16 anos</b> em 01/09/2026.</div>
+            <div class="uwc-portal-h1" style="margin-bottom:6px;">Create account</div>
+            <div class="uwc-portal-sub" style="margin-bottom:24px;">Eligibility confirmed <span style="color:#166534;font-weight:600;">✓</span> — nascida em <b>15 ago 2009</b> · terá <b>16 anos</b> em 01/09/2026.</div>
             <div class="portal-banner portal-banner--ok">
               <span style="font-size:20px;flex-shrink:0;">✅</span>
-              <div><b>Elegível para o Ciclo 2026!</b> Preencha o formulário abaixo para criar a sua conta e iniciar a candidatura.</div>
+              <div><b>Eligible for the 2026 Cycle!</b> Fill in the form below to create your account and start your application.</div>
             </div>
             <div class="portal-row">
-              <div><label class="portal-label">Primeiro nome</label><input class="portal-input" type="text" value="Sofia"></div>
+              <div><label class="portal-label">First name</label><input class="portal-input" type="text" value="Sofia"></div>
               <div><label class="portal-label">Sobrenome</label><input class="portal-input" type="text" value="Almeida"></div>
             </div>
             <div class="portal-row--full"><label class="portal-label">E-mail</label><input class="portal-input" type="email" value="sofia.almeida@example.com"></div>
@@ -813,7 +1050,7 @@ Finally, I want to be challenged. I want to be the least experienced person in a
                 <tr><td><input type="checkbox"></td><td class="zoho-list__name-link">Ana Lúcia Ramos</td><td>al.ramos@example.com</td><td>🇧🇷 Brazil NC</td><td>Student</td><td>15 May 2026</td><td></td></tr>
               </tbody>
             </table>
-            <div style="padding:10px 22px;font-size:12px;color:#6b7280;">4 contacts · 1 novo hoje</div>
+            <div style="padding:10px 22px;font-size:12px;color:#6b7280;">4 contacts · 1 new today</div>
             <div class="zoho-smart-chat"><span class="zoho-smart-chat__placeholder">Here is your Smart Chat (Ctrl+Space)</span></div>
           </main>
         </div>
@@ -1079,7 +1316,6 @@ Finally, I want to be challenged. I want to be the least experienced person in a
     </section>
 
   </div>
-</div>
 
 <script>
 /* INLINE:sample-data.js */
@@ -1139,18 +1375,18 @@ UWC.getRolesFor = function(code) {
 const TOTAL = 11;
 let step = 0;
 const stepCounterEl = document.getElementById('step-counter');
-const prevBtn = document.getElementById('prev-btn');
-const nextBtn = document.getElementById('next-btn');
+const prevBtn = document.getElementById('prev-btn');  // may be null after demo-bar removal
+const nextBtn = document.getElementById('next-btn');  // may be null after demo-bar removal
 function go(i) {
   if (i < 0 || i >= TOTAL) return;
   step = i;
   document.querySelectorAll('.screen').forEach((s, j) => s.classList.toggle('active', j === i));
-  stepCounterEl.textContent = 'Step ' + (i + 1) + ' / ' + TOTAL;
-  prevBtn.disabled = i === 0;
-  nextBtn.disabled = i === TOTAL - 1;
+  if (stepCounterEl) stepCounterEl.textContent = 'Step ' + (i + 1) + ' / ' + TOTAL;
+  if (prevBtn) prevBtn.disabled = i === 0;
+  if (nextBtn) nextBtn.disabled = i === TOTAL - 1;
 }
-prevBtn.addEventListener('click', () => go(step - 1));
-nextBtn.addEventListener('click', () => go(step + 1));
+if (prevBtn) prevBtn.addEventListener('click', () => go(step - 1));
+if (nextBtn) nextBtn.addEventListener('click', () => go(step + 1));
 document.addEventListener('keydown', (e) => {
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
   if (e.key === 'ArrowRight') go(step + 1);
