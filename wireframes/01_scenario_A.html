@@ -95,7 +95,9 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
 .zoho-sb__teamspace { margin: 12px 10px; padding: 10px 12px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
 .zoho-sb__teamspace-icon { width: 22px; height: 22px; background: #ef4444; color: #fff; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
 .zoho-sb__teamspace-name { font-weight: 500; color: #1f2937; flex: 1; }
-.zoho-sb__teamspace-chev { color: #6b7280; font-size: 10px; }
+.zoho-sb__teamspace-chev, .zoho-sb__group-chev { color: #6b7280; font-size: 11px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; margin-left: 4px; vertical-align: middle; flex-shrink: 0; transition: transform 150ms; }
+.zoho-home-banner__user-pick { display: inline-flex; align-items: center; gap: 6px; }
+.zoho-page-strip__view { display: inline-flex !important; align-items: center; gap: 6px; line-height: 1.2; }
 .zoho-sb__teamspace-more { color: #6b7280; font-size: 16px; line-height: 1; cursor: pointer; padding: 0 4px; }
 .zoho-sb__search { margin: 0 10px 12px; background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 6px 10px; display: flex; align-items: center; gap: 8px; }
 .zoho-sb__search input { border: none; outline: none; background: transparent; width: 100%; font-size: 12px; color: #1f2937; font-family: inherit; }
@@ -158,7 +160,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
 .zoho-detail__back { color: #6b7280; font-size: 18px; cursor: pointer; padding: 4px; }
 .zoho-detail__avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #ec4899); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 16px; flex-shrink: 0; }
 .zoho-detail__name-block { flex: 1; }
-.zoho-detail__name { font-size: 19px; font-weight: 600; color: #1f2937; }
+.zoho-detail__name { font-size: 22px; font-weight: 600; color: #1f2937; letter-spacing: -0.2px; }
 .zoho-detail__add-tags { font-size: 12px; color: #2563eb; cursor: pointer; margin-top: 2px; }
 .zoho-detail__actions { display: flex; align-items: center; gap: 8px; }
 .zoho-detail__last-update { font-size: 12px; color: #6b7280; margin-right: 12px; }
@@ -488,11 +490,11 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
 
 /* Detail sections */
 .cd-section { background:#fff; border:1px solid #e5e7eb; border-radius:8px; padding:16px 18px; margin-top:10px; }
-.cd-section__title { font-size:13px; font-weight:600; color:#1f2937; margin-bottom:14px; }
-.cd-fields-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px 28px; }
+.cd-section__title { font-size: 14px; font-weight: 600; color: #1f2937; margin-bottom: 14px; }
+.cd-fields-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 36px; }
 .cd-field-row { display:flex; align-items:baseline; gap:12px; }
-.cd-field-row__label { min-width:140px; text-align:right; color:#6b7280; font-size:12px; flex-shrink:0; }
-.cd-field-row__value { color:#1f2937; flex:1; font-size:13px; word-break:break-word; }
+.cd-field-row__label { min-width: 160px; text-align: right; color: #6b7280; font-size: 13px; flex-shrink: 0; font-weight: 400; }
+.cd-field-row__value { color: #1f2937; flex: 1; font-size: 14px; line-height: 1.55; word-break: break-word; }
 .cd-field-row__value.link { color:#2563eb; }
 .cd-field-row__value .phone-ico,.cd-compact-card__value .phone-ico { color:#22c55e; }
 .cd-hide-details { font-size:12px; color:#2563eb; cursor:pointer; display:inline-flex; align-items:center; gap:4px; margin-bottom:12px; }
@@ -1058,7 +1060,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
                         <td><input type="checkbox"></td>
                         <td class="cl-icon-col">✉</td>
                         <td><span class="date-pill date-pill--overdue">MAY 27</span></td>
-                        <td><span class="cl-name-link" data-contact-id="sofia">Sofia Almeida (Sample)</span></td>
+                        <td><span class="cl-name-link" data-contact-id="sofia">Sofia Almeida</span></td>
                         <td style="color:#6b7280;">sofia.almeida@noemail.invalid</td>
                         <td style="color:#6b7280;">555-555-5555</td>
                         <td style="color:#6b7280;">UWC A2Z Admin</td>
@@ -1068,7 +1070,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
                         <td><input type="checkbox"></td>
                         <td class="cl-icon-col">✉</td>
                         <td><span class="date-pill date-pill--upcoming">MAY 29</span></td>
-                        <td><span class="cl-name-link" data-contact-id="marcus-c">Marcus Weber (Sample)</span></td>
+                        <td><span class="cl-name-link" data-contact-id="marcus-c">Marcus Weber</span></td>
                         <td style="color:#6b7280;">m.weber@uwcgermany.de</td>
                         <td style="color:#6b7280;">555-555-5555</td>
                         <td style="color:#6b7280;">UWC A2Z Admin</td>
@@ -1078,7 +1080,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
                         <td><input type="checkbox"></td>
                         <td class="cl-icon-col">✉</td>
                         <td><span class="date-pill date-pill--today">TODAY</span></td>
-                        <td><span class="cl-name-link" data-contact-id="ana-c">Ana Carvalho (Sample)</span></td>
+                        <td><span class="cl-name-link" data-contact-id="ana-c">Ana Carvalho</span></td>
                         <td style="color:#6b7280;">a.carvalho@uwcbrazil.org</td>
                         <td style="color:#6b7280;">555-555-5555</td>
                         <td style="color:#6b7280;">UWC A2Z Admin</td>
@@ -1088,7 +1090,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
                         <td><input type="checkbox"></td>
                         <td class="cl-icon-col">✉</td>
                         <td><span class="date-pill date-pill--upcoming">MAY 29</span></td>
-                        <td><span class="cl-name-link" data-contact-id="clara">Clara Ramos (Sample)</span></td>
+                        <td><span class="cl-name-link" data-contact-id="clara">Clara Ramos</span></td>
                         <td style="color:#6b7280;">clara.ramos@uwcbrazil.org</td>
                         <td style="color:#6b7280;">555-555-5555</td>
                         <td style="color:#6b7280;">UWC A2Z Admin</td>
@@ -1098,7 +1100,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
                         <td><input type="checkbox"></td>
                         <td class="cl-icon-col">✉</td>
                         <td><span class="date-pill date-pill--overdue">MAY 26</span></td>
-                        <td><span class="cl-name-link" data-contact-id="paulo">Paulo Fonseca (Sample)</span></td>
+                        <td><span class="cl-name-link" data-contact-id="paulo">Paulo Fonseca</span></td>
                         <td style="color:#6b7280;">paulo.fonseca@uwcbrazil.org</td>
                         <td style="color:#6b7280;">555-555-5555</td>
                         <td style="color:#6b7280;">UWC A2Z Admin</td>
@@ -1108,7 +1110,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
                         <td><input type="checkbox"></td>
                         <td class="cl-icon-col">✉</td>
                         <td><span class="date-pill date-pill--upcoming">MAY 29</span></td>
-                        <td><span class="cl-name-link" data-contact-id="helen">Helen Richards (Sample)</span></td>
+                        <td><span class="cl-name-link" data-contact-id="helen">Helen Richards</span></td>
                         <td style="color:#6b7280;">h.richards@uwcatlantic.org</td>
                         <td style="color:#6b7280;">555-555-5555</td>
                         <td style="color:#6b7280;">UWC A2Z Admin</td>
@@ -1118,7 +1120,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
                         <td><input type="checkbox"></td>
                         <td class="cl-icon-col">✉</td>
                         <td><span class="date-pill date-pill--overdue">MAY 25</span></td>
-                        <td><span class="cl-name-link" data-contact-id="akanksha-c">Akanksha Anand (Sample)</span></td>
+                        <td><span class="cl-name-link" data-contact-id="akanksha-c">Akanksha Anand</span></td>
                         <td style="color:#6b7280;">a.anand@uwcio.uwc.org</td>
                         <td style="color:#6b7280;">555-555-5555</td>
                         <td style="color:#6b7280;">UWC A2Z Admin</td>
@@ -1128,7 +1130,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
                         <td><input type="checkbox"></td>
                         <td class="cl-icon-col">✉</td>
                         <td></td>
-                        <td><span class="cl-name-link" data-contact-id="maria">Maria Almeida (Sample)</span></td>
+                        <td><span class="cl-name-link" data-contact-id="maria">Maria Almeida</span></td>
                         <td style="color:#6b7280;">maria.almeida@noemail.invalid</td>
                         <td style="color:#6b7280;">555-555-5555</td>
                         <td style="color:#6b7280;">UWC A2Z Admin</td>
@@ -1138,7 +1140,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
                         <td><input type="checkbox"></td>
                         <td class="cl-icon-col">✉</td>
                         <td></td>
-                        <td><span class="cl-name-link" data-contact-id="grace">Grace Omondi (Sample)</span></td>
+                        <td><span class="cl-name-link" data-contact-id="grace">Grace Omondi</span></td>
                         <td style="color:#6b7280;">g.omondi@uwckenya.org</td>
                         <td style="color:#6b7280;">555-555-5555</td>
                         <td style="color:#6b7280;">UWC A2Z Admin</td>
@@ -1148,7 +1150,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
                         <td><input type="checkbox"></td>
                         <td class="cl-icon-col">✉</td>
                         <td><span class="date-pill date-pill--today">TODAY</span></td>
-                        <td><span class="cl-name-link" data-contact-id="jonathan">Jonathan Osei (Sample)</span></td>
+                        <td><span class="cl-name-link" data-contact-id="jonathan">Jonathan Osei</span></td>
                         <td style="color:#6b7280;">j.osei@example.com</td>
                         <td style="color:#6b7280;">555-555-5555</td>
                         <td style="color:#6b7280;">UWC A2Z Admin</td>
@@ -1213,7 +1215,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
               <span class="zoho-detail__back cd-back-to-list" title="Back to Contacts list">←</span>
               <div class="zoho-detail__avatar" id="cd-avatar">SA</div>
               <div class="zoho-detail__name-block">
-                <div class="zoho-detail__name" id="cd-name">Sofia Almeida (Sample)</div>
+                <div class="zoho-detail__name" id="cd-name">Sofia Almeida</div>
                 <div class="zoho-detail__add-tags">+ Add Tags</div>
               </div>
               <div class="zoho-detail__actions" id="cd-actions-view">
@@ -2179,8 +2181,8 @@ function _c(name,avatar,grad,type,dob,gender,nationality,email,mobile,phone,addr
 }
 UWC.contacts = {
   'sofia': {
-    name: 'Sofia Almeida (Sample)', avatar: 'SA', avatarGrad: 'linear-gradient(135deg,#f59e0b,#ec4899)',
-    type: 'Student', dob: '15 Aug 2009', gender: 'Female', parent: 'Maria Almeida', relationship: 'Mother→Daughter',
+    name: 'Sofia Almeida', avatar: 'SA', avatarGrad: 'linear-gradient(135deg,#f59e0b,#ec4899)',
+    type: 'Student', dob: '15 Aug 2009', gender: 'Female', parent: 'Maria Almeida', relationship: 'Mother',
     nationality: 'Brazilian', email: 'sofia.almeida@noemail.invalid', mobile: '+55 11 9 4567 1234',
     secondary: '—', phone: '—', emergency: '—',
     passportNum: '—', passportIssue: '—', passportName: '—', passportExpiry: '—',
@@ -2196,15 +2198,15 @@ UWC.contacts = {
       { time: '09:12 AM', icon: '➕', desc: 'Contact record was created' }
     ]
   },
-  'marcus-c': _c('Marcus Weber (Sample)','MW','linear-gradient(135deg,#003087,#7c3aed)','NC Admin','03 Jun 1985','Male','German','m.weber@uwcgermany.de','+49 30 5555 0101','+49 30 5555 0100','Unter den Linden 42\nBerlin 10117\nGermany','NC Admin for UWC Germany','Active','marcus.weber',[{time:'02:15 PM',icon:'✎',desc:'Phone was updated'},{time:'10:00 AM',icon:'➕',desc:'Contact record was created'}]),
-  'ana-c': _c('Ana Carvalho (Sample)','AC','linear-gradient(135deg,#10b981,#3b82f6)','NC Admin','12 Sep 1982','Female','Brazilian','a.carvalho@uwcbrazil.org','+55 21 9 8765 4321','+55 21 2222 3333','Av. Atlântica 2880\nRio de Janeiro, RJ 22010-000\nBrazil','NC Admin for UWC Brazil','Active','ana.carvalho',[{time:'03:45 PM',icon:'✎',desc:'Email was updated'},{time:'09:00 AM',icon:'➕',desc:'Contact record was created'}]),
-  'clara': _c('Clara Ramos (Sample)','CR','linear-gradient(135deg,#a855f7,#6366f1)','Reviewer','07 Mar 1990','Female','Brazilian','clara.ramos@uwcbrazil.org','+55 21 9 9999 1234','—','Rua do Catete 100\nRio de Janeiro, RJ 22220-000\nBrazil','—','Active','clara.ramos',[{time:'01:30 PM',icon:'✎',desc:'Role was updated to Reviewer'},{time:'11:00 AM',icon:'➕',desc:'Contact record was created'}]),
-  'paulo': _c('Paulo Fonseca (Sample)','PF','linear-gradient(135deg,#f97316,#ef4444)','Reviewer','19 Nov 1988','Male','Brazilian','paulo.fonseca@uwcbrazil.org','+55 21 9 7777 5678','—','Rua Voluntários da Pátria 50\nNiterói, RJ 24020-000\nBrazil','—','Active','paulo.fonseca',[{time:'10:22 AM',icon:'➕',desc:'Contact record was created'}]),
-  'helen': _c('Helen Richards (Sample)','HR','linear-gradient(135deg,#0ea5e9,#6366f1)','School Director','14 Feb 1975','Female','British','h.richards@uwcatlantic.org','+44 7700 900321','+44 2079 000100','UWC Atlantic\nSt Donat\'s Castle\nLlantwit Major CF61 1WF\nWales, UK','School Admissions Director, UWC Atlantic','Active','helen.richards',[{time:'09:15 AM',icon:'✎',desc:'Phone was added'},{time:'08:00 AM',icon:'➕',desc:'Contact record was created'}]),
-  'akanksha-c': _c('Akanksha Anand (Sample)','AA','linear-gradient(135deg,#003087,#a855f7)','IO Admin','25 Jan 1980','Female','Indian','a.anand@uwcio.uwc.org','+91 98765 43210','—','UWC International\n17–21 Emerald St\nLondon WC1N 3QN\nUK','IO Super Admin — global CRM access','Active','akanksha.anand',[{time:'03:00 PM',icon:'✎',desc:'Nationality was updated to Indian'},{time:'11:30 AM',icon:'➕',desc:'Contact record was created'}]),
-  'maria': _c('Maria Almeida (Sample)','MA','linear-gradient(135deg,#ec4899,#f59e0b)','Guardian','02 Apr 1975','Female','Brazilian','maria.almeida@noemail.invalid','+55 11 9 8888 2222','—','Rua Augusta 1240\nSão Paulo, SP 01304-001\nBrazil','Parent/Guardian of applicant Sofia Almeida','Inactive','—',[{time:'04:39 PM',icon:'✎',desc:'Relationship set to Mother of Sofia Almeida'},{time:'04:39 PM',icon:'➕',desc:'Contact record was created'}]),
-  'grace': _c('Grace Omondi (Sample)','GO','linear-gradient(135deg,#10b981,#f59e0b)','Student','08 Jul 2008','Female','Kenyan','g.omondi@uwckenya.org','+254 700 123456','—','Ngong Road 15\nNairobi 00100\nKenya','—','Active','grace.omondi',[{time:'11:00 AM',icon:'✎',desc:'Nationality was updated to Kenyan'},{time:'10:00 AM',icon:'➕',desc:'Contact record was created'}]),
-  'jonathan': _c('Jonathan Osei (Sample)','JO','linear-gradient(135deg,#6366f1,#22c55e)','Student','17 Nov 2007','Male','Ghanaian','j.osei@example.com','+233 20 111 2222','—','Cantonments Rd 8\nAccra\nGhana','—','Active','jonathan.osei',[{time:'02:00 PM',icon:'✎',desc:'Type was updated to Student'},{time:'09:30 AM',icon:'➕',desc:'Contact record was created'}])
+  'marcus-c': _c('Marcus Weber','MW','linear-gradient(135deg,#003087,#7c3aed)','NC Admin','03 Jun 1985','Male','German','m.weber@uwcgermany.de','+49 30 5555 0101','+49 30 5555 0100','Unter den Linden 42\nBerlin 10117\nGermany','NC Admin for UWC Germany','Active','marcus.weber',[{time:'02:15 PM',icon:'✎',desc:'Phone was updated'},{time:'10:00 AM',icon:'➕',desc:'Contact record was created'}]),
+  'ana-c': _c('Ana Carvalho','AC','linear-gradient(135deg,#10b981,#3b82f6)','NC Admin','12 Sep 1982','Female','Brazilian','a.carvalho@uwcbrazil.org','+55 21 9 8765 4321','+55 21 2222 3333','Av. Atlântica 2880\nRio de Janeiro, RJ 22010-000\nBrazil','NC Admin for UWC Brazil','Active','ana.carvalho',[{time:'03:45 PM',icon:'✎',desc:'Email was updated'},{time:'09:00 AM',icon:'➕',desc:'Contact record was created'}]),
+  'clara': _c('Clara Ramos','CR','linear-gradient(135deg,#a855f7,#6366f1)','Reviewer','07 Mar 1990','Female','Brazilian','clara.ramos@uwcbrazil.org','+55 21 9 9999 1234','—','Rua do Catete 100\nRio de Janeiro, RJ 22220-000\nBrazil','—','Active','clara.ramos',[{time:'01:30 PM',icon:'✎',desc:'Role was updated to Reviewer'},{time:'11:00 AM',icon:'➕',desc:'Contact record was created'}]),
+  'paulo': _c('Paulo Fonseca','PF','linear-gradient(135deg,#f97316,#ef4444)','Reviewer','19 Nov 1988','Male','Brazilian','paulo.fonseca@uwcbrazil.org','+55 21 9 7777 5678','—','Rua Voluntários da Pátria 50\nNiterói, RJ 24020-000\nBrazil','—','Active','paulo.fonseca',[{time:'10:22 AM',icon:'➕',desc:'Contact record was created'}]),
+  'helen': _c('Helen Richards','HR','linear-gradient(135deg,#0ea5e9,#6366f1)','School Director','14 Feb 1975','Female','British','h.richards@uwcatlantic.org','+44 7700 900321','+44 2079 000100','UWC Atlantic\nSt Donat\'s Castle\nLlantwit Major CF61 1WF\nWales, UK','School Admissions Director, UWC Atlantic','Active','helen.richards',[{time:'09:15 AM',icon:'✎',desc:'Phone was added'},{time:'08:00 AM',icon:'➕',desc:'Contact record was created'}]),
+  'akanksha-c': _c('Akanksha Anand','AA','linear-gradient(135deg,#003087,#a855f7)','IO Admin','25 Jan 1980','Female','Indian','a.anand@uwcio.uwc.org','+91 98765 43210','—','UWC International\n17–21 Emerald St\nLondon WC1N 3QN\nUK','IO Super Admin — global CRM access','Active','akanksha.anand',[{time:'03:00 PM',icon:'✎',desc:'Nationality was updated to Indian'},{time:'11:30 AM',icon:'➕',desc:'Contact record was created'}]),
+  'maria': _c('Maria Almeida','MA','linear-gradient(135deg,#ec4899,#f59e0b)','Guardian','02 Apr 1975','Female','Brazilian','maria.almeida@noemail.invalid','+55 11 9 8888 2222','—','Rua Augusta 1240\nSão Paulo, SP 01304-001\nBrazil','Parent/Guardian of applicant Sofia Almeida','Inactive','—',[{time:'04:39 PM',icon:'✎',desc:'Relationship set to Mother of Sofia Almeida'},{time:'04:39 PM',icon:'➕',desc:'Contact record was created'}]),
+  'grace': _c('Grace Omondi','GO','linear-gradient(135deg,#10b981,#f59e0b)','Student','08 Jul 2008','Female','Kenyan','g.omondi@uwckenya.org','+254 700 123456','—','Ngong Road 15\nNairobi 00100\nKenya','—','Active','grace.omondi',[{time:'11:00 AM',icon:'✎',desc:'Nationality was updated to Kenyan'},{time:'10:00 AM',icon:'➕',desc:'Contact record was created'}]),
+  'jonathan': _c('Jonathan Osei','JO','linear-gradient(135deg,#6366f1,#22c55e)','Student','17 Nov 2007','Male','Ghanaian','j.osei@example.com','+233 20 111 2222','—','Cantonments Rd 8\nAccra\nGhana','—','Active','jonathan.osei',[{time:'02:00 PM',icon:'✎',desc:'Type was updated to Student'},{time:'09:30 AM',icon:'➕',desc:'Contact record was created'}])
 };
 
 (function () {
@@ -2245,7 +2247,10 @@ UWC.contacts = {
     applyCapabilityGating(id);
     // Update scope banner
     updateScopeBannerForRole(id);
-  }
+  
+  try { document.dispatchEvent(new CustomEvent("roleChanged", { detail: { roleId: id } })); } catch(e){}
+  try { applyDPLHiding(); } catch(e){}
+}
 })();
 
 /* ---- CAPABILITY MATRIX (Issue 7) ---- */
@@ -2261,6 +2266,17 @@ var CAPABILITY_MATRIX = {
   'accept-nomination':    ['helen'],
   'see-sensitive-fields': ['marcus','ana','akanksha','fatima','helen','clara','paulo']
 };
+
+// Apply DPL hiding to elements marked data-cap-hide="dpl"
+function applyDPLHiding() {
+  var isDpl = document.body.dataset.currentRole === 'data-protection';
+  document.querySelectorAll('[data-cap-hide="dpl"]').forEach(function(el){
+    el.hidden = isDpl;
+  });
+}
+// Hook it to role changes
+document.addEventListener('roleChanged', applyDPLHiding);
+
 function canRole(action) {
   var role = document.body.dataset.currentRole || 'marcus';
   return (CAPABILITY_MATRIX[action] || []).indexOf(role) !== -1;
@@ -2341,6 +2357,9 @@ function showView(viewId, opts) {
   if (sbKey) document.querySelectorAll('[data-sb-nav="' + sbKey + '"]').forEach(function(el) { el.classList.add('active'); });
   // Update scope banner
   updateScopeBanner();
+
+  try { applyDPLHiding(); } catch(e){}
+  try { if (typeof applyCapabilityGating === "function") applyCapabilityGating(document.body.dataset.currentRole); } catch(e){}
 }
 
 function updateScopeBanner() {
@@ -2649,6 +2668,13 @@ function _fr(label, id, val, extra) {
   var idAttr = id ? ' id="' + id + '"' : '';
   return '<div class="cd-field-row"><div class="cd-field-row__label">' + label + '</div><div class="' + cls + '"' + idAttr + '>' + (val || '—') + '</div></div>';
 }
+  // _frSens: same as _fr, but returns empty for Data Protection Lead (sensitive fields)
+  function _frSens(label, id, value, klass){
+    if (document.body.dataset.currentRole === 'data-protection') {
+      return '<div class="cd-field-row"><div class="cd-field-row__label">' + label + '</div><div class="cd-field-row__value" style="color:#9ca3af;font-style:italic;">— Restricted (sensitive field)</div></div>';
+    }
+    return _fr(label, id, value, klass);
+  }
 
 // Build all overview sections for a contact
 function buildSections(c) {
@@ -2661,8 +2687,8 @@ function buildSections(c) {
   sec('Student Information',
     _fr('Contact Name','cd-f-name',c.name) +
     _fr('Type','cd-f-type',c.type) +
-    _fr('Date of Birth','cd-f-dob',c.dob) +
-    _fr('Parent Name','cd-f-parent',c.parent,'link') +
+    _frSens('Date of Birth','cd-f-dob',c.dob) +
+    _frSens('Parent Name','cd-f-parent',c.parent,'link') +
     '<div class="cd-field-row" style="align-items:flex-start;"><div class="cd-field-row__label" style="padding-top:2px;">Gender</div><div class="cd-field-row__value" id="cd-f-gender">' + genderHtml + '</div></div>' +
     _fr('Relationship','cd-f-relationship',c.relationship) +
     _fr('Nationality','cd-f-nationality',c.nationality) +
@@ -2671,20 +2697,20 @@ function buildSections(c) {
   // Contact Information
   sec('Contact Information',
     _fr('Email','cd-f-email',c.email,'link') +
-    '<div class="cd-field-row"><div class="cd-field-row__label">Mobile</div><div class="cd-field-row__value phone" id="cd-f-mobile"><span id="cd-f-mobile-val">' + (c.mobile||'—') + '</span> <span class="phone-ico">📞</span></div></div>' +
+    '<div class="cd-field-row" data-cap-hide="dpl"><div class="cd-field-row__label">Mobile</div><div class="cd-field-row__value phone" id="cd-f-mobile"><span id="cd-f-mobile-val">' + (c.mobile||'—') + '</span> <span class="phone-ico">📞</span></div></div>' +
     _fr('Secondary Email','cd-f-secondary',c.secondary) +
-    _fr('Phone','cd-f-phone',c.phone) +
+    _frSens('Phone','cd-f-phone',c.phone) +
     '<div class="cd-field-row"><div class="cd-field-row__label"></div><div class="cd-field-row__value"></div></div>' +
-    _fr('Emergency Contact','cd-f-emergency',c.emergency)
+    _frSens('Emergency Contact','cd-f-emergency',c.emergency)
   );
   // Passport
   sec('Passport Information',
-    _fr('Passport Number','cd-f-passportNum',c.passportNum) + _fr('Passport Issue Date','cd-f-passportIssue',c.passportIssue) +
-    _fr('Name in Passport','cd-f-passportName',c.passportName) + _fr('Passport Expiry','cd-f-passportExpiry',c.passportExpiry)
+    _frSens('Passport Number','cd-f-passportNum',c.passportNum) + _fr('Passport Issue Date','cd-f-passportIssue',c.passportIssue) +
+    _frSens('Name in Passport','cd-f-passportName',c.passportName) + _fr('Passport Expiry','cd-f-passportExpiry',c.passportExpiry)
   );
   // Address
   H += '<div class="cd-section"><div class="cd-section__title">Address Information</div><div class="cd-fields-grid">' +
-    '<div class="cd-field-row" style="align-items:flex-start;"><div class="cd-field-row__label" style="padding-top:2px;">Mailing Address</div><div class="cd-field-row__value" id="cd-f-address" style="white-space:pre-line;">' + (c.address||'—') + '</div></div>' +
+    '<div class="cd-field-row" data-cap-hide="dpl" style="align-items:flex-start;"><div class="cd-field-row__label" style="padding-top:2px;">Mailing Address</div><div class="cd-field-row__value" id="cd-f-address" style="white-space:pre-line;">' + (c.address||'—') + '</div></div>' +
     '<div class="cd-field-row" style="align-items:flex-start;"><div class="cd-field-row__label" style="padding-top:2px;">Other Address</div><div class="cd-field-row__value" id="cd-f-otherAddress">' + (c.otherAddress||'—') + '</div></div>' +
     '</div></div>';
   // Description
@@ -3271,6 +3297,21 @@ setTimeout(function() {
 
 /* ---- Show initial view ---- */
 showView('home');
+
+// Add prominent Settings link to every Zoho sidebar
+function ensureSettingsLink() {
+  document.querySelectorAll('.zoho-sidebar').forEach(function(sb){
+    if (sb.querySelector('.zoho-sb__settings-quick')) return;
+    var item = document.createElement('a');
+    item.className = 'zoho-sb__item zoho-sb__settings-quick';
+    item.style.cssText = 'margin-top:auto;border-top:1px solid #e2e8f0;padding-top:10px;font-weight:500;color:#003087;';
+    item.setAttribute('data-sb-nav','setup-home');
+    item.innerHTML = '<span class="zoho-sb__item-icon">⚙</span><span>Settings · Roles & Permissions</span>';
+    sb.appendChild(item);
+  });
+}
+document.addEventListener('DOMContentLoaded', ensureSettingsLink);
+window.addEventListener('load', ensureSettingsLink);
 </script>
 
 </body>
