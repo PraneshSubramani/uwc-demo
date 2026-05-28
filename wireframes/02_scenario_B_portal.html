@@ -712,6 +712,301 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
     .auth-card h1, .auth-success h2 { font-size: 20px; }
   }
 </style>
+<style>
+  /* ============================================================ */
+  /* Shared design tokens — UWC palette + typography               */
+  /* ============================================================ */
+  .dash-shell, .docs-shell, .refs-shell, .status-shell {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif;
+    color: #1f2937;
+    font-size: 14.5px;
+    line-height: 1.55;
+    padding: 24px 28px 64px;
+    max-width: 1180px;
+    margin: 0 auto;
+    background: #f5f7fb;
+    min-height: 100vh;
+  }
+  .dash-shell *, .docs-shell *, .refs-shell *, .status-shell * { box-sizing: border-box; }
+  .dash-shell svg, .docs-shell svg, .refs-shell svg, .status-shell svg {
+    width: 16px; height: 16px; fill: currentColor; flex-shrink: 0;
+  }
+
+  /* shared card / button primitives */
+  .dash-card, .docs-card, .refs-card, .status-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px 22px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: box-shadow 0.18s, border-color 0.18s, transform 0.18s;
+  }
+  .dash-card.is-hover:hover, .docs-card:hover, .refs-card:hover {
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    border-color: #cbd5e1;
+  }
+
+  .dash-btn, .docs-btn, .refs-btn, .status-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    white-space: nowrap;
+  }
+  .dash-btn svg, .docs-btn svg, .refs-btn svg, .status-btn svg { width: 14px; height: 14px; }
+  .dash-btn--primary, .docs-btn--primary, .refs-btn--primary, .status-btn--primary { background: #003087; color: #fff; }
+  .dash-btn--primary:hover, .docs-btn--primary:hover, .refs-btn--primary:hover, .status-btn--primary:hover { background: #001a4d; }
+  .dash-btn--danger, .docs-btn--danger, .refs-btn--danger, .status-btn--danger { background: #C8102E; color: #fff; }
+  .dash-btn--danger:hover, .docs-btn--danger:hover, .refs-btn--danger:hover, .status-btn--danger:hover { background: #9a0c23; }
+  .dash-btn--ghost, .docs-btn--ghost, .refs-btn--ghost, .status-btn--ghost { background: #fff; color: #1f2937; border-color: #e5e7eb; }
+  .dash-btn--ghost:hover, .docs-btn--ghost:hover, .refs-btn--ghost:hover, .status-btn--ghost:hover { background: #f9fafb; border-color: #cbd5e1; }
+  .dash-btn[disabled], .docs-btn[disabled], .refs-btn[disabled], .status-btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+
+  /* pill */
+  .dash-pill, .docs-pill, .refs-pill, .status-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 10px; border-radius: 100px;
+    font-size: 12px; font-weight: 600; line-height: 1.4; letter-spacing: 0.1px;
+  }
+  .dash-pill svg, .docs-pill svg, .refs-pill svg, .status-pill svg { width: 11px; height: 11px; }
+  .dash-pill--in_progress, .docs-pill--in_progress, .refs-pill--in_progress, .status-pill--in_progress { background: rgba(0,48,135,0.1); color: #003087; }
+  .dash-pill--draft, .docs-pill--draft, .refs-pill--draft, .status-pill--draft { background: rgba(245,158,11,0.13); color: #b45309; }
+  .dash-pill--complete, .docs-pill--complete, .refs-pill--complete, .status-pill--complete,
+  .dash-pill--submitted, .docs-pill--verified, .refs-pill--submitted, .status-pill--submitted { background: rgba(22,163,74,0.12); color: #15803d; }
+  .dash-pill--locked, .docs-pill--locked, .refs-pill--locked, .status-pill--locked { background: #f1f5f9; color: #64748b; }
+  .dash-pill--pending, .docs-pill--pending, .refs-pill--pending, .status-pill--pending { background: rgba(245,158,11,0.13); color: #b45309; }
+
+  /* progress bar */
+  .dash-bar, .status-bar { height: 8px; background: #f1f5f9; border-radius: 100px; overflow: hidden; position: relative; }
+  .dash-bar-fill, .status-bar-fill { height: 100%; border-radius: 100px; transition: width 0.4s ease; }
+  .dash-bar-fill--in_progress, .status-bar-fill--in_progress { background: linear-gradient(90deg, #003087, #2456b8); }
+  .dash-bar-fill--draft, .status-bar-fill--draft { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+  .dash-bar-fill--complete, .status-bar-fill--complete { background: linear-gradient(90deg, #16a34a, #22c55e); }
+  .dash-bar-fill--locked, .status-bar-fill--locked { background: #cbd5e1; }
+
+  /* DASHBOARD */
+  .dash-welcome { margin-bottom: 26px; padding: 4px 2px; }
+  .dash-welcome h1 { margin: 0 0 6px; font-size: 28px; font-weight: 700; color: #003087; letter-spacing: -0.3px; }
+  .dash-welcome-sub { color: #6b7280; font-size: 15px; margin: 0; }
+  .dash-welcome-sub b { color: #1f2937; font-weight: 600; }
+  .dash-welcome-motivate { color: #9ca3af; font-size: 13px; margin-top: 6px; font-style: italic; }
+
+  .dash-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+  .dash-stat { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px 18px; display: flex; align-items: center; gap: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .dash-stat-icon { width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; flex-shrink: 0; }
+  .dash-stat-icon svg { width: 20px; height: 20px; }
+  .dash-stat-icon--navy { background: rgba(0,48,135,0.1); color: #003087; }
+  .dash-stat-icon--amber { background: rgba(245,158,11,0.13); color: #b45309; }
+  .dash-stat-icon--green { background: rgba(22,163,74,0.12); color: #15803d; }
+  .dash-stat-icon--teal { background: rgba(0,148,130,0.12); color: #009482; }
+  .dash-stat-value { font-size: 22px; font-weight: 700; color: #1f2937; line-height: 1.1; }
+  .dash-stat-label { font-size: 12.5px; color: #6b7280; margin-top: 2px; }
+
+  .dash-section-head { display: flex; align-items: center; justify-content: space-between; margin: 28px 0 14px; gap: 14px; flex-wrap: wrap; }
+  .dash-section-head h2 { margin: 0; font-size: 20px; font-weight: 700; color: #1f2937; letter-spacing: -0.2px; }
+
+  .dash-filters { display: inline-flex; gap: 4px; background: #fff; border: 1px solid #e5e7eb; border-radius: 100px; padding: 3px; }
+  .dash-filter { padding: 6px 14px; border-radius: 100px; font-size: 13px; font-weight: 500; color: #6b7280; cursor: pointer; background: transparent; border: none; font-family: inherit; transition: background 0.15s, color 0.15s; }
+  .dash-filter:hover { color: #1f2937; }
+  .dash-filter.is-active { background: #003087; color: #fff; font-weight: 600; }
+
+  .dash-apps { display: flex; flex-direction: column; gap: 14px; }
+  .dash-app-card { display: grid; grid-template-columns: auto 1fr auto; gap: 22px; align-items: center; padding: 22px 24px; }
+  .dash-app-icon { width: 60px; height: 60px; border-radius: 14px; display: grid; place-items: center; flex-shrink: 0; }
+  .dash-app-icon svg { width: 28px; height: 28px; }
+  .dash-app-icon--in_progress { background: rgba(0,48,135,0.1); color: #003087; }
+  .dash-app-icon--draft { background: rgba(245,158,11,0.13); color: #b45309; }
+  .dash-app-icon--complete { background: rgba(22,163,74,0.12); color: #15803d; }
+  .dash-app-icon--locked { background: #f1f5f9; color: #94a3b8; }
+  .dash-app-body { min-width: 0; }
+  .dash-app-title { font-size: 17px; font-weight: 600; color: #1f2937; margin: 0 0 4px; line-height: 1.3; }
+  .dash-app-meta { font-size: 12.5px; color: #6b7280; margin: 0 0 10px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .dash-app-status-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .dash-app-progress-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .dash-app-progress-wrap .dash-bar { flex: 1; max-width: 340px; }
+  .dash-app-progress-pct { font-size: 12.5px; font-weight: 600; color: #6b7280; min-width: 38px; text-align: right; }
+  .dash-app-subinfo { font-size: 13px; color: #6b7280; margin: 0; }
+  .dash-app-subinfo b { color: #1f2937; font-weight: 600; }
+  .dash-app-actions { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+  .dash-app-reviewer { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #6b7280; margin-bottom: 4px; }
+  .dash-app-reviewer-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #C8102E, #9a0c23); color: #fff; display: grid; place-items: center; font-weight: 600; font-size: 11px; }
+  .dash-app-action-row { display: flex; gap: 6px; }
+
+  .dash-activity { margin-top: 12px; }
+  .dash-activity-list { list-style: none; padding: 0; margin: 0; }
+  .dash-activity-item { display: flex; align-items: flex-start; gap: 14px; padding: 12px 0; border-bottom: 1px solid #f3f4f6; }
+  .dash-activity-item:last-child { border-bottom: none; }
+  .dash-activity-icon { width: 32px; height: 32px; border-radius: 50%; background: rgba(0,48,135,0.08); color: #003087; display: grid; place-items: center; flex-shrink: 0; }
+  .dash-activity-icon svg { width: 14px; height: 14px; }
+  .dash-activity-text { flex: 1; font-size: 13.5px; color: #1f2937; }
+  .dash-activity-time { font-size: 12px; color: #9ca3af; flex-shrink: 0; white-space: nowrap; }
+  .dash-activity-footer { text-align: center; margin-top: 14px; padding-top: 12px; border-top: 1px solid #f3f4f6; }
+  .dash-link { color: #003087; font-size: 13px; font-weight: 600; text-decoration: none; cursor: pointer; background: none; border: none; font-family: inherit; padding: 0; }
+  .dash-link:hover { text-decoration: underline; }
+
+  .dash-deadline-list { list-style: none; padding: 0; margin: 0; }
+  .dash-deadline-item { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid #f3f4f6; }
+  .dash-deadline-item:last-child { border-bottom: none; }
+  .dash-deadline-date { background: rgba(200,16,46,0.08); color: #C8102E; padding: 6px 10px; border-radius: 8px; font-size: 11.5px; font-weight: 700; text-align: center; min-width: 78px; line-height: 1.3; }
+  .dash-deadline-text { flex: 1; font-size: 13.5px; color: #1f2937; }
+
+  .dash-grid-2 { display: grid; grid-template-columns: 1.5fr 1fr; gap: 18px; margin-top: 8px; }
+  .dash-card h3 { margin: 0 0 14px; font-size: 16px; font-weight: 600; color: #1f2937; display: flex; align-items: center; gap: 8px; }
+  .dash-card h3 svg { color: #003087; }
+
+  @media (max-width: 900px) {
+    .dash-stats { grid-template-columns: repeat(2, 1fr); }
+    .dash-app-card { grid-template-columns: 1fr; gap: 16px; }
+    .dash-app-actions { align-items: flex-start; }
+    .dash-grid-2 { grid-template-columns: 1fr; }
+  }
+
+  /* DOCUMENTS */
+  .docs-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; gap: 14px; flex-wrap: wrap; }
+  .docs-head h1 { margin: 0; font-size: 26px; font-weight: 700; color: #003087; }
+  .docs-head-sub { color: #6b7280; font-size: 13.5px; margin: 4px 0 0; }
+
+  .docs-layout { display: grid; grid-template-columns: 1fr 280px; gap: 20px; }
+  .docs-main { display: flex; flex-direction: column; gap: 12px; }
+
+  .docs-card { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; padding: 16px 18px; }
+  .docs-file-icon { width: 44px; height: 44px; background: rgba(0,48,135,0.08); color: #003087; border-radius: 10px; display: grid; place-items: center; }
+  .docs-file-icon svg { width: 20px; height: 20px; }
+  .docs-file-info { min-width: 0; }
+  .docs-file-name { font-weight: 600; color: #1f2937; margin: 0 0 3px; font-size: 14.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .docs-file-meta { font-size: 12.5px; color: #6b7280; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .docs-file-meta-dot { color: #cbd5e1; }
+  .docs-file-actions { display: flex; gap: 6px; align-items: center; }
+  .docs-file-actions .docs-btn { padding: 6px 10px; font-size: 12.5px; }
+
+  .docs-dropzone { border: 2px dashed #cbd5e1; border-radius: 12px; padding: 28px 20px; text-align: center; background: #fff; cursor: pointer; transition: border-color 0.18s, background 0.18s; margin-top: 4px; }
+  .docs-dropzone:hover, .docs-dropzone.is-dragover { border-color: #003087; background: rgba(0,48,135,0.03); }
+  .docs-dropzone-icon { width: 44px; height: 44px; margin: 0 auto 10px; color: #003087; background: rgba(0,48,135,0.08); border-radius: 50%; display: grid; place-items: center; }
+  .docs-dropzone-icon svg { width: 22px; height: 22px; }
+  .docs-dropzone-text { color: #1f2937; font-weight: 600; margin: 0 0 4px; }
+  .docs-dropzone-hint { color: #6b7280; font-size: 12.5px; margin: 0; }
+
+  .docs-side { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px 18px; height: fit-content; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .docs-side h3 { margin: 0 0 12px; font-size: 15px; font-weight: 600; color: #1f2937; display: flex; align-items: center; gap: 8px; }
+  .docs-side h3 svg { color: #003087; }
+  .docs-checklist { list-style: none; padding: 0; margin: 0; }
+  .docs-checklist li { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 13px; color: #1f2937; border-bottom: 1px solid #f3f4f6; }
+  .docs-checklist li:last-child { border-bottom: none; }
+  .docs-checklist li.is-optional { color: #6b7280; }
+  .docs-checklist-icon { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; }
+  .docs-checklist-icon svg { width: 11px; height: 11px; }
+  .docs-checklist li.is-done .docs-checklist-icon { background: #16a34a; color: #fff; }
+  .docs-checklist li.is-missing .docs-checklist-icon { background: #fee2e2; color: #C8102E; }
+  .docs-checklist li.is-optional .docs-checklist-icon { background: #f1f5f9; color: #94a3b8; }
+
+  @media (max-width: 900px) {
+    .docs-layout { grid-template-columns: 1fr; }
+    .docs-card { grid-template-columns: auto 1fr; }
+    .docs-file-actions { grid-column: 1 / -1; }
+  }
+
+  /* REFERENCES */
+  .refs-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; gap: 14px; flex-wrap: wrap; }
+  .refs-head h1 { margin: 0; font-size: 26px; font-weight: 700; color: #003087; }
+
+  .refs-list { display: flex; flex-direction: column; gap: 14px; }
+  .refs-card { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; padding: 20px 22px; }
+  .refs-avatar { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 16px; flex-shrink: 0; }
+  .refs-avatar--1 { background: linear-gradient(135deg, #003087, #2456b8); }
+  .refs-avatar--2 { background: linear-gradient(135deg, #009482, #14b8a6); }
+  .refs-avatar--3 { background: linear-gradient(135deg, #C8102E, #ef4444); }
+  .refs-avatar--4 { background: linear-gradient(135deg, #C8AB00, #eab308); }
+  .refs-info { min-width: 0; }
+  .refs-name { font-size: 16px; font-weight: 600; color: #1f2937; margin: 0 0 2px; }
+  .refs-role { font-size: 13px; color: #6b7280; margin: 0 0 2px; }
+  .refs-org { font-size: 12.5px; color: #9ca3af; margin: 0 0 6px; }
+  .refs-email { display: inline-flex; align-items: center; gap: 5px; color: #003087; text-decoration: none; font-size: 12.5px; font-weight: 500; margin-bottom: 8px; }
+  .refs-email:hover { text-decoration: underline; }
+  .refs-status-row { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: #6b7280; flex-wrap: wrap; }
+  .refs-actions { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+
+  .refs-note { margin-top: 18px; padding: 16px 18px; background: rgba(0,48,135,0.05); border-left: 3px solid #003087; border-radius: 8px; font-size: 13.5px; color: #1f2937; display: flex; align-items: flex-start; gap: 12px; }
+  .refs-note svg { color: #003087; margin-top: 2px; }
+  .refs-note b { font-weight: 600; }
+  .refs-note p { margin: 0 0 4px; }
+  .refs-note p:last-child { margin-bottom: 0; }
+
+  @media (max-width: 700px) {
+    .refs-card { grid-template-columns: auto 1fr; }
+    .refs-actions { grid-column: 1 / -1; align-items: flex-start; }
+  }
+
+  /* STATUS */
+  .status-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; gap: 14px; flex-wrap: wrap; }
+  .status-head h1 { margin: 0; font-size: 26px; font-weight: 700; color: #003087; }
+  .status-ref { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: #f1f5f9; color: #1f2937; padding: 6px 12px; border-radius: 6px; font-size: 12.5px; font-weight: 600; border: 1px solid #e5e7eb; }
+
+  .status-banner { background: linear-gradient(135deg, #003087 0%, #001a4d 100%); color: #fff; border-radius: 14px; padding: 26px 28px; margin-bottom: 22px; box-shadow: 0 6px 24px rgba(0,48,135,0.18); }
+  .status-banner-label { font-size: 12.5px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; margin: 0 0 4px; }
+  .status-banner-stage { font-size: 24px; font-weight: 700; margin: 0 0 4px; letter-spacing: -0.3px; }
+  .status-banner-nc { font-size: 14px; color: rgba(255,255,255,0.85); margin: 0 0 18px; }
+  .status-banner-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.15); }
+  .status-banner-stat-label { font-size: 11.5px; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 6px; font-weight: 600; }
+  .status-banner-stat-value { font-size: 16px; font-weight: 600; color: #fff; margin: 0; display: flex; align-items: center; gap: 8px; }
+  .status-banner-reviewer-avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.2); color: #fff; display: grid; place-items: center; font-weight: 600; font-size: 11px; }
+
+  .status-timeline-card { margin-bottom: 22px; }
+  .status-timeline { list-style: none; padding: 0; margin: 12px 0 0; position: relative; }
+  .status-timeline::before { content: ''; position: absolute; left: 13px; top: 18px; bottom: 18px; width: 2px; background: #e5e7eb; }
+  .status-timeline-item { position: relative; padding-left: 42px; padding-bottom: 22px; }
+  .status-timeline-item:last-child { padding-bottom: 0; }
+  .status-timeline-dot { position: absolute; left: 0; top: 2px; width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 2px solid #e5e7eb; display: grid; place-items: center; z-index: 2; }
+  .status-timeline-dot svg { width: 12px; height: 12px; }
+  .status-timeline-item.is-done .status-timeline-dot { background: #16a34a; border-color: #16a34a; color: #fff; }
+  .status-timeline-item.is-current .status-timeline-dot { background: #003087; border-color: #003087; color: #fff; box-shadow: 0 0 0 4px rgba(0,48,135,0.18); }
+  .status-timeline-item.is-current .status-timeline-dot::after { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid #003087; animation: status-pulse 1.6s infinite; }
+  @keyframes status-pulse { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.7); opacity: 0; } }
+  .status-timeline-name { font-weight: 600; color: #1f2937; font-size: 14.5px; margin: 0; }
+  .status-timeline-item.is-pending .status-timeline-name { color: #9ca3af; font-weight: 500; }
+  .status-timeline-date { font-size: 12.5px; color: #6b7280; margin: 2px 0 0; }
+  .status-timeline-item.is-current .status-timeline-date { color: #003087; font-weight: 600; }
+
+  .status-next-list { list-style: none; padding: 0; margin: 12px 0 14px; }
+  .status-next-list li { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; font-size: 13.5px; color: #1f2937; border-bottom: 1px solid #f3f4f6; }
+  .status-next-list li:last-child { border-bottom: none; }
+  .status-next-num { background: rgba(0,48,135,0.1); color: #003087; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 11.5px; font-weight: 700; flex-shrink: 0; }
+  .status-tip { background: rgba(245,158,11,0.08); border-left: 3px solid #f59e0b; padding: 12px 14px; border-radius: 6px; margin-top: 6px; font-size: 13px; color: #1f2937; display: flex; align-items: flex-start; gap: 10px; }
+  .status-tip svg { color: #f59e0b; margin-top: 2px; }
+  .status-tip b { font-weight: 600; }
+
+  .status-toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f3f4f6; gap: 14px; }
+  .status-toggle-row:last-child { border-bottom: none; }
+  .status-toggle-label { font-size: 13.5px; color: #1f2937; font-weight: 500; }
+  .status-toggle-hint { font-size: 12px; color: #6b7280; margin-top: 2px; }
+  .status-toggle { position: relative; width: 40px; height: 22px; background: #cbd5e1; border-radius: 100px; cursor: pointer; transition: background 0.2s; border: none; padding: 0; flex-shrink: 0; }
+  .status-toggle::after { content: ''; position: absolute; left: 2px; top: 2px; width: 18px; height: 18px; background: #fff; border-radius: 50%; transition: left 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.15); }
+  .status-toggle.is-on { background: #003087; }
+  .status-toggle.is-on::after { left: 20px; }
+
+  .status-card h3 { margin: 0 0 4px; font-size: 16px; font-weight: 600; color: #1f2937; display: flex; align-items: center; gap: 8px; }
+  .status-card h3 svg { color: #003087; }
+  .status-card + .status-card { margin-top: 16px; }
+
+  /* TOAST */
+  .dash-toast { position: fixed; bottom: 24px; right: 24px; background: #1f2937; color: #fff; padding: 12px 18px; border-radius: 10px; font-size: 13.5px; box-shadow: 0 8px 24px rgba(0,0,0,0.18); z-index: 10000; display: flex; align-items: center; gap: 10px; transform: translateY(20px); opacity: 0; transition: transform 0.25s, opacity 0.25s; pointer-events: none; max-width: 360px; }
+  .dash-toast.is-visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .dash-toast svg { color: #22c55e; width: 16px; height: 16px; }
+  .dash-toast--info svg { color: #60a5fa; }
+  .dash-toast--warn svg { color: #fbbf24; }
+
+  .dash-file-input { display: none; }
+
+  @media (max-width: 700px) {
+    .dash-shell, .docs-shell, .refs-shell, .status-shell { padding: 18px 16px 48px; }
+    .status-banner-row { grid-template-columns: 1fr; gap: 12px; }
+    .dash-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
 </head>
 <body>
 
@@ -1794,412 +2089,202 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
             <a class="uwc-portal-sidebar__item" data-portal-section="documents"><span class="uwc-portal-sidebar__icon">📎</span> Documents</a>
             <a class="uwc-portal-sidebar__item" data-portal-section="status"><span class="uwc-portal-sidebar__icon">📊</span> Status</a>
           </nav>
-          <div class="uwc-portal-main"><div class="tab-section" data-portal-section="dashboard">
+          <div class="uwc-portal-main"><div data-portal-section="dashboard" class="dash-shell">
 
-            <div class="progress-card">
-              <div class="progress-card__info">
-                <div class="progress-card__title">Welcome, Sofia!</div>
-                <div class="progress-card__sub">UWC 2026 Application · Brazil National Committee</div>
-                <div class="progress-bar-track"><div class="progress-bar-fill"></div></div>
-                <div class="progress-bar-label">60% complete · deadline: 30 Nov 2026</div>
-              </div>
-              <div class="progress-card__pct">
-                <div class="progress-card__pct-val">60%</div>
-                <div class="progress-card__pct-text">complete</div>
-              </div>
-            </div>
-            <div class="checklist-card">
-              <div class="uwc-portal-h2" style="margin-bottom:14px;">Application sections</div>
-              <div class="checklist-item">
-                <div class="checklist-icon checklist-icon--done">✓</div>
-                <div class="checklist-label">Personal Details</div>
-                <div class="checklist-status cs-done">✓ Complete</div>
-              </div>
-              <div class="checklist-item">
-                <div class="checklist-icon checklist-icon--done">✓</div>
-                <div class="checklist-label">Academic Background</div>
-                <div class="checklist-status cs-done">✓ Complete</div>
-              </div>
-              <div class="checklist-item">
-                <div class="checklist-icon checklist-icon--prog">✎</div>
-                <div class="checklist-label" style="cursor:pointer;color:#003087;font-weight:500;" onclick="window.go && window.go(5)">Personal Statement →</div>
-                <div class="checklist-status cs-prog" style="cursor:pointer;" onclick="window.go && window.go(5)">In progress</div>
-              </div>
-              <div class="checklist-item">
-                <div class="checklist-icon checklist-icon--todo">○</div>
-                <div class="checklist-label">References <span style="font-size:11px;color:#9ca3af;">(2 required)</span></div>
-                <div class="checklist-status cs-todo">Not started</div>
-              </div>
-              <div class="checklist-item">
-                <div class="checklist-icon checklist-icon--todo">○</div>
-                <div class="checklist-label">Documents <span style="font-size:11px;color:#9ca3af;">(passport, certificates)</span></div>
-                <div class="checklist-status cs-todo">Not started</div>
-              </div>
-              <div style="margin-top:18px;padding:13px 16px;background:#fffbeb;border-radius:8px;font-size:13px;color:#92400e;border:1px solid #fde68a;">
-                ⚠ Parental consent has not yet been received. The application cannot be submitted without the guardian's signature. <a href="#" onclick="window.go(6);return false;" style="color:#003087;font-weight:600;text-decoration:underline;margin-left:4px;">Preview guardian view →</a>
-              </div>
-              <div style="margin-top:16px;display:flex;gap:10px;">
-                <button onclick="window.go && window.go(5)" class="uwc-portal-btn-primary" style="flex:1;padding:12px;font-size:14px;font-weight:600;">Continue application →</button>
-                <button style="background:#fff;color:#003087;border:1px solid #003087;padding:12px 18px;border-radius:8px;font-size:13.5px;cursor:pointer;font-weight:500;">View timeline</button>
-              </div>
-            </div>
-          
+  <header class="dash-welcome">
+    <h1>Welcome back, Sofia</h1>
+    <p class="dash-welcome-sub">You have <b>1 active application</b> and <b>1 draft</b> in progress.</p>
+    <p class="dash-welcome-motivate">Every UWC journey starts with one brave step — yours is well underway.</p>
+  </header>
+
+  <section class="dash-stats" id="dash-stats">
+    <div class="dash-stat">
+      <div class="dash-stat-icon dash-stat-icon--navy"><svg><use href="#icon-graduation-cap"/></svg></div>
+      <div><div class="dash-stat-value" id="dash-stat-active">1</div><div class="dash-stat-label">Active applications</div></div>
+    </div>
+    <div class="dash-stat">
+      <div class="dash-stat-icon dash-stat-icon--amber"><svg><use href="#icon-edit"/></svg></div>
+      <div><div class="dash-stat-value" id="dash-stat-draft">1</div><div class="dash-stat-label">Draft in progress</div></div>
+    </div>
+    <div class="dash-stat">
+      <div class="dash-stat-icon dash-stat-icon--green"><svg><use href="#icon-file-text"/></svg></div>
+      <div><div class="dash-stat-value" id="dash-stat-docs">4</div><div class="dash-stat-label">Documents uploaded</div></div>
+    </div>
+    <div class="dash-stat">
+      <div class="dash-stat-icon dash-stat-icon--teal"><svg><use href="#icon-calendar"/></svg></div>
+      <div><div class="dash-stat-value" id="dash-stat-days">12</div><div class="dash-stat-label">Days until next milestone</div></div>
+    </div>
+  </section>
+
+  <div class="dash-section-head">
+    <h2>My applications</h2>
+    <div class="dash-filters" id="dash-filters">
+      <button class="dash-filter is-active" data-filter="all">All</button>
+      <button class="dash-filter" data-filter="in_progress">Active</button>
+      <button class="dash-filter" data-filter="draft">Draft</button>
+      <button class="dash-filter" data-filter="locked">Upcoming</button>
+    </div>
+  </div>
+
+  <section class="dash-apps" id="dash-apps"></section>
+
+  <div class="dash-grid-2">
+    <div class="dash-card dash-activity">
+      <h3><svg><use href="#icon-activity"/></svg> Recent activity</h3>
+      <ul class="dash-activity-list" id="dash-activity-list"></ul>
+      <div class="dash-activity-footer">
+        <button class="dash-link" id="dash-view-all-activity">View full activity log <svg style="width:11px;height:11px;vertical-align:-1px;"><use href="#icon-arrow-right"/></svg></button>
+      </div>
+    </div>
+
+    <div class="dash-card">
+      <h3><svg><use href="#icon-calendar"/></svg> Upcoming deadlines</h3>
+      <ul class="dash-deadline-list">
+        <li class="dash-deadline-item"><div class="dash-deadline-date">15 Jun<br><small>2026</small></div><div class="dash-deadline-text">Short course application closes</div></li>
+        <li class="dash-deadline-item"><div class="dash-deadline-date">8-15 Jun<br><small>2026</small></div><div class="dash-deadline-text">Local interview window opens</div></li>
+        <li class="dash-deadline-item"><div class="dash-deadline-date">30 Nov<br><small>2026</small></div><div class="dash-deadline-text">Main cycle submission deadline</div></li>
+      </ul>
+    </div>
+  </div>
+
 </div>
 
-<div class="tab-section" data-portal-section="documents" hidden>
-  <div class="tab-section-header">
-    <div class="tab-section-header-left">
-      <h2 class="tab-section-title">Documents</h2>
-      <p class="tab-section-subtitle">4 of 4 required documents uploaded</p>
-    </div>
-    <div class="tab-section-header-actions">
-      <button type="button" class="tab-btn tab-btn-primary" data-role-variant="upload">
-        <svg class="icon"><use href="#icon-upload-cloud"/></svg>
-        Upload
-      </button>
-    </div>
-  </div>
+<div data-portal-section="documents" hidden class="docs-shell">
 
-  <div class="tab-doc-grid">
-
-    <!-- Doc 1: Passport -->
-    <article class="tab-doc-card">
-      <div class="tab-doc-card-head">
-        <div class="tab-doc-icon-wrap">
-          <svg class="icon icon-lg"><use href="#icon-file-text"/></svg>
-        </div>
-        <div class="tab-doc-meta">
-          <h3 class="tab-doc-name">Passport scan.pdf</h3>
-          <p class="tab-doc-info">2.1 MB &middot; uploaded 25 May 2026, 14:18</p>
-        </div>
-      </div>
-      <div class="tab-doc-status-row">
-        <span class="tab-pill tab-pill-verified">
-          <svg class="icon" style="width:11px;height:11px"><use href="#icon-check"/></svg>
-          Verified
-        </span>
-      </div>
-      <div class="tab-doc-actions">
-        <button type="button" class="tab-doc-action" data-role-variant="preview">
-          <svg class="icon"><use href="#icon-eye"/></svg>
-          Preview
-        </button>
-        <button type="button" class="tab-doc-action" data-role-variant="download">
-          <svg class="icon"><use href="#icon-download"/></svg>
-          Download
-        </button>
-        <button type="button" class="tab-doc-action" data-role-variant="replace">
-          <svg class="icon"><use href="#icon-upload-cloud"/></svg>
-          Replace
-        </button>
-      </div>
-    </article>
-
-    <!-- Doc 2: Transcript -->
-    <article class="tab-doc-card">
-      <div class="tab-doc-card-head">
-        <div class="tab-doc-icon-wrap">
-          <svg class="icon icon-lg"><use href="#icon-file-text"/></svg>
-        </div>
-        <div class="tab-doc-meta">
-          <h3 class="tab-doc-name">Col&eacute;gio Bandeirantes &mdash; 2025 transcript.pdf</h3>
-          <p class="tab-doc-info">1.8 MB &middot; uploaded 25 May 2026, 14:22</p>
-        </div>
-      </div>
-      <div class="tab-doc-status-row">
-        <span class="tab-pill tab-pill-verified">
-          <svg class="icon" style="width:11px;height:11px"><use href="#icon-check"/></svg>
-          Verified
-        </span>
-      </div>
-      <div class="tab-doc-actions">
-        <button type="button" class="tab-doc-action" data-role-variant="preview">
-          <svg class="icon"><use href="#icon-eye"/></svg>
-          Preview
-        </button>
-        <button type="button" class="tab-doc-action" data-role-variant="download">
-          <svg class="icon"><use href="#icon-download"/></svg>
-          Download
-        </button>
-        <button type="button" class="tab-doc-action" data-role-variant="replace">
-          <svg class="icon"><use href="#icon-upload-cloud"/></svg>
-          Replace
-        </button>
-      </div>
-    </article>
-
-    <!-- Doc 3: Recommendation -->
-    <article class="tab-doc-card">
-      <div class="tab-doc-card-head">
-        <div class="tab-doc-icon-wrap">
-          <svg class="icon icon-lg"><use href="#icon-file-text"/></svg>
-        </div>
-        <div class="tab-doc-meta">
-          <h3 class="tab-doc-name">Recommendation &mdash; Maria Santos (English teacher).pdf</h3>
-          <p class="tab-doc-info">412 KB &middot; uploaded 26 May 2026, 09:35</p>
-        </div>
-      </div>
-      <div class="tab-doc-status-row">
-        <span class="tab-pill tab-pill-pending">
-          <svg class="icon" style="width:11px;height:11px"><use href="#icon-clock"/></svg>
-          Pending review
-        </span>
-      </div>
-      <div class="tab-doc-actions">
-        <button type="button" class="tab-doc-action" data-role-variant="preview">
-          <svg class="icon"><use href="#icon-eye"/></svg>
-          Preview
-        </button>
-        <button type="button" class="tab-doc-action" data-role-variant="download">
-          <svg class="icon"><use href="#icon-download"/></svg>
-          Download
-        </button>
-        <button type="button" class="tab-doc-action" data-role-variant="replace">
-          <svg class="icon"><use href="#icon-upload-cloud"/></svg>
-          Replace
-        </button>
-      </div>
-    </article>
-
-    <!-- Doc 4: Guardian consent -->
-    <article class="tab-doc-card">
-      <div class="tab-doc-card-head">
-        <div class="tab-doc-icon-wrap">
-          <svg class="icon icon-lg"><use href="#icon-file-text"/></svg>
-        </div>
-        <div class="tab-doc-meta">
-          <h3 class="tab-doc-name">Guardian consent.pdf</h3>
-          <p class="tab-doc-info">624 KB &middot; uploaded 27 May 2026, 14:28</p>
-        </div>
-      </div>
-      <div class="tab-doc-status-row">
-        <span class="tab-pill tab-pill-verified">
-          <svg class="icon" style="width:11px;height:11px"><use href="#icon-check"/></svg>
-          Verified
-        </span>
-        <span class="tab-doc-extra-note">signed by Maria Almeida</span>
-      </div>
-      <div class="tab-doc-actions">
-        <button type="button" class="tab-doc-action" data-role-variant="preview">
-          <svg class="icon"><use href="#icon-eye"/></svg>
-          Preview
-        </button>
-        <button type="button" class="tab-doc-action" data-role-variant="download">
-          <svg class="icon"><use href="#icon-download"/></svg>
-          Download
-        </button>
-      </div>
-    </article>
-
-  </div>
-
-  <!-- Drop zone -->
-  <div class="tab-dropzone" data-role-variant="dropzone" role="button" tabindex="0">
-    <svg class="tab-dropzone-icon"><use href="#icon-upload-cloud"/></svg>
-    <p class="tab-dropzone-text"><strong>Drag files here to upload</strong>, or click to browse</p>
-    <p class="tab-dropzone-hint">PDF, JPG or PNG &middot; max 10 MB per file</p>
-  </div>
-
-  <!-- Info box -->
-  <div class="tab-info-box">
-    <svg class="icon"><use href="#icon-check"/></svg>
+  <header class="docs-head">
     <div>
-      <strong>Accepted formats:</strong> PDF, JPG, PNG. Max 10 MB per file. Documents are encrypted in transit and at rest, and are only accessible to your National Committee reviewers and UWC International staff.
+      <h1>Documents</h1>
+      <p class="docs-head-sub">All files attached to your applications &mdash; preview, replace, or download anytime.</p>
     </div>
+    <button class="docs-btn docs-btn--primary" id="docs-upload-btn">
+      <svg><use href="#icon-upload-cloud"/></svg> Upload document
+    </button>
+  </header>
+
+  <div class="docs-layout">
+    <div class="docs-main">
+      <div id="docs-list"></div>
+
+      <div class="docs-dropzone" id="docs-dropzone" tabindex="0" role="button" aria-label="Drop files here">
+        <div class="docs-dropzone-icon"><svg><use href="#icon-upload-cloud"/></svg></div>
+        <p class="docs-dropzone-text">Drag files here or click to browse</p>
+        <p class="docs-dropzone-hint">PDF, JPG, PNG &mdash; up to 10 MB each</p>
+      </div>
+      <input type="file" id="docs-file-input" class="dash-file-input" multiple accept=".pdf,.jpg,.jpeg,.png">
+    </div>
+
+    <aside class="docs-side">
+      <h3><svg><use href="#icon-check"/></svg> Required documents</h3>
+      <p style="margin:0 0 12px;color:#6b7280;font-size:12.5px;">3 of 3 uploaded</p>
+      <ul class="docs-checklist">
+        <li class="is-done"><span class="docs-checklist-icon"><svg><use href="#icon-check"/></svg></span> Passport scan</li>
+        <li class="is-done"><span class="docs-checklist-icon"><svg><use href="#icon-check"/></svg></span> School transcript</li>
+        <li class="is-done"><span class="docs-checklist-icon"><svg><use href="#icon-check"/></svg></span> Guardian consent</li>
+      </ul>
+
+      <h3 style="margin-top:18px;"><svg><use href="#icon-plus"/></svg> Optional</h3>
+      <ul class="docs-checklist">
+        <li class="is-optional"><span class="docs-checklist-icon"><svg><use href="#icon-check"/></svg></span> Additional references</li>
+        <li class="is-optional"><span class="docs-checklist-icon"><svg><use href="#icon-check"/></svg></span> Personal portfolio</li>
+        <li class="is-optional"><span class="docs-checklist-icon"><svg><use href="#icon-check"/></svg></span> Language certificates</li>
+      </ul>
+    </aside>
   </div>
+
 </div>
-<div class="tab-section" data-portal-section="references" hidden>
-  <div class="tab-section-header">
-    <div class="tab-section-header-left">
-      <h2 class="tab-section-title">References</h2>
-      <p class="tab-section-subtitle">2 of 2 referees nominated</p>
-    </div>
-    <div class="tab-section-header-actions">
-      <button type="button" class="tab-btn tab-btn-secondary" data-role-variant="add-referee">
-        <svg class="icon"><use href="#icon-edit"/></svg>
-        Add referee
-      </button>
-    </div>
-  </div>
+<div data-portal-section="references" hidden class="refs-shell">
 
-  <div class="tab-ref-list">
-
-    <!-- Ref 1: Maria Santos -->
-    <article class="tab-ref-card">
-      <div class="tab-ref-avatar">MS</div>
-      <div class="tab-ref-body">
-        <h3 class="tab-ref-name">Maria Santos</h3>
-        <p class="tab-ref-role">English teacher &middot; Col&eacute;gio Bandeirantes</p>
-        <p class="tab-ref-contact">
-          <svg class="icon"><use href="#icon-mail"/></svg>
-          santos.m@bandeirantes.edu.br &middot; invited 22 May 2026
-        </p>
-        <p class="tab-ref-status-line">
-          <span class="tab-pill tab-pill-progress">
-            <svg class="icon" style="width:11px;height:11px"><use href="#icon-clock"/></svg>
-            In progress
-          </span>
-          <span class="tab-ref-status-text">Reference started 24 May 2026</span>
-        </p>
-        <div class="tab-ref-actions">
-          <button type="button" class="tab-btn tab-btn-secondary tab-btn-sm" data-role-variant="remind">
-            <svg class="icon"><use href="#icon-bell"/></svg>
-            Send reminder
-          </button>
-          <button type="button" class="tab-btn tab-btn-ghost tab-btn-sm" data-role-variant="resend-invite">
-            <svg class="icon"><use href="#icon-mail"/></svg>
-            Resend invitation
-          </button>
-        </div>
-      </div>
-    </article>
-
-    <!-- Ref 2: Prof. Antonio Costa -->
-    <article class="tab-ref-card">
-      <div class="tab-ref-avatar">AC</div>
-      <div class="tab-ref-body">
-        <h3 class="tab-ref-name">Prof. Antonio Costa</h3>
-        <p class="tab-ref-role">Counsellor &middot; Col&eacute;gio Bandeirantes</p>
-        <p class="tab-ref-contact">
-          <svg class="icon"><use href="#icon-mail"/></svg>
-          costa.a@bandeirantes.edu.br &middot; invited 22 May 2026
-        </p>
-        <p class="tab-ref-status-line">
-          <span class="tab-pill tab-pill-submitted">
-            <svg class="icon" style="width:11px;height:11px"><use href="#icon-check"/></svg>
-            Submitted
-          </span>
-          <span class="tab-ref-status-text">Completed 26 May 2026</span>
-        </p>
-        <div class="tab-ref-actions">
-          <button type="button" class="tab-btn tab-btn-secondary tab-btn-sm" data-role-variant="preview-ref">
-            <svg class="icon"><use href="#icon-eye"/></svg>
-            Preview submitted reference
-          </button>
-        </div>
-      </div>
-    </article>
-
-  </div>
-
-  <!-- Info note -->
-  <div class="tab-info-box">
-    <svg class="icon"><use href="#icon-user"/></svg>
+  <header class="refs-head">
     <div>
-      <strong>UWC Brazil requires 2 references</strong> &mdash; 1 academic (teacher) and 1 character (counsellor or community leader). Referees receive a secure link to complete their reference online; you cannot see the content of submitted references, but you can see whether they have been started or completed.
+      <h1>References</h1>
+      <p class="docs-head-sub" style="margin:4px 0 0;">Two references required &mdash; one academic, one character.</p>
+    </div>
+    <button class="refs-btn refs-btn--primary" id="refs-add-btn">
+      <svg><use href="#icon-user-plus"/></svg> Add referee
+    </button>
+  </header>
+
+  <div class="refs-list" id="refs-list"></div>
+
+  <div class="refs-note">
+    <svg><use href="#icon-shield"/></svg>
+    <div>
+      <p><b>UWC reference requirements</b></p>
+      <p>Each referee receives a private invitation link with a secure form. UWC will not share your application content with referees, and you cannot read what they submit. Allow at least 14 days before the deadline so they have time to respond thoughtfully.</p>
     </div>
   </div>
+
 </div>
-<div class="tab-section" data-portal-section="status" hidden>
-  <div class="tab-section-header">
-    <div class="tab-section-header-left">
-      <h2 class="tab-section-title">Application status</h2>
-      <p class="tab-section-subtitle">Track your application through every stage of the 2026/27 cycle</p>
-    </div>
-    <div class="tab-section-header-actions">
-      <span class="tab-status-ref-id">
-        <svg class="icon"><use href="#icon-file-text"/></svg>
-        UWC-2026-BR-00127
-      </span>
-    </div>
-  </div>
+<div data-portal-section="status" hidden class="status-shell">
 
-  <!-- Current stage card -->
-  <div class="tab-status-current">
-    <p class="tab-status-current-label">Currently</p>
-    <h3 class="tab-status-current-stage">Eligibility Review &middot; Brazil NC</h3>
-    <p class="tab-status-current-eta">Expected decision by 12 June 2026</p>
-    <div class="tab-status-reviewer">
-      <div class="tab-status-reviewer-avatar">AC</div>
-      <div class="tab-status-reviewer-text">
-        <small>Your assigned reviewer</small>
-        <strong>Ana Carvalho</strong>
+  <header class="status-head">
+    <h1>Application status</h1>
+    <span class="status-ref" id="status-ref-id">UWC-2026-BR-00127</span>
+  </header>
+
+  <div class="status-banner" id="status-banner">
+    <p class="status-banner-label">Currently</p>
+    <h2 class="status-banner-stage" id="status-banner-stage">Eligibility Review</h2>
+    <p class="status-banner-nc" id="status-banner-nc">Brazil National Committee &middot; Expected decision by 12 June 2026</p>
+    <div class="status-banner-row">
+      <div>
+        <p class="status-banner-stat-label">Reviewer</p>
+        <p class="status-banner-stat-value"><span class="status-banner-reviewer-avatar">AC</span> Ana Carvalho</p>
+      </div>
+      <div>
+        <p class="status-banner-stat-label">Estimated days remaining</p>
+        <p class="status-banner-stat-value">14 days</p>
+      </div>
+      <div>
+        <p class="status-banner-stat-label">Overall progress</p>
+        <p class="status-banner-stat-value" id="status-overall-progress">67%</p>
       </div>
     </div>
   </div>
 
-  <!-- Stepper -->
-  <div class="tab-status-stepper-wrap">
-    <p class="tab-status-stepper-title">Application timeline</p>
-    <div class="tab-status-stepper">
+  <div class="status-card status-timeline-card">
+    <h3><svg><use href="#icon-trending-up"/></svg> Application timeline</h3>
+    <ul class="status-timeline" id="status-timeline"></ul>
+  </div>
 
-      <div class="tab-status-step tab-status-step-done">
-        <div class="tab-status-step-circle">
-          <svg class="icon" style="width:14px;height:14px"><use href="#icon-check"/></svg>
-        </div>
-        <p class="tab-status-step-label">Submitted</p>
-        <p class="tab-status-step-meta">27 May 2026</p>
-      </div>
-
-      <div class="tab-status-step tab-status-step-current">
-        <div class="tab-status-step-circle">2</div>
-        <p class="tab-status-step-label">Eligibility Review</p>
-        <p class="tab-status-step-meta">Brazil NC reviewing</p>
-      </div>
-
-      <div class="tab-status-step tab-status-step-future">
-        <div class="tab-status-step-circle">3</div>
-        <p class="tab-status-step-label">Local Selection</p>
-        <p class="tab-status-step-meta">8&ndash;15 June</p>
-      </div>
-
-      <div class="tab-status-step tab-status-step-future">
-        <div class="tab-status-step-circle">4</div>
-        <p class="tab-status-step-label">Local Interview</p>
-        <p class="tab-status-step-meta">In-person or video</p>
-      </div>
-
-      <div class="tab-status-step tab-status-step-future">
-        <div class="tab-status-step-circle">5</div>
-        <p class="tab-status-step-label">National Selection</p>
-        <p class="tab-status-step-meta">Final selection panel</p>
-      </div>
-
-      <div class="tab-status-step tab-status-step-future">
-        <div class="tab-status-step-circle">6</div>
-        <p class="tab-status-step-label">NC Decision</p>
-        <p class="tab-status-step-meta">Mid July</p>
-      </div>
-
-      <div class="tab-status-step tab-status-step-future">
-        <div class="tab-status-step-circle">7</div>
-        <p class="tab-status-step-label">Place Allocation</p>
-        <p class="tab-status-step-meta">Aug/Sep</p>
-      </div>
-
+  <div class="status-card">
+    <h3><svg><use href="#icon-arrow-right"/></svg> What happens next</h3>
+    <ol class="status-next-list">
+      <li><span class="status-next-num">1</span> Your Brazil NC reviewer (Ana Carvalho) verifies eligibility criteria &mdash; passport validity, school enrolment, recommendation letters.</li>
+      <li><span class="status-next-num">2</span> If eligible, you'll be invited to the local selection round &mdash; usually a written task plus a short essay (8-15 June 2026 window).</li>
+      <li><span class="status-next-num">3</span> Local interview is scheduled if you progress past selection &mdash; held in S&atilde;o Paulo or remotely.</li>
+    </ol>
+    <div class="status-tip">
+      <svg><use href="#icon-alert-triangle"/></svg>
+      <div><b>Tip:</b> Start preparing answers to behavioural questions about leadership, conflict, and what you'd bring to a UWC residential community. The interview is conversational, not a test.</div>
     </div>
   </div>
 
-  <!-- What happens next -->
-  <div class="tab-status-next">
-    <h3 class="tab-status-next-title">
-      <svg class="icon icon-lg"><use href="#icon-chevron-right"/></svg>
-      What happens next
-    </h3>
-    <ul class="tab-status-next-list">
-      <li>
-        <svg class="icon"><use href="#icon-check"/></svg>
-        <span>Your Brazil NC reviewer <strong>Ana Carvalho</strong> will check your application against the eligibility criteria for the 2026/27 cycle.</span>
-      </li>
-      <li>
-        <svg class="icon"><use href="#icon-check"/></svg>
-        <span>You&rsquo;ll receive an <strong>email with next steps within 5 working days</strong> &mdash; check your inbox and the Messages tab.</span>
-      </li>
-      <li>
-        <svg class="icon"><use href="#icon-check"/></svg>
-        <span>If selected, you&rsquo;ll be invited to a <strong>Local Interview in S&atilde;o Paulo (8&ndash;15 June)</strong>. Plan to be available on those dates.</span>
-      </li>
-    </ul>
+  <div class="status-card">
+    <h3><svg><use href="#icon-bell"/></svg> Notification settings</h3>
+    <div class="status-toggle-row">
+      <div>
+        <div class="status-toggle-label">Email me when status changes</div>
+        <div class="status-toggle-hint">Stage transitions, reviewer notes, interview invitations</div>
+      </div>
+      <button class="status-toggle is-on" data-toggle="status-change" aria-label="Toggle status change emails"></button>
+    </div>
+    <div class="status-toggle-row">
+      <div>
+        <div class="status-toggle-label">Send me weekly progress summary</div>
+        <div class="status-toggle-hint">Sunday digest with timeline + upcoming deadlines</div>
+      </div>
+      <button class="status-toggle" data-toggle="weekly-summary" aria-label="Toggle weekly summary"></button>
+    </div>
+    <div class="status-toggle-row">
+      <div>
+        <div class="status-toggle-label">SMS for urgent updates</div>
+        <div class="status-toggle-hint">Interview confirmations, decision releases</div>
+      </div>
+      <button class="status-toggle" data-toggle="sms" aria-label="Toggle SMS"></button>
+    </div>
   </div>
 
-  <!-- Notification preference -->
-  <div class="tab-status-pref">
-    <div class="tab-status-pref-label">
-      <svg class="icon icon-lg" style="color:#003087"><use href="#icon-bell"/></svg>
-      <span>Email me when my application status changes</span>
-    </div>
-    <div class="tab-toggle" role="switch" aria-checked="true" tabindex="0" data-role-variant="status-notify"></div>
-  </div>
 </div>
 </div>
         </div>
@@ -6229,6 +6314,569 @@ go(0);
   });
   // Expose for debugging
   window.UWCSwitchPanel = switchPanel;
+})();
+</script>
+
+<script>
+(function(){
+  'use strict';
+
+  window.UWCMultiApp = window.UWCMultiApp || {
+    apps: [
+      {
+        id: 'UWC-2026-BR-00127',
+        title: 'UWC 2026/27 Cycle',
+        nc: 'Brazil National Committee',
+        flag: '🇧🇷',
+        status: 'Eligibility Review',
+        statusKind: 'in_progress',
+        progress: 67,
+        submittedAt: '2026-05-27T14:32',
+        nextMilestone: 'Local interview',
+        nextDate: '8-15 June 2026',
+        reviewer: { name: 'Ana Carvalho', avatar: 'AC' },
+        stages: [
+          { name: 'Submitted', date: '27 May 2026', done: true },
+          { name: 'Eligibility Review', date: 'In progress', done: false, current: true },
+          { name: 'Local Selection', date: 'Pending', done: false },
+          { name: 'Local Interview', date: 'Pending', done: false },
+          { name: 'National Selection', date: 'Pending', done: false },
+          { name: 'Place Decision', date: 'Pending', done: false }
+        ]
+      },
+      {
+        id: 'UWC-SC-2026-CR-04832',
+        title: 'UWC Short Course — Costa Rica',
+        nc: 'Brazil National Committee',
+        flag: '🇨🇷',
+        status: 'Draft',
+        statusKind: 'draft',
+        progress: 30,
+        startedAt: '2026-05-22',
+        deadline: '15 June 2026',
+        sectionsCompleted: 3,
+        sectionsTotal: 6
+      },
+      {
+        id: null,
+        title: 'UWC 2027/28 Cycle',
+        nc: '—',
+        flag: '',
+        status: 'Opens 1 March 2027',
+        statusKind: 'locked',
+        progress: 0,
+        cta: 'Get notified',
+        subscribed: false
+      }
+    ],
+    activity: [
+      { ts: '2026-05-27T14:32', text: 'Application UWC-2026-BR-00127 submitted', icon: 'icon-check' },
+      { ts: '2026-05-27T14:28', text: 'Maria Almeida signed guardian consent', icon: 'icon-shield' },
+      { ts: '2026-05-26T19:14', text: 'Personal statement saved (Section 3)', icon: 'icon-edit' },
+      { ts: '2026-05-25T16:42', text: 'Documents uploaded (passport, transcript, recommendation)', icon: 'icon-upload-cloud' },
+      { ts: '2026-05-22T10:18', text: 'Account created via portal registration', icon: 'icon-user-plus' }
+    ],
+    filter: 'all'
+  };
+
+  window.UWCDocuments = window.UWCDocuments || {
+    files: [
+      { id: 1, name: 'Passport scan.pdf', size: '2.1 MB', uploaded: '25 May 2026', status: 'verified', statusLabel: 'Verified' },
+      { id: 2, name: 'Colégio Bandeirantes 2025 transcript.pdf', size: '1.8 MB', uploaded: '25 May 2026', status: 'verified', statusLabel: 'Verified' },
+      { id: 3, name: 'Recommendation letter — Maria Santos.pdf', size: '412 KB', uploaded: '26 May 2026', status: 'pending', statusLabel: 'Pending review' },
+      { id: 4, name: 'Guardian consent.pdf', size: '624 KB', uploaded: '27 May 2026', status: 'verified', statusLabel: 'Verified (signed by Maria Almeida)' }
+    ]
+  };
+
+  window.UWCReferences = window.UWCReferences || {
+    referees: [
+      {
+        id: 1, name: 'Maria Santos', role: 'English teacher',
+        org: 'Colégio Bandeirantes, São Paulo',
+        email: 'santos.m@bandeirantes.edu.br',
+        invitedAt: '2026-05-22', status: 'in_progress',
+        lastActivity: 'Started reading the form 24 May 2026', reminderSent: false
+      },
+      {
+        id: 2, name: 'Prof. Antonio Costa', role: 'School counsellor',
+        org: 'Colégio Bandeirantes, São Paulo',
+        email: 'costa.a@bandeirantes.edu.br',
+        invitedAt: '2026-05-22', status: 'submitted', submittedAt: '2026-05-26'
+      }
+    ]
+  };
+
+  window.UWCStatusPrefs = window.UWCStatusPrefs || { 'status-change': true, 'weekly-summary': false, 'sms': false };
+
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function $$(sel, root) { return Array.from((root || document).querySelectorAll(sel)); }
+
+  function escapeHTML(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  function relativeTime(iso) {
+    var then = new Date(iso).getTime();
+    if (isNaN(then)) return iso;
+    var now = Date.now();
+    var diff = Math.max(0, now - then);
+    var mins = Math.floor(diff / 60000);
+    if (mins < 1) return 'just now';
+    if (mins < 60) return mins + ' min ago';
+    var hrs = Math.floor(mins / 60);
+    if (hrs < 24) return hrs + (hrs === 1 ? ' hour ago' : ' hours ago');
+    var days = Math.floor(hrs / 24);
+    if (days < 7) return days + (days === 1 ? ' day ago' : ' days ago');
+    var weeks = Math.floor(days / 7);
+    if (weeks < 5) return weeks + (weeks === 1 ? ' week ago' : ' weeks ago');
+    var months = Math.floor(days / 30);
+    return months + (months === 1 ? ' month ago' : ' months ago');
+  }
+
+  function toast(text, kind) {
+    var t = $('#dash-toast');
+    if (!t) return;
+    $('#dash-toast-text').textContent = text;
+    t.classList.remove('dash-toast--info', 'dash-toast--warn');
+    if (kind) t.classList.add('dash-toast--' + kind);
+    t.classList.add('is-visible');
+    clearTimeout(toast._h);
+    toast._h = setTimeout(function(){ t.classList.remove('is-visible'); }, 2600);
+  }
+
+  function renderApps() {
+    var list = $('#dash-apps');
+    if (!list) return;
+    var state = window.UWCMultiApp;
+    var filter = state.filter || 'all';
+    var visible = state.apps.filter(function(a){ if (filter === 'all') return true; return a.statusKind === filter; });
+
+    if (visible.length === 0) {
+      list.innerHTML = '<div class="dash-card" style="text-align:center;color:#6b7280;padding:30px;">No applications match this filter.</div>';
+      return;
+    }
+
+    list.innerHTML = visible.map(function(app, idx){
+      var icon = app.statusKind === 'locked' ? 'icon-lock' : app.statusKind === 'draft' ? 'icon-edit' : 'icon-graduation-cap';
+      var idLine = app.id ? escapeHTML(app.nc) + ' &middot; ' + escapeHTML(app.id) : (app.flag ? app.flag + ' ' : '') + escapeHTML(app.status);
+
+      var subInfo;
+      if (app.statusKind === 'in_progress') {
+        subInfo = '<p class="dash-app-subinfo">Next: <b>' + escapeHTML(app.nextMilestone) + '</b> &middot; ' + escapeHTML(app.nextDate) + '</p>';
+      } else if (app.statusKind === 'draft') {
+        subInfo = '<p class="dash-app-subinfo"><b>' + app.sectionsCompleted + ' of ' + app.sectionsTotal + '</b> sections complete &middot; Deadline ' + escapeHTML(app.deadline) + '</p>';
+      } else if (app.statusKind === 'locked') {
+        subInfo = '<p class="dash-app-subinfo">' + escapeHTML(app.status) + '</p>';
+      } else {
+        subInfo = '';
+      }
+
+      var reviewerHTML = '';
+      if (app.reviewer) {
+        reviewerHTML = '<div class="dash-app-reviewer">'
+          + '<span class="dash-app-reviewer-avatar">' + escapeHTML(app.reviewer.avatar) + '</span>'
+          + '<span>Reviewer: ' + escapeHTML(app.reviewer.name) + '</span></div>';
+      }
+
+      var actions;
+      if (app.statusKind === 'in_progress') {
+        actions = '<div class="dash-app-action-row">'
+          + '<button class="dash-btn dash-btn--ghost" data-action="view-timeline" data-app-idx="' + idx + '">View timeline</button>'
+          + '<button class="dash-btn dash-btn--primary" data-action="view-app" data-app-idx="' + idx + '">View application <svg><use href="#icon-arrow-right"/></svg></button>'
+          + '</div>';
+      } else if (app.statusKind === 'draft') {
+        actions = '<div class="dash-app-action-row">'
+          + '<button class="dash-btn dash-btn--ghost" data-action="discard-draft" data-app-idx="' + idx + '">Discard</button>'
+          + '<button class="dash-btn dash-btn--danger" data-action="continue-app" data-app-idx="' + idx + '">Continue application <svg><use href="#icon-arrow-right"/></svg></button>'
+          + '</div>';
+      } else if (app.statusKind === 'locked') {
+        var subscribed = app.subscribed;
+        actions = '<div class="dash-app-action-row">'
+          + '<button class="dash-btn ' + (subscribed ? 'dash-btn--ghost' : 'dash-btn--primary') + '" data-action="notify-me" data-app-idx="' + idx + '" ' + (subscribed ? 'disabled' : '') + '>'
+          + (subscribed ? '<svg><use href="#icon-check"/></svg> Subscribed' : '<svg><use href="#icon-bell"/></svg> Get notified')
+          + '</button></div>';
+      } else { actions = ''; }
+
+      var statusPill = '<span class="dash-pill dash-pill--' + app.statusKind + '">'
+        + (app.statusKind === 'in_progress' ? '<svg><use href="#icon-clock"/></svg>' :
+           app.statusKind === 'draft' ? '<svg><use href="#icon-edit"/></svg>' :
+           app.statusKind === 'locked' ? '<svg><use href="#icon-lock"/></svg>' : '<svg><use href="#icon-check"/></svg>')
+        + ' ' + escapeHTML(app.status) + '</span>';
+
+      var progressRow = app.statusKind !== 'locked' ? (
+        '<div class="dash-app-progress-wrap">'
+          + '<div class="dash-bar"><div class="dash-bar-fill dash-bar-fill--' + app.statusKind + '" style="width:' + app.progress + '%;"></div></div>'
+          + '<span class="dash-app-progress-pct">' + app.progress + '%</span></div>'
+      ) : '';
+
+      return '<article class="dash-card dash-app-card is-hover">'
+        + '<div class="dash-app-icon dash-app-icon--' + app.statusKind + '"><svg><use href="#' + icon + '"/></svg></div>'
+        + '<div class="dash-app-body">'
+        +   '<h3 class="dash-app-title">' + (app.flag ? app.flag + ' ' : '') + escapeHTML(app.title) + '</h3>'
+        +   '<p class="dash-app-meta">' + idLine + '</p>'
+        +   '<div class="dash-app-status-row">' + statusPill + '</div>'
+        +   progressRow + subInfo
+        + '</div>'
+        + '<div class="dash-app-actions">' + reviewerHTML + actions + '</div>'
+        + '</article>';
+    }).join('');
+
+    var active = state.apps.filter(function(a){return a.statusKind === 'in_progress';}).length;
+    var drafts = state.apps.filter(function(a){return a.statusKind === 'draft';}).length;
+    if ($('#dash-stat-active')) $('#dash-stat-active').textContent = active;
+    if ($('#dash-stat-draft')) $('#dash-stat-draft').textContent = drafts;
+  }
+
+  function renderActivity() {
+    var list = $('#dash-activity-list');
+    if (!list) return;
+    list.innerHTML = window.UWCMultiApp.activity.map(function(a){
+      return '<li class="dash-activity-item">'
+        + '<div class="dash-activity-icon"><svg><use href="#' + escapeHTML(a.icon) + '"/></svg></div>'
+        + '<div class="dash-activity-text">' + escapeHTML(a.text) + '</div>'
+        + '<div class="dash-activity-time">' + relativeTime(a.ts) + '</div>'
+        + '</li>';
+    }).join('');
+  }
+
+  function wireFilters() {
+    var bar = $('#dash-filters');
+    if (!bar) return;
+    bar.addEventListener('click', function(e){
+      var btn = e.target.closest('.dash-filter');
+      if (!btn) return;
+      $$('.dash-filter', bar).forEach(function(b){ b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      window.UWCMultiApp.filter = btn.dataset.filter;
+      renderApps();
+    });
+  }
+
+  function wireAppActions() {
+    var container = $('#dash-apps');
+    if (!container) return;
+    container.addEventListener('click', function(e){
+      var btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      var idx = parseInt(btn.dataset.appIdx, 10);
+      var app = window.UWCMultiApp.apps[idx];
+      var action = btn.dataset.action;
+      if (action === 'view-app' || action === 'continue-app') {
+        if (typeof window.go === 'function') { window.go(5); }
+        else { toast('Opening application form...', 'info'); }
+      } else if (action === 'view-timeline') {
+        if (typeof window.UWCSwitchPanel === 'function') { window.UWCSwitchPanel('status'); }
+        else { toast('Switching to status view...', 'info'); }
+      } else if (action === 'notify-me') {
+        app.subscribed = true; renderApps();
+        toast("Subscribed — we'll email you when applications open.", 'info');
+      } else if (action === 'discard-draft') {
+        if (confirm('Discard this draft? You will lose any unsaved sections.')) {
+          window.UWCMultiApp.apps.splice(idx, 1); renderApps();
+          toast('Draft discarded.', 'warn');
+        }
+      }
+    });
+    var viewAll = $('#dash-view-all-activity');
+    if (viewAll) { viewAll.addEventListener('click', function(){ toast('Full activity log coming soon.', 'info'); }); }
+  }
+
+  function renderDocuments() {
+    var list = $('#docs-list');
+    if (!list) return;
+    if (window.UWCFormState && Array.isArray(window.UWCFormState.documents)) {
+      window.UWCFormState.documents.forEach(function(extDoc){
+        var exists = window.UWCDocuments.files.some(function(f){ return f.name === extDoc.name; });
+        if (!exists) {
+          window.UWCDocuments.files.push({
+            id: Date.now() + Math.random(),
+            name: extDoc.name, size: extDoc.size || '—',
+            uploaded: extDoc.uploaded || 'just now',
+            status: 'pending', statusLabel: 'Pending review'
+          });
+        }
+      });
+    }
+    var files = window.UWCDocuments.files;
+    list.innerHTML = files.map(function(f){
+      var pillCls = f.status === 'verified' ? 'docs-pill--complete' : 'docs-pill--pending';
+      var pillIcon = f.status === 'verified' ? 'icon-check' : 'icon-clock';
+      return '<article class="docs-card">'
+        + '<div class="docs-file-icon"><svg><use href="#icon-file-text"/></svg></div>'
+        + '<div class="docs-file-info">'
+        +   '<p class="docs-file-name">' + escapeHTML(f.name) + '</p>'
+        +   '<div class="docs-file-meta">'
+        +     '<span>' + escapeHTML(f.size) + '</span>'
+        +     '<span class="docs-file-meta-dot">&middot;</span>'
+        +     '<span>uploaded ' + escapeHTML(f.uploaded) + '</span>'
+        +     '<span class="docs-file-meta-dot">&middot;</span>'
+        +     '<span class="docs-pill ' + pillCls + '"><svg><use href="#' + pillIcon + '"/></svg> ' + escapeHTML(f.statusLabel) + '</span>'
+        +   '</div>'
+        + '</div>'
+        + '<div class="docs-file-actions">'
+        +   '<button class="docs-btn docs-btn--ghost" data-doc-action="preview" data-doc-id="' + f.id + '"><svg><use href="#icon-eye"/></svg> Preview</button>'
+        +   '<button class="docs-btn docs-btn--ghost" data-doc-action="download" data-doc-id="' + f.id + '"><svg><use href="#icon-download"/></svg></button>'
+        +   '<button class="docs-btn docs-btn--ghost" data-doc-action="replace" data-doc-id="' + f.id + '">Replace</button>'
+        +   '<button class="docs-btn docs-btn--ghost" data-doc-action="remove" data-doc-id="' + f.id + '"><svg><use href="#icon-x"/></svg></button>'
+        + '</div>'
+        + '</article>';
+    }).join('');
+    if ($('#dash-stat-docs')) $('#dash-stat-docs').textContent = files.length;
+  }
+
+  function wireDocuments() {
+    var list = $('#docs-list');
+    var input = $('#docs-file-input');
+    var dropzone = $('#docs-dropzone');
+    var upBtn = $('#docs-upload-btn');
+    if (!list || !input || !dropzone) return;
+
+    list.addEventListener('click', function(e){
+      var btn = e.target.closest('[data-doc-action]');
+      if (!btn) return;
+      var id = btn.dataset.docId;
+      var action = btn.dataset.docAction;
+      var file = window.UWCDocuments.files.find(function(f){ return String(f.id) === String(id); });
+      if (!file) return;
+      if (action === 'preview') { toast('Preview: ' + file.name, 'info'); }
+      else if (action === 'download') { toast('Downloading ' + file.name + '...', 'info'); }
+      else if (action === 'replace') { input.click(); }
+      else if (action === 'remove') {
+        if (confirm('Remove ' + file.name + '?')) {
+          window.UWCDocuments.files = window.UWCDocuments.files.filter(function(f){ return String(f.id) !== String(id); });
+          renderDocuments();
+          toast('Document removed.', 'warn');
+        }
+      }
+    });
+
+    function handleFiles(fileList) {
+      if (!fileList || !fileList.length) return;
+      Array.from(fileList).forEach(function(file){
+        var doc = {
+          id: Date.now() + Math.random(),
+          name: file.name,
+          size: (file.size / 1024 / 1024).toFixed(1) + ' MB',
+          uploaded: 'just now', status: 'pending', statusLabel: 'Pending review'
+        };
+        window.UWCDocuments.files.push(doc);
+        if (window.UWCFormState) {
+          window.UWCFormState.documents = window.UWCFormState.documents || [];
+          window.UWCFormState.documents.push({ name: doc.name, size: doc.size, uploaded: doc.uploaded });
+        }
+      });
+      renderDocuments();
+      toast(fileList.length + (fileList.length === 1 ? ' file uploaded' : ' files uploaded'), 'info');
+    }
+
+    input.addEventListener('change', function(){ handleFiles(input.files); input.value = ''; });
+    if (upBtn) upBtn.addEventListener('click', function(){ input.click(); });
+    dropzone.addEventListener('click', function(){ input.click(); });
+    dropzone.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); } });
+    dropzone.addEventListener('dragover', function(e){ e.preventDefault(); dropzone.classList.add('is-dragover'); });
+    dropzone.addEventListener('dragleave', function(){ dropzone.classList.remove('is-dragover'); });
+    dropzone.addEventListener('drop', function(e){ e.preventDefault(); dropzone.classList.remove('is-dragover'); handleFiles(e.dataTransfer.files); });
+  }
+
+  function renderReferences() {
+    var list = $('#refs-list');
+    if (!list) return;
+    list.innerHTML = window.UWCReferences.referees.map(function(r, idx){
+      var parts = r.name.split(' ').filter(function(p){return p.length>0;});
+      var initials = parts.length >= 2 ? (parts[0][0] + parts[parts.length-1][0]) : (r.name.substring(0,2));
+      initials = initials.toUpperCase();
+      var pillCls = r.status === 'submitted' ? 'refs-pill--complete' : 'refs-pill--in_progress';
+      var pillIcon = r.status === 'submitted' ? 'icon-check' : 'icon-clock';
+      var pillText = r.status === 'submitted' ? 'Submitted ' + escapeHTML(r.submittedAt || '') : 'In progress';
+
+      var actions;
+      if (r.status === 'submitted') {
+        actions = '<div class="dash-app-action-row">'
+          + '<button class="refs-btn refs-btn--ghost" data-ref-action="preview" data-ref-id="' + r.id + '"><svg><use href="#icon-eye"/></svg> Preview reference</button>'
+          + '</div>';
+      } else {
+        actions = '<div class="dash-app-action-row" style="flex-direction:column;align-items:flex-end;">'
+          + '<button class="refs-btn ' + (r.reminderSent ? 'refs-btn--ghost' : 'refs-btn--primary') + '" data-ref-action="remind" data-ref-id="' + r.id + '" ' + (r.reminderSent ? 'disabled' : '') + '>'
+          + (r.reminderSent ? '<svg><use href="#icon-check"/></svg> Reminder sent (just now)' : '<svg><use href="#icon-bell"/></svg> Send reminder')
+          + '</button>'
+          + '<button class="refs-btn refs-btn--ghost" data-ref-action="resend" data-ref-id="' + r.id + '" style="margin-top:6px;"><svg><use href="#icon-mail"/></svg> Resend invitation</button>'
+          + '</div>';
+      }
+
+      var lastActivity = r.status === 'submitted'
+        ? '<span>Submitted ' + escapeHTML(r.submittedAt) + '</span>'
+        : '<span>' + escapeHTML(r.lastActivity || 'No activity yet') + '</span>';
+      var avatarCls = 'refs-avatar--' + ((idx % 4) + 1);
+
+      return '<article class="refs-card">'
+        + '<div class="refs-avatar ' + avatarCls + '">' + escapeHTML(initials) + '</div>'
+        + '<div class="refs-info">'
+        +   '<h3 class="refs-name">' + escapeHTML(r.name) + '</h3>'
+        +   '<p class="refs-role">' + escapeHTML(r.role) + '</p>'
+        +   '<p class="refs-org">' + escapeHTML(r.org) + '</p>'
+        +   '<a href="mailto:' + escapeHTML(r.email) + '" class="refs-email"><svg><use href="#icon-mail"/></svg> ' + escapeHTML(r.email) + '</a>'
+        +   '<div class="refs-status-row">'
+        +     '<span class="refs-pill ' + pillCls + '"><svg><use href="#' + pillIcon + '"/></svg> ' + pillText + '</span>'
+        +     lastActivity + '</div>'
+        + '</div>'
+        + '<div class="refs-actions">' + actions + '</div>'
+        + '</article>';
+    }).join('');
+  }
+
+  function wireReferences() {
+    var list = $('#refs-list');
+    var addBtn = $('#refs-add-btn');
+    if (!list) return;
+    list.addEventListener('click', function(e){
+      var btn = e.target.closest('[data-ref-action]');
+      if (!btn) return;
+      var id = parseInt(btn.dataset.refId, 10);
+      var action = btn.dataset.refAction;
+      var ref = window.UWCReferences.referees.find(function(r){ return r.id === id; });
+      if (!ref) return;
+      if (action === 'remind') {
+        ref.reminderSent = true; renderReferences();
+        toast('Reminder sent to ' + ref.name + '.', 'info');
+        setTimeout(function(){ ref.reminderSent = false; renderReferences(); }, 12000);
+      } else if (action === 'resend') {
+        toast('Invitation resent to ' + ref.email, 'info');
+      } else if (action === 'preview') {
+        toast('Reference content is confidential — UWC review only.', 'warn');
+      }
+    });
+    if (addBtn) {
+      addBtn.addEventListener('click', function(){
+        var name = prompt('Referee full name?'); if (!name) return;
+        var email = prompt('Referee email?'); if (!email) return;
+        var role = prompt('Referee role (e.g. Maths teacher)?') || 'Referee';
+        var newRef = {
+          id: Date.now(), name: name, role: role, org: 'Pending verification',
+          email: email, invitedAt: new Date().toISOString().slice(0,10),
+          status: 'in_progress', lastActivity: 'Invitation sent just now', reminderSent: false
+        };
+        window.UWCReferences.referees.push(newRef);
+        renderReferences();
+        toast('Invitation sent to ' + email, 'info');
+      });
+    }
+  }
+
+  function renderStatus() {
+    var timeline = $('#status-timeline');
+    if (!timeline) return;
+    var app = window.UWCMultiApp.apps.find(function(a){ return a.statusKind === 'in_progress'; });
+    if (!app) {
+      timeline.innerHTML = '<li style="color:#6b7280;padding:14px 0;">No active application — submit a draft to see your status here.</li>';
+      return;
+    }
+    if ($('#status-ref-id')) $('#status-ref-id').textContent = app.id || '—';
+    if ($('#status-banner-stage')) $('#status-banner-stage').textContent = app.status;
+    if ($('#status-banner-nc')) $('#status-banner-nc').textContent = app.nc + ' · Expected decision by 12 June 2026';
+    if ($('#status-overall-progress')) $('#status-overall-progress').textContent = app.progress + '%';
+
+    timeline.innerHTML = app.stages.map(function(s){
+      var cls = s.done ? 'is-done' : (s.current ? 'is-current' : 'is-pending');
+      var icon = s.done ? '<svg><use href="#icon-check"/></svg>'
+              : s.current ? '<svg><use href="#icon-clock"/></svg>' : '';
+      return '<li class="status-timeline-item ' + cls + '">'
+        + '<div class="status-timeline-dot">' + icon + '</div>'
+        + '<p class="status-timeline-name">' + escapeHTML(s.name) + '</p>'
+        + '<p class="status-timeline-date">' + escapeHTML(s.date) + '</p>'
+        + '</li>';
+    }).join('');
+  }
+
+  function wireStatus() {
+    $$('.status-toggle').forEach(function(btn){
+      var key = btn.dataset.toggle;
+      if (window.UWCStatusPrefs[key]) btn.classList.add('is-on');
+      btn.addEventListener('click', function(){
+        var nowOn = !btn.classList.contains('is-on');
+        btn.classList.toggle('is-on', nowOn);
+        window.UWCStatusPrefs[key] = nowOn;
+        var labelEl = btn.parentElement.querySelector('.status-toggle-label');
+        var label = labelEl ? labelEl.textContent : key;
+        toast((nowOn ? 'Enabled' : 'Disabled') + ': ' + label, 'info');
+      });
+    });
+  }
+
+  function onSectionVisible() {
+    $$('[data-portal-section]').forEach(function(section){
+      if (!section.hasAttribute('hidden')) {
+        var name = section.dataset.portalSection;
+        if (name === 'documents') renderDocuments();
+        else if (name === 'references') renderReferences();
+        else if (name === 'status') renderStatus();
+        else if (name === 'dashboard') { renderApps(); renderActivity(); }
+      }
+    });
+  }
+
+  function setupObserver() {
+    var sections = $$('[data-portal-section]');
+    if (!sections.length) return;
+    var mo = new MutationObserver(function(mutations){
+      mutations.forEach(function(m){ if (m.attributeName === 'hidden') { onSectionVisible(); } });
+    });
+    sections.forEach(function(s){ mo.observe(s, { attributes: true, attributeFilter: ['hidden'] }); });
+  }
+
+  window.UWCDashboardV2 = {
+    renderAll: function() { renderApps(); renderActivity(); renderDocuments(); renderReferences(); renderStatus(); },
+    refresh: onSectionVisible,
+    toast: toast
+  };
+
+  function init() {
+    renderApps(); renderActivity(); renderDocuments(); renderReferences(); renderStatus();
+    wireFilters(); wireAppActions(); wireDocuments(); wireReferences(); wireStatus();
+    setupObserver();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+})();
+</script>
+
+<!-- v12 corrective panel-swap (targets content panels only, not sidebar links) -->
+<script>
+(function(){
+  function switchPanel(targetSection) {
+    // Only target ACTUAL panel shells inside the main content, not sidebar links
+    var panels = document.querySelectorAll('.dash-shell, .docs-shell, .refs-shell, .status-shell, [class*="appform-shell"]');
+    var anyShown = false;
+    panels.forEach(function(p){
+      var sect = p.getAttribute('data-portal-section');
+      // Treat 'application' specially — it's the form, not a panel; window.go(5) handles it
+      var shouldShow = (sect === targetSection);
+      p.hidden = !shouldShow;
+      if (shouldShow) anyShown = true;
+    });
+    // Update sidebar active state
+    document.querySelectorAll('.uwc-portal-sidebar__item[data-portal-section]').forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('data-portal-section') === targetSection);
+    });
+    // If a UWCDashboardV2.refresh exists, call it
+    if (window.UWCDashboardV2 && window.UWCDashboardV2.refresh) {
+      try { window.UWCDashboardV2.refresh(); } catch(e){}
+    }
+  }
+  // Override the broken version
+  window.UWCSwitchPanel = switchPanel;
+  // Re-bind sidebar clicks
+  document.addEventListener('click', function(e){
+    var item = e.target && e.target.closest && e.target.closest('.uwc-portal-sidebar__item[data-portal-section]');
+    if (!item) return;
+    e.preventDefault();
+    var section = item.getAttribute('data-portal-section');
+    if (section === 'application' && window.go) { window.go(5); return; }
+    switchPanel(section);
+  }, true);  // capture phase to win over any earlier handler
 })();
 </script>
 
