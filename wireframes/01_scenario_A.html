@@ -26,7 +26,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
 #scope-banner { background: #fef3c7; border-bottom: 1px solid #fde047; padding: 4px 22px 4px 247px; font-size: 11.5px; color: #78350f; font-weight: 500; display: flex; align-items: center; gap: 6px; }
 #scope-banner::before { content: '🌐'; font-size: 12px; }
 .app { height: 100vh; display: grid; grid-template-rows: 32px auto 1fr; }
-.stage { overflow: hidden; padding: 0; }
+.stage { overflow: hidden; padding: 0; display: flex; }
 
 .demo-bar { background: linear-gradient(90deg, #C8102E 0%, #a00d24 100%); color: #fff; height: 32px; display: flex; align-items: center; padding: 0 14px; gap: 14px; font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; position: relative; z-index: 200; box-shadow: 0 1px 0 rgba(0,0,0,0.1); }
 .demo-bar__brand { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase; font-size: 10px; color: rgba(255,255,255,0.95); }
@@ -51,12 +51,12 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
 /* (layout moved above) */
 
 /* Step screen wrapper */
-.screen { display: none; height: 100%; }
-.screen.active { display: block; animation: fadeIn 250ms ease; }
+.screen { display: none; flex: 1; min-width: 0; min-height: 0; }
+.screen.active { display: flex; flex-direction: column; animation: fadeIn 250ms ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 :root { --zoho-topbar-bg: #ffffff; --zoho-topbar-border: #e5e7eb; --zoho-topbar-text: #1f2937; --zoho-topbar-text-muted: #6b7280; --zoho-topbar-icon: #6b7280; --zoho-topbar-icon-hover: #1f2937; --zoho-topbar-height: 52px; --zoho-topbar-search-bg: #f3f5fa; --zoho-sidebar-bg: #f7f8fa; --zoho-sidebar-border: #e8eaed; --zoho-sidebar-text: #4a5568; --zoho-sidebar-section-text: #6b7280; --zoho-sidebar-active-bg: #e6efff; --zoho-sidebar-active-text: #2563eb; --zoho-sidebar-hover-bg: #eef1f7; --zoho-sidebar-width: 225px; --zoho-content-bg: #ffffff; --zoho-content-alt: #f9fafb; --zoho-content-secondary: #f3f5fa; --zoho-content-grey: #eef1f7; --zoho-border: #e5e7eb; --zoho-border-light: #f0f2f5; --zoho-divider: #ebeef2; --zoho-text: #1f2937; --zoho-text-secondary: #4b5563; --zoho-text-muted: #6b7280; --zoho-text-disabled: #9ca3af; --zoho-link: #2563eb; --zoho-link-hover: #1d4ed8; --zoho-primary: #3b6ef5; --zoho-primary-hover: #2563eb; --zoho-primary-text: #ffffff; --zoho-outline: #d1d5db; --zoho-outline-hover: #9ca3af; --zoho-violet: #7c3aed; --zoho-violet-light: #ede9fe; --zoho-pill-today-bg: #fff1de; --zoho-pill-today-text: #c2410c; --zoho-pill-overdue-bg: #fee2e2; --zoho-pill-overdue-text: #991b1b; --zoho-success: #10b981; --zoho-danger: #ef4444; --zoho-phone: #22c55e; --zoho-fs-base: 13px; --zoho-fs-sm: 12px; --zoho-fs-xs: 11px; --zoho-fs-lg: 14px; --zoho-fs-xl: 17px; --zoho-radius-sm: 4px; --zoho-radius: 6px; --zoho-radius-lg: 8px; --zoho-radius-pill: 999px; }
-.zoho-shell { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; color: #1f2937; background: #fff; display: grid; grid-template-rows: 52px 1fr; height: 100%; overflow: hidden; }
+.zoho-shell { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; color: #1f2937; background: #fff; display: grid; grid-template-rows: 52px 1fr; height: 100%; min-height: 100%; width: 100%; overflow: hidden; flex: 1; }
 .zoho-topbar { background: #fff; border-bottom: 1px solid #e5e7eb; display: grid; grid-template-columns: 235px 1fr auto; align-items: stretch; height: 52px; }
 .zoho-tb__brand { display: flex; align-items: center; gap: 8px; padding: 0 14px; border-right: 1px solid #e5e7eb; }
 .zoho-tb__logo { width: 22px; height: 22px; border-radius: 50%; background: conic-gradient(from 0deg, #f43f5e, #ec4899, #a855f7, #6366f1, #3b82f6, #06b6d4, #f43f5e); position: relative; flex-shrink: 0; }
@@ -82,7 +82,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
 .zoho-tb__org::after { content: '1'; position: absolute; top: -3px; right: -3px; width: 14px; height: 14px; background: #7c3aed; color: #fff; font-size: 9px; font-weight: 600; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1.5px solid #fff; }
 .zoho-tb__waffle { display: grid; grid-template-columns: repeat(3, 4px); gap: 2px; width: auto; padding: 0 6px; }
 .zoho-tb__waffle span { width: 4px; height: 4px; background: #6b7280; border-radius: 1px; }
-.zoho-body { display: grid; grid-template-columns: 225px 1fr; height: 100%; overflow: hidden; }
+.zoho-body { display: grid; grid-template-columns: 225px 1fr; height: 100%; min-height: 0; overflow: hidden; }
 .zoho-sidebar { background: #f7f8fa; border-right: 1px solid #e8eaed; overflow-y: auto; padding: 8px 0; font-size: 13px; }
 .zoho-sb__item { display: flex; align-items: center; gap: 10px; padding: 7px 14px; color: #4a5568; cursor: pointer; transition: background 120ms; text-decoration: none; font-size: 13px; }
 .zoho-sb__item:hover { background: #eef1f7; }
@@ -109,7 +109,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
 .zoho-sb__group.collapsed .zoho-sb__group-items { display: none; }
 .zoho-sb__group-items .zoho-sb__item { padding-left: 38px; }
 .zoho-sb__group-items .zoho-sb__item-icon { color: #6b7280; }
-.zoho-content { background: #fff; overflow: auto; position: relative; }
+.zoho-content { background: #fff; overflow: auto; position: relative; min-height: 0; }
 .zoho-page-strip { display: flex; align-items: center; gap: 12px; padding: 10px 22px; border-bottom: 1px solid #f0f2f5; background: #fff; }
 .zoho-page-strip__view { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; background: #eef1f7; border-radius: 6px; font-size: 13px; color: #1f2937; cursor: pointer; font-weight: 500; }
 .zoho-page-strip__more { color: #6b7280; font-size: 16px; letter-spacing: 1px; cursor: pointer; padding: 0 6px; }
@@ -279,6 +279,147 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
 .ft-name { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #5a6480; }
 .ft-t { display: inline-block; padding: 2px 7px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 10px; background: #f3f5fa; color: #5a6480; }
 .ft-pick { background: #f0f4ff; color: #1e3a8a; } .ft-look { background: #f0fdf4; color: #166534; } .ft-auto { background: #fef3c7; color: #92400e; }
+
+
+/* ===== Issue 5: Multi-line text type chips ===== */
+.zoho-fieldtype-chip { display: inline-block; font-size: 9.5px; font-weight: 500; padding: 1px 6px; border-radius: 3px; background: #f1f5f9; color: #64748b; margin-left: 6px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.2px; vertical-align: middle; }
+
+/* ===== Issue 2/4: Setup Home grid ===== */
+.setup-tile-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; padding: 22px; }
+.setup-tile { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px 18px; cursor: pointer; transition: box-shadow 120ms; }
+.setup-tile:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.setup-tile__cat { font-size: 11px; font-weight: 600; color: #6b7280; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.setup-tile__items { list-style: none; }
+.setup-tile__items li { font-size: 12.5px; color: #1f2937; padding: 3px 0; cursor: pointer; }
+.setup-tile__items li:hover { color: #2563eb; text-decoration: underline; }
+.setup-tile__items li.wired { color: #2563eb; font-weight: 500; }
+.setup-tile__items li.wired::before { content: '→ '; font-size: 11px; }
+
+/* ===== Issue 6/3: Review scores table ===== */
+.review-scores-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.review-scores-table th { padding: 8px 10px; text-align: left; font-size: 11px; font-weight: 600; color: #4b5563; border-bottom: 2px solid #e5e7eb; background: #f9fafb; }
+.review-scores-table td { padding: 10px 10px; border-bottom: 1px solid #f0f2f5; vertical-align: middle; }
+.review-scores-table tr:hover td { background: #f9fafb; }
+.review-score-cell { text-align: center; }
+.score-badge { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; font-size: 12px; font-weight: 600; background: #e0e7ff; color: #3730a3; }
+.score-badge--high { background: #d1fae5; color: #065f46; }
+.score-badge--blind { background: #f3f4f6; color: #9ca3af; font-size: 10px; }
+.overall-yes { display: inline-flex; align-items: center; gap: 3px; background: #d1fae5; color: #065f46; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.overall-conditional { display: inline-flex; align-items: center; gap: 3px; background: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.blind-row td { color: #9ca3af; font-style: italic; }
+.blind-pill { background: #f3f4f6; color: #6b7280; padding: 2px 8px; border-radius: 4px; font-size: 10px; }
+
+/* ===== Documents table ===== */
+.docs-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.docs-table th { padding: 8px 12px; text-align: left; font-size: 11px; font-weight: 600; color: #4b5563; border-bottom: 2px solid #e5e7eb; background: #f9fafb; }
+.docs-table td { padding: 9px 12px; border-bottom: 1px solid #f0f2f5; }
+.doc-name { display: flex; align-items: center; gap: 8px; color: #2563eb; cursor: pointer; }
+.doc-name::before { content: '📄'; font-size: 14px; }
+.doc-status-received { background: #d1fae5; color: #065f46; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+.doc-status-verified { background: #dbeafe; color: #1e3a8a; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+
+/* ===== Setup Profiles list ===== */
+.profile-list-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.profile-list-table th { padding: 10px 16px; text-align: left; font-size: 12px; font-weight: 500; color: #4b5563; border-bottom: 1px solid #e5e7eb; background: #fff; }
+.profile-list-table td { padding: 13px 16px; border-bottom: 1px solid #f0f2f5; vertical-align: middle; }
+.profile-list-table tr:hover td { background: #f9fafb; cursor: pointer; }
+.profile-color-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+
+/* ===== Setup Roles tree ===== */
+.roles-tree { padding:0; }
+.roles-node__label { display:flex;align-items:center;gap:8px;padding:10px 14px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;cursor:pointer;margin-bottom:8px;font-size:13px;transition:box-shadow .15s; }
+.roles-node__label:hover { box-shadow:0 2px 8px rgba(0,0,0,.08); }
+.roles-node--top > .roles-node__label { background:#f8fafc;border-color:#003087; }
+.roles-icon { font-size:18px;flex-shrink:0; }
+.roles-meta { color:#64748b;font-size:12px; }
+.roles-badge { margin-left:auto;font-size:11px;padding:2px 8px;border-radius:4px;background:#dbeafe;color:#1e3a8a;font-weight:600; }
+.roles-children { margin-left:28px;padding-left:14px;border-left:2px solid #e2e8f0; }
+.role-node { margin-bottom: 2px; }
+.role-node__row { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 6px; cursor: pointer; transition: background 120ms; }
+.role-node__row:hover { background: #f3f5fa; }
+.role-node__indent { display: flex; align-items: center; gap: 6px; }
+.role-node__line { width: 20px; height: 2px; background: #d1d5db; }
+.role-node__icon { font-size: 12px; color: #9ca3af; }
+.role-node__name { font-size: 13px; font-weight: 500; color: #1f2937; }
+.role-node__users { font-size: 11px; color: #6b7280; margin-left: 6px; }
+.role-node__badge { font-size: 10px; padding: 1px 7px; border-radius: 999px; background: #e0e7ff; color: #3730a3; margin-left: 8px; font-weight: 500; }
+.role-children { margin-left: 32px; border-left: 2px solid #e5e7eb; padding-left: 14px; }
+
+/* ===== Users detail panel ===== */
+.users-page { display: grid; grid-template-columns: 300px 1fr; height: 100%; overflow: hidden; }
+.users-list-panel { border-right: 1px solid #e5e7eb; overflow-y: auto; background: #f9fafb; }
+.user-list-card { display: flex; align-items: center; gap: 12px; padding: 12px 16px; cursor: pointer; border-bottom: 1px solid #f0f2f5; transition: background 120ms; }
+.user-list-card:hover { background: #f0f4ff; }
+.user-list-card.active { background: #e6efff; border-left: 3px solid #003087; }
+.user-list-card__avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: #fff; flex-shrink: 0; }
+.user-list-card__info { flex: 1; min-width: 0; }
+.user-list-card__name { font-size: 13px; font-weight: 500; color: #1f2937; }
+.user-list-card__role { font-size: 11.5px; color: #6b7280; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-detail-panel { overflow-y: auto; padding: 24px 28px; background: #fff; }
+.user-detail-header { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 24px; }
+.user-detail-avatar { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 600; color: #fff; flex-shrink: 0; }
+.user-detail-name { font-size: 20px; font-weight: 600; color: #1f2937; margin-bottom: 4px; }
+.user-detail-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+.user-detail-badge { font-size: 11px; padding: 2px 10px; border-radius: 999px; font-weight: 500; }
+.user-detail-badge--admin { background: #003087; color: #fff; }
+.user-detail-badge--super { background: #7c3aed; color: #fff; }
+.user-detail-badge--nc { background: #1f9535; color: #fff; }
+.user-detail-badge--reviewer { background: #e85d0c; color: #fff; }
+.user-detail-badge--school { background: #7c3aed; color: #fff; }
+.user-detail-badge--io { background: #0ea5e9; color: #fff; }
+.user-detail-badge--dpl { background: #C8102E; color: #fff; }
+.user-detail-section { margin-bottom: 20px; }
+.user-detail-section__title { font-size: 12px; font-weight: 600; color: #6b7280; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid #f0f2f5; }
+.user-detail-field { display: grid; grid-template-columns: 140px 1fr; gap: 8px; margin-bottom: 8px; font-size: 13px; }
+.user-detail-field__label { color: #6b7280; }
+.user-detail-field__value { color: #1f2937; font-weight: 500; }
+
+/* ===== Programme edit form ===== */
+.prog-edit-form { padding: 22px; background: #f9fafb; }
+.prog-edit-form__section { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 18px 22px; margin-bottom: 16px; }
+.prog-edit-form__section-title { font-size: 13px; font-weight: 600; color: #1f2937; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #f0f2f5; }
+.prog-edit-form__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; }
+.prog-edit-form__field { display: flex; flex-direction: column; gap: 4px; }
+.prog-edit-form__field--full { grid-column: 1 / -1; }
+.prog-edit-form__image-upload { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+.prog-edit-form__image-circle { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg,#003087,#7c3aed); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 24px; font-weight: 600; cursor: pointer; position: relative; }
+.prog-edit-form__image-circle::after { content: '✎'; position: absolute; bottom: 0; right: 0; width: 20px; height: 20px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #1f2937; border: 1.5px solid #e5e7eb; }
+.prog-edit-form__spinner { position: fixed; inset: 0; background: rgba(0,0,0,0.3); display: none; align-items: center; justify-content: center; z-index: 9000; }
+.prog-edit-form__spinner.active { display: flex; }
+.prog-edit-form__spinner-box { background: #fff; border-radius: 8px; padding: 24px 32px; text-align: center; font-size: 14px; color: #1f2937; }
+
+/* Application multi-line display */
+.app-multiline { font-size: 13px; color: #1f2937; line-height: 1.7; padding: 12px 16px; background: #f9fafb; border-radius: 6px; border-left: 3px solid #e5e7eb; white-space: pre-wrap; }
+.app-multiline--ncq { border-left-color: #003087; font-style: italic; }
+
+/* Stage compact card */
+.app-status-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; }
+.app-status-card__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px 20px; font-size: 13px; }
+.app-status-card__label { font-size: 11px; color: #6b7280; margin-bottom: 2px; }
+.app-status-card__value { color: #1f2937; font-weight: 500; }
+.app-status-card__value--eligible { color: #065f46; }
+.app-status-card__value--consent { color: #065f46; }
+
+/* ===== New-screen compact left nav ===== */
+.zoho-nav { width:56px; min-width:56px; background:#1e293b; display:flex; flex-direction:column; align-items:center; padding:12px 0; gap:4px; overflow:hidden; flex-shrink:0; }
+.zoho-nav__logo { width:32px; height:32px; display:flex; align-items:center; justify-content:center; margin-bottom:8px; }
+.zoho-nav__items { list-style:none; margin:0; padding:0; width:100%; display:flex; flex-direction:column; align-items:center; gap:2px; }
+.zoho-nav__item { width:48px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:6px 4px; border-radius:8px; cursor:pointer; gap:2px; transition:background .15s; }
+.zoho-nav__item:hover { background:rgba(255,255,255,.1); }
+.zoho-nav__item.active { background:rgba(255,255,255,.18); }
+.zoho-nav__icon { font-size:18px; line-height:1; }
+.zoho-nav__label { font-size:9px; color:rgba(255,255,255,.75); text-align:center; line-height:1.2; white-space:nowrap; }
+.zoho-nav__item.active .zoho-nav__label { color:#fff; }
+/* Shell override for new screens: nav replaces sidebar in body row */
+.zoho-shell--with-nav { grid-template-columns: 56px 1fr !important; }
+.zoho-shell > .zoho-nav + .zoho-body { grid-column:2; }
+
+.zoho-nav ~ .zoho-body { display:flex; flex-direction:column; min-height:0; }
+.zoho-nav ~ .zoho-body .zoho-topbar { display:flex; align-items:center; height:52px; min-height:52px; padding:0 16px; border-bottom:1px solid #e5e7eb; background:#fff; }
+.zoho-nav ~ .zoho-body .zoho-content { flex:1; overflow:auto; }
+
+/* Override zoho-shell layout when it has zoho-nav child (not topbar-first) */
+.zoho-shell:has(> .zoho-nav) { grid-template-rows:1fr; grid-template-columns:56px 1fr; }
 
 /* Toast notification */
 .uwc-toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #1f2937; color: #fff; padding: 10px 18px; border-radius: 8px; font-size: 13px; z-index: 9999; box-shadow: 0 8px 24px rgba(0,0,0,0.25); font-family: 'Inter', sans-serif; pointer-events: none; animation: toastIn 200ms ease; white-space: nowrap; }
@@ -542,81 +683,122 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
         <header class="zoho-topbar">
           <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
           <div class="zoho-tb__center"><h1 class="zoho-tb__module">Programmes</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">🔍</span><input placeholder="Search records"></div></div>
-          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus" data-toast="Quick create — choose a module to add a record">+</button><button class="zoho-tb__icon zoho-tb__icon--zia" data-toast="Zia AI — your intelligent assistant is ready">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell" data-toast="Notifications — 1 new notification"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-bell"/></svg></button><button class="zoho-tb__icon" data-toast="Calendar — upcoming deadlines"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-cal"/></svg></button><button class="zoho-tb__icon" data-toast="Profile settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-user"/></svg></button><button class="zoho-tb__icon" data-toast="Settings — CRM configuration"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-gear"/></svg></button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon" data-toast="Zoho suite — switch between Zoho apps"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><use href="#ico-waffle"/></svg></button></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus" data-toast="Quick create">+</button><button class="zoho-tb__icon zoho-tb__icon--zia" data-toast="Zia AI">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell" data-toast="Notifications"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-bell"/></svg></button><button class="zoho-tb__icon" data-toast="Calendar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-cal"/></svg></button><button class="zoho-tb__icon" data-toast="Profile"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-user"/></svg></button><button class="zoho-tb__icon" data-nav-view="setup-home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-gear"/></svg></button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon" data-toast="Zoho suite"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><use href="#ico-waffle"/></svg></button></div>
         </header>
         <div class="zoho-body">
           <aside class="zoho-sidebar">
             <a class="zoho-sb__item zoho-sb__item--home" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-home"/></svg></span>Home</a>
             <a class="zoho-sb__item zoho-sb__item--reports" data-sb-nav="reports"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-reports"/></svg></span>Reports</a>
             <a class="zoho-sb__item zoho-sb__item--analytics" data-sb-nav="analytics"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-analytics"/></svg></span>Analytics</a>
-            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name">Germany NC</span><span class="zoho-sb__teamspace-chev">⌄</span><span class="zoho-sb__teamspace-more">⋯</span></div>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name" data-role-variant="marcus:Germany NC|ana:Brazil NC|akanksha:CRM Teamspace|data-protection:CRM Teamspace|clara:Brazil NC|paulo:Brazil NC|helen:Atlantic|fatima:IO CRM">Germany NC</span><span class="zoho-sb__teamspace-chev">⌄</span></div>
             <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14"><use href="#ico-folder"/></svg></span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Leads</a><a class="zoho-sb__item" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span>Contacts</a><a class="zoho-sb__item" data-sb-nav="applications"><span class="zoho-sb__item-icon">·</span>Applications</a><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Campaigns</a></div></div>
             <a class="zoho-sb__item active" data-sb-nav="programmes"><span class="zoho-sb__item-icon">🎓</span>Programmes</a>
-            <a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">🌐</span>National Committees</a>
           </aside>
-          <main class="zoho-content">
+          <main class="zoho-content" style="display:flex;flex-direction:column;">
+            <!-- Hero -->
             <div class="zoho-detail__hero">
-              <span class="zoho-detail__back">←</span>
+              <span class="zoho-detail__back" data-nav-view="programmes-list">←</span>
               <div class="zoho-detail__avatar" style="background:linear-gradient(135deg,#003087,#7c3aed);">UD</div>
               <div class="zoho-detail__name-block">
-                <div class="zoho-detail__name">UWC Deutschland 2026 Auswahl</div>
-                <div class="zoho-detail__add-tags">+ Add Tags</div>
+                <div class="zoho-detail__name" id="prog-detail-name">UWC Deutschland 2026 Auswahl</div>
+                <div class="zoho-detail__add-tags">+ Add Tags &nbsp;·&nbsp; <span style="color:#6b7280;font-size:11px;">Last Update : 14:22 PM</span></div>
               </div>
               <div class="zoho-detail__actions">
-                <span class="zoho-detail__last-update">Last Update : 14:22 PM</span>
-                <button class="zoho-btn--primary zoho-btn" data-toast="Send Mail — compose email to applicant">Send Mail</button>
-                <button class="zoho-btn" data-toast="Edit — enter edit mode for this record">Edit</button>
-                <button class="zoho-btn" data-toast="More actions — clone, delete, merge, convert">⋯</button>
+                <button class="zoho-btn--primary zoho-btn" data-cap="send-mail" data-toast="Send Mail">Send Mail</button>
+                <button class="zoho-btn" data-cap="edit-programme" id="prog-edit-btn" data-nav-view="programme-edit">✎ Edit</button>
+                <button class="zoho-btn" data-toast="More actions">⋯</button>
               </div>
             </div>
-            <div class="zoho-tabs">
-              <span class="zoho-tabs__tab active">Overview</span>
-              <span class="zoho-tabs__tab">Timeline</span>
+            <!-- Tabs -->
+            <div style="padding:0 22px;background:#fff;border-bottom:1px solid #f0f2f5;">
+              <div class="zoho-tabs" style="margin:0;">
+                <span class="zoho-tabs__tab active">Overview</span>
+                <span class="zoho-tabs__tab" data-toast="Timeline — programme activity log">Timeline</span>
+              </div>
             </div>
-            <div class="zoho-detail__body" style="margin-top:14px;">
-              <aside class="zoho-detail__rail">
+            <!-- Body: rail + main -->
+            <div style="display:flex;flex:1;overflow:hidden;">
+              <!-- Left rail -->
+              <aside class="zoho-detail__rail" style="width:210px;flex-shrink:0;overflow-y:auto;">
                 <div class="zoho-detail__rail-header">Related List</div>
-                <div class="zoho-detail__rail-item"><span>Applications</span><span class="zoho-detail__rail-count">14</span></div>
-                <div class="zoho-detail__rail-item"><span>Local Questions</span><span class="zoho-detail__rail-count">1</span></div>
-                <div class="zoho-detail__rail-item"><span>Reviewers</span><span class="zoho-detail__rail-count">4</span></div>
                 <div class="zoho-detail__rail-item"><span>Notes</span></div>
+                <div class="zoho-detail__rail-item"><span>Connected Records</span></div>
                 <div class="zoho-detail__rail-item"><span>Attachments</span></div>
                 <div class="zoho-detail__rail-item"><span>Open Activities</span><span class="zoho-detail__rail-count">3</span></div>
+                <div class="zoho-detail__rail-item"><span>Closed Activities</span></div>
+                <div class="zoho-detail__rail-item"><span>Contacts</span></div>
+                <div class="zoho-detail__rail-item"><span>Leads</span></div>
+                <div class="zoho-detail__rail-item active" style="color:#2563eb;font-weight:500;"><span>Applications</span><span class="zoho-detail__rail-count" style="background:#dbeafe;color:#1e3a8a;">14</span></div>
+                <div class="zoho-detail__rail-item" data-role-hide="marcus"><span>Accounts</span></div>
+                <div class="zoho-detail__rail-item"><span>Local Questions</span><span class="zoho-detail__rail-count">1</span></div>
+                <div class="zoho-detail__rail-item"><span>Reviewers</span><span class="zoho-detail__rail-count">4</span></div>
                 <div class="zoho-detail__rail-add">+ Add Related List</div>
-                <div class="zoho-detail__rail-header" style="margin-top:18px;">Links</div>
-                <div class="zoho-detail__rail-add">+ Add Link</div>
               </aside>
-              <div class="zoho-detail__main">
-                <div class="zoho-helper-tag">Edit any field inline — Marcus has full edit on Germany programme</div>
-                <div class="zoho-detail__card" style="margin-top:12px;">
-                  <div class="zoho-detail__hide-details">▾ Hide Details</div>
-                  <div class="zoho-detail__card-title">Programme Configuration</div>
+              <!-- Main content -->
+              <div style="flex:1;overflow-y:auto;background:#f9fafb;padding:16px 22px 60px;">
+                <!-- Compact category card -->
+                <div class="zoho-detail__card" style="padding:10px 16px;display:flex;align-items:center;gap:16px;margin-bottom:14px;">
+                  <div style="font-size:11px;color:#6b7280;">Programme Category</div>
+                  <div style="font-size:13px;color:#9ca3af;">—</div>
+                  <div class="zoho-detail__hide-details" style="margin:0 0 0 auto;">▾ Hide Details</div>
+                </div>
+
+                <!-- Programme Information -->
+                <div class="zoho-detail__card">
+                  <div class="zoho-detail__card-title">Programme Information</div>
                   <div class="zoho-fields-grid">
-                    <div class="zoho-field-row"><div class="zoho-field-row__label">Programme Name</div><div class="zoho-field-row__value">UWC Deutschland 2026 Auswahl</div></div>
-                    <div class="zoho-field-row"><div class="zoho-field-row__label">Programme Code</div><div class="zoho-field-row__value">DE-2026</div></div>
-                    <div class="zoho-field-row"><div class="zoho-field-row__label">National Committee</div><div class="zoho-field-row__value link">UWC Germany National Committee</div></div>
-                    <div class="zoho-field-row"><div class="zoho-field-row__label">Cycle Year</div><div class="zoho-field-row__value">2026</div></div>
-                    <div class="zoho-field-row"><div class="zoho-field-row__label">Open Date</div><div class="zoho-field-row__value">01 Feb 2026</div></div>
-                    <div class="zoho-field-row"><div class="zoho-field-row__label">Application Deadline</div><div class="zoho-field-row__value" style="background:#fef3c7;padding:2px 8px;border-radius:4px;display:inline-block;color:#92400e;">30 May 2026 ✎</div></div>
-                    <div class="zoho-field-row"><div class="zoho-field-row__label">Place Allocation</div><div class="zoho-field-row__value">6 places (4 remaining) ✎</div></div>
-                    <div class="zoho-field-row"><div class="zoho-field-row__label">Programme Owner</div><div class="zoho-field-row__value">Marcus Weber</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Programme Name</div><div class="zoho-field-row__value" id="pd-name">UWC Deutschland 2026 Auswahl</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Open Date</div><div class="zoho-field-row__value" id="pd-open-date">01 Feb 2026</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Programme Code</div><div class="zoho-field-row__value" id="pd-code">DE-2026</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Support Start Date</div><div class="zoho-field-row__value">—</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Cycle Year</div><div class="zoho-field-row__value" id="pd-year">2026</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Place Allocation</div><div class="zoho-field-row__value" id="pd-places">6 places · 4 remaining</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Status</div><div class="zoho-field-row__value"><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:500;">Active</span></div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Application Deadline</div><div class="zoho-field-row__value" id="pd-deadline"><span style="background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:500;">30 May 2026</span></div></div>
                   </div>
                 </div>
+
+                <!-- Description Information -->
                 <div class="zoho-detail__card">
-                  <div class="zoho-detail__card-title">Selection Stages</div>
+                  <div class="zoho-detail__card-title">Description Information</div>
+                  <div class="zoho-field-row">
+                    <div class="zoho-field-row__label">Description</div>
+                    <div class="zoho-field-row__value" id="pd-description">Annual selection cycle for German applicants to UWC schools worldwide. Managed by UWC Germany National Committee. Applicants aged 16–18 at time of programme start.</div>
+                  </div>
+                </div>
+
+                <!-- System Fields -->
+                <div class="zoho-detail__card">
+                  <div class="zoho-detail__card-title">System Fields</div>
+                  <div class="zoho-fields-grid">
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Created By</div><div class="zoho-field-row__value">UWC A2Z Admin · 12:38 PM</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Modified By</div><div class="zoho-field-row__value">Marcus Weber · 14:22 PM</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Programme Owner</div><div class="zoho-field-row__value link">Marcus Weber</div></div>
+                    <div class="zoho-field-row"><div class="zoho-field-row__label">Programme Category</div><div class="zoho-field-row__value" style="color:#9ca3af;">—</div></div>
+                  </div>
+                </div>
+
+                <!-- Pipeline Configuration (custom UWC extension) -->
+                <div class="zoho-detail__card">
+                  <div class="zoho-detail__card-title">Pipeline Configuration <span style="font-size:10px;background:#ede9fe;color:#5b21b6;padding:2px 8px;border-radius:4px;margin-left:8px;font-weight:500;">custom UWC extension</span></div>
                   <div style="display:flex;flex-wrap:wrap;gap:6px;font-size:12px;">
-                    <span style="background:#f3f4f6;color:#4b5563;padding:5px 12px;border-radius:4px;border:1px solid #e5e7eb;">1. Eligibility</span>
-                    <span style="background:#dbeafe;color:#1e3a8a;padding:5px 12px;border-radius:4px;">2. Form</span>
-                    <span style="background:#ede9fe;color:#581c87;padding:5px 12px;border-radius:4px;">3. Review</span>
-                    <span style="background:#fefce8;color:#854d0e;padding:5px 12px;border-radius:4px;">4. Panel</span>
-                    <span style="background:#f0fdf4;color:#14532d;padding:5px 12px;border-radius:4px;">5. Nomination</span>
+                    <span style="background:#f3f4f6;color:#4b5563;padding:5px 14px;border-radius:4px;border:1px solid #e5e7eb;font-weight:500;">Eligibility</span>
+                    <span style="color:#6b7280;padding:5px 0;align-self:center;">→</span>
+                    <span style="background:#dbeafe;color:#1e3a8a;padding:5px 14px;border-radius:4px;font-weight:500;">Form</span>
+                    <span style="color:#6b7280;padding:5px 0;align-self:center;">→</span>
+                    <span style="background:#ede9fe;color:#581c87;padding:5px 14px;border-radius:4px;font-weight:500;">Review</span>
+                    <span style="color:#6b7280;padding:5px 0;align-self:center;">→</span>
+                    <span style="background:#fefce8;color:#854d0e;padding:5px 14px;border-radius:4px;font-weight:500;">Panel</span>
+                    <span style="color:#6b7280;padding:5px 0;align-self:center;">→</span>
+                    <span style="background:#f0fdf4;color:#14532d;padding:5px 14px;border-radius:4px;font-weight:500;">Nomination</span>
                   </div>
                 </div>
+
+                <!-- Local Question -->
                 <div class="zoho-detail__card">
-                  <div class="zoho-detail__card-title">Local Question (Germany-specific)</div>
-                  <div style="background:#f9fafb;padding:14px 16px;border-radius:6px;border-left:3px solid #003087;font-size:13px;color:#1f2937;font-style:italic;line-height:1.6;">
-                    "Beschreibe ein gesellschaftliches Problem in deiner Region und wie du es angehen würdest." <span style="display:block;margin-top:6px;font-style:normal;color:#6b7280;font-size:11px;">Marcus added this local question — no IO ticket required.</span>
-                  </div>
+                  <div class="zoho-detail__card-title">Local Question (Germany-specific) <span class="zoho-fieldtype-chip">multi-line</span></div>
+                  <div class="app-multiline app-multiline--ncq" id="pd-localq">"Beschreibe ein gesellschaftliches Problem in deiner Region und wie du es angehen würdest."
+<span style="display:block;margin-top:6px;font-style:normal;color:#6b7280;font-size:11px;">Added by Marcus Weber · NC Admins can set local questions without IO ticket.</span></div>
                 </div>
               </div>
             </div>
@@ -706,7 +888,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
                   <div class="zoho-kanban-col__amount">2 applicants</div>
                 </div>
                 <div class="zoho-kanban-card"><div class="zoho-kanban-card__name">Anneke Müller</div><span class="zoho-kanban-card__stage" style="background:#f3f4f6;color:#4b5563;">Registered</span><div class="zoho-kanban-card__meta">Marcus Weber<br>Anneke Müller<br>—<br>26 May 2026</div></div>
-                <div class="zoho-kanban-card"><div class="zoho-kanban-card__name">Tobias Krug</div><span class="zoho-kanban-card__stage" style="background:#f3f4f6;color:#4b5563;">Registered</span><div class="zoho-kanban-card__meta">Marcus Weber<br>Tobias Krug<br>—<br>27 May 2026</div></div>
+                
               </div>
               <div class="zoho-kanban-col">
                 <div class="zoho-kanban-col__header" style="background:#dbeafe;">
@@ -714,7 +896,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
                   <div class="zoho-kanban-col__amount">3 applicants</div>
                 </div>
                 <div class="zoho-kanban-card"><div class="zoho-kanban-card__name">Felix Hoffmann</div><span class="zoho-kanban-card__stage" style="background:#dbeafe;color:#1e3a8a;">In Progress</span><div class="zoho-kanban-card__meta">Marcus Weber<br>Felix Hoffmann<br>—<br>24 May 2026</div></div>
-                <div class="zoho-kanban-card"><div class="zoho-kanban-card__name">Sophie Werner</div><span class="zoho-kanban-card__stage" style="background:#dbeafe;color:#1e3a8a;">In Progress</span><div class="zoho-kanban-card__meta">Marcus Weber<br>Sophie Werner<br>—<br>23 May 2026</div></div>
+                
               </div>
               <div class="zoho-kanban-col">
                 <div class="zoho-kanban-col__header" style="background:#E8EEF6;">
@@ -722,7 +904,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
                   <div class="zoho-kanban-col__amount">4 applicants</div>
                 </div>
                 <div class="zoho-kanban-card"><div class="zoho-kanban-card__name">Lena Fischer</div><span class="zoho-kanban-card__stage" style="background:#003087;color:#fff;">Submitted</span><div class="zoho-kanban-card__meta">Marcus Weber<br>Lena Fischer<br>—<br>25 May 2026</div><span class="zoho-kanban-card__icon-tick">✓</span></div>
-                <div class="zoho-kanban-card"><div class="zoho-kanban-card__name">Max Schäfer</div><span class="zoho-kanban-card__stage" style="background:#003087;color:#fff;">Submitted</span><div class="zoho-kanban-card__meta">Marcus Weber<br>Max Schäfer<br>—<br>24 May 2026</div></div>
+                
               </div>
               <div class="zoho-kanban-col">
                 <div class="zoho-kanban-col__header" style="background:#ede9fe;">
@@ -730,7 +912,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
                   <div class="zoho-kanban-col__amount">3 applicants</div>
                 </div>
                 <div class="zoho-kanban-card"><div class="zoho-kanban-card__name">Klaus Berger</div><span class="zoho-kanban-card__stage" style="background:#ede9fe;color:#5b21b6;">Under Review</span><div class="zoho-kanban-card__meta">Marcus Weber<br>Klaus Berger<br>—<br>22 May 2026</div></div>
-                <div class="zoho-kanban-card"><div class="zoho-kanban-card__name">Eva Brandt</div><span class="zoho-kanban-card__stage" style="background:#ede9fe;color:#5b21b6;">Under Review</span><div class="zoho-kanban-card__meta">Marcus Weber<br>Eva Brandt<br>—<br>21 May 2026</div></div>
+                
               </div>
               <div class="zoho-kanban-col">
                 <div class="zoho-kanban-col__header" style="background:#fefce8;">
@@ -772,7 +954,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
               <span class="zoho-setup-tabs__tab">Deactivated</span>
             </div>
             <div style="padding:14px 22px;display:flex;gap:8px;align-items:center;border-bottom:1px solid #f0f2f5;">
-              <div style="background:#f3f5fa;border-radius:6px;padding:7px 12px;display:flex;align-items:center;gap:8px;width:280px;"><span style="color:#9ca3af;font-size:13px;">🔍</span><input style="border:none;background:transparent;outline:none;font-size:13px;flex:1;font-family:inherit;" placeholder="Search by name or email"></div>
+              <div class="zoho-tb__search" style="width:280px;"><span style="color:#9ca3af;font-size:13px;">🔍</span><input style="border:none;background:transparent;outline:none;font-size:13px;flex:1;font-family:inherit;" placeholder="Search by name or email"></div>
               <span style="flex:1;"></span>
               <button class="zoho-btn">⚙ Manage Profiles</button>
               <button class="zoho-btn">⚙ Manage Roles</button>
@@ -797,182 +979,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
       </div>
     </section>
 
-    <section class="screen" id="sc-4">
-      <div class="zoho-shell">
-        <header class="zoho-topbar">
-          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
-          <div class="zoho-tb__center"><h1 class="zoho-tb__module">Profile · NC Administrator</h1></div>
-          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus" data-toast="Quick create — choose a module to add a record">+</button><button class="zoho-tb__icon zoho-tb__icon--zia" data-toast="Zia AI — your intelligent assistant is ready">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell" data-toast="Notifications — 1 new notification"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-bell"/></svg></button><button class="zoho-tb__icon" data-toast="Settings — CRM configuration"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-gear"/></svg></button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon" data-toast="Zoho suite — switch between Zoho apps"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><use href="#ico-waffle"/></svg></button></div>
-        </header>
-        <div class="zoho-body">
-          <aside class="zoho-sidebar">
-            <div class="zoho-setup-header"><span class="zoho-setup-header__title">← Profile · NC Administrator</span></div>
-            <a class="zoho-sb__item active"><span class="zoho-sb__item-icon">📦</span>Module Permissions</a>
-            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">🧾</span>Field Permissions</a>
-            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">🗂</span>Record Type Permissions</a>
-            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">⚡</span>Workflow &amp; Approval</a>
-            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">📤</span>Export &amp; Mass Updates</a>
-            <a class="zoho-sb__item"><span class="zoho-sb__item-icon">⚙</span>Admin Permissions</a>
-          </aside>
-          <main class="zoho-content">
-            <div style="padding:18px 22px;display:flex;align-items:center;gap:14px;border-bottom:1px solid #f0f2f5;">
-              <div><div style="font-size:16px;font-weight:600;color:#1f2937;">Module Permissions</div><div style="font-size:12px;color:#6b7280;margin-top:2px;">NC Administrator profile — choose what NC Admins can do per module.</div></div>
-              <span style="flex:1;"></span>
-              <button class="zoho-btn">Reset</button><button class="zoho-btn--primary zoho-btn">Save</button>
-            </div>
-            <table class="zoho-list">
-              <thead><tr><th>Module</th><th style="text-align:center;">View</th><th style="text-align:center;">Create</th><th style="text-align:center;">Edit</th><th style="text-align:center;">Delete</th><th style="text-align:center;">Mass Update</th><th style="text-align:center;">Export</th></tr></thead>
-              <tbody>
-                <tr><td><b>Leads</b></td><td style="text-align:center;"><div class="zoho-setup-toggle on"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle on"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle on"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td></tr>
-                <tr><td><b>Contacts</b></td><td style="text-align:center;"><div class="zoho-setup-toggle on"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle on"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle on"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td></tr>
-                <tr><td><b>Applications</b> <span style="color:#7c3aed;font-size:11px;margin-left:6px;">⚡ NC-scoped</span></td><td style="text-align:center;"><div class="zoho-setup-toggle on"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle on"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle on"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle on"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td></tr>
-                <tr><td><b>Programmes</b></td><td style="text-align:center;"><div class="zoho-setup-toggle on"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle on"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td></tr>
-                <tr><td><b>National Committees</b></td><td style="text-align:center;"><div class="zoho-setup-toggle on"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle on"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td></tr>
-                <tr><td><b>Governance Bodies</b></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td></tr>
-                <tr><td><b>Financial Aid</b> <span style="color:#C8102E;font-size:11px;margin-left:6px;">🔒 Sensitive</span></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td><td style="text-align:center;"><div class="zoho-setup-toggle"></div></td></tr>
-              </tbody>
-            </table>
-            <div style="padding:16px 22px;background:#fffbeb;border-top:1px solid #fde047;font-size:12.5px;color:#78350f;line-height:1.5;">
-              <b>Data sharing scope:</b> NC Administrators can only see records where <code style="background:#fff;padding:1px 5px;border-radius:3px;font-family:'JetBrains Mono',monospace;color:#92400e;">National Committee = their own NC</code>. Brazil NC Admin cannot see Germany records. Field-level security applies independently to Financial Aid, DOB, and Parental Consent fields.
-            </div>
-          </main>
-        </div>
-      </div>
-    </section>
-
-    <section class="screen" id="sc-7">
-      <div style="height:100%;background:#f9fafb;display:flex;flex-direction:column;">
-        <div style="background:#fff;padding:14px 22px;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;gap:14px;">
-          <div style="flex:1;">
-            <div style="font-size:16px;font-weight:600;color:#1f2937;">Same Contact record · two roles · two views</div>
-            <div style="font-size:12.5px;color:#5a6480;margin-top:2px;">Sofia Almeida's record (Brazil). On the left: IO Super Admin (Akanksha) — full visibility. On the right: Data Protection Lead — DOB, financial aid, and parent contact masked. <b>Field-level security is standard Zoho CRM configuration, not custom code.</b></div>
-          </div>
-          <span class="zoho-helper-tag" style="background:#fffbeb;color:#92400e;">Use the role switcher above to test this live</span>
-        </div>
-        <div class="split-view">
-          <!-- LEFT: IO Super Admin view -->
-          <div class="split-panel">
-            <div class="split-panel__header">
-              <span class="split-panel__avatar">AA</span>
-              <div><div class="split-panel__name">Akanksha Anand</div><div class="split-panel__role">IO Super Admin · Global access</div></div>
-            </div>
-            <div class="split-panel__body">
-              <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;"><div class="zoho-detail__avatar" style="background:linear-gradient(135deg,#003087,#7c3aed);">SA</div><div><div style="font-weight:600;font-size:15px;">Sofia Almeida (Sample)</div><div style="font-size:12px;color:#6b7280;">Brazil · APP-2026-00041</div></div></div>
-              <div style="font-size:11.5px;font-weight:600;color:#003087;letter-spacing:0.6px;text-transform:uppercase;margin-bottom:8px;">Personal Information</div>
-              <div class="zoho-fields-grid" style="grid-template-columns:1fr;gap:10px;">
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Full Name</div><div class="zoho-field-row__value">Sofia Almeida</div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Date of Birth</div><div class="zoho-field-row__value">15 Aug 2009 (age 16)</div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Email</div><div class="zoho-field-row__value link">sofia.almeida@example.com</div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Phone</div><div class="zoho-field-row__value">+55 11 9 4567 1234 <span class="phone-ico">📞</span></div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Address</div><div class="zoho-field-row__value">Rua Augusta 1240, São Paulo, SP 01304-001, Brazil</div></div>
-              </div>
-              <div style="font-size:11.5px;font-weight:600;color:#003087;letter-spacing:0.6px;text-transform:uppercase;margin:16px 0 8px;">Financial Aid (sensitive)</div>
-              <div class="zoho-fields-grid" style="grid-template-columns:1fr;gap:10px;">
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Financial Aid Status</div><div class="zoho-field-row__value">Full scholarship requested</div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Household Income</div><div class="zoho-field-row__value">BRL 38,000 / year</div></div>
-              </div>
-              <div style="font-size:11.5px;font-weight:600;color:#003087;letter-spacing:0.6px;text-transform:uppercase;margin:16px 0 8px;">Parent / Guardian</div>
-              <div class="zoho-fields-grid" style="grid-template-columns:1fr;gap:10px;">
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Parent Name</div><div class="zoho-field-row__value link">Maria Almeida</div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Parent Email</div><div class="zoho-field-row__value link">maria.almeida@example.com</div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Parent Phone</div><div class="zoho-field-row__value">+55 11 9 8765 4321</div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Relationship</div><div class="zoho-field-row__value">Mother</div></div>
-              </div>
-            </div>
-          </div>
-          <!-- RIGHT: Data Protection Lead view -->
-          <div class="split-panel">
-            <div class="split-panel__header dp">
-              <span class="split-panel__avatar">DP</span>
-              <div><div class="split-panel__name">Data Protection Lead</div><div class="split-panel__role">Compliance · Restricted visibility · GDPR audit</div></div>
-            </div>
-            <div class="split-panel__body">
-              <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;"><div class="zoho-detail__avatar" style="background:linear-gradient(135deg,#003087,#7c3aed);">SA</div><div><div style="font-weight:600;font-size:15px;">Sofia Almeida (Sample)</div><div style="font-size:12px;color:#6b7280;">Brazil · APP-2026-00041</div></div></div>
-              <div style="font-size:11.5px;font-weight:600;color:#003087;letter-spacing:0.6px;text-transform:uppercase;margin-bottom:8px;">Personal Information</div>
-              <div class="zoho-fields-grid" style="grid-template-columns:1fr;gap:10px;">
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Full Name</div><div class="zoho-field-row__value">Sofia Almeida</div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Date of Birth</div><div class="zoho-field-row__value masked">•••••••• <span style="font-style:normal;color:#C8102E;font-size:10px;margin-left:6px;background:#fee2e2;padding:1px 6px;border-radius:3px;">Restricted</span></div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Email</div><div class="zoho-field-row__value link">sofia.almeida@example.com</div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Phone</div><div class="zoho-field-row__value masked">•••••••• <span style="font-style:normal;color:#C8102E;font-size:10px;margin-left:6px;background:#fee2e2;padding:1px 6px;border-radius:3px;">Restricted</span></div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Address</div><div class="zoho-field-row__value">São Paulo, Brazil</div></div>
-              </div>
-              <div style="font-size:11.5px;font-weight:600;color:#003087;letter-spacing:0.6px;text-transform:uppercase;margin:16px 0 8px;">Financial Aid (sensitive)</div>
-              <div class="zoho-fields-grid" style="grid-template-columns:1fr;gap:10px;">
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Financial Aid Status</div><div class="zoho-field-row__value masked">•••••••• <span style="font-style:normal;color:#C8102E;font-size:10px;margin-left:6px;background:#fee2e2;padding:1px 6px;border-radius:3px;">Restricted</span></div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Household Income</div><div class="zoho-field-row__value masked">•••••••• <span style="font-style:normal;color:#C8102E;font-size:10px;margin-left:6px;background:#fee2e2;padding:1px 6px;border-radius:3px;">Restricted</span></div></div>
-              </div>
-              <div style="font-size:11.5px;font-weight:600;color:#003087;letter-spacing:0.6px;text-transform:uppercase;margin:16px 0 8px;">Parent / Guardian</div>
-              <div class="zoho-fields-grid" style="grid-template-columns:1fr;gap:10px;">
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Parent Name</div><div class="zoho-field-row__value masked">•••••••• <span style="font-style:normal;color:#C8102E;font-size:10px;margin-left:6px;background:#fee2e2;padding:1px 6px;border-radius:3px;">Restricted</span></div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Parent Email</div><div class="zoho-field-row__value masked">••••••••</div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Parent Phone</div><div class="zoho-field-row__value masked">••••••••</div></div>
-                <div class="zoho-field-row"><div class="zoho-field-row__label">Relationship</div><div class="zoho-field-row__value">Mother</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="screen" id="sc-8">
-      <div class="appendix">
-        <h1>Module field reference — Scenario A</h1>
-        <p>Field-level model for the modules touched in Scenario A. Used throughout the demo; documented here for reference. Every <code style="font-family:'JetBrains Mono',monospace;background:#E8EEF6;color:#003087;padding:1px 6px;border-radius:3px;">API name</code> matches the live Zoho org.</p>
-
-        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:18px;">Programmes module</h2>
-        <table class="ref-table">
-          <thead><tr><th>Field</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
-          <tbody>
-            <tr><td>Programme Name</td><td class="ft-name">Product_Name</td><td><span class="ft-t">Text</span></td><td>e.g. UWC Deutschland 2026 Auswahl</td></tr>
-            <tr><td>Programme Code</td><td class="ft-name">Product_Code</td><td><span class="ft-t">Text</span></td><td>e.g. DE-2026</td></tr>
-            <tr><td>National Committee</td><td class="ft-name">NC_Lookup</td><td><span class="ft-t ft-look">Lookup</span></td><td>Lookup → National Committees module</td></tr>
-            <tr><td>Cycle Year</td><td class="ft-name">Cycle_Year</td><td><span class="ft-t">Integer</span></td><td>e.g. 2026</td></tr>
-            <tr><td>Application Deadline</td><td class="ft-name">Application_Deadline</td><td><span class="ft-t">Date</span></td><td>NC Admin can edit inline</td></tr>
-            <tr><td>Place Allocation</td><td class="ft-name">Place_Allocation</td><td><span class="ft-t">Integer</span></td><td>Set by IO Admissions in Scenario D</td></tr>
-            <tr><td>Local Question</td><td class="ft-name">Local_Question</td><td><span class="ft-t">Multi-line</span></td><td>Added by NC Admin in own language</td></tr>
-            <tr><td>Programme Owner</td><td class="ft-name">Owner</td><td><span class="ft-t ft-look">Lookup → User</span></td><td>NC Admin for this cycle</td></tr>
-          </tbody>
-        </table>
-
-        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:24px;">Profile — NC Administrator</h2>
-        <table class="ref-table">
-          <thead><tr><th>Permission</th><th>Setting</th><th>Scope</th></tr></thead>
-          <tbody>
-            <tr class="section"><td colspan="3">Module-level access</td></tr>
-            <tr><td>Leads · Contacts · Applications · Programmes · NCs</td><td>View / Create / Edit · No Delete</td><td>NC-scoped (their own NC only)</td></tr>
-            <tr><td>Governance Bodies · Financial Aid</td><td>No access</td><td>—</td></tr>
-            <tr class="section"><td colspan="3">Field-level masking (sensitive fields)</td></tr>
-            <tr><td>Date of Birth · Financial Aid · Parent Contact</td><td>Visible to NC Admin (within own NC) · Masked for Data Protection Lead</td><td>Field-level security</td></tr>
-            <tr><td>Reviewer Scores</td><td>Hidden until <code class="ft-name">All_Reviews_Complete = true</code></td><td>Blueprint trigger (see Scenario C)</td></tr>
-            <tr class="section"><td colspan="3">Workflow actions allowed</td></tr>
-            <tr><td>Override edit on behalf of applicant</td><td>Allowed · audit entry required</td><td>Reason &gt;= 20 chars</td></tr>
-            <tr><td>Unlock submitted application</td><td>Allowed · audit entry required</td><td>Reason &gt;= 20 chars · email applicant</td></tr>
-            <tr><td>Convert Lead → Contact</td><td>Allowed</td><td>Auto-creates Contact + assigns to NC</td></tr>
-          </tbody>
-        </table>
-
-        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:24px;">Audit Log entry</h2>
-        <table class="ref-table">
-          <thead><tr><th>Field</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
-          <tbody>
-            <tr><td>Timestamp</td><td class="ft-name">Created_Time</td><td><span class="ft-t ft-auto">DateTime</span></td><td>Auto-set on save</td></tr>
-            <tr><td>Performed By</td><td class="ft-name">Modified_By</td><td><span class="ft-t ft-look">Lookup → User</span></td><td>Auto-set</td></tr>
-            <tr><td>Action</td><td class="ft-name">Action_Type</td><td><span class="ft-t">Picklist</span></td><td>Override Edit · Unlock · Lock · Stage Transition</td></tr>
-            <tr><td>Target Record</td><td class="ft-name">Record_Id</td><td><span class="ft-t ft-look">Lookup</span></td><td>The record acted upon</td></tr>
-            <tr><td>Reason</td><td class="ft-name">Reason_Text</td><td><span class="ft-t">Multi-line</span></td><td>Required for override/unlock</td></tr>
-            <tr><td>Before Value</td><td class="ft-name">Before_Value</td><td><span class="ft-t">Text</span></td><td>For field changes</td></tr>
-            <tr><td>After Value</td><td class="ft-name">After_Value</td><td><span class="ft-t">Text</span></td><td>For field changes</td></tr>
-          </tbody>
-        </table>
-
-        <div style="margin-top:28px;padding:16px 20px;background:#E8EEF6;border-radius:8px;font-size:12.5px;color:#003087;line-height:1.6;">
-          <b style="font-family:'Playfair Display',Georgia,serif;font-size:14px;">End of Scenario A.</b><br>
-          Akanksha will narrate this scenario in approximately 8 minutes. Continue to <b><a href="02_scenario_B.html" style="color:#003087;text-decoration:underline;">Scenario B — Applicant Registration</a></b> for Sofia's portal journey.
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== CONTACTS LIST (exploration, not counted in steps) ===== -->
+                <!-- ===== CONTACTS LIST (exploration, not counted in steps) ===== -->
     <section class="screen" id="sc-contacts-list">
       <div class="zoho-shell">
         <header class="zoho-topbar">
@@ -1530,7 +1537,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
       </div>
     </section>
 
-    <!-- ===== APPLICATION DETAIL (new view — the centrepiece) ===== -->
+    <!-- ===== APPLICATION DETAIL (rewritten v5) ===== -->
     <section class="screen" id="sc-application-detail">
       <div class="zoho-shell">
         <header class="zoho-topbar">
@@ -1542,8 +1549,8 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
           <aside class="zoho-sidebar">
             <a class="zoho-sb__item zoho-sb__item--home" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-home"/></svg></span>Home</a>
             <a class="zoho-sb__item zoho-sb__item--reports" data-sb-nav="reports"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-reports"/></svg></span>Reports</a>
-            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name" data-role-variant="marcus:Germany NC|ana:Brazil NC|akanksha:CRM Teamspace|data-protection:CRM Teamspace">Germany NC</span><span class="zoho-sb__teamspace-chev">⌄</span></div>
-            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14"><use href="#ico-folder"/></svg></span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item" data-sb-nav="leads"><span class="zoho-sb__item-icon">·</span>Leads</a><a class="zoho-sb__item" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span>Contacts</a><a class="zoho-sb__item active" data-sb-nav="applications"><span class="zoho-sb__item-icon">·</span>Applications</a><a class="zoho-sb__item" data-sb-nav="campaigns"><span class="zoho-sb__item-icon">·</span>Campaigns</a></div></div>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name" data-role-variant="marcus:Germany NC|ana:Brazil NC|akanksha:CRM Teamspace|data-protection:CRM Teamspace|clara:Brazil NC|paulo:Brazil NC|helen:Atlantic|fatima:IO CRM">Germany NC</span><span class="zoho-sb__teamspace-chev">⌄</span></div>
+            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14"><use href="#ico-folder"/></svg></span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item" data-sb-nav="leads"><span class="zoho-sb__item-icon">·</span>Leads</a><a class="zoho-sb__item" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span>Contacts</a><a class="zoho-sb__item active" data-sb-nav="applications"><span class="zoho-sb__item-icon">·</span>Applications</a></div></div>
             <a class="zoho-sb__item" data-sb-nav="programmes"><span class="zoho-sb__item-icon">🎓</span>Programmes</a>
           </aside>
           <main class="zoho-content" style="display:flex;flex-direction:column;overflow:hidden;position:relative;">
@@ -1553,13 +1560,15 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
               <div class="zoho-detail__avatar" id="app-avatar" style="background:linear-gradient(135deg,#f59e0b,#ec4899);">LF</div>
               <div class="zoho-detail__name-block">
                 <div class="zoho-detail__name" id="app-title">APP-2026-00073 · Lena Fischer</div>
-                <div class="zoho-detail__add-tags"><span class="zoho-pill" id="app-stage-chip" style="background:#003087;color:#fff;">Submitted</span> <span style="font-size:11px;color:#2563eb;cursor:pointer;margin-left:8px;">+ Add Tags</span></div>
+                <div class="zoho-detail__add-tags"><span class="zoho-pill" id="app-stage-chip" style="background:#003087;color:#fff;">Submitted</span> <span style="font-size:11px;color:#2563eb;cursor:pointer;margin-left:8px;">+ Add Tags</span> <span style="font-size:11px;color:#6b7280;margin-left:8px;" id="app-last-update">Last Update : 25 May 2026</span></div>
               </div>
               <div class="zoho-detail__actions" id="app-actions-view">
-                <span class="zoho-detail__last-update" id="app-last-update">Last Update : 25 May 2026 · 16:42</span>
-                <button class="zoho-btn" id="app-unlock-btn" style="background:#C8102E;color:#fff;border-color:#C8102E;font-weight:500;">⊖ Unlock for amendment</button>
-                <button class="zoho-btn" id="app-lock-btn" style="display:none;background:#003087;color:#fff;border-color:#003087;font-weight:500;">🔒 Lock application</button>
-                <button class="zoho-btn" id="app-edit-btn">Edit</button>
+                <button class="zoho-btn" data-cap="unlock-application" id="app-unlock-btn" style="background:#C8102E;color:#fff;border-color:#C8102E;font-weight:500;">⊖ Unlock</button>
+                <button class="zoho-btn" data-cap="lock-application" id="app-lock-btn" style="display:none;background:#003087;color:#fff;border-color:#003087;font-weight:500;">🔒 Lock</button>
+                <button class="zoho-btn" data-cap="edit-application" id="app-edit-btn">✎ Edit</button>
+                <button class="zoho-btn" data-cap="send-mail" data-toast="Send Mail — compose email to applicant">✉ Send Mail</button>
+                <button class="zoho-btn" data-cap="score-application" data-toast="Submit your review score for this application" style="background:#e85d0c;color:#fff;border-color:#e85d0c;">★ Score</button>
+                <button class="zoho-btn" data-cap="accept-nomination" data-toast="Accept this nomination to UWC Atlantic" style="background:#1f9535;color:#fff;border-color:#1f9535;">✓ Accept</button>
                 <button class="zoho-btn" data-toast="More actions">⋯</button>
               </div>
               <div class="zoho-detail__actions" id="app-actions-edit" style="display:none;">
@@ -1576,55 +1585,121 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
               </div>
             </div>
 
-            <!-- SCROLLABLE CONTENT -->
-            <div style="flex:1;overflow-y:auto;background:#f9fafb;padding-bottom:80px;display:flex;flex-direction:column;" id="app-tab-content">
+            <!-- BODY: rail + scrollable content -->
+            <div style="flex:1;overflow:hidden;display:flex;">
+              <!-- LEFT RAIL -->
+              <aside class="zoho-detail__rail" style="width:210px;flex-shrink:0;overflow-y:auto;padding-bottom:60px;">
+                <div class="zoho-detail__rail-header">Related List</div>
+                <div class="zoho-detail__rail-item"><span>Notes</span></div>
+                <div class="zoho-detail__rail-item"><span>Attachments</span></div>
+                <div class="zoho-detail__rail-item"><span>Emails</span></div>
+                <div class="zoho-detail__rail-item"><span>Open Activities</span><span class="zoho-detail__rail-count">1</span></div>
+                <div class="zoho-detail__rail-item"><span>Closed Activities</span></div>
+                <div class="zoho-detail__rail-item active" style="color:#2563eb;font-weight:500;"><span>Documents</span><span class="zoho-detail__rail-count" id="app-rail-docs-count" style="background:#dbeafe;color:#1e3a8a;">3</span></div>
+                <div class="zoho-detail__rail-item"><span>Review Scores</span><span class="zoho-detail__rail-count" id="app-rail-scores-count">2</span></div>
+                <div class="zoho-detail__rail-item"><span>References</span></div>
+                <div class="zoho-detail__rail-item"><span>Parent Name</span><span class="zoho-detail__rail-count">1</span></div>
+                <div class="zoho-detail__rail-item"><span>Programmes</span><span class="zoho-detail__rail-count">1</span></div>
+                <div class="zoho-detail__rail-item"><span>Audit Log</span></div>
+                <div class="zoho-detail__rail-add">+ Add Related List</div>
+              </aside>
 
-              <!-- OVERVIEW TAB -->
-              <div id="app-overview" style="padding:14px 22px;">
-                <div class="zoho-detail__card">
-                  <div class="zoho-detail__card-title">Application Status</div>
-                  <div class="zoho-fields-grid">
-                    <div class="zoho-field-row"><div class="zoho-field-row__label">Stage</div><div class="zoho-field-row__value" id="app-f-stage"><span class="zoho-pill" style="background:#003087;color:#fff;">Submitted</span></div></div>
-                    <div class="zoho-field-row"><div class="zoho-field-row__label">Submitted Date</div><div class="zoho-field-row__value" id="app-f-submitted">25 May 2026 · 16:42</div></div>
-                    <div class="zoho-field-row"><div class="zoho-field-row__label">Programme</div><div class="zoho-field-row__value link" id="app-f-programme">UWC Deutschland 2026 Auswahl</div></div>
-                    <div class="zoho-field-row"><div class="zoho-field-row__label">Parental Consent</div><div class="zoho-field-row__value" id="app-f-consent" style="color:#166534;">Received · 24 May 2026</div></div>
-                    <div class="zoho-field-row"><div class="zoho-field-row__label">NC</div><div class="zoho-field-row__value" id="app-f-nc">Germany</div></div>
-                    <div class="zoho-field-row"><div class="zoho-field-row__label">Eligibility Status</div><div class="zoho-field-row__value" id="app-f-elig" style="color:#166534;">Eligible ✓</div></div>
+              <!-- SCROLLABLE CONTENT -->
+              <div style="flex:1;overflow-y:auto;background:#f9fafb;padding-bottom:80px;" id="app-tab-content">
+
+                <!-- OVERVIEW TAB -->
+                <div id="app-overview" style="padding:14px 22px;">
+
+                  <!-- 1. Application Status card -->
+                  <div class="app-status-card">
+                    <div class="app-status-card__grid">
+                      <div><div class="app-status-card__label">Stage</div><div class="app-status-card__value" id="app-f-stage"><span class="zoho-pill" style="background:#003087;color:#fff;">Submitted</span></div></div>
+                      <div><div class="app-status-card__label">Submitted Date</div><div class="app-status-card__value" id="app-f-submitted">25 May 2026 · 16:42</div></div>
+                      <div><div class="app-status-card__label">Programme</div><div class="app-status-card__value link" id="app-f-programme">UWC Deutschland 2026 Auswahl</div></div>
+                      <div><div class="app-status-card__label">NC</div><div class="app-status-card__value" id="app-f-nc">Germany</div></div>
+                      <div><div class="app-status-card__label">Parental Consent</div><div class="app-status-card__value app-status-card__value--consent" id="app-f-consent">✓ Received · 24 May 2026</div></div>
+                      <div><div class="app-status-card__label">Eligibility</div><div class="app-status-card__value app-status-card__value--eligible" id="app-f-elig">Eligible ✓</div></div>
+                    </div>
+                  </div>
+
+                  <!-- 2. Personal Statement -->
+                  <div class="zoho-detail__card">
+                    <div class="zoho-detail__card-title">Personal Statement <span class="zoho-fieldtype-chip">multi-line</span></div>
+                    <div class="app-multiline" id="app-f-statement">Growing up near Cologne, I witnessed the 2021 flood devastation first-hand. The Ahr valley — a region my family had visited every summer — was unrecognisable overnight. This experience ignited my passion for environmental justice and cross-border cooperation.
+
+Through my work with the local climate youth group, I helped organise three community forums that brought together farmers, scientists, and local government. I learned that sustainable change requires not just technical solutions but genuine dialogue across social boundaries.
+
+At UWC, I hope to connect with peers from climate-vulnerable regions in the Global South — from Bangladesh to Mozambique — and build collaborative solutions that transcend national boundaries. I believe education is the most powerful lever for the systemic change our generation urgently needs.</div>
+                  </div>
+
+                  <!-- 3. Education Background -->
+                  <div class="zoho-detail__card">
+                    <div class="zoho-detail__card-title">Education Background <span class="zoho-fieldtype-chip">multi-line</span></div>
+                    <div class="app-multiline" id="app-f-education">Gymnasium Köln-Porz · Year 11 (2025–2026)
+Current GPA: 1.3 (German scale) — equivalent A*/A across all subjects
+Strong in Biology, Chemistry, Geography, and English Literature.
+Abitur expected June 2027.
+
+Additional: DELF B2 (French), Cambridge Advanced English (C1 distinction)</div>
+                  </div>
+
+                  <!-- 4. Extracurricular Activities -->
+                  <div class="zoho-detail__card">
+                    <div class="zoho-detail__card-title">Extracurricular Activities <span class="zoho-fieldtype-chip">multi-line</span></div>
+                    <div class="app-multiline" id="app-f-extra">• Youth Climate Forum Cologne — co-founder (2023–present). Organised 3 public forums, 400+ attendees total.
+• School debate team — regional finalist 2024 (topic: EU climate policy)
+• Volunteer: Ahr valley flood relief, summer 2021 and 2022
+• Violin — Grade 8 distinction, performs in school chamber orchestra
+• Football — school team captain, 2024–2025 season</div>
+                  </div>
+
+                  <!-- 5. Leadership Statement -->
+                  <div class="zoho-detail__card">
+                    <div class="zoho-detail__card-title">Leadership Statement <span class="zoho-fieldtype-chip">multi-line</span></div>
+                    <div class="app-multiline" id="app-f-leadership">My approach to leadership is rooted in listening before acting. When I co-founded the Youth Climate Forum, my first instinct was to survey 200 classmates about what environmental topics they actually cared about — not what I assumed they would.
+
+That survey led us to focus on local flooding rather than abstract global targets, which tripled our attendance at the first event. I have learned that effective leadership means making complexity accessible, and that the most important skill is creating space for others to contribute their knowledge.</div>
+                  </div>
+
+                  <!-- 6. NC Local Question Answer -->
+                  <div class="zoho-detail__card">
+                    <div class="zoho-detail__card-title">NC Local Question Answer <span class="zoho-fieldtype-chip">multi-line</span></div>
+                    <div class="app-multiline app-multiline--ncq" id="app-f-ncq">"Die Klimakrise betrifft meinen Wohnort direkt — steigende Hochwasser im Rheintal. Ich würde lokale Klimaschutzinitiativen verbinden und junge Menschen zur Mitwirkung motivieren, indem ich einen interdisziplinären Ansatz verfolge: Naturwissenschaft, Politik und soziale Gerechtigkeit als ein gemeinsames Projekt."</div>
+                  </div>
+
+                  <!-- 7. Review Scores (role-gated rendering) -->
+                  <div class="zoho-detail__card" id="app-review-scores-card">
+                    <div class="zoho-detail__card-title" style="display:flex;align-items:center;gap:10px;">
+                      Review Scores
+                      <span id="app-review-scores-status" style="font-size:11px;background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:4px;font-weight:500;">All reviews complete · scores unlocked</span>
+                    </div>
+                    <div id="app-review-scores-content">
+                      <!-- Rendered by renderReviewScores() -->
+                    </div>
+                  </div>
+
+                  <!-- 8. Documents -->
+                  <div class="zoho-detail__card">
+                    <div class="zoho-detail__card-title">Documents</div>
+                    <table class="docs-table" id="app-docs-table">
+                      <thead><tr><th>Document</th><th>Status</th><th>Uploaded By</th><th>Date</th><th>Size</th></tr></thead>
+                      <tbody id="app-docs-tbody">
+                        <!-- Rendered by renderDocuments() -->
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div><!-- /app-overview -->
+
+                <!-- TIMELINE TAB -->
+                <div id="app-timeline" style="display:none;padding:14px 22px 80px;">
+                  <div class="tl-entries" id="app-tl-entries" style="position:relative;">
+                    <div class="tl-entry__connector" style="top:13px;"></div>
                   </div>
                 </div>
-                <div class="zoho-detail__card">
-                  <div class="zoho-detail__card-title">Review Scores</div>
-                  <div style="background:#fef3c7;padding:12px 16px;border-radius:6px;font-size:12.5px;color:#92400e;">Reviewer scores are hidden until all reviews are complete (Blueprint trigger). 2 of 3 reviewers have submitted.</div>
-                </div>
-                <div class="zoho-detail__card" id="app-nc-question-card">
-                  <div class="zoho-detail__card-title">NC Local Question Answer</div>
-                  <div style="background:#f9fafb;padding:14px 16px;border-radius:6px;border-left:3px solid #003087;font-size:13px;color:#1f2937;font-style:italic;line-height:1.6;" id="app-f-ncq">"Die Klimakrise betrifft meinen Wohnort direkt — steigende Hochwasser im Rheintal. Ich würde lokale Klimaschutzinitiativen verbinden und junge Menschen zur Mitwirkung motivieren."</div>
-                </div>
-                <div class="zoho-detail__card">
-                  <div class="zoho-detail__card-title">Personal Statement (excerpt)</div>
-                  <div style="font-size:13px;color:#1f2937;line-height:1.7;padding:4px 0;" id="app-f-statement">"Growing up near Cologne, I witnessed the 2021 flood devastation first-hand. This experience ignited my passion for environmental justice and cross-border cooperation. Through UWC I hope to connect with peers from climate-vulnerable regions and build solutions that transcend national boundaries..."</div>
-                </div>
-                <div class="zoho-detail__card">
-                  <div class="zoho-detail__card-title">Documents</div>
-                  <table class="zoho-list" style="font-size:12px;">
-                    <thead><tr><th>Document</th><th>Status</th><th>Uploaded</th></tr></thead>
-                    <tbody>
-                      <tr><td>Passport scan</td><td><span class="zoho-pill zoho-pill--nominate">Received</span></td><td>20 May 2026</td></tr>
-                      <tr><td>School transcript</td><td><span class="zoho-pill zoho-pill--nominate">Received</span></td><td>22 May 2026</td></tr>
-                      <tr><td>Reference letter</td><td><span class="zoho-pill zoho-pill--elig">Pending</span></td><td>—</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
 
-              <!-- TIMELINE TAB -->
-              <div id="app-timeline" style="display:none;padding:14px 22px 80px;">
-                <div class="tl-entries" id="app-tl-entries" style="position:relative;">
-                  <div class="tl-entry__connector" style="top:13px;"></div>
-                </div>
-              </div>
-
-            </div><!-- /app-tab-content -->
+              </div><!-- /app-tab-content -->
+            </div><!-- /body flex -->
 
             <!-- UNLOCK MODAL -->
             <div class="zoho-modal-overlay" id="unlock-modal" style="display:none;position:absolute;">
@@ -1652,6 +1727,409 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
       </div>
     </section>
 
+    <!-- ═══════════════════════ sc-programme-edit ═══════════════════════ -->
+    <section class="screen" id="sc-programme-edit">
+      <div class="zoho-shell">
+        <nav class="zoho-nav" id="zoho-nav-pe">
+          <div class="zoho-nav__logo"><img src="../_shared/uwc-logo.png" alt="UWC" style="height:28px;" onerror="this.style.display='none';this.parentNode.textContent='UWC'"></div>
+          <ul class="zoho-nav__items">
+            <li class="zoho-nav__item" data-nav="home" onclick="showView('home')"><span class="zoho-nav__icon">🏠</span><span class="zoho-nav__label">Home</span></li>
+            <li class="zoho-nav__item" data-nav="contacts-list" onclick="showView('contacts-list')"><span class="zoho-nav__icon">👤</span><span class="zoho-nav__label">Contacts</span></li>
+            <li class="zoho-nav__item active" data-nav="programme-list" onclick="showView('programme-list')"><span class="zoho-nav__icon">📚</span><span class="zoho-nav__label">Programmes</span></li>
+            <li class="zoho-nav__item" data-nav="applications-list" onclick="showView('applications-list')"><span class="zoho-nav__icon">📋</span><span class="zoho-nav__label">Applications</span></li>
+            <li class="zoho-nav__item" data-nav="setup-home" onclick="showView('setup-home')" style="margin-top:auto;"><span class="zoho-nav__icon">⚙️</span><span class="zoho-nav__label">Setup</span></li>
+          </ul>
+        </nav>
+        <div class="zoho-body">
+          <header class="zoho-topbar">
+            <button class="zoho-btn zoho-btn--ghost" onclick="showView('programme-detail')" style="margin-right:8px;">← Cancel</button>
+            <span style="font-weight:600;font-size:15px;">Edit Programme</span>
+            <a href="#" onclick="return false;" style="margin-left:12px;font-size:13px;color:#1a6fb3;">Edit Page Layout</a>
+            <div style="margin-left:auto;display:flex;gap:8px;">
+              <button class="zoho-btn zoho-btn--ghost" onclick="showView('programme-detail')">Cancel</button>
+              <button class="zoho-btn zoho-btn--ghost" id="pe-save-new-btn" onclick="saveAndNewProgramme()">Save &amp; New</button>
+              <button class="zoho-btn zoho-btn--primary" id="pe-save-btn" onclick="saveProgramme()">Save</button>
+            </div>
+          </header>
+          <div class="zoho-content" style="padding:24px;max-width:900px;margin:0 auto;">
+
+            <!-- Programme Image -->
+            <div style="margin-bottom:20px;">
+              <div style="width:100px;height:100px;background:#f1f5f9;border:2px dashed #cbd5e1;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;color:#94a3b8;font-size:12px;text-align:center;" onclick="showToast('Image upload — not wired in wireframe')">
+                <div style="font-size:28px;">🖼️</div>
+                <div>Upload Image</div>
+              </div>
+            </div>
+
+            <!-- Programme Information -->
+            <div class="zoho-card" style="margin-bottom:16px;">
+              <div class="zoho-card__header" style="font-weight:600;font-size:14px;padding:12px 16px;border-bottom:1px solid #e2e8f0;">Programme Information</div>
+              <div class="zoho-card__body" style="padding:16px;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                  <div>
+                    <label class="zoho-form-label">Programme Name *</label>
+                    <input class="zoho-form-input" id="pe-f-name" type="text" value="UWC NC Germany — 2027 Intake">
+                  </div>
+                  <div>
+                    <label class="zoho-form-label">Programme Code</label>
+                    <input class="zoho-form-input" id="pe-f-code" type="text" value="UWC-DE-2027">
+                  </div>
+                  <div>
+                    <label class="zoho-form-label">Academic Year *</label>
+                    <input class="zoho-form-input" id="pe-f-year" type="text" value="2027–2028">
+                  </div>
+                  <div>
+                    <label class="zoho-form-label">Stage</label>
+                    <select class="zoho-form-input" id="pe-f-stage">
+                      <option>Active</option>
+                      <option>Draft</option>
+                      <option>Closed</option>
+                      <option>Archived</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="zoho-form-label">Application Open Date</label>
+                    <input class="zoho-form-input" id="pe-f-open" type="date" value="2026-10-01">
+                  </div>
+                  <div>
+                    <label class="zoho-form-label">Application Close Date</label>
+                    <input class="zoho-form-input" id="pe-f-close" type="date" value="2027-01-31">
+                  </div>
+                  <div>
+                    <label class="zoho-form-label">National Committee</label>
+                    <input class="zoho-form-input" id="pe-f-nc" type="text" value="UWC Germany (DACH)">
+                  </div>
+                  <div>
+                    <label class="zoho-form-label">Capacity (Seats)</label>
+                    <input class="zoho-form-input" id="pe-f-capacity" type="number" value="12">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Description Information -->
+            <div class="zoho-card" style="margin-bottom:16px;">
+              <div class="zoho-card__header" style="font-weight:600;font-size:14px;padding:12px 16px;border-bottom:1px solid #e2e8f0;">Description</div>
+              <div class="zoho-card__body" style="padding:16px;">
+                <textarea class="zoho-form-input" id="pe-f-desc" rows="4" style="width:100%;resize:vertical;">The UWC Germany national committee selects candidates from German-speaking countries (Germany, Austria, Switzerland) for placement at any of the 18 UWC schools worldwide. We seek young people who demonstrate academic excellence, intercultural curiosity, and commitment to the UWC mission of peace through education.</textarea>
+              </div>
+            </div>
+
+            <!-- System Fields -->
+            <div class="zoho-card" style="margin-bottom:16px;">
+              <div class="zoho-card__header" style="font-weight:600;font-size:14px;padding:12px 16px;border-bottom:1px solid #e2e8f0;">System Fields</div>
+              <div class="zoho-card__body" style="padding:16px;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                  <div>
+                    <label class="zoho-form-label">Record Owner</label>
+                    <select class="zoho-form-input" id="pe-f-owner">
+                      <option>Marcus Weber</option>
+                      <option>Ana Costa</option>
+                      <option>Helen Bach</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="zoho-form-label">Visibility</label>
+                    <select class="zoho-form-input" id="pe-f-visibility">
+                      <option>All NC Members</option>
+                      <option>Administrators Only</option>
+                      <option>Public</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom form view links -->
+            <div style="margin-top:8px;padding:12px 0;border-top:1px solid #e2e8f0;display:flex;gap:24px;font-size:13px;">
+              <a href="#" onclick="return false;" style="color:#1a6fb3;">Create Form Views</a>
+              <a href="#" onclick="return false;" style="color:#1a6fb3;">Standard View</a>
+              <a href="#" onclick="return false;" style="color:#1a6fb3;">Create custom form page</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ sc-setup-home ═══════════════════════ -->
+    <section class="screen" id="sc-setup-home">
+      <div class="zoho-shell">
+        <nav class="zoho-nav">
+          <div class="zoho-nav__logo"><img src="../_shared/uwc-logo.png" alt="UWC" style="height:28px;" onerror="this.style.display='none';this.parentNode.textContent='UWC'"></div>
+          <ul class="zoho-nav__items">
+            <li class="zoho-nav__item" onclick="showView('home')"><span class="zoho-nav__icon">🏠</span><span class="zoho-nav__label">Home</span></li>
+            <li class="zoho-nav__item" onclick="showView('contacts-list')"><span class="zoho-nav__icon">👤</span><span class="zoho-nav__label">Contacts</span></li>
+            <li class="zoho-nav__item" onclick="showView('programme-list')"><span class="zoho-nav__icon">📚</span><span class="zoho-nav__label">Programmes</span></li>
+            <li class="zoho-nav__item" onclick="showView('applications-list')"><span class="zoho-nav__icon">📋</span><span class="zoho-nav__label">Applications</span></li>
+            <li class="zoho-nav__item active" onclick="showView('setup-home')" style="margin-top:auto;"><span class="zoho-nav__icon">⚙️</span><span class="zoho-nav__label">Setup</span></li>
+          </ul>
+        </nav>
+        <div class="zoho-body">
+          <header class="zoho-topbar"><span style="font-weight:600;font-size:15px;">Setup</span></header>
+          <div class="zoho-content" style="padding:24px;">
+            <h2 style="font-size:18px;font-weight:700;margin:0 0 20px;color:#1e293b;">Setup Home</h2>
+            <div class="setup-tile-grid">
+              <!-- Users & Permissions -->
+              <div class="setup-tile">
+                <div class="setup-tile__cat">👥 Users &amp; Permissions</div>
+                <ul class="setup-tile__items">
+                  <li class="wired" onclick="showView('setup-users')">Users</li>
+                  <li class="wired" onclick="showView('setup-profiles-list')">Profiles</li>
+                  <li class="wired" onclick="showView('setup-roles')">Roles and Sharing</li>
+                </ul>
+              </div>
+              <!-- Applications & Programmes -->
+              <div class="setup-tile">
+                <div class="setup-tile__cat">📋 Applications &amp; Programmes</div>
+                <ul class="setup-tile__items">
+                  <li onclick="showToast('Not in wireframe scope')">Application Stages</li>
+                  <li onclick="showToast('Not in wireframe scope')">Review Criteria</li>
+                  <li onclick="showToast('Not in wireframe scope')">Eligibility Rules</li>
+                </ul>
+              </div>
+              <!-- Data & Privacy -->
+              <div class="setup-tile">
+                <div class="setup-tile__cat">🔒 Data &amp; Privacy</div>
+                <ul class="setup-tile__items">
+                  <li onclick="showToast('Not in wireframe scope')">Data Sharing Rules</li>
+                  <li onclick="showToast('Not in wireframe scope')">Consent &amp; GDPR</li>
+                </ul>
+              </div>
+              <!-- Communications -->
+              <div class="setup-tile">
+                <div class="setup-tile__cat">📧 Communications</div>
+                <ul class="setup-tile__items">
+                  <li onclick="showToast('Not in wireframe scope')">Email Templates</li>
+                  <li onclick="showToast('Not in wireframe scope')">Workflow Rules</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ sc-setup-profiles-list ═══════════════════════ -->
+    <section class="screen" id="sc-setup-profiles-list">
+      <div class="zoho-shell">
+        <nav class="zoho-nav">
+          <div class="zoho-nav__logo"><img src="../_shared/uwc-logo.png" alt="UWC" style="height:28px;" onerror="this.style.display='none';this.parentNode.textContent='UWC'"></div>
+          <ul class="zoho-nav__items">
+            <li class="zoho-nav__item" onclick="showView('home')"><span class="zoho-nav__icon">🏠</span><span class="zoho-nav__label">Home</span></li>
+            <li class="zoho-nav__item" onclick="showView('contacts-list')"><span class="zoho-nav__icon">👤</span><span class="zoho-nav__label">Contacts</span></li>
+            <li class="zoho-nav__item" onclick="showView('programme-list')"><span class="zoho-nav__icon">📚</span><span class="zoho-nav__label">Programmes</span></li>
+            <li class="zoho-nav__item" onclick="showView('applications-list')"><span class="zoho-nav__icon">📋</span><span class="zoho-nav__label">Applications</span></li>
+            <li class="zoho-nav__item active" onclick="showView('setup-home')" style="margin-top:auto;"><span class="zoho-nav__icon">⚙️</span><span class="zoho-nav__label">Setup</span></li>
+          </ul>
+        </nav>
+        <div class="zoho-body">
+          <header class="zoho-topbar">
+            <button class="zoho-btn zoho-btn--ghost" onclick="showView('setup-home')" style="margin-right:8px;">← Setup</button>
+            <span style="font-weight:600;font-size:15px;">Profiles</span>
+            <div style="margin-left:auto;">
+              <button class="zoho-btn zoho-btn--primary" data-cap="create-profile" onclick="showToast('Create Profile — opens profile wizard')">+ Create Profile</button>
+            </div>
+          </header>
+          <div class="zoho-content" style="padding:24px;">
+            <p style="color:#64748b;font-size:13px;margin:0 0 16px;">Profiles define the permissions a set of users have in UWC NC Administration. Each user is assigned exactly one profile.</p>
+            <table style="width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08);">
+              <thead>
+                <tr style="background:#f8fafc;">
+                  <th style="padding:12px 16px;text-align:left;font-weight:600;border-bottom:1px solid #e2e8f0;">Profile Name</th>
+                  <th style="padding:12px;text-align:left;font-weight:600;border-bottom:1px solid #e2e8f0;">Description</th>
+                  <th style="padding:12px;text-align:center;font-weight:600;border-bottom:1px solid #e2e8f0;">Users</th>
+                  <th style="padding:12px;text-align:left;font-weight:600;border-bottom:1px solid #e2e8f0;">Modified</th>
+                  <th style="padding:12px;border-bottom:1px solid #e2e8f0;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="cursor:pointer;" onclick="showView('setup-profile-detail')" class="zoho-tr-hover">
+                  <td class="td-row"><strong>NC Administrator</strong><span style="margin-left:8px;background:#dbeafe;color:#1e3a8a;font-size:11px;padding:1px 6px;border-radius:4px;">Default</span></td>
+                  <td class="td-row td-subtle">Full access to all modules, contacts, programmes, and applications</td>
+                  <td class="td-row td-center">3</td>
+                  <td class="td-row td-muted">24 May 2026</td>
+                  <td class="td-row"><button class="zoho-btn zoho-btn--ghost" style="font-size:12px;" onclick="event.stopPropagation();showView('setup-profile-detail')">Edit</button></td>
+                </tr>
+                <tr style="cursor:pointer;" onclick="showToast('Not in wireframe scope')" class="zoho-tr-hover">
+                  <td class="td-row"><strong>Reviewer</strong></td>
+                  <td class="td-row td-subtle">Read applications, submit blind review scores</td>
+                  <td class="td-row td-center">2</td>
+                  <td class="td-row td-muted">18 May 2026</td>
+                  <td class="td-row"><button class="zoho-btn zoho-btn--ghost" style="font-size:12px;" onclick="event.stopPropagation();showToast('Edit Reviewer profile')">Edit</button></td>
+                </tr>
+                <tr style="cursor:pointer;" onclick="showToast('Not in wireframe scope')" class="zoho-tr-hover">
+                  <td class="td-row"><strong>Data Protection Officer</strong></td>
+                  <td class="td-row td-subtle">Audit logs, consent records, data retention only</td>
+                  <td class="td-row td-center">1</td>
+                  <td class="td-row td-muted">10 Apr 2026</td>
+                  <td class="td-row"><button class="zoho-btn zoho-btn--ghost" style="font-size:12px;" onclick="event.stopPropagation();showToast('Edit DPO profile')">Edit</button></td>
+                </tr>
+                <tr style="cursor:pointer;" onclick="showToast('Not in wireframe scope')" class="zoho-tr-hover">
+                  <td class="td-row"><strong>Regional Coordinator</strong></td>
+                  <td class="td-row td-subtle">Contacts and applications for assigned region</td>
+                  <td class="td-row td-center">2</td>
+                  <td class="td-row td-muted">05 May 2026</td>
+                  <td class="td-row"><button class="zoho-btn zoho-btn--ghost" style="font-size:12px;" onclick="event.stopPropagation();showToast('Edit Regional Coordinator profile')">Edit</button></td>
+                </tr>
+                <tr style="cursor:pointer;" onclick="showToast('Not in wireframe scope')" class="zoho-tr-hover">
+                  <td class="td-row"><strong>Selection Committee</strong></td>
+                  <td class="td-row td-subtle">View applications post-review, submit recommendations</td>
+                  <td class="td-row td-center">4</td>
+                  <td class="td-row td-muted">12 May 2026</td>
+                  <td class="td-row"><button class="zoho-btn zoho-btn--ghost" style="font-size:12px;" onclick="event.stopPropagation();showToast('Edit Selection Committee profile')">Edit</button></td>
+                </tr>
+                <tr style="cursor:pointer;" onclick="showToast('Not in wireframe scope')" class="zoho-tr-hover">
+                  <td class="td-row"><strong>Scholarship Finance</strong></td>
+                  <td class="td-row td-subtle">Accepted applicants and financial aid records</td>
+                  <td class="td-row td-center">1</td>
+                  <td class="td-row td-muted">02 Apr 2026</td>
+                  <td class="td-row"><button class="zoho-btn zoho-btn--ghost" style="font-size:12px;" onclick="event.stopPropagation();showToast('Edit Scholarship Finance profile')">Edit</button></td>
+                </tr>
+                <tr style="cursor:pointer;" onclick="showToast('Not in wireframe scope')" class="zoho-tr-hover">
+                  <td class="td-row"><strong>Read Only</strong></td>
+                  <td class="td-row td-subtle">View-only access to non-restricted records</td>
+                  <td class="td-row td-center">0</td>
+                  <td class="td-row td-muted">15 Jan 2026</td>
+                  <td class="td-row"><button class="zoho-btn zoho-btn--ghost" style="font-size:12px;" onclick="event.stopPropagation();showToast('Edit Read Only profile')">Edit</button></td>
+                </tr>
+                <tr style="cursor:pointer;" onclick="showToast('Not in wireframe scope')" class="zoho-tr-hover">
+                  <td style="padding:12px 16px;"><strong>Standard</strong><span style="margin-left:8px;background:#f3f4f6;color:#6b7280;font-size:11px;padding:1px 6px;border-radius:4px;">System</span></td>
+                  <td style="padding:12px;color:#475569;">Default Zoho CRM standard profile (system-generated)</td>
+                  <td style="padding:12px;text-align:center;">0</td>
+                  <td style="padding:12px;color:#94a3b8;">—</td>
+                  <td style="padding:12px;"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ sc-setup-profile-detail ═══════════════════════ -->
+    <section class="screen" id="sc-setup-profile-detail">
+      <div class="zoho-shell">
+        <nav class="zoho-nav">
+          <div class="zoho-nav__logo"><img src="../_shared/uwc-logo.png" alt="UWC" style="height:28px;" onerror="this.style.display='none';this.parentNode.textContent='UWC'"></div>
+          <ul class="zoho-nav__items">
+            <li class="zoho-nav__item" onclick="showView('home')"><span class="zoho-nav__icon">🏠</span><span class="zoho-nav__label">Home</span></li>
+            <li class="zoho-nav__item" onclick="showView('contacts-list')"><span class="zoho-nav__icon">👤</span><span class="zoho-nav__label">Contacts</span></li>
+            <li class="zoho-nav__item" onclick="showView('programme-list')"><span class="zoho-nav__icon">📚</span><span class="zoho-nav__label">Programmes</span></li>
+            <li class="zoho-nav__item" onclick="showView('applications-list')"><span class="zoho-nav__icon">📋</span><span class="zoho-nav__label">Applications</span></li>
+            <li class="zoho-nav__item active" onclick="showView('setup-home')" style="margin-top:auto;"><span class="zoho-nav__icon">⚙️</span><span class="zoho-nav__label">Setup</span></li>
+          </ul>
+        </nav>
+        <div class="zoho-body">
+          <header class="zoho-topbar">
+            <button class="zoho-btn zoho-btn--ghost" onclick="showView('setup-profiles-list')" style="margin-right:8px;">← Profiles</button>
+            <span style="font-weight:600;font-size:15px;">NC Administrator <span style="font-weight:400;color:#64748b;">Profile</span></span>
+            <div style="margin-left:auto;">
+              <button class="zoho-btn zoho-btn--primary" onclick="showToast('Profile changes saved')">Save</button>
+            </div>
+          </header>
+          <div class="zoho-content" style="display:flex;min-height:0;">
+            <!-- Left rail: permission categories -->
+            <div style="width:220px;min-width:220px;border-right:1px solid #e2e8f0;padding:16px 0;background:#fafafa;overflow-y:auto;">
+              <div style="padding:8px 16px;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;">Permissions</div>
+              <div class="profile-rail-item active" onclick="showToast('Module Permissions selected')">Module Permissions</div>
+              <div class="profile-rail-item" onclick="showToast('Setup Permissions selected')">Setup Permissions</div>
+              <div class="profile-rail-item" onclick="showToast('App Permissions selected')">App Permissions</div>
+              <div class="profile-rail-item" onclick="showToast('Data Administration selected')">Data Administration</div>
+              <div class="profile-rail-item" onclick="showToast('Activity Logs selected')">Activity Logs</div>
+            </div>
+            <!-- Right: module permissions table -->
+            <div style="flex:1;padding:24px;overflow-y:auto;">
+              <h3 style="font-size:14px;font-weight:700;margin:0 0 4px;">Module Permissions — NC Administrator</h3>
+              <p style="font-size:12px;color:#64748b;margin:0 0 16px;">Check the operations this profile can perform on each module.</p>
+              <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                <thead>
+                  <tr style="background:#f8fafc;">
+                    <th style="padding:10px 12px;text-align:left;font-weight:600;border-bottom:1px solid #e2e8f0;">Module</th>
+                    <th style="padding:10px 8px;text-align:center;font-weight:600;border-bottom:1px solid #e2e8f0;" title="View">V</th>
+                    <th style="padding:10px 8px;text-align:center;font-weight:600;border-bottom:1px solid #e2e8f0;" title="Create">C</th>
+                    <th style="padding:10px 8px;text-align:center;font-weight:600;border-bottom:1px solid #e2e8f0;" title="Edit">E</th>
+                    <th style="padding:10px 8px;text-align:center;font-weight:600;border-bottom:1px solid #e2e8f0;" title="Delete">D</th>
+                  </tr>
+                </thead>
+                <tbody id="profile-perms-tbody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ sc-setup-roles ═══════════════════════ -->
+    <section class="screen" id="sc-setup-roles">
+      <div class="zoho-shell">
+        <nav class="zoho-nav">
+          <div class="zoho-nav__logo"><img src="../_shared/uwc-logo.png" alt="UWC" style="height:28px;" onerror="this.style.display='none';this.parentNode.textContent='UWC'"></div>
+          <ul class="zoho-nav__items">
+            <li class="zoho-nav__item" onclick="showView('home')"><span class="zoho-nav__icon">🏠</span><span class="zoho-nav__label">Home</span></li>
+            <li class="zoho-nav__item" onclick="showView('contacts-list')"><span class="zoho-nav__icon">👤</span><span class="zoho-nav__label">Contacts</span></li>
+            <li class="zoho-nav__item" onclick="showView('programme-list')"><span class="zoho-nav__icon">📚</span><span class="zoho-nav__label">Programmes</span></li>
+            <li class="zoho-nav__item" onclick="showView('applications-list')"><span class="zoho-nav__icon">📋</span><span class="zoho-nav__label">Applications</span></li>
+            <li class="zoho-nav__item active" onclick="showView('setup-home')" style="margin-top:auto;"><span class="zoho-nav__icon">⚙️</span><span class="zoho-nav__label">Setup</span></li>
+          </ul>
+        </nav>
+        <div class="zoho-body">
+          <header class="zoho-topbar">
+            <button class="zoho-btn zoho-btn--ghost" onclick="showView('setup-home')" style="margin-right:8px;">← Setup</button>
+            <span style="font-weight:600;font-size:15px;">Roles and Sharing</span>
+            <div style="margin-left:auto;"><button class="zoho-btn zoho-btn--primary" onclick="showToast('Create Role — opens role wizard')">+ Add Role</button></div>
+          </header>
+          <div class="zoho-content" style="padding:24px;">
+            <p style="color:#64748b;font-size:13px;margin:0 0 20px;">The role hierarchy controls data visibility. Users can view records owned by those below them. Sharing rules extend access beyond the hierarchy.</p>
+            <div class="roles-tree">
+              <div class="roles-node roles-node--top">
+                <div class="roles-node__label" onclick="showToast('NC Executive Director')">
+                  <span class="roles-icon">👑</span><strong>NC Executive Director</strong><span class="roles-meta"> · 1 user · Marcus Weber</span><span class="roles-badge">Root</span>
+                </div>
+                <div class="roles-children">
+                  <div class="roles-node">
+                    <div class="roles-node__label" onclick="showToast('NC Programme Administrator')">
+                      <span class="roles-icon">🛠️</span><strong>NC Programme Administrator</strong><span class="roles-meta"> · 2 users · Ana Costa, Helen Bach</span>
+                    </div>
+                    <div class="roles-children">
+                      <div class="roles-node">
+                        <div class="roles-node__label" onclick="showToast('Regional Coordinator')">
+                          <span class="roles-icon">📍</span><strong>Regional Coordinator</strong><span class="roles-meta"> · 2 users · Fatima Al-Rashid, +1</span>
+                        </div>
+                      </div>
+                      <div class="roles-node">
+                        <div class="roles-node__label" onclick="showToast('Application Reviewer (Blind)')">
+                          <span class="roles-icon">🔍</span><strong>Application Reviewer (Blind)</strong><span class="roles-meta"> · 2 users · Clara Ramos, Paulo Fonseca</span>
+                        </div>
+                      </div>
+                      <div class="roles-node">
+                        <div class="roles-node__label" onclick="showToast('Data Protection Officer')">
+                          <span class="roles-icon">🛡️</span><strong>Data Protection Officer</strong><span class="roles-meta"> · 1 user · Akanksha Sharma</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="roles-node">
+                    <div class="roles-node__label" onclick="showToast('Selection Committee')">
+                      <span class="roles-icon">🗳️</span><strong>Selection Committee</strong><span class="roles-meta"> · 4 users · Committee members</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:20px;padding:14px 16px;background:#f0f9ff;border-left:4px solid #0ea5e9;border-radius:4px;font-size:13px;">
+              <strong>Sharing Rules (2 active):</strong>
+              <ul style="margin:6px 0 0;padding-left:18px;color:#334155;line-height:1.8;">
+                <li>Application Reviewers can view assigned applications regardless of ownership (Blind Review Rule)</li>
+                <li>Data Protection Officer can view Consent Records across all roles (GDPR Audit Rule)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
 </div>
 
@@ -1670,14 +2148,28 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
 
 window.UWC = window.UWC || {};
 UWC.users = [
-  { id: 'akanksha', name: 'Akanksha Anand', initial: 'AA', role: 'IO Super Admin', scope: 'Global · Full visibility', badge: 'ios' },
-  { id: 'marcus', name: 'Marcus Weber', initial: 'MW', role: 'NC Admin', scope: 'UWC Germany only', badge: 'nc' },
-  { id: 'ana', name: 'Ana Carvalho', initial: 'AC', role: 'NC Admin', scope: 'UWC Brazil only', badge: 'nc' },
-  { id: 'data-protection', name: 'Data Protection Lead', initial: 'DP', role: 'Compliance & GDPR', scope: 'Restricted record visibility', badge: 'dp' }
+  { id: 'akanksha', name: 'Akanksha Anand', initial: 'AA', role: 'IO Super Admin · Administrator', scope: 'Global · Full visibility', badge: 'ios' },
+  { id: 'marcus', name: 'Marcus Weber', initial: 'MW', role: 'NC Admin · NC Administrator', scope: 'UWC Germany only', badge: 'nc' },
+  { id: 'ana', name: 'Ana Carvalho', initial: 'AC', role: 'NC Admin · NC Administrator', scope: 'UWC Brazil only', badge: 'nc' },
+  { id: 'data-protection', name: 'Data Protection Lead', initial: 'DP', role: 'Compliance · Restricted Reviewer', scope: 'Restricted record visibility', badge: 'dp' },
+  { id: 'clara', name: 'Clara Ramos', initial: 'CR', role: 'NC Reviewer · Brazil', scope: 'Assigned applications only', badge: 'reviewer' },
+  { id: 'paulo', name: 'Paulo Fonseca', initial: 'PF', role: 'NC Reviewer · Brazil', scope: 'Assigned applications only', badge: 'reviewer' },
+  { id: 'helen', name: 'Helen Richards', initial: 'HR', role: 'School Director · Atlantic', scope: 'Atlantic school nominations', badge: 'school' },
+  { id: 'fatima', name: 'Fatima Al-Rashid', initial: 'FA', role: 'IO Admissions', scope: 'Global read · place allocation', badge: 'ios' }
 ];
 UWC.getRolesFor = function(code) {
-  var map = { A: ['marcus','ana','akanksha','data-protection'], B:['visitor','sofia','maria','ana','io-mkt'], C:['clara','paulo','ana','akanksha'], D:['fatima','ana','helen'], E:['akanksha','io-crm'], F:['akanksha','grace'], G:['io-mkt','akanksha','jonathan'] };
+  var map = {
+    A: ['marcus','ana','akanksha','data-protection','clara','paulo','helen','fatima'],
+    B:['visitor','sofia','maria','ana','io-mkt'], C:['clara','paulo','ana','akanksha'],
+    D:['fatima','ana','helen'], E:['akanksha','io-crm'], F:['akanksha','grace'], G:['io-mkt','akanksha','jonathan']
+  };
   return (map[code]||[]).map(function(id){ return UWC.users.find(function(u){return u.id===id;}); }).filter(Boolean);
+};
+/* Default views by role */
+var ROLE_DEFAULT_VIEW = {
+  'marcus': 'home', 'ana': 'home', 'akanksha': 'home', 'data-protection': 'home',
+  'clara': 'applications-list', 'paulo': 'applications-list',
+  'helen': 'home', 'fatima': 'home'
 };
 
 /* ===== Contact data store ===== */
@@ -1749,8 +2241,35 @@ UWC.contacts = {
       if (variants[id]) { if (!el.dataset.roleVariantOriginal) el.dataset.roleVariantOriginal = el.textContent; el.textContent = variants[id]; }
       else if (el.dataset.roleVariantOriginal) { el.textContent = el.dataset.roleVariantOriginal; }
     });
+    // Apply capability matrix gating
+    applyCapabilityGating(id);
+    // Update scope banner
+    updateScopeBannerForRole(id);
   }
 })();
+
+/* ---- CAPABILITY MATRIX (Issue 7) ---- */
+var CAPABILITY_MATRIX = {
+  'unlock-application':   ['marcus','ana','akanksha','fatima'],
+  'lock-application':     ['marcus','ana','akanksha','fatima'],
+  'edit-application':     ['marcus','ana','akanksha','fatima','helen'],
+  'edit-contact':         ['marcus','ana','akanksha','fatima'],
+  'edit-programme':       ['marcus','ana','akanksha'],
+  'send-mail':            ['marcus','ana','akanksha','fatima','clara','paulo','helen'],
+  'delete':               ['akanksha'],
+  'score-application':    ['clara','paulo'],
+  'accept-nomination':    ['helen'],
+  'see-sensitive-fields': ['marcus','ana','akanksha','fatima','helen','clara','paulo']
+};
+function canRole(action) {
+  var role = document.body.dataset.currentRole || 'marcus';
+  return (CAPABILITY_MATRIX[action] || []).indexOf(role) !== -1;
+}
+function applyCapabilityGating(id) {
+  document.querySelectorAll('[data-cap]').forEach(function(el) {
+    el.hidden = !((CAPABILITY_MATRIX[el.dataset.cap] || []).indexOf(id) !== -1);
+  });
+}
 
 /* ---- Toast helper ---- */
 function showToast(msg) {
@@ -1771,19 +2290,20 @@ var _currentContactId = null;
 
 // VIEW → SCREEN ID mapping
 var VIEW_SCREEN = {
-  'home':                'sc-0',
-  'programme-detail':    'sc-1',
-  'applications-kanban': 'sc-2',
-  'setup-home':          'sc-3',
-  'setup-profile':       'sc-4',
-  'contact-edit':        'sc-5',
-  'role-comparison':     'sc-7',
-  'field-reference':     'sc-8',
-  'contacts-list':       'sc-contacts-list',
-  'contact-detail':      'sc-contact-detail',
-  'programmes-list':     'sc-programmes-list',
-  'applications-list':   'sc-applications-list',
-  'application-detail':  'sc-application-detail'
+  'home':                   'sc-0',
+  'programme-detail':       'sc-1',
+  'applications-kanban':    'sc-2',
+  'setup-home':             'sc-setup-home',
+  'setup-users':            'sc-3',
+  'setup-profiles-list':    'sc-setup-profiles-list',
+  'setup-profile-detail':   'sc-setup-profile-detail',
+  'setup-roles':            'sc-setup-roles',
+  'contacts-list':          'sc-contacts-list',
+  'contact-detail':         'sc-contact-detail',
+  'programmes-list':        'sc-programmes-list',
+  'applications-list':      'sc-applications-list',
+  'application-detail':     'sc-application-detail',
+  'programme-edit':         'sc-programme-edit'
 };
 
 // VIEW → sidebar nav key
@@ -1791,21 +2311,24 @@ var VIEW_SB_KEY = {
   'home': 'home',
   'programmes-list': 'programmes',
   'programme-detail': 'programmes',
+  'programme-edit': 'programmes',
   'applications-kanban': 'applications',
   'applications-list': 'applications',
   'application-detail': 'applications',
   'contacts-list': 'contacts',
   'contact-detail': 'contacts',
   'setup-home': null,
-  'setup-profile': null,
-  'role-comparison': null,
-  'field-reference': null,
-  'contact-edit': 'contacts'
+  'setup-users': null,
+  'setup-profiles-list': null,
+  'setup-profile-detail': null,
+  'setup-roles': null,
+  'programme-edit': 'programmes'
 };
 
 function showView(viewId, opts) {
   opts = opts || {};
   document.querySelectorAll('.zoho-dd-menu').forEach(function(m) { m.hidden = true; });
+  if (viewId === 'setup-profile-detail') { setTimeout(renderProfilePerms, 0); }
   var screenId = VIEW_SCREEN[viewId];
   if (!screenId) { showToast('View not implemented yet'); return; }
   _currentView = viewId;
@@ -1821,14 +2344,20 @@ function showView(viewId, opts) {
 }
 
 function updateScopeBanner() {
+  updateScopeBannerForRole(document.body.dataset.currentRole || 'marcus');
+}
+function updateScopeBannerForRole(role) {
   var banner = document.getElementById('scope-banner');
   if (!banner) return;
-  var role = document.body.dataset.currentRole || 'marcus';
   var msgs = {
     'marcus': 'Marcus sees only Germany — no Brazil, Kenya, India or UK records',
     'ana': 'Ana sees only Brazil — no Germany, Kenya, India, UK records',
     'akanksha': 'Akanksha has global visibility — all NCs, all records',
-    'data-protection': 'Data Protection Lead sees masked sensitive fields — DOB, Financial Aid, Parent Contact shown as ••••'
+    'data-protection': 'Data Protection Lead sees masked sensitive fields — DOB, Financial Aid, Parent Contact shown as ••••',
+    'clara': 'Clara Ramos · NC Reviewer Brazil — sees only applications assigned to her · scores are blind until all reviewers submit',
+    'paulo': 'Paulo Fonseca · NC Reviewer Brazil — sees only applications assigned to him · scores are blind until all reviewers submit',
+    'helen': 'Helen Richards · School Director Atlantic — sees nominations addressed to UWC Atlantic only',
+    'fatima': 'Fatima Al-Rashid · IO Admissions — global read across all NCs · manages place allocation'
   };
   banner.textContent = msgs[role] || msgs['marcus'];
 }
@@ -1862,6 +2391,8 @@ document.addEventListener('click', function(e) {
     _currentAppId = null;
     _currentContactId = null;
     RoleSwitcher.init({ scenarioCode: 'A', defaultRoleId: 'marcus', roles: UWC.getRolesFor('A') });
+applyCapabilityGating('marcus');
+updateScopeBannerForRole('marcus');
     showView('home');
     showToast('Reset — back to Marcus home view');
     return;
@@ -2341,6 +2872,165 @@ UWC.programmes = {
   'brazil':  { name: 'UWC Brazil 2026 Selection',    code: 'BR-2026', nc: 'Brazil',  year: '2026', deadline: '15 Jun 2026',  places: '8 (5 remaining)', owner: 'Ana Carvalho' }
 };
 
+/* ===== Issue 8: New data stores ===== */
+UWC.profiles = [
+  { id: 'admin', name: 'Administrator', users: 1, color: '#003087', desc: 'Full system access. Can configure modules, fields, blueprints, users.' },
+  { id: 'nc-admin', name: 'NC Administrator', users: 5, color: '#1f9535', desc: 'Manages own National Committee — applications, programmes, reviewers.' },
+  { id: 'nc-reviewer', name: 'NC Reviewer', users: 12, color: '#e85d0c', desc: 'Reviews assigned applications. Scores blind until all reviews complete.' },
+  { id: 'school-director', name: 'School Director', users: 3, color: '#7c3aed', desc: 'Accepts or declines nominations to their school.' },
+  { id: 'io-admissions', name: 'IO Admissions', users: 2, color: '#003087', desc: 'Manages place allocation across all NCs. Global read.' },
+  { id: 'restricted-reviewer', name: 'Restricted Reviewer (DPL)', users: 1, color: '#C8102E', desc: 'Compliance / Data Protection Lead. Sensitive fields masked.' },
+  { id: 'marketing', name: 'Marketing', users: 4, color: '#ec4899', desc: 'Manages campaigns, mailing lists, lead source attribution.' },
+  { id: 'standard', name: 'Standard', users: 0, color: '#6b7280', desc: 'Default Zoho standard profile (unused at UWC).' }
+];
+
+UWC.profilePermissions = {
+  'admin': { Leads: 'VCED', Contacts: 'VCED', Accounts: 'VCED', Applications: 'VCED', Tasks: 'VCED', Meetings: 'VCED', Calls: 'VCED', Reports: 'VCED', Analytics: 'VCED', Programmes: 'VCED', Campaigns: 'VCED', Vendors: 'VCED', 'Local Questions': 'VCED', Questions: 'VCED', Schools: 'VCED', Governance: 'VCED', 'NC Volunteer': 'VCED', 'Training Record': 'VCED' },
+  'nc-admin': { Leads: 'VCE-', Contacts: 'VCED', Accounts: '----', Applications: 'VCE-', Tasks: 'VCE-', Meetings: 'VCE-', Calls: 'VCE-', Reports: 'V---', Analytics: 'V---', Programmes: 'VCE-', Campaigns: 'V---', Vendors: '----', 'Local Questions': 'VCE-', Questions: 'V---', Schools: 'V---', Governance: '----' },
+  'nc-reviewer': { Leads: '----', Contacts: 'V---', Accounts: '----', Applications: 'VC*-', Tasks: 'V---', Meetings: 'V---', Calls: 'V---', Reports: 'V---', Analytics: '----', Programmes: 'V---', Campaigns: '----' },
+  'school-director': { Leads: '----', Contacts: 'V---', Accounts: '----', Applications: 'V*--', Tasks: '----', Meetings: 'V---', Calls: '----', Reports: 'V---', Analytics: '----', Programmes: 'V---', Campaigns: '----' },
+  'io-admissions': { Leads: 'V---', Contacts: 'V---', Accounts: 'V---', Applications: 'V---', Tasks: 'VCE-', Meetings: 'VCE-', Calls: 'V---', Reports: 'VCE-', Analytics: 'V---', Programmes: 'V---', Campaigns: 'V---', Schools: 'VCE-' },
+  'restricted-reviewer': { Leads: 'V---', Contacts: 'V*--', Accounts: 'V---', Applications: 'V*--', Tasks: 'V---', Reports: 'VCED', Analytics: 'V---' }
+};
+
+UWC.roles = [
+  { id: 'io-super', name: 'IO Super Admin', parent: null, users: ['akanksha'] },
+  { id: 'io-admissions', name: 'IO Admissions', parent: 'io-super', users: ['fatima'] },
+  { id: 'io-marketing', name: 'IO Marketing', parent: 'io-super', users: [] },
+  { id: 'io-crm-admin', name: 'IO CRM Administrator', parent: 'io-super', users: [] },
+  { id: 'compliance', name: 'Compliance / Data Protection', parent: 'io-super', users: ['data-protection'] },
+  { id: 'nc-admin-de', name: 'NC Admin — Germany', parent: 'io-super', users: ['marcus'] },
+  { id: 'nc-admin-br', name: 'NC Admin — Brazil', parent: 'io-super', users: ['ana'] },
+  { id: 'nc-admin-ke', name: 'NC Admin — Kenya', parent: 'io-super', users: ['grace'] },
+  { id: 'nc-admin-in', name: 'NC Admin — India', parent: 'io-super', users: [] },
+  { id: 'nc-admin-uk', name: 'NC Admin — UK', parent: 'io-super', users: [] },
+  { id: 'nc-rev-br', name: 'NC Reviewer — Brazil', parent: 'nc-admin-br', users: ['clara', 'paulo'] },
+  { id: 'school-atlantic', name: 'School Admissions — Atlantic', parent: 'io-super', users: ['helen'] },
+  { id: 'school-rcn', name: 'School Admissions — RC Nordic', parent: 'io-super', users: [] },
+  { id: 'school-mahindra', name: 'School Admissions — Mahindra', parent: 'io-super', users: [] }
+];
+
+UWC.userProfileRole = {
+  'akanksha': { profile: 'admin', role: 'io-super' },
+  'fatima': { profile: 'io-admissions', role: 'io-admissions' },
+  'data-protection': { profile: 'restricted-reviewer', role: 'compliance' },
+  'marcus': { profile: 'nc-admin', role: 'nc-admin-de' },
+  'ana': { profile: 'nc-admin', role: 'nc-admin-br' },
+  'clara': { profile: 'nc-reviewer', role: 'nc-rev-br' },
+  'paulo': { profile: 'nc-reviewer', role: 'nc-rev-br' },
+  'helen': { profile: 'school-director', role: 'school-atlantic' }
+};
+
+UWC.reviewScores = {
+  'app-sofia': [
+    { reviewer: 'clara', name: 'Clara Ramos', academic: 9, community: 8, communication: 9, values: 9, overall: 'Yes', submittedAt: '2026-05-26 14:22', comments: 'Outstanding articulation of community impact in São Paulo. Mentioned specific UWC mission alignment.' },
+    { reviewer: 'paulo', name: 'Paulo Fonseca', academic: 8, community: 9, communication: 8, values: 9, overall: 'Conditional', submittedAt: '2026-05-26 16:08', comments: 'Strong values fit. Academic record solid but interview will be revealing.' }
+  ],
+  'app-lena': [
+    { reviewer: 'klaus-r', name: 'Klaus Reviewer DE', academic: 7, community: 8, communication: 8, values: 9, overall: 'Yes', submittedAt: '2026-05-23 11:04', comments: 'Genuine engagement with climate work. References checked out.' },
+    { reviewer: 'eva-r', name: 'Eva Reviewer DE', academic: 8, community: 7, communication: 7, values: 8, overall: 'Conditional', submittedAt: '2026-05-24 09:33', comments: 'Strong academically, less developed community profile. Worth interview.' }
+  ]
+};
+
+UWC.documents = {
+  'app-sofia': [
+    { name: 'Passport scan.pdf', status: 'Received', uploaded: '2026-05-20', uploadedBy: 'Sofia Almeida', size: '1.2 MB' },
+    { name: 'School transcript 2024-2025.pdf', status: 'Received', uploaded: '2026-05-21', uploadedBy: 'Sofia Almeida', size: '850 KB' },
+    { name: 'Personal statement final.pdf', status: 'Received', uploaded: '2026-05-22', uploadedBy: 'Sofia Almeida', size: '210 KB' },
+    { name: 'Parental consent form.pdf', status: 'Received · Verified', uploaded: '2026-05-24', uploadedBy: 'Maria Almeida', size: '180 KB' }
+  ],
+  'app-lena': [
+    { name: 'Passport.pdf', status: 'Received', uploaded: '2026-05-18', uploadedBy: 'Lena Fischer', size: '1.4 MB' },
+    { name: 'Abiturzeugnis.pdf', status: 'Received', uploaded: '2026-05-19', uploadedBy: 'Lena Fischer', size: '920 KB' },
+    { name: 'Empfehlungsschreiben.pdf', status: 'Received', uploaded: '2026-05-20', uploadedBy: 'Lena Fischer', size: '340 KB' }
+  ]
+};
+
+/* ===== Review Scores renderer ===== */
+function renderReviewScores(appKey) {
+  var container = document.getElementById('app-review-scores-content');
+  if (!container) return;
+  var role = document.body.dataset.currentRole || 'marcus';
+  var scores = (UWC.reviewScores && UWC.reviewScores[appKey]) ? UWC.reviewScores[appKey] : [];
+
+  // Data-protection role: show restricted message
+  if (role === 'data-protection') {
+    container.innerHTML = '<p style="color:#64748b;padding:16px;font-style:italic;">Review scores are restricted for data protection access.</p>';
+    return;
+  }
+
+  if (!scores.length) {
+    container.innerHTML = '<p style="color:#64748b;padding:16px;font-style:italic;">No review scores submitted yet.</p>';
+    return;
+  }
+
+  var html = '<table class="uwc-review-table" style="width:100%;border-collapse:collapse;font-size:13px;">';
+  html += '<thead><tr style="background:#f8fafc;"><th style="padding:8px 12px;text-align:left;font-weight:600;border-bottom:1px solid #e2e8f0;">Reviewer</th><th style="padding:8px;text-align:center;font-weight:600;border-bottom:1px solid #e2e8f0;">Academic</th><th style="padding:8px;text-align:center;font-weight:600;border-bottom:1px solid #e2e8f0;">Community</th><th style="padding:8px;text-align:center;font-weight:600;border-bottom:1px solid #e2e8f0;">Communication</th><th style="padding:8px;text-align:center;font-weight:600;border-bottom:1px solid #e2e8f0;">Values</th><th style="padding:8px;text-align:center;font-weight:600;border-bottom:1px solid #e2e8f0;">Overall</th><th style="padding:8px;text-align:left;font-weight:600;border-bottom:1px solid #e2e8f0;">Submitted</th></tr></thead>';
+  html += '<tbody>';
+  scores.forEach(function(s) {
+    // Blind review: clara sees her row + paulo's blank; paulo sees his row + clara's blank
+    var isBlind = false;
+    if (role === 'clara' && s.reviewer === 'paulo') isBlind = true;
+    if (role === 'paulo' && s.reviewer === 'clara') isBlind = true;
+    if (isBlind) {
+      html += '<tr><td style="padding:8px 12px;border-bottom:1px solid #f1f5f9;color:#94a3b8;font-style:italic;" colspan="7">Peer reviewer score (blind review — not visible until review period closes)</td></tr>';
+    } else {
+      var overallColor = s.overall === 'Yes' ? '#065f46' : s.overall === 'No' ? '#991b1b' : '#92400e';
+      var overallBg = s.overall === 'Yes' ? '#d1fae5' : s.overall === 'No' ? '#fee2e2' : '#fef3c7';
+      html += '<tr>';
+      html += '<td style="padding:8px 12px;border-bottom:1px solid #f1f5f9;"><span style="font-weight:500;">' + s.name + '</span></td>';
+      html += '<td style="padding:8px;text-align:center;border-bottom:1px solid #f1f5f9;">' + s.academic + '/10</td>';
+      html += '<td style="padding:8px;text-align:center;border-bottom:1px solid #f1f5f9;">' + s.community + '/10</td>';
+      html += '<td style="padding:8px;text-align:center;border-bottom:1px solid #f1f5f9;">' + s.communication + '/10</td>';
+      html += '<td style="padding:8px;text-align:center;border-bottom:1px solid #f1f5f9;">' + s.values + '/10</td>';
+      html += '<td style="padding:8px;text-align:center;border-bottom:1px solid #f1f5f9;"><span style="background:' + overallBg + ';color:' + overallColor + ';padding:2px 8px;border-radius:4px;font-weight:600;font-size:12px;">' + s.overall + '</span></td>';
+      html += '<td style="padding:8px;border-bottom:1px solid #f1f5f9;color:#64748b;font-size:12px;">' + s.submittedAt + '</td>';
+      html += '</tr>';
+      if (s.comments) {
+        html += '<tr><td colspan="7" style="padding:4px 12px 10px;border-bottom:1px solid #f1f5f9;color:#475569;font-size:12px;font-style:italic;">' + s.comments + '</td></tr>';
+      }
+    }
+  });
+  html += '</tbody></table>';
+  container.innerHTML = html;
+}
+
+/* ===== Documents renderer ===== */
+function renderDocuments(appKey) {
+  var tbody = document.getElementById('app-docs-tbody');
+  if (!tbody) return;
+  var docs = (UWC.documents && UWC.documents[appKey]) ? UWC.documents[appKey] : [];
+  if (!docs.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="padding:16px;color:#64748b;font-style:italic;text-align:center;">No documents uploaded.</td></tr>';
+    // Update count badge
+    var badge = document.getElementById('app-docs-count');
+    if (badge) badge.textContent = '0';
+    return;
+  }
+  var html = '';
+  docs.forEach(function(d) {
+    var statusColor = d.status.indexOf('Verified') !== -1 ? '#065f46' : '#1e3a8a';
+    var statusBg = d.status.indexOf('Verified') !== -1 ? '#d1fae5' : '#dbeafe';
+    html += '<tr>';
+    html += '<td style="padding:8px 12px;font-size:13px;">📄 ' + d.name + '</td>';
+    html += '<td style="padding:8px;font-size:12px;"><span style="background:' + statusBg + ';color:' + statusColor + ';padding:2px 8px;border-radius:4px;">' + d.status + '</span></td>';
+    html += '<td style="padding:8px;font-size:12px;color:#64748b;">' + d.uploaded + '</td>';
+    html += '<td style="padding:8px;font-size:12px;color:#64748b;">' + d.uploadedBy + '</td>';
+    html += '<td style="padding:8px;font-size:12px;color:#94a3b8;">' + d.size + '</td>';
+    html += '</tr>';
+  });
+  tbody.innerHTML = html;
+  // Update count badge
+  var badge = document.getElementById('app-docs-count');
+  if (badge) badge.textContent = docs.length;
+  // Also update review scores count
+  var rsCount = document.getElementById('app-rs-count');
+  if (rsCount) {
+    var scoresArr = (UWC.reviewScores && UWC.reviewScores[appKey]) ? UWC.reviewScores[appKey] : [];
+    rsCount.textContent = scoresArr.length;
+  }
+}
+
 /* ===== Application detail functions ===== */
 function openApplicationDetail(applicantName) {
   // Find by name
@@ -2410,6 +3100,10 @@ function openApplicationDetailById(appKey) {
       tlEl.appendChild(div);
     });
   }
+
+  // Render dynamic content
+  renderDocuments(appKey);
+  renderReviewScores(appKey);
 
   // Reset to overview tab
   document.querySelectorAll('#app-tabs .zoho-tabs__tab').forEach(function(t) { t.classList.toggle('active', t.dataset.appTab === 'overview'); });
@@ -2481,17 +3175,90 @@ function saveApp() {
   }, 800);
 }
 
-/* ---- Initialise role switcher (with scope banner update hook) ---- */
-var _origSetRole = RoleSwitcher.setRole;
-RoleSwitcher.init({ scenarioCode: 'A', defaultRoleId: 'marcus', roles: UWC.getRolesFor('A') });
+/* ===== Programme Edit functions ===== */
+function saveProgramme() {
+  var btn = document.getElementById('pe-save-btn');
+  if (btn) { btn.textContent = '⏳ Saving…'; btn.disabled = true; }
+  setTimeout(function() {
+    // Read values back to programme data store
+    var nameEl = document.getElementById('pe-f-name');
+    if (nameEl && UWC.programmes && UWC.programmes['uwc-de-2027']) {
+      UWC.programmes['uwc-de-2027'].name = nameEl.value;
+    }
+    if (btn) { btn.textContent = 'Save'; btn.disabled = false; }
+    showView('programme-detail');
+    showToast('Programme saved successfully');
+    // Refresh programme detail fields if visible
+    var pdTitle = document.getElementById('pd-f-name');
+    if (pdTitle && nameEl) pdTitle.textContent = nameEl.value;
+  }, 800);
+}
 
-// Patch setRole to also update scope banner
+function saveAndNewProgramme() {
+  var btn = document.getElementById('pe-save-new-btn');
+  if (btn) { btn.textContent = '⏳ Saving…'; btn.disabled = true; }
+  setTimeout(function() {
+    if (btn) { btn.textContent = 'Save & New'; btn.disabled = false; }
+    // Clear form fields for new entry
+    ['pe-f-name','pe-f-code','pe-f-year','pe-f-nc'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    var capEl = document.getElementById('pe-f-capacity');
+    if (capEl) capEl.value = '';
+    var descEl = document.getElementById('pe-f-desc');
+    if (descEl) descEl.value = '';
+    showToast('Programme saved. Form cleared for new entry.');
+  }, 800);
+}
+
+/* ===== Profile permissions table renderer ===== */
+function renderProfilePerms() {
+  var tbody = document.getElementById('profile-perms-tbody');
+  if (!tbody) return;
+  var modules = [
+    { name: 'Contacts',       v:1, c:1, e:1, d:1 },
+    { name: 'Applications',   v:1, c:1, e:1, d:0 },
+    { name: 'Programmes',     v:1, c:1, e:1, d:0 },
+    { name: 'Documents',      v:1, c:1, e:1, d:1 },
+    { name: 'Review Scores',  v:1, c:1, e:1, d:0 },
+    { name: 'Reports',        v:1, c:0, e:0, d:0 },
+    { name: 'Users (Setup)',  v:1, c:1, e:1, d:0 },
+    { name: 'Profiles',       v:1, c:1, e:1, d:0 },
+    { name: 'Roles',          v:1, c:1, e:1, d:0 }
+  ];
+  var rows = modules.map(function(m) {
+    function chk(v) { return v ? '<span style="color:#16a34a;font-size:16px;">✓</span>' : '<span style="color:#d1d5db;font-size:16px;">—</span>'; }
+    return '<tr style="border-bottom:1px solid #f1f5f9;">' +
+      '<td style="padding:10px 12px;font-size:13px;">' + m.name + '</td>' +
+      '<td style="padding:10px 8px;text-align:center;">' + chk(m.v) + '</td>' +
+      '<td style="padding:10px 8px;text-align:center;">' + chk(m.c) + '</td>' +
+      '<td style="padding:10px 8px;text-align:center;">' + chk(m.e) + '</td>' +
+      '<td style="padding:10px 8px;text-align:center;">' + chk(m.d) + '</td>' +
+      '</tr>';
+  });
+  tbody.innerHTML = rows.join('');
+}
+
+/* ---- Initialise role switcher (with scope banner + nav + capability gating hooks) ---- */
+RoleSwitcher.init({ scenarioCode: 'A', defaultRoleId: 'marcus', roles: UWC.getRolesFor('A') });
+applyCapabilityGating('marcus');
+updateScopeBannerForRole('marcus');
+
+// Patch role switcher: on role click, navigate to that role's default view
 (function() {
   var dropdown = document.getElementById('role-switcher');
   if (!dropdown) return;
   Array.prototype.forEach.call(dropdown.querySelectorAll('.rs-option'), function(btn) {
     btn.addEventListener('click', function() {
-      setTimeout(updateScopeBanner, 50);
+      var roleId = btn.dataset.roleId;
+      setTimeout(function() {
+        updateScopeBanner();
+        applyCapabilityGating(roleId);
+        var defaultView = (typeof ROLE_DEFAULT_VIEW !== 'undefined' && ROLE_DEFAULT_VIEW[roleId]) || 'home';
+        showView(defaultView);
+        showToast('Switched to ' + (btn.querySelector('.rs-opt-name') || btn).textContent.trim());
+      }, 50);
     });
   });
 })();
