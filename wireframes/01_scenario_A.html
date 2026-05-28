@@ -289,12 +289,103 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
 .zoho-sb__item-icon svg { display: block; }
 .zoho-tb__icon svg { display: block; pointer-events: none; }
 .ico-use { display:inline-flex; align-items:center; justify-content:center; }
+
+/* ===== CONTACTS LIST VIEW ===== */
+.cl-filter-sidebar { width:240px; flex-shrink:0; border-right:1px solid #e8eaed; background:#f7f8fa; overflow-y:auto; padding:0 0 80px; font-size:12px; }
+.cl-filter-sidebar__header { padding:10px 14px 8px; font-size:12px; font-weight:600; color:#1f2937; border-bottom:1px solid #e8eaed; }
+.cl-filter-section { border-bottom:1px solid #ebeef2; }
+.cl-filter-section__title { display:flex; align-items:center; justify-content:space-between; padding:8px 14px; font-weight:500; color:#1f2937; cursor:pointer; font-size:12px; }
+.cl-filter-section__title:hover { background:#eef1f7; }
+.cl-filter-item { display:flex; align-items:center; gap:8px; padding:5px 14px 5px 24px; color:#4b5563; cursor:pointer; font-size:12px; }
+.cl-filter-item:hover { background:#eef1f7; }
+.cl-filter-item input[type=checkbox] { accent-color:#3b6ef5; flex-shrink:0; }
+.cl-filter-search { margin:8px 10px; background:#fff; border:1px solid #e5e7eb; border-radius:5px; padding:5px 10px; display:flex; align-items:center; gap:6px; }
+.cl-filter-search input { border:none; outline:none; background:transparent; width:100%; font-size:12px; font-family:inherit; color:#1f2937; }
+.cl-table-wrap { flex:1; overflow:auto; }
+.cl-table { width:100%; border-collapse:collapse; font-size:13px; }
+.cl-table th { padding:9px 12px; text-align:left; font-size:12px; font-weight:500; color:#4b5563; border-bottom:1px solid #e5e7eb; background:#fff; white-space:nowrap; position:sticky; top:0; z-index:2; }
+.cl-table th .th-filter { color:#9ca3af; font-size:11px; cursor:pointer; margin-left:4px; }
+.cl-table td { padding:10px 12px; border-bottom:1px solid #f0f2f5; vertical-align:middle; }
+.cl-table tr:hover td { background:#f9fafb; }
+.cl-table .cl-name-link { color:#2563eb; cursor:pointer; font-weight:500; }
+.cl-table .cl-name-link:hover { text-decoration:underline; }
+.cl-table .cl-icon-col { color:#9ca3af; font-size:14px; cursor:pointer; width:28px; }
+.cl-statusbar { border-top:1px solid #e5e7eb; padding:7px 16px; display:flex; align-items:center; justify-content:space-between; font-size:12px; color:#4b5563; background:#fff; flex-shrink:0; }
+.cl-pagination { display:flex; align-items:center; gap:8px; }
+.cl-pagination__btn { background:none; border:1px solid #d1d5db; border-radius:4px; width:24px; height:24px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:#4b5563; font-size:11px; }
+.cl-pagination__btn:hover { background:#eef1f7; }
+
+/* Date ribbon pills (clip-path pointed left edge, Zoho style) */
+.date-pill { display:inline-block; padding:2px 8px 2px 10px; font-size:10px; font-weight:600; border-radius:0 3px 3px 0; position:relative; white-space:nowrap; clip-path:polygon(6px 0%,100% 0%,100% 100%,6px 100%,0% 50%); letter-spacing:0.3px; }
+.date-pill--overdue { background:#ef4444; color:#fff; }
+.date-pill--today { background:#f97316; color:#fff; }
+.date-pill--upcoming { background:#22c55e; color:#fff; }
+
+/* ===== CONTACT DETAIL VIEW ===== */
+.cd-compact-card { background:#fff; border:1px solid #e5e7eb; border-radius:8px; margin:14px 0 0; }
+.cd-compact-card__row { display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-bottom:1px solid #f0f2f5; }
+.cd-compact-card__row:last-child { border-bottom:none; }
+.cd-compact-card__cell { padding:10px 16px; }
+.cd-compact-card__label { font-size:11px; color:#6b7280; margin-bottom:2px; }
+.cd-compact-card__value { font-size:13px; color:#1f2937; font-weight:500; }
+.cd-compact-card__value.link { color:#2563eb; }
+.cd-compact-card__value.phone,.cd-field-row__value.phone { display:inline-flex; align-items:center; gap:5px; }
+
+/* Next-action card */
+.cd-next-action { background:#fff; border:1px solid #e5e7eb; border-radius:8px; padding:14px 16px; margin-top:10px; }
+.cd-next-action__title { font-size:12px; font-weight:600; color:#1f2937; margin-bottom:10px; }
+.cd-next-action__row { display:flex; align-items:center; gap:10px; margin-bottom:8px; font-size:13px; color:#1f2937; }
+.cd-next-action__row:last-child { margin-bottom:0; }
+
+/* Detail sections */
+.cd-section { background:#fff; border:1px solid #e5e7eb; border-radius:8px; padding:16px 18px; margin-top:10px; }
+.cd-section__title { font-size:13px; font-weight:600; color:#1f2937; margin-bottom:14px; }
+.cd-fields-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px 28px; }
+.cd-field-row { display:flex; align-items:baseline; gap:12px; }
+.cd-field-row__label { min-width:140px; text-align:right; color:#6b7280; font-size:12px; flex-shrink:0; }
+.cd-field-row__value { color:#1f2937; flex:1; font-size:13px; word-break:break-word; }
+.cd-field-row__value.link { color:#2563eb; }
+.cd-field-row__value .phone-ico,.cd-compact-card__value .phone-ico { color:#22c55e; }
+.cd-hide-details { font-size:12px; color:#2563eb; cursor:pointer; display:inline-flex; align-items:center; gap:4px; margin-bottom:12px; }
+.cd-radio-group { display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+.cd-radio-group label { display:flex; align-items:center; gap:5px; font-size:13px; color:#1f2937; cursor:pointer; }
+.cd-radio-group .cd-clear { font-size:11px; color:#2563eb; cursor:pointer; }
+
+/* Timeline */
+.tl-wrap { padding:14px 22px 80px; }
+.tl-subtabs { display:flex; gap:0; border-bottom:2px solid #e5e7eb; margin-bottom:16px; }
+.tl-subtab { padding:8px 20px; font-size:13px; color:#6b7280; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-2px; font-weight:500; }
+.tl-subtab.active { color:#2563eb; border-bottom-color:#2563eb; }
+.tl-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.tl-header__title { font-size:14px; font-weight:600; color:#1f2937; }
+.tl-header__link { font-size:12px; color:#2563eb; cursor:pointer; }
+.tl-date-chip { display:inline-flex; align-items:center; background:#f3f5fa; border-radius:999px; padding:3px 14px; font-size:12px; color:#4b5563; font-weight:500; margin-bottom:16px; }
+.tl-entries { position:relative; }
+.tl-entry { display:flex; gap:12px; margin-bottom:20px; }
+.tl-entry__time { width:68px; flex-shrink:0; font-size:11px; color:#6b7280; padding-top:2px; text-align:right; }
+.tl-entry__icon { width:26px; height:26px; border-radius:50%; background:#e0e7ff; border:2px solid #c7d2fe; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:12px; color:#4f46e5; position:relative; z-index:1; }
+.tl-entry__connector { position:absolute; left:calc(68px + 12px + 13px); top:0; bottom:0; width:2px; background:#e5e7eb; z-index:0; }
+.tl-entry__body { flex:1; padding-top:2px; }
+.tl-entry__desc { font-size:13px; color:#1f2937; font-weight:500; line-height:1.5; }
+.tl-entry__meta { font-size:11px; color:#6b7280; margin-top:2px; }
+
+/* Edit mode */
+.cd-edit-input { width:100%; padding:5px 8px; border:1px solid #93c5fd; border-radius:4px; font-size:13px; font-family:inherit; color:#1f2937; background:#eff6ff; outline:none; }
+.cd-edit-input:focus { border-color:#3b6ef5; box-shadow:0 0 0 2px rgba(59,110,245,0.15); }
+.cd-field-row--changed .cd-field-row__value { animation:fieldFlash 800ms ease; }
+@keyframes fieldFlash { 0%,100%{ background:transparent; } 30%{ background:#d1fae5; border-radius:3px; padding:1px 4px; } }
+
 </style>
 </head>
 <body>
 
 <!-- Shared SVG symbol defs (referenced via <use> to avoid repeating large paths) -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="ico-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+  <symbol id="ico-reports" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></symbol>
+  <symbol id="ico-analytics" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></symbol>
+  <symbol id="ico-requests" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6a1 1 0 0 1 1 1v2H8V3a1 1 0 0 1 1-1z"/><rect x="4" y="5" width="16" height="17" rx="2"/></symbol>
+  <symbol id="ico-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
   <symbol id="ico-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
   <symbol id="ico-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
   <symbol id="ico-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
@@ -351,10 +442,10 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
         </header>
         <div class="zoho-body">
           <aside class="zoho-sidebar">
-            <a class="zoho-sb__item zoho-sb__item--home active" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span>Home</span></a>
-            <a class="zoho-sb__item zoho-sb__item--reports" data-sb-nav="reports"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></span><span>Reports</span></a>
-            <a class="zoho-sb__item zoho-sb__item--analytics" data-sb-nav="analytics"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></span><span>Analytics</span></a>
-            <a class="zoho-sb__item zoho-sb__item--requests" data-sb-nav="requests"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6a1 1 0 0 1 1 1v2H8V3a1 1 0 0 1 1-1z"/><rect x="4" y="5" width="16" height="17" rx="2"/></svg></span><span>My Requests</span></a>
+            <a class="zoho-sb__item zoho-sb__item--home active" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-home"/></svg></span><span>Home</span></a>
+            <a class="zoho-sb__item zoho-sb__item--reports" data-sb-nav="reports"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-reports"/></svg></span><span>Reports</span></a>
+            <a class="zoho-sb__item zoho-sb__item--analytics" data-sb-nav="analytics"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-analytics"/></svg></span><span>Analytics</span></a>
+            <a class="zoho-sb__item zoho-sb__item--requests" data-sb-nav="requests"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-requests"/></svg></span><span>My Requests</span></a>
             <div class="zoho-sb__teamspace">
               <span class="zoho-sb__teamspace-icon">CT</span>
               <span class="zoho-sb__teamspace-name" data-role-variant="marcus:Germany NC|ana:Brazil NC|akanksha:CRM Teamspace|data-protection:CRM Teamspace">Germany NC</span>
@@ -364,7 +455,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
             <div class="zoho-sb__search"><span style="color:#9ca3af;font-size:12px;">🔍</span><input placeholder="Search"></div>
             <a class="zoho-sb__item"><span class="zoho-sb__item-icon">✨</span><span>Workqueue</span></a>
             <div class="zoho-sb__group">
-              <div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span><span>Sales</span><span class="zoho-sb__group-chev">⌄</span></div>
+              <div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14"><use href="#ico-folder"/></svg></span><span>Sales</span><span class="zoho-sb__group-chev">⌄</span></div>
               <div class="zoho-sb__group-items">
                 <a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span><span>Leads</span></a>
                 <a class="zoho-sb__item" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span><span>Contacts</span></a>
@@ -374,7 +465,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
               </div>
             </div>
             <div class="zoho-sb__group">
-              <div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span><span>Activities</span><span class="zoho-sb__group-chev">⌄</span></div>
+              <div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14"><use href="#ico-folder"/></svg></span><span>Activities</span><span class="zoho-sb__group-chev">⌄</span></div>
               <div class="zoho-sb__group-items">
                 <a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span><span>Tasks</span></a>
                 <a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span><span>Meetings</span></a>
@@ -450,11 +541,11 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
         </header>
         <div class="zoho-body">
           <aside class="zoho-sidebar">
-            <a class="zoho-sb__item zoho-sb__item--home" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>Home</a>
-            <a class="zoho-sb__item zoho-sb__item--reports" data-sb-nav="reports"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></span>Reports</a>
-            <a class="zoho-sb__item zoho-sb__item--analytics" data-sb-nav="analytics"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></span>Analytics</a>
+            <a class="zoho-sb__item zoho-sb__item--home" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-home"/></svg></span>Home</a>
+            <a class="zoho-sb__item zoho-sb__item--reports" data-sb-nav="reports"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-reports"/></svg></span>Reports</a>
+            <a class="zoho-sb__item zoho-sb__item--analytics" data-sb-nav="analytics"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-analytics"/></svg></span>Analytics</a>
             <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name">Germany NC</span><span class="zoho-sb__teamspace-chev">⌄</span><span class="zoho-sb__teamspace-more">⋯</span></div>
-            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Leads</a><a class="zoho-sb__item" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span>Contacts</a><a class="zoho-sb__item" data-sb-nav="applications"><span class="zoho-sb__item-icon">·</span>Applications</a><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Campaigns</a></div></div>
+            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14"><use href="#ico-folder"/></svg></span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Leads</a><a class="zoho-sb__item" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span>Contacts</a><a class="zoho-sb__item" data-sb-nav="applications"><span class="zoho-sb__item-icon">·</span>Applications</a><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Campaigns</a></div></div>
             <a class="zoho-sb__item active" data-sb-nav="programmes"><span class="zoho-sb__item-icon">🎓</span>Programmes</a>
             <a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">🌐</span>National Committees</a>
           </aside>
@@ -539,11 +630,11 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
         </header>
         <div class="zoho-body">
           <aside class="zoho-sidebar">
-            <a class="zoho-sb__item zoho-sb__item--home" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>Home</a>
-            <a class="zoho-sb__item zoho-sb__item--reports" data-sb-nav="reports"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></span>Reports</a>
-            <a class="zoho-sb__item zoho-sb__item--analytics" data-sb-nav="analytics"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></span>Analytics</a>
+            <a class="zoho-sb__item zoho-sb__item--home" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-home"/></svg></span>Home</a>
+            <a class="zoho-sb__item zoho-sb__item--reports" data-sb-nav="reports"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-reports"/></svg></span>Reports</a>
+            <a class="zoho-sb__item zoho-sb__item--analytics" data-sb-nav="analytics"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-analytics"/></svg></span>Analytics</a>
             <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name" data-role-variant="marcus:Germany NC|ana:Brazil NC|akanksha:CRM Teamspace">Germany NC</span><span class="zoho-sb__teamspace-chev">⌄</span><span class="zoho-sb__teamspace-more">⋯</span></div>
-            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Leads</a><a class="zoho-sb__item" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span>Contacts</a><a class="zoho-sb__item active" data-sb-nav="applications"><span class="zoho-sb__item-icon">·</span>Applications</a><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Campaigns</a></div></div>
+            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14"><use href="#ico-folder"/></svg></span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Leads</a><a class="zoho-sb__item" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span>Contacts</a><a class="zoho-sb__item active" data-sb-nav="applications"><span class="zoho-sb__item-icon">·</span>Applications</a><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Campaigns</a></div></div>
             <a class="zoho-sb__item" data-sb-nav="programmes"><span class="zoho-sb__item-icon">🎓</span>Programmes</a>
           </aside>
           <main class="zoho-content">
@@ -757,9 +848,9 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
         </header>
         <div class="zoho-body">
           <aside class="zoho-sidebar">
-            <a class="zoho-sb__item zoho-sb__item--home" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>Home</a>
+            <a class="zoho-sb__item zoho-sb__item--home" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-home"/></svg></span>Home</a>
             <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name">Germany NC</span><span class="zoho-sb__teamspace-chev">⌄</span></div>
-            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Leads</a><a class="zoho-sb__item active" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span>Contacts</a><a class="zoho-sb__item" data-sb-nav="applications"><span class="zoho-sb__item-icon">·</span>Applications</a></div></div>
+            <div class="zoho-sb__group"><div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14"><use href="#ico-folder"/></svg></span>Sales<span class="zoho-sb__group-chev">⌄</span></div><div class="zoho-sb__group-items"><a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Leads</a><a class="zoho-sb__item active" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span>Contacts</a><a class="zoho-sb__item" data-sb-nav="applications"><span class="zoho-sb__item-icon">·</span>Applications</a></div></div>
           </aside>
           <main class="zoho-content">
             <div class="zoho-detail__hero">
@@ -1010,6 +1101,352 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
       </div>
     </section>
 
+    <!-- ===== CONTACTS LIST (exploration, not counted in steps) ===== -->
+    <section class="screen" id="sc-contacts-list">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">Contacts</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">🔍</span><input placeholder="Search records"></div></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus" data-toast="Quick create — choose a module to add a record">+</button><button class="zoho-tb__icon zoho-tb__icon--zia" data-toast="Zia AI">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell" data-toast="Notifications"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-bell"/></svg></button><button class="zoho-tb__icon" data-toast="Calendar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-cal"/></svg></button><button class="zoho-tb__icon" data-toast="Profile"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-user"/></svg></button><button class="zoho-tb__icon" data-toast="Settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-gear"/></svg></button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon" data-toast="Zoho suite"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><use href="#ico-waffle"/></svg></button></div>
+        </header>
+        <div class="zoho-body">
+          <!-- LEFT NAV SIDEBAR -->
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item zoho-sb__item--home" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-home"/></svg></span>Home</a>
+            <a class="zoho-sb__item zoho-sb__item--reports" data-sb-nav="reports"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-reports"/></svg></span>Reports</a>
+            <a class="zoho-sb__item zoho-sb__item--analytics" data-sb-nav="analytics"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-analytics"/></svg></span>Analytics</a>
+            <a class="zoho-sb__item zoho-sb__item--requests" data-sb-nav="requests"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-requests"/></svg></span>My Requests</a>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name">Germany NC</span><span class="zoho-sb__teamspace-chev">⌄</span><span class="zoho-sb__teamspace-more">⋯</span></div>
+            <div class="zoho-sb__search"><span style="color:#9ca3af;font-size:12px;">🔍</span><input placeholder="Search"></div>
+            <div class="zoho-sb__group">
+              <div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14"><use href="#ico-folder"/></svg></span>Sales<span class="zoho-sb__group-chev">⌄</span></div>
+              <div class="zoho-sb__group-items">
+                <a class="zoho-sb__item" data-sb-nav="leads"><span class="zoho-sb__item-icon">·</span>Leads</a>
+                <a class="zoho-sb__item active" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span>Contacts</a>
+                <a class="zoho-sb__item" data-sb-nav="applications"><span class="zoho-sb__item-icon">·</span>Applications</a>
+                <a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Campaigns</a>
+              </div>
+            </div>
+            <a class="zoho-sb__item" data-sb-nav="programmes"><span class="zoho-sb__item-icon">🎓</span>Programmes</a>
+            <a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">🌐</span>National Committees</a>
+          </aside>
+          <!-- MAIN CONTENT -->
+          <main class="zoho-content" style="display:flex;flex-direction:column;overflow:hidden;">
+            <!-- Page strip -->
+            <div class="zoho-page-strip">
+              <div class="zoho-page-strip__view">All Contacts ⌄</div>
+              <span class="zoho-page-strip__more" data-toast="More view options">⋯</span>
+            </div>
+            <!-- Toolbar -->
+            <div class="zoho-toolbar">
+              <button class="zoho-toolbar__btn" data-toast="Filter contacts"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:2px;"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg> Filter</button>
+              <button class="zoho-toolbar__btn" data-toast="Sort contacts">↕ Sort</button>
+              <span class="zoho-toolbar__divider"></span>
+              <span class="zoho-toolbar__view-icon active" title="List view" data-toast="List view (active)">☰</span>
+              <span class="zoho-toolbar__view-icon" title="Kanban" data-toast="Kanban view">▦</span>
+              <span class="zoho-toolbar__view-icon" title="Calendar" data-toast="Calendar view">📅</span>
+              <span class="zoho-toolbar__view-icon" title="Chart" data-toast="Chart view">📊</span>
+              <span class="zoho-toolbar__view-icon" title="Timeline" data-toast="Timeline view">↔</span>
+              <span class="zoho-toolbar__view-icon" title="More" data-toast="More view options">⋯</span>
+              <span class="zoho-toolbar__spacer"></span>
+              <button class="zoho-toolbar__cta" data-toast="Create Contact — opens new record form">Create Contact</button><button class="zoho-toolbar__cta-split" data-toast="More create options">▾</button>
+              <span class="zoho-toolbar__more" data-toast="More actions — mass update, export">⋯</span>
+            </div>
+            <!-- Body: filter sidebar + table -->
+            <div style="display:flex;flex:1;overflow:hidden;">
+              <!-- LEFT FILTER SIDEBAR (built by JS) -->
+              <div class="cl-filter-sidebar" id="cl-filter-sidebar">
+                <div class="cl-filter-sidebar__header">Filter Contacts by</div>
+                <div class="cl-filter-search"><span style="color:#9ca3af;">🔍</span><input placeholder="Search"></div>
+              </div>
+              <!-- TABLE AREA -->
+              <div class="cl-main">
+                <div class="cl-table-wrap">
+                  <table class="cl-table">
+                    <thead>
+                      <tr>
+                        <th style="width:36px;"><input type="checkbox"></th>
+                        <th style="width:28px;"></th>
+                        <th style="width:82px;">Date</th>
+                        <th>Contact Name <span style="font-size:11px;color:#6b7280;font-weight:400;">All ⌄</span> <span class="th-filter">▼</span></th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Contact Owner</th>
+                        <th style="width:28px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></th>
+                      </tr>
+                    </thead>
+                    <tbody id="cl-tbody">
+                      <tr data-contact-id="sofia">
+                        <td><input type="checkbox"></td>
+                        <td class="cl-icon-col">✉</td>
+                        <td><span class="date-pill date-pill--overdue">MAY 27</span></td>
+                        <td><span class="cl-name-link" data-contact-id="sofia">Sofia Almeida (Sample)</span></td>
+                        <td style="color:#6b7280;">sofia.almeida@noemail.invalid</td>
+                        <td style="color:#6b7280;">555-555-5555</td>
+                        <td style="color:#6b7280;">UWC A2Z Admin</td>
+                        <td class="cl-icon-col">⋯</td>
+                      </tr>
+                      <tr data-contact-id="marcus-c">
+                        <td><input type="checkbox"></td>
+                        <td class="cl-icon-col">✉</td>
+                        <td><span class="date-pill date-pill--upcoming">MAY 29</span></td>
+                        <td><span class="cl-name-link" data-contact-id="marcus-c">Marcus Weber (Sample)</span></td>
+                        <td style="color:#6b7280;">m.weber@uwcgermany.de</td>
+                        <td style="color:#6b7280;">555-555-5555</td>
+                        <td style="color:#6b7280;">UWC A2Z Admin</td>
+                        <td class="cl-icon-col">⋯</td>
+                      </tr>
+                      <tr data-contact-id="ana-c">
+                        <td><input type="checkbox"></td>
+                        <td class="cl-icon-col">✉</td>
+                        <td><span class="date-pill date-pill--today">TODAY</span></td>
+                        <td><span class="cl-name-link" data-contact-id="ana-c">Ana Carvalho (Sample)</span></td>
+                        <td style="color:#6b7280;">a.carvalho@uwcbrazil.org</td>
+                        <td style="color:#6b7280;">555-555-5555</td>
+                        <td style="color:#6b7280;">UWC A2Z Admin</td>
+                        <td class="cl-icon-col">⋯</td>
+                      </tr>
+                      <tr data-contact-id="clara">
+                        <td><input type="checkbox"></td>
+                        <td class="cl-icon-col">✉</td>
+                        <td><span class="date-pill date-pill--upcoming">MAY 29</span></td>
+                        <td><span class="cl-name-link" data-contact-id="clara">Clara Ramos (Sample)</span></td>
+                        <td style="color:#6b7280;">clara.ramos@uwcbrazil.org</td>
+                        <td style="color:#6b7280;">555-555-5555</td>
+                        <td style="color:#6b7280;">UWC A2Z Admin</td>
+                        <td class="cl-icon-col">⋯</td>
+                      </tr>
+                      <tr data-contact-id="paulo">
+                        <td><input type="checkbox"></td>
+                        <td class="cl-icon-col">✉</td>
+                        <td><span class="date-pill date-pill--overdue">MAY 26</span></td>
+                        <td><span class="cl-name-link" data-contact-id="paulo">Paulo Fonseca (Sample)</span></td>
+                        <td style="color:#6b7280;">paulo.fonseca@uwcbrazil.org</td>
+                        <td style="color:#6b7280;">555-555-5555</td>
+                        <td style="color:#6b7280;">UWC A2Z Admin</td>
+                        <td class="cl-icon-col">⋯</td>
+                      </tr>
+                      <tr data-contact-id="helen">
+                        <td><input type="checkbox"></td>
+                        <td class="cl-icon-col">✉</td>
+                        <td><span class="date-pill date-pill--upcoming">MAY 29</span></td>
+                        <td><span class="cl-name-link" data-contact-id="helen">Helen Richards (Sample)</span></td>
+                        <td style="color:#6b7280;">h.richards@uwcatlantic.org</td>
+                        <td style="color:#6b7280;">555-555-5555</td>
+                        <td style="color:#6b7280;">UWC A2Z Admin</td>
+                        <td class="cl-icon-col">⋯</td>
+                      </tr>
+                      <tr data-contact-id="akanksha-c">
+                        <td><input type="checkbox"></td>
+                        <td class="cl-icon-col">✉</td>
+                        <td><span class="date-pill date-pill--overdue">MAY 25</span></td>
+                        <td><span class="cl-name-link" data-contact-id="akanksha-c">Akanksha Anand (Sample)</span></td>
+                        <td style="color:#6b7280;">a.anand@uwcio.uwc.org</td>
+                        <td style="color:#6b7280;">555-555-5555</td>
+                        <td style="color:#6b7280;">UWC A2Z Admin</td>
+                        <td class="cl-icon-col">⋯</td>
+                      </tr>
+                      <tr data-contact-id="maria">
+                        <td><input type="checkbox"></td>
+                        <td class="cl-icon-col">✉</td>
+                        <td></td>
+                        <td><span class="cl-name-link" data-contact-id="maria">Maria Almeida (Sample)</span></td>
+                        <td style="color:#6b7280;">maria.almeida@noemail.invalid</td>
+                        <td style="color:#6b7280;">555-555-5555</td>
+                        <td style="color:#6b7280;">UWC A2Z Admin</td>
+                        <td class="cl-icon-col">⋯</td>
+                      </tr>
+                      <tr data-contact-id="grace">
+                        <td><input type="checkbox"></td>
+                        <td class="cl-icon-col">✉</td>
+                        <td></td>
+                        <td><span class="cl-name-link" data-contact-id="grace">Grace Omondi (Sample)</span></td>
+                        <td style="color:#6b7280;">g.omondi@uwckenya.org</td>
+                        <td style="color:#6b7280;">555-555-5555</td>
+                        <td style="color:#6b7280;">UWC A2Z Admin</td>
+                        <td class="cl-icon-col">⋯</td>
+                      </tr>
+                      <tr data-contact-id="jonathan">
+                        <td><input type="checkbox"></td>
+                        <td class="cl-icon-col">✉</td>
+                        <td><span class="date-pill date-pill--today">TODAY</span></td>
+                        <td><span class="cl-name-link" data-contact-id="jonathan">Jonathan Osei (Sample)</span></td>
+                        <td style="color:#6b7280;">j.osei@example.com</td>
+                        <td style="color:#6b7280;">555-555-5555</td>
+                        <td style="color:#6b7280;">UWC A2Z Admin</td>
+                        <td class="cl-icon-col">⋯</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- Status bar -->
+                <div class="cl-statusbar">
+                  <span>Total Records <b>10</b></span>
+                  <div class="cl-pagination">
+                    <span>1 to 10</span>
+                    <button class="cl-pagination__btn" data-toast="Previous page">◂</button>
+                    <button class="cl-pagination__btn" data-toast="Next page">▸</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Smart chat bar -->
+            <div class="zoho-smart-chat" style="padding-left:247px;">
+              <span class="zoho-smart-chat__placeholder">Here is your Smart Chat (Ctrl+Space)</span>
+              <div class="zoho-smart-chat__icons"><span class="zoho-smart-chat__icon">💬</span><span class="zoho-smart-chat__icon">🔔</span><span class="zoho-smart-chat__icon">💡</span></div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT DETAIL (exploration, not counted in steps) ===== -->
+    <section class="screen" id="sc-contact-detail">
+      <div class="zoho-shell">
+        <header class="zoho-topbar">
+          <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span><button class="zoho-tb__panel-toggle">▢</button></div>
+          <div class="zoho-tb__center"><h1 class="zoho-tb__module">Contacts</h1><div class="zoho-tb__search"><span class="zoho-tb__search-icon">🔍</span><input placeholder="Search records"></div></div>
+          <div class="zoho-tb__icons"><button class="zoho-tb__icon zoho-tb__icon--plus" data-toast="Quick create">+</button><button class="zoho-tb__icon zoho-tb__icon--zia" data-toast="Zia AI">ZA</button><button class="zoho-tb__icon zoho-tb__icon--bell" data-toast="Notifications"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-bell"/></svg></button><button class="zoho-tb__icon" data-toast="Calendar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-cal"/></svg></button><button class="zoho-tb__icon" data-toast="Settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ico-gear"/></svg></button><span class="zoho-tb__org">A2Z</span><button class="zoho-tb__icon" data-toast="Zoho suite"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><use href="#ico-waffle"/></svg></button></div>
+        </header>
+        <div class="zoho-body">
+          <!-- LEFT NAV SIDEBAR -->
+          <aside class="zoho-sidebar">
+            <a class="zoho-sb__item zoho-sb__item--home" data-sb-nav="home"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-home"/></svg></span>Home</a>
+            <a class="zoho-sb__item zoho-sb__item--reports" data-sb-nav="reports"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-reports"/></svg></span>Reports</a>
+            <a class="zoho-sb__item zoho-sb__item--analytics" data-sb-nav="analytics"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-analytics"/></svg></span>Analytics</a>
+            <a class="zoho-sb__item zoho-sb__item--requests" data-sb-nav="requests"><span class="zoho-sb__item-icon"><svg width="14" height="14"><use href="#ico-requests"/></svg></span>My Requests</a>
+            <div class="zoho-sb__teamspace"><span class="zoho-sb__teamspace-icon">CT</span><span class="zoho-sb__teamspace-name">Germany NC</span><span class="zoho-sb__teamspace-chev">⌄</span><span class="zoho-sb__teamspace-more">⋯</span></div>
+            <div class="zoho-sb__search"><span style="color:#9ca3af;font-size:12px;">🔍</span><input placeholder="Search"></div>
+            <div class="zoho-sb__group">
+              <div class="zoho-sb__group-header"><span class="zoho-sb__group-icon"><svg width="14" height="14"><use href="#ico-folder"/></svg></span>Sales<span class="zoho-sb__group-chev">⌄</span></div>
+              <div class="zoho-sb__group-items">
+                <a class="zoho-sb__item" data-sb-nav="leads"><span class="zoho-sb__item-icon">·</span>Leads</a>
+                <a class="zoho-sb__item active" data-sb-nav="contacts"><span class="zoho-sb__item-icon">·</span>Contacts</a>
+                <a class="zoho-sb__item" data-sb-nav="applications"><span class="zoho-sb__item-icon">·</span>Applications</a>
+                <a class="zoho-sb__item" data-sb-nav="other"><span class="zoho-sb__item-icon">·</span>Campaigns</a>
+              </div>
+            </div>
+            <a class="zoho-sb__item" data-sb-nav="programmes"><span class="zoho-sb__item-icon">🎓</span>Programmes</a>
+          </aside>
+          <!-- DETAIL MAIN CONTENT -->
+          <main class="zoho-content" style="display:flex;flex-direction:column;overflow:hidden;">
+            <!-- HERO ROW -->
+            <div class="zoho-detail__hero">
+              <span class="zoho-detail__back cd-back-to-list" title="Back to Contacts list">←</span>
+              <div class="zoho-detail__avatar" id="cd-avatar">SA</div>
+              <div class="zoho-detail__name-block">
+                <div class="zoho-detail__name" id="cd-name">Sofia Almeida (Sample)</div>
+                <div class="zoho-detail__add-tags">+ Add Tags</div>
+              </div>
+              <div class="zoho-detail__actions" id="cd-actions-view">
+                <span class="zoho-detail__last-update">Last Update : Yesterday</span>
+                <button class="zoho-btn--primary zoho-btn" data-toast="Send Mail — compose email">Send Mail</button>
+                <button class="zoho-btn" id="cd-edit-btn">Edit</button>
+                <button class="zoho-btn" data-toast="More actions">⋯</button>
+                <button class="zoho-btn" style="padding:7px 8px;" data-toast="Previous record">‹</button>
+                <button class="zoho-btn" style="padding:7px 8px;" data-toast="Next record">›</button>
+              </div>
+              <div class="zoho-detail__actions" id="cd-actions-edit" style="display:none;">
+                <button class="zoho-btn" id="cd-cancel-btn">Cancel</button>
+                <button class="zoho-btn--primary zoho-btn" id="cd-save-btn">Save</button>
+              </div>
+            </div>
+
+            <!-- RELATED LIST LEFT RAIL + TABS + CONTENT -->
+            <div style="display:flex;flex:1;overflow:hidden;">
+              <!-- LEFT RAIL -->
+              <aside class="zoho-detail__rail" style="width:200px;flex-shrink:0;overflow-y:auto;padding-bottom:60px;">
+                <div class="zoho-detail__rail-header">Related List</div>
+                <div class="zoho-detail__rail-item"><span>Notes</span></div>
+                <div class="zoho-detail__rail-item"><span>Attachments</span></div>
+                <div class="zoho-detail__rail-item"><span>Emails</span></div>
+                <div class="zoho-detail__rail-item"><span>Open Activities</span><span class="zoho-detail__rail-count">2</span></div>
+                <div class="zoho-detail__rail-item"><span>Closed Activities</span></div>
+                <div class="zoho-detail__rail-item"><span>Invited Meetings</span></div>
+                <div class="zoho-detail__rail-item"><span>Programmes</span></div>
+                <div class="zoho-detail__rail-item"><span>Applications</span><span class="zoho-detail__rail-count">1</span></div>
+                <div class="zoho-detail__rail-item"><span>Parent Name</span></div>
+                <div class="zoho-detail__rail-item"><span>Social</span></div>
+                <div class="zoho-detail__rail-item"><span>Applicant Names</span></div>
+                <div class="zoho-detail__rail-add">+ Add Related List</div>
+                <div class="zoho-detail__rail-header" style="margin-top:18px;">Links</div>
+                <div class="zoho-detail__rail-add">+ Add Link</div>
+              </aside>
+
+              <!-- RIGHT CONTENT: tabs + body -->
+              <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
+                <!-- TABS -->
+                <div style="padding:12px 22px 0;background:#fff;border-bottom:1px solid #f0f2f5;flex-shrink:0;">
+                  <div class="zoho-tabs" style="margin:0 0 0 0;" id="cd-tabs">
+                    <span class="zoho-tabs__tab active" data-cd-tab="overview">Overview</span>
+                    <span class="zoho-tabs__tab" data-cd-tab="timeline">Timeline</span>
+                  </div>
+                </div>
+                <!-- SCROLLABLE CONTENT AREA -->
+                <div style="flex:1;overflow-y:auto;background:#f9fafb;padding-bottom:80px;" id="cd-tab-content">
+
+                  <!-- ===== OVERVIEW TAB ===== -->
+                  <div id="cd-overview" style="padding:14px 22px;">
+                    <!-- Compact info card -->
+                    <div class="cd-compact-card" style="margin-top:0;">
+                      <div class="cd-compact-card__row">
+                        <div class="cd-compact-card__cell"><div class="cd-compact-card__label">Type</div><div class="cd-compact-card__value" id="cd-cinfo-type">Student</div></div>
+                        <div class="cd-compact-card__cell"><div class="cd-compact-card__label">Email</div><div class="cd-compact-card__value link" id="cd-cinfo-email">sofia.almeida@noemail.invalid</div></div>
+                        <div class="cd-compact-card__cell"><div class="cd-compact-card__label">Phone</div><div class="cd-compact-card__value phone" id="cd-cinfo-phone"><span id="cd-cinfo-phone-val">—</span></div></div>
+                        <div class="cd-compact-card__cell"><div class="cd-compact-card__label">Mobile</div><div class="cd-compact-card__value phone" id="cd-cinfo-mobile"><span id="cd-cinfo-mobile-val">+55 11 9 4567 1234</span> <span class="phone-ico">📞</span></div></div>
+                      </div>
+                    </div>
+
+                    <!-- Next action card -->
+                    <div class="cd-next-action">
+                      <div class="cd-next-action__title">Next Action</div>
+                      <div class="cd-next-action__row"><span class="date-pill date-pill--overdue">MAY 27</span> Register for upcoming CRM Webinars</div>
+                      <div class="cd-next-action__row"><span class="date-pill date-pill--today">TODAY</span> Get Approval from Manager</div>
+                    </div>
+
+                    <!-- Hide details toggle -->
+                    <div class="cd-hide-details" id="cd-hide-toggle">▾ Hide Details</div>
+
+                    <!-- SECTIONS — built by buildSections() in JS -->
+                    <div id="cd-sections"></div>
+                  </div><!-- /cd-overview -->
+
+                  <!-- ===== TIMELINE TAB ===== -->
+                  <div id="cd-timeline" style="display:none;">
+                    <div class="tl-wrap">
+                      <div class="tl-subtabs">
+                        <span class="tl-subtab active" data-tl-subtab="history">History</span>
+                        <span class="tl-subtab" data-tl-subtab="interactions">Interactions</span>
+                      </div>
+                      <div class="tl-header">
+                        <div class="tl-header__title">Timeline History</div>
+                        <div style="display:flex;align-items:center;gap:12px;">
+                          <span class="tl-header__link" data-toast="Show Upcoming Automated Actions">Show Upcoming Automated Actions ⌄</span>
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor:pointer;" data-toast="Filter timeline"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                        </div>
+                      </div>
+                      <div class="tl-date-chip" id="cd-tl-date">27 May, 2026</div>
+                      <div class="tl-entries" id="cd-tl-entries" style="position:relative;">
+                        <div class="tl-entry__connector" style="top:13px;"></div>
+                        <!-- entries injected by loadContact() -->
+                      </div>
+                    </div>
+                  </div><!-- /cd-timeline -->
+
+                </div><!-- /cd-tab-content -->
+              </div><!-- /right col -->
+            </div><!-- /detail body flex -->
+
+            <!-- Smart chat -->
+            <div class="zoho-smart-chat" style="padding-left:247px;">
+              <span class="zoho-smart-chat__placeholder">Here is your Smart Chat (Ctrl+Space)</span>
+              <div class="zoho-smart-chat__icons"><span class="zoho-smart-chat__icon">💬</span><span class="zoho-smart-chat__icon">🔔</span></div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+
   </div>
 </div>
 
@@ -1026,6 +1463,41 @@ UWC.users = [
 UWC.getRolesFor = function(code) {
   var map = { A: ['marcus','ana','akanksha','data-protection'], B:['visitor','sofia','maria','ana','io-mkt'], C:['clara','paulo','ana','akanksha'], D:['fatima','ana','helen'], E:['akanksha','io-crm'], F:['akanksha','grace'], G:['io-mkt','akanksha','jonathan'] };
   return (map[code]||[]).map(function(id){ return UWC.users.find(function(u){return u.id===id;}); }).filter(Boolean);
+};
+
+/* ===== Contact data store ===== */
+// Factory fn for compact contact records (non-Sofia)
+function _c(name,avatar,grad,type,dob,gender,nationality,email,mobile,phone,address,description,portalStatus,portalUserId,timeline){
+  return {name:name,avatar:avatar,avatarGrad:grad,type:type,dob:dob,gender:gender,parent:'—',relationship:'—',nationality:nationality,email:email,mobile:mobile,secondary:'—',phone:phone,emergency:'—',passportNum:'—',passportIssue:'—',passportName:'—',passportExpiry:'—',address:address,otherAddress:'—',description:description,portalStatus:portalStatus,portalUserId:portalUserId,portalUrl:portalUserId==='—'?'—':'https://portal.uwc.org/u/'+portalUserId.replace('.','-'),owner:'UWC A2Z Admin',timeline:timeline};
+}
+UWC.contacts = {
+  'sofia': {
+    name: 'Sofia Almeida (Sample)', avatar: 'SA', avatarGrad: 'linear-gradient(135deg,#f59e0b,#ec4899)',
+    type: 'Student', dob: '15 Aug 2009', gender: 'Female', parent: 'Maria Almeida', relationship: 'Mother→Daughter',
+    nationality: 'Brazilian', email: 'sofia.almeida@noemail.invalid', mobile: '+55 11 9 4567 1234',
+    secondary: '—', phone: '—', emergency: '—',
+    passportNum: '—', passportIssue: '—', passportName: '—', passportExpiry: '—',
+    address: 'Rua Augusta 1240\nSão Paulo, SP 01304-001\nBrazil', otherAddress: '—', description: '—',
+    portalStatus: 'Active', portalUserId: 'sofia.almeida', portalUrl: 'https://portal.uwc.org/u/sofia-almeida',
+    owner: 'UWC A2Z Admin',
+    timeline: [
+      { time: '04:39 PM', icon: '✎', desc: 'Application Language was updated from blank value to Português' },
+      { time: '04:39 PM', icon: '✎', desc: 'Gender was updated from blank value to Female' },
+      { time: '04:39 PM', icon: '✎', desc: 'Date of Birth was updated from blank value to 15 Aug 2009' },
+      { time: '04:39 PM', icon: '✎', desc: 'Type was updated from blank value to Student' },
+      { time: '10:04 AM', icon: '🖼', desc: 'Contact Image uploaded' },
+      { time: '09:12 AM', icon: '➕', desc: 'Contact record was created' }
+    ]
+  },
+  'marcus-c': _c('Marcus Weber (Sample)','MW','linear-gradient(135deg,#003087,#7c3aed)','NC Admin','03 Jun 1985','Male','German','m.weber@uwcgermany.de','+49 30 5555 0101','+49 30 5555 0100','Unter den Linden 42\nBerlin 10117\nGermany','NC Admin for UWC Germany','Active','marcus.weber',[{time:'02:15 PM',icon:'✎',desc:'Phone was updated'},{time:'10:00 AM',icon:'➕',desc:'Contact record was created'}]),
+  'ana-c': _c('Ana Carvalho (Sample)','AC','linear-gradient(135deg,#10b981,#3b82f6)','NC Admin','12 Sep 1982','Female','Brazilian','a.carvalho@uwcbrazil.org','+55 21 9 8765 4321','+55 21 2222 3333','Av. Atlântica 2880\nRio de Janeiro, RJ 22010-000\nBrazil','NC Admin for UWC Brazil','Active','ana.carvalho',[{time:'03:45 PM',icon:'✎',desc:'Email was updated'},{time:'09:00 AM',icon:'➕',desc:'Contact record was created'}]),
+  'clara': _c('Clara Ramos (Sample)','CR','linear-gradient(135deg,#a855f7,#6366f1)','Reviewer','07 Mar 1990','Female','Brazilian','clara.ramos@uwcbrazil.org','+55 21 9 9999 1234','—','Rua do Catete 100\nRio de Janeiro, RJ 22220-000\nBrazil','—','Active','clara.ramos',[{time:'01:30 PM',icon:'✎',desc:'Role was updated to Reviewer'},{time:'11:00 AM',icon:'➕',desc:'Contact record was created'}]),
+  'paulo': _c('Paulo Fonseca (Sample)','PF','linear-gradient(135deg,#f97316,#ef4444)','Reviewer','19 Nov 1988','Male','Brazilian','paulo.fonseca@uwcbrazil.org','+55 21 9 7777 5678','—','Rua Voluntários da Pátria 50\nNiterói, RJ 24020-000\nBrazil','—','Active','paulo.fonseca',[{time:'10:22 AM',icon:'➕',desc:'Contact record was created'}]),
+  'helen': _c('Helen Richards (Sample)','HR','linear-gradient(135deg,#0ea5e9,#6366f1)','School Director','14 Feb 1975','Female','British','h.richards@uwcatlantic.org','+44 7700 900321','+44 2079 000100','UWC Atlantic\nSt Donat\'s Castle\nLlantwit Major CF61 1WF\nWales, UK','School Admissions Director, UWC Atlantic','Active','helen.richards',[{time:'09:15 AM',icon:'✎',desc:'Phone was added'},{time:'08:00 AM',icon:'➕',desc:'Contact record was created'}]),
+  'akanksha-c': _c('Akanksha Anand (Sample)','AA','linear-gradient(135deg,#003087,#a855f7)','IO Admin','25 Jan 1980','Female','Indian','a.anand@uwcio.uwc.org','+91 98765 43210','—','UWC International\n17–21 Emerald St\nLondon WC1N 3QN\nUK','IO Super Admin — global CRM access','Active','akanksha.anand',[{time:'03:00 PM',icon:'✎',desc:'Nationality was updated to Indian'},{time:'11:30 AM',icon:'➕',desc:'Contact record was created'}]),
+  'maria': _c('Maria Almeida (Sample)','MA','linear-gradient(135deg,#ec4899,#f59e0b)','Guardian','02 Apr 1975','Female','Brazilian','maria.almeida@noemail.invalid','+55 11 9 8888 2222','—','Rua Augusta 1240\nSão Paulo, SP 01304-001\nBrazil','Parent/Guardian of applicant Sofia Almeida','Inactive','—',[{time:'04:39 PM',icon:'✎',desc:'Relationship set to Mother of Sofia Almeida'},{time:'04:39 PM',icon:'➕',desc:'Contact record was created'}]),
+  'grace': _c('Grace Omondi (Sample)','GO','linear-gradient(135deg,#10b981,#f59e0b)','Student','08 Jul 2008','Female','Kenyan','g.omondi@uwckenya.org','+254 700 123456','—','Ngong Road 15\nNairobi 00100\nKenya','—','Active','grace.omondi',[{time:'11:00 AM',icon:'✎',desc:'Nationality was updated to Kenyan'},{time:'10:00 AM',icon:'➕',desc:'Contact record was created'}]),
+  'jonathan': _c('Jonathan Osei (Sample)','JO','linear-gradient(135deg,#6366f1,#22c55e)','Student','17 Nov 2007','Male','Ghanaian','j.osei@example.com','+233 20 111 2222','—','Cantonments Rd 8\nAccra\nGhana','—','Active','jonathan.osei',[{time:'02:00 PM',icon:'✎',desc:'Type was updated to Student'},{time:'09:30 AM',icon:'➕',desc:'Contact record was created'}])
 };
 /* /INLINE */
 
@@ -1083,23 +1555,81 @@ function showToast(msg) {
 /* ---- Scenario A driver ---- */
 const TOTAL = 9;
 let step = 0;
+let lastNumberedStep = 0; // remember where tour was when entering exploration
+let currentView = 'step'; // 'step' | 'contacts-list' | 'contact-detail'
+let currentContactId = null;
 const stepCounterEl = document.getElementById('step-counter');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 
+// All named screens (beyond numbered steps)
+const NAMED_SCREENS = ['sc-contacts-list', 'sc-contact-detail'];
+
 function go(i) {
   if (i < 0 || i >= TOTAL) return;
+  // leaving exploration — store nothing special
   step = i;
-  document.querySelectorAll('.screen').forEach(function(s, j) { s.classList.toggle('active', j === i); });
+  lastNumberedStep = i;
+  currentView = 'step';
+  currentContactId = null;
+  _activateScreenById('sc-' + i);
   stepCounterEl.textContent = 'Step ' + (i + 1) + ' / ' + TOTAL;
   prevBtn.disabled = i === 0;
-  nextBtn.disabled = i === TOTAL - 1;
-  // Close any open dropdowns on navigation
+  nextBtn.disabled = false;
+  nextBtn.textContent = '›';
   document.querySelectorAll('.zoho-dd-menu').forEach(function(m) { m.hidden = true; });
+  updateSidebarActive();
 }
 
-prevBtn.addEventListener('click', function() { go(step - 1); });
-nextBtn.addEventListener('click', function() { go(step + 1); });
+function goToView(viewId) {
+  document.querySelectorAll('.zoho-dd-menu').forEach(function(m) { m.hidden = true; });
+  if (viewId === 'contacts-list') {
+    currentView = 'contacts-list';
+    currentContactId = null;
+    _activateScreenById('sc-contacts-list');
+    stepCounterEl.textContent = 'Exploring · Contacts';
+    prevBtn.disabled = true;
+    nextBtn.disabled = false;
+    nextBtn.textContent = 'Resume ▸';
+    updateSidebarActive('contacts');
+  } else if (viewId === 'contact-detail') {
+    currentView = 'contact-detail';
+    _activateScreenById('sc-contact-detail');
+    var c = UWC.contacts[currentContactId];
+    var name = c ? c.name : 'Contact';
+    stepCounterEl.textContent = 'Exploring · ' + name.replace(' (Sample)','');
+    prevBtn.disabled = true;
+    nextBtn.disabled = false;
+    nextBtn.textContent = 'Resume ▸';
+    updateSidebarActive('contacts');
+  }
+}
+
+function _activateScreenById(id) {
+  document.querySelectorAll('.screen').forEach(function(s) {
+    s.classList.toggle('active', s.id === id);
+  });
+}
+
+function updateSidebarActive(key) {
+  document.querySelectorAll('[data-sb-nav]').forEach(function(el) {
+    el.classList.remove('active');
+  });
+  if (key) {
+    document.querySelectorAll('[data-sb-nav="' + key + '"]').forEach(function(el) {
+      el.classList.add('active');
+    });
+  }
+}
+
+prevBtn.addEventListener('click', function() {
+  if (currentView === 'step') go(step - 1);
+  // no prev from exploration
+});
+nextBtn.addEventListener('click', function() {
+  if (currentView === 'step') { go(step + 1); }
+  else { go(lastNumberedStep); } // "Resume tour"
+});
 document.addEventListener('keydown', function(e) {
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
   if (e.key === 'ArrowRight') go(step + 1);
@@ -1107,12 +1637,13 @@ document.addEventListener('keydown', function(e) {
 });
 
 /* ---- Sidebar navigation (delegated) ---- */
-// Map sidebar nav keys to step indices
+// Map sidebar nav keys to destinations
 const SB_NAV_MAP = {
   'home': 0,
   'programmes': 1,
   'applications': 2,
-  'contacts': 5,
+  'contacts': 'contacts-list',  // NEW: goes to contacts list view
+  'leads': 'leads-toast',
   'reports': null,
   'analytics': null,
   'requests': null,
@@ -1160,17 +1691,17 @@ document.addEventListener('click', function(e) {
   var sbItem = e.target.closest('[data-sb-nav]');
   if (sbItem) {
     var navKey = sbItem.dataset.sbNav;
-    var targetStep = SB_NAV_MAP[navKey];
-    if (targetStep !== null && targetStep !== undefined) {
-      go(targetStep);
-      // Update active class on all matching sidebar items
-      document.querySelectorAll('[data-sb-nav]').forEach(function(el) {
-        el.classList.remove('active');
-      });
+    var dest = SB_NAV_MAP[navKey];
+    if (dest === 'contacts-list') {
+      goToView('contacts-list');
+    } else if (dest === 'leads-toast') {
+      showToast('Leads — see Scenario B for the registration flow');
+    } else if (typeof dest === 'number') {
+      go(dest);
+      document.querySelectorAll('[data-sb-nav]').forEach(function(el) { el.classList.remove('active'); });
       sbItem.classList.add('active');
     } else {
-      // Module not covered in this scenario
-      var itemName = sbItem.querySelector('span:last-child');
+      var itemName = sbItem.querySelector('span:last-child, span');
       var label = itemName ? itemName.textContent.trim() : navKey;
       showToast(label + ' — see other scenarios for full module demo');
     }
@@ -1185,8 +1716,12 @@ document.addEventListener('click', function(e) {
   }
 
   // ---- Back button (← arrow) ----
-  if (e.target.classList.contains('zoho-detail__back')) {
-    go(Math.max(0, step - 1));
+  if (e.target.classList.contains('zoho-detail__back') || e.target.classList.contains('cd-back-to-list')) {
+    if (currentView === 'contact-detail') {
+      goToView('contacts-list');
+    } else {
+      go(Math.max(0, step - 1));
+    }
     return;
   }
 
@@ -1231,12 +1766,60 @@ document.addEventListener('click', function(e) {
     return;
   }
 
-  // ---- Detail tabs ----
+  // ---- Detail tabs (including contact detail Overview/Timeline) ----
   var detailTab = e.target.closest('.zoho-tabs__tab');
   if (detailTab) {
     detailTab.closest('.zoho-tabs').querySelectorAll('.zoho-tabs__tab').forEach(function(t) { t.classList.remove('active'); });
     detailTab.classList.add('active');
+    // Contact detail tab switching
+    var cdTabKey = detailTab.dataset.cdTab;
+    if (cdTabKey) {
+      var ov = document.getElementById('cd-overview');
+      var tl = document.getElementById('cd-timeline');
+      if (ov && tl) {
+        ov.style.display = cdTabKey === 'overview' ? '' : 'none';
+        tl.style.display = cdTabKey === 'timeline' ? '' : 'none';
+      }
+    }
     showToast(detailTab.textContent.trim() + ' tab');
+    return;
+  }
+
+  // ---- Timeline sub-tabs ----
+  var tlSubtab = e.target.closest('.tl-subtab');
+  if (tlSubtab) {
+    tlSubtab.closest('.tl-subtabs').querySelectorAll('.tl-subtab').forEach(function(t) { t.classList.remove('active'); });
+    tlSubtab.classList.add('active');
+    showToast(tlSubtab.textContent.trim() + ' sub-tab');
+    return;
+  }
+
+  // ---- Contact list row click ----
+  var clNameLink = e.target.closest('.cl-name-link');
+  if (clNameLink) {
+    var cid = clNameLink.dataset.contactId;
+    if (cid) {
+      lastNumberedStep = step;
+      currentContactId = cid;
+      loadContact(cid);
+      goToView('contact-detail');
+    }
+    return;
+  }
+
+  // ---- Contact detail Edit button ----
+  if (e.target.id === 'cd-edit-btn' || e.target.closest('#cd-edit-btn')) {
+    enterEditMode();
+    return;
+  }
+  // ---- Contact detail Save button ----
+  if (e.target.id === 'cd-save-btn' || e.target.closest('#cd-save-btn')) {
+    saveContact();
+    return;
+  }
+  // ---- Contact detail Cancel button ----
+  if (e.target.id === 'cd-cancel-btn' || e.target.closest('#cd-cancel-btn')) {
+    exitEditMode(false);
     return;
   }
 
@@ -1254,6 +1837,214 @@ document.addEventListener('keydown', function(e) {
     document.querySelectorAll('.zoho-dd-menu').forEach(function(m) { m.hidden = true; });
   }
 });
+
+/* ===== Contact detail functions ===== */
+var _editSnapshots = {};
+
+// Build a field-row HTML string
+function _fr(label, id, val, extra) {
+  var cls = 'cd-field-row__value' + (extra ? ' ' + extra : '');
+  var idAttr = id ? ' id="' + id + '"' : '';
+  return '<div class="cd-field-row"><div class="cd-field-row__label">' + label + '</div><div class="' + cls + '"' + idAttr + '>' + (val || '—') + '</div></div>';
+}
+
+// Build all overview sections for a contact
+function buildSections(c) {
+  var H = '';
+  function sec(title, rows) { H += '<div class="cd-section"><div class="cd-section__title">' + title + '</div><div class="cd-fields-grid">' + rows + '</div></div>'; }
+  // Student Information
+  var genderHtml = '<div class="cd-radio-group" id="cd-gender-view">' +
+    ['Male','Female','Others'].map(function(v){ return '<label><input type="radio" name="cd-gender" value="' + v + '"' + (v===c.gender?' checked':'') + '> ' + v + '</label>'; }).join('') +
+    '<span class="cd-clear" onclick="document.querySelectorAll(\'input[name=cd-gender]\').forEach(function(r){r.checked=false;});">Clear</span></div>';
+  sec('Student Information',
+    _fr('Contact Name','cd-f-name',c.name) +
+    _fr('Type','cd-f-type',c.type) +
+    _fr('Date of Birth','cd-f-dob',c.dob) +
+    _fr('Parent Name','cd-f-parent',c.parent,'link') +
+    '<div class="cd-field-row" style="align-items:flex-start;"><div class="cd-field-row__label" style="padding-top:2px;">Gender</div><div class="cd-field-row__value" id="cd-f-gender">' + genderHtml + '</div></div>' +
+    _fr('Relationship','cd-f-relationship',c.relationship) +
+    _fr('Nationality','cd-f-nationality',c.nationality) +
+    _fr('Layout',null,'Student')
+  );
+  // Contact Information
+  sec('Contact Information',
+    _fr('Email','cd-f-email',c.email,'link') +
+    '<div class="cd-field-row"><div class="cd-field-row__label">Mobile</div><div class="cd-field-row__value phone" id="cd-f-mobile"><span id="cd-f-mobile-val">' + (c.mobile||'—') + '</span> <span class="phone-ico">📞</span></div></div>' +
+    _fr('Secondary Email','cd-f-secondary',c.secondary) +
+    _fr('Phone','cd-f-phone',c.phone) +
+    '<div class="cd-field-row"><div class="cd-field-row__label"></div><div class="cd-field-row__value"></div></div>' +
+    _fr('Emergency Contact','cd-f-emergency',c.emergency)
+  );
+  // Passport
+  sec('Passport Information',
+    _fr('Passport Number','cd-f-passportNum',c.passportNum) + _fr('Passport Issue Date','cd-f-passportIssue',c.passportIssue) +
+    _fr('Name in Passport','cd-f-passportName',c.passportName) + _fr('Passport Expiry','cd-f-passportExpiry',c.passportExpiry)
+  );
+  // Address
+  H += '<div class="cd-section"><div class="cd-section__title">Address Information</div><div class="cd-fields-grid">' +
+    '<div class="cd-field-row" style="align-items:flex-start;"><div class="cd-field-row__label" style="padding-top:2px;">Mailing Address</div><div class="cd-field-row__value" id="cd-f-address" style="white-space:pre-line;">' + (c.address||'—') + '</div></div>' +
+    '<div class="cd-field-row" style="align-items:flex-start;"><div class="cd-field-row__label" style="padding-top:2px;">Other Address</div><div class="cd-field-row__value" id="cd-f-otherAddress">' + (c.otherAddress||'—') + '</div></div>' +
+    '</div></div>';
+  // Description
+  H += '<div class="cd-section"><div class="cd-section__title">Description Information</div>' +
+    '<div class="cd-field-row"><div class="cd-field-row__label" style="text-align:left;">Description</div><div class="cd-field-row__value" id="cd-f-description">' + (c.description||'—') + '</div></div></div>';
+  // Portal
+  sec('Portal Information',
+    _fr('Portal Status','cd-f-portalStatus',c.portalStatus) + _fr('Portal User ID','cd-f-portalUserId',c.portalUserId) +
+    _fr('Portal URL','cd-f-portalUrl',c.portalUrl,'link') + '<div class="cd-field-row"><div class="cd-field-row__label"></div><div class="cd-field-row__value"></div></div>'
+  );
+  // System Fields
+  sec('System Fields',
+    _fr('Contact Owner','cd-f-owner',c.owner) + _fr('Reporting To','cd-f-reportingTo','—') +
+    _fr('Created By','cd-f-createdBy','UWC A2Z Admin · 27 May 2026') + _fr('Email Opt Out','cd-f-emailOptOut','No')
+  );
+  return H;
+}
+
+function loadContact(id) {
+  var c = UWC.contacts[id];
+  if (!c) return;
+
+  // Hero
+  var avEl = document.getElementById('cd-avatar');
+  if (avEl) { avEl.textContent = c.avatar; avEl.style.background = c.avatarGrad || 'linear-gradient(135deg,#f59e0b,#ec4899)'; }
+  _setTxt('cd-name', c.name);
+
+  // Compact card
+  _setTxt('cd-cinfo-type', c.type);
+  _setTxt('cd-cinfo-email', c.email);
+  _setTxt('cd-cinfo-phone-val', c.phone || '—');
+  _setTxt('cd-cinfo-mobile-val', c.mobile || '—');
+
+  // Build sections
+  var sectEl = document.getElementById('cd-sections');
+  if (sectEl) sectEl.innerHTML = buildSections(c);
+
+  // Timeline
+  var tlEl = document.getElementById('cd-tl-entries');
+  if (tlEl && c.timeline) {
+    var connector = tlEl.querySelector('.tl-entry__connector');
+    tlEl.innerHTML = '';
+    if (connector) tlEl.appendChild(connector);
+    c.timeline.forEach(function(entry) {
+      var div = document.createElement('div');
+      div.className = 'tl-entry';
+      div.innerHTML = '<div class="tl-entry__time">' + entry.time + '</div><div class="tl-entry__icon">' + entry.icon + '</div><div class="tl-entry__body"><div class="tl-entry__desc">' + entry.desc + '</div><div class="tl-entry__meta">by UWC A2Z Admin · 27 May, 2026</div></div>';
+      tlEl.appendChild(div);
+    });
+  }
+
+  // Reset tab to Overview
+  document.querySelectorAll('#cd-tabs .zoho-tabs__tab').forEach(function(t) { t.classList.toggle('active', t.dataset.cdTab === 'overview'); });
+  var ov = document.getElementById('cd-overview');
+  var tl = document.getElementById('cd-timeline');
+  if (ov) ov.style.display = '';
+  if (tl) tl.style.display = 'none';
+
+  exitEditMode(false);
+}
+
+function _setTxt(id, val) {
+  var el = document.getElementById(id);
+  if (el) el.textContent = (val !== undefined && val !== null) ? val : '—';
+}
+
+var _inEditMode = false;
+// IDs of plain text fields that become inputs in edit mode
+// cd-f-address handled separately (textarea); cd-f-mobile-val is a span inside .phone wrapper
+var _editableFields = ['cd-f-name','cd-f-type','cd-f-dob','cd-f-relationship','cd-f-nationality',
+  'cd-f-email','cd-f-mobile-val','cd-f-secondary','cd-f-phone','cd-f-emergency',
+  'cd-f-passportNum','cd-f-passportIssue','cd-f-passportName','cd-f-passportExpiry',
+  'cd-f-otherAddress','cd-f-description','cd-f-portalStatus','cd-f-portalUserId'];
+
+function enterEditMode() {
+  if (_inEditMode) return;
+  _inEditMode = true;
+  _editSnapshots = {};
+  _editableFields.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var currentVal = el.textContent;
+    _editSnapshots[id] = currentVal;
+    var inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'cd-edit-input';
+    inp.value = currentVal;
+    inp.dataset.fieldId = id;
+    el.innerHTML = '';
+    el.appendChild(inp);
+  });
+  // Also handle address (textarea)
+  var addrEl = document.getElementById('cd-f-address');
+  if (addrEl) {
+    _editSnapshots['cd-f-address'] = addrEl.textContent;
+    var ta = document.createElement('textarea');
+    ta.className = 'cd-edit-input';
+    ta.style.minHeight = '60px';
+    ta.value = addrEl.textContent;
+    ta.dataset.fieldId = 'cd-f-address';
+    addrEl.innerHTML = '';
+    addrEl.appendChild(ta);
+  }
+  var viewActions = document.getElementById('cd-actions-view');
+  var editActions = document.getElementById('cd-actions-edit');
+  if (viewActions) viewActions.style.display = 'none';
+  if (editActions) editActions.style.display = '';
+}
+
+function exitEditMode(save) {
+  if (!_inEditMode && !save) { _inEditMode = false; return; }
+  _inEditMode = false;
+  // Collect edited values or restore originals
+  _editableFields.concat(['cd-f-address']).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var inp = el.querySelector('input, textarea');
+    if (inp) {
+      var newVal = save ? inp.value : (_editSnapshots[id] || '');
+      el.innerHTML = '';
+      el.textContent = newVal;
+      if (save && newVal !== _editSnapshots[id]) {
+        el.classList.add('cd-field-row--changed');
+        setTimeout(function() { el.classList.remove('cd-field-row--changed'); }, 1000);
+      }
+    } else if (!save && _editSnapshots[id] !== undefined) {
+      el.textContent = _editSnapshots[id];
+    }
+  });
+  var viewActions = document.getElementById('cd-actions-view');
+  var editActions = document.getElementById('cd-actions-edit');
+  if (viewActions) viewActions.style.display = '';
+  if (editActions) editActions.style.display = 'none';
+}
+
+function saveContact() {
+  var saveBtn = document.getElementById('cd-save-btn');
+  if (saveBtn) { saveBtn.textContent = '⏳ Saving…'; saveBtn.disabled = true; }
+  setTimeout(function() {
+    exitEditMode(true);
+    if (saveBtn) { saveBtn.textContent = 'Save'; saveBtn.disabled = false; }
+    showToast('Contact saved successfully');
+  }, 800);
+}
+
+/* ---- Build filter sidebar ---- */
+(function() {
+  var sb = document.getElementById('cl-filter-sidebar');
+  if (!sb) return;
+  function mkSection(title, items) {
+    var s = document.createElement('div'); s.className = 'cl-filter-section';
+    s.innerHTML = '<div class="cl-filter-section__title">▾ ' + title + '</div>';
+    items.forEach(function(n) {
+      var d = document.createElement('div'); d.className = 'cl-filter-item';
+      d.innerHTML = '<input type="checkbox"> ' + n;
+      s.appendChild(d);
+    });
+    sb.appendChild(s);
+  }
+  mkSection('System Defined Filters', ['Activities','Campaigns','Latest Email Status','Locked','Record Action','Related Records Action','Touched Records','Untouched Records','Cadences']);
+  mkSection('Filter By Fields', ['Connected To','Contact Name','Contact Owner','Created By','Created Time','Date of Birth','Email','Email Opt Out','Emergency Contact Number','First Name','Gender','Last Activity Time','Last Name','Layout']);
+})();
 
 /* ---- Initialise role switcher ---- */
 RoleSwitcher.init({ scenarioCode: 'A', defaultRoleId: 'marcus', roles: UWC.getRolesFor('A') });
