@@ -883,45 +883,42 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
               <span class="zoho-kanban-header__view">STAGEVIEW ⌄</span>
               <span class="zoho-kanban-header__edit">✎</span>
             </div>
+            <div id="kanban-scope-chip" class="role-scope-chip" style="display:inline-flex;align-items:center;gap:6px;background:#e8eef6;color:#003087;border-radius:4px;padding:4px 12px;font-size:12px;font-weight:500;margin-bottom:4px;margin-left:22px;margin-top:8px;">🇩🇪 9 applications · Marcus's Germany NC scope</div>
             <div class="zoho-kanban">
               <div class="zoho-kanban-col">
                 <div class="zoho-kanban-col__header" style="background:#f3f4f6;">
-                  <div class="zoho-kanban-col__title">Registered <span class="zoho-kanban-col__count">2</span><span class="zoho-kanban-col__pct">· 5%</span></div>
+                  <div class="zoho-kanban-col__title">Registered <span class="zoho-kanban-col__count">2</span><span class="zoho-kanban-col__pct"></span></div>
                   <div class="zoho-kanban-col__amount">2 applicants</div>
                 </div>
-                <div class="zoho-kanban-card"><div class="zoho-kanban-card__name">Anneke Müller</div><span class="zoho-kanban-card__stage" style="background:#f3f4f6;color:#4b5563;">Registered</span><div class="zoho-kanban-card__meta">Marcus Weber<br>Anneke Müller<br>—<br>26 May 2026</div></div>
-                
+                <div class="zoho-kanban-col__cards" id="kanban-col-registered"></div>
               </div>
               <div class="zoho-kanban-col">
                 <div class="zoho-kanban-col__header" style="background:#dbeafe;">
-                  <div class="zoho-kanban-col__title">In Progress <span class="zoho-kanban-col__count">3</span><span class="zoho-kanban-col__pct">· 15%</span></div>
+                  <div class="zoho-kanban-col__title">In Progress <span class="zoho-kanban-col__count">3</span><span class="zoho-kanban-col__pct"></span></div>
                   <div class="zoho-kanban-col__amount">3 applicants</div>
                 </div>
-                <div class="zoho-kanban-card"><div class="zoho-kanban-card__name">Felix Hoffmann</div><span class="zoho-kanban-card__stage" style="background:#dbeafe;color:#1e3a8a;">In Progress</span><div class="zoho-kanban-card__meta">Marcus Weber<br>Felix Hoffmann<br>—<br>24 May 2026</div></div>
-                
+                <div class="zoho-kanban-col__cards" id="kanban-col-in-progress"></div>
               </div>
               <div class="zoho-kanban-col">
                 <div class="zoho-kanban-col__header" style="background:#E8EEF6;">
-                  <div class="zoho-kanban-col__title">Submitted <span class="zoho-kanban-col__count">4</span><span class="zoho-kanban-col__pct">· 30%</span></div>
+                  <div class="zoho-kanban-col__title">Submitted <span class="zoho-kanban-col__count">4</span><span class="zoho-kanban-col__pct"></span></div>
                   <div class="zoho-kanban-col__amount">4 applicants</div>
                 </div>
-                <div class="zoho-kanban-card"><div class="zoho-kanban-card__name">Lena Fischer</div><span class="zoho-kanban-card__stage" style="background:#003087;color:#fff;">Submitted</span><div class="zoho-kanban-card__meta">Marcus Weber<br>Lena Fischer<br>—<br>25 May 2026</div><span class="zoho-kanban-card__icon-tick">✓</span></div>
-                
+                <div class="zoho-kanban-col__cards" id="kanban-col-submitted"></div>
               </div>
               <div class="zoho-kanban-col">
                 <div class="zoho-kanban-col__header" style="background:#ede9fe;">
-                  <div class="zoho-kanban-col__title">Under Review <span class="zoho-kanban-col__count">3</span><span class="zoho-kanban-col__pct">· 45%</span></div>
+                  <div class="zoho-kanban-col__title">Under Review <span class="zoho-kanban-col__count">3</span><span class="zoho-kanban-col__pct"></span></div>
                   <div class="zoho-kanban-col__amount">3 applicants</div>
                 </div>
-                <div class="zoho-kanban-card"><div class="zoho-kanban-card__name">Klaus Berger</div><span class="zoho-kanban-card__stage" style="background:#ede9fe;color:#5b21b6;">Under Review</span><div class="zoho-kanban-card__meta">Marcus Weber<br>Klaus Berger<br>—<br>22 May 2026</div></div>
-                
+                <div class="zoho-kanban-col__cards" id="kanban-col-under-review"></div>
               </div>
               <div class="zoho-kanban-col">
                 <div class="zoho-kanban-col__header" style="background:#fefce8;">
-                  <div class="zoho-kanban-col__title">Shortlisted <span class="zoho-kanban-col__count">2</span><span class="zoho-kanban-col__pct">· 60%</span></div>
+                  <div class="zoho-kanban-col__title">Shortlisted <span class="zoho-kanban-col__count">2</span><span class="zoho-kanban-col__pct"></span></div>
                   <div class="zoho-kanban-col__amount">2 applicants</div>
                 </div>
-                <div class="zoho-kanban-card"><div class="zoho-kanban-card__name">Amara Diallo</div><span class="zoho-kanban-card__stage" style="background:#C8AB00;color:#fff;">Shortlisted</span><div class="zoho-kanban-card__meta">Marcus Weber<br>Amara Diallo<br>—<br>20 May 2026</div></div>
+                <div class="zoho-kanban-col__cards" id="kanban-col-shortlisted"></div>
               </div>
             </div>
             <div class="zoho-smart-chat"><span class="zoho-smart-chat__placeholder">Here is your Smart Chat (Ctrl+Space)</span><div class="zoho-smart-chat__icons"><span class="zoho-smart-chat__icon">💬</span><span class="zoho-smart-chat__icon">🔔</span></div></div>
@@ -1017,6 +1014,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
               <div class="zoho-page-strip__view">All Contacts ⌄</div>
               <span class="zoho-page-strip__more" data-toast="More view options">⋯</span>
             </div>
+            <div id="cl-scope-chip" class="role-scope-chip" style="display:inline-flex;align-items:center;gap:6px;background:#e8eef6;color:#003087;border-radius:4px;padding:4px 12px;font-size:12px;font-weight:500;margin-bottom:4px;margin-left:22px;margin-top:8px;">🇩🇪 5 contacts · Marcus's Germany NC scope</div>
             <!-- Toolbar -->
             <div class="zoho-toolbar">
               <button class="zoho-toolbar__btn" data-toast="Filter contacts"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:2px;"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg> Filter</button>
@@ -1348,6 +1346,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
           </aside>
           <main class="zoho-content">
             <div class="zoho-page-strip"><div class="zoho-page-strip__view" data-role-variant="marcus:Germany Programmes ⌄|ana:Brazil Programmes ⌄|akanksha:All Programmes ⌄|data-protection:All Programmes ⌄">Germany Programmes ⌄</div><span style="margin-left:auto;" class="zoho-helper-tag" data-role-variant="marcus:Marcus sees only Germany programmes|ana:Ana sees only Brazil programmes|akanksha:Akanksha has global visibility|data-protection:Read-only access">Marcus sees only Germany programmes</span></div>
+            <div id="prog-scope-chip" class="role-scope-chip" style="display:inline-flex;align-items:center;gap:6px;background:#e8eef6;color:#003087;border-radius:4px;padding:4px 12px;font-size:12px;font-weight:500;margin-bottom:4px;margin-left:22px;margin-top:4px;">🇩🇪 1 programme · Marcus's Germany NC scope</div>
             <div class="zoho-toolbar">
               <button class="zoho-toolbar__btn" data-toast="Filter programmes">▼ Filter</button>
               <button class="zoho-toolbar__btn" data-toast="Sort programmes">↕ Sort</button>
@@ -1424,6 +1423,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Robo
               <div class="zoho-page-strip__view" data-role-variant="marcus:Germany Applications ⌄|ana:Brazil Applications ⌄|akanksha:All Applications ⌄|data-protection:All Applications ⌄">Germany Applications ⌄</div>
               <span style="margin-left:auto;" class="zoho-helper-tag" data-role-variant="marcus:Marcus sees only Germany — no Brazil, Kenya, India or UK records|ana:Ana sees only Brazil — no Germany, Kenya, India, UK records|akanksha:Akanksha has global visibility|data-protection:Read-only access">Marcus sees only Germany — no Brazil, Kenya, India or UK records</span>
             </div>
+            <div id="app-list-scope-chip" class="role-scope-chip" style="display:inline-flex;align-items:center;gap:6px;background:#e8eef6;color:#003087;border-radius:4px;padding:4px 12px;font-size:12px;font-weight:500;margin-bottom:4px;margin-left:22px;margin-top:8px;">🇩🇪 9 applications · Marcus's Germany NC scope</div>
             <div class="zoho-toolbar">
               <button class="zoho-toolbar__btn" data-toast="Filter">▼ Filter</button>
               <button class="zoho-toolbar__btn" data-toast="Sort">↕ Sort</button>
@@ -2206,7 +2206,8 @@ UWC.contacts = {
   'akanksha-c': _c('Akanksha Anand','AA','linear-gradient(135deg,#003087,#a855f7)','IO Admin','25 Jan 1980','Female','Indian','a.anand@uwcio.uwc.org','+91 98765 43210','—','UWC International\n17–21 Emerald St\nLondon WC1N 3QN\nUK','IO Super Admin — global CRM access','Active','akanksha.anand',[{time:'03:00 PM',icon:'✎',desc:'Nationality was updated to Indian'},{time:'11:30 AM',icon:'➕',desc:'Contact record was created'}]),
   'maria': _c('Maria Almeida','MA','linear-gradient(135deg,#ec4899,#f59e0b)','Guardian','02 Apr 1975','Female','Brazilian','maria.almeida@noemail.invalid','+55 11 9 8888 2222','—','Rua Augusta 1240\nSão Paulo, SP 01304-001\nBrazil','Parent/Guardian of applicant Sofia Almeida','Inactive','—',[{time:'04:39 PM',icon:'✎',desc:'Relationship set to Mother of Sofia Almeida'},{time:'04:39 PM',icon:'➕',desc:'Contact record was created'}]),
   'grace': _c('Grace Omondi','GO','linear-gradient(135deg,#10b981,#f59e0b)','Student','08 Jul 2008','Female','Kenyan','g.omondi@uwckenya.org','+254 700 123456','—','Ngong Road 15\nNairobi 00100\nKenya','—','Active','grace.omondi',[{time:'11:00 AM',icon:'✎',desc:'Nationality was updated to Kenyan'},{time:'10:00 AM',icon:'➕',desc:'Contact record was created'}]),
-  'jonathan': _c('Jonathan Osei','JO','linear-gradient(135deg,#6366f1,#22c55e)','Student','17 Nov 2007','Male','Ghanaian','j.osei@example.com','+233 20 111 2222','—','Cantonments Rd 8\nAccra\nGhana','—','Active','jonathan.osei',[{time:'02:00 PM',icon:'✎',desc:'Type was updated to Student'},{time:'09:30 AM',icon:'➕',desc:'Contact record was created'}])
+  'jonathan': _c('Jonathan Osei','JO','linear-gradient(135deg,#6366f1,#22c55e)','Student','17 Nov 2007','Male','Ghanaian','j.osei@example.com','+233 20 111 2222','—','Cantonments Rd 8\nAccra\nGhana','—','Active','jonathan.osei',[{time:'02:00 PM',icon:'✎',desc:'Type was updated to Student'},{time:'09:30 AM',icon:'➕',desc:'Contact record was created'}]),
+  'kwame': _c('Kwame Asante','KA','linear-gradient(135deg,#f59e0b,#22c55e)','Student','04 Mar 2008','Male','Kenyan','k.asante@uwckenya.org','+254 711 234567','—','Eldoret Road 22\nEldoret 30100\nKenya','—','Active','kwame.asante',[{time:'11:00 AM',icon:'⭐',desc:'Nominated to UWC Atlantic'},{time:'10:30 AM',icon:'📨',desc:'Application submitted'},{time:'09:00 AM',icon:'➕',desc:'Contact record was created'}])
 };
 
 (function () {
@@ -2250,6 +2251,8 @@ UWC.contacts = {
   
   try { document.dispatchEvent(new CustomEvent("roleChanged", { detail: { roleId: id } })); } catch(e){}
   try { applyDPLHiding(); } catch(e){}
+  // Role-filter all list/kanban views
+  try { renderAllRoleViews(id); } catch(e){}
 }
 })();
 
@@ -2360,6 +2363,12 @@ function showView(viewId, opts) {
 
   try { applyDPLHiding(); } catch(e){}
   try { if (typeof applyCapabilityGating === "function") applyCapabilityGating(document.body.dataset.currentRole); } catch(e){}
+  // Per-view renders triggered on navigation
+  var _rv = document.body.dataset.currentRole || 'marcus';
+  if (viewId === 'applications-kanban') { try { renderApplicationsKanban(_rv); } catch(e){} }
+  else if (viewId === 'applications-list') { try { renderApplicationsList(_rv); } catch(e){} }
+  else if (viewId === 'contacts-list') { try { renderContactsList(_rv); } catch(e){} }
+  else if (viewId === 'programmes-list') { try { renderProgrammesList(_rv); } catch(e){} }
 }
 
 function updateScopeBanner() {
@@ -2412,6 +2421,7 @@ document.addEventListener('click', function(e) {
     RoleSwitcher.init({ scenarioCode: 'A', defaultRoleId: 'marcus', roles: UWC.getRolesFor('A') });
 applyCapabilityGating('marcus');
 updateScopeBannerForRole('marcus');
+    try { renderAllRoleViews('marcus'); } catch(e) {}
     showView('home');
     showToast('Reset — back to Marcus home view');
     return;
@@ -2889,7 +2899,8 @@ UWC.applications = {
   'sofia-app': _a('APP-2026-00041','Sofia Almeida','SA','linear-gradient(135deg,#f59e0b,#ec4899)','Under Review','UWC Brazil 2026 Selection','Brazil','22 May 2026 · 13:10','Received · 21 May 2026','Eligible ✓','"As mudanças climáticas afetam as comunidades ribeirinhas..."','"Growing up in São Paulo..."',[{icon:'🔍',desc:'Under review'},{icon:'📨',desc:'Application submitted'},{icon:'➕',desc:'Application record created'}]),
   'miguel':    _a('APP-2026-00043','Miguel Santos','MS','linear-gradient(135deg,#22c55e,#3b82f6)','In Progress','UWC Brazil 2026 Selection','Brazil','—','Pending','Pending','—','—',[{icon:'✎',desc:'Application form in progress'},{icon:'➕',desc:'Application record created'}]),
   'clara-app': _a('APP-2026-00039','Clara Ribeiro','CR','linear-gradient(135deg,#a855f7,#6366f1)','Submitted','UWC Brazil 2026 Selection','Brazil','21 May 2026 · 15:30','Received · 20 May 2026','Eligible ✓','"A desigualdade social no Brasil..."','"Rio taught me that beauty and injustice coexist..."',[{icon:'📨',desc:'Application submitted'},{icon:'✅',desc:'Parental consent received'},{icon:'➕',desc:'Application record created'}]),
-  'lucas':     _a('APP-2026-00038','Lucas Ferreira','LF','linear-gradient(135deg,#f59e0b,#10b981)','Shortlisted','UWC Brazil 2026 Selection','Brazil','19 May 2026 · 10:44','Received · 18 May 2026','Eligible ✓','"O empoderamento juvenil começa na escola..."','"From Fortaleza to the world..."',[{icon:'⭐',desc:'Shortlisted by panel'},{icon:'📨',desc:'Application submitted'},{icon:'➕',desc:'Application record created'}])
+  'lucas':     _a('APP-2026-00038','Lucas Ferreira','LF','linear-gradient(135deg,#f59e0b,#10b981)','Shortlisted','UWC Brazil 2026 Selection','Brazil','19 May 2026 · 10:44','Received · 18 May 2026','Eligible ✓','"O empoderamento juvenil começa na escola..."','"From Fortaleza to the world..."',[{icon:'⭐',desc:'Shortlisted by panel'},{icon:'📨',desc:'Application submitted'},{icon:'➕',desc:'Application record created'}]),
+  'kwame':     _a('APP-2026-00052','Kwame Asante','KA','linear-gradient(135deg,#f59e0b,#22c55e)','Shortlisted','UWC Atlantic 2026 Nominations','Kenya','18 May 2026 · 11:20','Received · 17 May 2026','Eligible ✓','"The land dispossession crisis in Kenya..."','"Growing up near Eldoret, I saw families lose ancestral land..."',[{icon:'⭐',desc:'Nominated to UWC Atlantic'},{icon:'📨',desc:'Application submitted'},{icon:'➕',desc:'Application record created'}])
 };
 
 /* ===== Programmes data store ===== */
@@ -2897,6 +2908,347 @@ UWC.programmes = {
   'germany': { name: 'UWC Deutschland 2026 Auswahl', code: 'DE-2026', nc: 'Germany', year: '2026', deadline: '30 May 2026', places: '6 (4 remaining)', owner: 'Marcus Weber' },
   'brazil':  { name: 'UWC Brazil 2026 Selection',    code: 'BR-2026', nc: 'Brazil',  year: '2026', deadline: '15 Jun 2026',  places: '8 (5 remaining)', owner: 'Ana Carvalho' }
 };
+
+/* ===== UWC.recordsByRole — role-to-allowed-record-ids mapping ===== */
+UWC.recordsByRole = {
+  // Marcus = Germany NC Admin
+  marcus: {
+    applications: ['anneke','tobias','felix','sophie','lena','max','eva','klaus','amara'],
+    contacts: ['marcus-c'],
+    programmes: ['de-2026']
+  },
+  // Ana = Brazil NC Admin
+  ana: {
+    applications: ['sofia-app','miguel','clara-app','lucas'],
+    contacts: ['ana-c','sofia','maria','miguel','clara','paulo'],
+    programmes: ['br-2026']
+  },
+  // Akanksha = IO Super Admin (global)
+  akanksha: {
+    applications: 'ALL',
+    contacts: 'ALL',
+    programmes: 'ALL'
+  },
+  // Fatima = IO Admissions (global read)
+  fatima: {
+    applications: 'ALL',
+    contacts: ['ana-c','marcus-c','grace','akanksha-c'],
+    programmes: 'ALL'
+  },
+  // Clara = NC Reviewer Brazil — only assigned apps
+  clara: {
+    applications: ['sofia-app','miguel'],
+    contacts: ['sofia','maria','miguel'],
+    programmes: ['br-2026']
+  },
+  // Paulo = NC Reviewer Brazil — only assigned apps
+  paulo: {
+    applications: ['sofia-app','clara-app'],
+    contacts: ['sofia','maria','clara'],
+    programmes: ['br-2026']
+  },
+  // Helen = School Admissions Atlantic — nominations to Atlantic
+  helen: {
+    applications: ['sofia-app','kwame'],
+    contacts: ['sofia','kwame','maria'],
+    programmes: 'ALL'
+  },
+  // Data Protection Lead — sees all, sensitive fields masked
+  'data-protection': {
+    applications: 'ALL',
+    contacts: 'ALL',
+    programmes: 'ALL',
+    maskColumns: ['dob','phone','financial','parent_phone']
+  }
+};
+
+/* ─── Kanban stage config ─── */
+var KANBAN_STAGES = [
+  { key: 'registered',    label: 'Registered',   bg: '#f3f4f6', textColor: '#4b5563', cardBg: '#f3f4f6', cardText: '#4b5563' },
+  { key: 'in-progress',   label: 'In Progress',  bg: '#dbeafe', textColor: '#1e3a8a', cardBg: '#dbeafe', cardText: '#1e3a8a' },
+  { key: 'submitted',     label: 'Submitted',    bg: '#E8EEF6', textColor: '#003087', cardBg: '#003087', cardText: '#fff' },
+  { key: 'under-review',  label: 'Under Review', bg: '#ede9fe', textColor: '#5b21b6', cardBg: '#ede9fe', cardText: '#5b21b6' },
+  { key: 'shortlisted',   label: 'Shortlisted',  bg: '#fefce8', textColor: '#854d0e', cardBg: '#C8AB00', cardText: '#fff' }
+];
+
+/* ─── Stage normalisation helper ─── */
+function normaliseStage(stage) {
+  if (!stage) return 'registered';
+  var s = stage.toLowerCase().replace(/[^a-z]/g, '-');
+  if (s === 'in-progress') return 'in-progress';
+  if (s === 'under-review') return 'under-review';
+  return s; // registered, submitted, shortlisted
+}
+
+/* ─── Scope chip labels ─── */
+var SCOPE_CHIP_LABELS = {
+  marcus: { label: "Marcus's Germany NC scope",   icon: '🇩🇪' },
+  ana:    { label: "Ana's Brazil NC scope",        icon: '🇧🇷' },
+  akanksha: { label: "IO Super Admin · global",   icon: '🌐' },
+  fatima: { label: "IO Admissions · global read",  icon: '🌐' },
+  clara:  { label: "Clara's reviewer queue · assigned to her only", icon: '🔍' },
+  paulo:  { label: "Paulo's reviewer queue · assigned to him only", icon: '🔍' },
+  helen:  { label: "Atlantic School Admissions",  icon: '🏫' },
+  'data-protection': { label: "DPL view · sensitive fields masked in detail views", icon: '🛡' }
+};
+
+function getScopeChipHtml(roleId, count, type) {
+  var sc = SCOPE_CHIP_LABELS[roleId] || { label: roleId, icon: '👤' };
+  var isDpl = roleId === 'data-protection';
+  var chipBg = isDpl ? '#fee2e2' : '#e8eef6';
+  var chipColor = isDpl ? '#991b1b' : '#003087';
+  var countText = (typeof count === 'number') ? count + ' ' + type + ' · ' : '';
+  var dplNote = isDpl ? ' <span style="background:#fee2e2;color:#991b1b;padding:1px 6px;border-radius:4px;font-size:10px;margin-left:4px;font-weight:600;">sensitive fields masked in detail views</span>' : '';
+  return '<div class="role-scope-chip" style="display:inline-flex;align-items:center;gap:6px;background:' + chipBg + ';color:' + chipColor + ';border-radius:4px;padding:4px 12px;font-size:12px;font-weight:500;margin-bottom:10px;margin-left:22px;margin-top:8px;">' + sc.icon + ' ' + countText + sc.label + dplNote + '</div>';
+}
+
+/* ─── Helper: get allowed app keys for role ─── */
+function getAllowedAppKeys(roleId) {
+  var rbr = UWC.recordsByRole[roleId] || {};
+  var allowed = rbr.applications;
+  if (!allowed || allowed === 'ALL') return Object.keys(UWC.applications);
+  return allowed.filter(function(k) { return !!UWC.applications[k]; });
+}
+
+/* ─── Helper: get allowed contact ids for role ─── */
+function getAllowedContactIds(roleId) {
+  var rbr = UWC.recordsByRole[roleId] || {};
+  var allowed = rbr.contacts;
+  if (!allowed || allowed === 'ALL') return Object.keys(UWC.contacts);
+  return allowed.filter(function(k) { return !!UWC.contacts[k]; });
+}
+
+/* ─── Helper: get allowed programme ids for role ─── */
+function getAllowedProgIds(roleId) {
+  var rbr = UWC.recordsByRole[roleId] || {};
+  var allowed = rbr.programmes;
+  var allKeys = Object.keys(UWC.programmes);
+  if (!allowed || allowed === 'ALL') return allKeys;
+  // Map short codes (de-2026 → germany, br-2026 → brazil)
+  var codeMap = { 'de-2026': 'germany', 'br-2026': 'brazil' };
+  return allowed.map(function(c) { return codeMap[c] || c; }).filter(function(k) { return !!UWC.programmes[k]; });
+}
+
+/* ===== renderApplicationsKanban(roleId) ===== */
+function renderApplicationsKanban(roleId) {
+  roleId = roleId || document.body.dataset.currentRole || 'marcus';
+  var allowedKeys = getAllowedAppKeys(roleId);
+
+  // Update scope chip
+  var chipWrap = document.getElementById('kanban-scope-chip');
+  if (chipWrap) chipWrap.outerHTML = getScopeChipHtml(roleId, allowedKeys.length, allowedKeys.length === 1 ? 'application' : 'applications').replace('class="role-scope-chip"', 'class="role-scope-chip" id="kanban-scope-chip"');
+
+  // Group by stage
+  var byStage = {};
+  KANBAN_STAGES.forEach(function(s) { byStage[s.key] = []; });
+  allowedKeys.forEach(function(k) {
+    var app = UWC.applications[k];
+    if (!app) return;
+    var stageKey = normaliseStage(app.stage);
+    if (!byStage[stageKey]) byStage[stageKey] = [];
+    byStage[stageKey].push({ key: k, app: app });
+  });
+
+  // Render cards per stage column
+  KANBAN_STAGES.forEach(function(stageCfg) {
+    var col = document.getElementById('kanban-col-' + stageCfg.key);
+    if (!col) return;
+    var cards = byStage[stageCfg.key] || [];
+
+    // Update column header count
+    var hdr = col.closest('.zoho-kanban-col');
+    if (hdr) {
+      var countEl = hdr.querySelector('.zoho-kanban-col__count');
+      var amtEl = hdr.querySelector('.zoho-kanban-col__amount');
+      if (countEl) countEl.textContent = cards.length;
+      if (amtEl) amtEl.textContent = cards.length + ' applicant' + (cards.length !== 1 ? 's' : '');
+    }
+
+    if (!cards.length) {
+      col.innerHTML = '<div style="color:#9ca3af;font-size:12px;font-style:italic;padding:8px 0;">No applications in this stage</div>';
+      return;
+    }
+    col.innerHTML = cards.map(function(item) {
+      var app = item.app;
+      var hasTick = (app.stage === 'Submitted' || app.stage === 'Shortlisted');
+      var submittedLine = app.submitted && app.submitted !== '—' ? app.submitted.split('·')[0].trim() : '—';
+      return '<div class="zoho-kanban-card" data-app-key="' + item.key + '">' +
+        '<div class="zoho-kanban-card__name">' + app.name + '</div>' +
+        '<span class="zoho-kanban-card__stage" style="background:' + stageCfg.cardBg + ';color:' + stageCfg.cardText + ';">' + app.stage + '</span>' +
+        '<div class="zoho-kanban-card__meta">' + (app.nc || '') + '<br>' + app.name + '<br>—<br>' + submittedLine + '</div>' +
+        (hasTick ? '<span class="zoho-kanban-card__icon-tick">✓</span>' : '') +
+        '</div>';
+    }).join('');
+  });
+}
+
+/* ===== renderApplicationsList(roleId) ===== */
+function renderApplicationsList(roleId) {
+  roleId = roleId || document.body.dataset.currentRole || 'marcus';
+  var allowedKeys = getAllowedAppKeys(roleId);
+  var tbody = document.getElementById('app-list-tbody');
+  if (!tbody) return;
+
+  var stageHtmlMap = {
+    'Submitted':   '<span class="zoho-pill" style="background:#003087;color:#fff;">Submitted</span>',
+    'Under Review':'<span class="zoho-pill zoho-pill--qual">Under Review</span>',
+    'In Progress': '<span class="zoho-pill zoho-pill--elig">In Progress</span>',
+    'Shortlisted': '<span class="zoho-pill zoho-pill--shortlist">Shortlisted</span>',
+    'Registered':  '<span class="zoho-pill" style="background:#f3f4f6;color:#4b5563;">Registered</span>',
+    'Nominated':   '<span class="zoho-pill zoho-pill--nominate">Nominated</span>'
+  };
+
+  if (!allowedKeys.length) {
+    tbody.innerHTML = '<tr><td colspan="8" style="padding:20px;text-align:center;color:#9ca3af;font-style:italic;">No applications visible for your role.</td></tr>';
+  } else {
+    tbody.innerHTML = allowedKeys.map(function(k, i) {
+      var app = UWC.applications[k];
+      if (!app) return '';
+      var stageHtml = stageHtmlMap[app.stage] || '<span class="zoho-pill">' + (app.stage || '—') + '</span>';
+      var submittedDate = app.submitted && app.submitted !== '—' ? app.submitted.split('·')[0].trim() : '—';
+      return '<tr class="app-row" data-app-id="' + k + '">' +
+        '<td><input type="checkbox"></td>' +
+        '<td class="zoho-list__name-link app-row-link" data-app-id="' + k + '">' + app.id + '</td>' +
+        '<td>' + app.name + '</td>' +
+        '<td>' + stageHtml + '</td>' +
+        '<td>' + (app.programme || '—') + '</td>' +
+        '<td>' + submittedDate + '</td>' +
+        '<td>' + (app.nc || '—') + '</td>' +
+        '<td>⋯</td>' +
+        '</tr>';
+    }).join('');
+  }
+
+  // Scope chip
+  var listScopeChip = document.getElementById('app-list-scope-chip');
+  var newChipHtml = getScopeChipHtml(roleId, allowedKeys.length, allowedKeys.length === 1 ? 'application' : 'applications').replace('class="role-scope-chip"', 'class="role-scope-chip" id="app-list-scope-chip"');
+  if (listScopeChip) {
+    listScopeChip.outerHTML = newChipHtml;
+  }
+
+  // Status bar total
+  var totalEl = document.querySelector('#sc-applications-list .cl-statusbar b, #sc-applications-list .app-list-total');
+  if (totalEl) totalEl.textContent = allowedKeys.length;
+}
+
+/* ===== renderContactsList(roleId) ===== */
+function renderContactsList(roleId) {
+  roleId = roleId || document.body.dataset.currentRole || 'marcus';
+  var allowedIds = getAllowedContactIds(roleId);
+  var tbody = document.getElementById('cl-tbody');
+  if (!tbody) return;
+  var isDpl = roleId === 'data-protection';
+
+  var datePills = {
+    'sofia':       '<span class="date-pill date-pill--overdue">MAY 27</span>',
+    'marcus-c':    '<span class="date-pill date-pill--upcoming">MAY 29</span>',
+    'ana-c':       '<span class="date-pill date-pill--today">TODAY</span>',
+    'clara':       '<span class="date-pill date-pill--upcoming">MAY 29</span>',
+    'paulo':       '<span class="date-pill date-pill--overdue">MAY 26</span>',
+    'helen':       '<span class="date-pill date-pill--upcoming">MAY 29</span>',
+    'akanksha-c':  '<span class="date-pill date-pill--overdue">MAY 25</span>',
+    'maria':       '',
+    'grace':       '',
+    'jonathan':    '<span class="date-pill date-pill--today">TODAY</span>',
+    'kwame':       ''
+  };
+
+  if (!allowedIds.length) {
+    tbody.innerHTML = '<tr><td colspan="8" style="padding:20px;text-align:center;color:#9ca3af;font-style:italic;">No contacts visible for your role.</td></tr>';
+  } else {
+    tbody.innerHTML = allowedIds.map(function(id) {
+      var c = UWC.contacts[id];
+      if (!c) return '';
+      var phone = isDpl ? '<span class="field-masked">••••</span>' : (c.phone && c.phone !== '—' ? c.phone : c.mobile || '—');
+      return '<tr data-contact-id="' + id + '">' +
+        '<td><input type="checkbox"></td>' +
+        '<td class="cl-icon-col">✉</td>' +
+        '<td>' + (datePills[id] || '') + '</td>' +
+        '<td><span class="cl-name-link" data-contact-id="' + id + '">' + c.name + '</span></td>' +
+        '<td style="color:#6b7280;">' + c.email + '</td>' +
+        '<td style="color:#6b7280;">' + phone + '</td>' +
+        '<td style="color:#6b7280;">' + (c.owner || 'UWC A2Z Admin') + '</td>' +
+        '<td class="cl-icon-col">⋯</td>' +
+        '</tr>';
+    }).join('');
+  }
+
+  // Update total count in status bar
+  var totalEl = document.querySelector('#sc-contacts-list .cl-statusbar b');
+  if (totalEl) totalEl.textContent = allowedIds.length;
+
+  // Scope chip
+  var clScopeChip = document.getElementById('cl-scope-chip');
+  var newChipHtml = getScopeChipHtml(roleId, allowedIds.length, allowedIds.length === 1 ? 'contact' : 'contacts').replace('class="role-scope-chip"', 'class="role-scope-chip" id="cl-scope-chip"');
+  if (clScopeChip) {
+    clScopeChip.outerHTML = newChipHtml;
+  }
+}
+
+/* ===== renderProgrammesList(roleId) ===== */
+function renderProgrammesList(roleId) {
+  roleId = roleId || document.body.dataset.currentRole || 'marcus';
+  var allowedProgIds = getAllowedProgIds(roleId);
+
+  // Full programme rows data (some only for akanksha)
+  var allProgRows = [
+    { id: 'germany', name: 'UWC Deutschland 2026 Auswahl', code: 'DE-2026', nc: 'Germany', year: '2026',
+      deadline: '<span style="background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:500;">30 May 2026</span>',
+      places: '6 places (4 remaining)', status: '<span class="zoho-pill zoho-pill--nominate">Active</span>', progId: 'germany' },
+    { id: 'brazil', name: 'UWC Brazil 2026 Selection', code: 'BR-2026', nc: 'Brazil', year: '2026',
+      deadline: '<span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:500;">15 Jun 2026</span>',
+      places: '8 places (5 remaining)', status: '<span class="zoho-pill zoho-pill--nominate">Active</span>', progId: 'brazil' },
+    { id: 'ke-2026', name: 'UWC Kenya 2026 Selection', code: 'KE-2026', nc: 'Kenya', year: '2026',
+      deadline: '20 Jun 2026', places: '4 places', status: '<span class="zoho-pill zoho-pill--nominate">Active</span>', progId: null },
+    { id: 'in-2026', name: 'UWC India 2026 Selection', code: 'IN-2026', nc: 'India', year: '2026',
+      deadline: '<span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:4px;font-size:11px;">30 Apr 2026 Closed</span>',
+      places: '5 places', status: '<span class="zoho-pill" style="background:#f0f2f5;color:#6b7280;">Closed</span>', progId: null }
+  ];
+
+  // For helen and fatima (ALL) we show all active programmes (same as akanksha sans india)
+  var showAll = (allowedProgIds.length === Object.keys(UWC.programmes).length ||
+                 UWC.recordsByRole[roleId] && UWC.recordsByRole[roleId].programmes === 'ALL');
+
+  var visibleRows;
+  if (showAll) {
+    visibleRows = allProgRows;
+  } else {
+    visibleRows = allProgRows.filter(function(r) { return allowedProgIds.indexOf(r.id) !== -1 || allowedProgIds.indexOf(r.progId) !== -1; });
+  }
+
+  var tbody = document.querySelector('#sc-programmes-list table.zoho-list tbody');
+  if (!tbody) return;
+
+  tbody.innerHTML = visibleRows.map(function(r) {
+    return '<tr class="prog-row" data-prog-id="' + (r.progId || r.id) + '">' +
+      '<td><input type="checkbox"></td>' +
+      '<td class="zoho-list__name-link prog-name-link" data-prog-id="' + (r.progId || r.id) + '">' + r.name + '</td>' +
+      '<td>' + r.code + '</td>' +
+      '<td>' + r.nc + '</td>' +
+      '<td>' + r.year + '</td>' +
+      '<td>' + r.deadline + '</td>' +
+      '<td>' + r.places + '</td>' +
+      '<td>' + r.status + '</td>' +
+      '<td>⋯</td>' +
+      '</tr>';
+  }).join('');
+
+  // Scope chip
+  var progScopeChip = document.getElementById('prog-scope-chip');
+  var newChipHtml = getScopeChipHtml(roleId, visibleRows.length, visibleRows.length === 1 ? 'programme' : 'programmes').replace('class="role-scope-chip"', 'class="role-scope-chip" id="prog-scope-chip"');
+  if (progScopeChip) {
+    progScopeChip.outerHTML = newChipHtml;
+  }
+}
+
+/* ===== renderAllRoleViews — call all 4 renderers ===== */
+function renderAllRoleViews(roleId) {
+  roleId = roleId || document.body.dataset.currentRole || 'marcus';
+  try { renderApplicationsKanban(roleId); } catch(e) { console.error('renderApplicationsKanban:', e); }
+  try { renderApplicationsList(roleId); } catch(e) { console.error('renderApplicationsList:', e); }
+  try { renderContactsList(roleId); } catch(e) { console.error('renderContactsList:', e); }
+  try { renderProgrammesList(roleId); } catch(e) { console.error('renderProgrammesList:', e); }
+}
 
 /* ===== Issue 8: New data stores ===== */
 UWC.profiles = [
@@ -3270,6 +3622,7 @@ function renderProfilePerms() {
 RoleSwitcher.init({ scenarioCode: 'A', defaultRoleId: 'marcus', roles: UWC.getRolesFor('A') });
 applyCapabilityGating('marcus');
 updateScopeBannerForRole('marcus');
+try { renderAllRoleViews('marcus'); } catch(e) { console.error('init renderAllRoleViews:', e); }
 
 // Patch role switcher: on role click, navigate to that role's default view
 (function() {
