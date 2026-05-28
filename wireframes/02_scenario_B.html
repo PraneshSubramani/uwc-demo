@@ -7,7 +7,7 @@
 <link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ====== Reset + base ====== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -190,15 +190,15 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 /* UWC Portal shell */
 .uwc-portal-shell { background: #f3f5fa; min-height: 100vh; display: flex; flex-direction: column; overflow: visible; }
 .uwc-portal-topbar { background: linear-gradient(90deg, #003087 0%, #004A97 100%); color: #fff; padding: 14px 24px; display: flex; align-items: center; gap: 16px; border-bottom: 3px solid #C8102E; flex-shrink: 0; }
-.uwc-portal-topbar__logo { width: 40px; height: 40px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #003087; font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 13px; flex-shrink: 0; }
-.uwc-portal-topbar__title { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: 17px; }
+.uwc-portal-topbar__logo { width: 40px; height: 40px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #003087; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-weight: 700; font-size: 13px; flex-shrink: 0; }
+.uwc-portal-topbar__title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-weight: 500; font-size: 17px; }
 .uwc-portal-topbar__lang { margin-left: auto; display: flex; gap: 4px; }
 .uwc-portal-topbar__lang-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; }
 .uwc-portal-topbar__lang-btn.active { background: rgba(255,255,255,0.2); color: #fff; border-color: rgba(255,255,255,0.6); }
 .uwc-portal-body { flex: 1; padding: 24px; }
 .uwc-portal-content { max-width: 920px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 32px; box-shadow: 0 2px 8px rgba(0,48,135,0.06); }
-.uwc-portal-h1 { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: 26px; color: #003087; margin-bottom: 8px; }
-.uwc-portal-h2 { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: 18px; color: #0d1b3e; margin-bottom: 6px; }
+.uwc-portal-h1 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-weight: 500; font-size: 26px; color: #003087; margin-bottom: 8px; }
+.uwc-portal-h2 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-weight: 500; font-size: 18px; color: #0d1b3e; margin-bottom: 6px; }
 .uwc-portal-sub { color: #5a6480; font-size: 14px; line-height: 1.6; }
 .uwc-portal-btn-primary { background: #003087; color: #fff; border: none; padding: 12px 22px; border-radius: 8px; font-weight: 500; font-size: 14px; cursor: pointer; }
 
@@ -215,7 +215,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 /* Progress card */
 .progress-card { background: linear-gradient(135deg, #003087 0%, #004A97 100%); color: #fff; border-radius: 12px; padding: 24px; margin-bottom: 20px; display: flex; align-items: center; gap: 20px; }
 .progress-card__info { flex: 1; }
-.progress-card__title { font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 500; margin-bottom: 4px; }
+.progress-card__title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-size: 20px; font-weight: 500; margin-bottom: 4px; }
 .progress-card__sub { font-size: 13px; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
 .progress-bar-track { background: rgba(255,255,255,0.2); border-radius: 999px; height: 8px; margin-bottom: 6px; }
 .progress-bar-fill { background: #fff; border-radius: 999px; height: 8px; width: 60%; }
@@ -282,7 +282,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 
 /* Field-reference appendix */
 .appendix { background: #fff; padding: 30px 40px; height: 100%; overflow: auto; }
-.appendix h1 { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; color: #003087; font-size: 24px; margin-bottom: 6px; }
+.appendix h1 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-weight: 500; color: #003087; font-size: 24px; margin-bottom: 6px; }
 .appendix p { color: #5a6480; font-size: 13px; margin-bottom: 22px; }
 .ref-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 20px; }
 .ref-table th { background: #003087; color: #fff; padding: 8px 14px; text-align: left; font-size: 11px; font-weight: 500; }
@@ -297,14 +297,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 <body>
 
 <div class="app">
-    <span class="demo-bar__divider"></span>
-    <span class="demo-bar__step" id="step-counter">Step 1 / 12</span>
-    <div class="demo-bar__nav">
-      <button class="demo-bar__nav-btn" id="prev-btn" title="Previous">‹</button>
-      <button class="demo-bar__nav-btn" id="next-btn" title="Next">›</button>
-    </div>
-  </div>
-
   <div class="stage" id="stage">
 
     <!-- STEP 1 — UWC International landing page (full-viewport, public visitor) -->
@@ -313,7 +305,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         /* === Landing-only styles, namespaced with .lp- prefix === */
         .lp-wrap { background: #fff; min-height: 100vh; color: #0d1b3e; }
         .lp-nav { position: sticky; top: 0; z-index: 100; height: 72px; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; padding: 0 40px; gap: 36px; }
-        .lp-nav__logo { display: flex; align-items: center; gap: 10px; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 22px; color: #003087; letter-spacing: -0.5px; }
+        .lp-nav__logo { display: flex; align-items: center; gap: 10px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-weight: 600; font-size: 22px; color: #003087; letter-spacing: -0.5px; }
         .lp-nav__logo-mark { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #003087 0%, #004A97 100%); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; }
         .lp-nav__links { display: flex; gap: 28px; flex: 1; }
         .lp-nav__link { color: #4b5563; font-size: 14px; font-weight: 500; text-decoration: none; cursor: pointer; transition: color 120ms; }
@@ -336,7 +328,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         .lp-hero__overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,26,77,0.7) 0%, rgba(0,48,135,0.55) 60%, rgba(0,148,130,0.4) 100%); }
         .lp-hero__content { position: relative; max-width: 920px; padding: 0 32px; text-align: center; z-index: 2; }
         .lp-hero__eyebrow { display: inline-block; color: #C8AB00; font-size: 13px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 24px; padding: 6px 18px; border: 1px solid rgba(200,171,0,0.5); border-radius: 999px; background: rgba(200,171,0,0.08); }
-        .lp-hero__headline { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(40px, 6vw, 68px); line-height: 1.05; font-weight: 500; color: #fff; margin: 0 0 24px; letter-spacing: -1px; text-shadow: 0 4px 24px rgba(0,0,0,0.25); }
+        .lp-hero__headline { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-size: clamp(40px, 6vw, 68px); line-height: 1.05; font-weight: 500; color: #fff; margin: 0 0 24px; letter-spacing: -1px; text-shadow: 0 4px 24px rgba(0,0,0,0.25); }
         .lp-hero__sub { font-size: clamp(16px, 1.6vw, 19px); line-height: 1.55; color: rgba(255,255,255,0.92); max-width: 680px; margin: 0 auto 40px; }
         .lp-hero__ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
         .lp-hero__scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 8px; }
@@ -348,20 +340,20 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         .lp-stats__card { background: #fff; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,48,135,0.18); display: grid; grid-template-columns: repeat(4, 1fr); padding: 28px; gap: 0; }
         .lp-stats__item { text-align: center; padding: 8px 14px; position: relative; }
         .lp-stats__item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 14%; bottom: 14%; width: 1px; background: #e5e7eb; }
-        .lp-stats__num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 600; color: #003087; line-height: 1; }
+        .lp-stats__num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-size: 36px; font-weight: 600; color: #003087; line-height: 1; }
         .lp-stats__label { font-size: 13px; color: #6b7280; margin-top: 6px; font-weight: 500; }
 
         /* HOW TO APPLY */
         .lp-section { max-width: 1180px; margin: 0 auto; padding: 96px 32px; }
         .lp-section__eyebrow { text-align: center; color: #003087; font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 12px; }
-        .lp-section__title { text-align: center; font-family: 'Playfair Display', Georgia, serif; font-size: clamp(30px, 3.5vw, 44px); font-weight: 500; color: #0d1b3e; line-height: 1.15; margin: 0 auto 18px; max-width: 700px; letter-spacing: -0.5px; }
+        .lp-section__title { text-align: center; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-size: clamp(30px, 3.5vw, 44px); font-weight: 500; color: #0d1b3e; line-height: 1.15; margin: 0 auto 18px; max-width: 700px; letter-spacing: -0.5px; }
         .lp-section__lede { text-align: center; font-size: 17px; line-height: 1.6; color: #5a6480; max-width: 640px; margin: 0 auto 56px; }
 
         .lp-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; }
         .lp-steps::before { content: ''; position: absolute; top: 32px; left: 12.5%; right: 12.5%; height: 2px; background: repeating-linear-gradient(90deg, #c8cdd8 0, #c8cdd8 6px, transparent 6px, transparent 12px); z-index: 0; }
         .lp-step { background: #fff; padding: 28px 22px 24px; border-radius: 14px; border: 1px solid #e5e7eb; position: relative; z-index: 1; transition: all 200ms; cursor: pointer; }
         .lp-step:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,48,135,0.12); border-color: #003087; }
-        .lp-step__num { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #003087, #004A97); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; margin: 0 auto 16px; box-shadow: 0 4px 12px rgba(0,48,135,0.3); }
+        .lp-step__num { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #003087, #004A97); color: #fff; display: flex; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-size: 24px; font-weight: 600; margin: 0 auto 16px; box-shadow: 0 4px 12px rgba(0,48,135,0.3); }
         .lp-step__title { font-size: 16px; font-weight: 600; color: #0d1b3e; margin-bottom: 8px; text-align: center; }
         .lp-step__desc { font-size: 13.5px; line-height: 1.55; color: #6b7280; text-align: center; }
         .lp-steps-cta { text-align: center; margin-top: 48px; }
@@ -375,7 +367,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         .lp-why__icon--1 { background: #E8EEF6; }
         .lp-why__icon--2 { background: #fef3c7; }
         .lp-why__icon--3 { background: #dcfce7; }
-        .lp-why__card-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; color: #0d1b3e; margin-bottom: 12px; }
+        .lp-why__card-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-size: 22px; font-weight: 500; color: #0d1b3e; margin-bottom: 12px; }
         .lp-why__card-desc { font-size: 14.5px; line-height: 1.65; color: #5a6480; }
 
         /* SCHOOLS row */
@@ -385,7 +377,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         .lp-school:hover { transform: translateY(-4px); }
         .lp-school::before { content: ''; position: absolute; top: -40px; right: -40px; width: 140px; height: 140px; border-radius: 50%; background: rgba(255,255,255,0.06); }
         .lp-school__flag { font-size: 32px; margin-bottom: 14px; position: relative; z-index: 1; }
-        .lp-school__name { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; line-height: 1.25; margin-bottom: 4px; position: relative; z-index: 1; }
+        .lp-school__name { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-size: 19px; font-weight: 500; line-height: 1.25; margin-bottom: 4px; position: relative; z-index: 1; }
         .lp-school__country { font-size: 12.5px; opacity: 0.75; position: relative; z-index: 1; }
         .lp-school__year { font-size: 11px; opacity: 0.6; margin-top: 8px; position: relative; z-index: 1; font-family: 'DM Mono', ui-monospace, monospace; }
 
@@ -393,7 +385,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         .lp-footer { background: #001a4d; color: rgba(255,255,255,0.7); padding: 64px 32px 28px; }
         .lp-footer__inner { max-width: 1180px; margin: 0 auto; }
         .lp-footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
-        .lp-footer__brand-name { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; color: #fff; margin: 14px 0 12px; }
+        .lp-footer__brand-name { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-size: 24px; font-weight: 600; color: #fff; margin: 14px 0 12px; }
         .lp-footer__brand-tag { font-size: 13.5px; line-height: 1.65; }
         .lp-footer__col-title { color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; }
         .lp-footer__link { display: block; color: rgba(255,255,255,0.65); font-size: 13.5px; margin-bottom: 10px; text-decoration: none; cursor: pointer; transition: color 120ms; }
@@ -1132,46 +1124,305 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
       </div>
     </section>
 
-    <!-- STEP 2 — Eligibility blocks 14-year-old -->
-    <section class="screen" id="sc-1">
-      <div class="uwc-portal-shell">
-        <div class="uwc-portal-topbar">
-          <div class="uwc-portal-topbar__logo">UWC</div>
-          <span class="uwc-portal-topbar__title">Eligibility check</span>
-          <div class="uwc-portal-topbar__lang">
-            <button class="uwc-portal-topbar__lang-btn">PT</button>
-            <button class="uwc-portal-topbar__lang-btn active">EN</button>
-            <button class="uwc-portal-topbar__lang-btn">ES</button>
-          </div>
-        </div>
-        <div class="uwc-portal-body">
-          <div class="uwc-portal-content" style="max-width:580px;">
-            <div class="uwc-portal-h1" style="margin-bottom:6px;">Check eligibility</div>
-            <div class="uwc-portal-sub" style="margin-bottom:24px;">To apply for the 2026 Cycle, you must be between 15 and 17 years old by 1 September 2026.</div>
-            <div class="portal-banner portal-banner--error">
-              <span style="font-size:22px;flex-shrink:0;">🚫</span>
-              <div>
-                <div style="font-weight:600;margin-bottom:4px;">You don't meet the age requirement</div>
-                With the date of birth provided you will be <b>14 years old</b> on 01/09/2026. The minimum required is 15 years. You cannot create an account in this cycle.<br><br>
-                You may apply in the <b>2027 Cycle</b>. Enable the alerts below to be notified when applications open.
-              </div>
-            </div>
-            <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:20px 24px;margin-bottom:22px;">
-              <div class="portal-row--full">
-                <label class="portal-label">Date of birth</label>
-                <input class="portal-input error" type="text" value="12 Feb 2012" readonly>
-                <div style="font-size:12px;color:#C8102E;margin-top:6px;display:flex;align-items:center;gap:5px;"><span>⚠</span> Age on 01/09/2026: <b>14 years</b> — below the minimum of 15.</div>
-              </div>
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;">
-              <button style="background:#f3f5fa;color:#374151;border:1px solid #d1d5db;padding:11px 20px;border-radius:8px;font-size:14px;cursor:pointer;">← Back to start</button>
-              <button style="background:#003087;color:#fff;border:none;padding:11px 22px;border-radius:8px;font-size:14px;cursor:pointer;font-weight:500;">📧 Notify me for 2027 Cycle</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
+    <!-- STEP 2 — Eligibility check (interactive wizard with live validation + 3 outcomes) -->
+    <section class="screen" id="sc-1">
+      <style>
+        .elig-shell { min-height: 100vh; background: #f3f5fa; padding: 48px 24px 80px; }
+        .elig-back { background: transparent; border: none; color: #003087; font-size: 14px; font-weight: 500; cursor: pointer; padding: 8px 12px; border-radius: 6px; transition: background 120ms; }
+        .elig-back:hover { background: #E8EEF6; }
+        .elig-card { max-width: 640px; margin: 24px auto 0; background: #fff; border-radius: 16px; box-shadow: 0 12px 40px rgba(0,48,135,0.08); border: 1px solid #e5e7eb; overflow: hidden; }
+        .elig-card__head { padding: 32px 36px 24px; border-bottom: 1px solid #f0f2f5; }
+        .elig-card__eyebrow { color: #003087; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+        .elig-card__title { font-size: 28px; font-weight: 600; color: #0d1b3e; line-height: 1.2; margin: 0 0 10px; letter-spacing: -0.3px; }
+        .elig-card__sub { font-size: 14.5px; line-height: 1.55; color: #5a6480; }
+        .elig-card__body { padding: 28px 36px 32px; }
+
+        .elig-field { margin-bottom: 22px; }
+        .elig-field__label { display: block; font-size: 13px; font-weight: 600; color: #0d1b3e; margin-bottom: 8px; }
+        .elig-field__label .req { color: #c8102e; margin-left: 2px; }
+        .elig-field__input, .elig-field__select {
+          width: 100%; padding: 12px 14px; border: 1.5px solid #d1d5db; border-radius: 8px;
+          font-family: inherit; font-size: 14.5px; color: #0d1b3e; background: #fff;
+          transition: border-color 150ms ease, box-shadow 150ms ease;
+          appearance: none; -webkit-appearance: none;
+        }
+        .elig-field__input:hover, .elig-field__select:hover { border-color: #9ca3af; }
+        .elig-field__input:focus, .elig-field__select:focus { outline: none; border-color: #003087; box-shadow: 0 0 0 3px rgba(0,48,135,0.15); }
+        .elig-field--ok .elig-field__input, .elig-field--ok .elig-field__select { border-color: #16a34a; }
+        .elig-field--err .elig-field__input, .elig-field--err .elig-field__select { border-color: #c8102e; }
+        .elig-field__select { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
+        .elig-field__msg { margin-top: 6px; font-size: 12.5px; line-height: 1.45; display: flex; align-items: flex-start; gap: 6px; min-height: 18px; }
+        .elig-field__msg.ok { color: #16a34a; }
+        .elig-field__msg.err { color: #c8102e; }
+        .elig-field__msg.info { color: #5a6480; }
+
+        .elig-submit-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 8px; padding-top: 24px; border-top: 1px solid #f0f2f5; }
+        .elig-submit-row__help { font-size: 12.5px; color: #6b7280; flex: 1; }
+        .elig-submit { background: #c8102e; color: #fff; border: none; padding: 14px 32px; font-size: 15px; font-weight: 600; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 14px rgba(200,16,46,0.28); transition: all 180ms ease; }
+        .elig-submit:hover { background: #a00d24; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(200,16,46,0.35); }
+        .elig-submit:focus { outline: none; box-shadow: 0 0 0 4px rgba(200,16,46,0.25), 0 4px 14px rgba(200,16,46,0.28); }
+
+        .elig-outcome { padding: 0; }
+        .elig-outcome__top { padding: 36px 36px 28px; text-align: center; }
+        .elig-outcome__icon { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; font-size: 36px; }
+        .elig-outcome__icon--ok { background: #dcfce7; color: #16a34a; }
+        .elig-outcome__icon--warn { background: #fef3c7; color: #d97706; }
+        .elig-outcome__icon--err { background: #fee2e2; color: #c8102e; }
+        .elig-outcome__title { font-size: 26px; font-weight: 600; color: #0d1b3e; margin-bottom: 10px; letter-spacing: -0.2px; }
+        .elig-outcome__sub { font-size: 14.5px; line-height: 1.6; color: #5a6480; max-width: 460px; margin: 0 auto; }
+        .elig-outcome__detail { margin: 24px 36px; padding: 18px 22px; border-radius: 12px; font-size: 13.5px; line-height: 1.6; }
+        .elig-outcome__detail--ok { background: #f0fdf4; border: 1px solid #86efac; color: #14532d; }
+        .elig-outcome__detail--warn { background: #fffbeb; border: 1px solid #fde68a; color: #78350f; }
+        .elig-outcome__detail--err { background: #fef2f2; border: 1px solid #fca5a5; color: #7f1d1d; }
+        .elig-outcome__actions { display: flex; gap: 12px; padding: 0 36px 36px; flex-wrap: wrap; }
+        .elig-outcome__btn { flex: 1; min-width: 180px; padding: 14px 24px; font-size: 14.5px; font-weight: 600; border-radius: 10px; cursor: pointer; transition: all 180ms ease; border: none; font-family: inherit; }
+        .elig-outcome__btn--ghost { background: #fff; color: #374151; border: 1px solid #d1d5db; }
+        .elig-outcome__btn--ghost:hover { background: #f3f5fa; border-color: #9ca3af; }
+        .elig-outcome__btn--primary { background: #003087; color: #fff; }
+        .elig-outcome__btn--primary:hover { background: #001a4d; transform: translateY(-1px); }
+        .elig-outcome__btn--red { background: #c8102e; color: #fff; }
+        .elig-outcome__btn--red:hover { background: #a00d24; }
+
+        .elig-helper { background: #E8EEF6; border-radius: 8px; padding: 14px 18px; font-size: 12.5px; line-height: 1.55; color: #003087; margin-bottom: 22px; display: flex; gap: 10px; align-items: flex-start; }
+        .elig-helper-icon { font-size: 18px; flex-shrink: 0; line-height: 1.2; }
+
+        @keyframes elig-fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .elig-outcome { animation: elig-fade-in 280ms ease; }
+      </style>
+
+      <div class="elig-shell">
+        <div style="max-width:640px;margin:0 auto;">
+          <button class="elig-back" onclick="window.go && window.go(0)">← Back to home</button>
+        </div>
+
+        <div class="elig-card" id="elig-card-form">
+          <div class="elig-card__head">
+            <div class="elig-card__eyebrow">Step 1 of 3 · Eligibility check</div>
+            <h1 class="elig-card__title">Are you eligible for UWC 2026/27?</h1>
+            <p class="elig-card__sub">Three quick questions. To apply for the September 2026 entry, you must be between 14 and 19 years old on 1 September 2026.</p>
+          </div>
+          <div class="elig-card__body">
+
+            <div class="elig-helper">
+              <span class="elig-helper-icon">💡</span>
+              <div>This is a self-service eligibility check. Your answers are not saved and you can re-run it as many times as you need.</div>
+            </div>
+
+            <!-- Field 1: DOB -->
+            <div class="elig-field" id="elig-f-dob">
+              <label class="elig-field__label" for="elig-dob">Date of birth <span class="req">*</span></label>
+              <input class="elig-field__input" id="elig-dob" type="date" min="1990-01-01" max="2015-12-31" placeholder="DD/MM/YYYY">
+              <div class="elig-field__msg info" id="elig-dob-msg">We'll calculate your age on 1 September 2026.</div>
+            </div>
+
+            <!-- Field 2: Nationality -->
+            <div class="elig-field" id="elig-f-nat">
+              <label class="elig-field__label" for="elig-nat">Nationality <span class="req">*</span></label>
+              <select class="elig-field__select" id="elig-nat">
+                <option value="">Select your nationality...</option>
+                <option value="BR">🇧🇷 Brazilian</option>
+                <option value="DE">🇩🇪 German</option>
+                <option value="KE">🇰🇪 Kenyan</option>
+                <option value="IN">🇮🇳 Indian</option>
+                <option value="GB">🇬🇧 British</option>
+                <option value="CA">🇨🇦 Canadian</option>
+                <option value="US">🇺🇸 American</option>
+                <option value="NL">🇳🇱 Dutch</option>
+                <option value="NO">🇳🇴 Norwegian</option>
+                <option value="IT">🇮🇹 Italian</option>
+                <option value="CR">🇨🇷 Costa Rican</option>
+                <option value="JP">🇯🇵 Japanese</option>
+                <option value="CN">🇨🇳 Chinese</option>
+                <option value="SG">🇸🇬 Singaporean</option>
+                <option value="PT">🇵🇹 Portuguese</option>
+                <option value="GH">🇬🇭 Ghanaian</option>
+                <option value="GN">🇬🇳 Guinean</option>
+                <option value="OTHER">Other / dual nationality</option>
+              </select>
+              <div class="elig-field__msg info">If you have more than one nationality, choose the one matching your residence.</div>
+            </div>
+
+            <!-- Field 3: Country of residency -->
+            <div class="elig-field" id="elig-f-res">
+              <label class="elig-field__label" for="elig-res">Country of residency <span class="req">*</span></label>
+              <select class="elig-field__select" id="elig-res">
+                <option value="">Select your country of residency...</option>
+                <option value="BR">🇧🇷 Brazil</option>
+                <option value="DE">🇩🇪 Germany</option>
+                <option value="KE">🇰🇪 Kenya</option>
+                <option value="IN">🇮🇳 India</option>
+                <option value="GB">🇬🇧 United Kingdom</option>
+                <option value="CA">🇨🇦 Canada</option>
+                <option value="US">🇺🇸 United States</option>
+                <option value="NL">🇳🇱 Netherlands</option>
+                <option value="NO">🇳🇴 Norway</option>
+                <option value="IT">🇮🇹 Italy</option>
+                <option value="CR">🇨🇷 Costa Rica</option>
+                <option value="JP">🇯🇵 Japan</option>
+                <option value="CN">🇨🇳 China</option>
+                <option value="SG">🇸🇬 Singapore</option>
+                <option value="PT">🇵🇹 Portugal</option>
+                <option value="GH">🇬🇭 Ghana</option>
+                <option value="OTHER">Other</option>
+              </select>
+              <div class="elig-field__msg info">Your application will be routed to the National Committee of this country.</div>
+            </div>
+
+            <div class="elig-submit-row">
+              <div class="elig-submit-row__help">Your data is not stored until you create an account.</div>
+              <button type="button" class="elig-submit" id="elig-check-btn">Check eligibility →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Outcome panels (one shown at a time) -->
+        <div class="elig-card elig-outcome" id="elig-outcome-pass" hidden>
+          <div class="elig-outcome__top">
+            <div class="elig-outcome__icon elig-outcome__icon--ok">✓</div>
+            <div class="elig-outcome__title">You're eligible to apply</div>
+            <div class="elig-outcome__sub" id="elig-pass-sub">Great news — you meet the age and residency criteria for the 2026/27 UWC application cycle.</div>
+          </div>
+          <div class="elig-outcome__detail elig-outcome__detail--ok">
+            <b>What happens next:</b> Create your free applicant account, then complete the six-section application form at your own pace. Your local National Committee will review and contact you within 2 weeks.
+          </div>
+          <div class="elig-outcome__actions">
+            <button class="elig-outcome__btn elig-outcome__btn--ghost" onclick="document.getElementById('elig-card-form').hidden=false;document.getElementById('elig-outcome-pass').hidden=true;document.getElementById('elig-outcome-guardian').hidden=true;document.getElementById('elig-outcome-fail').hidden=true;">← Re-check</button>
+            <button class="elig-outcome__btn elig-outcome__btn--primary" onclick="window.go && window.go(2)">Proceed to registration →</button>
+          </div>
+        </div>
+
+        <div class="elig-card elig-outcome" id="elig-outcome-guardian" hidden>
+          <div class="elig-outcome__top">
+            <div class="elig-outcome__icon elig-outcome__icon--warn">!</div>
+            <div class="elig-outcome__title">Eligible with guardian consent</div>
+            <div class="elig-outcome__sub" id="elig-guardian-sub">You can apply, but because you'll be under 16 on 1 September 2026, your parent or guardian must complete a consent section of the application.</div>
+          </div>
+          <div class="elig-outcome__detail elig-outcome__detail--warn">
+            <b>What happens next:</b> You'll create your account and start the application form. A secure consent link will be sent to your guardian's email — they must complete the consent section before you can submit.
+          </div>
+          <div class="elig-outcome__actions">
+            <button class="elig-outcome__btn elig-outcome__btn--ghost" onclick="document.getElementById('elig-card-form').hidden=false;document.getElementById('elig-outcome-pass').hidden=true;document.getElementById('elig-outcome-guardian').hidden=true;document.getElementById('elig-outcome-fail').hidden=true;">← Re-check</button>
+            <button class="elig-outcome__btn elig-outcome__btn--primary" onclick="window.go && window.go(2)">Continue with guardian email →</button>
+          </div>
+        </div>
+
+        <div class="elig-card elig-outcome" id="elig-outcome-fail" hidden>
+          <div class="elig-outcome__top">
+            <div class="elig-outcome__icon elig-outcome__icon--err">🚫</div>
+            <div class="elig-outcome__title">You don't meet the age requirement</div>
+            <div class="elig-outcome__sub" id="elig-fail-sub">UWC programmes accept applicants aged 14 to 19 at time of application.</div>
+          </div>
+          <div class="elig-outcome__detail elig-outcome__detail--err" id="elig-fail-detail">
+            With the date of birth you provided, you fall outside the eligible age range for this cycle.
+          </div>
+          <div class="elig-outcome__actions">
+            <button class="elig-outcome__btn elig-outcome__btn--ghost" onclick="window.go && window.go(0)">← Back to start</button>
+            <button class="elig-outcome__btn elig-outcome__btn--red" onclick="alert('Subscription noted. We will email you when applications open for the next cycle.')">📧 Notify me for next cycle</button>
+          </div>
+        </div>
+
+      </div>
+
+      <script>
+        (function() {
+          var CUTOFF = new Date(2026, 8, 1); // 1 Sep 2026 (months 0-indexed)
+          function ageOnCutoff(dobStr) {
+            if (!dobStr) return null;
+            var d = new Date(dobStr);
+            if (isNaN(d.getTime())) return null;
+            var a = CUTOFF.getFullYear() - d.getFullYear();
+            var m = CUTOFF.getMonth() - d.getMonth();
+            if (m < 0 || (m === 0 && CUTOFF.getDate() < d.getDate())) a--;
+            return a;
+          }
+          function fmt(d) {
+            try {
+              return new Date(d).toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+            } catch(e) { return d; }
+          }
+          var dob = document.getElementById('elig-dob');
+          var dobMsg = document.getElementById('elig-dob-msg');
+          var dobField = document.getElementById('elig-f-dob');
+          var nat = document.getElementById('elig-nat');
+          var res = document.getElementById('elig-res');
+          var natField = document.getElementById('elig-f-nat');
+          var resField = document.getElementById('elig-f-res');
+          var btn = document.getElementById('elig-check-btn');
+          var card = document.getElementById('elig-card-form');
+          var outPass = document.getElementById('elig-outcome-pass');
+          var outGuardian = document.getElementById('elig-outcome-guardian');
+          var outFail = document.getElementById('elig-outcome-fail');
+
+          function setFieldState(fieldEl, state, msg) {
+            if (!fieldEl) return;
+            fieldEl.classList.remove('elig-field--ok','elig-field--err');
+            if (state) fieldEl.classList.add('elig-field--' + state);
+            var msgEl = fieldEl.querySelector('.elig-field__msg');
+            if (msgEl && msg !== undefined) {
+              msgEl.classList.remove('ok','err','info');
+              msgEl.classList.add(state || 'info');
+              msgEl.textContent = msg;
+            }
+          }
+
+          // Live DOB validation
+          dob.addEventListener('input', function() {
+            var v = dob.value;
+            if (!v) { setFieldState(dobField, '', "We'll calculate your age on 1 September 2026."); return; }
+            var age = ageOnCutoff(v);
+            if (age === null) { setFieldState(dobField, 'err', 'Please enter a valid date.'); return; }
+            if (age < 14) {
+              setFieldState(dobField, 'err', 'You will be ' + age + ' on 1 September 2026 — below the minimum age of 14.');
+            } else if (age > 19) {
+              setFieldState(dobField, 'err', 'You will be ' + age + ' on 1 September 2026 — above the maximum age of 19.');
+            } else if (age < 16) {
+              setFieldState(dobField, 'ok', '✓ You will be ' + age + ' on 1 September 2026. Eligible with guardian consent.');
+            } else {
+              setFieldState(dobField, 'ok', '✓ You will be ' + age + ' on 1 September 2026. Eligible.');
+            }
+          });
+
+          // Live select validation
+          nat.addEventListener('change', function() { setFieldState(natField, nat.value ? 'ok' : '', nat.value ? '✓ Selected.' : 'If you have more than one nationality, choose the one matching your residence.'); });
+          res.addEventListener('change', function() { setFieldState(resField, res.value ? 'ok' : '', res.value ? '✓ Your application will be routed to the National Committee of this country.' : 'Your application will be routed to the National Committee of this country.'); });
+
+          // Submit
+          btn.addEventListener('click', function() {
+            var missing = [];
+            if (!dob.value) { setFieldState(dobField, 'err', 'Please enter your date of birth.'); missing.push('date of birth'); }
+            if (!nat.value) { setFieldState(natField, 'err', 'Please select your nationality.'); missing.push('nationality'); }
+            if (!res.value) { setFieldState(resField, 'err', 'Please select your country of residency.'); missing.push('country of residency'); }
+            if (missing.length) {
+              if (window.UWCToast) window.UWCToast('Please complete: ' + missing.join(', '), { kind: 'err' });
+              return;
+            }
+            var age = ageOnCutoff(dob.value);
+            // Branch
+            card.hidden = true;
+            outPass.hidden = true; outGuardian.hidden = true; outFail.hidden = true;
+            if (age < 14 || age > 19) {
+              document.getElementById('elig-fail-detail').innerHTML = 'With your date of birth (' + fmt(dob.value) + '), you will be <b>' + age + ' years old</b> on 1 September 2026. UWC programmes accept applicants aged <b>14 to 19</b> at time of application. You may apply in a future cycle when you fall within the age range.';
+              outFail.hidden = false;
+              outFail.scrollIntoView({ behavior:'smooth', block:'start' });
+            } else if (age < 16) {
+              document.getElementById('elig-guardian-sub').textContent = 'You can apply, but because you will be ' + age + ' on 1 September 2026 (under 16), your parent or guardian must complete a consent section of the application.';
+              outGuardian.hidden = false;
+              outGuardian.scrollIntoView({ behavior:'smooth', block:'start' });
+            } else {
+              document.getElementById('elig-pass-sub').textContent = 'You will be ' + age + ' on 1 September 2026 — within the 16-19 eligible range. Your application will be routed to the National Committee of your country of residency.';
+              outPass.hidden = false;
+              outPass.scrollIntoView({ behavior:'smooth', block:'start' });
+            }
+          });
+
+          // Pre-fill for demo: if no value, set Sofia's DOB (2009-03-14) on first visit to make demo flow snappy
+          if (!dob.value) {
+            // Don't pre-fill — keep blank so user can demo entering values
+          }
+        })();
+      </script>
+    </section>
     <!-- STEP 3 — Eligibility passes, registration form -->
     <section class="screen" id="sc-2">
       <div class="uwc-portal-shell">
@@ -1325,7 +1576,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
             <div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px 22px;margin-bottom:16px;">
               <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
                 <div>
-                  <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:#0d1b3e;">Application form</div>
+                  <div style="font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif;font-size:22px;font-weight:600;color:#0d1b3e;">Application form</div>
                   <div style="font-size:13px;color:#5a6480;margin-top:4px;">Brazil National Committee · September 2026 entry · Submission deadline 30 Nov 2026</div>
                 </div>
                 <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:#5a6480;">
@@ -2338,7 +2589,7 @@ Finally, I want to be challenged. I want to be the least experienced person in a
       letter-spacing: 0.5px;
     }
     #sc-app-detail .ad-name {
-      font-family: "Playfair Display", Georgia, serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif;
       font-size: 24px;
       font-weight: 600;
       margin: 0 0 6px;
@@ -2809,7 +3060,7 @@ Finally, I want to be challenged. I want to be the least experienced person in a
       font-size: 18px;
       font-weight: 700;
       margin-bottom: 2px;
-      font-family: "Playfair Display", Georgia, serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif;
     }
     #sc-app-detail .ad-path {
       font-size: 13px;
@@ -3524,7 +3775,7 @@ Finally, I want to be challenged. I want to be the least experienced person in a
         <h1>Module field reference — Scenario B</h1>
         <p>Key fields for Scenario B: Lead capture → eligibility gate → portal signup → Contact auto-conversion → Application submission → parental consent. Every <code style="font-family:'DM Mono',monospace;background:#E8EEF6;color:#003087;padding:1px 6px;border-radius:3px;">API name</code> matches the live Zoho org.</p>
 
-        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:18px;">Lead module — key fields</h2>
+        <h2 style="font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:18px;">Lead module — key fields</h2>
         <table class="ref-table">
           <thead><tr><th>Field</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
           <tbody>
@@ -3539,7 +3790,7 @@ Finally, I want to be challenged. I want to be the least experienced person in a
           </tbody>
         </table>
 
-        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:24px;">Contact module — extended for student info</h2>
+        <h2 style="font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:24px;">Contact module — extended for student info</h2>
         <table class="ref-table">
           <thead><tr><th>Field</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
           <tbody>
@@ -3556,7 +3807,7 @@ Finally, I want to be challenged. I want to be the least experienced person in a
           </tbody>
         </table>
 
-        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:24px;">Application module — Scenario B subset</h2>
+        <h2 style="font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:24px;">Application module — Scenario B subset</h2>
         <table class="ref-table">
           <thead><tr><th>Field</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
           <tbody>
@@ -3570,7 +3821,7 @@ Finally, I want to be challenged. I want to be the least experienced person in a
           </tbody>
         </table>
 
-        <h2 style="font-family:'Playfair Display',Georgia,serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:24px;">Lead → Contact auto-conversion mapping</h2>
+        <h2 style="font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif;color:#003087;font-size:17px;margin-bottom:8px;margin-top:24px;">Lead → Contact auto-conversion mapping</h2>
         <table class="ref-table">
           <thead><tr><th>Lead field</th><th>Contact field</th><th>Rule</th></tr></thead>
           <tbody>
@@ -3585,13 +3836,15 @@ Finally, I want to be challenged. I want to be the least experienced person in a
         </table>
 
         <div style="margin-top:28px;padding:16px 20px;background:#E8EEF6;border-radius:8px;font-size:12.5px;color:#003087;line-height:1.6;">
-          <b style="font-family:'Playfair Display',Georgia,serif;font-size:14px;">End of Scenario B.</b><br>
+          <b style="font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif;font-size:14px;">End of Scenario B.</b><br>
           Full applicant journey: eligibility gate → portal registration → Lead creation → email verification → automatic Lead→Contact conversion → form completion → parental consent → submission. Continue to <b><a href="03_scenario_C.html" style="color:#003087;text-decoration:underline;">Scenario C — Review &amp; Selection</a></b>.
         </div>
       </div>
     </section>
 
   </div>
+
+</div>
 
 <script>
 /* INLINE:sample-data.js */
