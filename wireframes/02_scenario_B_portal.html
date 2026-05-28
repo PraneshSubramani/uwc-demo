@@ -293,6 +293,425 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .ft-t { display: inline-block; padding: 2px 7px; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 10px; background: #f3f5fa; color: #5a6480; }
 .ft-pick { background: #f0f4ff; color: #1e3a8a; } .ft-look { background: #f0fdf4; color: #166534; } .ft-auto { background: #fef3c7; color: #92400e; }
 </style>
+
+<style>
+  /* ---------- shell + card ---------- */
+  .auth-shell {
+    min-height: calc(100vh - 64px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 56px 20px 80px;
+    background:
+      radial-gradient(1100px 520px at 50% -10%, rgba(0,48,135,.08), transparent 60%),
+      linear-gradient(180deg, #f6f8fc 0%, #eef2f8 100%);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif;
+    color: #0f1c3a;
+  }
+  .auth-card {
+    width: 100%;
+    max-width: 460px;
+    background: #ffffff;
+    border: 1px solid #e3e8f1;
+    border-radius: 14px;
+    box-shadow:
+      0 1px 2px rgba(15,28,58,.04),
+      0 12px 32px -12px rgba(15,28,58,.18);
+    padding: 36px 36px 32px;
+    animation: auth-fade-in .35s ease-out both;
+  }
+  .auth-card-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .auth-card-logo-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: #003087;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .5px;
+  }
+  .auth-card-logo-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: #003087;
+    letter-spacing: .3px;
+  }
+  .auth-card h1 {
+    font-size: 22px;
+    line-height: 1.25;
+    margin: 0 0 6px;
+    font-weight: 600;
+    color: #0f1c3a;
+    letter-spacing: -.2px;
+  }
+  .auth-card .auth-sub {
+    font-size: 14px;
+    color: #5b6b8a;
+    margin: 0 0 26px;
+    line-height: 1.5;
+  }
+
+  /* ---------- form fields ---------- */
+  .auth-field {
+    display: block;
+    margin-bottom: 16px;
+  }
+  .auth-field label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #2a3658;
+    margin-bottom: 6px;
+    letter-spacing: .1px;
+  }
+  .auth-field label .auth-req {
+    color: #C8102E;
+    margin-left: 2px;
+  }
+  .auth-input-wrap {
+    position: relative;
+  }
+  .auth-field input[type="email"],
+  .auth-field input[type="password"],
+  .auth-field input[type="text"] {
+    width: 100%;
+    height: 42px;
+    padding: 0 14px;
+    font: inherit;
+    font-size: 14px;
+    color: #0f1c3a;
+    background: #fbfcfe;
+    border: 1px solid #d6deec;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color .15s, box-shadow .15s, background .15s;
+    box-sizing: border-box;
+  }
+  .auth-field input::placeholder { color: #97a2bd; }
+  .auth-field input:focus {
+    border-color: #003087;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(0,48,135,.15);
+  }
+  .auth-field.has-eye input { padding-right: 42px; }
+  .auth-field.has-error input {
+    border-color: #C8102E;
+    background: #fff5f6;
+    box-shadow: 0 0 0 3px rgba(200,16,46,.12);
+  }
+  .auth-field-error {
+    font-size: 12px;
+    color: #C8102E;
+    margin-top: 5px;
+    min-height: 14px;
+    line-height: 1.3;
+  }
+  .auth-eye {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border: 0;
+    background: transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #6b7a99;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s, color .15s;
+  }
+  .auth-eye:hover { background: #eef2f8; color: #003087; }
+  .auth-eye svg { width: 16px; height: 16px; }
+
+  /* ---------- inline row (remember + forgot) ---------- */
+  .auth-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: -2px 0 22px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .auth-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #2a3658;
+    cursor: pointer;
+    user-select: none;
+  }
+  .auth-check input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #003087;
+    cursor: pointer;
+    margin: 0;
+  }
+  .auth-link {
+    font-size: 13px;
+    color: #003087;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    padding: 0;
+    font-family: inherit;
+  }
+  .auth-link:hover { text-decoration: underline; }
+
+  /* ---------- buttons ---------- */
+  .auth-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 46px;
+    padding: 0 18px;
+    font: inherit;
+    font-size: 14.5px;
+    font-weight: 600;
+    border-radius: 9px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform .12s, box-shadow .15s, background .15s, border-color .15s, color .15s;
+    letter-spacing: .1px;
+  }
+  .auth-btn svg { width: 16px; height: 16px; }
+  .auth-btn-primary {
+    background: #C8102E;
+    color: #ffffff;
+    box-shadow: 0 1px 2px rgba(200,16,46,.25), 0 6px 16px -6px rgba(200,16,46,.5);
+  }
+  .auth-btn-primary:hover { background: #b00d28; }
+  .auth-btn-primary:active { transform: translateY(1px); }
+  .auth-btn-navy {
+    background: #003087;
+    color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0,48,135,.25), 0 6px 16px -6px rgba(0,48,135,.5);
+  }
+  .auth-btn-navy:hover { background: #002770; }
+  .auth-btn-navy:active { transform: translateY(1px); }
+  .auth-btn-ghost {
+    background: #ffffff;
+    color: #003087;
+    border-color: #d6deec;
+  }
+  .auth-btn-ghost:hover { background: #f4f7fc; border-color: #003087; }
+
+  /* ---------- divider ---------- */
+  .auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0;
+    color: #97a2bd;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+  }
+  .auth-divider::before,
+  .auth-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e3e8f1;
+  }
+
+  /* ---------- footer links ---------- */
+  .auth-foot {
+    text-align: center;
+    font-size: 13px;
+    color: #5b6b8a;
+    margin-top: 4px;
+    line-height: 1.6;
+  }
+  .auth-foot a, .auth-foot button.auth-link { font-weight: 600; }
+  .auth-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 18px;
+    color: #5b6b8a;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .auth-back:hover { color: #003087; }
+
+  /* ---------- success card ---------- */
+  .auth-success {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #e3e8f1;
+    border-radius: 14px;
+    box-shadow:
+      0 1px 2px rgba(15,28,58,.04),
+      0 12px 32px -12px rgba(15,28,58,.18);
+    padding: 40px 40px 36px;
+    text-align: center;
+    animation: auth-fade-in .45s ease-out both;
+  }
+  .auth-success-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #e8f8ee 0%, #d6f1de 100%);
+    color: #1f8a3f;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    box-shadow: 0 0 0 6px rgba(31,138,63,.08);
+    animation: auth-pop .5s ease-out both;
+  }
+  .auth-success-icon svg { width: 32px; height: 32px; }
+  .auth-success h2 {
+    font-size: 22px;
+    margin: 0 0 6px;
+    color: #0f1c3a;
+    font-weight: 600;
+    letter-spacing: -.2px;
+  }
+  .auth-success p.auth-sub {
+    font-size: 14px;
+    color: #5b6b8a;
+    margin: 0 0 22px;
+    line-height: 1.5;
+  }
+  .auth-success-id {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #f6f8fc;
+    border: 1px solid #e3e8f1;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    text-align: left;
+  }
+  .auth-success-id svg {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    margin-top: 1px;
+    color: #003087;
+  }
+  .auth-success-id-body {
+    font-size: 13px;
+    color: #2a3658;
+    line-height: 1.5;
+  }
+  .auth-success-id-label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    color: #6b7a99;
+    margin-bottom: 2px;
+    font-weight: 600;
+  }
+  .auth-success-id-value {
+    font-weight: 600;
+    color: #003087;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13.5px;
+  }
+  .auth-success-actions {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* ---------- toast (fallback if UWCToast missing) ---------- */
+  .auth-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #0f1c3a;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 500;
+    box-shadow: 0 10px 30px -8px rgba(0,0,0,.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s, transform .25s;
+    z-index: 9999;
+    max-width: 360px;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif;
+  }
+  .auth-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---------- sparkle ---------- */
+  .auth-sparkle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ffd84d;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: auth-spark 1.2s ease-out forwards;
+  }
+
+  /* ---------- animations ---------- */
+  @keyframes auth-fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes auth-shake {
+    0%, 100% { transform: translateX(0); }
+    20%      { transform: translateX(-6px); }
+    40%      { transform: translateX(6px); }
+    60%      { transform: translateX(-4px); }
+    80%      { transform: translateX(4px); }
+  }
+  .auth-shake { animation: auth-shake .4s ease-in-out; }
+  @keyframes auth-pop {
+    0%   { transform: scale(.6); opacity: 0; }
+    60%  { transform: scale(1.08); opacity: 1; }
+    100% { transform: scale(1); }
+  }
+  @keyframes auth-spark {
+    0%   { transform: translate(0,0) scale(.6); opacity: 1; }
+    100% { transform: translate(var(--sx,30px), var(--sy,-40px)) scale(0); opacity: 0; }
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 480px) {
+    .auth-shell { padding: 32px 14px 60px; }
+    .auth-card, .auth-success { padding: 28px 22px 24px; }
+    .auth-card h1, .auth-success h2 { font-size: 20px; }
+  }
+</style>
 </head>
 <body>
 
@@ -1065,7 +1484,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
           </div>
           <div class="elig-outcome__actions">
             <button class="elig-outcome__btn elig-outcome__btn--ghost" onclick="document.getElementById('elig-card-form').hidden=false;document.getElementById('elig-outcome-pass').hidden=true;document.getElementById('elig-outcome-guardian').hidden=true;document.getElementById('elig-outcome-fail').hidden=true;">← Re-check</button>
-            <button class="elig-outcome__btn elig-outcome__btn--primary" onclick="window.go && window.go(3)">Continue with guardian email →</button>
+            <button class="elig-outcome__btn elig-outcome__btn--primary" onclick="window.UWCEmailSent && window.UWCEmailSent.show()">Continue with guardian email →</button>
           </div>
         </div>
 
@@ -1369,15 +1788,16 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         <div class="uwc-portal-layout">
           <nav class="uwc-portal-sidebar">
             <div class="uwc-portal-sidebar__section">My Application</div>
-            <a class="uwc-portal-sidebar__item active"><span class="uwc-portal-sidebar__icon">🏠</span> Home</a>
-            <a class="uwc-portal-sidebar__item"><span class="uwc-portal-sidebar__icon">👤</span> Personal Details</a>
-            <a class="uwc-portal-sidebar__item"><span class="uwc-portal-sidebar__icon">🎓</span> Academic Background</a>
-            <a class="uwc-portal-sidebar__item"><span class="uwc-portal-sidebar__icon">✍️</span> Personal Statement</a>
-            <a class="uwc-portal-sidebar__item"><span class="uwc-portal-sidebar__icon">👥</span> References</a>
-            <a class="uwc-portal-sidebar__item"><span class="uwc-portal-sidebar__icon">📎</span> Documents</a>
+            <a class="uwc-portal-sidebar__item active" data-portal-section="dashboard"><span class="uwc-portal-sidebar__icon">🏠</span> Dashboard</a>
+            <a class="uwc-portal-sidebar__item" data-portal-section="application" onclick="window.go && window.go(5)"><span class="uwc-portal-sidebar__icon">👤</span> Personal Details</a>
+            <a class="uwc-portal-sidebar__item" data-portal-section="application" onclick="window.go && window.go(5)"><span class="uwc-portal-sidebar__icon">🎓</span> Academic Background</a>
+            <a class="uwc-portal-sidebar__item" data-portal-section="application" onclick="window.go && window.go(5)"><span class="uwc-portal-sidebar__icon">✍️</span> Personal Statement</a>
+            <a class="uwc-portal-sidebar__item" data-portal-section="references"><span class="uwc-portal-sidebar__icon">👥</span> References</a>
+            <a class="uwc-portal-sidebar__item" data-portal-section="documents"><span class="uwc-portal-sidebar__icon">📎</span> Documents</a>
             <div class="uwc-portal-sidebar__section" style="margin-top:8px;">Communication</div>
-            <a class="uwc-portal-sidebar__item"><span class="uwc-portal-sidebar__icon">💬</span> Messages</a>
-            <a class="uwc-portal-sidebar__item"><span class="uwc-portal-sidebar__icon">❓</span> FAQ</a>
+            <a class="uwc-portal-sidebar__item" data-portal-section="messages"><span class="uwc-portal-sidebar__icon">💬</span> Messages</a>
+            <a class="uwc-portal-sidebar__item" data-portal-section="status"><span class="uwc-portal-sidebar__icon">📊</span> Status</a>
+            <a class="uwc-portal-sidebar__item" data-portal-section="faq"><span class="uwc-portal-sidebar__icon">❓</span> FAQ</a>
           </nav>
           <div class="uwc-portal-main"><div class="tab-section" data-portal-section="dashboard">
 
@@ -3557,9 +3977,18 @@ UWC.getRolesFor = function(code) {
         overlay.className = 'uwc-maria-success-overlay';
         overlay.innerHTML = [
           '<div class="uwc-maria-success-card">',
-          '  <div class="uwc-maria-success-tick">✓</div>',
-          '  <h2 class="uwc-maria-success-title">Thank you, Maria.</h2>',
-          '  <p class="uwc-maria-success-text">You may close this page.</p>',
+          '  <div class="uwc-maria-success-tick">',
+          '    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;">',
+          '      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>',
+          '      <polyline points="22,4 12,14.01 9,11.01"/>',
+          '    </svg>',
+          '  </div>',
+          '  <h2 class="uwc-maria-success-title">Thank you, Maria</h2>',
+          '  <p class="uwc-maria-success-text">Your authorisation has been submitted successfully. Sofia will be notified by email and can now proceed to submit her application. You may close this page or return to the UWC home page.</p>',
+          '  <div style="margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">',
+          '    <button onclick="var o=document.querySelector(\'.uwc-maria-success-overlay\');if(o)o.remove();if(window.go)window.go(0);" style="background:#003087;color:#fff;border:none;padding:12px 28px;font-size:14px;font-weight:600;border-radius:10px;cursor:pointer;">Go to UWC home</button>',
+          '    <button onclick="var o=document.querySelector(\'.uwc-maria-success-overlay\');if(o)o.remove();" style="background:#fff;color:#374151;border:1px solid #d1d5db;padding:12px 24px;font-size:14px;font-weight:600;border-radius:10px;cursor:pointer;">Close this page</button>',
+          '  </div>',
           '</div>'
         ].join('');
         document.body.appendChild(overlay);
@@ -4118,5 +4547,96 @@ go(0);
   }
 })();
 </script>
+
+<!-- ====== EMAIL SENT MODAL (v10 fix) ====== -->
+<div id="uwc-email-sent-overlay" style="position:fixed;inset:0;background:rgba(10,22,55,0.6);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;opacity:0;transition:opacity 200ms ease;" role="dialog" aria-modal="true">
+  <div id="uwc-email-sent-card" style="background:#fff;border-radius:14px;max-width:480px;width:100%;padding:36px 32px;text-align:center;box-shadow:0 24px 48px rgba(0,0,0,0.25);transform:translateY(20px);transition:transform 280ms cubic-bezier(.4,0,.2,1);">
+    <div style="width:72px;height:72px;border-radius:50%;background:#dcfce7;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+    </div>
+    <h2 style="font-size:22px;font-weight:600;color:#0d1b3e;margin:0 0 10px;">Email sent to your guardian</h2>
+    <p style="font-size:14.5px;line-height:1.6;color:#5a6480;margin:0 0 20px;">We've sent a secure consent link to your parent or guardian. Once they sign the consent form, you'll be able to continue your application.</p>
+    <div style="background:#E8EEF6;border-radius:10px;padding:14px 16px;margin-bottom:24px;font-size:13px;color:#003087;text-align:left;">
+      <b>What happens next:</b><br>
+      • Your guardian receives an email with a secure link<br>
+      • They review and sign 4 standard consents<br>
+      • You'll be notified by email once signed
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button onclick="window.UWCEmailSent.close(); window.go(0);" style="flex:1;min-width:140px;background:#fff;color:#374151;border:1px solid #d1d5db;padding:12px 20px;font-size:14px;font-weight:600;border-radius:10px;cursor:pointer;">Back to home</button>
+      <button onclick="window.UWCEmailSent.close(); window.go(3);" style="flex:1;min-width:140px;background:#003087;color:#fff;border:none;padding:12px 20px;font-size:14px;font-weight:600;border-radius:10px;cursor:pointer;">Continue to register →</button>
+    </div>
+    <p style="font-size:11.5px;color:#9ca3af;margin:18px 0 0;">For demo: guardian email pretends to be sent. Switch role to Maria to see the guardian view.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  window.UWCEmailSent = {
+    show: function() {
+      var o = document.getElementById('uwc-email-sent-overlay');
+      if (!o) return;
+      o.style.display = 'flex';
+      requestAnimationFrame(function() {
+        o.style.opacity = '1';
+        document.getElementById('uwc-email-sent-card').style.transform = 'translateY(0)';
+      });
+    },
+    close: function() {
+      var o = document.getElementById('uwc-email-sent-overlay');
+      if (!o) return;
+      o.style.opacity = '0';
+      document.getElementById('uwc-email-sent-card').style.transform = 'translateY(20px)';
+      setTimeout(function() { o.style.display = 'none'; }, 200);
+    }
+  };
+  // Close on backdrop click
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'uwc-email-sent-overlay') { window.UWCEmailSent.close(); }
+  });
+  // Close on ESC
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { window.UWCEmailSent.close(); }
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  function switchPanel(targetSection) {
+    var dashboard = document.querySelector('#sc-3 .uwc-portal-main');
+    if (!dashboard) return;
+    // Hide all tab-section panels
+    var panels = dashboard.querySelectorAll('[data-portal-section]');
+    panels.forEach(function(p){ p.hidden = (p.getAttribute('data-portal-section') !== targetSection); });
+    // Mark active sidebar item
+    var items = dashboard.parentElement.querySelectorAll('.uwc-portal-sidebar__item');
+    items.forEach(function(it){
+      it.classList.toggle('active', it.getAttribute('data-portal-section') === targetSection);
+    });
+    // Scroll main to top
+    var main = dashboard.querySelector ? dashboard : null;
+    if (main && main.scrollTo) main.scrollTo(0,0);
+  }
+  document.addEventListener('click', function(e){
+    var item = e.target && e.target.closest && e.target.closest('.uwc-portal-sidebar__item[data-portal-section]');
+    if (!item) return;
+    e.preventDefault();
+    var section = item.getAttribute('data-portal-section');
+    if (section === 'application' && window.go) {
+      window.go(5);
+      return;
+    }
+    switchPanel(section);
+  });
+  // Expose for debugging
+  window.UWCSwitchPanel = switchPanel;
+})();
+</script>
+
 </body>
 </html>
