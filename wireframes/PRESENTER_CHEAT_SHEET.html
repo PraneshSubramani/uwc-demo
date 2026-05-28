@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Presenter Cheat-Sheet · UWC Demo · Akanksha · 1 June 2026</title>
+<link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #003087; --navy-deep: #001a4d; --navy-tint: #E8EEF6;
+  --red: #C8102E; --red-tint: #fdeaea; --gold: #C8AB00;
+  --green: #1f9535; --orange: #e85d0c; --grey-100: #f3f5fa;
+  --grey-200: #e2e6ed; --grey-300: #c8cdd8; --grey-400: #9aa3b8;
+  --grey-500: #6C757D; --grey-600: #5a6480; --grey-800: #0d1b3e;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --mono: 'DM Mono', ui-monospace, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--sans); font-size: 11.5px; line-height: 1.45; color: var(--grey-800); background: #fff; -webkit-font-smoothing: antialiased; }
+
+/* Header banner */
+.banner { background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 100%); color: #fff; padding: 18px 28px; display: flex; align-items: center; gap: 20px; border-bottom: 3px solid var(--red); }
+.banner__mark { width: 44px; height: 44px; border-radius: 50%; background: #fff; color: var(--navy); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-weight: 700; font-size: 14px; }
+.banner__title-block { flex: 1; }
+.banner__title { font-family: var(--serif); font-size: 22px; font-weight: 600; line-height: 1; }
+.banner__sub { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 4px; letter-spacing: 0.3px; }
+.banner__sched { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 8px 14px; font-size: 11px; }
+.banner__sched-time { font-family: var(--mono); font-size: 14px; font-weight: 500; color: #fff; }
+.banner__sched-meta { color: rgba(255,255,255,0.7); font-size: 10px; letter-spacing: 0.8px; text-transform: uppercase; margin-top: 1px; }
+
+/* Quick-ref strip — agenda + ground rules */
+.strip { display: grid; grid-template-columns: 2fr 3fr; gap: 0; border-bottom: 1px solid var(--grey-200); }
+.strip__col { padding: 12px 22px; }
+.strip__col:first-child { border-right: 1px solid var(--grey-200); background: var(--grey-100); }
+.strip__h { font-family: var(--serif); font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+.strip__list { font-size: 10.5px; color: var(--grey-600); }
+.strip__list li { list-style: none; padding: 2px 0; display: flex; gap: 8px; align-items: baseline; }
+.strip__list code { font-family: var(--mono); color: var(--navy); font-weight: 500; min-width: 70px; }
+.strip__rules { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 18px; }
+.strip__rule b { color: var(--red); font-weight: 700; }
+
+/* Main scenarios grid */
+.scenarios-wrap { padding: 16px 22px 0; }
+.section-label { font-size: 9.5px; font-weight: 700; color: var(--grey-500); letter-spacing: 1.8px; text-transform: uppercase; margin: 10px 0 8px; }
+.scenarios { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.scen { background: #fff; border: 1px solid var(--grey-200); border-radius: 8px; padding: 12px 14px; position: relative; overflow: hidden; }
+.scen--full { grid-column: span 2; }
+.scen::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 4px; background: var(--navy); }
+.scen__head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+.scen__letter { font-family: var(--serif); font-size: 32px; font-weight: 600; color: var(--navy); line-height: 0.9; min-width: 32px; }
+.scen__title-block { flex: 1; }
+.scen__title { font-family: var(--serif); font-size: 13.5px; font-weight: 500; color: var(--grey-800); line-height: 1.2; }
+.scen__meta { display: flex; gap: 10px; margin-top: 3px; font-size: 9.5px; color: var(--grey-500); flex-wrap: wrap; }
+.scen__meta b { color: var(--navy); font-weight: 600; }
+.scen__meta code { font-family: var(--mono); color: var(--navy); font-weight: 500; background: var(--navy-tint); padding: 1px 5px; border-radius: 3px; }
+.scen__opening { background: var(--navy-tint); border-left: 2px solid var(--navy); padding: 6px 9px; margin: 6px 0; font-size: 10.5px; line-height: 1.45; font-style: italic; color: var(--navy-deep); border-radius: 0 3px 3px 0; }
+.scen__opening b { font-style: normal; font-weight: 600; }
+.scen__beats { font-size: 10.5px; }
+.scen__beat { display: flex; gap: 8px; padding: 2px 0; }
+.scen__beat-num { background: var(--grey-100); color: var(--grey-600); font-family: var(--mono); font-size: 9px; font-weight: 600; width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0; margin-top: 1px; }
+.scen__beat-num.role-switch { background: var(--red); color: #fff; }
+.scen__beat-text { flex: 1; color: var(--grey-800); }
+.scen__beat-text b { color: var(--navy); font-weight: 600; }
+.scen__honest { background: #fefce8; border: 1px solid #fde047; border-radius: 4px; padding: 5px 8px; margin-top: 6px; font-size: 9.5px; color: #713f12; line-height: 1.4; }
+.scen__honest b { font-weight: 700; }
+
+/* Q&A panel */
+.qa-section { padding: 0 22px 16px; }
+.qa-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.qa-card { background: var(--grey-100); border-radius: 6px; padding: 9px 11px; font-size: 10px; line-height: 1.4; }
+.qa-card__q { color: var(--navy); font-weight: 600; margin-bottom: 3px; font-size: 10.5px; }
+.qa-card__a { color: var(--grey-600); }
+
+/* Bottom bar — files + commands */
+.bottom-bar { background: var(--navy-deep); color: rgba(255,255,255,0.9); padding: 10px 22px; display: grid; grid-template-columns: 2fr 1fr; gap: 20px; font-size: 10px; align-items: center; }
+.bottom-bar__cmd { font-family: var(--mono); color: rgba(255,255,255,0.55); }
+.bottom-bar__cmd code { color: #fff; background: rgba(255,255,255,0.1); padding: 1px 6px; border-radius: 3px; }
+.bottom-bar__brand { text-align: right; color: rgba(255,255,255,0.5); font-size: 9.5px; }
+.bottom-bar__brand b { color: rgba(255,255,255,0.85); }
+
+/* Print + screen */
+@media print {
+  body { font-size: 9.5px; }
+  .banner, .scenarios-wrap, .qa-section, .bottom-bar { break-inside: avoid; }
+  @page { size: A4 landscape; margin: 8mm; }
+}
+</style>
+</head>
+<body>
+
+<header class="banner">
+  <div class="banner__mark">UWC</div>
+  <div class="banner__title-block">
+    <div class="banner__title">Presenter Cheat-Sheet</div>
+    <div class="banner__sub">UWC International CRM & Applications Platform Demonstration · A2Z Cloud</div>
+  </div>
+  <div class="banner__sched">
+    <div class="banner__sched-time">Mon 1 June · 15:00 BST</div>
+    <div class="banner__sched-meta">Akanksha Anand · presenting</div>
+  </div>
+</header>
+
+<section class="strip">
+  <div class="strip__col">
+    <div class="strip__h">Agenda · 2 hours</div>
+    <ul class="strip__list">
+      <li><code>15:00–15:05</code> Welcome &amp; introductions <em>(Paul)</em></li>
+      <li><code>15:05–15:15</code> Solution overview <em>(Paul + you)</em></li>
+      <li><code>15:15–16:15</code> Scenarios A → G <em>(you, 60 min)</em></li>
+      <li><code>16:15–16:45</code> Implementation &amp; delivery plan <em>(Paul)</em></li>
+      <li><code>16:45–17:00</code> Q&amp;A <em>(both)</em></li>
+    </ul>
+  </div>
+  <div class="strip__col">
+    <div class="strip__h">Ground rules (keep in your head all session)</div>
+    <div class="strip__rules">
+      <div class="strip__rule"><b>🧵 Follow Sofia.</b> Her name threads through B, C, D. Keep returning to it.</div>
+      <div class="strip__rule"><b>🐢 Slow is confident.</b> When the system does something clever, stop. Let them see it.</div>
+      <div class="strip__rule"><b>🟡 Say what it is.</b> If something is wireframe or custom build, name it. Builds trust.</div>
+      <div class="strip__rule"><b>🎤 Don't guess.</b> "Great question — let me note that and we'll come back" is fine.</div>
+      <div class="strip__rule"><b>👁 Use the role switcher live.</b> Click "View as" in the topbar. Don't just narrate, do it.</div>
+      <div class="strip__rule"><b>📂 If anything breaks</b> close the tab, open the next file from <code>00_index.html</code>.</div>
+    </div>
+  </div>
+</section>
+
+<div class="scenarios-wrap">
+<div class="section-label">Application & Selection Scenarios</div>
+<div class="scenarios">
+
+  <!-- A -->
+  <div class="scen">
+    <div class="scen__head">
+      <div class="scen__letter">A</div>
+      <div class="scen__title-block">
+        <div class="scen__title">NC Administration, Permissions & Programme Configuration</div>
+        <div class="scen__meta"><b>~8 min</b> · 9 steps · file <code>01_scenario_A.html</code> · default <code>Marcus Weber</code></div>
+      </div>
+    </div>
+    <div class="scen__opening">"Marcus is NC Admin for Germany. <b>This is his entire world</b> — he can see Germany and nothing else. The absence speaks for itself."</div>
+    <div class="scen__beats">
+      <div class="scen__beat"><span class="scen__beat-num">1</span><span class="scen__beat-text">Marcus's home — Germany scope only · KPI strip · "this is his entire world"</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">2</span><span class="scen__beat-text">Edit Germany programme inline — deadline, place count, local question in German</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">3</span><span class="scen__beat-text">NC dashboard — 14 applications by stage · days-to-deadline countdown</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">4-5</span><span class="scen__beat-text">User & role mgmt → permission matrix · field/record/module level toggles</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">6-7</span><span class="scen__beat-text">Edit applicant on behalf · Unlock submitted app with reason → audit log entry</span></div>
+      <div class="scen__beat"><span class="scen__beat-num role-switch">8</span><span class="scen__beat-text"><b>ROLE SWITCH — IO Super Admin ↔ Data Protection Lead</b>. Same Contact, DOB/financial/parent contact mask to ••••</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">9</span><span class="scen__beat-text">Field reference appendix (close)</span></div>
+    </div>
+    <div class="scen__honest"><b>HONEST:</b> Field-level security and NC permission boundaries are standard Zoho CRM config — not custom. "Field level, record level, and module level — independently."</div>
+  </div>
+
+  <!-- B -->
+  <div class="scen">
+    <div class="scen__head">
+      <div class="scen__letter">B</div>
+      <div class="scen__title-block">
+        <div class="scen__title">Applicant Registration, Eligibility & Form Submission</div>
+        <div class="scen__meta"><b>~10 min</b> · 10 steps · file <code>02_scenario_B.html</code> · default <code>Public visitor</code></div>
+      </div>
+    </div>
+    <div class="scen__opening">"This is the first thing Sofia sees. UWC colours, UWC logo, <b>her language</b>. The system meets her where she is."</div>
+    <div class="scen__beats">
+      <div class="scen__beat"><span class="scen__beat-num">1-2</span><span class="scen__beat-text">UWC portal landing · language EN/PT/ES · eligibility check blocks a 14-year-old</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">3-4</span><span class="scen__beat-text">Sofia registers · email verification · dashboard shows 60% saved</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">5-6</span><span class="scen__beat-text">Application form in Portuguese · pause on essay, <b>actually read a sentence</b></span></div>
+      <div class="scen__beat"><span class="scen__beat-num role-switch">7</span><span class="scen__beat-text"><b>ROLE SWITCH to Maria (Guardian).</b> Parental consent capture flow</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">8</span><span class="scen__beat-text">Submit · Blueprint gate-check alert · stage transition</span></div>
+      <div class="scen__beat"><span class="scen__beat-num role-switch">9</span><span class="scen__beat-text"><b>ROLE SWITCH to Ana (NC Admin).</b> Application appears in NC queue (Zoho mode)</span></div>
+      <div class="scen__beat"><span class="scen__beat-num role-switch">10</span><span class="scen__beat-text"><b>ROLE SWITCH to IO Marketing.</b> Source attribution dashboard + HubSpot panel</span></div>
+    </div>
+    <div class="scen__honest"><b>HONEST on portal:</b> "This isn't a standard Zoho form. It's a custom application on Zoho Catalyst — talks to Zoho CRM via API and writes everything back. That's what gives us the language flexibility and the design control."</div>
+  </div>
+
+  <!-- C -->
+  <div class="scen">
+    <div class="scen__head">
+      <div class="scen__letter">C</div>
+      <div class="scen__title-block">
+        <div class="scen__title">Multi-Stage Selection, Scoring & Safeguarding</div>
+        <div class="scen__meta"><b>~10 min</b> · 10 steps · file <code>03_scenario_C.html</code> · default <code>Clara Ramos</code></div>
+      </div>
+    </div>
+    <div class="scen__opening">"Clara has reviewed Sofia. <b>Take the blind review slowly.</b> The panel will watch this more closely than anything else in the demo."</div>
+    <div class="scen__beats">
+      <div class="scen__beat"><span class="scen__beat-num">1-2</span><span class="scen__beat-text">Clara's reviewer queue · COI declare · scoring form (4 dims × 1–10)</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">3</span><span class="scen__beat-text">Clara submits · "Awaiting other reviewer" banner</span></div>
+      <div class="scen__beat"><span class="scen__beat-num role-switch">4</span><span class="scen__beat-text"><b>ROLE SWITCH to Paulo.</b> Pause. Scroll to scores area. <b>"Clara's scores are not here." Let it sit.</b></span></div>
+      <div class="scen__beat"><span class="scen__beat-num">5</span><span class="scen__beat-text">Paulo submits · automation fires <code>Review_Count = 2</code> · scores unlock</span></div>
+      <div class="scen__beat"><span class="scen__beat-num role-switch">6</span><span class="scen__beat-text"><b>ROLE SWITCH to Ana (NC Admin).</b> Both score sets visible side-by-side. <b>Take a breath. Let the reveal land.</b></span></div>
+      <div class="scen__beat"><span class="scen__beat-num">7</span><span class="scen__beat-text">Open Miguel Santos — pre-created safeguarding flag · red banner · dual email preview</span></div>
+      <div class="scen__beat"><span class="scen__beat-num role-switch">8</span><span class="scen__beat-text"><b>ROLE SWITCH to Akanksha (IO Super Admin).</b> Safeguarding triage record</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">9-10</span><span class="scen__beat-text">Sofia → Shortlisted · auto-email to Sofia · field appendix</span></div>
+    </div>
+    <div class="scen__honest"><b>HONEST on safeguarding:</b> The flag-and-lock workflow is configured in Blueprint — not a custom build. The trigger is field-level: when status changes from None to Under Review, lock + notify fire automatically.</div>
+  </div>
+
+  <!-- D -->
+  <div class="scen">
+    <div class="scen__head">
+      <div class="scen__letter">D</div>
+      <div class="scen__title-block">
+        <div class="scen__title">Nomination, Place Allocation & Pack Generation</div>
+        <div class="scen__meta"><b>~9 min</b> · 10 steps · file <code>04_scenario_D.html</code> · default <code>Fatima Al-Rashid</code></div>
+      </div>
+    </div>
+    <div class="scen__opening">"IO has allocated 12 places to UWC Atlantic this cycle. Four filled, eight remaining. <b>Brazil NC holds three of those twelve</b> — tracked here in real time."</div>
+    <div class="scen__beats">
+      <div class="scen__beat"><span class="scen__beat-num">1-2</span><span class="scen__beat-text">IO place-allocation grid · Schools × NCs · Fatima allocates 2 Atlantic places to Brazil</span></div>
+      <div class="scen__beat"><span class="scen__beat-num role-switch">3</span><span class="scen__beat-text"><b>ROLE SWITCH to Ana (NC Admin Brazil).</b> Quota update appears on her dashboard</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">4-5</span><span class="scen__beat-text">Ana generates Sofia's nomination pack · <b>PDF preview centerpiece</b> — compiled, branded, ready</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">6</span><span class="scen__beat-text">Nominate Sofia to Atlantic place #4 · quota auto-decrement 2→1</span></div>
+      <div class="scen__beat"><span class="scen__beat-num role-switch">7</span><span class="scen__beat-text"><b>ROLE SWITCH to Helen (Atlantic Admissions).</b> School portal — only Atlantic nominations visible</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">8</span><span class="scen__beat-text">Helen accepts · Nominated → Placed · toast: email to applicant + NC + IO</span></div>
+      <div class="scen__beat"><span class="scen__beat-num role-switch">9</span><span class="scen__beat-text"><b>ROLE SWITCH back to Fatima.</b> Place confirmed · BC sync tile #INV-2026-0124</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">10</span><span class="scen__beat-text">Pack tracker dashboard · field reference</span></div>
+    </div>
+    <div class="scen__honest"><b>HONEST:</b> The nomination pack generator is custom-built — one button pulls from multiple related records and outputs a formatted PDF. Not something Zoho does out of the box.</div>
+  </div>
+
+  </div>
+
+  <div class="section-label">Wider CRM Scenarios</div>
+  <div class="scenarios">
+
+  <!-- E -->
+  <div class="scen">
+    <div class="scen__head">
+      <div class="scen__letter">E</div>
+      <div class="scen__title-block">
+        <div class="scen__title">Governance Structure & Body Management</div>
+        <div class="scen__meta"><b>~7 min</b> · 8 steps · file <code>05_scenario_E.html</code> · default <code>Akanksha</code></div>
+      </div>
+    </div>
+    <div class="scen__opening">"The board is a structured record. Each member has a role, an appointment date, a term length, and a link to their full contact in the CRM."</div>
+    <div class="scen__beats">
+      <div class="scen__beat"><span class="scen__beat-num">1-2</span><span class="scen__beat-text">Governance bodies list · Create new body — type/purpose form</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">3</span><span class="scen__beat-text">UWC International Board — 5 members (Dame Catherine, Dr Ravi Menon, Sarah Okonkwo, Thomas Berger, Amina Hassan)</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">4-5</span><span class="scen__beat-text">Add member workflow · <b>Point at Dr Ravi Menon + Thomas Berger</b> red EXPIRED badges. "Nobody had to notice."</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">6</span><span class="scen__beat-text"><b>Competency matrix</b> — 3 gaps highlighted: Marketing &amp; Comms, Youth Engagement, Asia-Pac. <b>Let them look. Don't narrate over it.</b></span></div>
+      <div class="scen__beat"><span class="scen__beat-num">7-8</span><span class="scen__beat-text">Network-wide summary · field reference</span></div>
+    </div>
+    <div class="scen__honest"><b>HONEST:</b> The competency matrix is custom-built on native CRM components — not a standard Zoho view.</div>
+  </div>
+
+  <!-- F -->
+  <div class="scen">
+    <div class="scen__head">
+      <div class="scen__letter">F</div>
+      <div class="scen__title-block">
+        <div class="scen__title">NC Management & Volunteer Oversight</div>
+        <div class="scen__meta"><b>~8 min</b> · 8 steps · file <code>06_scenario_F.html</code> · default <code>Akanksha</code></div>
+      </div>
+    </div>
+    <div class="scen__opening">"Kenya — active NC, Grace Omondi as chair. Current MoU version, linked volunteers, and this cycle's applications <b>all from one record</b>."</div>
+    <div class="scen__beats">
+      <div class="scen__beat"><span class="scen__beat-num">1-2</span><span class="scen__beat-text">All-NCs list · Open UWC Kenya — country, status, key contacts, linked governance</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">3</span><span class="scen__beat-text">Volunteer roster · Grace (CURRENT) · Daniel Kimani (<b>EXPIRED — over 2 years</b>) · Aisha Waweru (<b>MISSING — system detects the absence, not just the expiry</b>)</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">4</span><span class="scen__beat-text">Open Daniel's training record · renew workflow</span></div>
+      <div class="scen__beat"><span class="scen__beat-num role-switch">5</span><span class="scen__beat-text"><b>ROLE SWITCH to Grace (NC Chair).</b> NC Chair portal · her view of own volunteers + MoU</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">6</span><span class="scen__beat-text">MoU panel · Annual Report OVERDUE flag from 31 March</span></div>
+      <div class="scen__beat"><span class="scen__beat-num role-switch">7</span><span class="scen__beat-text"><b>ROLE SWITCH back to Akanksha.</b> IO NC-health dashboard · 150+ NCs colour-coded · Kenya amber. <b>Stop. Let them sit with it.</b></span></div>
+      <div class="scen__beat"><span class="scen__beat-num">8</span><span class="scen__beat-text">Field reference</span></div>
+    </div>
+  </div>
+
+  <!-- G -->
+  <div class="scen scen--full">
+    <div class="scen__head">
+      <div class="scen__letter">G</div>
+      <div class="scen__title-block">
+        <div class="scen__title">Communications, Mailing Lists & Bulk Record Updates · GDPR consent closure</div>
+        <div class="scen__meta"><b>~8 min</b> · 9 steps · file <code>07_scenario_G.html</code> · default <code>IO Marketing</code></div>
+      </div>
+    </div>
+    <div class="scen__opening">"This list filtered automatically: donors who gave in the last 12 months and have opted in. Jonathan Osei and Isabelle Fontaine. <b>Marcus has opted out. Watch what happens when I try to add him.</b>"</div>
+    <div class="scen__beats">
+      <div class="scen__beat"><span class="scen__beat-num">1-2</span><span class="scen__beat-text">Mailing list builder · saved list "Impact Report Q2 2026" · 59 contacts (1 excluded due to Marcus opt-out)</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">3-4</span><span class="scen__beat-text">Send via Mailchimp · campaign brief · <b>distinct Mailchimp UI</b> (yellow accent) · sync-confirmed toast</span></div>
+      <div class="scen__beat"><span class="scen__beat-num">5</span><span class="scen__beat-text">Bulk Communication Log update animation · "Recording 59 outbound..." · progress bar</span></div>
+      <div class="scen__beat"><span class="scen__beat-num role-switch">6</span><span class="scen__beat-text"><b>ROLE SWITCH to Jonathan Osei (Contact view).</b> His communication history — 4 campaigns in 2026 with opens/clicks</span></div>
+      <div class="scen__beat"><span class="scen__beat-num role-switch">7</span><span class="scen__beat-text"><b>ROLE SWITCH to Marcus Weber.</b> RED OPTED-OUT banner · "Excluded from 14 campaigns" tally · empty post-opt-out history. <b>"GDPR compliance built into the workflow — not a policy on a shelf."</b></span></div>
+      <div class="scen__beat"><span class="scen__beat-num">8-9</span><span class="scen__beat-text">GDPR consent audit log · Export CSV · field reference for Mailing List + Campaign + Comm Log + Consent</span></div>
+    </div>
+    <div class="scen__honest"><b>HONEST on Raiser's Edge:</b> "Fundraising transactions stay in Raiser's Edge — we're not replacing it. The integration means the relationship view in the CRM is complete even though the financial engine is elsewhere." · <b>HONEST on Mailchimp:</b> "Yes — HubSpot works the same way. Same integration pattern, same list sync, same activity logging."</div>
+  </div>
+
+  </div>
+</div>
+
+<section class="qa-section">
+  <div class="section-label">Q&A Bank — Technical Questions Likely to Come to You</div>
+  <div class="qa-grid">
+    <div class="qa-card">
+      <div class="qa-card__q">Portal vs Zoho CRM — same system?</div>
+      <div class="qa-card__a">Connected but separate. Zoho CRM is the system of record. The applicant portal is a custom app on Zoho Catalyst — talks to CRM via API and writes everything back. External users never touch CRM directly.</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-card__q">MFA and user security?</div>
+      <div class="qa-card__a">Zoho CRM supports MFA natively — authenticator apps and security keys. Admins can enforce it globally for specific roles. Account recovery process doesn't create a back door.</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-card__q">Accidentally delete 500 records?</div>
+      <div class="qa-card__a">Zoho has a recycle bin — deleted records sit there for a configurable period before permanent removal. Mass restoration brings records back with all associated history and attachments intact.</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-card__q">GDPR right-to-erasure?</div>
+      <div class="qa-card__a">We configure what erasure means in your context — which fields are deleted, which are anonymised, what's retained for legal obligation. A request triggers a workflow. The audit trail of the erasure itself is retained.</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-card__q">Restrict access to specific IP ranges?</div>
+      <div class="qa-card__a">Yes — Zoho supports IP allowlisting at organisation level. Restrict access so only authorised networks can connect. Configuration setting, not a custom build.</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-card__q">Documents encrypted at rest?</div>
+      <div class="qa-card__a">Zoho uses AES-256 at rest and TLS 1.2+ in transit. Documents uploaded through the portal stored within Zoho's infrastructure with those standards.</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-card__q">Reapply in future cycles?</div>
+      <div class="qa-card__a">Yes — the account persists within a retention window we configure. They return, start a new application, and their history is still there.</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-card__q">Arabic / right-to-left languages?</div>
+      <div class="qa-card__a">RTL support is confirmed in scope for Phase 1. We haven't shown it today because it requires additional configuration — we'd rather be accurate than approximate.</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-card__q">Rejected applicant — what happens?</div>
+      <div class="qa-card__a">Retained in full. Blueprint stage moves to Declined, notification to applicant, every stage/score/decision stays in the system. Nothing deleted. Fully auditable.</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-card__q">Blind review — how does it actually work?</div>
+      <div class="qa-card__a">Each reviewer's assessment is a separate record. Field-level security means a reviewer can only read their own. When both submit, a workflow flips All Reviews Complete, which unlocks mutual visibility. Blueprint trigger, not manual.</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-card__q">Safeguarding escalation beyond NC?</div>
+      <div class="qa-card__a">IO Super Admin is notified at the same moment as the NC Admin. The record stays locked until IO-level access explicitly resolves the flag. Full audit trail retained.</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-card__q">If Zoho changes something that breaks our config?</div>
+      <div class="qa-card__a">Zoho is a mature platform with stable APIs and transparent upgrade path. We monitor platform changes as part of ongoing support. <b>Hand to Paul</b> for the support-arrangement specifics.</div>
+    </div>
+  </div>
+</section>
+
+<footer class="bottom-bar">
+  <div class="bottom-bar__cmd">
+    <strong>Pre-session checklist (14:30):</strong>
+    Open <code>00_index.html</code> · 7 tabs ready (one per scenario) · role-switcher tested in each · Sofia's app pre-loaded in Scenario B · Paulo + Clara dummy state in Scenario C · 1 backup tab to real <code>crm.zoho.eu</code>
+  </div>
+  <div class="bottom-bar__brand">
+    UWC International CRM Demonstration<br>
+    <b>A2Z Cloud Ltd</b> · Zoho Premium Partner · Salisbury, UK
+  </div>
+</footer>
+
+</body>
+</html>

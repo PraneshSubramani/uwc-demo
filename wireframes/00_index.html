@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UWC International — Demo Wireframes · A2Z Cloud</title>
+<link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* INLINE:uwc-tokens.css */
+:root{--uwc-navy:#003087;--uwc-navy-deep:#001a4d;--uwc-navy-tint:#E8EEF6;--uwc-red:#C8102E;--uwc-red-tint:#fdeaea;--uwc-gold:#C8AB00;--uwc-green:#1f9535;--uwc-orange:#e85d0c;--uwc-navy-live:#004A97;--uwc-teal:#009482;--uwc-white:#ffffff;--uwc-grey-50:#f8f9fb;--uwc-grey-100:#f3f5fa;--uwc-grey-200:#e2e6ed;--uwc-grey-300:#c8cdd8;--uwc-grey-400:#9aa3b8;--uwc-grey-500:#6C757D;--uwc-grey-600:#5a6480;--uwc-grey-800:#0d1b3e;--uwc-font-title:'Playfair Display',Georgia,serif;--uwc-font-body:'DM Sans',system-ui,sans-serif;--uwc-font-mono:'DM Mono',ui-monospace,monospace;--uwc-radius-sm:4px;--uwc-radius:8px;--uwc-radius-lg:12px;--uwc-radius-pill:999px;--uwc-shadow-sm:0 1px 2px rgba(0,0,0,0.04);--uwc-shadow:0 2px 8px rgba(0,48,135,0.08);--uwc-shadow-lg:0 8px 24px rgba(0,48,135,0.12);--uwc-tx-fast:120ms ease;--uwc-tx:200ms cubic-bezier(0.4,0,0.2,1)}
+*,*::before,*::after{box-sizing:border-box}body{margin:0;font-family:var(--uwc-font-body);color:var(--uwc-grey-800);background:var(--uwc-grey-100);-webkit-font-smoothing:antialiased}
+/* /INLINE */
+
+/* Landing-specific */
+.hero {
+  background:
+    linear-gradient(135deg, rgba(0,26,77,0.92) 0%, rgba(0,48,135,0.88) 60%, rgba(0,74,151,0.85) 100%),
+    url('_shared/assets/uwc-brand/hero-students-flags.jpeg') center / cover no-repeat;
+  color: #fff;
+  padding: 40px 0 56px;
+  border-bottom: 4px solid var(--uwc-red);
+}
+.hero__inner { max-width: 1240px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 24px; }
+.hero__brand { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.hero__logo-mark { width: 48px; height: 48px; border-radius: 50%; background: #fff; color: var(--uwc-navy); display: flex; align-items: center; justify-content: center; font-family: var(--uwc-font-title); font-weight: 700; font-size: 16px; box-shadow: var(--uwc-shadow); }
+.hero__brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+.hero__brand-name { font-family: var(--uwc-font-title); font-size: 16px; font-weight: 600; color: #fff; }
+.hero__brand-sub { font-size: 11px; color: rgba(255,255,255,0.65); letter-spacing: 1.6px; text-transform: uppercase; margin-top: 2px; }
+.hero__demo-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--uwc-red); color: #fff; font-size: 10.5px; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; padding: 4px 12px; border-radius: var(--uwc-radius-sm); margin-bottom: 24px; }
+.hero__title { font-family: var(--uwc-font-title); font-size: 42px; font-weight: 500; line-height: 1.1; color: #fff; max-width: 740px; }
+.hero__sub { font-size: 16px; line-height: 1.55; color: rgba(255,255,255,0.82); margin-top: 14px; max-width: 680px; }
+.hero__meta { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--uwc-radius); padding: 16px 18px; min-width: 240px; backdrop-filter: blur(4px); }
+.hero__meta-row { display: flex; justify-content: space-between; font-size: 12px; padding: 4px 0; }
+.hero__meta-label { color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 1px; font-size: 10px; }
+.hero__meta-value { color: #fff; font-weight: 500; }
+
+.body-wrap { max-width: 1240px; margin: -32px auto 60px; padding: 0 32px; position: relative; }
+
+.section-label { font-size: 11px; font-weight: 600; color: var(--uwc-grey-500); letter-spacing: 1.8px; text-transform: uppercase; margin: 40px 0 14px; }
+
+.scenarios { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.scenarios .row2 { grid-column: span 1; }
+.scenario-card { background: #fff; border: 1px solid var(--uwc-grey-200); border-radius: var(--uwc-radius-lg); padding: 22px; box-shadow: var(--uwc-shadow-sm); transition: all var(--uwc-tx); text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden; }
+.scenario-card:hover { transform: translateY(-3px); box-shadow: var(--uwc-shadow-lg); border-color: var(--uwc-navy); text-decoration: none; }
+.scenario-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--uwc-navy); transition: background var(--uwc-tx); }
+.scenario-card:hover::before { background: var(--uwc-red); }
+.scenario-card__letter { font-family: var(--uwc-font-title); font-size: 56px; font-weight: 600; color: var(--uwc-navy); line-height: 0.9; margin: -4px 0 -4px; }
+.scenario-card__title { font-family: var(--uwc-font-title); font-size: 15px; font-weight: 500; line-height: 1.25; color: var(--uwc-grey-800); }
+.scenario-card__desc { font-size: 12.5px; color: var(--uwc-grey-500); line-height: 1.45; }
+.scenario-card__meta { display: flex; gap: 8px; margin-top: auto; padding-top: 8px; border-top: 1px solid var(--uwc-grey-100); align-items: center; }
+.scenario-card__meta-item { font-size: 10.5px; color: var(--uwc-grey-500); display: inline-flex; align-items: center; gap: 4px; }
+.scenario-card__meta-item strong { color: var(--uwc-navy); font-weight: 600; }
+.scenario-card__cta { font-size: 12px; font-weight: 500; color: var(--uwc-navy); margin-left: auto; display: inline-flex; align-items: center; gap: 4px; }
+.scenario-card__cta::after { content: '→'; transition: transform var(--uwc-tx-fast); }
+.scenario-card:hover .scenario-card__cta::after { transform: translateX(3px); }
+.scenario-card__role { font-size: 10.5px; color: var(--uwc-grey-500); display: inline-flex; align-items: center; gap: 5px; }
+.scenario-card__role::before { content: '👤'; }
+
+.utility-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 32px; }
+.util-card { background: linear-gradient(135deg, var(--uwc-navy) 0%, var(--uwc-navy-deep) 100%); color: #fff; border-radius: var(--uwc-radius-lg); padding: 24px; text-decoration: none; display: flex; align-items: center; gap: 18px; transition: all var(--uwc-tx); }
+.util-card:hover { transform: translateY(-3px); box-shadow: var(--uwc-shadow-lg); text-decoration: none; color: #fff; }
+.util-card__icon { width: 56px; height: 56px; flex-shrink: 0; border-radius: var(--uwc-radius); background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 26px; }
+.util-card__body { flex: 1; }
+.util-card__title { font-family: var(--uwc-font-title); font-size: 18px; font-weight: 500; color: #fff; }
+.util-card__sub { font-size: 12.5px; color: rgba(255,255,255,0.7); margin-top: 4px; line-height: 1.4; }
+.util-card__cta { font-size: 13px; color: #fff; }
+.util-card__cta::after { content: ' →'; }
+
+.session-info { background: #fff; border: 1px solid var(--uwc-grey-200); border-radius: var(--uwc-radius-lg); padding: 24px 28px; margin-top: 32px; box-shadow: var(--uwc-shadow-sm); }
+.session-info__title { font-family: var(--uwc-font-title); font-size: 18px; font-weight: 500; color: var(--uwc-navy); margin-bottom: 12px; }
+.session-info__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.session-info__cell { display: flex; flex-direction: column; gap: 3px; }
+.session-info__cell-label { font-size: 10px; color: var(--uwc-grey-500); letter-spacing: 1.2px; text-transform: uppercase; }
+.session-info__cell-value { font-size: 13px; font-weight: 500; color: var(--uwc-grey-800); }
+
+footer { background: var(--uwc-navy-deep); color: rgba(255,255,255,0.55); padding: 22px 32px; text-align: center; font-size: 11px; letter-spacing: 0.4px; }
+footer strong { color: rgba(255,255,255,0.85); }
+
+@media (max-width: 1100px) { .scenarios { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 820px)  { .scenarios { grid-template-columns: repeat(2, 1fr); } .utility-row, .session-info__grid { grid-template-columns: 1fr; } .hero__inner { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero__inner">
+    <div>
+      <div class="hero__brand">
+        <div class="hero__logo-mark">UWC</div>
+        <div class="hero__brand-text">
+          <span class="hero__brand-name">United World Colleges</span>
+          <span class="hero__brand-sub">International · A2Z Cloud Bid Demo</span>
+        </div>
+      </div>
+      <div class="hero__demo-tag">● Live Demonstration · 1 June 2026</div>
+      <h1 class="hero__title">CRM and Applications Platform</h1>
+      <p class="hero__sub">Seven scenario walkthroughs covering applicant selection, governance, and engagement — built on Zoho CRM with a custom branded portal layer. Click any scenario to begin.</p>
+    </div>
+    <div class="hero__meta">
+      <div class="hero__meta-row"><span class="hero__meta-label">Session</span><span class="hero__meta-value">15:00–17:00 BST</span></div>
+      <div class="hero__meta-row"><span class="hero__meta-label">Format</span><span class="hero__meta-value">Live video conference</span></div>
+      <div class="hero__meta-row"><span class="hero__meta-label">Presenter</span><span class="hero__meta-value">Akanksha Anand</span></div>
+      <div class="hero__meta-row"><span class="hero__meta-label">Partner</span><span class="hero__meta-value">A2Z Cloud · Zoho Premium</span></div>
+      <div class="hero__meta-row"><span class="hero__meta-label">Reference</span><span class="hero__meta-value">UWC-CRM-5128</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="body-wrap">
+
+  <div class="section-label">Application & Selection — Scenarios A → D</div>
+  <div class="scenarios">
+
+    <a href="01_scenario_A.html" class="scenario-card">
+      <div class="scenario-card__letter">A</div>
+      <div class="scenario-card__title">NC Administration, Permissions, and Programme Configuration</div>
+      <div class="scenario-card__desc">Marcus Weber configures his National Committee's selection programme, sets reviewer roles, monitors a real-time dashboard, and we compare visibility across the IO Super Admin and Data Protection Lead.</div>
+      <div class="scenario-card__meta">
+        <span class="scenario-card__role">Marcus Weber</span>
+        <span class="scenario-card__meta-item"><strong>9</strong> steps</span>
+        <span class="scenario-card__meta-item"><strong>8</strong> min</span>
+        <span class="scenario-card__cta">Open</span>
+      </div>
+    </a>
+
+    <a href="02_scenario_B.html" class="scenario-card">
+      <div class="scenario-card__letter">B</div>
+      <div class="scenario-card__title">Applicant Registration, Eligibility, and Form Submission</div>
+      <div class="scenario-card__desc">Follow Sofia Almeida (16, Brazil) through the public portal in Portuguese — eligibility check, parental consent from Maria, application form, save-and-resume, submission. Then switch to IO Marketing for source attribution.</div>
+      <div class="scenario-card__meta">
+        <span class="scenario-card__role">Sofia Almeida</span>
+        <span class="scenario-card__meta-item"><strong>10</strong> steps</span>
+        <span class="scenario-card__meta-item"><strong>10</strong> min</span>
+        <span class="scenario-card__cta">Open</span>
+      </div>
+    </a>
+
+    <a href="03_scenario_C.html" class="scenario-card">
+      <div class="scenario-card__letter">C</div>
+      <div class="scenario-card__title">Multi-Stage Selection, Scoring, and Safeguarding</div>
+      <div class="scenario-card__desc">Clara and Paulo score Sofia's application independently — blind-review enforced. The All-Reviews-Complete trigger unlocks scores for Ana. A safeguarding flag is raised on Miguel Santos, locking the application and alerting the IO.</div>
+      <div class="scenario-card__meta">
+        <span class="scenario-card__role">Clara Ramos</span>
+        <span class="scenario-card__meta-item"><strong>10</strong> steps</span>
+        <span class="scenario-card__meta-item"><strong>10</strong> min</span>
+        <span class="scenario-card__cta">Open</span>
+      </div>
+    </a>
+
+    <a href="04_scenario_D.html" class="scenario-card">
+      <div class="scenario-card__letter">D</div>
+      <div class="scenario-card__title">Nomination, Place Allocation, and Pack Generation</div>
+      <div class="scenario-card__desc">Fatima allocates 2 Atlantic places to Brazil NC. Ana generates Sofia's nomination pack PDF, sends to Atlantic. Helen Richards opens the pack and accepts the nomination. Stage moves to Placed; Business Central is notified.</div>
+      <div class="scenario-card__meta">
+        <span class="scenario-card__role">Fatima Al-Rashid</span>
+        <span class="scenario-card__meta-item"><strong>10</strong> steps</span>
+        <span class="scenario-card__meta-item"><strong>9</strong> min</span>
+        <span class="scenario-card__cta">Open</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="section-label">Wider CRM — Scenarios E → G</div>
+  <div class="scenarios">
+
+    <a href="05_scenario_E.html" class="scenario-card">
+      <div class="scenario-card__letter">E</div>
+      <div class="scenario-card__title">Governance Structure and Body Management</div>
+      <div class="scenario-card__desc">UWC International Board with its 5 members, expired terms (Dr Ravi Menon, Thomas Berger), competency matrix surfacing 3 gaps (Marketing &amp; Comms, Youth Engagement, Asia-Pac Regional), and a network-wide governance health view.</div>
+      <div class="scenario-card__meta">
+        <span class="scenario-card__role">Akanksha (IO Super Admin)</span>
+        <span class="scenario-card__meta-item"><strong>8</strong> steps</span>
+        <span class="scenario-card__meta-item"><strong>7</strong> min</span>
+        <span class="scenario-card__cta">Open</span>
+      </div>
+    </a>
+
+    <a href="06_scenario_F.html" class="scenario-card">
+      <div class="scenario-card__letter">F</div>
+      <div class="scenario-card__title">National Committee Management and Volunteer Oversight</div>
+      <div class="scenario-card__desc">UWC Kenya record, volunteer roster (Grace, Daniel, Aisha), safeguarding training compliance (CURRENT / EXPIRED / MISSING), MoU obligation tracking, and the IO-level network health dashboard.</div>
+      <div class="scenario-card__meta">
+        <span class="scenario-card__role">Akanksha (IO Super Admin)</span>
+        <span class="scenario-card__meta-item"><strong>8</strong> steps</span>
+        <span class="scenario-card__meta-item"><strong>8</strong> min</span>
+        <span class="scenario-card__cta">Open</span>
+      </div>
+    </a>
+
+    <a href="07_scenario_G.html" class="scenario-card">
+      <div class="scenario-card__letter">G</div>
+      <div class="scenario-card__title">Communications, Mailing Lists, and Bulk Record Updates</div>
+      <div class="scenario-card__desc">Mailing list builder targeting donors who contributed in last 12 months + NC Chairs. Send via Mailchimp, bulk-update 59 Communication Log records. Marcus Weber's opt-out enforced — 14 campaigns he was excluded from.</div>
+      <div class="scenario-card__meta">
+        <span class="scenario-card__role">IO Marketing</span>
+        <span class="scenario-card__meta-item"><strong>9</strong> steps</span>
+        <span class="scenario-card__meta-item"><strong>8</strong> min</span>
+        <span class="scenario-card__cta">Open</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="utility-row">
+    <a href="99_data_model.html" class="util-card">
+      <div class="util-card__icon">⟁</div>
+      <div class="util-card__body">
+        <div class="util-card__title">Data Model &amp; Architecture</div>
+        <div class="util-card__sub">Salesforce-style entity-relationship diagram + 8-layer solution architecture connecting external actors, portals, Zoho CRM core, automations, integrations.</div>
+      </div>
+      <div class="util-card__cta">View</div>
+    </a>
+    <a href="../docs/UWC_Demo_Presenter_Guide.docx" class="util-card">
+      <div class="util-card__icon">🎤</div>
+      <div class="util-card__body">
+        <div class="util-card__title">Presenter Guide</div>
+        <div class="util-card__sub">Akanksha's narration script — opening lines per scenario, "if they ask" Q&amp;A prep, honesty notes on what's wireframe vs live, role switch cues.</div>
+      </div>
+      <div class="util-card__cta">Open</div>
+    </a>
+  </div>
+
+  <div class="session-info">
+    <div class="session-info__title">Solution at a glance</div>
+    <div class="session-info__grid">
+      <div class="session-info__cell"><span class="session-info__cell-label">Platform</span><span class="session-info__cell-value">Zoho CRM Enterprise · EU DC</span></div>
+      <div class="session-info__cell"><span class="session-info__cell-label">Portal</span><span class="session-info__cell-value">Zoho Catalyst · UWC-branded</span></div>
+      <div class="session-info__cell"><span class="session-info__cell-label">Data residency</span><span class="session-info__cell-value">UK / EU only</span></div>
+      <div class="session-info__cell"><span class="session-info__cell-label">Compliance</span><span class="session-info__cell-value">GDPR · WCAG 2.2 AA · Cyber Essentials Plus</span></div>
+      <div class="session-info__cell"><span class="session-info__cell-label">Pilot</span><span class="session-info__cell-value">October 2026 · 10–15 NCs</span></div>
+      <div class="session-info__cell"><span class="session-info__cell-label">Full rollout</span><span class="session-info__cell-value">February 2027</span></div>
+      <div class="session-info__cell"><span class="session-info__cell-label">Reference build</span><span class="session-info__cell-value">StudyIn · 1,800 users</span></div>
+      <div class="session-info__cell"><span class="session-info__cell-label">Implementation team</span><span class="session-info__cell-value">A2Z Cloud · UK Zoho Premium Partner</span></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <strong>UWC International CRM and Applications Platform Demonstration</strong> · A2Z Cloud Ltd · Salisbury, UK · Company No. 09758206 · <em>This is an interactive demonstration package — not a production system.</em>
+</footer>
+
+</body>
+</html>

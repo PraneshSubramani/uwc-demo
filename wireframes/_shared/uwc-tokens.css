@@ -1,0 +1,104 @@
+/* ========================================================================
+   UWC brand tokens — single source of truth
+   Used by: UWC-branded portal pages + landing page + scenario chrome
+   Source: Build Plan v4.1 §1.1 + live audit of uwc.org
+   ======================================================================== */
+
+:root {
+  /* PRIMARY PALETTE — exact from Build Plan v4.1 (Pantone 2945) */
+  --uwc-navy: #003087;
+  --uwc-navy-deep: #001a4d;
+  --uwc-navy-tint: #E8EEF6;
+  --uwc-red: #C8102E;
+  --uwc-red-tint: #fdeaea;
+  --uwc-gold: #C8AB00;
+  --uwc-green: #1f9535;
+  --uwc-orange: #e85d0c;
+
+  /* SECONDARY — from live uwc.org logo (Pantone 2945 brighter render + decorative teal) */
+  --uwc-navy-live: #004A97;
+  --uwc-teal: #009482;
+
+  /* NEUTRALS */
+  --uwc-white: #ffffff;
+  --uwc-grey-50: #f8f9fb;
+  --uwc-grey-100: #f3f5fa;
+  --uwc-grey-200: #e2e6ed;
+  --uwc-grey-300: #c8cdd8;
+  --uwc-grey-400: #9aa3b8;
+  --uwc-grey-500: #6C757D;
+  --uwc-grey-600: #5a6480;
+  --uwc-grey-800: #0d1b3e;
+
+  /* TYPOGRAPHY */
+  --uwc-font-title: 'Playfair Display', Georgia, "Times New Roman", serif;
+  --uwc-font-body: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --uwc-font-mono: 'DM Mono', ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* TYPE SCALE */
+  --uwc-fs-display: 32px;
+  --uwc-fs-h1: 26px;
+  --uwc-fs-h2: 20px;
+  --uwc-fs-h3: 16px;
+  --uwc-fs-body: 14px;
+  --uwc-fs-small: 12.5px;
+  --uwc-fs-tiny: 11px;
+  --uwc-fs-micro: 10px;
+
+  /* SPACING */
+  --uwc-sp-1: 4px;
+  --uwc-sp-2: 8px;
+  --uwc-sp-3: 12px;
+  --uwc-sp-4: 16px;
+  --uwc-sp-5: 20px;
+  --uwc-sp-6: 24px;
+  --uwc-sp-8: 32px;
+
+  /* RADIUS */
+  --uwc-radius-sm: 4px;
+  --uwc-radius: 8px;
+  --uwc-radius-lg: 12px;
+  --uwc-radius-pill: 999px;
+
+  /* SHADOWS */
+  --uwc-shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --uwc-shadow: 0 2px 8px rgba(0, 48, 135, 0.08);
+  --uwc-shadow-lg: 0 8px 24px rgba(0, 48, 135, 0.12);
+
+  /* MOTION */
+  --uwc-tx-fast: 120ms ease;
+  --uwc-tx: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================================================
+   Webfont loader — Google Fonts. Each scenario file includes this <link>
+   in its <head> for self-contained rendering.
+   ======================================================================== */
+/* Use: <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+*/
+
+/* ========================================================================
+   Body baseline — every UWC-branded page uses these defaults
+   ======================================================================== */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--uwc-font-body);
+  font-size: var(--uwc-fs-body);
+  line-height: 1.5;
+  color: var(--uwc-grey-800);
+  background: var(--uwc-grey-100);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+h1, h2, h3, h4, h5 { font-family: var(--uwc-font-title); font-weight: 500; line-height: 1.2; margin: 0; }
+h1 { font-size: var(--uwc-fs-h1); }
+h2 { font-size: var(--uwc-fs-h2); }
+h3 { font-size: var(--uwc-fs-h3); }
+a { color: var(--uwc-navy); text-decoration: none; transition: color var(--uwc-tx-fast); }
+a:hover { color: var(--uwc-red); text-decoration: underline; }
+button { font-family: inherit; }

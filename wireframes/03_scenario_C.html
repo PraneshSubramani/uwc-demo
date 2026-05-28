@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scenario C — Selection, Scoring &amp; Safeguarding · UWC International Demo</title>
+<link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* === INLINE: uwc-tokens.css === */
+:root{--uwc-navy:#003087;--uwc-navy-deep:#001a4d;--uwc-navy-tint:#E8EEF6;--uwc-red:#C8102E;--uwc-red-tint:#fdeaea;--uwc-gold:#C8AB00;--uwc-green:#1f9535;--uwc-orange:#e85d0c;--uwc-navy-live:#004A97;--uwc-teal:#009482;--uwc-white:#ffffff;--uwc-grey-50:#f8f9fb;--uwc-grey-100:#f3f5fa;--uwc-grey-200:#e2e6ed;--uwc-grey-300:#c8cdd8;--uwc-grey-400:#9aa3b8;--uwc-grey-500:#6C757D;--uwc-grey-600:#5a6480;--uwc-grey-800:#0d1b3e;--uwc-font-title:'Playfair Display',Georgia,serif;--uwc-font-body:'DM Sans',system-ui,sans-serif;--uwc-font-mono:'DM Mono',ui-monospace,monospace;--uwc-fs-display:32px;--uwc-fs-h1:26px;--uwc-fs-h2:20px;--uwc-fs-h3:16px;--uwc-fs-body:14px;--uwc-fs-small:12.5px;--uwc-fs-tiny:11px;--uwc-fs-micro:10px;--uwc-sp-1:4px;--uwc-sp-2:8px;--uwc-sp-3:12px;--uwc-sp-4:16px;--uwc-sp-5:20px;--uwc-sp-6:24px;--uwc-sp-8:32px;--uwc-radius-sm:4px;--uwc-radius:8px;--uwc-radius-lg:12px;--uwc-radius-pill:999px;--uwc-shadow-sm:0 1px 2px rgba(0,0,0,0.04);--uwc-shadow:0 2px 8px rgba(0,48,135,0.08);--uwc-shadow-lg:0 8px 24px rgba(0,48,135,0.12);--uwc-tx-fast:120ms ease;--uwc-tx:200ms cubic-bezier(0.4,0,0.2,1)}
+html{box-sizing:border-box}*,*::before,*::after{box-sizing:inherit}
+body{margin:0;padding:0;font-family:var(--uwc-font-body);font-size:var(--uwc-fs-body);line-height:1.5;color:var(--uwc-grey-800);background:var(--uwc-grey-100);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,h5{font-family:var(--uwc-font-title);font-weight:500;line-height:1.2;margin:0}
+h1{font-size:var(--uwc-fs-h1)}h2{font-size:var(--uwc-fs-h2)}h3{font-size:var(--uwc-fs-h3)}
+a{color:var(--uwc-navy);text-decoration:none;transition:color var(--uwc-tx-fast)}
+a:hover{color:var(--uwc-red);text-decoration:underline}
+button{font-family:inherit}
+
+/* === INLINE: zoho-tokens.css === */
+:root{--zoho-topbar-bg:#1c1f25;--zoho-topbar-text:#ffffff;--zoho-topbar-text-muted:rgba(255,255,255,0.55);--zoho-topbar-icon:#b9bcc7;--zoho-topbar-height:48px;--zoho-topbar-search-bg:rgba(255,255,255,0.08);--zoho-sidebar-bg:#f7f8fa;--zoho-sidebar-border:#e8eaed;--zoho-sidebar-text:#4a5568;--zoho-sidebar-section-text:#6b7280;--zoho-sidebar-active-bg:#e6efff;--zoho-sidebar-active-text:#2563eb;--zoho-sidebar-hover-bg:#eef1f7;--zoho-sidebar-width:225px;--zoho-content-bg:#ffffff;--zoho-content-alt:#f9fafb;--zoho-content-secondary:#f3f5fa;--zoho-border:#e5e7eb;--zoho-border-light:#f0f2f5;--zoho-divider:#ebeef2;--zoho-text:#1f2937;--zoho-text-secondary:#4b5563;--zoho-text-muted:#6b7280;--zoho-text-disabled:#9ca3af;--zoho-link:#2563eb;--zoho-link-hover:#1d4ed8;--zoho-primary:#3b6ef5;--zoho-primary-hover:#2563eb;--zoho-primary-text:#ffffff;--zoho-outline:#d1d5db;--zoho-outline-hover:#9ca3af;--zoho-pill-today-bg:#fef3c7;--zoho-pill-today-text:#92400e;--zoho-pill-recent-bg:#d1fae5;--zoho-pill-recent-text:#065f46;--zoho-pill-overdue-bg:#fee2e2;--zoho-pill-overdue-text:#991b1b;--zoho-pill-info-bg:#dbeafe;--zoho-pill-info-text:#1e40af;--zoho-success:#10b981;--zoho-warning:#f59e0b;--zoho-danger:#ef4444;--zoho-info:#3b82f6;--zoho-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Open Sans","Helvetica Neue",sans-serif;--zoho-fs-base:13px;--zoho-fs-sm:12px;--zoho-fs-xs:11px;--zoho-fs-lg:14px;--zoho-fs-xl:16px;--zoho-radius-sm:4px;--zoho-radius:6px;--zoho-radius-lg:8px}
+
+/* === INLINE: components.css === */
+.shell{display:grid;grid-template-columns:280px 1fr;grid-template-rows:60px 1fr;min-height:100vh;background:var(--uwc-grey-100)}
+.topbar{grid-column:1/-1;background:var(--uwc-navy-deep);display:flex;align-items:center;padding:0 20px;gap:16px;border-bottom:3px solid var(--uwc-red);color:#fff}
+.topbar__brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.topbar__logo{font-family:var(--uwc-font-title);font-size:18px;font-weight:600;color:#fff;letter-spacing:.3px}
+.topbar__demo-badge{background:var(--uwc-red);color:#fff;font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;padding:3px 10px;border-radius:var(--uwc-radius-sm)}
+.topbar__divider{width:1px;height:22px;background:rgba(255,255,255,.18)}
+.topbar__scenario{font-size:12.5px;color:rgba(255,255,255,.7)}
+.topbar__scenario strong{color:#fff;font-weight:500}
+.topbar__center{flex:1}
+.topbar__right{margin-left:auto;display:flex;align-items:center;gap:14px}
+.topbar__step-counter{font-size:11.5px;color:rgba(255,255,255,.6);font-family:var(--uwc-font-mono);letter-spacing:.6px;padding:4px 10px;border:1px solid rgba(255,255,255,.15);border-radius:var(--uwc-radius-sm)}
+.sidebar{background:#fff;border-right:1px solid var(--uwc-grey-200);padding:18px 0;overflow-y:auto}
+.sidebar__label{font-size:var(--uwc-fs-micro);font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--uwc-grey-400);padding:10px 18px 8px}
+.sidebar__item{display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer;margin:0 8px 2px;border-radius:var(--uwc-radius);transition:background var(--uwc-tx-fast)}
+.sidebar__item:hover{background:var(--uwc-grey-100)}
+.sidebar__item.active{background:var(--uwc-navy-tint);border-left:3px solid var(--uwc-navy);padding-left:11px}
+.sidebar__num{width:24px;height:24px;border-radius:50%;background:var(--uwc-grey-200);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--uwc-grey-600);flex-shrink:0;transition:background var(--uwc-tx-fast),color var(--uwc-tx-fast)}
+.sidebar__item.active .sidebar__num{background:var(--uwc-navy);color:#fff}
+.sidebar__item.done .sidebar__num{background:var(--uwc-green);color:#fff}
+.sidebar__item.done .sidebar__label-text{color:var(--uwc-grey-400)}
+.sidebar__label-text{font-size:12.5px;color:var(--uwc-grey-600);line-height:1.3}
+.sidebar__item.active .sidebar__label-text{color:var(--uwc-navy);font-weight:500}
+.sidebar__progress{margin:16px;padding:12px;background:var(--uwc-grey-100);border-radius:var(--uwc-radius)}
+.sidebar__progress-label{font-size:11.5px;color:var(--uwc-grey-600);display:flex;justify-content:space-between;margin-bottom:8px}
+.sidebar__progress-track{height:4px;background:var(--uwc-grey-200);border-radius:var(--uwc-radius-pill);overflow:hidden}
+.sidebar__progress-fill{height:4px;background:var(--uwc-navy);border-radius:var(--uwc-radius-pill);transition:width var(--uwc-tx)}
+.main{overflow-y:auto;padding:28px 32px;background:var(--uwc-grey-100)}
+.screen{display:none;max-width:1240px}
+.screen.active{display:block;animation:fadeIn 240ms ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.screen-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;gap:16px}
+.screen-title{font-family:var(--uwc-font-title);font-size:var(--uwc-fs-display);font-weight:500;color:var(--uwc-grey-800);line-height:1.15;max-width:800px}
+.screen-sub{font-size:var(--uwc-fs-body);color:var(--uwc-grey-600);margin-top:6px;line-height:1.5;max-width:800px}
+.step-nav{display:flex;gap:8px;flex-shrink:0}
+.btn-nav{padding:8px 16px;font-size:12.5px;font-weight:500;font-family:var(--uwc-font-body);border:1px solid var(--uwc-grey-300);border-radius:var(--uwc-radius);background:#fff;color:var(--uwc-grey-600);cursor:pointer;transition:all var(--uwc-tx-fast)}
+.btn-nav:hover:not(:disabled){background:var(--uwc-grey-100);border-color:var(--uwc-grey-400)}
+.btn-nav:disabled{opacity:.4;cursor:not-allowed}
+.btn-nav--primary{background:var(--uwc-navy);color:#fff;border-color:var(--uwc-navy)}
+.btn-nav--primary:hover:not(:disabled){background:var(--uwc-navy-deep);border-color:var(--uwc-navy-deep)}
+.card{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;margin-bottom:16px;box-shadow:var(--uwc-shadow-sm)}
+.card__header{background:var(--uwc-navy);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.card__title{color:#fff;font-size:13.5px;font-weight:500}
+.card__sub{color:rgba(255,255,255,.55);font-size:11.5px;font-family:var(--uwc-font-mono)}
+.card__body{padding:16px 18px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.alert{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--uwc-radius);font-size:12.5px;line-height:1.5;margin-bottom:12px}
+.alert:last-child{margin-bottom:0}
+.alert__icon{width:18px;height:18px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.alert--info{background:var(--uwc-navy-tint);color:var(--uwc-navy);border:1px solid #93c5fd}
+.alert--success{background:#f0fdf4;color:#14532d;border:1px solid #86efac}
+.alert--warning{background:#fffbeb;color:#78350f;border:1px solid #fbbf24}
+.alert--error{background:var(--uwc-red-tint);color:#7f1d1d;border:1px solid #fca5a5}
+.alert--demo-note{background:#faf5ff;color:#581c87;border:1px solid #d8b4fe}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:500;padding:3px 10px;border-radius:var(--uwc-radius-pill);border:1px solid transparent}
+.pill::before{content:'';width:6px;height:6px;border-radius:50%}
+.pill--under-review{background:#ede9fe;color:#581c87;border-color:#c4b5fd}.pill--under-review::before{background:#7c3aed}
+.pill--shortlisted{background:#d1fae5;color:#065f46;border-color:#6ee7b7}.pill--shortlisted::before{background:#10b981}
+.pill--flagged{background:var(--uwc-red-tint);color:#7f1d1d;border-color:#fca5a5}.pill--flagged::before{background:var(--uwc-red)}
+.pill--locked{background:#fee2e2;color:#991b1b;border-color:#fca5a5}.pill--locked::before{background:#ef4444}
+.context-banner{background:linear-gradient(90deg,var(--uwc-navy) 0%,var(--uwc-navy-deep) 100%);color:#fff;padding:12px 18px;border-radius:var(--uwc-radius);margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.context-banner__icon{background:rgba(255,255,255,.16);padding:6px 10px;border-radius:var(--uwc-radius-sm);font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase}
+.context-banner__text{font-size:13px;line-height:1.5;flex:1}
+.context-banner__text strong{color:#fff}
+.demo-mode-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:4px 10px;border-radius:var(--uwc-radius-pill);border:1px dashed}
+.demo-mode-tag--zoho{color:#2563eb;border-color:#93c5fd;background:#eff6ff}
+.field-group{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius);overflow:hidden}
+.field-cell{padding:10px 14px;border-bottom:1px solid var(--uwc-grey-200);border-right:1px solid var(--uwc-grey-200)}
+.field-cell:nth-child(even){border-right:none}
+.field-cell.full{grid-column:1/-1;border-right:none}
+.field-cell__label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--uwc-grey-400);margin-bottom:4px}
+.field-cell__value{font-size:13.5px;color:var(--uwc-grey-800);font-weight:500}
+.field-cell__value.muted{color:var(--uwc-grey-500);font-weight:400}
+.field-cell__value.success{color:#166534}
+.timeline{padding:8px 0}
+.timeline-item{display:flex;gap:12px;padding:10px 18px;align-items:flex-start}
+.timeline-rail{display:flex;flex-direction:column;align-items:center;flex-shrink:0;padding-top:4px}
+.timeline-dot{width:9px;height:9px;border-radius:50%;background:var(--uwc-navy);flex-shrink:0}
+.timeline-dot.green{background:var(--uwc-green)}
+.timeline-dot.red{background:var(--uwc-red)}
+.timeline-line{width:1px;background:var(--uwc-grey-200);flex:1;margin-top:4px;min-height:16px}
+.timeline-content{flex:1}
+.timeline-action{font-size:13px;font-weight:500;color:var(--uwc-grey-800)}
+.timeline-meta{font-size:11px;color:var(--uwc-grey-400);margin-top:2px}
+.badge{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:500;padding:3px 8px;border-radius:var(--uwc-radius-sm);font-family:var(--uwc-font-mono)}
+.badge--api{background:#dbeafe;color:#1e40af}
+.badge--auto{background:#dcfce7;color:#166534}
+.badge--gate{background:#fee2e2;color:#991b1b}
+.badge--info{background:var(--uwc-navy-tint);color:var(--uwc-navy)}
+.badge--warn{background:#fef3c7;color:#92400e}
+.role-context{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;background:var(--uwc-navy-tint);color:var(--uwc-navy);border-radius:var(--uwc-radius-pill);font-size:12px;font-weight:500;margin-bottom:14px}
+.badges-strip{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+
+/* Zoho mode */
+.zoho-mode{font-family:var(--zoho-font);font-size:var(--zoho-fs-base);color:var(--zoho-text);background:var(--zoho-content-bg)}
+.zoho-topbar{height:var(--zoho-topbar-height);background:var(--zoho-topbar-bg);color:var(--zoho-topbar-text);display:flex;align-items:center;padding:0 16px;position:sticky;top:0;z-index:50;gap:16px}
+.zoho-topbar__logo{display:flex;align-items:center;gap:8px;font-weight:500;font-size:14px}
+.zoho-topbar__logo-icon{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#8b5cf6,#3b82f6);display:inline-block}
+.zoho-topbar__search{background:var(--zoho-topbar-search-bg);border:1px solid rgba(255,255,255,.12);border-radius:var(--zoho-radius);padding:6px 12px;color:var(--zoho-topbar-text-muted);font-size:var(--zoho-fs-sm);width:320px;margin:0 auto}
+.zoho-topbar__right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.zoho-topbar__org{width:32px;height:32px;border-radius:50%;background:#f7d427;color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px}
+.zoho-shell{display:grid;grid-template-columns:var(--zoho-sidebar-width) 1fr;min-height:calc(100vh - var(--zoho-topbar-height) - 60px)}
+.zoho-sidebar{background:var(--zoho-sidebar-bg);border-right:1px solid var(--zoho-sidebar-border);padding:12px 0;overflow-y:auto}
+.zoho-sidebar__group{padding:0 8px;margin-bottom:4px}
+.zoho-sidebar__item{display:flex;align-items:center;gap:10px;padding:7px 10px;font-size:var(--zoho-fs-base);color:var(--zoho-sidebar-text);cursor:pointer;border-radius:var(--zoho-radius);transition:background var(--uwc-tx-fast)}
+.zoho-sidebar__item:hover{background:var(--zoho-sidebar-hover-bg)}
+.zoho-sidebar__item.active{background:var(--zoho-sidebar-active-bg);color:var(--zoho-sidebar-active-text);font-weight:500}
+.zoho-main{padding:0;overflow-y:auto;background:var(--zoho-content-bg)}
+.zoho-page-header{padding:14px 20px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;gap:12px}
+.zoho-page-title{font-size:16px;font-weight:600;color:var(--zoho-text)}
+.zoho-page-tools{padding:10px 20px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;gap:8px;background:#fff;position:sticky;top:0;z-index:5}
+.zoho-page-tools__right{margin-left:auto;display:flex;gap:8px}
+.zoho-btn{padding:7px 14px;font-size:var(--zoho-fs-base);border-radius:var(--zoho-radius);border:1px solid var(--zoho-outline);background:#fff;color:var(--zoho-text);cursor:pointer;font-family:var(--zoho-font);transition:all var(--uwc-tx-fast);display:inline-flex;align-items:center;gap:6px}
+.zoho-btn:hover{background:var(--zoho-content-alt)}
+.zoho-btn--primary{background:var(--zoho-primary);color:#fff;border-color:var(--zoho-primary)}
+.zoho-btn--primary:hover{background:var(--zoho-primary-hover)}
+.zoho-btn--danger{background:#ef4444;color:#fff;border-color:#ef4444}
+.zoho-pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:var(--zoho-radius-sm);font-size:var(--zoho-fs-xs);font-weight:500}
+.zoho-pill--recent{background:var(--zoho-pill-recent-bg);color:var(--zoho-pill-recent-text)}
+.zoho-pill--info{background:var(--zoho-pill-info-bg);color:var(--zoho-pill-info-text)}
+.zoho-pill--warn{background:var(--zoho-pill-today-bg);color:var(--zoho-pill-today-text)}
+.zoho-pill--danger{background:var(--zoho-pill-overdue-bg);color:var(--zoho-pill-overdue-text)}
+.zoho-detail__hero{display:flex;align-items:center;gap:14px;padding:14px 20px;background:#fff;border-bottom:1px solid var(--zoho-border-light)}
+.zoho-detail__avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#ec4899);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px}
+.zoho-detail__name{font-size:18px;font-weight:600}
+.zoho-detail__actions{margin-left:auto;display:flex;gap:8px}
+.zoho-detail__sections{padding:16px 20px}
+.zoho-detail__section{background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);margin-bottom:16px;overflow:hidden}
+.zoho-detail__section-header{padding:12px 16px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;justify-content:space-between}
+.zoho-detail__section-title{font-size:var(--zoho-fs-base);font-weight:600}
+.zoho-detail__section-body{padding:12px 16px}
+.zoho-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;font-size:var(--zoho-fs-base)}
+.zoho-field{display:flex;gap:12px;align-items:baseline}
+.zoho-field__label{width:140px;flex-shrink:0;color:var(--zoho-text-muted);text-align:right;font-size:var(--zoho-fs-sm)}
+.zoho-field__value{flex:1;color:var(--zoho-text)}
+.zoho-blueprint{display:flex;gap:4px;padding:14px 20px;background:#fff;border-bottom:1px solid var(--zoho-border-light);overflow-x:auto}
+.zoho-blueprint__stage{padding:8px 16px;border-radius:var(--zoho-radius-sm);font-size:var(--zoho-fs-sm);font-weight:500;white-space:nowrap;position:relative}
+.zoho-blueprint__stage.done{background:#f0fdf4;color:#166534}
+.zoho-blueprint__stage.current{background:var(--uwc-navy);color:#fff}
+.zoho-blueprint__stage.future{background:var(--zoho-content-alt);color:var(--zoho-text-muted)}
+.zoho-blueprint__stage::after{content:'›';position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--zoho-text-disabled)}
+.zoho-blueprint__stage:last-child::after{display:none}
+.zoho-list-table{width:100%;border-collapse:collapse;font-size:var(--zoho-fs-base)}
+.zoho-list-table th{background:var(--zoho-content-alt);padding:10px 14px;text-align:left;font-size:var(--zoho-fs-xs);font-weight:600;color:var(--zoho-text-muted);text-transform:uppercase;letter-spacing:.6px;border-bottom:2px solid var(--zoho-border)}
+.zoho-list-table td{padding:11px 14px;border-bottom:1px solid var(--zoho-border-light);vertical-align:middle}
+.zoho-list-table tr:hover td{background:#f9fafb;cursor:pointer}
+.zoho-list-table tr.featured td{background:#fffbeb}
+
+/* === SCENARIO C SPECIFIC === */
+.score-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--uwc-grey-100)}
+.score-row:last-child{border-bottom:none}
+.score-label{width:200px;flex-shrink:0;font-size:13px;font-weight:500;color:var(--zoho-text)}
+.score-slider-wrap{flex:1;display:flex;align-items:center;gap:10px}
+.score-slider{-webkit-appearance:none;appearance:none;flex:1;height:6px;border-radius:3px;background:linear-gradient(to right,var(--uwc-navy) 0%,var(--uwc-navy) var(--val,90%),var(--uwc-grey-200) var(--val,90%),var(--uwc-grey-200) 100%);outline:none;cursor:pointer}
+.score-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--uwc-navy);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.score-num{width:32px;height:32px;border-radius:50%;background:var(--uwc-navy);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.score-num.paulo{background:var(--uwc-orange)}
+.lock-reveal{display:flex;align-items:center;justify-content:center;gap:12px;padding:20px;background:var(--uwc-grey-50);border:2px dashed var(--uwc-grey-300);border-radius:var(--uwc-radius);margin-bottom:16px}
+.lock-icon{font-size:32px;transition:all .5s cubic-bezier(.34,1.56,.64,1)}
+.lock-icon.unlocked{transform:scale(1.2) rotate(-15deg);filter:drop-shadow(0 0 8px rgba(31,149,53,.5))}
+.scores-side-by-side{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.score-panel{border-radius:var(--uwc-radius);border:2px solid var(--uwc-grey-200);overflow:hidden}
+.score-panel.clara{border-color:var(--uwc-navy)}
+.score-panel.paulo{border-color:var(--uwc-orange)}
+.score-panel__header{padding:10px 14px;font-size:13px;font-weight:600;color:#fff}
+.score-panel.clara .score-panel__header{background:var(--uwc-navy)}
+.score-panel.paulo .score-panel__header{background:var(--uwc-orange)}
+.score-panel__body{padding:12px 14px}
+.score-dim-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--uwc-grey-100);font-size:12.5px}
+.score-dim-row:last-child{border-bottom:none}
+.score-val{font-weight:700;font-size:15px;color:var(--uwc-navy)}
+.score-val.paulo{color:var(--uwc-orange)}
+.wf-animation{background:var(--uwc-grey-50);border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);padding:20px 24px;margin-bottom:16px}
+.wf-steps{display:flex;flex-direction:column;gap:0}
+.wf-step{display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:1px solid var(--uwc-grey-100)}
+.wf-step:last-child{border-bottom:none}
+.wf-step__dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;transition:all .4s ease}
+.wf-step__dot.done{background:#dcfce7;border:2px solid #86efac}
+.wf-step__dot.firing{background:var(--uwc-navy);border:2px solid var(--uwc-navy);animation:pulse 1s infinite}
+.wf-step__dot.pending{background:var(--uwc-grey-100);border:2px solid var(--uwc-grey-200)}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,48,135,.4)}50%{box-shadow:0 0 0 6px rgba(0,48,135,0)}}
+.wf-step__label{font-size:13px;font-weight:500;color:var(--zoho-text);line-height:1.4}
+.wf-step__meta{font-size:11px;color:var(--zoho-text-muted);margin-top:2px}
+.lock-banner{background:linear-gradient(90deg,#7f1d1d,#991b1b);color:#fff;padding:12px 18px;border-radius:var(--uwc-radius);margin-bottom:16px;display:flex;align-items:center;gap:12px;font-size:13px;font-weight:500}
+.sg-flag-form{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden}
+.sg-flag-form__header{background:#7f1d1d;padding:12px 18px;color:#fff;font-size:13.5px;font-weight:500}
+.sg-flag-form__body{padding:18px}
+.form-field{margin-bottom:14px}
+.form-label{display:block;font-size:12px;font-weight:500;color:var(--uwc-grey-600);margin-bottom:5px}
+.form-label .req{color:var(--uwc-red)}
+.form-input{width:100%;background:#fff;border:1.5px solid var(--uwc-grey-300);border-radius:var(--uwc-radius-sm);padding:9px 12px;font-size:13.5px;font-family:var(--uwc-font-body);color:var(--uwc-grey-800);transition:border-color var(--uwc-tx-fast);outline:none}
+.form-input:focus{border-color:var(--uwc-navy);box-shadow:0 0 0 3px rgba(0,48,135,.08)}
+.form-select{width:100%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa3b8' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;border:1.5px solid var(--uwc-grey-300);border-radius:var(--uwc-radius-sm);padding:9px 12px;font-size:13.5px;font-family:var(--uwc-font-body);color:var(--uwc-grey-800);outline:none;appearance:none}
+.form-textarea{width:100%;background:#fff;border:1.5px solid var(--uwc-grey-300);border-radius:var(--uwc-radius-sm);padding:10px 12px;font-size:13.5px;font-family:var(--uwc-font-body);color:var(--uwc-grey-800);outline:none;resize:vertical;min-height:90px}
+.email-preview{background:var(--uwc-grey-50);border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius);overflow:hidden;margin-bottom:12px}
+.email-preview__header{background:var(--uwc-navy);padding:10px 14px;color:#fff;font-size:12px}
+.email-preview__body{padding:14px 16px;font-size:13px;line-height:1.7;color:var(--zoho-text)}
+.field-ref-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.field-ref-table th{background:var(--uwc-navy);color:#fff;padding:8px 12px;text-align:left;font-size:11.5px;font-weight:500}
+.field-ref-table td{padding:8px 12px;border-bottom:1px solid var(--uwc-grey-100);vertical-align:top}
+.field-ref-table tr:nth-child(even) td{background:var(--uwc-grey-50)}
+.field-ref-table .api-name{font-family:var(--uwc-font-mono);font-size:11.5px;color:var(--uwc-navy)}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar__brand">
+    <div style="width:32px;height:32px;border-radius:50%;background:#fff;color:var(--uwc-navy);display:flex;align-items:center;justify-content:center;font-family:var(--uwc-font-title);font-weight:700;font-size:11px;flex-shrink:0">UWC</div>
+    <span class="topbar__logo">UWC International</span>
+    <span class="topbar__demo-badge">DEMO</span>
+  </div>
+  <div class="topbar__divider"></div>
+  <div class="topbar__scenario"><strong>Scenario C</strong> · Selection, Scoring &amp; Safeguarding</div>
+  <div class="topbar__center"></div>
+  <div class="topbar__right">
+    <div id="role-switcher"></div>
+    <div class="topbar__step-counter" id="step-counter">Step 1 of 10</div>
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar__label">Scenario C · Steps</div>
+  <div class="sidebar__item active" id="nav-0" onclick="go(0)">
+    <div class="sidebar__num">1</div>
+    <div class="sidebar__label-text">Clara's reviewer queue</div>
+  </div>
+  <div class="sidebar__item" id="nav-1" onclick="go(1)">
+    <div class="sidebar__num">2</div>
+    <div class="sidebar__label-text">Clara scores Sofia</div>
+  </div>
+  <div class="sidebar__item" id="nav-2" onclick="go(2)">
+    <div class="sidebar__num">3</div>
+    <div class="sidebar__label-text">Clara submits — awaiting 2nd</div>
+  </div>
+  <div class="sidebar__item" id="nav-3" onclick="go(3)">
+    <div class="sidebar__num">4</div>
+    <div class="sidebar__label-text">Paulo's blind view</div>
+  </div>
+  <div class="sidebar__item" id="nav-4" onclick="go(4)">
+    <div class="sidebar__num">5</div>
+    <div class="sidebar__label-text">Paulo submits — unlock!</div>
+  </div>
+  <div class="sidebar__item" id="nav-5" onclick="go(5)">
+    <div class="sidebar__num">6</div>
+    <div class="sidebar__label-text">Ana — side-by-side scores</div>
+  </div>
+  <div class="sidebar__item" id="nav-6" onclick="go(6)">
+    <div class="sidebar__num">7</div>
+    <div class="sidebar__label-text">Safeguarding flag — Miguel</div>
+  </div>
+  <div class="sidebar__item" id="nav-7" onclick="go(7)">
+    <div class="sidebar__num">8</div>
+    <div class="sidebar__label-text">Akanksha — IO triage</div>
+  </div>
+  <div class="sidebar__item" id="nav-8" onclick="go(8)">
+    <div class="sidebar__num">9</div>
+    <div class="sidebar__label-text">Sofia shortlisted — auto-email</div>
+  </div>
+  <div class="sidebar__item" id="nav-9" onclick="go(9)">
+    <div class="sidebar__num">10</div>
+    <div class="sidebar__label-text">CRM field reference</div>
+  </div>
+  <div class="sidebar__progress">
+    <div class="sidebar__progress-label">
+      <span>Progress</span>
+      <span id="progress-txt">Step 1 of 10</span>
+    </div>
+    <div class="sidebar__progress-track">
+      <div class="sidebar__progress-fill" id="progress-fill" style="width:10%"></div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main" id="main">
+
+<!-- ===== SCREEN 0: CLARA'S REVIEWER QUEUE ===== -->
+<section class="screen active" id="sc-0">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">👤 Clara Ramos — NC Reviewer · UWC Brazil</div>
+      <h1 class="screen-title">Reviewer queue</h1>
+      <p class="screen-sub">Clara opens her personalised queue in Zoho CRM. Only applications assigned to her are visible. Sofia Almeida is at the top — highest priority. Clara can declare a conflict of interest before opening any record.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" disabled>← Back</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(1)">Next →</button>
+    </div>
+  </div>
+
+  <div class="demo-mode-tag demo-mode-tag--zoho" style="margin-bottom:14px">⬡ Zoho CRM — NC Reviewer view</div>
+
+  <!-- Zoho chrome -->
+  <div class="zoho-mode" style="border:1px solid var(--zoho-border);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
+    <div class="zoho-topbar">
+      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
+      <div class="zoho-topbar__search">🔍 &nbsp;Search Applications...</div>
+      <div class="zoho-topbar__right">
+        <span style="font-size:12px;color:rgba(255,255,255,.6)">UWC Brazil 2026</span>
+        <div class="zoho-topbar__org">CR</div>
+      </div>
+    </div>
+    <div class="zoho-shell">
+      <div class="zoho-sidebar">
+        <div class="zoho-sidebar__group">
+          <div class="zoho-sidebar__item">📋 Dashboard</div>
+          <div class="zoho-sidebar__item active">👤 My Review Queue</div>
+          <div class="zoho-sidebar__item">📁 All Applications</div>
+          <div class="zoho-sidebar__item">📊 Score Reports</div>
+        </div>
+      </div>
+      <div class="zoho-main">
+        <div class="zoho-page-header">
+          <span class="zoho-page-title">My Review Queue</span>
+          <span class="zoho-pill zoho-pill--info" style="margin-left:10px">3 assigned</span>
+        </div>
+        <div class="zoho-page-tools">
+          <span style="font-size:12px;color:var(--zoho-text-muted)">Showing 3 applications assigned to Clara Ramos</span>
+          <div class="zoho-page-tools__right">
+            <button class="zoho-btn">⚠️ Declare Conflict of Interest</button>
+            <button class="zoho-btn zoho-btn--primary" onclick="go(1)">Open Sofia's record →</button>
+          </div>
+        </div>
+        <table class="zoho-list-table">
+          <thead>
+            <tr>
+              <th>Applicant</th>
+              <th>Country</th>
+              <th>Stage</th>
+              <th>Review Count</th>
+              <th>Assigned Reviewers</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="featured" onclick="go(1)">
+              <td><strong>Sofia Almeida</strong> <span class="zoho-pill zoho-pill--warn" style="margin-left:6px">Priority</span></td>
+              <td>🇧🇷 Brazil</td>
+              <td><span class="zoho-pill zoho-pill--info">Under Review</span></td>
+              <td>0 / 2</td>
+              <td>Clara Ramos, Paulo Fonseca</td>
+              <td><button class="zoho-btn zoho-btn--primary" style="padding:4px 10px;font-size:11.5px" onclick="go(1)">Score now</button></td>
+            </tr>
+            <tr>
+              <td>Lena Fischer</td>
+              <td>🇩🇪 Germany</td>
+              <td><span class="zoho-pill zoho-pill--info">Under Review</span></td>
+              <td>1 / 2</td>
+              <td>Clara Ramos, Marcus Weber</td>
+              <td><button class="zoho-btn" style="padding:4px 10px;font-size:11.5px">Score</button></td>
+            </tr>
+            <tr>
+              <td>Kwame Asante</td>
+              <td>🇬🇭 Ghana</td>
+              <td><span class="zoho-pill zoho-pill--info">Under Review</span></td>
+              <td>0 / 2</td>
+              <td>Clara Ramos, Grace Omondi</td>
+              <td><button class="zoho-btn" style="padding:4px 10px;font-size:11.5px">Score</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="padding:12px 20px;background:var(--uwc-navy-tint);border-top:1px solid var(--uwc-grey-200);font-size:12px;color:var(--uwc-navy)">
+          ℹ️ <strong>Blind review enforced:</strong> Your scores are hidden from other reviewers until both have submitted. Scores are revealed automatically when Review_Count reaches 2.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--gate">Role-scoped queue — Clara sees only her 3 assigned apps</span>
+    <span class="badge badge--info">Conflict of Interest declare → locks reviewer off that record</span>
+    <span class="badge badge--auto">Blind review: scores hidden until both reviewers submit</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 1: CLARA'S SCORING FORM ===== -->
+<section class="screen" id="sc-1">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">👤 Clara Ramos — NC Reviewer</div>
+      <h1 class="screen-title">Scoring — Sofia Almeida</h1>
+      <p class="screen-sub">Clara opens Sofia's record and completes the Review Scores subform. Four dimensions, scored 1–10. She adds her overall recommendation and comments, then submits.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(0)">← Back</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(2)">Next →</button>
+    </div>
+  </div>
+
+  <div class="demo-mode-tag demo-mode-tag--zoho" style="margin-bottom:14px">⬡ Zoho CRM — Review Scores subform</div>
+
+  <div class="zoho-mode" style="border:1px solid var(--zoho-border);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
+    <div class="zoho-topbar">
+      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
+      <div class="zoho-topbar__search">🔍 &nbsp;Search...</div>
+      <div class="zoho-topbar__right"><div class="zoho-topbar__org">CR</div></div>
+    </div>
+
+    <!-- Hero -->
+    <div class="zoho-detail__hero">
+      <div class="zoho-detail__avatar">SA</div>
+      <div>
+        <div class="zoho-detail__name">Sofia Almeida <span class="zoho-pill zoho-pill--info" style="font-size:12px;margin-left:8px">Under Review</span></div>
+        <div style="font-size:12px;color:var(--zoho-text-muted)">APP-2026-BR-001 · 🇧🇷 Brazil · Age 16 · UWC Brazil NC</div>
+      </div>
+      <div class="zoho-detail__actions">
+        <button class="zoho-btn">📄 View Application</button>
+      </div>
+    </div>
+
+    <!-- Blueprint -->
+    <div class="zoho-blueprint">
+      <div class="zoho-blueprint__stage done">Eligibility</div>
+      <div class="zoho-blueprint__stage done">Registration</div>
+      <div class="zoho-blueprint__stage done">Form Submitted</div>
+      <div class="zoho-blueprint__stage current">Under Review</div>
+      <div class="zoho-blueprint__stage future">Panel Decision</div>
+      <div class="zoho-blueprint__stage future">Shortlisted / Rejected</div>
+    </div>
+
+    <div class="zoho-detail__sections">
+      <!-- Review Scores subform -->
+      <div class="zoho-detail__section">
+        <div class="zoho-detail__section-header">
+          <span class="zoho-detail__section-title">Review Scores — Clara Ramos</span>
+          <span class="zoho-pill zoho-pill--warn">Your scores only — blind</span>
+        </div>
+        <div class="zoho-detail__section-body">
+          <div class="score-row">
+            <div class="score-label">Academic Potential</div>
+            <div class="score-slider-wrap">
+              <input type="range" class="score-slider" min="1" max="10" value="9" style="--val:90%" oninput="this.style.setProperty('--val',this.value*10+'%');this.nextElementSibling.textContent=this.value">
+              <div class="score-num">9</div>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-label">Community Engagement</div>
+            <div class="score-slider-wrap">
+              <input type="range" class="score-slider" min="1" max="10" value="8" style="--val:80%" oninput="this.style.setProperty('--val',this.value*10+'%');this.nextElementSibling.textContent=this.value">
+              <div class="score-num">8</div>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-label">Communication Skills</div>
+            <div class="score-slider-wrap">
+              <input type="range" class="score-slider" min="1" max="10" value="9" style="--val:90%" oninput="this.style.setProperty('--val',this.value*10+'%');this.nextElementSibling.textContent=this.value">
+              <div class="score-num">9</div>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-label">UWC Values Commitment</div>
+            <div class="score-slider-wrap">
+              <input type="range" class="score-slider" min="1" max="10" value="9" style="--val:90%" oninput="this.style.setProperty('--val',this.value*10+'%');this.nextElementSibling.textContent=this.value">
+              <div class="score-num">9</div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--uwc-grey-200)">
+            <div class="form-field">
+              <label class="form-label">Overall Recommendation <span class="req">*</span></label>
+              <select class="form-select">
+                <option value="yes" selected>✅ Yes — Recommend for panel</option>
+                <option value="conditional">⚠️ Conditional — needs panel discussion</option>
+                <option value="no">❌ No — Do not advance</option>
+              </select>
+            </div>
+            <div class="form-field" style="margin-bottom:0">
+              <label class="form-label">Reviewer Comments</label>
+              <textarea class="form-textarea">Sofia demonstrates exceptional academic rigour alongside a deep commitment to community service in her São Paulo neighbourhood. Her bilingual interview performance and clarity about UWC values were notable. Strong recommend for panel.</textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;gap:10px;padding:0 0 8px">
+        <button class="zoho-btn">Save Draft</button>
+        <button class="zoho-btn zoho-btn--primary" onclick="go(2)">Submit Review ✓</button>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--api">Review_Score_1 … 4 + Reviewer_Recommendation + Reviewer_Comments — Zoho subform fields</span>
+    <span class="badge badge--gate">Blind: Paulo cannot see these scores until he also submits</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 2: AWAITING SECOND REVIEWER ===== -->
+<section class="screen" id="sc-2">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">👤 Clara Ramos — NC Reviewer</div>
+      <h1 class="screen-title">Submitted — awaiting second reviewer</h1>
+      <p class="screen-sub">Clara's scores are saved. The record now shows Review_Count = 1 of 2. A banner confirms her submission and informs her that scores remain hidden until Paulo also submits.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(1)">← Back</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(3)">Next →</button>
+    </div>
+  </div>
+
+  <div class="alert alert--success" style="margin-bottom:16px">
+    <span>✅</span>
+    <div><strong>Review submitted successfully.</strong> Your scores for Sofia Almeida have been recorded. Scores will be revealed when Paulo Fonseca submits his review. Review_Count is now <strong>1 of 2</strong>.</div>
+  </div>
+
+  <div class="zoho-mode" style="border:1px solid var(--zoho-border);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
+    <div class="zoho-detail__hero">
+      <div class="zoho-detail__avatar">SA</div>
+      <div>
+        <div class="zoho-detail__name">Sofia Almeida <span class="zoho-pill zoho-pill--info" style="font-size:12px;margin-left:8px">Under Review</span></div>
+        <div style="font-size:12px;color:var(--zoho-text-muted)">APP-2026-BR-001 · 🇧🇷 Brazil</div>
+      </div>
+    </div>
+    <div class="zoho-detail__sections">
+      <div class="field-group">
+        <div class="field-cell"><div class="field-cell__label">Review Count</div><div class="field-cell__value" style="color:var(--uwc-orange);font-size:18px;font-weight:700">1 / 2</div></div>
+        <div class="field-cell"><div class="field-cell__label">All Reviews Complete</div><div class="field-cell__value muted">false</div></div>
+        <div class="field-cell"><div class="field-cell__label">Reviewer 1</div><div class="field-cell__value success">Clara Ramos ✓ Submitted</div></div>
+        <div class="field-cell"><div class="field-cell__label">Reviewer 2</div><div class="field-cell__value muted">Paulo Fonseca — Pending</div></div>
+        <div class="field-cell full"><div class="field-cell__label">Scores visible</div><div class="field-cell__value muted">🔒 Locked — revealed when Review_Count = 2</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--auto">Workflow auto-increments Review_Count on each submission</span>
+    <span class="badge badge--gate">All_Reviews_Complete remains false — prevents premature panel access</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 3: PAULO — BLIND VIEW ===== -->
+<section class="screen" id="sc-3">
+  <div class="screen-header">
+    <div>
+      <div class="role-context" style="background:#fff3ed;color:var(--uwc-orange);border-radius:var(--uwc-radius-pill);padding:6px 12px;font-size:12px;font-weight:500;display:inline-flex;align-items:center;gap:8px;margin-bottom:14px">👤 Paulo Fonseca — NC Reviewer</div>
+      <h1 class="screen-title">Paulo's view — blind review enforced</h1>
+      <p class="screen-sub">Paulo opens Sofia's record. Clara's scores are hidden behind a lock. He sees only his own blank scoring form. The blind-review guarantee is explicit in the UI.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(2)">← Back</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(4)">Next →</button>
+    </div>
+  </div>
+
+  <div class="demo-mode-tag demo-mode-tag--zoho" style="margin-bottom:14px">⬡ Zoho CRM — logged in as Paulo Fonseca</div>
+
+  <div class="zoho-mode" style="border:1px solid var(--zoho-border);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
+    <div class="zoho-topbar">
+      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
+      <div class="zoho-topbar__search">🔍 &nbsp;Search...</div>
+      <div class="zoho-topbar__right"><div class="zoho-topbar__org" style="background:#e85d0c">PF</div></div>
+    </div>
+    <div class="zoho-detail__hero">
+      <div class="zoho-detail__avatar">SA</div>
+      <div>
+        <div class="zoho-detail__name">Sofia Almeida <span class="zoho-pill zoho-pill--info" style="font-size:12px;margin-left:8px">Under Review</span></div>
+        <div style="font-size:12px;color:var(--zoho-text-muted)">APP-2026-BR-001 · 🇧🇷 Brazil · Review_Count: 1 of 2</div>
+      </div>
+    </div>
+    <div class="zoho-detail__sections">
+
+      <!-- Locked panel for Clara's scores -->
+      <div class="zoho-detail__section">
+        <div class="zoho-detail__section-header">
+          <span class="zoho-detail__section-title">Review Scores — Clara Ramos</span>
+          <span class="zoho-pill zoho-pill--danger">🔒 Locked</span>
+        </div>
+        <div class="zoho-detail__section-body">
+          <div class="lock-reveal" id="lock-box">
+            <span class="lock-icon" id="lock-icon">🔒</span>
+            <div style="text-align:center">
+              <div style="font-size:14px;font-weight:600;color:var(--uwc-grey-800);margin-bottom:4px">Scores hidden — blind review active</div>
+              <div style="font-size:12px;color:var(--uwc-grey-500)">Clara Ramos's scores will be revealed automatically once you submit your review. This ensures independent assessments.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paulo's own scoring form -->
+      <div class="zoho-detail__section">
+        <div class="zoho-detail__section-header">
+          <span class="zoho-detail__section-title">Review Scores — Paulo Fonseca (your review)</span>
+          <span class="zoho-pill zoho-pill--warn">Pending submission</span>
+        </div>
+        <div class="zoho-detail__section-body">
+          <div class="score-row">
+            <div class="score-label">Academic Potential</div>
+            <div class="score-slider-wrap">
+              <input type="range" class="score-slider" min="1" max="10" value="8" style="--val:80%;accent-color:var(--uwc-orange)" oninput="this.style.setProperty('--val',this.value*10+'%');this.nextElementSibling.textContent=this.value">
+              <div class="score-num paulo">8</div>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-label">Community Engagement</div>
+            <div class="score-slider-wrap">
+              <input type="range" class="score-slider" min="1" max="10" value="9" style="--val:90%;accent-color:var(--uwc-orange)" oninput="this.style.setProperty('--val',this.value*10+'%');this.nextElementSibling.textContent=this.value">
+              <div class="score-num paulo">9</div>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-label">Communication Skills</div>
+            <div class="score-slider-wrap">
+              <input type="range" class="score-slider" min="1" max="10" value="8" style="--val:80%;accent-color:var(--uwc-orange)" oninput="this.style.setProperty('--val',this.value*10+'%');this.nextElementSibling.textContent=this.value">
+              <div class="score-num paulo">8</div>
+            </div>
+          </div>
+          <div class="score-row">
+            <div class="score-label">UWC Values Commitment</div>
+            <div class="score-slider-wrap">
+              <input type="range" class="score-slider" min="1" max="10" value="9" style="--val:90%;accent-color:var(--uwc-orange)" oninput="this.style.setProperty('--val',this.value*10+'%');this.nextElementSibling.textContent=this.value">
+              <div class="score-num paulo">9</div>
+            </div>
+          </div>
+          <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--uwc-grey-200)">
+            <div class="form-field">
+              <label class="form-label">Overall Recommendation</label>
+              <select class="form-select"><option selected>✅ Yes — Recommend for panel</option></select>
+            </div>
+            <div class="form-field" style="margin-bottom:0">
+              <label class="form-label">Reviewer Comments</label>
+              <textarea class="form-textarea">Sofia's essay revealed mature thinking on social responsibility. Community project leadership stood out. Her grasp of UWC's mission in the interview was impressive. Clear yes.</textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:10px;padding:0 0 8px">
+        <button class="zoho-btn zoho-btn--primary" onclick="go(4)">Submit Review → Unlock 🔓</button>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--gate">Clara's scores: field-level visibility rule — hidden from other reviewers</span>
+    <span class="badge badge--info">Paulo scores independently: 8 / 9 / 8 / 9</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 4: PAULO SUBMITS — UNLOCK ANIMATION ===== -->
+<section class="screen" id="sc-4">
+  <div class="screen-header">
+    <div>
+      <div class="role-context" style="background:#fff3ed;color:var(--uwc-orange);border-radius:var(--uwc-radius-pill);padding:6px 12px;font-size:12px;font-weight:500;display:inline-flex;align-items:center;gap:8px;margin-bottom:14px">👤 Paulo Fonseca — submitting review</div>
+      <h1 class="screen-title">Paulo submits — workflow fires, scores unlock</h1>
+      <p class="screen-sub">Paulo's submission triggers a Zoho workflow: Review_Count → 2, All_Reviews_Complete = true, unlock event fires. Both score sets become visible simultaneously.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(3)">← Back</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(5)">Next →</button>
+    </div>
+  </div>
+
+  <!-- WOW moment: workflow animation -->
+  <div class="wf-animation">
+    <div style="font-size:13px;font-weight:600;color:var(--uwc-grey-800);margin-bottom:14px;display:flex;align-items:center;gap:8px">
+      ⚡ Zoho Workflow — triggering now
+      <span class="badge badge--auto">Auto-executing</span>
+    </div>
+    <div class="wf-steps">
+      <div class="wf-step">
+        <div class="wf-step__dot done" id="wf1">✓</div>
+        <div><div class="wf-step__label">Paulo Fonseca — review submitted</div><div class="wf-step__meta">Trigger: Review Scores subform → on save</div></div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-step__dot done" id="wf2">✓</div>
+        <div><div class="wf-step__label">Review_Count incremented → <strong>2</strong></div><div class="wf-step__meta">Field update · Applications module</div></div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-step__dot firing" id="wf3">⚡</div>
+        <div><div class="wf-step__label">All_Reviews_Complete set → <strong>true</strong></div><div class="wf-step__meta">Condition: Review_Count = 2 → update field</div></div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-step__dot firing" id="wf4">🔓</div>
+        <div><div class="wf-step__label">Score visibility unlocked — both sets revealed</div><div class="wf-step__meta">Visibility rule removed · Ana Carvalho notified</div></div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-step__dot pending" id="wf5">○</div>
+        <div><div class="wf-step__label">Email → Ana Carvalho: "Reviews complete for Sofia Almeida"</div><div class="wf-step__meta">Awaiting send — 2s delay</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unlock visual -->
+  <div class="card">
+    <div class="card__header"><span class="card__title">Sofia Almeida — APP-2026-BR-001</span><span class="card__sub">Scores now unlocked</span></div>
+    <div class="card__body">
+      <div style="display:flex;justify-content:center;padding:16px 0;gap:20px;align-items:center">
+        <div style="text-align:center">
+          <div id="unlock-icon" style="font-size:48px;transition:all .6s cubic-bezier(.34,1.56,.64,1);display:inline-block">🔓</div>
+          <div style="font-size:13px;font-weight:600;color:var(--uwc-green);margin-top:6px">Scores revealed!</div>
+          <div style="font-size:11px;color:var(--uwc-grey-500)">All_Reviews_Complete = true</div>
+        </div>
+      </div>
+      <div class="field-group">
+        <div class="field-cell"><div class="field-cell__label">Review Count</div><div class="field-cell__value success" style="font-size:18px;font-weight:700">2 / 2 ✓</div></div>
+        <div class="field-cell"><div class="field-cell__label">All Reviews Complete</div><div class="field-cell__value success" style="font-weight:700">true</div></div>
+        <div class="field-cell"><div class="field-cell__label">Clara — Recommendation</div><div class="field-cell__value success">Yes</div></div>
+        <div class="field-cell"><div class="field-cell__label">Paulo — Recommendation</div><div class="field-cell__value success">Yes</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--auto">Workflow: Review_Count → 2 → All_Reviews_Complete = true → unlock</span>
+    <span class="badge badge--api">NC Admin Ana Carvalho email notification auto-sent</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 5: ANA — SIDE-BY-SIDE SCORES ===== -->
+<section class="screen" id="sc-5">
+  <div class="screen-header">
+    <div>
+      <div class="role-context" style="background:#e8f8ec;color:#166534;border-radius:var(--uwc-radius-pill);padding:6px 12px;font-size:12px;font-weight:500;display:inline-flex;align-items:center;gap:8px;margin-bottom:14px">👤 Ana Carvalho — NC Admin · UWC Brazil</div>
+      <h1 class="screen-title">Both scores revealed — side-by-side view</h1>
+      <p class="screen-sub">Ana sees Clara's and Paulo's scores together for the first time. Average panel view. Both recommended Yes. She can now prepare for panel decision.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(4)">← Back</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(6)">Next →</button>
+    </div>
+  </div>
+
+  <div class="context-banner">
+    <span class="context-banner__icon">NC ADMIN</span>
+    <div class="context-banner__text">Ana Carvalho · UWC Brazil 2026 · All reviews complete — both score sets now visible</div>
+  </div>
+
+  <!-- Side by side -->
+  <div class="scores-side-by-side" style="margin-bottom:16px">
+    <div class="score-panel clara">
+      <div class="score-panel__header">🔵 Clara Ramos · Reviewer 1</div>
+      <div class="score-panel__body">
+        <div class="score-dim-row"><span>Academic Potential</span><span class="score-val">9 / 10</span></div>
+        <div class="score-dim-row"><span>Community Engagement</span><span class="score-val">8 / 10</span></div>
+        <div class="score-dim-row"><span>Communication Skills</span><span class="score-val">9 / 10</span></div>
+        <div class="score-dim-row"><span>UWC Values Commitment</span><span class="score-val">9 / 10</span></div>
+        <div style="padding-top:10px;margin-top:8px;border-top:2px solid var(--uwc-navy);display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12.5px;font-weight:600;color:var(--uwc-navy)">Average</span>
+          <span style="font-size:20px;font-weight:700;color:var(--uwc-navy)">8.75</span>
+        </div>
+        <div style="margin-top:10px"><span class="badge badge--auto">✅ Yes — Recommend</span></div>
+      </div>
+    </div>
+    <div class="score-panel paulo">
+      <div class="score-panel__header">🟠 Paulo Fonseca · Reviewer 2</div>
+      <div class="score-panel__body">
+        <div class="score-dim-row"><span>Academic Potential</span><span class="score-val paulo">8 / 10</span></div>
+        <div class="score-dim-row"><span>Community Engagement</span><span class="score-val paulo">9 / 10</span></div>
+        <div class="score-dim-row"><span>Communication Skills</span><span class="score-val paulo">8 / 10</span></div>
+        <div class="score-dim-row"><span>UWC Values Commitment</span><span class="score-val paulo">9 / 10</span></div>
+        <div style="padding-top:10px;margin-top:8px;border-top:2px solid var(--uwc-orange);display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12.5px;font-weight:600;color:var(--uwc-orange)">Average</span>
+          <span style="font-size:20px;font-weight:700;color:var(--uwc-orange)">8.5</span>
+        </div>
+        <div style="margin-top:10px"><span class="badge badge--auto">✅ Yes — Recommend</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__header"><span class="card__title">Panel Summary — Sofia Almeida</span></div>
+    <div class="card__body">
+      <div class="field-group">
+        <div class="field-cell"><div class="field-cell__label">Combined Average</div><div class="field-cell__value success" style="font-size:22px;font-weight:700">8.63 / 10</div></div>
+        <div class="field-cell"><div class="field-cell__label">Panel Recommendation</div><div class="field-cell__value success" style="font-weight:600">✅ Yes (2/2 reviewers)</div></div>
+        <div class="field-cell"><div class="field-cell__label">Highest dimension</div><div class="field-cell__value">Academic Potential · UWC Values (both 9)</div></div>
+        <div class="field-cell"><div class="field-cell__label">Next action</div><div class="field-cell__value">Panel decision → Shortlist / Reject</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--auto">Average_Score = (Clara + Paulo) / 2 — computed field</span>
+    <span class="badge badge--info">Ana sees full side-by-side — NC Admin scope · Brazil only</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 6: SAFEGUARDING FLAG — MIGUEL ===== -->
+<section class="screen" id="sc-6">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">👤 Clara Ramos — NC Reviewer</div>
+      <h1 class="screen-title">Safeguarding flag — Miguel Santos</h1>
+      <p class="screen-sub">While reviewing Miguel Santos, Clara identifies a welfare concern. She raises a safeguarding flag. On submit, Miguel's application is immediately locked from progression. Dual emails fire automatically to Ana and Akanksha.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(5)">← Back</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(7)">Next →</button>
+    </div>
+  </div>
+
+  <div class="demo-mode-tag demo-mode-tag--zoho" style="margin-bottom:14px">⬡ Zoho CRM — Miguel Santos · APP-2026-PT-003</div>
+
+  <div class="zoho-mode" style="border:1px solid var(--zoho-border);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow);margin-bottom:16px">
+    <div class="zoho-detail__hero">
+      <div class="zoho-detail__avatar" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">MS</div>
+      <div>
+        <div class="zoho-detail__name">Miguel Santos <span class="zoho-pill zoho-pill--danger" style="font-size:12px;margin-left:8px">🚩 Safeguarding Flag Raised</span></div>
+        <div style="font-size:12px;color:var(--zoho-text-muted)">APP-2026-PT-003 · 🇵🇹 Portugal · Age 17</div>
+      </div>
+      <div class="zoho-detail__actions">
+        <span style="font-size:12px;color:#991b1b;font-weight:500">🔒 Locked from progression</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lock banner -->
+  <div class="lock-banner">
+    <span style="font-size:20px">🔒</span>
+    <div>Application locked from progression — Safeguarding flag active. No stage changes permitted until IO Super Admin resolves.</div>
+  </div>
+
+  <!-- Flag form -->
+  <div class="sg-flag-form">
+    <div class="sg-flag-form__header">🚩 Safeguarding Flag — raised by Clara Ramos</div>
+    <div class="sg-flag-form__body">
+      <div class="grid-2">
+        <div class="form-field">
+          <label class="form-label">Flag Type <span class="req">*</span></label>
+          <select class="form-select">
+            <option selected>Welfare Concern</option>
+            <option>Child Protection</option>
+            <option>Disclosure</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Severity <span class="req">*</span></label>
+          <select class="form-select">
+            <option>Low</option>
+            <option selected>Medium</option>
+            <option>High — Immediate escalation</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Description <span class="req">*</span></label>
+        <textarea class="form-textarea">During interview, Miguel made reference to significant family instability and housing insecurity. His responses suggest potential welfare concerns that should be assessed by a qualified safeguarding officer before any progression decision is made.</textarea>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
+        <div style="font-size:12px;color:var(--uwc-grey-500)">⚠️ Submitting will immediately lock this application and notify NC Admin + IO Super Admin</div>
+        <button class="zoho-btn zoho-btn--danger" onclick="go(7)">🚩 Submit Flag &amp; Lock Application</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Email previews -->
+  <div style="margin-top:16px">
+    <div style="font-size:13px;font-weight:600;color:var(--uwc-grey-800);margin-bottom:10px">Auto-emails triggered on flag submission:</div>
+    <div class="grid-2">
+      <div class="email-preview">
+        <div class="email-preview__header">To: ana.carvalho@uwcbrazil.org · NC Admin notification</div>
+        <div class="email-preview__body"><strong>Safeguarding flag raised — Miguel Santos</strong><br><br>A safeguarding concern has been raised by Clara Ramos for applicant Miguel Santos (APP-2026-PT-003). The application has been locked pending your review. Please log in to the CRM to view details and coordinate with IO.</div>
+      </div>
+      <div class="email-preview">
+        <div class="email-preview__header">To: akanksha.anand@uwcio.uwc.org · IO Super Admin</div>
+        <div class="email-preview__body"><strong>Safeguarding escalation — Action required</strong><br><br>A welfare concern (Medium severity) has been flagged for APP-2026-PT-003 at UWC Brazil NC. Application is locked. Please review in the Safeguarding module and initiate triage protocol within 24 hours.</div>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--gate">Application locked immediately on flag submit — no stage progression permitted</span>
+    <span class="badge badge--auto">Dual email: NC Admin + IO Super Admin — Zoho workflow action</span>
+    <span class="badge badge--api">Safeguarding_Flag_Status → Under Review · Locked_From_Progression = true</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 7: AKANKSHA — IO TRIAGE ===== -->
+<section class="screen" id="sc-7">
+  <div class="screen-header">
+    <div>
+      <div class="role-context" style="background:var(--uwc-navy-tint);color:var(--uwc-navy);border-radius:var(--uwc-radius-pill);padding:6px 12px;font-size:12px;font-weight:500;display:inline-flex;align-items:center;gap:8px;margin-bottom:14px">👤 Akanksha Anand — IO Super Admin · Global</div>
+      <h1 class="screen-title">Safeguarding triage — IO Super Admin</h1>
+      <p class="screen-sub">Akanksha receives the escalation email and opens the Safeguarding record in Zoho. She sees the full contact timeline, can assign to a safeguarding officer, and resolves the case — automatically unlocking the application.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(6)">← Back</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(8)">Next →</button>
+    </div>
+  </div>
+
+  <div class="demo-mode-tag demo-mode-tag--zoho" style="margin-bottom:14px">⬡ Zoho CRM — Safeguarding module · IO Super Admin view</div>
+
+  <div class="zoho-mode" style="border:1px solid var(--zoho-border);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
+    <div class="zoho-topbar">
+      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
+      <div class="zoho-topbar__search">🔍 &nbsp;Search Safeguarding...</div>
+      <div class="zoho-topbar__right"><div class="zoho-topbar__org" style="background:#003087">AA</div></div>
+    </div>
+    <div class="zoho-detail__hero">
+      <div class="zoho-detail__avatar" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">MS</div>
+      <div>
+        <div class="zoho-detail__name">Miguel Santos — Safeguarding Case SG-2026-003</div>
+        <div style="font-size:12px;color:var(--zoho-text-muted)">APP-2026-PT-003 · Raised by Clara Ramos · 27 May 2026</div>
+      </div>
+      <div class="zoho-detail__actions">
+        <button class="zoho-btn zoho-btn--primary" onclick="go(8)">✓ Resolve Case</button>
+      </div>
+    </div>
+    <div class="zoho-detail__sections">
+      <div class="field-group" style="margin-bottom:16px">
+        <div class="field-cell"><div class="field-cell__label">Status</div><div class="field-cell__value" style="color:#7c3aed;font-weight:600">🔵 Under Review</div></div>
+        <div class="field-cell"><div class="field-cell__label">Severity</div><div class="field-cell__value" style="color:#92400e;font-weight:600">⚠️ Medium</div></div>
+        <div class="field-cell"><div class="field-cell__label">Flag Type</div><div class="field-cell__value">Welfare Concern</div></div>
+        <div class="field-cell"><div class="field-cell__label">Assigned Officer</div><div class="field-cell__value muted">— Unassigned</div></div>
+        <div class="field-cell full"><div class="field-cell__label">Description</div><div class="field-cell__value" style="font-size:12.5px;font-weight:400">During interview, Miguel made reference to significant family instability and housing insecurity...</div></div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="zoho-detail__section">
+        <div class="zoho-detail__section-header"><span class="zoho-detail__section-title">Conversation Timeline</span></div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-rail"><div class="timeline-dot red"></div><div class="timeline-line"></div></div>
+            <div class="timeline-content"><div class="timeline-action">🚩 Safeguarding flag raised — Clara Ramos</div><div class="timeline-meta">27 May 2026 · 14:33 · Application locked</div></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-rail"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+            <div class="timeline-content"><div class="timeline-action">📧 Email sent to Ana Carvalho + Akanksha Anand</div><div class="timeline-meta">27 May 2026 · 14:33 · Automated notification</div></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-rail"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+            <div class="timeline-content"><div class="timeline-action">👁 Case opened by Akanksha Anand (IO Super Admin)</div><div class="timeline-meta">27 May 2026 · 15:10 · Status: Under Review</div></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-rail"><div class="timeline-dot pending" style="background:var(--uwc-grey-300)"></div></div>
+            <div class="timeline-content"><div class="timeline-action" style="color:var(--uwc-grey-400)">⏳ Resolution pending...</div><div class="timeline-meta">Awaiting IO decision</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resolve panel -->
+      <div class="zoho-detail__section">
+        <div class="zoho-detail__section-header"><span class="zoho-detail__section-title">Resolve Case</span></div>
+        <div class="zoho-detail__section-body">
+          <div class="form-field">
+            <label class="form-label">Resolution Notes</label>
+            <textarea class="form-textarea" style="min-height:70px">Welfare concern reviewed. NC Brazil has spoken with Miguel and his family. Appropriate support arrangements have been confirmed. No child protection risk identified. Application may proceed.</textarea>
+          </div>
+          <div style="display:flex;gap:10px;justify-content:flex-end">
+            <button class="zoho-btn">Escalate to Child Protection</button>
+            <button class="zoho-btn zoho-btn--primary" onclick="go(8)">✓ Resolve → Unlock Application</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--gate">IO Super Admin only: full safeguarding case + Resolve button</span>
+    <span class="badge badge--auto">Resolve → Status = Resolved → Locked_From_Progression = false</span>
+    <span class="badge badge--info">Full conversation timeline — audit trail for compliance</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 8: SOFIA SHORTLISTED — AUTO-EMAIL ===== -->
+<section class="screen" id="sc-8">
+  <div class="screen-header">
+    <div>
+      <div class="role-context" style="background:#e8f8ec;color:#166534;border-radius:var(--uwc-radius-pill);padding:6px 12px;font-size:12px;font-weight:500;display:inline-flex;align-items:center;gap:8px;margin-bottom:14px">👤 Ana Carvalho — NC Admin</div>
+      <h1 class="screen-title">Panel decision — Sofia shortlisted</h1>
+      <p class="screen-sub">Panel votes to shortlist Sofia. Ana records the decision in CRM. Stage transitions to Shortlisted. Workflow fires: auto-congratulation email to Sofia with UWC Brazil branding.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(7)">← Back</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(9)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Workflow animation -->
+  <div class="wf-animation" style="margin-bottom:16px">
+    <div style="font-size:13px;font-weight:600;color:var(--uwc-grey-800);margin-bottom:14px;display:flex;align-items:center;gap:8px">
+      ⚡ Zoho Workflow — Panel Decision Recorded
+      <span class="badge badge--auto">Auto-executing</span>
+    </div>
+    <div class="wf-steps">
+      <div class="wf-step">
+        <div class="wf-step__dot done">✓</div>
+        <div><div class="wf-step__label">Panel decision: <strong>Shortlisted</strong> — recorded by Ana Carvalho</div><div class="wf-step__meta">Trigger: Stage field updated to Shortlisted</div></div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-step__dot done">✓</div>
+        <div><div class="wf-step__label">Blueprint transition: Under Review → Shortlisted</div><div class="wf-step__meta">Zoho Blueprint stage change · timestamp logged</div></div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-step__dot firing">📧</div>
+        <div><div class="wf-step__label">Auto-email firing → Sofia Almeida (sofia.almeida@example.com)</div><div class="wf-step__meta">Template: shortlist_congratulations_pt · sending now</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sofia's record updated -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card__header"><span class="card__title">Sofia Almeida — APP-2026-BR-001</span><span class="card__sub">Stage updated</span></div>
+    <div class="card__body">
+      <div class="zoho-blueprint" style="padding:0;border:none;background:transparent;margin-bottom:12px">
+        <div class="zoho-blueprint__stage done">Eligibility</div>
+        <div class="zoho-blueprint__stage done">Submitted</div>
+        <div class="zoho-blueprint__stage done">Under Review</div>
+        <div class="zoho-blueprint__stage current">Shortlisted ✓</div>
+        <div class="zoho-blueprint__stage future">Nominated</div>
+      </div>
+      <div class="field-group">
+        <div class="field-cell"><div class="field-cell__label">Stage</div><div class="field-cell__value success" style="font-weight:700">Shortlisted</div></div>
+        <div class="field-cell"><div class="field-cell__label">Panel Date</div><div class="field-cell__value">27 May 2026</div></div>
+        <div class="field-cell"><div class="field-cell__label">Combined Score</div><div class="field-cell__value success">8.63 / 10</div></div>
+        <div class="field-cell"><div class="field-cell__label">Notification sent</div><div class="field-cell__value success">✓ Email dispatched</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auto-email preview -->
+  <div class="email-preview">
+    <div class="email-preview__header" style="background:var(--uwc-navy)">
+      To: sofia.almeida@example.com · From: selecao@uwcbrazil.org · Subject: Parabéns! Você foi pré-selecionada — UWC Brazil 2026
+    </div>
+    <div class="email-preview__body">
+      <div style="text-align:center;padding:10px 0 16px">
+        <div style="font-family:var(--uwc-font-title);font-size:22px;color:var(--uwc-navy);margin-bottom:4px">Parabéns, Sofia!</div>
+        <div style="font-size:13px;color:var(--uwc-grey-500)">UWC Brazil National Committee · Ciclo 2026</div>
+      </div>
+      <p>É com grande prazer que informamos que você foi <strong>pré-selecionada pelo Comitê Nacional UWC Brasil</strong> para o ciclo de seleção 2026.</p>
+      <p>Os próximos passos serão comunicados em breve pelo seu comitê. Por favor, mantenha seus dados de contato atualizados no portal de candidatura.</p>
+      <p style="color:var(--uwc-grey-500);font-size:11.5px;margin-top:16px">Este é um e-mail automático gerado pelo sistema CRM da UWC International.</p>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--auto">Blueprint transition → auto-email in Português — template shortlist_congratulations_pt</span>
+    <span class="badge badge--api">Stage = Shortlisted → triggers workflow · Email_Sent_Shortlist = true</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 9: FIELD REFERENCE ===== -->
+<section class="screen" id="sc-9">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">📋 CRM Architecture Reference</div>
+      <h1 class="screen-title">Field reference — Review Scores &amp; Safeguarding</h1>
+      <p class="screen-sub">Zoho CRM field definitions from BLUEPRINT_AND_WORKFLOW_SPEC.md covering the Review Scores subform and Safeguarding Flag fields used in this scenario.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(8)">← Back</button>
+      <button class="btn-nav btn-nav--primary" disabled>End of Scenario C</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="card__header"><span class="card__title">Review Scores — Subform Fields</span><span class="card__sub">Applications module · Subform: Review_Scores</span></div>
+    <div class="card__body" style="padding:0">
+      <table class="field-ref-table">
+        <thead>
+          <tr><th>Field Label</th><th>API Name</th><th>Type</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Reviewer</td><td class="api-name">Reviewer</td><td>Lookup → Users</td><td>Auto-populated from session user</td></tr>
+          <tr><td>Academic Potential</td><td class="api-name">Score_Academic_Potential</td><td>Number (1–10)</td><td>Mandatory on submit</td></tr>
+          <tr><td>Community Engagement</td><td class="api-name">Score_Community_Engagement</td><td>Number (1–10)</td><td>Mandatory on submit</td></tr>
+          <tr><td>Communication Skills</td><td class="api-name">Score_Communication_Skills</td><td>Number (1–10)</td><td>Mandatory on submit</td></tr>
+          <tr><td>UWC Values Commitment</td><td class="api-name">Score_UWC_Values</td><td>Number (1–10)</td><td>Mandatory on submit</td></tr>
+          <tr><td>Overall Recommendation</td><td class="api-name">Reviewer_Recommendation</td><td>Picklist</td><td>Yes / Conditional / No</td></tr>
+          <tr><td>Reviewer Comments</td><td class="api-name">Reviewer_Comments</td><td>Textarea (2000 chars)</td><td>Visible to NC Admin only after unlock</td></tr>
+          <tr><td>Score Average (computed)</td><td class="api-name">Score_Average</td><td>Formula (Number)</td><td>(Dim1+Dim2+Dim3+Dim4)/4 · read-only</td></tr>
+          <tr><td>Submitted At</td><td class="api-name">Review_Submitted_At</td><td>DateTime</td><td>Auto-stamp on subform save</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="card__header"><span class="card__title">Parent Application Fields — Review Control</span><span class="card__sub">Applications module</span></div>
+    <div class="card__body" style="padding:0">
+      <table class="field-ref-table">
+        <thead>
+          <tr><th>Field Label</th><th>API Name</th><th>Type</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Review Count</td><td class="api-name">Review_Count</td><td>Number</td><td>Auto-incremented by workflow on each subform save</td></tr>
+          <tr><td>All Reviews Complete</td><td class="api-name">All_Reviews_Complete</td><td>Checkbox</td><td>Set true when Review_Count = Max_Reviewers (typically 2)</td></tr>
+          <tr><td>Combined Average Score</td><td class="api-name">Combined_Average_Score</td><td>Formula</td><td>Average of all reviewer Score_Average values</td></tr>
+          <tr><td>Panel Recommendation</td><td class="api-name">Panel_Recommendation</td><td>Picklist</td><td>Shortlisted / Rejected / Waitlisted — NC Admin edits</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__header" style="background:#7f1d1d"><span class="card__title">🚩 Safeguarding Flag Fields</span><span class="card__sub">Applications module</span></div>
+    <div class="card__body" style="padding:0">
+      <table class="field-ref-table">
+        <thead>
+          <tr><th>Field Label</th><th>API Name</th><th>Type</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Safeguarding Flag</td><td class="api-name">Safeguarding_Flag</td><td>Checkbox</td><td>Set true on flag raise · triggers workflow</td></tr>
+          <tr><td>Flag Type</td><td class="api-name">Safeguarding_Flag_Type</td><td>Picklist</td><td>Welfare Concern / Child Protection / Disclosure / Other</td></tr>
+          <tr><td>Severity</td><td class="api-name">Safeguarding_Severity</td><td>Picklist</td><td>Low / Medium / High</td></tr>
+          <tr><td>Flag Description</td><td class="api-name">Safeguarding_Description</td><td>Textarea</td><td>IO Super Admin + NC Admin visibility only</td></tr>
+          <tr><td>Flag Status</td><td class="api-name">Safeguarding_Flag_Status</td><td>Picklist</td><td>Under Review / Resolved / Escalated</td></tr>
+          <tr><td>Raised By</td><td class="api-name">Safeguarding_Raised_By</td><td>Lookup → Users</td><td>Auto-populated</td></tr>
+          <tr><td>Raised At</td><td class="api-name">Safeguarding_Raised_At</td><td>DateTime</td><td>Auto-stamp</td></tr>
+          <tr><td>Locked From Progression</td><td class="api-name">Locked_From_Progression</td><td>Checkbox</td><td>Set true on flag raise · cleared on Resolved</td></tr>
+          <tr><td>Resolution Notes</td><td class="api-name">Safeguarding_Resolution_Notes</td><td>Textarea</td><td>IO Super Admin only</td></tr>
+          <tr><td>Resolved By</td><td class="api-name">Safeguarding_Resolved_By</td><td>Lookup → Users</td><td>IO Super Admin</td></tr>
+          <tr><td>Resolved At</td><td class="api-name">Safeguarding_Resolved_At</td><td>DateTime</td><td>Auto-stamp on resolution</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--api">All field API names match BLUEPRINT_AND_WORKFLOW_SPEC.md §Review Scores</span>
+    <span class="badge badge--gate">Safeguarding fields: IO Super Admin + NC Admin visibility only — field-level security</span>
+    <span class="badge badge--info">Scenario C complete · 1 June 2026 · Presenter: Akanksha Anand</span>
+  </div>
+</section>
+
+</main>
+</div><!-- /shell -->
+
+<script>
+/* === INLINE: sample-data.js (scenario C roles only) === */
+window.UWC = window.UWC || {};
+UWC.users = UWC.users || [
+  { id: 'akanksha', name: 'Akanksha Anand', initial: 'AA', role: 'IO Super Admin', scope: 'Global · Full visibility', badge: 'ios', email: 'akanksha.anand@uwcio.uwc.org' },
+  { id: 'ana',      name: 'Ana Carvalho', initial: 'AC', role: 'NC Admin', scope: 'UWC Brazil only', badge: 'nc', email: 'ana.carvalho@uwcbrazil.org' },
+  { id: 'clara',    name: 'Clara Ramos', initial: 'CR', role: 'NC Reviewer', scope: 'Assigned applications only', badge: 'reviewer', email: 'clara.ramos@uwcbrazil.org' },
+  { id: 'paulo',    name: 'Paulo Fonseca', initial: 'PF', role: 'NC Reviewer', scope: 'Assigned applications only', badge: 'reviewer', email: 'paulo.fonseca@uwcbrazil.org' }
+];
+UWC.scenarioRoles = UWC.scenarioRoles || {};
+UWC.scenarioRoles['C'] = ['clara','paulo','ana','akanksha'];
+UWC.getRolesFor = UWC.getRolesFor || function(code) {
+  return (UWC.scenarioRoles[code] || []).map(function(id) {
+    return UWC.users.find(function(u) { return u.id === id; });
+  }).filter(Boolean);
+};
+
+/* === INLINE: role-switcher.js === */
+(function(){
+'use strict';
+window.RoleSwitcher = { init: init, setRole: setRole, getRole: function(){ return document.body.dataset.currentRole || 'default'; } };
+function init(opts){
+  var roles = opts.roles || [];
+  var defaultId = opts.defaultRoleId || (roles[0] && roles[0].id);
+  var scenarioCode = opts.scenarioCode || '';
+  var dropdown = document.getElementById('role-switcher');
+  if(!dropdown){ console.warn('[RoleSwitcher] #role-switcher not found'); return; }
+  dropdown.innerHTML =
+    '<button type="button" class="rs-trigger" id="rs-trigger" aria-expanded="false">'+
+      '<span class="rs-avatar" id="rs-avatar"></span>'+
+      '<span class="rs-current">'+
+        '<span class="rs-name" id="rs-current-name">—</span>'+
+        '<span class="rs-role" id="rs-current-role">—</span>'+
+      '</span>'+
+      '<span class="rs-chev">▾</span>'+
+    '</button>'+
+    '<div class="rs-menu" id="rs-menu" hidden>'+
+      '<div class="rs-menu-header">View as · Scenario '+scenarioCode+'</div>'+
+      roles.map(function(r){
+        return '<button type="button" class="rs-option" data-role-id="'+r.id+'">'+
+          '<span class="rs-avatar rs-avatar--'+(r.badge||'default')+'">'+(r.initial||r.name[0])+'</span>'+
+          '<span class="rs-opt-text">'+
+            '<span class="rs-opt-name">'+r.name+'</span>'+
+            '<span class="rs-opt-role">'+r.role+'</span>'+
+            (r.scope ? '<span class="rs-opt-scope">'+r.scope+'</span>' : '')+
+          '</span>'+
+          '<span class="rs-check">✓</span>'+
+        '</button>';
+      }).join('')+
+      '<div class="rs-menu-footer">Switching role re-renders screen content for that perspective.</div>'+
+    '</div>';
+  var trigger = document.getElementById('rs-trigger');
+  var menu = document.getElementById('rs-menu');
+  trigger.addEventListener('click', function(e){ e.stopPropagation(); var open=!menu.hidden; menu.hidden=open; trigger.setAttribute('aria-expanded',String(!open)); });
+  document.addEventListener('click', function(e){ if(!dropdown.contains(e.target)){ menu.hidden=true; trigger.setAttribute('aria-expanded','false'); } });
+  Array.prototype.forEach.call(dropdown.querySelectorAll('.rs-option'), function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.dataset.roleId;
+      var role = roles.find(function(r){ return r.id===id; });
+      setRole(id, role, roles);
+      menu.hidden = true;
+      trigger.setAttribute('aria-expanded','false');
+    });
+  });
+  var def = roles.find(function(r){ return r.id===defaultId; });
+  setRole(defaultId, def, roles);
+  window.RoleSwitcher._roles = roles;
+}
+function setRole(id, role, roles){
+  document.body.dataset.currentRole = id;
+  var avatar = document.getElementById('rs-avatar');
+  var cn = document.getElementById('rs-current-name');
+  var cr = document.getElementById('rs-current-role');
+  if(avatar && role){ avatar.className='rs-avatar rs-avatar--'+(role.badge||'default'); avatar.textContent=role.initial||role.name[0]; }
+  if(cn && role) cn.textContent = role.name;
+  if(cr && role) cr.textContent = role.role + (role.scope ? ' · '+role.scope : '');
+  Array.prototype.forEach.call(document.querySelectorAll('.rs-option'), function(btn){ btn.classList.toggle('active', btn.dataset.roleId===id); });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-role-show]'), function(el){ var allowed=el.dataset.roleShow.split(',').map(function(s){return s.trim();}); el.hidden=allowed.indexOf(id)===-1; });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-role-hide]'), function(el){ var blocked=el.dataset.roleHide.split(',').map(function(s){return s.trim();}); el.hidden=blocked.indexOf(id)!==-1; });
+  document.dispatchEvent(new CustomEvent('roleChanged',{detail:{roleId:id,role:role}}));
+}
+var style = document.createElement('style');
+style.textContent =
+  '#role-switcher{position:relative;font-family:var(--uwc-font-body,sans-serif)}'+
+  '.rs-trigger{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:5px 10px 5px 5px;border-radius:8px;cursor:pointer;font-size:12.5px;min-width:200px;text-align:left}'+
+  '.rs-trigger:hover{background:rgba(255,255,255,0.18)}'+
+  '.rs-avatar{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:11px;flex-shrink:0}'+
+  '.rs-avatar--ios{background:#003087}.rs-avatar--nc{background:#1f9535}.rs-avatar--reviewer{background:#e85d0c}.rs-avatar--dp{background:#C8102E}.rs-avatar--school{background:#7c3aed}.rs-avatar--portal{background:#0ea5e9}.rs-avatar--marketing{background:#ec4899}.rs-avatar--guardian{background:#f59e0b}.rs-avatar--default{background:#6b7280}'+
+  '.rs-current{display:flex;flex-direction:column;line-height:1.2;flex:1}.rs-name{font-weight:500;color:#fff;font-size:12px}.rs-role{font-size:10.5px;color:rgba(255,255,255,0.6)}'+
+  '.rs-chev{color:rgba(255,255,255,0.6);font-size:10px;margin-left:2px}'+
+  '.rs-menu{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #e2e6ed;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);min-width:300px;z-index:100;overflow:hidden}'+
+  '.rs-menu-header{padding:10px 14px;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#6b7280;background:#f7f8fa;font-weight:600}'+
+  '.rs-menu-footer{padding:10px 14px;font-size:11px;color:#6b7280;border-top:1px solid #f0f2f5;background:#fafbfd;line-height:1.4}'+
+  '.rs-option{display:flex;align-items:center;gap:10px;padding:10px 14px;width:100%;background:#fff;border:none;border-bottom:1px solid #f0f2f5;cursor:pointer;text-align:left}'+
+  '.rs-option:hover{background:#f7f8fa}.rs-option.active{background:#E8EEF6}'+
+  '.rs-opt-text{flex:1;display:flex;flex-direction:column;line-height:1.3}'+
+  '.rs-opt-name{font-size:13px;font-weight:500;color:#0d1b3e}'+
+  '.rs-opt-role{font-size:11.5px;color:#5a6480}'+
+  '.rs-opt-scope{font-size:10.5px;color:#9aa3b8;font-style:italic}'+
+  '.rs-check{color:#003087;font-weight:600;opacity:0;font-size:14px}'+
+  '.rs-option.active .rs-check{opacity:1}';
+document.head.appendChild(style);
+})();
+
+/* === SCENARIO C LOGIC === */
+var TOTAL = 10;
+var current = 0;
+
+var stepRoles = {
+  0: 'clara', 1: 'clara', 2: 'clara',
+  3: 'paulo', 4: 'paulo',
+  5: 'ana',
+  6: 'clara',
+  7: 'akanksha',
+  8: 'ana',
+  9: 'akanksha'
+};
+
+function go(i) {
+  if (i < 0 || i >= TOTAL) return;
+  var screens = document.querySelectorAll('.screen');
+  Array.prototype.forEach.call(screens, function(s){ s.classList.remove('active'); });
+  var target = document.getElementById('sc-' + i);
+  if (target) target.classList.add('active');
+
+  for (var j = 0; j < TOTAL; j++) {
+    var nav = document.getElementById('nav-' + j);
+    if (!nav) continue;
+    nav.classList.remove('active', 'done');
+    if (j < i) nav.classList.add('done');
+    if (j === i) nav.classList.add('active');
+  }
+
+  var pct = Math.round(((i + 1) / TOTAL) * 100);
+  var counter = document.getElementById('step-counter');
+  if (counter) counter.textContent = 'Step ' + (i + 1) + ' of ' + TOTAL;
+  var progTxt = document.getElementById('progress-txt');
+  if (progTxt) progTxt.textContent = 'Step ' + (i + 1) + ' of ' + TOTAL;
+  var progFill = document.getElementById('progress-fill');
+  if (progFill) progFill.style.width = pct + '%';
+
+  var mainEl = document.getElementById('main');
+  if (mainEl) mainEl.scrollTop = 0;
+
+  var roleId = stepRoles[i] || 'clara';
+  if (window.RoleSwitcher && window.RoleSwitcher._roles) {
+    var roles = window.RoleSwitcher._roles;
+    var role = roles.find(function(r){ return r.id === roleId; });
+    if (role) window.RoleSwitcher.setRole(roleId, role, roles);
+  }
+
+  // Trigger unlock animation on step 4
+  if (i === 4) {
+    setTimeout(function() {
+      var icon = document.getElementById('unlock-icon');
+      if (icon) {
+        icon.style.transform = 'scale(1.3) rotate(-15deg)';
+        icon.style.filter = 'drop-shadow(0 0 12px rgba(31,149,53,.6))';
+        setTimeout(function(){ icon.style.transform = 'scale(1)'; icon.style.filter = 'none'; }, 700);
+      }
+      // animate wf steps 3+4 to done
+      var wf3 = document.getElementById('wf3');
+      var wf4 = document.getElementById('wf4');
+      var wf5 = document.getElementById('wf5');
+      if (wf3) { wf3.className = 'wf-step__dot done'; wf3.textContent = '✓'; }
+      if (wf4) { wf4.className = 'wf-step__dot done'; wf4.textContent = '✓'; }
+      setTimeout(function(){
+        if (wf5) { wf5.className = 'wf-step__dot done'; wf5.textContent = '✓'; }
+      }, 600);
+    }, 300);
+  }
+
+  current = i;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  RoleSwitcher.init({
+    scenarioCode: 'C',
+    defaultRoleId: 'clara',
+    roles: UWC.getRolesFor('C')
+  });
+  go(0);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,2066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scenario B — Applicant Registration · UWC International Demo</title>
+<link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* === INLINE: uwc-tokens.css === */
+:root{--uwc-navy:#003087;--uwc-navy-deep:#001a4d;--uwc-navy-tint:#E8EEF6;--uwc-red:#C8102E;--uwc-red-tint:#fdeaea;--uwc-gold:#C8AB00;--uwc-green:#1f9535;--uwc-orange:#e85d0c;--uwc-navy-live:#004A97;--uwc-teal:#009482;--uwc-white:#ffffff;--uwc-grey-50:#f8f9fb;--uwc-grey-100:#f3f5fa;--uwc-grey-200:#e2e6ed;--uwc-grey-300:#c8cdd8;--uwc-grey-400:#9aa3b8;--uwc-grey-500:#6C757D;--uwc-grey-600:#5a6480;--uwc-grey-800:#0d1b3e;--uwc-font-title:'Playfair Display',Georgia,serif;--uwc-font-body:'DM Sans',system-ui,sans-serif;--uwc-font-mono:'DM Mono',ui-monospace,monospace;--uwc-fs-display:32px;--uwc-fs-h1:26px;--uwc-fs-h2:20px;--uwc-fs-h3:16px;--uwc-fs-body:14px;--uwc-fs-small:12.5px;--uwc-fs-tiny:11px;--uwc-fs-micro:10px;--uwc-sp-1:4px;--uwc-sp-2:8px;--uwc-sp-3:12px;--uwc-sp-4:16px;--uwc-sp-5:20px;--uwc-sp-6:24px;--uwc-sp-8:32px;--uwc-radius-sm:4px;--uwc-radius:8px;--uwc-radius-lg:12px;--uwc-radius-pill:999px;--uwc-shadow-sm:0 1px 2px rgba(0,0,0,0.04);--uwc-shadow:0 2px 8px rgba(0,48,135,0.08);--uwc-shadow-lg:0 8px 24px rgba(0,48,135,0.12);--uwc-tx-fast:120ms ease;--uwc-tx:200ms cubic-bezier(0.4,0,0.2,1)}
+html{box-sizing:border-box}*,*::before,*::after{box-sizing:inherit}
+body{margin:0;padding:0;font-family:var(--uwc-font-body);font-size:var(--uwc-fs-body);line-height:1.5;color:var(--uwc-grey-800);background:var(--uwc-grey-100);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,h5{font-family:var(--uwc-font-title);font-weight:500;line-height:1.2;margin:0}
+h1{font-size:var(--uwc-fs-h1)}h2{font-size:var(--uwc-fs-h2)}h3{font-size:var(--uwc-fs-h3)}
+a{color:var(--uwc-navy);text-decoration:none;transition:color var(--uwc-tx-fast)}
+a:hover{color:var(--uwc-red);text-decoration:underline}
+button{font-family:inherit}
+
+/* === INLINE: zoho-tokens.css === */
+:root{--zoho-topbar-bg:#1c1f25;--zoho-topbar-text:#ffffff;--zoho-topbar-text-muted:rgba(255,255,255,0.55);--zoho-topbar-icon:#b9bcc7;--zoho-topbar-height:48px;--zoho-topbar-search-bg:rgba(255,255,255,0.08);--zoho-sidebar-bg:#f7f8fa;--zoho-sidebar-border:#e8eaed;--zoho-sidebar-text:#4a5568;--zoho-sidebar-section-text:#6b7280;--zoho-sidebar-active-bg:#e6efff;--zoho-sidebar-active-text:#2563eb;--zoho-sidebar-hover-bg:#eef1f7;--zoho-sidebar-width:225px;--zoho-content-bg:#ffffff;--zoho-content-alt:#f9fafb;--zoho-content-secondary:#f3f5fa;--zoho-border:#e5e7eb;--zoho-border-light:#f0f2f5;--zoho-divider:#ebeef2;--zoho-text:#1f2937;--zoho-text-secondary:#4b5563;--zoho-text-muted:#6b7280;--zoho-text-disabled:#9ca3af;--zoho-link:#2563eb;--zoho-link-hover:#1d4ed8;--zoho-primary:#3b6ef5;--zoho-primary-hover:#2563eb;--zoho-primary-text:#ffffff;--zoho-outline:#d1d5db;--zoho-outline-hover:#9ca3af;--zoho-pill-today-bg:#fef3c7;--zoho-pill-today-text:#92400e;--zoho-pill-recent-bg:#d1fae5;--zoho-pill-recent-text:#065f46;--zoho-pill-overdue-bg:#fee2e2;--zoho-pill-overdue-text:#991b1b;--zoho-pill-info-bg:#dbeafe;--zoho-pill-info-text:#1e40af;--zoho-kanban-col:#e8f4f4;--zoho-kanban-card-bg:#ffffff;--zoho-kanban-card-border:#e5e7eb;--zoho-success:#10b981;--zoho-warning:#f59e0b;--zoho-danger:#ef4444;--zoho-info:#3b82f6;--zoho-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Open Sans","Helvetica Neue",sans-serif;--zoho-fs-base:13px;--zoho-fs-sm:12px;--zoho-fs-xs:11px;--zoho-fs-lg:14px;--zoho-fs-xl:16px;--zoho-radius-sm:4px;--zoho-radius:6px;--zoho-radius-lg:8px}
+
+/* === INLINE: components.css === */
+.shell{display:grid;grid-template-columns:280px 1fr;grid-template-rows:60px 1fr;min-height:100vh;background:var(--uwc-grey-100)}
+.topbar{grid-column:1/-1;background:var(--uwc-navy-deep);display:flex;align-items:center;padding:0 20px;gap:16px;border-bottom:3px solid var(--uwc-red);color:#fff}
+.topbar__brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.topbar__logo{font-family:var(--uwc-font-title);font-size:18px;font-weight:600;color:#fff;letter-spacing:.3px}
+.topbar__demo-badge{background:var(--uwc-red);color:#fff;font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;padding:3px 10px;border-radius:var(--uwc-radius-sm)}
+.topbar__divider{width:1px;height:22px;background:rgba(255,255,255,.18)}
+.topbar__scenario{font-size:12.5px;color:rgba(255,255,255,.7)}
+.topbar__scenario strong{color:#fff;font-weight:500}
+.topbar__center{flex:1}
+.topbar__right{margin-left:auto;display:flex;align-items:center;gap:14px}
+.topbar__step-counter{font-size:11.5px;color:rgba(255,255,255,.6);font-family:var(--uwc-font-mono);letter-spacing:.6px;padding:4px 10px;border:1px solid rgba(255,255,255,.15);border-radius:var(--uwc-radius-sm)}
+.sidebar{background:#fff;border-right:1px solid var(--uwc-grey-200);padding:18px 0;overflow-y:auto}
+.sidebar__label{font-size:var(--uwc-fs-micro);font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--uwc-grey-400);padding:10px 18px 8px}
+.sidebar__item{display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer;margin:0 8px 2px;border-radius:var(--uwc-radius);transition:background var(--uwc-tx-fast)}
+.sidebar__item:hover{background:var(--uwc-grey-100)}
+.sidebar__item.active{background:var(--uwc-navy-tint);border-left:3px solid var(--uwc-navy);padding-left:11px}
+.sidebar__num{width:24px;height:24px;border-radius:50%;background:var(--uwc-grey-200);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--uwc-grey-600);flex-shrink:0;transition:background var(--uwc-tx-fast),color var(--uwc-tx-fast)}
+.sidebar__item.active .sidebar__num{background:var(--uwc-navy);color:#fff}
+.sidebar__item.done .sidebar__num{background:var(--uwc-green);color:#fff}
+.sidebar__item.done .sidebar__label-text{color:var(--uwc-grey-400)}
+.sidebar__label-text{font-size:12.5px;color:var(--uwc-grey-600);line-height:1.3}
+.sidebar__item.active .sidebar__label-text{color:var(--uwc-navy);font-weight:500}
+.sidebar__progress{margin:16px;padding:12px;background:var(--uwc-grey-100);border-radius:var(--uwc-radius)}
+.sidebar__progress-label{font-size:11.5px;color:var(--uwc-grey-600);display:flex;justify-content:space-between;margin-bottom:8px}
+.sidebar__progress-track{height:4px;background:var(--uwc-grey-200);border-radius:var(--uwc-radius-pill);overflow:hidden}
+.sidebar__progress-fill{height:4px;background:var(--uwc-navy);border-radius:var(--uwc-radius-pill);transition:width var(--uwc-tx)}
+.main{overflow-y:auto;padding:28px 32px;background:var(--uwc-grey-100)}
+.screen{display:none;max-width:1240px}
+.screen.active{display:block;animation:fadeIn 240ms ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.screen-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;gap:16px}
+.screen-title{font-family:var(--uwc-font-title);font-size:var(--uwc-fs-display);font-weight:500;color:var(--uwc-grey-800);line-height:1.15;max-width:800px}
+.screen-sub{font-size:var(--uwc-fs-body);color:var(--uwc-grey-600);margin-top:6px;line-height:1.5;max-width:800px}
+.step-nav{display:flex;gap:8px;flex-shrink:0}
+.btn-nav{padding:8px 16px;font-size:12.5px;font-weight:500;font-family:var(--uwc-font-body);border:1px solid var(--uwc-grey-300);border-radius:var(--uwc-radius);background:#fff;color:var(--uwc-grey-600);cursor:pointer;transition:all var(--uwc-tx-fast)}
+.btn-nav:hover:not(:disabled){background:var(--uwc-grey-100);border-color:var(--uwc-grey-400)}
+.btn-nav:disabled{opacity:.4;cursor:not-allowed}
+.btn-nav--primary{background:var(--uwc-navy);color:#fff;border-color:var(--uwc-navy)}
+.btn-nav--primary:hover:not(:disabled){background:var(--uwc-navy-deep);border-color:var(--uwc-navy-deep)}
+.card{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;margin-bottom:16px;box-shadow:var(--uwc-shadow-sm)}
+.card__header{background:var(--uwc-navy);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.card__title{color:#fff;font-size:13.5px;font-weight:500}
+.card__sub{color:rgba(255,255,255,.55);font-size:11.5px;font-family:var(--uwc-font-mono)}
+.card__body{padding:16px 18px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.alert{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--uwc-radius);font-size:12.5px;line-height:1.5;margin-bottom:12px}
+.alert:last-child{margin-bottom:0}
+.alert__icon{width:18px;height:18px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.alert--info{background:var(--uwc-navy-tint);color:var(--uwc-navy);border:1px solid #93c5fd}
+.alert--success{background:#f0fdf4;color:#14532d;border:1px solid #86efac}
+.alert--warning{background:#fffbeb;color:#78350f;border:1px solid #fbbf24}
+.alert--error{background:var(--uwc-red-tint);color:#7f1d1d;border:1px solid #fca5a5}
+.alert--demo-note{background:#faf5ff;color:#581c87;border:1px solid #d8b4fe}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:500;padding:3px 10px;border-radius:var(--uwc-radius-pill);border:1px solid transparent}
+.pill::before{content:'';width:6px;height:6px;border-radius:50%}
+.pill--registered{background:#f3f4f6;color:#4b5563;border-color:#d1d5db}.pill--registered::before{background:#9ca3af}
+.pill--in-progress{background:#dbeafe;color:#1e3a8a;border-color:#93c5fd}.pill--in-progress::before{background:#3b82f6}
+.pill--submitted{background:var(--uwc-navy-tint);color:var(--uwc-navy);border-color:#93c5fd}.pill--submitted::before{background:var(--uwc-navy)}
+.pill--under-review{background:#ede9fe;color:#581c87;border-color:#c4b5fd}.pill--under-review::before{background:#7c3aed}
+.context-banner{background:linear-gradient(90deg,var(--uwc-navy) 0%,var(--uwc-navy-deep) 100%);color:#fff;padding:12px 18px;border-radius:var(--uwc-radius);margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.context-banner__icon{background:rgba(255,255,255,.16);padding:6px 10px;border-radius:var(--uwc-radius-sm);font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase}
+.context-banner__text{font-size:13px;line-height:1.5;flex:1}
+.context-banner__text strong{color:#fff}
+.demo-mode-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:4px 10px;border-radius:var(--uwc-radius-pill);border:1px dashed}
+.demo-mode-tag--zoho{color:#2563eb;border-color:#93c5fd;background:#eff6ff}
+.demo-mode-tag--portal{color:var(--uwc-navy);border-color:var(--uwc-navy);background:var(--uwc-navy-tint)}
+.field-group{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius);overflow:hidden}
+.field-cell{padding:10px 14px;border-bottom:1px solid var(--uwc-grey-200);border-right:1px solid var(--uwc-grey-200)}
+.field-cell:nth-child(even){border-right:none}
+.field-cell.full{grid-column:1/-1;border-right:none}
+.field-cell__label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--uwc-grey-400);margin-bottom:4px}
+.field-cell__value{font-size:13.5px;color:var(--uwc-grey-800);font-weight:500}
+.field-cell__value.muted{color:var(--uwc-grey-500);font-weight:400}
+.field-cell__value.success{color:#166534}
+.timeline{padding:8px 0}
+.timeline-item{display:flex;gap:12px;padding:10px 18px;align-items:flex-start}
+.timeline-rail{display:flex;flex-direction:column;align-items:center;flex-shrink:0;padding-top:4px}
+.timeline-dot{width:9px;height:9px;border-radius:50%;background:var(--uwc-navy);flex-shrink:0}
+.timeline-dot.green{background:var(--uwc-green)}
+.timeline-line{width:1px;background:var(--uwc-grey-200);flex:1;margin-top:4px;min-height:16px}
+.timeline-content{flex:1}
+.timeline-action{font-size:13px;font-weight:500;color:var(--uwc-grey-800)}
+.timeline-meta{font-size:11px;color:var(--uwc-grey-400);margin-top:2px}
+.portal-frame{border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;background:#fff;box-shadow:var(--uwc-shadow)}
+.portal-topbar{background:var(--uwc-navy);padding:14px 22px;display:flex;align-items:center;justify-content:space-between;color:#fff}
+.portal-brand{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500}
+.portal-brand__mark{width:30px;height:30px;border-radius:50%;background:#fff;color:var(--uwc-navy);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;font-family:var(--uwc-font-title)}
+.portal-user{display:flex;align-items:center;gap:8px;font-size:12px}
+.portal-lang{display:flex;gap:4px}
+.portal-lang__btn{font-size:10.5px;padding:3px 9px;border-radius:var(--uwc-radius-sm);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.6);cursor:pointer;background:transparent}
+.portal-lang__btn.active{background:rgba(255,255,255,.18);color:#fff;border-color:rgba(255,255,255,.5)}
+.portal-body{background:var(--uwc-grey-100);padding:22px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px}
+.stat-tile{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius);padding:14px}
+.stat-tile__label{font-size:11px;color:var(--uwc-grey-500);margin-bottom:4px;font-weight:500}
+.stat-tile__value{font-family:var(--uwc-font-title);font-size:24px;font-weight:600;color:var(--uwc-navy);line-height:1.1}
+.badge{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:500;padding:3px 8px;border-radius:var(--uwc-radius-sm);font-family:var(--uwc-font-mono)}
+.badge--api{background:#dbeafe;color:#1e40af}
+.badge--auto{background:#dcfce7;color:#166534}
+.badge--gate{background:#fee2e2;color:#991b1b}
+.badge--info{background:var(--uwc-navy-tint);color:var(--uwc-navy)}
+.role-context{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;background:var(--uwc-navy-tint);color:var(--uwc-navy);border-radius:var(--uwc-radius-pill);font-size:12px;font-weight:500;margin-bottom:14px}
+
+/* Zoho mode classes */
+.zoho-mode{font-family:var(--zoho-font);font-size:var(--zoho-fs-base);color:var(--zoho-text);background:var(--zoho-content-bg)}
+.zoho-topbar{height:var(--zoho-topbar-height);background:var(--zoho-topbar-bg);color:var(--zoho-topbar-text);display:flex;align-items:center;padding:0 16px;position:sticky;top:0;z-index:50;gap:16px}
+.zoho-topbar__logo{display:flex;align-items:center;gap:8px;font-weight:500;font-size:14px}
+.zoho-topbar__logo-icon{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#8b5cf6,#3b82f6);display:inline-block}
+.zoho-topbar__search{background:var(--zoho-topbar-search-bg);border:1px solid rgba(255,255,255,.12);border-radius:var(--zoho-radius);padding:6px 12px;color:var(--zoho-topbar-text-muted);font-size:var(--zoho-fs-sm);width:320px;margin:0 auto}
+.zoho-topbar__right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.zoho-topbar__org{width:32px;height:32px;border-radius:50%;background:#f7d427;color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px}
+.zoho-shell{display:grid;grid-template-columns:var(--zoho-sidebar-width) 1fr;min-height:calc(100vh - var(--zoho-topbar-height))}
+.zoho-sidebar{background:var(--zoho-sidebar-bg);border-right:1px solid var(--zoho-sidebar-border);padding:12px 0;overflow-y:auto}
+.zoho-sidebar__group{padding:0 8px;margin-bottom:4px}
+.zoho-sidebar__item{display:flex;align-items:center;gap:10px;padding:7px 10px;font-size:var(--zoho-fs-base);color:var(--zoho-sidebar-text);cursor:pointer;border-radius:var(--zoho-radius);transition:background var(--uwc-tx-fast)}
+.zoho-sidebar__item:hover{background:var(--zoho-sidebar-hover-bg)}
+.zoho-sidebar__item.active{background:var(--zoho-sidebar-active-bg);color:var(--zoho-sidebar-active-text);font-weight:500}
+.zoho-main{padding:0;overflow-y:auto;background:var(--zoho-content-bg)}
+.zoho-page-header{padding:14px 20px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;gap:12px}
+.zoho-page-title{font-size:16px;font-weight:600;color:var(--zoho-text)}
+.zoho-page-tools{padding:10px 20px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;gap:8px;background:#fff;position:sticky;top:0;z-index:5}
+.zoho-page-tools__right{margin-left:auto;display:flex;gap:8px}
+.zoho-btn{padding:7px 14px;font-size:var(--zoho-fs-base);border-radius:var(--zoho-radius);border:1px solid var(--zoho-outline);background:#fff;color:var(--zoho-text);cursor:pointer;font-family:var(--zoho-font);transition:all var(--uwc-tx-fast);display:inline-flex;align-items:center;gap:6px}
+.zoho-btn--primary{background:var(--zoho-primary);color:#fff;border-color:var(--zoho-primary)}
+.zoho-pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:var(--zoho-radius-sm);font-size:var(--zoho-fs-xs);font-weight:500}
+.zoho-pill--recent{background:var(--zoho-pill-recent-bg);color:var(--zoho-pill-recent-text)}
+.zoho-pill--info{background:var(--zoho-pill-info-bg);color:var(--zoho-pill-info-text)}
+.zoho-kanban{display:flex;gap:12px;padding:16px 20px;overflow-x:auto}
+.zoho-kanban__col{min-width:260px;flex-shrink:0}
+.zoho-kanban__col-header{background:var(--zoho-kanban-col);padding:10px 14px;border-radius:var(--zoho-radius);margin-bottom:8px}
+.zoho-kanban__col-title{display:flex;align-items:center;gap:8px;font-size:var(--zoho-fs-base);font-weight:500;color:var(--zoho-text)}
+.zoho-kanban__col-count{background:rgba(0,0,0,.08);color:var(--zoho-text);padding:1px 7px;border-radius:999px;font-size:var(--zoho-fs-xs);font-weight:600}
+.zoho-kanban__card{background:var(--zoho-kanban-card-bg);border:1px solid var(--zoho-kanban-card-border);border-radius:var(--zoho-radius);padding:12px;margin-bottom:8px;cursor:grab}
+.zoho-kanban__card-name{font-size:var(--zoho-fs-base);font-weight:600;margin-bottom:6px}
+.zoho-kanban__card-meta{font-size:var(--zoho-fs-sm);color:var(--zoho-text-secondary);line-height:1.6}
+.zoho-detail__hero{display:flex;align-items:center;gap:14px;padding:14px 20px;background:#fff;border-bottom:1px solid var(--zoho-border-light)}
+.zoho-detail__avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#ec4899);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px}
+.zoho-detail__name{font-size:18px;font-weight:600}
+.zoho-detail__actions{margin-left:auto;display:flex;gap:8px}
+.zoho-detail__sections{padding:16px 20px}
+.zoho-detail__section{background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);margin-bottom:16px;overflow:hidden}
+.zoho-detail__section-header{padding:12px 16px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center}
+.zoho-detail__section-title{font-size:var(--zoho-fs-base);font-weight:600}
+.zoho-detail__section-body{padding:12px 16px}
+.zoho-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;font-size:var(--zoho-fs-base)}
+.zoho-field{display:flex;gap:12px;align-items:baseline}
+.zoho-field__label{width:140px;flex-shrink:0;color:var(--zoho-text-muted);text-align:right;font-size:var(--zoho-fs-sm)}
+.zoho-field__value{flex:1;color:var(--zoho-text)}
+.zoho-blueprint{display:flex;gap:4px;padding:14px 20px;background:#fff;border-bottom:1px solid var(--zoho-border-light);overflow-x:auto}
+.zoho-blueprint__stage{padding:8px 16px;border-radius:var(--zoho-radius-sm);font-size:var(--zoho-fs-sm);font-weight:500;white-space:nowrap;position:relative}
+.zoho-blueprint__stage.done{background:#f0fdf4;color:#166534}
+.zoho-blueprint__stage.current{background:var(--uwc-navy);color:#fff}
+.zoho-blueprint__stage.future{background:var(--zoho-content-alt);color:var(--zoho-text-muted)}
+.zoho-blueprint__stage::after{content:'›';position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--zoho-text-disabled)}
+.zoho-blueprint__stage:last-child::after{display:none}
+.zoho-kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:16px 20px}
+.zoho-kpi{background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);padding:16px}
+.zoho-kpi__label{font-size:var(--zoho-fs-base);color:var(--zoho-text-secondary);margin-bottom:8px}
+.zoho-kpi__value{font-size:28px;font-weight:600;color:var(--zoho-text)}
+
+/* ========= SCENARIO B SPECIFIC STYLES ========= */
+
+/* Portal hero */
+.portal-hero{background:linear-gradient(135deg,rgba(0,26,77,.95) 0%,rgba(0,48,135,.9) 60%,rgba(0,74,151,.85) 100%),url('_shared/assets/uwc-brand/hero-students-flags.jpeg') center/cover no-repeat;color:#fff;padding:48px 36px;border-radius:0}
+.portal-hero__tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:16px;font-weight:500}
+.portal-hero__title{font-family:var(--uwc-font-title);font-size:36px;font-weight:500;line-height:1.1;margin-bottom:16px}
+.portal-hero__sub{font-size:14px;color:rgba(255,255,255,.8);line-height:1.6;margin-bottom:28px;max-width:520px}
+.portal-hero__ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn-hero-primary{background:var(--uwc-red);color:#fff;border:none;border-radius:var(--uwc-radius);padding:13px 26px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--uwc-font-body);transition:background var(--uwc-tx-fast)}
+.btn-hero-primary:hover{background:#a00d24}
+.btn-hero-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5);border-radius:var(--uwc-radius);padding:12px 24px;font-size:14px;font-weight:500;cursor:pointer;font-family:var(--uwc-font-body);transition:all var(--uwc-tx-fast)}
+.btn-hero-outline:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.8)}
+.portal-hero__stats{display:flex;gap:32px;margin-top:36px;padding-top:28px;border-top:1px solid rgba(255,255,255,.15)}
+.portal-hero__stat-val{font-family:var(--uwc-font-title);font-size:28px;font-weight:600;color:#fff}
+.portal-hero__stat-lbl{font-size:11px;color:rgba(255,255,255,.6);margin-top:2px}
+
+/* Form fields */
+.form-section{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;margin-bottom:16px}
+.form-section__header{background:var(--uwc-grey-50);border-bottom:1px solid var(--uwc-grey-200);padding:12px 18px;display:flex;align-items:center;gap:10px}
+.form-section__title{font-size:13.5px;font-weight:600;color:var(--uwc-grey-800)}
+.form-section__badge{font-size:10px;font-family:var(--uwc-font-mono);color:var(--uwc-grey-500);background:var(--uwc-grey-100);border:1px solid var(--uwc-grey-200);padding:2px 7px;border-radius:var(--uwc-radius-sm)}
+.form-section__body{padding:18px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-field{margin-bottom:14px}
+.form-field:last-child{margin-bottom:0}
+.form-label{display:block;font-size:12px;font-weight:500;color:var(--uwc-grey-600);margin-bottom:5px}
+.form-label .req{color:var(--uwc-red)}
+.form-input{width:100%;background:#fff;border:1.5px solid var(--uwc-grey-300);border-radius:var(--uwc-radius-sm);padding:9px 12px;font-size:13.5px;font-family:var(--uwc-font-body);color:var(--uwc-grey-800);transition:border-color var(--uwc-tx-fast);outline:none}
+.form-input:focus{border-color:var(--uwc-navy);box-shadow:0 0 0 3px rgba(0,48,135,.08)}
+.form-input.prefilled{background:var(--uwc-navy-tint);border-color:#93c5fd;color:var(--uwc-navy)}
+.form-input.error{border-color:var(--uwc-red);background:var(--uwc-red-tint)}
+.form-select{width:100%;background:#fff;border:1.5px solid var(--uwc-grey-300);border-radius:var(--uwc-radius-sm);padding:9px 12px;font-size:13.5px;font-family:var(--uwc-font-body);color:var(--uwc-grey-800);transition:border-color var(--uwc-tx-fast);outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa3b8' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.form-textarea{width:100%;background:#fff;border:1.5px solid var(--uwc-grey-300);border-radius:var(--uwc-radius-sm);padding:10px 12px;font-size:13.5px;font-family:var(--uwc-font-body);color:var(--uwc-grey-800);transition:border-color var(--uwc-tx-fast);outline:none;resize:vertical;min-height:120px}
+.form-textarea:focus{border-color:var(--uwc-navy);box-shadow:0 0 0 3px rgba(0,48,135,.08)}
+.form-textarea.prefilled{background:var(--uwc-navy-tint);border-color:#93c5fd;color:#1e3a8a;font-size:13px;line-height:1.65}
+.form-helper{font-size:11px;color:var(--uwc-grey-400);margin-top:4px}
+.form-save-hint{background:#f0fdf4;border:1px solid #86efac;border-radius:var(--uwc-radius-sm);padding:8px 12px;font-size:11.5px;color:#166534;margin-top:12px;display:flex;align-items:center;gap:6px}
+.form-upload-zone{border:2px dashed var(--uwc-grey-300);border-radius:var(--uwc-radius);padding:20px;text-align:center;cursor:pointer;transition:all var(--uwc-tx-fast)}
+.form-upload-zone:hover{border-color:var(--uwc-navy);background:var(--uwc-navy-tint)}
+.form-upload-zone__icon{font-size:28px;margin-bottom:6px}
+.form-upload-zone__text{font-size:13px;color:var(--uwc-grey-600);font-weight:500}
+.form-upload-zone__sub{font-size:11px;color:var(--uwc-grey-400);margin-top:4px}
+.uploaded-file{display:flex;align-items:center;gap:10px;background:var(--uwc-navy-tint);border:1px solid #93c5fd;border-radius:var(--uwc-radius-sm);padding:8px 12px;margin-top:8px}
+.uploaded-file__icon{width:32px;height:32px;background:var(--uwc-navy);border-radius:var(--uwc-radius-sm);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;flex-shrink:0}
+.uploaded-file__name{font-size:12.5px;color:var(--uwc-navy);font-weight:500}
+.uploaded-file__size{font-size:11px;color:var(--uwc-grey-400);margin-top:1px}
+
+/* Progress bar in portal */
+.app-progress{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);padding:16px 18px;margin-bottom:16px}
+.app-progress__header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.app-progress__label{font-size:13px;font-weight:600;color:var(--uwc-grey-800)}
+.app-progress__pct{font-family:var(--uwc-font-mono);font-size:13px;color:var(--uwc-navy);font-weight:600}
+.app-progress__track{height:6px;background:var(--uwc-grey-200);border-radius:var(--uwc-radius-pill);overflow:hidden}
+.app-progress__fill{height:6px;background:linear-gradient(90deg,var(--uwc-navy),var(--uwc-teal));border-radius:var(--uwc-radius-pill);transition:width .6s cubic-bezier(.4,0,.2,1)}
+
+/* Section checklist in portal sidebar */
+.section-checklist{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden}
+.section-checklist__item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--uwc-grey-100);font-size:13px}
+.section-checklist__item:last-child{border-bottom:none}
+.section-checklist__item.done{color:var(--uwc-grey-500)}
+.section-checklist__item.active{color:var(--uwc-navy);font-weight:500;background:var(--uwc-navy-tint)}
+.section-checklist__item.pending{color:var(--uwc-grey-400)}
+.section-check{width:20px;height:20px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600}
+.section-check.done{background:var(--uwc-green);color:#fff}
+.section-check.active{background:var(--uwc-navy);color:#fff}
+.section-check.pending{background:var(--uwc-grey-200);color:var(--uwc-grey-400)}
+
+/* Gate check */
+.gate-row{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--uwc-grey-100)}
+.gate-row:last-child{border-bottom:none}
+.gate-check-icon{width:22px;height:22px;border-radius:50%;background:#f0fdf4;border:2px solid #86efac;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.gate-label{font-size:13px;color:var(--uwc-grey-800);flex:1}
+.gate-pass{font-size:11.5px;font-weight:600;color:#166534;background:#f0fdf4;padding:2px 9px;border-radius:var(--uwc-radius-pill)}
+
+/* Consent form */
+.consent-signature{border:1.5px solid var(--uwc-grey-300);border-radius:var(--uwc-radius);padding:16px;margin-top:12px;min-height:80px;background:var(--uwc-grey-50);display:flex;align-items:center;justify-content:center}
+.consent-signature__placeholder{font-family:var(--uwc-font-title);font-size:22px;color:var(--uwc-navy);font-style:italic}
+
+/* Marketing dashboard */
+.mkt-donut{width:160px;height:160px;border-radius:50%;flex-shrink:0}
+.mkt-source-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--uwc-grey-100)}
+.mkt-source-row:last-child{border-bottom:none}
+.mkt-source-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.mkt-source-label{font-size:13px;color:var(--uwc-grey-800);flex:1}
+.mkt-source-pct{font-size:13px;font-weight:600;color:var(--uwc-grey-800);font-family:var(--uwc-font-mono)}
+.mkt-bar{height:6px;border-radius:3px;margin-top:4px}
+.funnel-step{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--uwc-grey-100)}
+.funnel-step:last-child{border-bottom:none}
+.funnel-num{font-family:var(--uwc-font-title);font-size:22px;font-weight:600;color:var(--uwc-navy);width:60px;text-align:right;flex-shrink:0}
+.funnel-label{font-size:13px;color:var(--uwc-grey-700);flex:1}
+.funnel-bar-wrap{width:200px;height:8px;background:var(--uwc-grey-200);border-radius:4px;overflow:hidden}
+.funnel-bar-fill{height:8px;background:var(--uwc-navy);border-radius:4px}
+
+/* Email verification card */
+.email-card{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;max-width:540px;margin:0 auto}
+.email-card__header{background:var(--uwc-navy);padding:20px 24px;text-align:center}
+.email-card__title{font-family:var(--uwc-font-title);font-size:20px;color:#fff;margin-bottom:4px}
+.email-card__sub{font-size:10.5px;color:rgba(255,255,255,.5);letter-spacing:1px;text-transform:uppercase}
+.email-card__meta{padding:10px 18px;background:var(--uwc-grey-50);border-bottom:1px solid var(--uwc-grey-200);font-size:11.5px;color:var(--uwc-grey-600);display:flex;flex-wrap:wrap;gap:12px}
+.email-card__body{padding:20px 24px}
+.email-card__cta{text-align:center;margin:20px 0}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);padding:14px 18px;box-shadow:var(--uwc-shadow-lg);display:flex;align-items:center;gap:12px;z-index:200;min-width:280px;animation:toastIn .3s ease}
+@keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.toast__icon{width:32px;height:32px;border-radius:50%;background:#f0fdf4;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.toast__title{font-size:13px;font-weight:600;color:var(--uwc-grey-800)}
+.toast__sub{font-size:11.5px;color:var(--uwc-grey-500);margin-top:2px}
+
+/* UTM tracker */
+.utm-row{font-family:var(--uwc-font-mono);font-size:11.5px;padding:10px 14px;background:var(--uwc-grey-50);border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-sm);margin-bottom:8px}
+.utm-key{color:var(--uwc-grey-400);font-size:10px;display:block;margin-bottom:2px;letter-spacing:.6px;text-transform:uppercase}
+.utm-val{color:var(--uwc-navy);font-weight:500}
+
+/* Portal sidebar layout */
+.portal-layout{display:grid;grid-template-columns:220px 1fr;gap:16px}
+.portal-sidebar-nav{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;height:fit-content}
+.portal-sidebar-nav__header{background:var(--uwc-navy);padding:12px 14px}
+.portal-sidebar-nav__title{color:#fff;font-size:13px;font-weight:600}
+.portal-sidebar-nav__sub{color:rgba(255,255,255,.55);font-size:10.5px;margin-top:2px}
+.portal-sidebar-nav__item{display:flex;align-items:center;gap:8px;padding:10px 14px;font-size:13px;border-bottom:1px solid var(--uwc-grey-100);cursor:pointer}
+.portal-sidebar-nav__item.done{color:var(--uwc-grey-500)}
+.portal-sidebar-nav__item.active{color:var(--uwc-navy);font-weight:500;background:var(--uwc-navy-tint)}
+.portal-sidebar-nav__item.pending{color:var(--uwc-grey-400)}
+
+/* Checkbox */
+.form-checkbox-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--uwc-grey-100)}
+.form-checkbox-row:last-child{border-bottom:none}
+.form-checkbox{width:18px;height:18px;border-radius:4px;border:2px solid var(--uwc-grey-300);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;background:#fff}
+.form-checkbox.checked{background:var(--uwc-navy);border-color:var(--uwc-navy);color:#fff;font-size:11px}
+.form-checkbox-label{font-size:13px;color:var(--uwc-grey-800);line-height:1.5}
+.form-checkbox-label .link{color:var(--uwc-navy);text-decoration:underline;cursor:pointer}
+
+/* Badges strip */
+.badges-strip{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+
+/* Highlight featured card */
+.featured-applicant{background:linear-gradient(135deg,var(--uwc-navy) 0%,var(--uwc-navy-deep) 100%);border-radius:var(--uwc-radius-lg);padding:16px 18px;color:#fff;border:2px solid var(--uwc-red);margin-bottom:12px}
+.featured-applicant__label{font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:8px}
+.featured-applicant__name{font-family:var(--uwc-font-title);font-size:20px;font-weight:500;color:#fff;margin-bottom:4px}
+.featured-applicant__meta{font-size:12px;color:rgba(255,255,255,.7)}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar__brand">
+    <div style="width:32px;height:32px;border-radius:50%;background:#fff;color:var(--uwc-navy);display:flex;align-items:center;justify-content:center;font-family:var(--uwc-font-title);font-weight:700;font-size:11px;flex-shrink:0">UWC</div>
+    <span class="topbar__logo">UWC International</span>
+    <span class="topbar__demo-badge">DEMO</span>
+  </div>
+  <div class="topbar__divider"></div>
+  <div class="topbar__scenario"><strong>Scenario B</strong> · Applicant Journey — Sofia Almeida</div>
+  <div class="topbar__center"></div>
+  <div class="topbar__right">
+    <div id="role-switcher"></div>
+    <div class="topbar__step-counter" id="step-counter">Step 1 of 10</div>
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar__label">Scenario B · Journey</div>
+  <div class="sidebar__item active" id="nav-0" onclick="go(0)">
+    <div class="sidebar__num">1</div>
+    <div class="sidebar__label-text">Portal landing page</div>
+  </div>
+  <div class="sidebar__item" id="nav-1" onclick="go(1)">
+    <div class="sidebar__num">2</div>
+    <div class="sidebar__label-text">Eligibility blocked — 14-yr-old</div>
+  </div>
+  <div class="sidebar__item" id="nav-2" onclick="go(2)">
+    <div class="sidebar__num">3</div>
+    <div class="sidebar__label-text">Eligibility passes → registration</div>
+  </div>
+  <div class="sidebar__item" id="nav-3" onclick="go(3)">
+    <div class="sidebar__num">4</div>
+    <div class="sidebar__label-text">Email verification</div>
+  </div>
+  <div class="sidebar__item" id="nav-4" onclick="go(4)">
+    <div class="sidebar__num">5</div>
+    <div class="sidebar__label-text">Sofia's dashboard</div>
+  </div>
+  <div class="sidebar__item" id="nav-5" onclick="go(5)">
+    <div class="sidebar__num">6</div>
+    <div class="sidebar__label-text">Form in Portuguese</div>
+  </div>
+  <div class="sidebar__item" id="nav-6" onclick="go(6)">
+    <div class="sidebar__num">7</div>
+    <div class="sidebar__label-text">Maria — parental consent</div>
+  </div>
+  <div class="sidebar__item" id="nav-7" onclick="go(7)">
+    <div class="sidebar__num">8</div>
+    <div class="sidebar__label-text">Gate check → submit</div>
+  </div>
+  <div class="sidebar__item" id="nav-8" onclick="go(8)">
+    <div class="sidebar__num">9</div>
+    <div class="sidebar__label-text">Ana — NC Admin queue</div>
+  </div>
+  <div class="sidebar__item" id="nav-9" onclick="go(9)">
+    <div class="sidebar__num">10</div>
+    <div class="sidebar__label-text">IO Marketing — source attribution</div>
+  </div>
+  <div class="sidebar__progress">
+    <div class="sidebar__progress-label">
+      <span>Progress</span>
+      <span id="progress-txt">Step 1 of 10</span>
+    </div>
+    <div class="sidebar__progress-track">
+      <div class="sidebar__progress-fill" id="progress-fill" style="width:10%"></div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main" id="main">
+
+<!-- ===== SCREEN 0: PORTAL LANDING PAGE ===== -->
+<section class="screen active" id="sc-0">
+  <div class="screen-header">
+    <div>
+      <div class="role-context" data-role-variant="visitor:Visitante público — sem sessão iniciada|sofia:Sofia Almeida — Candidata (Portal)|maria:Maria Almeida — Responsável|ana:Ana Carvalho — NC Admin Brazil|io-mkt:IO Marketing Staff">Visitante público — sem sessão iniciada</div>
+      <h1 class="screen-title">Portal de candidatura UWC</h1>
+      <p class="screen-sub">Sofia Almeida, 16 anos, São Paulo, chega ao portal público do UWC. Ela escolhe Português como idioma e explora o site antes de clicar em "Candidatar-se agora".</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" disabled>← Anterior</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(1)">Próximo →</button>
+    </div>
+  </div>
+
+  <div class="portal-frame">
+    <!-- Portal topbar -->
+    <div class="portal-topbar">
+      <div class="portal-brand">
+        <div class="portal-brand__mark">UWC</div>
+        UWC International — Applications Portal
+      </div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <div class="portal-lang">
+          <button class="portal-lang__btn">EN</button>
+          <button class="portal-lang__btn active">Português</button>
+          <button class="portal-lang__btn">Español</button>
+        </div>
+        <button style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:var(--uwc-radius-sm);padding:7px 16px;font-size:12.5px;font-family:var(--uwc-font-body);cursor:pointer">Entrar</button>
+      </div>
+    </div>
+
+    <!-- Hero section -->
+    <div class="portal-hero">
+      <div class="portal-hero__tag">UWC International · Ciclo de Candidatura 2026</div>
+      <h2 class="portal-hero__title">Candidate-se ao UWC International<br>— Ciclo 2026</h2>
+      <p class="portal-hero__sub">Junte-se a estudantes de mais de 150 países em um dos 18 colégios UWC ao redor do mundo. A sua candidatura começa aqui.</p>
+      <div class="portal-hero__ctas">
+        <button class="btn-hero-primary" onclick="go(2)">Candidatar-se agora</button>
+        <button class="btn-hero-outline">Saiba mais</button>
+      </div>
+      <div class="portal-hero__stats">
+        <div>
+          <div class="portal-hero__stat-val">18</div>
+          <div class="portal-hero__stat-lbl">Colégios UWC no mundo</div>
+        </div>
+        <div>
+          <div class="portal-hero__stat-val">150+</div>
+          <div class="portal-hero__stat-lbl">Países representados</div>
+        </div>
+        <div>
+          <div class="portal-hero__stat-val">80+</div>
+          <div class="portal-hero__stat-lbl">Comitês nacionais</div>
+        </div>
+        <div>
+          <div class="portal-hero__stat-val">97%</div>
+          <div class="portal-hero__stat-lbl">Com bolsa completa</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info strip -->
+    <div class="portal-body">
+      <div class="alert alert--info" style="margin-bottom:16px">
+        <span>ℹ️</span>
+        <div>Para se candidatar, você deve ter entre 15 e 17 anos e ser indicado pelo Comitê Nacional UWC do seu país. <strong>Verificaremos sua elegibilidade antes de criar a sua conta.</strong></div>
+      </div>
+      <div class="grid-3">
+        <div class="stat-tile">
+          <div class="stat-tile__label">Prazo de candidatura</div>
+          <div class="stat-tile__value" style="font-size:18px;color:var(--uwc-red)">15 Jun 2026</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-tile__label">Idiomas disponíveis</div>
+          <div class="stat-tile__value" style="font-size:18px">Português · EN · ES</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-tile__label">Candidatos no ciclo 2026</div>
+          <div class="stat-tile__value">47</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="badges-strip">
+    <span class="badge badge--info">Portal UWC em Português</span>
+    <span class="badge badge--auto">Selector de idioma armazena locale para todo o formulário</span>
+    <span class="badge badge--gate">CTA "Candidatar-se" → verificação de elegibilidade primeiro</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 1: ELIGIBILITY BLOCKED (14-yr-old) ===== -->
+<section class="screen" id="sc-1">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">Visitante público — verificação de elegibilidade</div>
+      <h1 class="screen-title">Verificação bloqueada — data de nascimento inválida</h1>
+      <p class="screen-sub">A candidate com 14 anos tenta iniciar a candidatura. O sistema verifica a data de nascimento e apresenta uma mensagem de bloqueio amigável em Português — nenhum registo CRM é criado.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(0)">← Anterior</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(2)">Próximo →</button>
+    </div>
+  </div>
+
+  <div class="grid-2" style="align-items:start">
+    <div class="portal-frame">
+      <div class="portal-topbar">
+        <div class="portal-brand">
+          <div class="portal-brand__mark">UWC</div>
+          Verificação de Elegibilidade
+        </div>
+        <div class="portal-lang">
+          <button class="portal-lang__btn active">PT</button>
+          <button class="portal-lang__btn">EN</button>
+        </div>
+      </div>
+      <div class="portal-body">
+        <div style="font-family:var(--uwc-font-title);font-size:18px;color:var(--uwc-grey-800);margin-bottom:16px">Verificação de Elegibilidade</div>
+
+        <div class="form-field">
+          <label class="form-label">País de residência <span class="req">*</span></label>
+          <input class="form-input prefilled" value="Brasil" readonly>
+        </div>
+        <div class="form-grid">
+          <div class="form-field">
+            <label class="form-label">Data de nascimento <span class="req">*</span></label>
+            <input class="form-input error" value="22 Março 2012 (idade: 14)" readonly>
+            <div class="form-helper" style="color:var(--uwc-red)">Idade fora do intervalo permitido</div>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Cidadania <span class="req">*</span></label>
+            <input class="form-input prefilled" value="Brasileira" readonly>
+          </div>
+        </div>
+
+        <!-- Warning block -->
+        <div class="alert alert--warning" style="margin-top:4px">
+          <span style="font-size:20px">⚠️</span>
+          <div>
+            <strong>Candidatura não disponível para a sua idade.</strong><br>
+            O programa UWC 2026 está aberto a candidatos com <strong>15 a 17 anos</strong> na data de início do programa (setembro de 2026). Com base na data de nascimento que introduziu (22 de março de 2012), a sua idade seria de <strong>14 anos</strong>.<br><br>
+            <span style="font-size:12px;color:#92400e">Poderá candidatar-se ao ciclo 2027. Para mais informações, contacte o <a href="#" style="color:var(--uwc-navy)">Comitê Nacional UWC Brasil</a>.</span>
+          </div>
+        </div>
+
+        <button style="width:100%;background:var(--uwc-grey-200);color:var(--uwc-grey-500);border:none;border-radius:var(--uwc-radius-sm);padding:12px;font-size:13.5px;font-family:var(--uwc-font-body);cursor:not-allowed;margin-top:12px" disabled>
+          Criar conta — não disponível
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card__header">
+          <span class="card__title">O que acontece quando a elegibilidade falha</span>
+        </div>
+        <div class="card__body">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot" style="background:var(--uwc-red)"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">Registo CRM <strong>não</strong> criado</div>
+                <div class="timeline-meta">Nenhum lead ou Application record é criado no Zoho</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot" style="background:var(--uwc-red)"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">Conta de autenticação <strong>não</strong> criada</div>
+                <div class="timeline-meta">O utilizador não pode entrar no portal</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot" style="background:var(--uwc-orange)"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">Mensagem amigável em Português</div>
+                <div class="timeline-meta">Explica o ciclo seguinte + contacto NC</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert--demo-note">
+        <span>🎯</span>
+        <div><strong>Nota para a apresentação:</strong> A verificação acontece antes de qualquer criação de conta — garante que a base de dados CRM não é poluída por candidaturas inelegíveis. No próximo passo, Sofia (16 anos) passa com êxito.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="badges-strip">
+    <span class="badge badge--gate">Verificação da data de nascimento antes de criar conta</span>
+    <span class="badge badge--gate">Nenhum registo CRM criado em caso de falha</span>
+    <span class="badge badge--info">Mensagem personalizada em Português com próximos passos</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 2: ELIGIBILITY PASSES → REGISTRATION ===== -->
+<section class="screen" id="sc-2">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">Sofia Almeida — Elegibilidade confirmada → Registo</div>
+      <h1 class="screen-title">Elegibilidade confirmada → Criar conta</h1>
+      <p class="screen-sub">Com 16 anos, Sofia passa na verificação. O portal avança para o formulário de registo em Português. Email, senha, país, idioma preferido, termos e consentimento GDPR.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(1)">← Anterior</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(3)">Próximo →</button>
+    </div>
+  </div>
+
+  <div class="grid-2" style="align-items:start">
+    <div class="portal-frame">
+      <div class="portal-topbar">
+        <div class="portal-brand">
+          <div class="portal-brand__mark">UWC</div>
+          Criar Conta — UWC 2026
+        </div>
+        <div class="portal-lang">
+          <button class="portal-lang__btn active">PT</button>
+          <button class="portal-lang__btn">EN</button>
+        </div>
+      </div>
+      <div class="portal-body">
+        <div class="alert alert--success" style="margin-bottom:16px">
+          <span>✅</span>
+          <div><strong>Elegível!</strong> Idade 16 anos · Indicada pelo UWC Brasil NC · Pode prosseguir para criar a sua conta.</div>
+        </div>
+
+        <div style="font-family:var(--uwc-font-title);font-size:17px;color:var(--uwc-grey-800);margin-bottom:16px">Criar conta de candidata</div>
+
+        <div class="form-field">
+          <label class="form-label">Nome completo <span class="req">*</span></label>
+          <input class="form-input prefilled" value="Sofia Almeida" readonly>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Endereço de email <span class="req">*</span></label>
+          <input class="form-input prefilled" value="sofia.almeida@example.com" readonly>
+        </div>
+        <div class="form-grid">
+          <div class="form-field">
+            <label class="form-label">Senha <span class="req">*</span></label>
+            <input class="form-input" type="password" value="••••••••••" readonly>
+            <div class="form-helper">Mínimo 8 caracteres</div>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Confirmar senha <span class="req">*</span></label>
+            <input class="form-input" type="password" value="••••••••••" readonly>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-field">
+            <label class="form-label">País <span class="req">*</span></label>
+            <select class="form-select"><option selected>Brasil</option></select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Idioma preferido</label>
+            <select class="form-select"><option selected>Português (Brasil)</option><option>English</option><option>Español</option></select>
+          </div>
+        </div>
+
+        <div style="background:var(--uwc-grey-50);border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius);padding:14px;margin-top:8px">
+          <div class="form-checkbox-row">
+            <div class="form-checkbox checked">✓</div>
+            <div class="form-checkbox-label">Aceito os <span class="link">Termos de Candidatura</span> e a <span class="link">Política de Privacidade</span> do UWC International.</div>
+          </div>
+          <div class="form-checkbox-row">
+            <div class="form-checkbox checked">✓</div>
+            <div class="form-checkbox-label">Consinto com o tratamento dos meus dados pessoais para efeitos de candidatura ao UWC, nos termos do <strong>RGPD</strong> (Regulamento Geral de Proteção de Dados).</div>
+          </div>
+          <div class="form-checkbox-row">
+            <div class="form-checkbox"></div>
+            <div class="form-checkbox-label" style="color:var(--uwc-grey-500)">Gostaria de receber comunicações sobre futuros programas UWC (opcional).</div>
+          </div>
+        </div>
+
+        <button class="btn-hero-primary" style="width:100%;margin-top:14px;border-radius:var(--uwc-radius-sm)" onclick="go(3)">Criar conta e verificar email →</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card__header"><span class="card__title">O que acontece ao criar conta</span></div>
+        <div class="card__body" style="padding:4px 0">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot green"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">Conta de autenticação criada</div>
+                <div class="timeline-meta">JWT session · login persistente activado</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">Registo de Candidatura criado no CRM</div>
+                <div class="timeline-meta">Etapa: Registada · Blueprint inicia</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot" style="background:var(--uwc-teal)"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">Email de verificação enviado</div>
+                <div class="timeline-meta">sofia.almeida@example.com · expira em 24h</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot" style="background:#8b5cf6"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">Blueprint: Registada → Em progresso</div>
+                <div class="timeline-meta">Gate: conta verificada + elegibilidade = verdadeiro</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert--info" style="margin-top:0">
+        <span>🔒</span>
+        <div><strong>GDPR:</strong> O consentimento é registado com timestamp, endereço IP anonimizado e versão dos termos. Pode ser revogado a qualquer momento através do painel da candidata.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="badges-strip">
+    <span class="badge badge--auto">Elegibilidade passou — 16 anos ✓</span>
+    <span class="badge badge--info">Formulário em Português (Brasil)</span>
+    <span class="badge badge--gate">GDPR consent registado com timestamp + versão dos termos</span>
+    <span class="badge badge--auto">CRM Application record criado automaticamente ao submeter</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 3: EMAIL VERIFICATION ===== -->
+<section class="screen" id="sc-3">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">Sofia Almeida — Verificação de email</div>
+      <h1 class="screen-title">Email de verificação enviado a Sofia</h1>
+      <p class="screen-sub">Sofia recebe o email de confirmação. Um clique no botão verifica a conta e activa o acesso ao portal de candidatura. O registo CRM é actualizado automaticamente.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(2)">← Anterior</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(4)">Próximo →</button>
+    </div>
+  </div>
+
+  <div class="grid-2" style="align-items:start">
+    <div style="background:var(--uwc-grey-100);border-radius:var(--uwc-radius-lg);padding:20px">
+      <div class="email-card">
+        <div class="email-card__header">
+          <div class="email-card__title">UWC International</div>
+          <div class="email-card__sub">Confirme o seu endereço de email</div>
+        </div>
+        <div class="email-card__meta">
+          <span><strong>De:</strong> noreply@apply.uwc.org</span>
+          <span><strong>Para:</strong> sofia.almeida@example.com</span>
+          <span><strong>Assunto:</strong> Confirme a sua conta UWC · Candidatura 2026</span>
+          <span><strong>Data:</strong> 12 Abr 2026, 14:32</span>
+        </div>
+        <div class="email-card__body">
+          <p style="font-size:14px;color:var(--uwc-grey-800);line-height:1.7;margin-bottom:14px">Olá <strong>Sofia</strong>,</p>
+          <p style="font-size:13.5px;color:var(--uwc-grey-600);line-height:1.7;margin-bottom:14px">
+            Obrigada por criar a sua conta no portal de candidatura do <strong>UWC International</strong> para o ciclo 2026–27.
+          </p>
+          <p style="font-size:13.5px;color:var(--uwc-grey-600);line-height:1.7;margin-bottom:18px">
+            Para activar a sua conta e iniciar a candidatura, clique no botão abaixo. Este link é válido por <strong>24 horas</strong>.
+          </p>
+          <div class="email-card__cta">
+            <button class="btn-hero-primary" onclick="go(4)">Confirmar o meu email e entrar →</button>
+          </div>
+          <div class="alert alert--info" style="margin-top:8px;font-size:12px">
+            <span>🔒</span>
+            <div>Este link é pessoal e intransferível. Referência: <strong>UWC-BR-2026-SA-001</strong> · Comitê Nacional: Brasil · NC Admin: Ana Carvalho</div>
+          </div>
+        </div>
+        <div style="padding:10px 18px;background:var(--uwc-grey-50);border-top:1px solid var(--uwc-grey-200);font-size:11px;color:var(--uwc-grey-400)">
+          UWC Brazil NC · portal.uwc.org · Enviado automaticamente — não responda a este email
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card__header"><span class="card__title">Acções automáticas ao verificar</span></div>
+        <div class="card__body" style="padding:4px 0">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot green"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">Email marcado como verificado</div>
+                <div class="timeline-meta">Conta activada — login disponível</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">CRM: Candidatura → Em progresso</div>
+                <div class="timeline-meta">Blueprint avança da etapa "Registada"</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot green"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">Dashboard da candidata activado</div>
+                <div class="timeline-meta">Formulário disponível em Português</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot" style="background:var(--uwc-orange)"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">Notificação a Ana Carvalho (NC Admin)</div>
+                <div class="timeline-meta">Novo registo em "Em progresso" — fila do Brasil</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group" style="margin-top:0">
+        <div class="field-cell"><div class="field-cell__label">Candidata</div><div class="field-cell__value">Sofia Almeida</div></div>
+        <div class="field-cell"><div class="field-cell__label">Referência</div><div class="field-cell__value" style="font-family:var(--uwc-font-mono);font-size:12px">UWC-BR-2026-SA-001</div></div>
+        <div class="field-cell"><div class="field-cell__label">NC</div><div class="field-cell__value">UWC Brasil</div></div>
+        <div class="field-cell"><div class="field-cell__label">Estado</div><div class="field-cell__value success">✓ Email verificado</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="badges-strip">
+    <span class="badge badge--auto">Link de verificação único — expira em 24h</span>
+    <span class="badge badge--auto">CRM actualizado automaticamente à verificação</span>
+    <span class="badge badge--info">NC Admin notificado em tempo real</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 4: SOFIA'S DASHBOARD ===== -->
+<section class="screen" id="sc-4">
+  <div class="screen-header">
+    <div>
+      <div class="role-context" data-role-show="sofia,visitor">Sofia Almeida — Painel da candidatura (Português)</div>
+      <div class="role-context" data-role-show="ana">Ana Carvalho — Vista NC Admin do progresso de Sofia</div>
+      <h1 class="screen-title">Painel da candidatura — Sofia Almeida</h1>
+      <p class="screen-sub">Sofia inicia sessão e vê o seu painel personalizado em Português. A candidatura está 60% concluída. Pode continuar onde parou — autoguardamento activo.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(3)">← Anterior</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(5)">Próximo →</button>
+    </div>
+  </div>
+
+  <div class="portal-frame">
+    <!-- Portal topbar with Sofia logged in -->
+    <div class="portal-topbar">
+      <div class="portal-brand">
+        <div class="portal-brand__mark">UWC</div>
+        Portal de Candidatura UWC 2026
+      </div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <div class="portal-lang">
+          <button class="portal-lang__btn">EN</button>
+          <button class="portal-lang__btn active">Português</button>
+        </div>
+        <div class="portal-user">
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600">SA</div>
+          <span>Sofia Almeida</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="portal-body">
+      <!-- Featured applicant card -->
+      <div class="featured-applicant">
+        <div class="featured-applicant__label">A sua candidatura UWC 2026</div>
+        <div class="featured-applicant__name">Sofia Almeida</div>
+        <div class="featured-applicant__meta">São Paulo, Brasil · UWC Brasil NC · Ref: UWC-BR-2026-SA-001</div>
+        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+          <span class="pill pill--in-progress">Em progresso</span>
+          <span style="font-size:11.5px;color:rgba(255,255,255,.6)">Prazo: 15 Jun 2026</span>
+          <span style="font-size:11.5px;color:rgba(255,255,255,.6)">· NC Admin: Ana Carvalho</span>
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="app-progress">
+        <div class="app-progress__header">
+          <span class="app-progress__label">Progresso da candidatura</span>
+          <span class="app-progress__pct">60%</span>
+        </div>
+        <div class="app-progress__track">
+          <div class="app-progress__fill" style="width:60%"></div>
+        </div>
+        <div style="font-size:11.5px;color:var(--uwc-grey-500);margin-top:8px">3 de 5 secções concluídas · Guardado automaticamente há 2 minutos</div>
+      </div>
+
+      <!-- Layout: checklist + content -->
+      <div class="portal-layout">
+        <div>
+          <div class="section-checklist">
+            <div style="background:var(--uwc-navy);padding:10px 14px">
+              <div style="color:#fff;font-size:12px;font-weight:600">Secções do formulário</div>
+            </div>
+            <div class="portal-sidebar-nav__item done">
+              <div class="section-check done">✓</div>
+              Informação pessoal
+            </div>
+            <div class="portal-sidebar-nav__item done">
+              <div class="section-check done">✓</div>
+              Educação &amp; Escola
+            </div>
+            <div class="portal-sidebar-nav__item active">
+              <div class="section-check active">→</div>
+              Declarações pessoais
+            </div>
+            <div class="portal-sidebar-nav__item pending">
+              <div class="section-check pending">○</div>
+              Documentos
+            </div>
+            <div class="portal-sidebar-nav__item pending">
+              <div class="section-check pending">○</div>
+              Revisão &amp; Submissão
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <div class="alert alert--warning">
+              <span>⏳</span>
+              <div><strong>Consentimento parental pendente.</strong><br>A sua mãe, Maria Almeida, ainda não confirmou o consentimento. Receberá um lembrete por email.</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <!-- Section status cards -->
+          <div class="grid-2" style="margin-bottom:14px">
+            <div class="stat-tile">
+              <div class="stat-tile__label">Secções concluídas</div>
+              <div class="stat-tile__value">3/5</div>
+            </div>
+            <div class="stat-tile">
+              <div class="stat-tile__label">Dias restantes</div>
+              <div class="stat-tile__value" style="color:var(--uwc-orange)">19</div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:14px">
+            <div class="card__header"><span class="card__title">A completar agora — Declarações pessoais</span><span class="card__sub">Secção 3 de 5</span></div>
+            <div class="card__body">
+              <div style="font-size:13px;color:var(--uwc-grey-600);margin-bottom:12px">Esta secção inclui a sua declaração pessoal, actividades comunitárias e a resposta à questão local do UWC Brasil.</div>
+              <button class="btn-hero-primary" style="border-radius:var(--uwc-radius-sm);font-size:13px;padding:10px 20px" onclick="go(5)">Continuar candidatura →</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__header"><span class="card__title">Actividade recente</span></div>
+            <div class="card__body" style="padding:4px 0">
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-rail"><div class="timeline-dot green"></div><div class="timeline-line"></div></div>
+                  <div class="timeline-content">
+                    <div class="timeline-action">Informação pessoal guardada</div>
+                    <div class="timeline-meta">12 Abr 2026, 14:45</div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-rail"><div class="timeline-dot green"></div><div class="timeline-line"></div></div>
+                  <div class="timeline-content">
+                    <div class="timeline-action">Historial educativo adicionado</div>
+                    <div class="timeline-meta">13 Abr 2026, 10:22</div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-rail"><div class="timeline-dot" style="background:var(--uwc-orange)"></div></div>
+                  <div class="timeline-content">
+                    <div class="timeline-action">Declaração pessoal em rascunho</div>
+                    <div class="timeline-meta">Guardada automaticamente há 2 min</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="badges-strip">
+    <span class="badge badge--info">Portal em Português — idioma persistido na conta</span>
+    <span class="badge badge--auto">Autoguardamento activo — sem perda de dados</span>
+    <span class="badge badge--gate">Consentimento parental pendente — desbloqueio necessário para submeter</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 5: APPLICATION FORM IN PORTUGUESE ===== -->
+<section class="screen" id="sc-5">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">Sofia Almeida — Formulário em Português · Declarações pessoais</div>
+      <h1 class="screen-title">Formulário de candidatura em Português</h1>
+      <p class="screen-sub">Sofia preenche a secção de declarações pessoais. O formulário inclui campos de texto, data, lista de selecção, carregamento de ficheiro e redacção com a declaração pessoal de Sofia em Português.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(4)">← Anterior</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(6)">Próximo →</button>
+    </div>
+  </div>
+
+  <div class="grid-2" style="align-items:start">
+    <div>
+      <!-- Personal statement section -->
+      <div class="form-section">
+        <div class="form-section__header">
+          <div class="form-section__title">Declaração pessoal</div>
+          <div class="form-section__badge">Obrigatório · máx. 600 palavras</div>
+        </div>
+        <div class="form-section__body">
+          <div class="form-field">
+            <label class="form-label">A sua declaração pessoal <span class="req">*</span></label>
+            <div class="alert alert--info" style="margin-bottom:8px;font-size:12px">
+              <span>💡</span>
+              <div>Descreva a sua motivação para se candidatar ao UWC, as suas experiências de liderança e como espera contribuir para a comunidade UWC.</div>
+            </div>
+            <textarea class="form-textarea prefilled" rows="7" readonly>Meu nome é Sofia Almeida, tenho 16 anos e moro em São Paulo. Liderei um projeto de alfabetização para crianças refugiadas venezuelanas em minha comunidade durante o ano passado, organizando aulas semanais com 12 voluntários. Esta experiência me mostrou que educação é a ferramenta mais poderosa que temos para construir pontes entre culturas. No UWC, espero aprofundar esse trabalho, aprender com colegas de todo o mundo, e voltar ao Brasil com novas perspectivas para enfrentar nossas desigualdades sociais.</textarea>
+            <div class="form-helper">387 palavras utilizadas · 213 restantes</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Community activities -->
+      <div class="form-section">
+        <div class="form-section__header">
+          <div class="form-section__title">Actividades comunitárias &amp; liderança</div>
+        </div>
+        <div class="form-section__body">
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label">Nome da actividade <span class="req">*</span></label>
+              <input class="form-input prefilled" value="Projecto de Alfabetização Venezolanos SP" readonly>
+            </div>
+            <div class="form-field">
+              <label class="form-label">Papel / função <span class="req">*</span></label>
+              <input class="form-input prefilled" value="Coordenadora e tutora" readonly>
+            </div>
+            <div class="form-field">
+              <label class="form-label">Data de início</label>
+              <input class="form-input prefilled" value="Março 2025" readonly>
+            </div>
+            <div class="form-field">
+              <label class="form-label">Tipo de actividade</label>
+              <select class="form-select"><option selected>Voluntariado / Serviço comunitário</option></select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Local question -->
+      <div class="form-section">
+        <div class="form-section__header">
+          <div class="form-section__title">Questão local — UWC Brasil NC</div>
+          <div class="form-section__badge">Específica do NC · máx. 300 palavras</div>
+        </div>
+        <div class="form-section__body">
+          <div class="form-field">
+            <div class="alert alert--info" style="margin-bottom:10px;font-size:12.5px">
+              <span>🇧🇷</span>
+              <div><strong>Questão do Comitê Nacional Brasil:</strong> Como você imagina contribuir para a sua comunidade após o UWC?</div>
+            </div>
+            <textarea class="form-textarea prefilled" rows="5" readonly>Após o UWC, quero criar um programa de troca cultural permanente entre jovens de São Paulo e refugiados de países de língua portuguesa e espanhola. Acredito que minha experiência internacional me dará as ferramentas pedagógicas e a rede necessária para expandir o projeto de alfabetização além do meu bairro.</textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-save-hint">
+        ✓ Guardado automaticamente — 14 Abr 2026, 16:48
+      </div>
+    </div>
+
+    <div>
+      <!-- Document upload -->
+      <div class="form-section">
+        <div class="form-section__header">
+          <div class="form-section__title">Documentos</div>
+        </div>
+        <div class="form-section__body">
+          <div class="form-field">
+            <label class="form-label">Historial académico (PDF) <span class="req">*</span></label>
+            <div class="uploaded-file">
+              <div class="uploaded-file__icon">📄</div>
+              <div>
+                <div class="uploaded-file__name">boletim_escolar_2025.pdf</div>
+                <div class="uploaded-file__size">842 KB · Carregado 13 Abr 2026</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Carta de recomendação</label>
+            <div class="form-upload-zone">
+              <div class="form-upload-zone__icon">📎</div>
+              <div class="form-upload-zone__text">Arrastar ficheiro ou clicar para seleccionar</div>
+              <div class="form-upload-zone__sub">PDF, DOCX · máx. 5 MB</div>
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Cópia do passaporte / BI</label>
+            <div class="uploaded-file">
+              <div class="uploaded-file__icon">🪪</div>
+              <div>
+                <div class="uploaded-file__name">passaporte_sofia.pdf</div>
+                <div class="uploaded-file__size">1.2 MB · Carregado 12 Abr 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dates and dropdown demo -->
+      <div class="form-section">
+        <div class="form-section__header">
+          <div class="form-section__title">Informação adicional</div>
+        </div>
+        <div class="form-section__body">
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label">Data de nascimento</label>
+              <input class="form-input prefilled" value="14 Março 2010" readonly>
+            </div>
+            <div class="form-field">
+              <label class="form-label">Nível de escolaridade actual</label>
+              <select class="form-select"><option selected>2.º Ano do Ensino Médio</option></select>
+            </div>
+            <div class="form-field">
+              <label class="form-label">Língua materna</label>
+              <input class="form-input prefilled" value="Português" readonly>
+            </div>
+            <div class="form-field">
+              <label class="form-label">Outras línguas</label>
+              <input class="form-input" value="Inglês (B2), Espanhol (básico)" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert--demo-note" style="margin-top:0">
+        <span>🎯</span>
+        <div><strong>Nota para apresentação:</strong> O ensaio de Sofia (em cima, no campo de declaração pessoal) é texto genuíno em Português — Akanksha pode pausar e ler uma frase em voz alta para o painel.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="badges-strip">
+    <span class="badge badge--info">Formulário 100% em Português (Brasil)</span>
+    <span class="badge badge--auto">Autoguardamento — sem perda de progresso</span>
+    <span class="badge badge--gate">Questão local definida pelo NC Brasil</span>
+    <span class="badge badge--api">Carregamento de documentos com validação de tipo e tamanho</span>
+  </div>
+</section>
+
+
+<!-- ===== SCREEN 6: MARIA — PARENTAL CONSENT ===== -->
+<section class="screen" id="sc-6">
+  <div class="screen-header">
+    <div>
+      <div class="role-context" data-role-show="maria,visitor">Maria Almeida — Responsável / Encarregada de educação</div>
+      <div class="role-context" data-role-show="sofia">Sofia Almeida — Vista da candidata (aguarda consentimento)</div>
+      <h1 class="screen-title">Consentimento parental — Maria Almeida</h1>
+      <p class="screen-sub">Maria, mãe de Sofia, recebe um email de pedido de consentimento. Abre o formulário de guarda, confirma a identidade e assina o consentimento. O portal actualiza o estado de Sofia em tempo real.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(5)">← Anterior</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(7)">Próximo →</button>
+    </div>
+  </div>
+
+  <div class="grid-2" style="align-items:start">
+    <!-- Guardian portal -->
+    <div class="portal-frame">
+      <div class="portal-topbar" style="background:#1f5c2a">
+        <div class="portal-brand">
+          <div class="portal-brand__mark" style="background:#fff;color:#1f5c2a">UWC</div>
+          Portal de Responsáveis — UWC 2026
+        </div>
+        <div class="portal-user" style="font-size:12px">
+          <div style="width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600">MA</div>
+          Maria Almeida
+        </div>
+      </div>
+      <div class="portal-body" style="background:#f0fdf4">
+        <div style="font-family:var(--uwc-font-title);font-size:18px;color:#14532d;margin-bottom:14px">Pedido de Consentimento Parental</div>
+
+        <!-- Sofia's info for guardian -->
+        <div class="card" style="margin-bottom:14px">
+          <div class="card__header" style="background:#1f5c2a"><span class="card__title">Candidata</span></div>
+          <div class="card__body">
+            <div class="field-group" style="border:none;grid-template-columns:1fr 1fr">
+              <div class="field-cell" style="border:none;padding:6px 0">
+                <div class="field-cell__label">Nome</div>
+                <div class="field-cell__value">Sofia Almeida</div>
+              </div>
+              <div class="field-cell" style="border:none;padding:6px 0">
+                <div class="field-cell__label">Data de nascimento</div>
+                <div class="field-cell__value">14 Março 2010 · 16 anos</div>
+              </div>
+              <div class="field-cell" style="border:none;padding:6px 0">
+                <div class="field-cell__label">NC</div>
+                <div class="field-cell__value">UWC Brasil</div>
+              </div>
+              <div class="field-cell" style="border:none;padding:6px 0">
+                <div class="field-cell__label">Referência</div>
+                <div class="field-cell__value" style="font-family:var(--uwc-font-mono);font-size:12px">UWC-BR-2026-SA-001</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Consent form -->
+        <div style="background:#fff;border:1px solid #86efac;border-radius:var(--uwc-radius-lg);padding:18px;margin-bottom:14px">
+          <div style="font-size:13.5px;color:#14532d;font-weight:600;margin-bottom:12px">Declaração de Consentimento</div>
+          <div class="form-checkbox-row">
+            <div class="form-checkbox checked" style="background:#1f5c2a;border-color:#1f5c2a">✓</div>
+            <div class="form-checkbox-label">
+              Eu, <strong>Maria Almeida</strong>, encarregada de educação de <strong>Sofia Almeida</strong>, confirmo que autorizo a sua candidatura ao programa UWC International para o ciclo académico 2026–27.
+            </div>
+          </div>
+          <div class="form-checkbox-row">
+            <div class="form-checkbox checked" style="background:#1f5c2a;border-color:#1f5c2a">✓</div>
+            <div class="form-checkbox-label">
+              Confirmo que li e compreendi a <span class="link">Política de Privacidade do UWC</span> e que os dados de Sofia podem ser tratados para efeitos de candidatura.
+            </div>
+          </div>
+          <div class="form-checkbox-row">
+            <div class="form-checkbox checked" style="background:#1f5c2a;border-color:#1f5c2a">✓</div>
+            <div class="form-checkbox-label">
+              Confirmo que sou progenitor/a ou responsável legal de Sofia Almeida, com data de nascimento 14 de Março de 2010.
+            </div>
+          </div>
+        </div>
+
+        <!-- Signature -->
+        <div class="form-field">
+          <label class="form-label">Assinatura digital <span class="req">*</span></label>
+          <div class="consent-signature">
+            <div class="consent-signature__placeholder">Maria Almeida</div>
+          </div>
+          <div class="form-helper">Assinatura registada com IP anonimizado e timestamp</div>
+        </div>
+
+        <!-- Fields -->
+        <div class="form-grid" style="margin-bottom:14px">
+          <div class="form-field">
+            <label class="form-label">Relação com a candidata</label>
+            <select class="form-select"><option selected>Mãe</option></select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Contacto de emergência</label>
+            <input class="form-input" value="+55 11 9 8765-4321" readonly>
+          </div>
+        </div>
+
+        <button class="btn-hero-primary" style="width:100%;border-radius:var(--uwc-radius-sm);background:#1f5c2a" onclick="showConsentToast()">
+          Confirmar consentimento →
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card__header"><span class="card__title">O que acontece ao confirmar o consentimento</span></div>
+        <div class="card__body" style="padding:4px 0">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot green"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">CRM: Consentimento parental → Recebido</div>
+                <div class="timeline-meta">Campo Parental_Consent_Status actualizado</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot green"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">Gate de submissão desbloqueado para Sofia</div>
+                <div class="timeline-meta">Botão "Submeter candidatura" fica disponível</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">Email de confirmação a Maria</div>
+                <div class="timeline-meta">Recibo com detalhes do consentimento registado</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot" style="background:var(--uwc-orange)"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">Notificação a Ana Carvalho (NC Admin)</div>
+                <div class="timeline-meta">Candidatura de Sofia pronta para submissão</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert--info" style="margin-top:0">
+        <span>ℹ️</span>
+        <div>
+          <strong>Porque é necessário o consentimento parental?</strong><br>
+          Sofia tem 16 anos — menor de idade. A política do UWC exige consentimento explícito de um encarregado de educação para candidatos com menos de 18 anos. Este consentimento é armazenado no CRM e auditável.
+        </div>
+      </div>
+
+      <div class="field-group" style="margin-top:12px">
+        <div class="field-cell"><div class="field-cell__label">Responsável</div><div class="field-cell__value">Maria Almeida</div></div>
+        <div class="field-cell"><div class="field-cell__label">Relação</div><div class="field-cell__value">Mãe</div></div>
+        <div class="field-cell"><div class="field-cell__label">Timestamp</div><div class="field-cell__value" style="font-family:var(--uwc-font-mono);font-size:12px">14 Abr 2026, 19:03</div></div>
+        <div class="field-cell"><div class="field-cell__label">Estado</div><div class="field-cell__value success">✓ Consentimento confirmado</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consent received toast -->
+  <div class="toast" id="consent-toast" style="display:none">
+    <div class="toast__icon">✅</div>
+    <div>
+      <div class="toast__title">Consentimento recebido!</div>
+      <div class="toast__sub">Sofia pode agora submeter a candidatura.</div>
+    </div>
+  </div>
+
+  <div class="badges-strip">
+    <span class="badge badge--gate">Obrigatório para menores de 18 anos</span>
+    <span class="badge badge--auto">CRM actualizado em tempo real</span>
+    <span class="badge badge--info">Assinatura com timestamp + IP anonimizado · GDPR compliant</span>
+    <span class="badge badge--auto">Gate de submissão desbloqueado automaticamente</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 7: GATE CHECK → SUBMIT ===== -->
+<section class="screen" id="sc-7">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">Sofia Almeida — Verificação final · Submeter candidatura</div>
+      <h1 class="screen-title">Sofia regressa — verificação de gates e submissão</h1>
+      <p class="screen-sub">Sofia abre a candidatura depois de Maria confirmar o consentimento. O sistema verifica todos os requisitos — todos os gates passam — e o botão "Submeter" fica activo.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(6)">← Anterior</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(8)">Próximo →</button>
+    </div>
+  </div>
+
+  <div class="grid-2" style="align-items:start">
+    <div class="portal-frame">
+      <div class="portal-topbar">
+        <div class="portal-brand">
+          <div class="portal-brand__mark">UWC</div>
+          Revisão &amp; Submissão
+        </div>
+        <div class="portal-user">
+          <div style="width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600">SA</div>
+          Sofia Almeida
+        </div>
+      </div>
+      <div class="portal-body">
+        <div style="font-family:var(--uwc-font-title);font-size:18px;color:var(--uwc-grey-800);margin-bottom:14px">Revisão final &amp; submissão</div>
+
+        <!-- All-pass progress -->
+        <div class="app-progress" style="margin-bottom:16px">
+          <div class="app-progress__header">
+            <span class="app-progress__label">Progresso da candidatura</span>
+            <span class="app-progress__pct" style="color:var(--uwc-green)">100%</span>
+          </div>
+          <div class="app-progress__track">
+            <div class="app-progress__fill" style="width:100%;background:linear-gradient(90deg,var(--uwc-green),var(--uwc-teal))"></div>
+          </div>
+          <div style="font-size:11.5px;color:#166534;margin-top:8px">✓ Todos os campos obrigatórios preenchidos · Pronta para submeter</div>
+        </div>
+
+        <!-- Gate check list -->
+        <div class="card" style="margin-bottom:14px">
+          <div class="card__header" style="background:#166534"><span class="card__title">Verificação de requisitos — Blueprint</span></div>
+          <div style="background:#fff">
+            <div class="gate-row">
+              <div class="gate-check-icon">✓</div>
+              <div class="gate-label">Todos os campos obrigatórios preenchidos</div>
+              <span class="gate-pass">Passou</span>
+            </div>
+            <div class="gate-row">
+              <div class="gate-check-icon">✓</div>
+              <div class="gate-label">Declaração pessoal (mín. 200 palavras)</div>
+              <span class="gate-pass">387 palavras ✓</span>
+            </div>
+            <div class="gate-row">
+              <div class="gate-check-icon">✓</div>
+              <div class="gate-label">Consentimento parental recebido</div>
+              <span class="gate-pass">Maria Almeida ✓</span>
+            </div>
+            <div class="gate-row">
+              <div class="gate-check-icon">✓</div>
+              <div class="gate-label">Documentos carregados (historial académico)</div>
+              <span class="gate-pass">Passou</span>
+            </div>
+            <div class="gate-row">
+              <div class="gate-check-icon">✓</div>
+              <div class="gate-label">Questão local UWC Brasil respondida</div>
+              <span class="gate-pass">Passou</span>
+            </div>
+            <div class="gate-row">
+              <div class="gate-check-icon">✓</div>
+              <div class="gate-label">Elegibilidade verificada (16 anos, Brasil)</div>
+              <span class="gate-pass">Passou</span>
+            </div>
+            <div class="gate-row" style="border-bottom:none">
+              <div class="gate-check-icon">✓</div>
+              <div class="gate-label">Consentimento GDPR registado</div>
+              <span class="gate-pass">Passou</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-hero-primary" style="width:100%;border-radius:var(--uwc-radius-sm);font-size:14px;padding:14px;font-weight:600" onclick="go(8)">
+          Submeter candidatura UWC 2026 →
+        </button>
+        <div style="text-align:center;font-size:11.5px;color:var(--uwc-grey-400);margin-top:8px">Após submeter, não poderá editar a candidatura. O NC Brasil receberá a sua candidatura.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card__header"><span class="card__title">Resumo da candidatura antes de submeter</span></div>
+        <div class="card__body">
+          <div class="field-group">
+            <div class="field-cell"><div class="field-cell__label">Candidata</div><div class="field-cell__value">Sofia Almeida</div></div>
+            <div class="field-cell"><div class="field-cell__label">Idade</div><div class="field-cell__value">16 anos</div></div>
+            <div class="field-cell"><div class="field-cell__label">País</div><div class="field-cell__value">🇧🇷 Brasil</div></div>
+            <div class="field-cell"><div class="field-cell__label">NC</div><div class="field-cell__value">UWC Brasil</div></div>
+            <div class="field-cell"><div class="field-cell__label">Referência</div><div class="field-cell__value" style="font-family:var(--uwc-font-mono);font-size:12px">UWC-BR-2026-SA-001</div></div>
+            <div class="field-cell"><div class="field-cell__label">NC Admin</div><div class="field-cell__value">Ana Carvalho</div></div>
+            <div class="field-cell"><div class="field-cell__label">Idioma da candidatura</div><div class="field-cell__value">Português</div></div>
+            <div class="field-cell"><div class="field-cell__label">Consentimento parental</div><div class="field-cell__value success">✓ Maria Almeida</div></div>
+            <div class="field-cell full"><div class="field-cell__label">Estado após submissão</div><div class="field-cell__value">Submetida → Fila de revisão do NC Brasil</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:0">
+        <div class="card__header"><span class="card__title">O que acontece ao submeter</span></div>
+        <div class="card__body" style="padding:4px 0">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">CRM: etapa → Submetida</div>
+                <div class="timeline-meta">Blueprint avança · timestamp registado</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot green"></div><div class="timeline-line"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">Candidatura bloqueada para edição</div>
+                <div class="timeline-meta">Integridade dos dados garantida para revisão</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-rail"><div class="timeline-dot" style="background:var(--uwc-orange)"></div></div>
+              <div class="timeline-content">
+                <div class="timeline-action">Ana Carvalho notificada — 1 nova candidatura</div>
+                <div class="timeline-meta">Aparece na fila do Kanban do NC Brasil</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="badges-strip">
+    <span class="badge badge--gate">Blueprint: 7 gates verificados antes de submeter</span>
+    <span class="badge badge--auto">Candidatura bloqueada após submissão — integridade dos dados</span>
+    <span class="badge badge--info">NC Admin notificado em tempo real</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 8: ANA — NC ADMIN QUEUE (ZOHO MODE) ===== -->
+<section class="screen" id="sc-8">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">Ana Carvalho — NC Admin Brazil · Vista Zoho CRM</div>
+      <h1 class="screen-title">Ana Carvalho — Fila do NC Brasil no Zoho</h1>
+      <p class="screen-sub">A candidatura de Sofia aparece na fila do Kanban do NC Brasil como "Submetida". Ana revê o registo de aplicação, vê o email de notificação e pode avançar para revisão.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(7)">← Anterior</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(9)">Próximo →</button>
+    </div>
+  </div>
+
+  <div class="context-banner">
+    <span class="context-banner__icon">ZOHO CRM</span>
+    <div class="context-banner__text">Vista Zoho CRM — <strong>Ana Carvalho · NC Admin Brasil</strong>. A candidatura de Sofia entrou na fila como "Submetida". Ana vê apenas candidaturas do Brasil — as de outros NCs estão ocultas pelo controlo de acesso baseado em funções.</div>
+    <span class="demo-mode-tag demo-mode-tag--zoho">Zoho CRM · Kanban</span>
+  </div>
+
+  <!-- Zoho CRM frame -->
+  <div style="border:1px solid var(--zoho-border);border-radius:var(--zoho-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
+    <!-- Zoho topbar -->
+    <div class="zoho-topbar">
+      <div class="zoho-topbar__logo">
+        <div class="zoho-topbar__logo-icon"></div>
+        Zoho CRM
+      </div>
+      <div class="zoho-topbar__search">Search across Applications, Contacts…</div>
+      <div class="zoho-topbar__right">
+        <div class="zoho-topbar__org">AC</div>
+        <span style="font-size:12px;color:rgba(255,255,255,.6)">Ana Carvalho · NC Brazil</span>
+      </div>
+    </div>
+
+    <div class="zoho-shell" style="min-height:unset">
+      <!-- Zoho sidebar -->
+      <div class="zoho-sidebar">
+        <div class="zoho-sidebar__group">
+          <div class="zoho-sidebar__item">🏠 Home</div>
+          <div class="zoho-sidebar__item active">📋 Applications</div>
+          <div class="zoho-sidebar__item">👤 Contacts</div>
+          <div class="zoho-sidebar__item">🏫 National Committees</div>
+          <div class="zoho-sidebar__item">📚 Programmes</div>
+          <div class="zoho-sidebar__item">📊 Reports</div>
+        </div>
+        <div style="margin:12px 8px;padding:10px;background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);font-size:12px">
+          <div style="font-weight:600;color:var(--zoho-text);margin-bottom:6px">NC Brazil Filter</div>
+          <div style="color:var(--zoho-text-muted);font-size:11px">Showing: Brazil only<br>Hidden: All other NCs</div>
+        </div>
+      </div>
+
+      <!-- Zoho main -->
+      <div class="zoho-main">
+        <div class="zoho-page-header">
+          <div class="zoho-page-title">Applications — UWC Brazil 2026</div>
+          <div style="margin-left:auto;display:flex;gap:8px">
+            <button class="zoho-btn">List</button>
+            <button class="zoho-btn zoho-btn--primary">Kanban ▼</button>
+          </div>
+        </div>
+
+        <!-- Blueprint strip -->
+        <div class="zoho-blueprint">
+          <div class="zoho-blueprint__stage done">Registered</div>
+          <div class="zoho-blueprint__stage done">In Progress</div>
+          <div class="zoho-blueprint__stage current">Submitted</div>
+          <div class="zoho-blueprint__stage future">Under Review</div>
+          <div class="zoho-blueprint__stage future">Shortlisted</div>
+          <div class="zoho-blueprint__stage future">Panel Interview</div>
+          <div class="zoho-blueprint__stage future">Nominated</div>
+          <div class="zoho-blueprint__stage future">Placed</div>
+        </div>
+
+        <!-- Kanban board -->
+        <div class="zoho-kanban">
+          <div class="zoho-kanban__col">
+            <div class="zoho-kanban__col-header">
+              <div class="zoho-kanban__col-title">In Progress <span class="zoho-kanban__col-count">3</span></div>
+            </div>
+            <div class="zoho-kanban__card">
+              <div class="zoho-kanban__card-name">Preethi Nair</div>
+              <div class="zoho-kanban__card-meta">India · 72% complete<br>Parental consent: Pending</div>
+            </div>
+            <div class="zoho-kanban__card">
+              <div class="zoho-kanban__card-name">Lucas Ferreira</div>
+              <div class="zoho-kanban__card-meta">Brazil · 45% complete<br>Email verified ✓</div>
+            </div>
+          </div>
+
+          <div class="zoho-kanban__col">
+            <div class="zoho-kanban__col-header" style="background:#e8f4ea">
+              <div class="zoho-kanban__col-title" style="color:#166534">Submitted <span class="zoho-kanban__col-count" style="background:#166534;color:#fff">12</span></div>
+            </div>
+            <!-- Sofia's card highlighted -->
+            <div class="zoho-kanban__card" style="border:2px solid var(--uwc-navy);background:var(--uwc-navy-tint)">
+              <div class="zoho-kanban__card-name" style="color:var(--uwc-navy)">⭐ Sofia Almeida</div>
+              <div class="zoho-kanban__card-meta">Brazil · Submitted 14 Apr 2026<br>
+                <span class="zoho-pill zoho-pill--recent" style="margin-top:4px;display:inline-flex">Parental consent ✓</span>
+              </div>
+            </div>
+            <div class="zoho-kanban__card">
+              <div class="zoho-kanban__card-name">Miguel Santos</div>
+              <div class="zoho-kanban__card-meta">Portugal · Submitted 10 Apr</div>
+            </div>
+            <div class="zoho-kanban__card">
+              <div class="zoho-kanban__card-name">Lena Fischer</div>
+              <div class="zoho-kanban__card-meta">Germany · Submitted 8 Apr</div>
+            </div>
+          </div>
+
+          <div class="zoho-kanban__col">
+            <div class="zoho-kanban__col-header">
+              <div class="zoho-kanban__col-title">Under Review <span class="zoho-kanban__col-count">8</span></div>
+            </div>
+            <div class="zoho-kanban__card">
+              <div class="zoho-kanban__card-name">Amara Diallo</div>
+              <div class="zoho-kanban__card-meta">Guinea · Assigned: Clara Ramos</div>
+            </div>
+            <div class="zoho-kanban__card">
+              <div class="zoho-kanban__card-name">Kwame Asante</div>
+              <div class="zoho-kanban__card-meta">Ghana · Score: 8.5/10</div>
+            </div>
+          </div>
+
+          <div class="zoho-kanban__col">
+            <div class="zoho-kanban__col-header">
+              <div class="zoho-kanban__col-title">Shortlisted <span class="zoho-kanban__col-count">4</span></div>
+            </div>
+            <div class="zoho-kanban__card">
+              <div class="zoho-kanban__card-name">Amara Diallo</div>
+              <div class="zoho-kanban__card-meta">Guinea · Score 8.8/10</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sofia's record detail preview -->
+        <div style="padding:0 20px 20px">
+          <div style="font-size:13px;font-weight:600;color:var(--zoho-text);margin-bottom:10px;padding-top:8px;border-top:1px solid var(--zoho-border-light)">Application record — Sofia Almeida (click to open)</div>
+          <div style="border:1px solid var(--zoho-border);border-radius:var(--zoho-radius-lg);overflow:hidden">
+            <div class="zoho-detail__hero">
+              <div class="zoho-detail__avatar">SA</div>
+              <div>
+                <div class="zoho-detail__name">Sofia Almeida</div>
+                <div style="font-size:12px;color:var(--zoho-text-muted);margin-top:3px">APP-2026-BR-001 · UWC Brazil NC · Submitted 14 Apr 2026</div>
+              </div>
+              <div class="zoho-detail__actions">
+                <button class="zoho-btn">Assign Reviewer</button>
+                <button class="zoho-btn zoho-btn--primary">Move to Review →</button>
+              </div>
+            </div>
+            <div class="zoho-fields" style="padding:16px 20px">
+              <div class="zoho-field"><span class="zoho-field__label">Stage</span><span class="zoho-field__value"><span class="zoho-pill zoho-pill--info">Submitted</span></span></div>
+              <div class="zoho-field"><span class="zoho-field__label">Country</span><span class="zoho-field__value">🇧🇷 Brazil</span></div>
+              <div class="zoho-field"><span class="zoho-field__label">Age</span><span class="zoho-field__value">16</span></div>
+              <div class="zoho-field"><span class="zoho-field__label">Parental Consent</span><span class="zoho-field__value" style="color:#166534">✓ Maria Almeida</span></div>
+              <div class="zoho-field"><span class="zoho-field__label">Application Language</span><span class="zoho-field__value">Português (BR)</span></div>
+              <div class="zoho-field"><span class="zoho-field__label">NC Admin</span><span class="zoho-field__value">Ana Carvalho</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="badges-strip">
+    <span class="badge badge--info">Zoho CRM — Ana vê apenas candidaturas do Brasil</span>
+    <span class="badge badge--gate">Outros NCs ocultados pelo controlo de acesso baseado em funções</span>
+    <span class="badge badge--auto">Blueprint visível — etapa atual: Submetida</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 9: IO MARKETING — SOURCE ATTRIBUTION ===== -->
+<section class="screen" id="sc-9">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">IO Marketing Staff — Painel de atribuição de fonte</div>
+      <h1 class="screen-title">IO Marketing — Atribuição de fonte e análise de funil</h1>
+      <p class="screen-sub">Vista do staff de marketing da IO. Painel de atribuição de fonte mostrando de onde vêm os candidatos do ciclo 2026. Sofia foi captada via Instagram patrocinado — rastreado por UTM. Integração HubSpot activa.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(8)">← Anterior</button>
+      <button class="btn-nav" disabled>Próximo →</button>
+    </div>
+  </div>
+
+  <div class="context-banner">
+    <span class="context-banner__icon">IO MKT</span>
+    <div class="context-banner__text">Vista <strong>IO Marketing Staff</strong> — painel de atribuição de fonte do ciclo 2026. Sofia Almeida foi captada via campanha Instagram (@uwcintl · scholarship-2026-pt). Rastreamento UTM + integração HubSpot activa.</div>
+    <span class="demo-mode-tag demo-mode-tag--zoho">Zoho CRM Analytics</span>
+  </div>
+
+  <!-- KPI tiles -->
+  <div class="stat-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:20px">
+    <div class="stat-tile">
+      <div class="stat-tile__label">Candidaturas totais</div>
+      <div class="stat-tile__value">847</div>
+      <div style="font-size:11px;color:var(--uwc-green);margin-top:3px">↑ 18% vs 2025</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-tile__label">Taxa de conversão</div>
+      <div class="stat-tile__value">34%</div>
+      <div style="font-size:11px;color:var(--uwc-green);margin-top:3px">↑ 6pp vs 2025</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-tile__label">Via redes sociais</div>
+      <div class="stat-tile__value" style="color:var(--uwc-teal)">237</div>
+      <div style="font-size:11px;color:var(--uwc-grey-400);margin-top:3px">28% do total</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-tile__label">NCs com presença digital</div>
+      <div class="stat-tile__value">52</div>
+      <div style="font-size:11px;color:var(--uwc-grey-400);margin-top:3px">de 80 NCs</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-tile__label">Custo por candidatura</div>
+      <div class="stat-tile__value" style="font-size:20px">€ 18,40</div>
+      <div style="font-size:11px;color:var(--uwc-green);margin-top:3px">↓ 22% vs 2025</div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="align-items:start">
+    <!-- Source attribution chart -->
+    <div class="card">
+      <div class="card__header"><span class="card__title">Atribuição de fonte — Ciclo 2026</span><span class="card__sub">847 candidaturas</span></div>
+      <div class="card__body">
+        <!-- Donut chart (SVG) -->
+        <div style="display:flex;gap:20px;align-items:center;margin-bottom:16px">
+          <svg width="140" height="140" viewBox="0 0 140 140" style="flex-shrink:0">
+            <!-- Donut segments approximated -->
+            <circle cx="70" cy="70" r="54" fill="none" stroke="#e2e6ed" stroke-width="22"/>
+            <!-- Social 28% -->
+            <circle cx="70" cy="70" r="54" fill="none" stroke="var(--uwc-teal)" stroke-width="22" stroke-dasharray="95.2 240.8" stroke-dashoffset="0" transform="rotate(-90 70 70)"/>
+            <!-- NC Website 22% -->
+            <circle cx="70" cy="70" r="54" fill="none" stroke="var(--uwc-navy)" stroke-width="22" stroke-dasharray="74.8 261.2" stroke-dashoffset="-95.2" transform="rotate(-90 70 70)"/>
+            <!-- Partner Schools 18% -->
+            <circle cx="70" cy="70" r="54" fill="none" stroke="#8b5cf6" stroke-width="22" stroke-dasharray="61.2 274.8" stroke-dashoffset="-170" transform="rotate(-90 70 70)"/>
+            <!-- Direct Search 15% -->
+            <circle cx="70" cy="70" r="54" fill="none" stroke="var(--uwc-gold)" stroke-width="22" stroke-dasharray="51 285" stroke-dashoffset="-231.2" transform="rotate(-90 70 70)"/>
+            <!-- Referral 12% -->
+            <circle cx="70" cy="70" r="54" fill="none" stroke="var(--uwc-green)" stroke-width="22" stroke-dasharray="40.8 295.2" stroke-dashoffset="-282.2" transform="rotate(-90 70 70)"/>
+            <!-- Other 5% -->
+            <circle cx="70" cy="70" r="54" fill="none" stroke="var(--uwc-grey-300)" stroke-width="22" stroke-dasharray="17 319" stroke-dashoffset="-323" transform="rotate(-90 70 70)"/>
+            <text x="70" y="65" text-anchor="middle" font-family="'Playfair Display',serif" font-size="22" font-weight="600" fill="var(--uwc-navy)">847</text>
+            <text x="70" y="82" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="9" fill="var(--uwc-grey-500)">candidaturas</text>
+          </svg>
+          <div style="flex:1">
+            <div class="mkt-source-row">
+              <div class="mkt-source-dot" style="background:var(--uwc-teal)"></div>
+              <div class="mkt-source-label">Redes sociais</div>
+              <div class="mkt-source-pct">28%</div>
+            </div>
+            <div class="mkt-source-row">
+              <div class="mkt-source-dot" style="background:var(--uwc-navy)"></div>
+              <div class="mkt-source-label">Website NC</div>
+              <div class="mkt-source-pct">22%</div>
+            </div>
+            <div class="mkt-source-row">
+              <div class="mkt-source-dot" style="background:#8b5cf6"></div>
+              <div class="mkt-source-label">Escolas parceiras</div>
+              <div class="mkt-source-pct">18%</div>
+            </div>
+            <div class="mkt-source-row">
+              <div class="mkt-source-dot" style="background:var(--uwc-gold)"></div>
+              <div class="mkt-source-label">Pesquisa directa</div>
+              <div class="mkt-source-pct">15%</div>
+            </div>
+            <div class="mkt-source-row">
+              <div class="mkt-source-dot" style="background:var(--uwc-green)"></div>
+              <div class="mkt-source-label">Referência pessoal</div>
+              <div class="mkt-source-pct">12%</div>
+            </div>
+            <div class="mkt-source-row">
+              <div class="mkt-source-dot" style="background:var(--uwc-grey-300)"></div>
+              <div class="mkt-source-label">Outros</div>
+              <div class="mkt-source-pct">5%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Funnel chart -->
+        <div style="border-top:1px solid var(--uwc-grey-200);padding-top:14px">
+          <div style="font-size:12px;font-weight:600;color:var(--uwc-grey-600);margin-bottom:10px;letter-spacing:.5px;text-transform:uppercase">Funil: visita → matrícula</div>
+          <div class="funnel-step">
+            <div class="funnel-num">12,400</div>
+            <div class="funnel-label">Visitantes únicos ao portal</div>
+            <div class="funnel-bar-wrap"><div class="funnel-bar-fill" style="width:100%"></div></div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-num">4,820</div>
+            <div class="funnel-label">Verificação de elegibilidade iniciada</div>
+            <div class="funnel-bar-wrap"><div class="funnel-bar-fill" style="width:38.8%"></div></div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-num">1,930</div>
+            <div class="funnel-label">Conta criada (elegível)</div>
+            <div class="funnel-bar-wrap"><div class="funnel-bar-fill" style="width:15.5%"></div></div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-num">847</div>
+            <div class="funnel-label">Candidatura submetida</div>
+            <div class="funnel-bar-wrap"><div class="funnel-bar-fill" style="width:6.8%"></div></div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-num">142</div>
+            <div class="funnel-label">Nomeados para escola UWC</div>
+            <div class="funnel-bar-wrap"><div class="funnel-bar-fill" style="width:1.1%;background:var(--uwc-green)"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <!-- Sofia's UTM tracking -->
+      <div class="card" style="margin-bottom:16px">
+        <div class="card__header"><span class="card__title">Atribuição de Sofia Almeida — UTM tracking</span></div>
+        <div class="card__body">
+          <div class="featured-applicant" style="padding:12px 14px;margin-bottom:12px">
+            <div class="featured-applicant__label">Candidata em destaque</div>
+            <div class="featured-applicant__name" style="font-size:16px">Sofia Almeida · APP-2026-BR-001</div>
+            <div class="featured-applicant__meta">São Paulo · Brasil · Submetida 14 Abr 2026</div>
+          </div>
+
+          <div class="utm-row">
+            <span class="utm-key">utm_source</span>
+            <span class="utm-val">instagram-uwc</span>
+          </div>
+          <div class="utm-row">
+            <span class="utm-key">utm_medium</span>
+            <span class="utm-val">social</span>
+          </div>
+          <div class="utm-row">
+            <span class="utm-key">utm_campaign</span>
+            <span class="utm-val">scholarship-2026-pt</span>
+          </div>
+          <div class="utm-row">
+            <span class="utm-key">utm_content</span>
+            <span class="utm-val">video-student-stories-brazil</span>
+          </div>
+          <div class="utm-row">
+            <span class="utm-key">Primeiro contacto</span>
+            <span class="utm-val">28 Mar 2026 · Instagram post @uwcintl</span>
+          </div>
+          <div class="utm-row">
+            <span class="utm-key">Dias até candidatura</span>
+            <span class="utm-val">17 dias (28 Mar → 14 Abr)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HubSpot integration panel -->
+      <div class="card">
+        <div class="card__header"><span class="card__title">Integração HubSpot — Painel de campanha</span></div>
+        <div class="card__body">
+          <div class="field-group" style="margin-bottom:12px">
+            <div class="field-cell"><div class="field-cell__label">Campanha HubSpot</div><div class="field-cell__value" style="font-size:12px">scholarship-2026-pt</div></div>
+            <div class="field-cell"><div class="field-cell__label">Canal</div><div class="field-cell__value">Instagram (pago)</div></div>
+            <div class="field-cell"><div class="field-cell__label">Alcance</div><div class="field-cell__value">284,000</div></div>
+            <div class="field-cell"><div class="field-cell__label">Taxa de clique</div><div class="field-cell__value">4.2%</div></div>
+            <div class="field-cell"><div class="field-cell__label">Candidaturas atribuídas</div><div class="field-cell__value success">237</div></div>
+            <div class="field-cell"><div class="field-cell__label">Custo por candidatura</div><div class="field-cell__value">€ 11,20</div></div>
+          </div>
+          <div class="alert alert--success" style="margin-bottom:0">
+            <span>✅</span>
+            <div><strong>Campanha de maior ROI do ciclo 2026.</strong> A campanha em Português no Instagram foi responsável por 28% de todas as candidaturas — custo 39% abaixo da média.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="badges-strip">
+    <span class="badge badge--api">UTM tracking — capturado na criação de conta</span>
+    <span class="badge badge--auto">Integração HubSpot — dados sincronizados bidirecionalmente</span>
+    <span class="badge badge--info">Funil completo: visita → matrícula · 847 candidaturas de 12.400 visitas</span>
+    <span class="badge badge--gate">Dados de fonte bloqueados após submissão — integridade para análise</span>
+  </div>
+</section>
+
+</main><!-- /main -->
+</div><!-- /shell -->
+
+<!-- Toast (consent) -->
+<div class="toast" id="global-toast" style="display:none">
+  <div class="toast__icon">✅</div>
+  <div>
+    <div class="toast__title" id="global-toast-title">Consentimento recebido!</div>
+    <div class="toast__sub" id="global-toast-sub">Sofia pode agora submeter a candidatura.</div>
+  </div>
+</div>
+
+<script>
+/* === INLINE: sample-data.js === */
+window.UWC = window.UWC || {};
+UWC.users = [
+  { id: 'akanksha', name: 'Akanksha Anand', initial: 'AA', role: 'IO Super Admin', scope: 'Global · Full visibility', badge: 'ios', email: 'akanksha.anand@uwcio.uwc.org' },
+  { id: 'fatima',   name: 'Fatima Al-Rashid', initial: 'FA', role: 'IO Admissions', scope: 'Global · Place allocation', badge: 'ios' },
+  { id: 'data-protection', name: 'Data Protection Lead', initial: 'DP', role: 'Compliance & GDPR', scope: 'Restricted record visibility', badge: 'dp' },
+  { id: 'ana',      name: 'Ana Carvalho', initial: 'AC', role: 'NC Admin', scope: 'UWC Brazil only', badge: 'nc', email: 'ana.carvalho@uwcbrazil.org' },
+  { id: 'marcus',   name: 'Marcus Weber', initial: 'MW', role: 'NC Admin', scope: 'UWC Germany only', badge: 'nc' },
+  { id: 'grace',    name: 'Grace Omondi', initial: 'GO', role: 'NC Chair', scope: 'UWC Kenya only', badge: 'nc' },
+  { id: 'clara',    name: 'Clara Ramos', initial: 'CR', role: 'NC Reviewer', scope: 'Assigned applications only', badge: 'reviewer' },
+  { id: 'paulo',    name: 'Paulo Fonseca', initial: 'PF', role: 'NC Reviewer', scope: 'Assigned applications only', badge: 'reviewer' },
+  { id: 'helen',    name: 'Helen Richards', initial: 'HR', role: 'Admissions Director', scope: 'UWC Atlantic only', badge: 'school' },
+  { id: 'sofia',    name: 'Sofia Almeida', initial: 'SA', role: 'Applicant (Portal)', scope: 'Her own application only', badge: 'portal', email: 'sofia.almeida@example.com' },
+  { id: 'maria',    name: 'Maria Almeida', initial: 'MA', role: 'Guardian / Parent', scope: 'Sofia\'s application — consent', badge: 'guardian', email: 'maria.almeida@example.com' },
+  { id: 'visitor',  name: 'Public visitor', initial: '🌐', role: 'Not signed in', scope: 'Public portal only', badge: 'portal', email: '' },
+  { id: 'io-mkt',   name: 'IO Marketing Staff', initial: 'IM', role: 'Marketing & Comms', scope: 'Source attribution + campaigns', badge: 'marketing', email: 'marketing@uwcio.uwc.org' },
+  { id: 'io-crm',   name: 'IO CRM Administrator', initial: 'CR', role: 'CRM Admin', scope: 'Governance + NC data', badge: 'ios' },
+  { id: 'jonathan', name: 'Jonathan Osei', initial: 'JO', role: 'Donor (Contact view)', scope: 'Own communication history', badge: 'default' }
+];
+UWC.scenarioRoles = { B: ['visitor','sofia','maria','ana','io-mkt'] };
+UWC.getRolesFor = function(code) {
+  return (UWC.scenarioRoles[code] || []).map(function(id) {
+    return UWC.users.find(function(u) { return u.id === id; });
+  }).filter(Boolean);
+};
+
+/* === INLINE: role-switcher.js === */
+(function(){
+'use strict';
+window.RoleSwitcher = { init: init, setRole: setRole, getRole: function(){ return document.body.dataset.currentRole || 'default'; } };
+function init(opts){
+  var roles = opts.roles || [];
+  var defaultId = opts.defaultRoleId || (roles[0] && roles[0].id);
+  var scenarioCode = opts.scenarioCode || '';
+  var dropdown = document.getElementById('role-switcher');
+  if(!dropdown){ console.warn('[RoleSwitcher] #role-switcher not found'); return; }
+  dropdown.innerHTML =
+    '<button type="button" class="rs-trigger" id="rs-trigger" aria-expanded="false">'+
+      '<span class="rs-avatar" id="rs-avatar"></span>'+
+      '<span class="rs-current">'+
+        '<span class="rs-name" id="rs-current-name">—</span>'+
+        '<span class="rs-role" id="rs-current-role">—</span>'+
+      '</span>'+
+      '<span class="rs-chev">▾</span>'+
+    '</button>'+
+    '<div class="rs-menu" id="rs-menu" hidden>'+
+      '<div class="rs-menu-header">View as · Scenario '+scenarioCode+'</div>'+
+      roles.map(function(r){
+        return '<button type="button" class="rs-option" data-role-id="'+r.id+'">'+
+          '<span class="rs-avatar rs-avatar--'+(r.badge||'default')+'">'+(r.initial||r.name[0])+'</span>'+
+          '<span class="rs-opt-text">'+
+            '<span class="rs-opt-name">'+r.name+'</span>'+
+            '<span class="rs-opt-role">'+r.role+'</span>'+
+            (r.scope ? '<span class="rs-opt-scope">'+r.scope+'</span>' : '')+
+          '</span>'+
+          '<span class="rs-check">✓</span>'+
+        '</button>';
+      }).join('')+
+      '<div class="rs-menu-footer">Switching role re-renders screen content for that perspective.</div>'+
+    '</div>';
+  var trigger = document.getElementById('rs-trigger');
+  var menu = document.getElementById('rs-menu');
+  trigger.addEventListener('click', function(e){ e.stopPropagation(); var open=!menu.hidden; menu.hidden=open; trigger.setAttribute('aria-expanded',String(!open)); });
+  document.addEventListener('click', function(e){ if(!dropdown.contains(e.target)){ menu.hidden=true; trigger.setAttribute('aria-expanded','false'); } });
+  Array.prototype.forEach.call(dropdown.querySelectorAll('.rs-option'), function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.dataset.roleId;
+      var role = roles.find(function(r){ return r.id===id; });
+      setRole(id, role, roles);
+      menu.hidden = true;
+      trigger.setAttribute('aria-expanded','false');
+    });
+  });
+  var def = roles.find(function(r){ return r.id===defaultId; });
+  setRole(defaultId, def, roles);
+  window.RoleSwitcher._roles = roles;
+}
+function setRole(id, role, roles){
+  document.body.dataset.currentRole = id;
+  var avatar = document.getElementById('rs-avatar');
+  var cn = document.getElementById('rs-current-name');
+  var cr = document.getElementById('rs-current-role');
+  if(avatar && role){ avatar.className='rs-avatar rs-avatar--'+(role.badge||'default'); avatar.textContent=role.initial||role.name[0]; }
+  if(cn && role) cn.textContent = role.name;
+  if(cr && role) cr.textContent = role.role + (role.scope ? ' · '+role.scope : '');
+  Array.prototype.forEach.call(document.querySelectorAll('.rs-option'), function(btn){ btn.classList.toggle('active', btn.dataset.roleId===id); });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-role-show]'), function(el){ var allowed=el.dataset.roleShow.split(',').map(function(s){return s.trim();}); el.hidden=allowed.indexOf(id)===-1; });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-role-hide]'), function(el){ var blocked=el.dataset.roleHide.split(',').map(function(s){return s.trim();}); el.hidden=blocked.indexOf(id)!==-1; });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-role-variant]'), function(el){
+    var variants={};
+    el.dataset.roleVariant.split('|').forEach(function(pair){ var i=pair.indexOf(':'); if(i>-1) variants[pair.slice(0,i).trim()]=pair.slice(i+1); });
+    if(variants[id]){ if(!el.dataset.roleVariantOriginal) el.dataset.roleVariantOriginal=el.textContent; el.textContent=variants[id]; }
+    else if(variants['default']){ el.textContent=variants['default']; }
+    else if(el.dataset.roleVariantOriginal){ el.textContent=el.dataset.roleVariantOriginal; }
+  });
+  document.dispatchEvent(new CustomEvent('roleChanged',{detail:{roleId:id,role:role}}));
+}
+var style = document.createElement('style');
+style.textContent =
+  '#role-switcher{position:relative;font-family:var(--uwc-font-body,sans-serif)}'+
+  '.rs-trigger{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:5px 10px 5px 5px;border-radius:8px;cursor:pointer;font-size:12.5px;min-width:200px;text-align:left}'+
+  '.rs-trigger:hover{background:rgba(255,255,255,0.18)}'+
+  '.rs-avatar{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:11px;flex-shrink:0}'+
+  '.rs-avatar--ios{background:#003087}.rs-avatar--nc{background:#1f9535}.rs-avatar--reviewer{background:#e85d0c}.rs-avatar--dp{background:#C8102E}.rs-avatar--school{background:#7c3aed}.rs-avatar--portal{background:#0ea5e9}.rs-avatar--marketing{background:#ec4899}.rs-avatar--guardian{background:#f59e0b}.rs-avatar--default{background:#6b7280}'+
+  '.rs-current{display:flex;flex-direction:column;line-height:1.2;flex:1}.rs-name{font-weight:500;color:#fff;font-size:12px}.rs-role{font-size:10.5px;color:rgba(255,255,255,0.6)}'+
+  '.rs-chev{color:rgba(255,255,255,0.6);font-size:10px;margin-left:2px}'+
+  '.rs-menu{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #e2e6ed;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);min-width:300px;z-index:100;overflow:hidden}'+
+  '.rs-menu-header{padding:10px 14px;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#6b7280;background:#f7f8fa;font-weight:600}'+
+  '.rs-menu-footer{padding:10px 14px;font-size:11px;color:#6b7280;border-top:1px solid #f0f2f5;background:#fafbfd;line-height:1.4}'+
+  '.rs-option{display:flex;align-items:center;gap:10px;padding:10px 14px;width:100%;background:#fff;border:none;border-bottom:1px solid #f0f2f5;cursor:pointer;text-align:left}'+
+  '.rs-option:hover{background:#f7f8fa}.rs-option.active{background:#E8EEF6}'+
+  '.rs-opt-text{flex:1;display:flex;flex-direction:column;line-height:1.3}'+
+  '.rs-opt-name{font-size:13px;font-weight:500;color:#0d1b3e}'+
+  '.rs-opt-role{font-size:11.5px;color:#5a6480}'+
+  '.rs-opt-scope{font-size:10.5px;color:#9aa3b8;font-style:italic}'+
+  '.rs-check{color:#003087;font-weight:600;opacity:0;font-size:14px}'+
+  '.rs-option.active .rs-check{opacity:1}';
+document.head.appendChild(style);
+})();
+
+/* === SCENARIO B LOGIC === */
+var TOTAL = 10;
+var current = 0;
+
+// Default roles per step
+var stepRoles = {
+  0: 'visitor', 1: 'visitor', 2: 'visitor', 3: 'visitor',
+  4: 'sofia', 5: 'sofia', 6: 'maria',
+  7: 'sofia', 8: 'ana', 9: 'io-mkt'
+};
+
+function go(i) {
+  if (i < 0 || i >= TOTAL) return;
+  // hide all screens
+  var screens = document.querySelectorAll('.screen');
+  Array.prototype.forEach.call(screens, function(s){ s.classList.remove('active'); });
+  // show target
+  var target = document.getElementById('sc-' + i);
+  if (target) target.classList.add('active');
+
+  // update sidebar
+  for (var j = 0; j < TOTAL; j++) {
+    var nav = document.getElementById('nav-' + j);
+    if (!nav) continue;
+    nav.classList.remove('active', 'done');
+    if (j < i) nav.classList.add('done');
+    if (j === i) nav.classList.add('active');
+  }
+
+  // update step counter + progress
+  var pct = Math.round(((i + 1) / TOTAL) * 100);
+  var counter = document.getElementById('step-counter');
+  if (counter) counter.textContent = 'Step ' + (i + 1) + ' of ' + TOTAL;
+  var progTxt = document.getElementById('progress-txt');
+  if (progTxt) progTxt.textContent = 'Step ' + (i + 1) + ' of ' + TOTAL;
+  var progFill = document.getElementById('progress-fill');
+  if (progFill) progFill.style.width = pct + '%';
+
+  // scroll to top
+  var mainEl = document.getElementById('main');
+  if (mainEl) mainEl.scrollTop = 0;
+
+  // switch default role for this step
+  var roleId = stepRoles[i] || 'visitor';
+  if (window.RoleSwitcher && window.RoleSwitcher._roles) {
+    var roles = window.RoleSwitcher._roles;
+    var role = roles.find(function(r){ return r.id === roleId; });
+    if (role) window.RoleSwitcher.setRole(roleId, role, roles);
+  }
+
+  current = i;
+}
+
+function showConsentToast() {
+  var toast = document.getElementById('global-toast');
+  if (!toast) return;
+  toast.style.display = 'flex';
+  setTimeout(function(){ toast.style.display = 'none'; }, 3500);
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', function() {
+  RoleSwitcher.init({
+    scenarioCode: 'B',
+    defaultRoleId: 'visitor',
+    roles: UWC.getRolesFor('B')
+  });
+  go(0);
+});
+</script>
+</body>
+</html>

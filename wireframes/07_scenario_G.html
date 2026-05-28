@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scenario G — Communications · UWC International Demo</title>
+<link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* === TOKENS === */
+:root{--uwc-navy:#003087;--uwc-navy-deep:#001a4d;--uwc-navy-tint:#E8EEF6;--uwc-red:#C8102E;--uwc-red-tint:#fdeaea;--uwc-gold:#C8AB00;--uwc-green:#1f9535;--uwc-orange:#e85d0c;--uwc-navy-live:#004A97;--uwc-teal:#009482;--uwc-white:#ffffff;--uwc-grey-50:#f8f9fb;--uwc-grey-100:#f3f5fa;--uwc-grey-200:#e2e6ed;--uwc-grey-300:#c8cdd8;--uwc-grey-400:#9aa3b8;--uwc-grey-500:#6C757D;--uwc-grey-600:#5a6480;--uwc-grey-800:#0d1b3e;--uwc-font-title:'Playfair Display',Georgia,serif;--uwc-font-body:'DM Sans',system-ui,sans-serif;--uwc-font-mono:'DM Mono',ui-monospace,monospace;--uwc-fs-display:32px;--uwc-fs-h1:26px;--uwc-fs-h2:20px;--uwc-fs-h3:16px;--uwc-fs-body:14px;--uwc-fs-small:12.5px;--uwc-fs-tiny:11px;--uwc-fs-micro:10px;--uwc-sp-1:4px;--uwc-sp-2:8px;--uwc-sp-3:12px;--uwc-sp-4:16px;--uwc-sp-5:20px;--uwc-sp-6:24px;--uwc-sp-8:32px;--uwc-radius-sm:4px;--uwc-radius:8px;--uwc-radius-lg:12px;--uwc-radius-pill:999px;--uwc-shadow-sm:0 1px 2px rgba(0,0,0,0.04);--uwc-shadow:0 2px 8px rgba(0,48,135,0.08);--uwc-shadow-lg:0 8px 24px rgba(0,48,135,0.12);--uwc-tx-fast:120ms ease;--uwc-tx:200ms cubic-bezier(0.4,0,0.2,1)}
+:root{--zoho-topbar-bg:#1c1f25;--zoho-topbar-text:#ffffff;--zoho-topbar-text-muted:rgba(255,255,255,0.55);--zoho-topbar-height:48px;--zoho-topbar-search-bg:rgba(255,255,255,0.08);--zoho-sidebar-bg:#f7f8fa;--zoho-sidebar-border:#e8eaed;--zoho-sidebar-text:#4a5568;--zoho-sidebar-active-bg:#e6efff;--zoho-sidebar-active-text:#2563eb;--zoho-sidebar-hover-bg:#eef1f7;--zoho-sidebar-width:220px;--zoho-content-bg:#ffffff;--zoho-content-alt:#f9fafb;--zoho-border:#e5e7eb;--zoho-border-light:#f0f2f5;--zoho-text:#1f2937;--zoho-text-secondary:#4b5563;--zoho-text-muted:#6b7280;--zoho-link:#2563eb;--zoho-primary:#3b6ef5;--zoho-outline:#d1d5db;--zoho-success:#10b981;--zoho-warning:#f59e0b;--zoho-danger:#ef4444;--zoho-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;--zoho-fs-base:13px;--zoho-fs-sm:12px;--zoho-fs-xs:11px;--zoho-radius:6px;--zoho-radius-sm:4px}
+html{box-sizing:border-box}*,*::before,*::after{box-sizing:inherit}
+body{margin:0;padding:0;font-family:var(--uwc-font-body);font-size:var(--uwc-fs-body);line-height:1.5;color:var(--uwc-grey-800);background:var(--uwc-grey-100);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,h5{font-family:var(--uwc-font-title);font-weight:500;line-height:1.2;margin:0}
+h1{font-size:var(--uwc-fs-h1)}h2{font-size:var(--uwc-fs-h2)}h3{font-size:var(--uwc-fs-h3)}
+a{color:var(--uwc-navy);text-decoration:none}button{font-family:inherit}
+
+/* === SHELL === */
+.shell{display:grid;grid-template-columns:280px 1fr;grid-template-rows:60px 1fr;min-height:100vh;background:var(--uwc-grey-100)}
+.topbar{grid-column:1/-1;background:var(--uwc-navy-deep);display:flex;align-items:center;padding:0 20px;gap:16px;border-bottom:3px solid var(--uwc-red);color:#fff}
+.topbar__brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.topbar__logo{font-family:var(--uwc-font-title);font-size:18px;font-weight:600;color:#fff;letter-spacing:.3px}
+.topbar__demo-badge{background:var(--uwc-red);color:#fff;font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;padding:3px 10px;border-radius:var(--uwc-radius-sm)}
+.topbar__divider{width:1px;height:22px;background:rgba(255,255,255,.18)}
+.topbar__scenario{font-size:12.5px;color:rgba(255,255,255,.7)}
+.topbar__scenario strong{color:#fff;font-weight:500}
+.topbar__center{flex:1}
+.topbar__right{margin-left:auto;display:flex;align-items:center;gap:14px}
+.topbar__step-counter{font-size:11.5px;color:rgba(255,255,255,.6);font-family:var(--uwc-font-mono);letter-spacing:.6px;padding:4px 10px;border:1px solid rgba(255,255,255,.15);border-radius:var(--uwc-radius-sm)}
+.sidebar{background:#fff;border-right:1px solid var(--uwc-grey-200);padding:18px 0;overflow-y:auto}
+.sidebar__label{font-size:var(--uwc-fs-micro);font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--uwc-grey-400);padding:10px 18px 8px}
+.sidebar__item{display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer;margin:0 8px 2px;border-radius:var(--uwc-radius);transition:background var(--uwc-tx-fast)}
+.sidebar__item:hover{background:var(--uwc-grey-100)}
+.sidebar__item.active{background:var(--uwc-navy-tint);border-left:3px solid var(--uwc-navy);padding-left:11px}
+.sidebar__num{width:24px;height:24px;border-radius:50%;background:var(--uwc-grey-200);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--uwc-grey-600);flex-shrink:0}
+.sidebar__item.active .sidebar__num{background:var(--uwc-navy);color:#fff}
+.sidebar__item.done .sidebar__num{background:var(--uwc-green);color:#fff}
+.sidebar__item.done .sidebar__label-text{color:var(--uwc-grey-400)}
+.sidebar__label-text{font-size:12.5px;color:var(--uwc-grey-600);line-height:1.3}
+.sidebar__item.active .sidebar__label-text{color:var(--uwc-navy);font-weight:500}
+.sidebar__progress{margin:16px;padding:12px;background:var(--uwc-grey-100);border-radius:var(--uwc-radius)}
+.sidebar__progress-label{font-size:11.5px;color:var(--uwc-grey-600);display:flex;justify-content:space-between;margin-bottom:8px}
+.sidebar__progress-track{height:4px;background:var(--uwc-grey-200);border-radius:var(--uwc-radius-pill);overflow:hidden}
+.sidebar__progress-fill{height:4px;background:var(--uwc-navy);border-radius:var(--uwc-radius-pill);transition:width var(--uwc-tx)}
+.main{overflow-y:auto;padding:28px 32px;background:var(--uwc-grey-100)}
+.screen{display:none;max-width:1200px}
+.screen.active{display:block;animation:fadeIn 240ms ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.screen-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;gap:16px}
+.screen-title{font-family:var(--uwc-font-title);font-size:var(--uwc-fs-display);font-weight:500;color:var(--uwc-grey-800);line-height:1.15}
+.screen-sub{font-size:var(--uwc-fs-body);color:var(--uwc-grey-600);margin-top:6px;line-height:1.5;max-width:760px}
+.step-nav{display:flex;gap:8px;flex-shrink:0}
+.btn-nav{padding:8px 16px;font-size:12.5px;font-weight:500;font-family:var(--uwc-font-body);border:1px solid var(--uwc-grey-300);border-radius:var(--uwc-radius);background:#fff;color:var(--uwc-grey-600);cursor:pointer;transition:all var(--uwc-tx-fast)}
+.btn-nav:hover:not(:disabled){background:var(--uwc-grey-100);border-color:var(--uwc-grey-400)}
+.btn-nav:disabled{opacity:.4;cursor:not-allowed}
+.btn-nav--primary{background:var(--uwc-navy);color:#fff;border-color:var(--uwc-navy)}
+.btn-nav--primary:hover:not(:disabled){background:var(--uwc-navy-deep);border-color:var(--uwc-navy-deep)}
+.card{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;margin-bottom:16px;box-shadow:var(--uwc-shadow-sm)}
+.card__header{background:var(--uwc-navy);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.card__title{color:#fff;font-size:13.5px;font-weight:500}
+.card__sub{color:rgba(255,255,255,.55);font-size:11.5px;font-family:var(--uwc-font-mono)}
+.card__body{padding:16px 18px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.alert{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--uwc-radius);font-size:12.5px;line-height:1.5;margin-bottom:12px}
+.alert--info{background:var(--uwc-navy-tint);color:var(--uwc-navy);border:1px solid #93c5fd}
+.alert--success{background:#f0fdf4;color:#14532d;border:1px solid #86efac}
+.alert--warning{background:#fffbeb;color:#78350f;border:1px solid #fbbf24}
+.alert--error{background:var(--uwc-red-tint);color:#7f1d1d;border:1px solid #fca5a5}
+.badge{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:500;padding:3px 8px;border-radius:var(--uwc-radius-sm);font-family:var(--uwc-font-mono)}
+.badge--api{background:#dbeafe;color:#1e40af}
+.badge--auto{background:#dcfce7;color:#166534}
+.badge--gate{background:#fee2e2;color:#991b1b}
+.badge--info{background:var(--uwc-navy-tint);color:var(--uwc-navy)}
+.badge--warn{background:#fef3c7;color:#92400e}
+.badges-strip{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.role-context{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;background:var(--uwc-navy-tint);color:var(--uwc-navy);border-radius:var(--uwc-radius-pill);font-size:12px;font-weight:500;margin-bottom:14px}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:500;padding:3px 10px;border-radius:var(--uwc-radius-pill);border:1px solid transparent}
+.pill--green{background:#dcfce7;color:#166534;border-color:#86efac}
+.pill--amber{background:#fef3c7;color:#92400e;border-color:#fbbf24}
+.pill--red{background:#fee2e2;color:#991b1b;border-color:#fca5a5}
+.pill--blue{background:#dbeafe;color:#1e40af;border-color:#93c5fd}
+.pill--grey{background:#f3f4f6;color:#4b5563;border-color:#d1d5db}
+
+/* Zoho mode */
+.zoho-topbar{height:var(--zoho-topbar-height);background:var(--zoho-topbar-bg);color:var(--zoho-topbar-text);display:flex;align-items:center;padding:0 16px;position:sticky;top:0;z-index:50;gap:16px}
+.zoho-topbar__logo{display:flex;align-items:center;gap:8px;font-weight:500;font-size:14px}
+.zoho-topbar__logo-icon{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#8b5cf6,#3b82f6);display:inline-block}
+.zoho-topbar__search{background:var(--zoho-topbar-search-bg);border:1px solid rgba(255,255,255,.12);border-radius:var(--zoho-radius);padding:6px 12px;color:var(--zoho-topbar-text-muted);font-size:var(--zoho-fs-sm);width:280px;margin:0 auto}
+.zoho-topbar__right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.zoho-topbar__org{width:32px;height:32px;border-radius:50%;background:#f7d427;color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px}
+.zoho-shell{display:grid;grid-template-columns:var(--zoho-sidebar-width) 1fr;min-height:calc(100vh - var(--zoho-topbar-height))}
+.zoho-sidebar{background:var(--zoho-sidebar-bg);border-right:1px solid var(--zoho-sidebar-border);padding:12px 0}
+.zoho-sidebar__group{padding:0 8px;margin-bottom:4px}
+.zoho-sidebar__item{display:flex;align-items:center;gap:10px;padding:7px 10px;font-size:var(--zoho-fs-base);color:var(--zoho-sidebar-text);cursor:pointer;border-radius:var(--zoho-radius);transition:background var(--uwc-tx-fast)}
+.zoho-sidebar__item:hover{background:var(--zoho-sidebar-hover-bg)}
+.zoho-sidebar__item.active{background:var(--zoho-sidebar-active-bg);color:var(--zoho-sidebar-active-text);font-weight:500}
+.zoho-main{overflow-y:auto;background:var(--zoho-content-bg)}
+.zoho-page-header{padding:14px 20px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;gap:12px}
+.zoho-page-title{font-size:16px;font-weight:600;color:var(--zoho-text)}
+.zoho-page-tools{padding:10px 20px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;gap:8px;background:#fff;position:sticky;top:0;z-index:5}
+.zoho-page-tools__right{margin-left:auto;display:flex;gap:8px}
+.zoho-btn{padding:7px 14px;font-size:var(--zoho-fs-base);border-radius:var(--zoho-radius);border:1px solid var(--zoho-outline);background:#fff;color:var(--zoho-text);cursor:pointer;font-family:var(--zoho-font);display:inline-flex;align-items:center;gap:6px}
+.zoho-btn--primary{background:var(--zoho-primary);color:#fff;border-color:var(--zoho-primary)}
+.zoho-btn--warn{background:#fef3c7;color:#92400e;border-color:#fbbf24}
+.zoho-btn--danger{background:#fee2e2;color:#991b1b;border-color:#fca5a5}
+.zoho-detail__hero{display:flex;align-items:center;gap:14px;padding:14px 20px;background:#fff;border-bottom:1px solid var(--zoho-border-light)}
+.zoho-detail__avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px}
+.zoho-detail__name{font-size:18px;font-weight:600}
+.zoho-detail__actions{margin-left:auto;display:flex;gap:8px}
+.zoho-detail__sections{padding:16px 20px}
+.zoho-detail__section{background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);margin-bottom:16px;overflow:hidden}
+.zoho-detail__section-header{padding:12px 16px;border-bottom:1px solid var(--zoho-border-light);display:flex;align-items:center;justify-content:space-between}
+.zoho-detail__section-title{font-size:var(--zoho-fs-base);font-weight:600}
+.zoho-detail__section-body{padding:12px 16px}
+.zoho-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px}
+.zoho-field{display:flex;gap:12px;align-items:baseline}
+.zoho-field__label{width:130px;flex-shrink:0;color:var(--zoho-text-muted);text-align:right;font-size:var(--zoho-fs-sm)}
+.zoho-field__value{flex:1;color:var(--zoho-text)}
+.zoho-kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;padding:16px 20px}
+.zoho-kpi{background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);padding:16px}
+.zoho-kpi__label{font-size:var(--zoho-fs-base);color:var(--zoho-text-secondary);margin-bottom:8px}
+.zoho-kpi__value{font-size:26px;font-weight:600;color:var(--zoho-text)}
+
+/* NC tile grid */
+.nc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;padding:16px 20px}
+.nc-tile{background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);padding:14px;cursor:pointer;transition:box-shadow var(--uwc-tx-fast)}
+.nc-tile:hover{box-shadow:var(--uwc-shadow)}
+.nc-tile__flag{width:32px;height:22px;border-radius:2px;object-fit:cover;display:block;margin-bottom:8px}
+.nc-tile__name{font-size:13px;font-weight:600;color:var(--zoho-text);margin-bottom:2px}
+.nc-tile__country{font-size:11.5px;color:var(--zoho-text-muted);margin-bottom:8px}
+.nc-tile__meta{display:flex;justify-content:space-between;align-items:center}
+.nc-tile--green{border-left:3px solid var(--uwc-green)}
+.nc-tile--amber{border-left:3px solid var(--uwc-gold)}
+.nc-tile--red{border-left:3px solid var(--uwc-red)}
+
+/* Data table */
+.data-table{width:100%;border-collapse:collapse;font-size:var(--zoho-fs-base)}
+.data-table th{background:#f7f8fa;padding:9px 12px;text-align:left;font-size:var(--zoho-fs-xs);font-weight:600;color:var(--zoho-text-muted);border-bottom:1px solid var(--zoho-border);text-transform:uppercase;letter-spacing:.5px}
+.data-table td{padding:10px 12px;border-bottom:1px solid var(--zoho-border-light);color:var(--zoho-text)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:#fafafa}
+
+/* Portal (Grace) mode */
+.nc-portal{border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)}
+.nc-portal__topbar{background:linear-gradient(90deg,#0a5c2f 0%,#1f9535 60%,#2db84a 100%);padding:14px 22px;display:flex;align-items:center;justify-content:space-between;color:#fff}
+.nc-portal__brand{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600}
+.nc-portal__mark{width:32px;height:32px;border-radius:50%;background:#fff;color:#0a5c2f;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;font-family:var(--uwc-font-title)}
+.nc-portal__user{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.nc-portal__nav{background:#fff;border-bottom:1px solid var(--uwc-grey-200);display:flex;gap:0}
+.nc-portal__nav-item{padding:11px 18px;font-size:13px;font-weight:500;color:var(--uwc-grey-600);cursor:pointer;border-bottom:2px solid transparent}
+.nc-portal__nav-item.active{color:#0a5c2f;border-bottom-color:#0a5c2f}
+.nc-portal__body{background:var(--uwc-grey-50);padding:20px}
+.stat-tile{background:#fff;border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius);padding:14px}
+.stat-tile__label{font-size:11px;color:var(--uwc-grey-500);margin-bottom:4px;font-weight:500}
+.stat-tile__value{font-family:var(--uwc-font-title);font-size:24px;font-weight:600;color:var(--uwc-navy);line-height:1.1}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px}
+
+/* Field reference table */
+.ref-section{margin-bottom:28px}
+.ref-section__title{font-family:var(--uwc-font-title);font-size:16px;font-weight:600;color:var(--uwc-navy);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--uwc-navy-tint)}
+.ref-table{width:100%;border-collapse:collapse;font-size:13px}
+.ref-table th{background:var(--uwc-navy);color:#fff;padding:9px 12px;text-align:left;font-size:11.5px;font-weight:500;letter-spacing:.3px}
+.ref-table td{padding:9px 12px;border-bottom:1px solid var(--uwc-grey-200);vertical-align:top}
+.ref-table tr:nth-child(even) td{background:var(--uwc-grey-50)}
+.ref-table tr:last-child td{border-bottom:none}
+
+/* SVG bar chart */
+.chart-wrap{background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);padding:16px;margin-bottom:16px}
+.chart-title{font-size:13px;font-weight:600;color:var(--zoho-text);margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar__brand">
+    <div style="width:32px;height:32px;border-radius:50%;background:#fff;color:var(--uwc-navy);display:flex;align-items:center;justify-content:center;font-family:var(--uwc-font-title);font-weight:700;font-size:11px;flex-shrink:0">UWC</div>
+    <span class="topbar__logo">UWC International</span>
+    <span class="topbar__demo-badge">DEMO</span>
+  </div>
+  <div class="topbar__divider"></div>
+  <div class="topbar__scenario"><strong>Scenario G</strong> · Communications &amp; Mailing Lists</div>
+  <div class="topbar__center"></div>
+  <div class="topbar__right">
+    <div id="role-switcher"></div>
+    <div class="topbar__step-counter" id="step-counter">Step 1 of 9</div>
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar__label">Scenario G · Journey</div>
+  <div class="sidebar__item active" id="nav-0" onclick="go(0)">
+    <div class="sidebar__num">1</div>
+    <div class="sidebar__label-text">Mailing list builder</div>
+  </div>
+  <div class="sidebar__item" id="nav-1" onclick="go(1)">
+    <div class="sidebar__num">2</div>
+    <div class="sidebar__label-text">Saved list preview</div>
+  </div>
+  <div class="sidebar__item" id="nav-2" onclick="go(2)">
+    <div class="sidebar__num">3</div>
+    <div class="sidebar__label-text">Campaign brief — Mailchimp</div>
+  </div>
+  <div class="sidebar__item" id="nav-3" onclick="go(3)">
+    <div class="sidebar__num">4</div>
+    <div class="sidebar__label-text">Mailchimp campaign view</div>
+  </div>
+  <div class="sidebar__item" id="nav-4" onclick="go(4)">
+    <div class="sidebar__num">5</div>
+    <div class="sidebar__label-text">Bulk comm log update</div>
+  </div>
+  <div class="sidebar__item" id="nav-5" onclick="go(5)">
+    <div class="sidebar__num">6</div>
+    <div class="sidebar__label-text">Jonathan — comm history</div>
+  </div>
+  <div class="sidebar__item" id="nav-6" onclick="go(6)">
+    <div class="sidebar__num">7</div>
+    <div class="sidebar__label-text">Marcus — opt-out record</div>
+  </div>
+  <div class="sidebar__item" id="nav-7" onclick="go(7)">
+    <div class="sidebar__num">8</div>
+    <div class="sidebar__label-text">GDPR consent audit log</div>
+  </div>
+  <div class="sidebar__item" id="nav-8" onclick="go(8)">
+    <div class="sidebar__num">9</div>
+    <div class="sidebar__label-text">CRM field reference</div>
+  </div>
+  <div class="sidebar__progress">
+    <div class="sidebar__progress-label">
+      <span>Progress</span>
+      <span id="progress-txt">Step 1 of 9</span>
+    </div>
+    <div class="sidebar__progress-track">
+      <div class="sidebar__progress-fill" id="progress-fill" style="width:11.1%"></div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main" id="main">
+
+<!-- ===== SCREEN 0: MAILING LIST BUILDER ===== -->
+<section class="screen active" id="sc-0">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">👤 Isabelle Fontaine — IO Marketing Manager · Comms module</div>
+      <h1 class="screen-title">Build Mailing List — Impact Report Q2 2026</h1>
+      <p class="screen-sub">Isabelle opens the Mailing Lists module in Zoho CRM and uses the visual criteria editor to define audience segments. The live preview shows 62 matching contacts before exclusions are applied.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" disabled>← Prev</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(1)">Next →</button>
+    </div>
+  </div>
+  <div style="border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
+    <div class="zoho-topbar">
+      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
+      <div class="zoho-topbar__search">&#128269; &nbsp;Mailing Lists › New List</div>
+      <div class="zoho-topbar__right">
+        <span style="font-size:12px;color:rgba(255,255,255,.6)">UWC International</span>
+        <div class="zoho-topbar__org">IF</div>
+      </div>
+    </div>
+    <div class="zoho-shell">
+      <div class="zoho-sidebar">
+        <div class="zoho-sidebar__group">
+          <div class="zoho-sidebar__item">&#127968; Home</div>
+          <div class="zoho-sidebar__item">&#128101; Contacts</div>
+          <div class="zoho-sidebar__item active">&#128231; Mailing Lists</div>
+          <div class="zoho-sidebar__item">&#128232; Campaigns</div>
+          <div class="zoho-sidebar__item">&#128202; Comm Logs</div>
+          <div class="zoho-sidebar__item">&#128274; Consent Records</div>
+          <div class="zoho-sidebar__item">&#9881; Settings</div>
+        </div>
+      </div>
+      <div class="zoho-main">
+        <div class="zoho-page-header"><span class="zoho-page-title">New Mailing List</span></div>
+        <div style="padding:20px">
+          <div style="background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);padding:16px;margin-bottom:16px">
+            <div style="font-size:11px;color:var(--zoho-text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">List Name</div>
+            <div style="font-size:15px;font-weight:600;color:var(--zoho-text);padding:8px 12px;background:var(--zoho-content-alt);border:1px solid var(--zoho-border);border-radius:var(--zoho-radius-sm)">Impact Report Q2 2026</div>
+          </div>
+          <div style="background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);overflow:hidden;margin-bottom:16px">
+            <div style="padding:12px 16px;background:#f7f8fa;border-bottom:1px solid var(--zoho-border);display:flex;align-items:center;justify-content:space-between">
+              <span style="font-weight:600;font-size:13px">Segment Criteria</span>
+              <span style="font-size:11.5px;color:var(--zoho-text-muted)">Match: <strong style="color:var(--zoho-primary)">ANY</strong> group</span>
+            </div>
+            <div style="padding:16px">
+              <div style="border:1px solid #bfdbfe;border-radius:var(--zoho-radius);padding:14px;margin-bottom:12px;background:#eff6ff">
+                <div style="font-size:11px;font-weight:700;color:#1e40af;letter-spacing:.8px;margin-bottom:10px">GROUP 1 — Match ALL</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+                  <div style="flex:1;padding:7px 10px;background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius-sm);font-size:13px">Contact Type</div>
+                  <div style="padding:7px 10px;background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius-sm);font-size:13px;color:var(--zoho-primary)">= equals</div>
+                  <div style="flex:1;padding:7px 10px;background:#fff;border:1px solid #3b6ef5;border-radius:var(--zoho-radius-sm);font-size:13px;font-weight:500;color:var(--zoho-primary)">Donor</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div style="flex:1;padding:7px 10px;background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius-sm);font-size:13px">Last Donation Date</div>
+                  <div style="padding:7px 10px;background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius-sm);font-size:13px;color:var(--zoho-primary)">in last</div>
+                  <div style="flex:1;padding:7px 10px;background:#fff;border:1px solid #3b6ef5;border-radius:var(--zoho-radius-sm);font-size:13px;font-weight:500;color:var(--zoho-primary)">12 months</div>
+                </div>
+              </div>
+              <div style="text-align:center;margin:4px 0 12px">
+                <span style="display:inline-block;background:#fff;padding:2px 12px;border:1px solid var(--zoho-border);border-radius:999px;font-size:11px;font-weight:700;color:var(--zoho-text-muted);letter-spacing:.8px">OR</span>
+              </div>
+              <div style="border:1px solid #d1fae5;border-radius:var(--zoho-radius);padding:14px;background:#f0fdf4">
+                <div style="font-size:11px;font-weight:700;color:#166534;letter-spacing:.8px;margin-bottom:10px">GROUP 2 — Match ALL</div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div style="flex:1;padding:7px 10px;background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius-sm);font-size:13px">Contact Type</div>
+                  <div style="padding:7px 10px;background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius-sm);font-size:13px;color:#166534">= equals</div>
+                  <div style="flex:1;padding:7px 10px;background:#fff;border:1px solid #10b981;border-radius:var(--zoho-radius-sm);font-size:13px;font-weight:500;color:#166534">NC Chair</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);padding:14px 16px;display:flex;align-items:center;gap:14px">
+            <div style="width:36px;height:36px;border-radius:50%;background:var(--zoho-primary);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;flex-shrink:0">62</div>
+            <div>
+              <div style="font-size:13px;font-weight:600;color:var(--zoho-text)">Live Preview: <strong style="color:var(--zoho-primary)">62 matching contacts</strong></div>
+              <div style="font-size:11.5px;color:var(--zoho-text-muted);margin-top:2px">Donors active last 12 mo + all NC Chairs &middot; Opt-outs excluded at send time</div>
+            </div>
+            <button class="zoho-btn zoho-btn--primary" style="margin-left:auto" onclick="go(1)">Save &amp; Preview &#8594;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--info">Zoho Mailing List — dynamic segment, re-evaluated at send</span>
+    <span class="badge badge--auto">OR logic across groups; AND within each group</span>
+    <span class="badge badge--gate">Opt-outs and GDPR withdrawals auto-excluded — never sent</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 1: SAVED LIST PREVIEW ===== -->
+<section class="screen" id="sc-1">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">&#128100; Isabelle Fontaine — IO Marketing Manager</div>
+      <h1 class="screen-title">Impact Report Q2 2026 — List Preview</h1>
+      <p class="screen-sub">The saved mailing list resolves to 59 sendable contacts. Marcus Weber is flagged and excluded (GDPR opt-out). A member preview table shows rows from UWC.commsContacts: Jonathan, Isabelle, Sam, Grace, and Marcus (excluded).</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(0)">&#8592; Prev</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(2)">Next &#8594;</button>
+    </div>
+  </div>
+  <div style="border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
+    <div class="zoho-topbar">
+      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
+      <div class="zoho-topbar__search">&#128269; &nbsp;Mailing Lists &#8250; Impact Report Q2 2026</div>
+      <div class="zoho-topbar__right"><div class="zoho-topbar__org">IF</div></div>
+    </div>
+    <div class="zoho-shell">
+      <div class="zoho-sidebar">
+        <div class="zoho-sidebar__group">
+          <div class="zoho-sidebar__item">&#127968; Home</div>
+          <div class="zoho-sidebar__item">&#128101; Contacts</div>
+          <div class="zoho-sidebar__item active">&#128231; Mailing Lists</div>
+          <div class="zoho-sidebar__item">&#128232; Campaigns</div>
+          <div class="zoho-sidebar__item">&#128202; Comm Logs</div>
+          <div class="zoho-sidebar__item">&#128274; Consent Records</div>
+        </div>
+      </div>
+      <div class="zoho-main">
+        <div class="zoho-page-header">
+          <span class="zoho-page-title">Impact Report Q2 2026</span>
+          <span style="background:#dbeafe;color:#1e40af;font-size:11px;padding:2px 9px;border-radius:999px;font-weight:600;margin-left:8px">59 sendable</span>
+        </div>
+        <div class="zoho-page-tools">
+          <button class="zoho-btn zoho-btn--primary" onclick="go(2)">&#128279; Send via Mailchimp</button>
+          <button class="zoho-btn">&#8595; Export CSV</button>
+          <button class="zoho-btn">&#9998; Edit criteria</button>
+          <div class="zoho-page-tools__right"><span style="font-size:12px;color:#991b1b;font-weight:500">&#9888; 1 excluded</span></div>
+        </div>
+        <div style="padding:16px 20px">
+          <div class="alert alert--warning" style="margin-bottom:16px">
+            <span>&#9888;&#65039;</span>
+            <div><strong>1 contact excluded</strong> — Marcus Weber opted out on 14 Feb 2026 (GDPR withdrawal). Permanently suppressed until consent is re-granted.</div>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>Contact</th><th>Type</th><th>Country</th><th>Email</th><th>Consent</th><th>Sendable</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Jonathan Osei</strong></td>
+                <td><span class="pill pill--blue" style="font-size:10px;padding:2px 6px">Donor</span></td>
+                <td>Ghana</td>
+                <td>j.osei@uwcghana.org</td>
+                <td><span class="pill pill--green" style="font-size:10px;padding:2px 6px">Opted In</span></td>
+                <td style="color:#166534;font-weight:600">&#10003; Yes</td>
+              </tr>
+              <tr>
+                <td><strong>Isabelle Fontaine</strong></td>
+                <td><span class="pill pill--blue" style="font-size:10px;padding:2px 6px">Donor</span></td>
+                <td>France</td>
+                <td>i.fontaine@uwcio.uwc.org</td>
+                <td><span class="pill pill--green" style="font-size:10px;padding:2px 6px">Opted In</span></td>
+                <td style="color:#166534;font-weight:600">&#10003; Yes</td>
+              </tr>
+              <tr>
+                <td><strong>Sam Blackwood</strong></td>
+                <td><span class="pill pill--grey" style="font-size:10px;padding:2px 6px">Alumni</span></td>
+                <td>UK</td>
+                <td>s.blackwood@uwcatlantic.uwc.org</td>
+                <td><span class="pill pill--green" style="font-size:10px;padding:2px 6px">Opted In</span></td>
+                <td style="color:#166534;font-weight:600">&#10003; Yes</td>
+              </tr>
+              <tr>
+                <td><strong>Grace Omondi</strong></td>
+                <td><span class="pill pill--amber" style="font-size:10px;padding:2px 6px">NC Chair</span></td>
+                <td>Kenya</td>
+                <td>g.omondi@uwckenya.org</td>
+                <td><span class="pill pill--green" style="font-size:10px;padding:2px 6px">Opted In</span></td>
+                <td style="color:#166534;font-weight:600">&#10003; Yes</td>
+              </tr>
+              <tr style="background:#fef2f2;opacity:.75">
+                <td><strong style="text-decoration:line-through;color:var(--zoho-text-muted)">Marcus Weber</strong></td>
+                <td><span class="pill pill--grey" style="font-size:10px;padding:2px 6px">NC Admin</span></td>
+                <td>Germany</td>
+                <td style="color:var(--zoho-text-muted)">m.weber@uwcgermany.org</td>
+                <td><span class="pill pill--red" style="font-size:10px;padding:2px 6px">OPTED OUT</span></td>
+                <td style="color:#991b1b;font-weight:600">&#10007; Excluded</td>
+              </tr>
+              <tr><td colspan="6" style="text-align:center;color:var(--zoho-text-muted);font-size:12px;padding:12px">&#8230; 55 more contacts</td></tr>
+            </tbody>
+          </table>
+          <div style="display:flex;gap:20px;margin-top:14px;padding:12px 0;border-top:1px solid var(--zoho-border-light)">
+            <div><span style="font-size:22px;font-weight:700;color:var(--zoho-primary)">62</span><span style="font-size:12px;color:var(--zoho-text-muted);margin-left:4px">matched</span></div>
+            <div><span style="font-size:22px;font-weight:700;color:#166534">59</span><span style="font-size:12px;color:var(--zoho-text-muted);margin-left:4px">sendable</span></div>
+            <div><span style="font-size:22px;font-weight:700;color:#991b1b">1</span><span style="font-size:12px;color:var(--zoho-text-muted);margin-left:4px">excluded (GDPR)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--auto">Opt-outs suppressed automatically — no manual filter needed</span>
+    <span class="badge badge--gate">59 sendable from 62 matched — 1 GDPR exclusion applied</span>
+    <span class="badge badge--info">List saved — criteria re-evaluated fresh at send time</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 2: CAMPAIGN BRIEF ===== -->
+<section class="screen" id="sc-2">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">&#128100; Isabelle Fontaine — IO Marketing Manager</div>
+      <h1 class="screen-title">Campaign Brief — Sync to Mailchimp</h1>
+      <p class="screen-sub">Isabelle configures the outbound campaign in Zoho CRM. Subject line, template preview, and reply-to are set. Clicking Sync pushes 59 contacts and campaign metadata to Mailchimp via native integration.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(1)">&#8592; Prev</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(3)">Next &#8594;</button>
+    </div>
+  </div>
+  <div style="border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
+    <div class="zoho-topbar">
+      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
+      <div class="zoho-topbar__search">&#128269; &nbsp;Campaigns &#8250; New Campaign</div>
+      <div class="zoho-topbar__right"><div class="zoho-topbar__org">IF</div></div>
+    </div>
+    <div class="zoho-shell">
+      <div class="zoho-sidebar">
+        <div class="zoho-sidebar__group">
+          <div class="zoho-sidebar__item">&#127968; Home</div>
+          <div class="zoho-sidebar__item">&#128101; Contacts</div>
+          <div class="zoho-sidebar__item">&#128231; Mailing Lists</div>
+          <div class="zoho-sidebar__item active">&#128232; Campaigns</div>
+          <div class="zoho-sidebar__item">&#128202; Comm Logs</div>
+          <div class="zoho-sidebar__item">&#128274; Consent Records</div>
+        </div>
+      </div>
+      <div class="zoho-main">
+        <div class="zoho-page-header">
+          <span class="zoho-page-title">New Campaign</span>
+          <span style="background:#dcfce7;color:#166534;font-size:11px;padding:2px 9px;border-radius:999px;font-weight:600;margin-left:8px">Draft</span>
+        </div>
+        <div style="padding:16px 20px">
+          <div class="grid-2" style="gap:20px;align-items:start">
+            <div>
+              <div style="background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);overflow:hidden">
+                <div style="padding:12px 16px;background:#f7f8fa;border-bottom:1px solid var(--zoho-border);font-weight:600;font-size:13px">Campaign Details</div>
+                <div style="padding:16px">
+                  <div style="margin-bottom:14px">
+                    <div style="font-size:11px;color:var(--zoho-text-muted);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.4px">Campaign Name</div>
+                    <div style="padding:8px 10px;background:#f9fafb;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius-sm);font-size:13px">UWC Impact Report Q2 2026</div>
+                  </div>
+                  <div style="margin-bottom:14px">
+                    <div style="font-size:11px;color:var(--zoho-text-muted);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.4px">Subject Line</div>
+                    <div style="padding:8px 10px;background:#fff;border:1px solid #3b6ef5;border-radius:var(--zoho-radius-sm);font-size:13px;font-weight:500;color:var(--zoho-primary)">UWC Impact Report 2026 — your impact in numbers</div>
+                  </div>
+                  <div style="margin-bottom:14px">
+                    <div style="font-size:11px;color:var(--zoho-text-muted);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.4px">Mailing List</div>
+                    <div style="padding:8px 10px;background:#f9fafb;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius-sm);font-size:13px;display:flex;justify-content:space-between;align-items:center">
+                      <span>Impact Report Q2 2026</span>
+                      <span style="background:#dbeafe;color:#1e40af;font-size:11px;padding:2px 8px;border-radius:999px;font-weight:600">59 recipients</span>
+                    </div>
+                  </div>
+                  <div style="margin-bottom:14px">
+                    <div style="font-size:11px;color:var(--zoho-text-muted);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.4px">Reply-To</div>
+                    <div style="padding:8px 10px;background:#f9fafb;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius-sm);font-size:13px">comms@uwcio.uwc.org</div>
+                  </div>
+                  <div>
+                    <div style="font-size:11px;color:var(--zoho-text-muted);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.4px">Platform</div>
+                    <div style="padding:8px 10px;background:#f9fafb;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius-sm);font-size:13px;display:flex;align-items:center;gap:8px">
+                      <span style="background:#FFE01B;color:#000;font-weight:700;font-size:11px;padding:2px 8px;border-radius:4px">Mailchimp</span>
+                      <span>Mailchimp integration (OAuth connected)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div style="background:#fff;border:1px solid var(--zoho-border);border-radius:var(--zoho-radius);overflow:hidden">
+                <div style="padding:12px 16px;background:#f7f8fa;border-bottom:1px solid var(--zoho-border);font-weight:600;font-size:13px">Template Preview</div>
+                <div style="padding:16px">
+                  <div style="border:1px solid var(--zoho-border);border-radius:var(--zoho-radius-sm);overflow:hidden;margin-bottom:14px">
+                    <div style="background:var(--uwc-navy);padding:14px 16px;text-align:center">
+                      <div style="color:#fff;font-family:var(--uwc-font-title);font-size:15px;font-weight:600">UWC International</div>
+                      <div style="color:rgba(255,255,255,.6);font-size:11px;margin-top:2px">Impact Report &middot; Q2 2026</div>
+                    </div>
+                    <div style="padding:14px 16px;background:#fff">
+                      <div style="height:8px;background:var(--uwc-grey-200);border-radius:4px;margin-bottom:8px;width:80%"></div>
+                      <div style="height:8px;background:var(--uwc-grey-200);border-radius:4px;margin-bottom:8px;width:65%"></div>
+                      <div style="height:8px;background:var(--uwc-grey-200);border-radius:4px;margin-bottom:14px;width:72%"></div>
+                      <div style="height:36px;background:var(--uwc-red);border-radius:4px;width:140px;margin:0 auto;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:500">Read Full Report &#8594;</div>
+                    </div>
+                    <div style="background:#f9fafb;padding:8px 16px;text-align:center;font-size:10px;color:var(--zoho-text-muted)">Unsubscribe &middot; Manage preferences</div>
+                  </div>
+                  <div style="font-size:12px;color:var(--zoho-text-muted)">Template: <strong style="color:var(--zoho-text)">UWC Impact Report v3</strong> &middot; Last edited 20 May 2026</div>
+                </div>
+              </div>
+              <div style="margin-top:12px">
+                <button class="zoho-btn zoho-btn--primary" style="width:100%;justify-content:center;padding:11px;font-size:13.5px" onclick="go(3)">&#128279; Sync to Mailchimp &#8594;</button>
+                <div style="font-size:11px;color:var(--zoho-text-muted);text-align:center;margin-top:6px">Pushes 59 contacts + campaign metadata to Mailchimp</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--info">Zoho &#8594; Mailchimp: OAuth sync, no CSV export needed</span>
+    <span class="badge badge--auto">Opt-out suppression carries over to Mailchimp audience</span>
+    <span class="badge badge--api">Campaign record in Zoho; Mailchimp holds send engine</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 3: MAILCHIMP CAMPAIGN VIEW ===== -->
+<section class="screen" id="sc-3">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">&#128100; Isabelle Fontaine — IO Marketing Manager &middot; Mailchimp</div>
+      <h1 class="screen-title">Mailchimp — Campaign Scheduled</h1>
+      <p class="screen-sub">The Zoho sync pushes 59 recipients to Mailchimp. Isabelle sees a distinctive yellow-branded Mailchimp campaign view: audience confirmed, scheduled send time set, Freddie mascot signals campaign is ready, and a sync-confirmed toast is shown.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(2)">&#8592; Prev</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(4)">Next &#8594;</button>
+    </div>
+  </div>
+  <div style="border:1px solid #e2e2e2;border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
+    <div style="background:#241c15;padding:0 20px;height:52px;display:flex;align-items:center;gap:16px;border-bottom:3px solid #FFE01B">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="background:#FFE01B;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#241c15">M</div>
+        <span style="color:#fff;font-weight:700;font-size:16px;letter-spacing:-.3px">Mailchimp</span>
+      </div>
+      <div style="flex:1"></div>
+      <span style="color:rgba(255,255,255,.5);font-size:12px">uwcinternational &middot; Audience: UWC Donors &amp; Partners</span>
+      <div style="width:30px;height:30px;border-radius:50%;background:#FFE01B;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;color:#241c15">IF</div>
+    </div>
+    <div style="background:#f6f5f4;min-height:480px">
+      <div style="background:#1a7a4a;color:#fff;padding:10px 20px;display:flex;align-items:center;gap:10px;font-size:13px">
+        <span style="font-size:16px">&#10003;</span>
+        <strong>Sync confirmed: 59 recipients</strong> imported from Zoho CRM &middot; Impact Report Q2 2026
+        <button style="margin-left:auto;background:none;border:none;color:rgba(255,255,255,.7);cursor:pointer;font-size:16px">&#10005;</button>
+      </div>
+      <div style="background:#fff;padding:24px 28px;border-bottom:1px solid #e2e2e2;display:flex;align-items:flex-start;gap:20px">
+        <div style="flex:1">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:#6c6c6c;text-transform:uppercase;margin-bottom:6px">Campaign</div>
+          <div style="font-size:22px;font-weight:700;color:#241c15;margin-bottom:4px">UWC Impact Report Q2 2026</div>
+          <div style="font-size:13px;color:#6c6c6c">Subject: <em>UWC Impact Report 2026 — your impact in numbers</em></div>
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+            <span style="background:#FFE01B;color:#241c15;font-size:11.5px;font-weight:700;padding:4px 12px;border-radius:4px">&#128197; Scheduled</span>
+            <span style="background:#f0f0f0;color:#6c6c6c;font-size:11.5px;padding:4px 12px;border-radius:4px">Send: Tue 3 Jun 2026 &middot; 09:00 BST</span>
+            <span style="background:#f0f0f0;color:#6c6c6c;font-size:11.5px;padding:4px 12px;border-radius:4px">To: 59 recipients</span>
+          </div>
+        </div>
+        <div style="text-align:center;flex-shrink:0">
+          <div style="font-size:52px;line-height:1">&#128018;</div>
+          <div style="font-size:11px;font-weight:600;color:#6c6c6c;margin-top:4px">Freddie says:</div>
+          <div style="font-size:13px;font-weight:700;color:#241c15;background:#FFE01B;padding:4px 10px;border-radius:20px;margin-top:4px">You're all set! :)</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid #e2e2e2">
+        <div style="padding:16px 20px;border-right:1px solid #e2e2e2;background:#fff">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#6c6c6c;letter-spacing:.5px;margin-bottom:6px">Recipients</div>
+          <div style="font-size:28px;font-weight:700;color:#241c15">59</div>
+        </div>
+        <div style="padding:16px 20px;border-right:1px solid #e2e2e2;background:#fff">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#6c6c6c;letter-spacing:.5px;margin-bottom:6px">Audience</div>
+          <div style="font-size:13px;font-weight:600;color:#241c15;margin-top:6px">UWC Donors &amp; Partners</div>
+        </div>
+        <div style="padding:16px 20px;border-right:1px solid #e2e2e2;background:#fff">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#6c6c6c;letter-spacing:.5px;margin-bottom:6px">Template</div>
+          <div style="font-size:13px;font-weight:600;color:#241c15;margin-top:6px">UWC Impact Report v3</div>
+        </div>
+        <div style="padding:16px 20px;background:#fff">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:#6c6c6c;letter-spacing:.5px;margin-bottom:6px">Suppressed</div>
+          <div style="font-size:28px;font-weight:700;color:#c0392b">1</div>
+          <div style="font-size:11px;color:#6c6c6c">GDPR opt-out</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--info">Mailchimp: 59 synced, 1 GDPR suppression carried over from Zoho</span>
+    <span class="badge badge--auto">Scheduled: 3 Jun 2026 &middot; 09:00 BST — no manual trigger needed</span>
+    <span class="badge badge--api">Zoho CRM stores Campaign record; Mailchimp handles delivery</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 4: BULK COMM LOG UPDATE ===== -->
+<section class="screen" id="sc-4">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">&#128100; Isabelle Fontaine — IO Marketing Manager</div>
+      <h1 class="screen-title">Bulk Comm Log — Recording 59 Outbound Comms</h1>
+      <p class="screen-sub">After Mailchimp confirms dispatch, a Zoho workflow triggers bulk creation of 59 Communication Log records — one per recipient. A progress bar animates from 0 to 100%. The completion card summarises channel, campaign, and timestamp.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(3)">&#8592; Prev</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(5)">Next &#8594;</button>
+    </div>
+  </div>
+  <div style="border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
+    <div class="zoho-topbar">
+      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
+      <div class="zoho-topbar__search">&#128269; &nbsp;Comm Logs &#8250; Bulk Update</div>
+      <div class="zoho-topbar__right"><div class="zoho-topbar__org">IF</div></div>
+    </div>
+    <div style="background:#fff;min-height:420px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px">
+      <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:var(--uwc-radius);padding:14px 20px;margin-bottom:32px;width:100%;max-width:560px;text-align:center">
+        <div style="font-size:12px;font-weight:600;color:#166534;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Zoho Workflow Triggered</div>
+        <div style="font-size:13.5px;color:#14532d">Mailchimp webhook: <strong>campaign_sent</strong> &middot; "UWC Impact Report Q2 2026"</div>
+      </div>
+      <div style="width:100%;max-width:560px;text-align:center">
+        <div style="font-size:18px;font-weight:600;color:var(--zoho-text);margin-bottom:6px">Recording Communication Log entries&hellip;</div>
+        <div style="font-size:13px;color:var(--zoho-text-muted);margin-bottom:28px">Creating one outbound record per recipient from "Impact Report Q2 2026"</div>
+        <div style="height:14px;background:#e5e7eb;border-radius:999px;overflow:hidden;margin-bottom:10px">
+          <div style="height:14px;background:linear-gradient(90deg,var(--uwc-navy),#3b6ef5);border-radius:999px;width:100%;transition:width .4s ease"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--zoho-text-muted);margin-bottom:24px">
+          <span>0</span>
+          <span style="font-weight:600;color:var(--zoho-primary)">59 / 59 records written</span>
+          <span>59</span>
+        </div>
+        <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:var(--uwc-radius);padding:16px 20px">
+          <div style="font-size:15px;font-weight:700;color:#166534;margin-bottom:8px">&#10003; Complete — 59 Communication Logs recorded</div>
+          <div class="grid-2" style="gap:12px;text-align:left;margin-top:12px">
+            <div style="background:#fff;border:1px solid #86efac;border-radius:4px;padding:10px 12px">
+              <div style="font-size:11px;color:#6c6c6c;font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px">Direction</div>
+              <div style="font-size:13px;font-weight:500;color:#14532d">Outbound</div>
+            </div>
+            <div style="background:#fff;border:1px solid #86efac;border-radius:4px;padding:10px 12px">
+              <div style="font-size:11px;color:#6c6c6c;font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px">Channel</div>
+              <div style="font-size:13px;font-weight:500;color:#14532d">Email &middot; Mailchimp</div>
+            </div>
+            <div style="background:#fff;border:1px solid #86efac;border-radius:4px;padding:10px 12px">
+              <div style="font-size:11px;color:#6c6c6c;font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px">Campaign</div>
+              <div style="font-size:13px;font-weight:500;color:#14532d">UWC Impact Report Q2 2026</div>
+            </div>
+            <div style="background:#fff;border:1px solid #86efac;border-radius:4px;padding:10px 12px">
+              <div style="font-size:11px;color:#6c6c6c;font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px">Date Sent</div>
+              <div style="font-size:13px;font-weight:500;color:#14532d">3 Jun 2026 &middot; 09:04 BST</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--auto">Webhook &#8594; Zoho Workflow &#8594; 59 Comm Log records auto-created</span>
+    <span class="badge badge--api">No manual data entry — CRM updated in seconds post-send</span>
+    <span class="badge badge--info">Each contact's Communication History tab now shows this campaign</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 5: JONATHAN — COMM HISTORY ===== -->
+<section class="screen" id="sc-5">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">&#128100; Jonathan Osei — Donor &middot; Contact record</div>
+      <h1 class="screen-title">Jonathan Osei — Communication History</h1>
+      <p class="screen-sub">Role switches to Jonathan Osei's contact record. The Communication History tab shows 4 campaigns received in 2026, with open and click data pulled back from Mailchimp via webhook.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(4)">&#8592; Prev</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(6)">Next &#8594;</button>
+    </div>
+  </div>
+  <div style="border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
+    <div class="zoho-topbar">
+      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
+      <div class="zoho-topbar__search">&#128269; &nbsp;Contacts &#8250; Jonathan Osei</div>
+      <div class="zoho-topbar__right">
+        <span style="font-size:12px;color:rgba(255,255,255,.6)">Viewing as: IO Admin</span>
+        <div class="zoho-topbar__org">AA</div>
+      </div>
+    </div>
+    <div class="zoho-shell">
+      <div class="zoho-sidebar">
+        <div class="zoho-sidebar__group">
+          <div class="zoho-sidebar__item">&#127968; Home</div>
+          <div class="zoho-sidebar__item active">&#128101; Contacts</div>
+          <div class="zoho-sidebar__item">&#128231; Mailing Lists</div>
+          <div class="zoho-sidebar__item">&#128232; Campaigns</div>
+          <div class="zoho-sidebar__item">&#128202; Comm Logs</div>
+          <div class="zoho-sidebar__item">&#128274; Consent Records</div>
+        </div>
+      </div>
+      <div class="zoho-main">
+        <div class="zoho-detail__hero">
+          <div class="zoho-detail__avatar" style="background:#003087">JO</div>
+          <div>
+            <div class="zoho-detail__name">Jonathan Osei</div>
+            <div style="font-size:13px;color:var(--zoho-text-muted)">Donor &middot; UWC Ghana NC &middot; j.osei@uwcghana.org</div>
+            <div style="margin-top:6px;display:flex;gap:8px">
+              <span class="pill pill--green" style="font-size:10.5px">Opted In</span>
+              <span class="pill pill--blue" style="font-size:10.5px">Active Donor</span>
+            </div>
+          </div>
+          <div class="zoho-detail__actions">
+            <button class="zoho-btn">&#128231; Send Email</button>
+            <button class="zoho-btn">&#9998; Edit</button>
+          </div>
+        </div>
+        <div style="border-bottom:1px solid var(--zoho-border);display:flex;background:#fff">
+          <div style="padding:11px 18px;font-size:13px;color:var(--zoho-text-muted);cursor:pointer">Details</div>
+          <div style="padding:11px 18px;font-size:13px;color:var(--zoho-primary);font-weight:600;border-bottom:2px solid var(--zoho-primary);cursor:pointer">Communication History</div>
+          <div style="padding:11px 18px;font-size:13px;color:var(--zoho-text-muted);cursor:pointer">Consent</div>
+          <div style="padding:11px 18px;font-size:13px;color:var(--zoho-text-muted);cursor:pointer">Activity</div>
+        </div>
+        <div class="zoho-detail__sections">
+          <div class="zoho-detail__section">
+            <div class="zoho-detail__section-header">
+              <span class="zoho-detail__section-title">Communication History &middot; 2026</span>
+              <span style="font-size:12px;color:var(--zoho-text-muted)">4 campaigns &middot; 3 opens &middot; 2 clicks</span>
+            </div>
+            <div class="zoho-detail__section-body" style="padding:0">
+              <table class="data-table">
+                <thead><tr><th>Date</th><th>Campaign</th><th>Direction</th><th>Channel</th><th>Opened</th><th>Clicked</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td style="font-family:var(--uwc-font-mono);font-size:12px">3 Jun 2026</td>
+                    <td><strong>UWC Impact Report Q2 2026</strong></td>
+                    <td><span class="pill pill--blue" style="font-size:10px;padding:2px 6px">Outbound</span></td>
+                    <td>Email &middot; Mailchimp</td>
+                    <td style="color:#166534;font-weight:600">&#10003; Yes</td>
+                    <td style="color:#166534;font-weight:600">&#10003; Yes</td>
+                  </tr>
+                  <tr>
+                    <td style="font-family:var(--uwc-font-mono);font-size:12px">14 Apr 2026</td>
+                    <td>UWC Scholarships Spring 2026</td>
+                    <td><span class="pill pill--blue" style="font-size:10px;padding:2px 6px">Outbound</span></td>
+                    <td>Email &middot; Mailchimp</td>
+                    <td style="color:#166534;font-weight:600">&#10003; Yes</td>
+                    <td style="color:var(--zoho-text-muted)">— No</td>
+                  </tr>
+                  <tr>
+                    <td style="font-family:var(--uwc-font-mono);font-size:12px">28 Feb 2026</td>
+                    <td>Annual Donor Thank You 2025</td>
+                    <td><span class="pill pill--blue" style="font-size:10px;padding:2px 6px">Outbound</span></td>
+                    <td>Email &middot; Mailchimp</td>
+                    <td style="color:#166534;font-weight:600">&#10003; Yes</td>
+                    <td style="color:#166534;font-weight:600">&#10003; Yes</td>
+                  </tr>
+                  <tr>
+                    <td style="font-family:var(--uwc-font-mono);font-size:12px">10 Jan 2026</td>
+                    <td>UWC New Year Update 2026</td>
+                    <td><span class="pill pill--blue" style="font-size:10px;padding:2px 6px">Outbound</span></td>
+                    <td>Email &middot; Mailchimp</td>
+                    <td style="color:var(--zoho-text-muted)">— No</td>
+                    <td style="color:var(--zoho-text-muted)">— No</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--info">4 campaigns sent to Jonathan in 2026 — all automatically logged</span>
+    <span class="badge badge--auto">Open/click data synced back from Mailchimp via webhook</span>
+    <span class="badge badge--api">360-degree comms view — no manual logging by staff</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 6: MARCUS — OPT-OUT RECORD ===== -->
+<section class="screen" id="sc-6">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">&#128100; Marcus Weber — NC Admin &middot; GDPR opt-out record</div>
+      <h1 class="screen-title">Marcus Weber — OPTED OUT</h1>
+      <p class="screen-sub">Role switches to Marcus Weber's contact record — an NC Admin from Germany who withdrew consent on 14 Feb 2026. A prominent red OPTED OUT banner, a tally of 14 campaigns excluded since opt-out, and an empty post-opt-out communication history demonstrate GDPR compliance in action.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(5)">&#8592; Prev</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(7)">Next &#8594;</button>
+    </div>
+  </div>
+  <div style="border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
+    <div class="zoho-topbar">
+      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
+      <div class="zoho-topbar__search">&#128269; &nbsp;Contacts &#8250; Marcus Weber</div>
+      <div class="zoho-topbar__right">
+        <span style="font-size:12px;color:rgba(255,255,255,.6)">Viewing as: IO Admin</span>
+        <div class="zoho-topbar__org">AA</div>
+      </div>
+    </div>
+    <div class="zoho-shell">
+      <div class="zoho-sidebar">
+        <div class="zoho-sidebar__group">
+          <div class="zoho-sidebar__item">&#127968; Home</div>
+          <div class="zoho-sidebar__item active">&#128101; Contacts</div>
+          <div class="zoho-sidebar__item">&#128231; Mailing Lists</div>
+          <div class="zoho-sidebar__item">&#128232; Campaigns</div>
+          <div class="zoho-sidebar__item">&#128202; Comm Logs</div>
+          <div class="zoho-sidebar__item">&#128274; Consent Records</div>
+        </div>
+      </div>
+      <div class="zoho-main">
+        <div style="background:#991b1b;color:#fff;padding:14px 20px;display:flex;align-items:center;gap:14px">
+          <div style="font-size:24px;font-weight:900;font-family:var(--uwc-font-title)">&#128683; OPTED OUT</div>
+          <div>
+            <div style="font-weight:600;font-size:14px">Marketing communications suspended — GDPR withdrawal of consent</div>
+            <div style="font-size:12px;opacity:.85;margin-top:2px">Opted out on <strong>14 February 2026</strong> &middot; Reason: "No longer wish to receive UWC marketing emails" &middot; Source: Unsubscribe link</div>
+          </div>
+          <div style="margin-left:auto;text-align:right;flex-shrink:0">
+            <div style="font-size:11px;opacity:.7;margin-bottom:2px">Excluded from</div>
+            <div style="font-size:32px;font-weight:700;line-height:1">14</div>
+            <div style="font-size:11px;opacity:.7">campaigns since opt-out</div>
+          </div>
+        </div>
+        <div class="zoho-detail__hero" style="background:#fef2f2">
+          <div class="zoho-detail__avatar" style="background:#6b7280">MW</div>
+          <div>
+            <div class="zoho-detail__name" style="color:#7f1d1d">Marcus Weber</div>
+            <div style="font-size:13px;color:var(--zoho-text-muted)">NC Admin &middot; UWC Germany NC &middot; m.weber@uwcgermany.org</div>
+            <div style="margin-top:6px;display:flex;gap:8px">
+              <span class="pill pill--red" style="font-size:10.5px">OPTED OUT — 14 Feb 2026</span>
+              <span class="pill pill--grey" style="font-size:10.5px">NC Admin</span>
+            </div>
+          </div>
+          <div class="zoho-detail__actions">
+            <button class="zoho-btn zoho-btn--danger" style="opacity:.5;cursor:not-allowed" disabled>&#128231; Send Email — BLOCKED</button>
+            <button class="zoho-btn">&#9998; Edit</button>
+          </div>
+        </div>
+        <div style="border-bottom:1px solid var(--zoho-border);display:flex;background:#fff">
+          <div style="padding:11px 18px;font-size:13px;color:var(--zoho-text-muted);cursor:pointer">Details</div>
+          <div style="padding:11px 18px;font-size:13px;color:var(--zoho-primary);font-weight:600;border-bottom:2px solid var(--zoho-primary);cursor:pointer">Communication History</div>
+          <div style="padding:11px 18px;font-size:13px;color:var(--zoho-text-muted);cursor:pointer">Consent</div>
+          <div style="padding:11px 18px;font-size:13px;color:var(--zoho-text-muted);cursor:pointer">Activity</div>
+        </div>
+        <div class="zoho-detail__sections">
+          <div class="zoho-detail__section">
+            <div class="zoho-detail__section-header">
+              <span class="zoho-detail__section-title">Before Opt-Out &middot; Jan 2026</span>
+              <span style="font-size:12px;color:var(--zoho-text-muted)">1 campaign</span>
+            </div>
+            <div class="zoho-detail__section-body" style="padding:0">
+              <table class="data-table">
+                <thead><tr><th>Date</th><th>Campaign</th><th>Direction</th><th>Channel</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td style="font-family:var(--uwc-font-mono);font-size:12px">10 Jan 2026</td>
+                    <td>UWC New Year Update 2026</td>
+                    <td><span class="pill pill--blue" style="font-size:10px;padding:2px 6px">Outbound</span></td>
+                    <td>Email &middot; Mailchimp</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="zoho-detail__section" style="border-color:#fca5a5">
+            <div class="zoho-detail__section-header" style="background:#fef2f2">
+              <span class="zoho-detail__section-title" style="color:#991b1b">After Opt-Out &middot; 14 Feb 2026 &#8594; present</span>
+              <span style="font-size:12px;color:#991b1b;font-weight:500">0 sent &middot; 14 campaigns blocked</span>
+            </div>
+            <div style="padding:32px;text-align:center">
+              <div style="font-size:40px;margin-bottom:10px">&#128683;</div>
+              <div style="font-size:14px;font-weight:600;color:#7f1d1d;margin-bottom:4px">No communications after 14 February 2026</div>
+              <div style="font-size:12.5px;color:var(--zoho-text-muted);max-width:480px;margin:0 auto">Marcus has been automatically excluded from all 14 marketing sends since his opt-out. Suppression is enforced system-wide across Zoho CRM and Mailchimp — no staff action required.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--gate">14 campaigns blocked automatically since opt-out — zero staff effort</span>
+    <span class="badge badge--auto">Suppression enforced in both Zoho CRM and Mailchimp simultaneously</span>
+    <span class="badge badge--info">Pre-opt-out history retained for audit; post-opt-out permanently empty</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 7: GDPR AUDIT LOG ===== -->
+<section class="screen" id="sc-7">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">&#128100; Akanksha Anand — IO Super Admin &middot; Compliance view</div>
+      <h1 class="screen-title">GDPR Consent Audit Log</h1>
+      <p class="screen-sub">Akanksha opens the Consent Audit Log — an append-only table of all consent changes with timestamps, contact, change direction, source channel, and lawful basis. Filterable by date range, contact type, or change direction. Exportable to CSV for DPO review.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(6)">&#8592; Prev</button>
+      <button class="btn-nav btn-nav--primary" onclick="go(8)">Next &#8594;</button>
+    </div>
+  </div>
+  <div style="border:1px solid var(--uwc-grey-200);border-radius:var(--uwc-radius-lg);overflow:hidden;box-shadow:var(--uwc-shadow)">
+    <div class="zoho-topbar">
+      <div class="zoho-topbar__logo"><span class="zoho-topbar__logo-icon"></span> Zoho CRM</div>
+      <div class="zoho-topbar__search">&#128269; &nbsp;Consent Records &#8250; Audit Log</div>
+      <div class="zoho-topbar__right"><div class="zoho-topbar__org">AA</div></div>
+    </div>
+    <div class="zoho-shell">
+      <div class="zoho-sidebar">
+        <div class="zoho-sidebar__group">
+          <div class="zoho-sidebar__item">&#127968; Home</div>
+          <div class="zoho-sidebar__item">&#128101; Contacts</div>
+          <div class="zoho-sidebar__item">&#128231; Mailing Lists</div>
+          <div class="zoho-sidebar__item">&#128232; Campaigns</div>
+          <div class="zoho-sidebar__item">&#128202; Comm Logs</div>
+          <div class="zoho-sidebar__item active">&#128274; Consent Records</div>
+        </div>
+      </div>
+      <div class="zoho-main">
+        <div class="zoho-page-header">
+          <span class="zoho-page-title">Consent Audit Log</span>
+          <span style="background:#dbeafe;color:#1e40af;font-size:11px;padding:2px 9px;border-radius:999px;font-weight:600;margin-left:8px">Append-only &middot; Read-only</span>
+        </div>
+        <div class="zoho-page-tools">
+          <button class="zoho-btn">&#128197; Date range</button>
+          <button class="zoho-btn">&#9660; Contact type</button>
+          <button class="zoho-btn">&#9660; Change direction</button>
+          <button class="zoho-btn">&#9660; Lawful basis</button>
+          <div class="zoho-page-tools__right">
+            <button class="zoho-btn zoho-btn--primary">&#8595; Export CSV</button>
+          </div>
+        </div>
+        <div style="padding:16px 20px">
+          <div class="alert alert--info" style="margin-bottom:16px">
+            <span>&#8505;&#65039;</span>
+            <div>This log is <strong>append-only</strong> and cannot be edited or deleted. It provides a full audit trail of all consent changes for GDPR Article 30 compliance. CSV export available to the Data Protection Officer (DPO) only.</div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr><th>Timestamp</th><th>Contact</th><th>Change</th><th>Source</th><th>Lawful Basis</th><th>Recorded By</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-family:var(--uwc-font-mono);font-size:11.5px;white-space:nowrap">14 Feb 2026 &middot; 11:23 UTC</td>
+                <td><strong>Marcus Weber</strong><br><span style="font-size:11px;color:var(--zoho-text-muted)">m.weber@uwcgermany.org</span></td>
+                <td><span class="pill pill--red" style="font-size:10px;padding:2px 6px">In &#8594; Out</span></td>
+                <td>Mailchimp unsubscribe link</td>
+                <td>Consent (withdrawn)</td>
+                <td style="font-size:11.5px;color:var(--zoho-text-muted)">System — auto</td>
+              </tr>
+              <tr>
+                <td style="font-family:var(--uwc-font-mono);font-size:11.5px;white-space:nowrap">8 Jan 2026 &middot; 09:41 UTC</td>
+                <td><strong>Grace Omondi</strong><br><span style="font-size:11px;color:var(--zoho-text-muted)">g.omondi@uwckenya.org</span></td>
+                <td><span class="pill pill--green" style="font-size:10px;padding:2px 6px">Out &#8594; In</span></td>
+                <td>Preference centre form</td>
+                <td>Consent (re-granted)</td>
+                <td style="font-size:11.5px;color:var(--zoho-text-muted)">System — auto</td>
+              </tr>
+              <tr>
+                <td style="font-family:var(--uwc-font-mono);font-size:11.5px;white-space:nowrap">3 Nov 2025 &middot; 14:07 UTC</td>
+                <td><strong>Sam Blackwood</strong><br><span style="font-size:11px;color:var(--zoho-text-muted)">s.blackwood@uwcatlantic.uwc.org</span></td>
+                <td><span class="pill pill--green" style="font-size:10px;padding:2px 6px">— &#8594; In</span></td>
+                <td>Alumni re-engagement form</td>
+                <td>Consent (new)</td>
+                <td style="font-size:11.5px;color:var(--zoho-text-muted)">System — auto</td>
+              </tr>
+              <tr>
+                <td style="font-family:var(--uwc-font-mono);font-size:11.5px;white-space:nowrap">12 Sep 2025 &middot; 10:15 UTC</td>
+                <td><strong>Jonathan Osei</strong><br><span style="font-size:11px;color:var(--zoho-text-muted)">j.osei@uwcghana.org</span></td>
+                <td><span class="pill pill--green" style="font-size:10px;padding:2px 6px">— &#8594; In</span></td>
+                <td>Donor onboarding form</td>
+                <td>Consent (new)</td>
+                <td style="font-size:11.5px;color:var(--zoho-text-muted)">Isabelle Fontaine</td>
+              </tr>
+              <tr>
+                <td style="font-family:var(--uwc-font-mono);font-size:11.5px;white-space:nowrap">2 Mar 2025 &middot; 16:32 UTC</td>
+                <td><strong>Marcus Weber</strong><br><span style="font-size:11px;color:var(--zoho-text-muted)">m.weber@uwcgermany.org</span></td>
+                <td><span class="pill pill--green" style="font-size:10px;padding:2px 6px">— &#8594; In</span></td>
+                <td>NC volunteer onboarding</td>
+                <td>Legitimate interest</td>
+                <td style="font-size:11.5px;color:var(--zoho-text-muted)">Akanksha Anand</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="padding:10px 0;font-size:12px;color:var(--zoho-text-muted);text-align:right">Showing 5 of 428 consent events &middot; <span style="color:var(--zoho-primary);cursor:pointer">Load more</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="badges-strip">
+    <span class="badge badge--gate">Append-only — no edits or deletions permitted (GDPR Article 30)</span>
+    <span class="badge badge--auto">All consent changes captured automatically — manual entry as fallback only</span>
+    <span class="badge badge--info">Export CSV available to DPO for regulatory review</span>
+  </div>
+</section>
+
+<!-- ===== SCREEN 8: FIELD REFERENCE ===== -->
+<section class="screen" id="sc-8">
+  <div class="screen-header">
+    <div>
+      <div class="role-context">&#128203; CRM Field Reference — Scenario G modules</div>
+      <h1 class="screen-title">Field Reference — Comms &amp; Consent Modules</h1>
+      <p class="screen-sub">Field tables for the four modules used in Scenario G: Mailing List, Campaign, Communication Log, Consent Record.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-nav" onclick="go(7)">&#8592; Prev</button>
+      <button class="btn-nav" disabled>Done &#10003;</button>
+    </div>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-section__title">Mailing List</div>
+    <table class="ref-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Values / Notes</th></tr></thead>
+      <tbody>
+        <tr><td>List Name</td><td>Text</td><td>e.g. "Impact Report Q2 2026"</td></tr>
+        <tr><td>Criteria JSON</td><td>JSON / Formula</td><td>Serialised segment rules (Contact Type, date filters, NC role)</td></tr>
+        <tr><td>Matched Count</td><td>Roll-up (count)</td><td>Contacts matching criteria at last evaluation</td></tr>
+        <tr><td>Sendable Count</td><td>Formula</td><td>Matched minus opted-out contacts</td></tr>
+        <tr><td>Last Evaluated</td><td>DateTime</td><td>When list was last resolved — re-runs dynamically at send</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-section__title">Campaign</div>
+    <table class="ref-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Values / Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Campaign Name</td><td>Text</td><td>Internal name — also sent to Mailchimp as campaign title</td></tr>
+        <tr><td>Subject Line</td><td>Text</td><td>Email subject shown to recipients</td></tr>
+        <tr><td>Mailing List</td><td>Lookup &#8594; Mailing List</td><td>Linked list — recipient count pulled from here</td></tr>
+        <tr><td>Platform</td><td>Picklist</td><td>Mailchimp &middot; Zoho Campaigns &middot; Manual &middot; SMS</td></tr>
+        <tr><td>Status</td><td>Picklist</td><td>Draft &middot; Scheduled &middot; Sent &middot; Cancelled</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-section__title">Communication Log</div>
+    <table class="ref-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Values / Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Contact</td><td>Lookup &#8594; Contact</td><td>Recipient of this communication</td></tr>
+        <tr><td>Campaign</td><td>Lookup &#8594; Campaign</td><td>Parent campaign; null for ad-hoc comms</td></tr>
+        <tr><td>Direction</td><td>Picklist</td><td>Outbound &middot; Inbound &middot; Internal note</td></tr>
+        <tr><td>Channel</td><td>Picklist</td><td>Email &middot; Phone &middot; Post &middot; WhatsApp &middot; In-person</td></tr>
+        <tr><td>Date Sent</td><td>DateTime</td><td>Actual send timestamp (from Mailchimp webhook or manual entry)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ref-section">
+    <div class="ref-section__title">Consent Record</div>
+    <table class="ref-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Values / Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Contact</td><td>Lookup &#8594; Contact</td><td>Whose consent this records</td></tr>
+        <tr><td>Current Status</td><td>Picklist</td><td>Opted In &middot; Opted Out &middot; Pending &middot; Legitimate Interest</td></tr>
+        <tr><td>Change Direction</td><td>Formula</td><td>In &#8594; Out &middot; Out &#8594; In &middot; New &middot; Revoked (computed on save)</td></tr>
+        <tr><td>Source</td><td>Text</td><td>e.g. "Mailchimp unsubscribe link", "Preference centre", "Manual — staff"</td></tr>
+        <tr><td>Lawful Basis</td><td>Picklist</td><td>Consent &middot; Legitimate Interest &middot; Legal Obligation &middot; Contract</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="badges-strip">
+    <span class="badge badge--info">4 modules &middot; 20 fields — all linked to Contact as parent</span>
+    <span class="badge badge--auto">Consent Record is append-only — Zoho field-level lock enforced</span>
+    <span class="badge badge--gate">Communication Log auto-created by workflow on campaign send</span>
+  </div>
+</section>
+
+</main>
+</div><!-- /shell -->
+
+<script>
+window.UWC = window.UWC || {};
+UWC.users = [
+  { id: 'io-mkt',   name: 'Isabelle Fontaine', initial: 'IF', role: 'IO Marketing Manager', scope: 'Global · Comms module',    badge: 'ios', email: 'i.fontaine@uwcio.uwc.org' },
+  { id: 'jonathan', name: 'Jonathan Osei',     initial: 'JO', role: 'Donor · Contact',      scope: 'UWC Ghana',               badge: 'nc',  email: 'j.osei@uwcghana.org' },
+  { id: 'marcus',   name: 'Marcus Weber',      initial: 'MW', role: 'NC Admin · OPTED OUT', scope: 'UWC Germany',             badge: 'nc',  email: 'm.weber@uwcgermany.org' },
+  { id: 'akanksha', name: 'Akanksha Anand',    initial: 'AA', role: 'IO Super Admin',        scope: 'Global · Full visibility', badge: 'ios', email: 'akanksha.anand@uwcio.uwc.org' }
+];
+UWC.scenarioRoles = { G: ['io-mkt','jonathan','marcus','akanksha'] };
+UWC.getRolesFor = function(code) {
+  return (UWC.scenarioRoles[code]||[]).map(function(id){ return UWC.users.find(function(u){ return u.id===id; }); }).filter(Boolean);
+};
+
+(function(){
+'use strict';
+window.RoleSwitcher={init:init,setRole:setRole,getRole:function(){return document.body.dataset.currentRole||'default';}};
+function init(opts){
+  var roles=opts.roles||[];var defaultId=opts.defaultRoleId||(roles[0]&&roles[0].id);var scenarioCode=opts.scenarioCode||'';
+  var dropdown=document.getElementById('role-switcher');
+  if(!dropdown)return;
+  dropdown.innerHTML='<button type="button" class="rs-trigger" id="rs-trigger" aria-expanded="false"><span class="rs-avatar" id="rs-avatar"></span><span class="rs-current"><span class="rs-name" id="rs-current-name">&#8212;</span><span class="rs-role" id="rs-current-role">&#8212;</span></span><span class="rs-chev">&#9660;</span></button><div class="rs-menu" id="rs-menu" hidden><div class="rs-menu-header">View as &middot; Scenario '+scenarioCode+'</div>'+
+  roles.map(function(r){return '<button type="button" class="rs-option" data-role-id="'+r.id+'"><span class="rs-avatar rs-avatar--'+(r.badge||'default')+'">'+(r.initial||r.name[0])+'</span><span class="rs-opt-text"><span class="rs-opt-name">'+r.name+'</span><span class="rs-opt-role">'+r.role+'</span>'+(r.scope?'<span class="rs-opt-scope">'+r.scope+'</span>':'')+'</span><span class="rs-check">&#10003;</span></button>';}).join('')+
+  '<div class="rs-menu-footer">Switching role re-renders screen content.</div></div>';
+  var trigger=document.getElementById('rs-trigger');var menu=document.getElementById('rs-menu');
+  trigger.addEventListener('click',function(e){e.stopPropagation();var open=!menu.hidden;menu.hidden=open;trigger.setAttribute('aria-expanded',String(!open));});
+  document.addEventListener('click',function(e){if(!dropdown.contains(e.target)){menu.hidden=true;trigger.setAttribute('aria-expanded','false');}});
+  Array.prototype.forEach.call(dropdown.querySelectorAll('.rs-option'),function(btn){btn.addEventListener('click',function(){var id=btn.dataset.roleId;var role=roles.find(function(r){return r.id===id;});setRole(id,role,roles);menu.hidden=true;trigger.setAttribute('aria-expanded','false');});});
+  var def=roles.find(function(r){return r.id===defaultId;});setRole(defaultId,def,roles);window.RoleSwitcher._roles=roles;
+}
+function setRole(id,role,roles){
+  document.body.dataset.currentRole=id;
+  var avatar=document.getElementById('rs-avatar');var cn=document.getElementById('rs-current-name');var cr=document.getElementById('rs-current-role');
+  if(avatar&&role){avatar.className='rs-avatar rs-avatar--'+(role.badge||'default');avatar.textContent=role.initial||role.name[0];}
+  if(cn&&role)cn.textContent=role.name;if(cr&&role)cr.textContent=role.role+(role.scope?' \xb7 '+role.scope:'');
+  Array.prototype.forEach.call(document.querySelectorAll('.rs-option'),function(btn){btn.classList.toggle('active',btn.dataset.roleId===id);});
+  document.dispatchEvent(new CustomEvent('roleChanged',{detail:{roleId:id,role:role}}));
+}
+var style=document.createElement('style');
+style.textContent='#role-switcher{position:relative;font-family:var(--uwc-font-body,sans-serif)}.rs-trigger{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:5px 10px 5px 5px;border-radius:8px;cursor:pointer;font-size:12.5px;min-width:200px;text-align:left}.rs-trigger:hover{background:rgba(255,255,255,0.18)}.rs-avatar{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:11px;flex-shrink:0}.rs-avatar--ios{background:#003087}.rs-avatar--nc{background:#1f9535}.rs-current{display:flex;flex-direction:column;line-height:1.2;flex:1}.rs-name{font-weight:500;color:#fff;font-size:12px}.rs-role{font-size:10.5px;color:rgba(255,255,255,0.6)}.rs-chev{color:rgba(255,255,255,0.6);font-size:10px;margin-left:2px}.rs-menu{position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #e2e6ed;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);min-width:280px;z-index:100;overflow:hidden}.rs-menu-header{padding:10px 14px;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#6b7280;background:#f7f8fa;font-weight:600}.rs-menu-footer{padding:10px 14px;font-size:11px;color:#6b7280;border-top:1px solid #f0f2f5;background:#fafbfd}.rs-option{display:flex;align-items:center;gap:10px;padding:10px 14px;width:100%;background:#fff;border:none;border-bottom:1px solid #f0f2f5;cursor:pointer;text-align:left}.rs-option:hover{background:#f7f8fa}.rs-option.active{background:#E8EEF6}.rs-opt-text{flex:1;display:flex;flex-direction:column;line-height:1.3}.rs-opt-name{font-size:13px;font-weight:500;color:#0d1b3e}.rs-opt-role{font-size:11.5px;color:#5a6480}.rs-opt-scope{font-size:10.5px;color:#9aa3b8;font-style:italic}.rs-check{color:#003087;font-weight:600;opacity:0;font-size:14px}.rs-option.active .rs-check{opacity:1}';
+document.head.appendChild(style);
+})();
+
+var TOTAL=9, current=0;
+var stepRoles={0:'io-mkt',1:'io-mkt',2:'io-mkt',3:'io-mkt',4:'io-mkt',5:'jonathan',6:'marcus',7:'akanksha',8:'akanksha'};
+
+function go(i){
+  if(i<0||i>=TOTAL)return;
+  Array.prototype.forEach.call(document.querySelectorAll('.screen'),function(s){s.classList.remove('active');});
+  var target=document.getElementById('sc-'+i);if(target)target.classList.add('active');
+  for(var j=0;j<TOTAL;j++){var nav=document.getElementById('nav-'+j);if(!nav)continue;nav.classList.remove('active','done');if(j<i)nav.classList.add('done');if(j===i)nav.classList.add('active');}
+  var pct=Math.round(((i+1)/TOTAL)*100);
+  var counter=document.getElementById('step-counter');if(counter)counter.textContent='Step '+(i+1)+' of '+TOTAL;
+  var progTxt=document.getElementById('progress-txt');if(progTxt)progTxt.textContent='Step '+(i+1)+' of '+TOTAL;
+  var progFill=document.getElementById('progress-fill');if(progFill)progFill.style.width=pct+'%';
+  var mainEl=document.getElementById('main');if(mainEl)mainEl.scrollTop=0;
+  var roleId=stepRoles[i]||'io-mkt';
+  if(window.RoleSwitcher&&window.RoleSwitcher._roles){var roles=window.RoleSwitcher._roles;var role=roles.find(function(r){return r.id===roleId;});if(role)window.RoleSwitcher.setRole(roleId,role,roles);}
+  current=i;
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  RoleSwitcher.init({scenarioCode:'G',defaultRoleId:'io-mkt',roles:UWC.getRolesFor('G')});
+  go(0);
+});
+</script>
+</body>
+</html>
