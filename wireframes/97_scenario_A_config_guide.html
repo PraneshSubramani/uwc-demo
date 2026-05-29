@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scenario A Configuration Guide · Profiles · Roles · FLS · Actions · UWC International CRM</title>
+<link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;font-feature-settings:'cv02','cv03','cv11';color:#0f172a;background:#f1f5f9;-webkit-font-smoothing:antialiased;line-height:1.5;scroll-behavior:smooth}
+a{color:#003087;text-decoration:none}a:hover{text-decoration:underline}
+code{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;background:#eef2f7;padding:1px 5px;border-radius:4px;color:#0f172a}
+
+.header{background:linear-gradient(135deg,#001a4d 0%,#003087 50%,#004A97 100%);color:#fff;border-bottom:3px solid #C8102E}
+.header-inner{max-width:1200px;margin:0 auto;padding:26px 32px;display:flex;align-items:center;gap:20px}
+.header-mark{width:48px;height:48px;border-radius:50%;background:#fff;color:#003087;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:14px;flex-shrink:0}
+.header-titleblock{flex:1}
+.header-title{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:24px}
+.header-sub{font-size:12.5px;color:rgba(255,255,255,0.7);margin-top:4px}
+.header-meta{display:flex;gap:14px;font-size:11px;color:rgba(255,255,255,0.65)}
+.header-meta strong{color:#fff;font-weight:600;display:block;font-size:14px;margin-top:2px}
+.header-meta div{padding:0 14px;border-left:1px solid rgba(255,255,255,0.18)}
+.header-meta div:first-child{border-left:none;padding-left:0}
+
+.backbar{max-width:1200px;margin:0 auto;padding:14px 32px 0}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:#003087}
+.back-link::before{content:'←'}
+
+.wrap{max-width:1200px;margin:0 auto;padding:24px 32px 56px}
+
+.lead{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:22px 26px;box-shadow:0 1px 2px rgba(0,0,0,0.04);margin-bottom:20px}
+.lead h2{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:20px;color:#003087;margin-bottom:8px}
+.lead p{font-size:13.5px;color:#475569;max-width:1000px}.lead p+p{margin-top:8px}
+
+/* concept callout: roles vs profiles */
+.concept{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:8px}
+.concept .c{border:1px solid #e2e8f0;border-radius:10px;padding:16px 18px;background:#fff}
+.concept .c h4{font-size:13px;font-weight:600;color:#003087;margin-bottom:6px}
+.concept .c p{font-size:12.5px;color:#475569;line-height:1.55}
+.concept .c .ex{font-size:11.5px;color:#64748b;margin-top:8px;font-style:italic}
+
+/* TOC */
+.toc{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 28px}
+.toc a{font-size:12px;font-weight:600;background:#fff;border:1px solid #e2e8f0;border-radius:999px;padding:6px 13px;color:#003087}
+.toc a:hover{border-color:#003087;text-decoration:none}
+
+.step-block{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px 26px;box-shadow:0 1px 2px rgba(0,0,0,0.04);margin-bottom:22px;scroll-margin-top:16px}
+.step-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.step-badge{width:32px;height:32px;border-radius:9px;background:#003087;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;flex-shrink:0}
+.step-block h2{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:19px;color:#003087}
+.step-path{font-size:11.5px;color:#64748b;margin:2px 0 16px 44px;font-family:'JetBrains Mono',monospace}
+.step-path::before{content:'⚙ ';color:#9aa3b8}
+
+.section-label{font-size:11px;font-weight:600;color:#64748b;letter-spacing:1.4px;text-transform:uppercase;margin:20px 0 10px}
+
+ol.steps{list-style:none;counter-reset:s;padding:0}
+ol.steps li{counter-increment:s;position:relative;padding:8px 0 8px 34px;font-size:13px;color:#334155;border-bottom:1px solid #f4f6f9;line-height:1.55}
+ol.steps li:last-child{border-bottom:none}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:7px;width:22px;height:22px;border-radius:6px;background:#eef3ff;color:#2563eb;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+
+/* tables */
+.card{border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;margin:6px 0}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead th{background:#f8fafc;text-align:left;padding:10px 12px;border-bottom:2px solid #e2e8f0;font-size:11px;font-weight:600;color:#475569}
+tbody td{padding:9px 12px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+td.mod{font-weight:600;color:#0f172a}
+.perm{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.full{background:#dbeafe;color:#1e40af}.view{background:#f1f5f9;color:#475569}.none{background:#fef2f2;color:#b91c1c}.rw{background:#dcfce7;color:#166534}
+.none::before{content:'✗ '}
+
+/* roles tree */
+.tree{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:18px 22px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.85;white-space:pre;overflow-x:auto}
+.tree .io{color:#fde68a;font-weight:700}.tree .nc{color:#86efac}.tree .sc{color:#93c5fd}
+
+.note{border-radius:9px;padding:14px 18px;margin:14px 0;font-size:12.5px;line-height:1.6}
+.note.warn{background:#fffbeb;border:1px solid #fde68a}.note.warn h4{color:#92400e}.note.warn h4::before{content:'⚠ '}
+.note.info{background:#eff6ff;border:1px solid #bfdbfe}.note.info h4{color:#1e40af}.note.info h4::before{content:'ℹ '}
+.note.key{background:#f0fdf4;border:1px solid #bbf7d0}.note.key h4{color:#166534}.note.key h4::before{content:'🔑 '}
+.note h4{font-size:12.5px;font-weight:600;margin-bottom:5px}
+.note p{color:#334155}.note p+p{margin-top:6px}
+
+.confirm{font-size:9.5px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase;padding:1px 6px;border-radius:4px;background:#fef3c7;color:#92400e;margin-left:4px}
+
+.footer{background:#001a4d;color:rgba(255,255,255,0.55);padding:22px 32px;text-align:center;font-size:11px;margin-top:40px}
+.footer strong{color:rgba(255,255,255,0.85)}
+@media(max-width:820px){.header-meta{display:none}.concept{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-mark">UWC</div>
+    <div class="header-titleblock">
+      <div class="header-title">Scenario A — Configuration Guide</div>
+      <div class="header-sub">Profiles · Roles &amp; data sharing · Field-level security · Action buttons — click-by-click in Zoho CRM</div>
+    </div>
+    <div class="header-meta">
+      <div>Reference<strong>UWC-CRM-5128</strong></div>
+      <div>Scope<strong>4 core profiles</strong></div>
+      <div>Org<strong>Zoho CRM · EU DC</strong></div>
+    </div>
+  </div>
+</header>
+
+<div class="backbar"><a href="00_index.html" class="back-link">Back to demo home</a></div>
+
+<div class="wrap">
+
+  <div class="lead">
+    <h2>The permissions foundation</h2>
+    <p>Scenario A configures who can see and do what. It is the base layer every other scenario depends on. This guide builds the <b>4 core profiles</b> (module access), the <b>role hierarchy + data-sharing rules</b> (which records), <b>field-level security</b> (blind review, DOB masking), and the <b>custom action buttons</b> (with visibility conditions) — step by step in Zoho CRM Setup.</p>
+  </div>
+
+  <div class="note key">
+    <h4>The one concept that explains everything: Profiles vs Roles</h4>
+    <p>Zoho splits access into two independent systems. Confusing them is the #1 setup error.</p>
+  </div>
+  <div class="concept">
+    <div class="c">
+      <h4>PROFILE = what you can DO</h4>
+      <p>Controls which <b>modules, fields and actions</b> a user can touch (View / Create / Edit / Delete). Profile says "you may edit Volunteers but only view NCs."</p>
+      <p class="ex">e.g. NC Admin profile can create volunteers; Reviewer profile cannot.</p>
+    </div>
+    <div class="c">
+      <h4>ROLE = which records you SEE</h4>
+      <p>Controls <b>data scope</b> via a hierarchy. A user sees their own records + everyone below them in the tree. Role says "you see Brazil's records, not Germany's."</p>
+      <p class="ex">e.g. Ana (NC Admin–Brazil role) sees Brazil; Marcus (NC Admin–Germany) sees Germany — same profile, different role.</p>
+    </div>
+  </div>
+  <div class="note info">
+    <h4>So country scoping is a ROLE job, not a profile job</h4>
+    <p>Ana and Marcus share the identical <code>NC Admin</code> profile (same module access) but sit in different roles, so Data Sharing Rules give each only their country's records. Build profiles first (Steps 1–2), then roles (Step 3), then layer field security (Step 4) and actions (Step 5).</p>
+  </div>
+
+  <div class="toc">
+    <a href="#prep">0 · Prep</a>
+    <a href="#profiles">1 · Create profiles</a>
+    <a href="#modules">2 · Module permissions</a>
+    <a href="#roles">3 · Roles &amp; data sharing</a>
+    <a href="#fls">4 · Field-level security</a>
+    <a href="#actions">5 · Action buttons</a>
+    <a href="#verify">6 · Verify per role</a>
+  </div>
+
+  <!-- ===== STEP 0 PREP ===== -->
+  <div class="step-block" id="prep">
+    <div class="step-head"><span class="step-badge">0</span><h2>Prep — modules &amp; admin access</h2></div>
+    <div class="step-path">Setup → Modules and Fields</div>
+    <ol class="steps">
+      <li>Confirm you are signed in with an <b>Administrator</b> profile. If you hit "Insufficient privileges", you must be promoted to Administrator before any of this works.</li>
+      <li>Disable unused stock modules (Vendors, Services, Projects, Sales Inbox, stock Questions) via the module kebab → <b>Disable Module</b>.</li>
+      <li>Leave enabled: Home · Leads (Applications) · Contacts · Programmes · Campaigns · Tasks · Meetings · Calls · plus the custom modules (NCs, Schools, Place Allocations, Nomination Packs, NC Volunteers, Training Records, MoU Obligations, Governance Bodies/Memberships, Competencies, Mailing Lists, Communication Logs, Consent Records, Safeguarding Cases).</li>
+    </ol>
+    <div class="note info"><h4>Note</h4><p>The "Applications" module is the standard <b>Leads</b> module, relabelled. Permission screens will say Leads.</p></div>
+  </div>
+
+  <!-- ===== STEP 1 PROFILES ===== -->
+  <div class="step-block" id="profiles">
+    <div class="step-head"><span class="step-badge">1</span><h2>Create the 4 core profiles</h2></div>
+    <div class="step-path">Setup → Users and Control → Profiles → + New Profile</div>
+    <p style="font-size:13px;color:#475569;margin-bottom:12px">Clone each from an existing profile, name it, save. Set module/field permissions in Steps 2 &amp; 4.</p>
+    <div class="card">
+      <table>
+        <thead><tr><th>Profile</th><th>Clone from</th><th>Purpose / user</th></tr></thead>
+        <tbody>
+          <tr><td class="mod">IO Super Admin</td><td>Administrator</td><td>Full system. Akanksha — the presenter role.</td></tr>
+          <tr><td class="mod">NC Admin</td><td>Standard</td><td>Runs a National Committee — Ana (Brazil), Marcus (Germany).</td></tr>
+          <tr><td class="mod">Reviewer</td><td>Standard</td><td>Scores applications, blind to peers — Clara, Paulo.</td></tr>
+          <tr><td class="mod">Data Protection Lead</td><td>Standard</td><td>GDPR oversight — consent, safeguarding, masked PII.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note info"><h4>Demo shortcut</h4><p>You don't need to create a user per profile — Akanksha demos by <b>switching profile</b> (Setup → Users → Switch User). One optional real user (a Reviewer) proves the blind-review wipe in Scenario C.</p></div>
+  </div>
+
+  <!-- ===== STEP 2 MODULE PERMISSIONS ===== -->
+  <div class="step-block" id="modules">
+    <div class="step-head"><span class="step-badge">2</span><h2>Set module permissions per profile</h2></div>
+    <div class="step-path">Setup → Users and Control → Profiles → [profile] → Module-level permissions</div>
+    <p style="font-size:13px;color:#475569;margin-bottom:8px">For each profile, toggle each module on/off; when on, expand the <code>View · Create · Edit · Delete</code> dropdown and tick only what's needed. IO Super Admin = full on everything (not shown). Apply this matrix to the other three:</p>
+    <div class="card">
+      <table>
+        <thead><tr><th>Module</th><th>NC Admin</th><th>Reviewer</th><th>Data Protection Lead</th></tr></thead>
+        <tbody>
+          <tr><td class="mod">Leads (Applications)</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm full">View+Create+Edit</span><br><span style="font-size:10px;color:#64748b">via "My Review Queue" view</span></td><td><span class="perm view">View</span></td></tr>
+          <tr><td class="mod">Contacts</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm view">View (own NC)</span></td><td><span class="perm rw">View+Edit (masked)</span></td></tr>
+          <tr><td class="mod">National Committees</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
+          <tr><td class="mod">NC Volunteers</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
+          <tr><td class="mod">Training Records</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td></tr>
+          <tr><td class="mod">MoU Obligations</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
+          <tr><td class="mod">Schools</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
+          <tr><td class="mod">School Place Allocations</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
+          <tr><td class="mod">Programmes</td><td><span class="perm view">View</span></td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td></tr>
+          <tr><td class="mod">Mailing Lists</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
+          <tr><td class="mod">Consent Records</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td><td><span class="perm rw">View+Create+Edit</span></td></tr>
+          <tr><td class="mod">Communication Logs</td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td><td><span class="perm view">View</span></td></tr>
+          <tr><td class="mod">Safeguarding Cases</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td><td><span class="perm rw">View+Edit</span></td></tr>
+          <tr><td class="mod">Governance Bodies / Memberships</td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note warn"><h4>Verify against the live org <span class="confirm">confirm</span></h4><p>This matrix follows the build spec. The 3-profile subset (NC Admin / IO Admissions / NC Reviewer) already on the <a href="91_permissions_matrix.html">Permission Matrix page</a> was applied live (31 changes). Reconcile any module-name differences before applying to the live org.</p></div>
+  </div>
+
+  <!-- ===== STEP 3 ROLES ===== -->
+  <div class="step-block" id="roles">
+    <div class="step-head"><span class="step-badge">3</span><h2>Build the role hierarchy + data-sharing rules</h2></div>
+    <div class="step-path">Setup → Users and Control → Roles  ·  then  Security Control → Data Sharing Settings</div>
+    <p style="font-size:13px;color:#475569;margin-bottom:10px">The role tree decides record visibility. Build it top-down, then set the org-wide default to Private so the hierarchy actually restricts.</p>
+    <div class="tree"><span class="io">International Office</span>  (top — sees everything)
+├── <span class="nc">NC Admin — Brazil</span>  (Ana)
+│   ├── NC Reviewer Brazil  (Clara)
+│   └── NC Reviewer Brazil  (Paulo)
+├── <span class="nc">NC Admin — Germany</span>  (Marcus)
+│   └── NC Reviewer Germany
+├── <span class="nc">NC Admin — Kenya</span>  (Grace)
+├── <span class="nc">NC Admin — India</span>  ·  <span class="nc">NC Admin — UK</span>
+└── <span class="sc">School Admissions Director</span>  (Helen, Erik, Anjali)</div>
+    <div class="section-label">Steps</div>
+    <ol class="steps">
+      <li>Under Roles, create the tree above — each NC Admin role reports to <b>International Office</b>; each NC Reviewer reports to its NC Admin.</li>
+      <li>Assign <code>uwc_admin</code> the <b>International Office</b> role + <b>IO Super Admin</b> profile.</li>
+      <li>Go to <b>Security Control → Data Sharing Settings</b>. Set the default access for record-scoped modules (Leads, Contacts, NC Volunteers, MoU Obligations, Place Allocations) to <b>Private</b>.</li>
+      <li>With Private default, each role sees only its own records + those below it. Ana (Brazil) cannot see Germany's; Marcus (Germany) cannot see Brazil's — automatically, because they are sibling branches.</li>
+      <li>If a module should be network-visible (e.g. Programmes), set its default to <b>Public Read Only</b> instead.</li>
+    </ol>
+    <div class="note key"><h4>This is what enforces NC-level isolation</h4><p>Profiles gave Ana and Marcus the same module access. The <b>Private default + sibling roles</b> is what makes Ana see only Brazil and Marcus only Germany. Without setting the default to Private, the hierarchy does nothing.</p></div>
+  </div>
+
+  <!-- ===== STEP 4 FLS ===== -->
+  <div class="step-block" id="fls">
+    <div class="step-head"><span class="step-badge">4</span><h2>Field-level security</h2></div>
+    <div class="step-path">Setup → Modules and Fields → [module] → Field Permissions</div>
+
+    <div class="section-label">4a · Blind review — Review Scores subform (Leads)</div>
+    <div class="card">
+      <table>
+        <thead><tr><th>Field</th><th>IO Super Admin</th><th>NC Admin</th><th>Reviewer</th><th>DPL</th></tr></thead>
+        <tbody>
+          <tr><td class="mod">Score_Academic</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td><td><span class="perm none">None</span></td></tr>
+          <tr><td class="mod">Score_Community</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td><td><span class="perm none">None</span></td></tr>
+          <tr><td class="mod">Score_Communication</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td><td><span class="perm none">None</span></td></tr>
+          <tr><td class="mod">Score_Values</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td><td><span class="perm none">None</span></td></tr>
+          <tr><td class="mod">Overall_Recommendation</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td><td><span class="perm none">None</span></td></tr>
+          <tr><td class="mod">Reviewer_Comments</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td><td><span class="perm none">None</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note warn"><h4>"Own row only" needs a Client Script</h4><p>Zoho FLS can't scope by row value. Set Reviewer to Read+Write at the field level, then add a <b>Client Script</b> on the Application detail page that <b>blanks peer reviewers' cells</b> unless <code>All_Reviews_Complete = true</code>. Script: <code>zoho-build/client-scripts/blind_review.js</code>. This is what makes the blind-review reveal work in Scenario C.</p></div>
+
+    <div class="section-label">4b · DOB masking for the Data Protection Lead</div>
+    <ol class="steps">
+      <li>Contacts → Field Permissions → <code>Date_of_Birth</code> → for the <b>Data Protection Lead</b> profile choose <b>"View masked"</b> (Zoho's built-in mask) — also apply to Address fields.</li>
+    </ol>
+
+    <div class="section-label">4c · Safeguarding sensitivity</div>
+    <ol class="steps">
+      <li>Safeguarding Cases → <code>Triage_Notes</code> → IO Super Admin + DPL = Read+Write; NC Admin = None.</li>
+      <li>Safeguarding Cases → <code>Resolution_Steps</code> → IO Super Admin + DPL only.</li>
+    </ol>
+  </div>
+
+  <!-- ===== STEP 5 ACTIONS ===== -->
+  <div class="step-block" id="actions">
+    <div class="step-head"><span class="step-badge">5</span><h2>Custom action buttons + visibility</h2></div>
+    <div class="step-path">Setup → Customisation → Buttons &amp; Links → Buttons → + Create Button</div>
+    <p style="font-size:13px;color:#475569;margin-bottom:8px">Each button is scoped to a module, a placement, a visibility condition, and (some) a single profile. The condition is what makes an action appear only at the right stage / for the right role.</p>
+    <div class="card">
+      <table>
+        <thead><tr><th>Button</th><th>Module · where</th><th>Visible when</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td class="mod">Raise Safeguarding Flag</td><td>Leads · detail</td><td><code>Safeguarding_Flag_Status = None</code> AND Stage ∈ {Under Review, Shortlisted}</td><td>Popup → set status Under Review (fires WR-C-5)</td></tr>
+          <tr><td class="mod">Generate Nomination Pack</td><td>Leads · detail</td><td><code>Stage = Shortlisted</code> AND School_Nominated not empty</td><td><code>generate_nomination_pack()</code></td></tr>
+          <tr><td class="mod">Nominate to School</td><td>Leads · detail</td><td>Stage = Shortlisted AND a Generated pack exists</td><td>Confirm → Stage = Nominated</td></tr>
+          <tr><td class="mod">Accept / Decline Nomination</td><td>Nomination Packs · detail</td><td><code>Pack_Status = Sent</code></td><td>Set Accepted (fires WR-D-Pack) / Declined</td></tr>
+          <tr><td class="mod">Build &amp; Preview</td><td>Mailing Lists · detail</td><td>List_Status ∈ {Draft, Built}</td><td><code>build_mailing_list()</code></td></tr>
+          <tr><td class="mod">Push to Mailchimp</td><td>Mailing Lists · detail</td><td>List_Status = Built</td><td><code>log_campaign_sends()</code></td></tr>
+          <tr><td class="mod">Allocate Places</td><td>Place Allocations · list</td><td>Always — <b>IO Super Admin profile only</b></td><td>Popup → adjust Allocated_Places</td></tr>
+          <tr><td class="mod">Generate Consent Audit Trail</td><td>Contacts · detail</td><td>Always — <b>DPL profile only</b></td><td><code>generate_consent_audit_trail()</code> → CSV</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note info"><h4>Profile-scoped buttons</h4><p>"Allocate Places" and "Generate Consent Audit Trail" are restricted to a single profile via the button's <b>profile visibility</b> setting — so even though the module is visible to others, only IO Super Admin / DPL see the action.</p></div>
+  </div>
+
+  <!-- ===== STEP 6 VERIFY ===== -->
+  <div class="step-block" id="verify">
+    <div class="step-head"><span class="step-badge">6</span><h2>Verify each role (Switch User)</h2></div>
+    <div class="step-path">Setup → Users and Control → Users → [user] → Switch User</div>
+    <div class="card">
+      <table>
+        <thead><tr><th>As…</th><th>Should see</th><th>Should NOT see</th></tr></thead>
+        <tbody>
+          <tr><td class="mod">IO Super Admin (Akanksha)</td><td>Everything; Allocate Places button</td><td>—</td></tr>
+          <tr><td class="mod">NC Admin — Ana (Brazil)</td><td>Brazil applications, contacts, volunteers, allocations</td><td>Germany's records; governance; Triage Notes</td></tr>
+          <tr><td class="mod">NC Admin — Marcus (Germany)</td><td>Germany's records only</td><td>Brazil's records (sibling role)</td></tr>
+          <tr><td class="mod">Reviewer (Clara)</td><td>Her own score row on Sofia; My Review Queue</td><td>Paulo's score cells (Client Script wipes them until all reviews complete)</td></tr>
+          <tr><td class="mod">Data Protection Lead</td><td>Consent, Safeguarding, Triage Notes; masked DOB</td><td>Unmasked DOB; NC config modules</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note warn"><h4>If a profile change locks you out</h4><p>Switch back to <code>uwc_admin</code> (Administrator) and fix. Always keep one Administrator session open while testing permission changes.</p></div>
+  </div>
+
+  <div class="note info" style="margin-top:8px">
+    <h4>Related pages</h4>
+    <p><a href="91_permissions_matrix.html">Profile Permission Matrix</a> (the at-a-glance grid) · <a href="98_module_fields_catalog.html">Module &amp; Field Catalogue</a> · <a href="99_data_model.html">Data Model</a> · <a href="01_scenario_A.html">Scenario A wireframe</a></p>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <strong>UWC International CRM — Scenario A Configuration Guide</strong> · A2Z Cloud Ltd · Zoho Premium Partner · Salisbury, UK · <em>Profiles · Roles · FLS · Actions · field names pending full live-org confirmation</em>
+</footer>
+
+</body>
+</html>

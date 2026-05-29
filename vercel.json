@@ -12,6 +12,8 @@
     { "source": "/data-model", "destination": "/wireframes/99_data_model.html", "permanent": false },
     { "source": "/catalog", "destination": "/wireframes/98_module_fields_catalog.html", "permanent": false },
     { "source": "/permissions", "destination": "/wireframes/91_permissions_matrix.html", "permanent": false },
+    { "source": "/config/a", "destination": "/wireframes/97_scenario_A_config_guide.html", "permanent": false },
+    { "source": "/scenario-a-config", "destination": "/wireframes/97_scenario_A_config_guide.html", "permanent": false },
     { "source": "/dashboards", "destination": "/wireframes/92_dashboards_build_guide.html", "permanent": false },
     { "source": "/dashboards/de", "destination": "/wireframes/93_dashboards_scenario_DE.html", "permanent": false },
     { "source": "/test/d", "destination": "/wireframes/94_scenario_D_test_guide.html", "permanent": false },
