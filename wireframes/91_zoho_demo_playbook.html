@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>UWC Demo · Presenter's Playbook · Live Zoho CRM walkthrough</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  :root {
+    --navy: #003087;
+    --navy-dark: #001a4d;
+    --teal: #009482;
+    --red: #C8102E;
+    --gold: #C8AB00;
+    --amber: #f59e0b;
+    --grey-1: #f5f7fb;
+    --grey-2: #e6eaf2;
+    --grey-3: #c9d2e0;
+    --grey-4: #6c757d;
+    --text: #1f2937;
+    --text-soft: #4b5563;
+    --ok: #166534;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--grey-1); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }
+  a { color: var(--navy); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code, pre { font-family: 'JetBrains Mono', 'DM Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  code { background: var(--grey-2); padding: 1px 6px; border-radius: 4px; color: var(--navy-dark); }
+  pre { background: #0b1230; color: #d9e1ff; padding: 16px 20px; border-radius: 8px; overflow-x: auto; line-height: 1.55; font-size: 12.5px; }
+  hr { border: 0; border-top: 1px solid var(--grey-3); margin: 24px 0; }
+
+  /* Header */
+  .top {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+    color: #fff;
+    padding: 28px 36px 22px;
+    border-bottom: 4px solid var(--gold);
+  }
+  .top__bar { display: flex; align-items: center; gap: 16px; }
+  .top__logo {
+    width: 48px; height: 48px;
+    background: #fff;
+    color: var(--navy);
+    font-weight: 800;
+    font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 6px;
+  }
+  .top__title { font-family: 'Playfair Display', Georgia, serif; font-size: 26px; font-weight: 700; line-height: 1.2; }
+  .top__sub { font-size: 13.5px; opacity: 0.95; margin-top: 4px; }
+  .top__meta { margin-top: 14px; display: flex; gap: 14px; font-size: 12.5px; flex-wrap: wrap; }
+  .top__meta span { padding: 4px 10px; background: rgba(255,255,255,0.14); border-radius: 4px; }
+
+  /* Tab nav */
+  .tabs {
+    background: #fff;
+    border-bottom: 1px solid var(--grey-3);
+    position: sticky; top: 0; z-index: 10;
+    display: flex; overflow-x: auto;
+    padding: 0 24px;
+  }
+  .tab {
+    padding: 14px 16px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    color: var(--grey-4);
+    font-weight: 500;
+    font-size: 13.5px;
+    white-space: nowrap;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--navy); background: var(--grey-1); }
+  .tab--active { color: var(--navy); border-bottom-color: var(--navy); font-weight: 700; }
+  .tab__chip {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--grey-2);
+    color: var(--text-soft);
+    font-weight: 700; font-size: 11px;
+    margin-right: 6px;
+  }
+  .tab--active .tab__chip { background: var(--navy); color: #fff; }
+
+  /* Main */
+  main { max-width: 1100px; margin: 0 auto; padding: 32px 36px 80px; }
+  .panel { display: none; animation: fade 0.25s; }
+  .panel--active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  h2.section {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: var(--navy);
+    font-size: 30px;
+    margin: 0 0 4px;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 10px;
+    display: inline-block;
+  }
+  .section__sub { color: var(--text-soft); font-size: 14.5px; margin: 0 0 24px; }
+  h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: var(--navy-dark);
+    font-size: 21px;
+    margin: 32px 0 12px;
+    padding-left: 12px;
+    border-left: 4px solid var(--navy);
+  }
+  h4 {
+    color: var(--navy);
+    font-size: 14.5px;
+    margin: 22px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Callouts */
+  .callout {
+    border-left: 4px solid var(--navy);
+    background: #f0f4ff;
+    padding: 14px 18px;
+    border-radius: 0 6px 6px 0;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .callout--ok    { border-left-color: var(--teal);  background: #e6f7f3; }
+  .callout--warn  { border-left-color: var(--amber); background: #fef3c7; }
+  .callout--alert { border-left-color: var(--red);   background: #fde7eb; }
+  .callout__title { font-weight: 700; color: var(--navy-dark); margin-bottom: 4px; }
+
+  /* Beat card — Akanksha's narration + click */
+  .beat {
+    background: #fff;
+    border: 1px solid var(--grey-3);
+    border-radius: 10px;
+    margin: 16px 0;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .beat__head {
+    background: var(--navy);
+    color: #fff;
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 12px;
+    font-size: 13px;
+  }
+  .beat__num {
+    background: #fff; color: var(--navy);
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    text-align: center; line-height: 26px;
+    font-weight: 800; font-size: 13px;
+  }
+  .beat__title { font-weight: 600; font-size: 14px; flex: 1; }
+  .beat__timer {
+    background: rgba(255,255,255,0.18);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+  }
+  .beat__body { padding: 14px 18px; }
+  .beat__row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 14px;
+    padding: 8px 0;
+    border-top: 1px dashed var(--grey-2);
+    align-items: start;
+  }
+  .beat__row:first-child { border-top: 0; padding-top: 0; }
+  .beat__label {
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--navy);
+    line-height: 22px;
+  }
+  .beat__say { font-style: italic; color: #15224a; font-size: 14px; line-height: 1.6; }
+  .beat__do { font-size: 13.5px; color: var(--text-soft); }
+  .beat__do code { background: var(--navy-dark); color: #fff; padding: 2px 7px; font-size: 12px; border-radius: 4px; }
+  .beat__see { font-size: 13.5px; color: var(--text-soft); }
+  .beat__see b { color: var(--ok); }
+  .beat__ask { font-size: 13.5px; color: var(--text-soft); padding: 8px 12px; background: #fef3c7; border-radius: 6px; }
+  .beat__recover {
+    font-size: 13px; color: #831843;
+    padding: 8px 12px;
+    background: #fde7eb;
+    border-radius: 6px;
+  }
+
+  .path {
+    display: inline-block;
+    background: var(--navy-dark);
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    margin: 2px 4px 2px 0;
+  }
+  .path .arrow { opacity: 0.5; padding: 0 4px; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 20px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    font-size: 13.5px;
+  }
+  thead { background: var(--grey-2); }
+  th {
+    text-align: left;
+    padding: 10px 12px;
+    color: var(--navy-dark);
+    font-weight: 700;
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  td {
+    padding: 11px 12px;
+    border-top: 1px solid var(--grey-2);
+    vertical-align: top;
+  }
+  tr:hover td { background: #fbfcfe; }
+
+  /* Checklist */
+  .checks { margin: 14px 0; padding: 0; list-style: none; }
+  .checks li {
+    padding: 8px 12px 8px 36px;
+    background: #fff;
+    border: 1px solid var(--grey-2);
+    margin-bottom: 6px;
+    border-radius: 6px;
+    position: relative;
+    font-size: 14px;
+  }
+  .checks li::before {
+    content: '☐';
+    position: absolute; left: 12px; top: 8px;
+    color: var(--navy);
+    font-size: 18px;
+  }
+
+  /* Timing strip */
+  .timing {
+    display: flex;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 14px 0 24px;
+    border: 1px solid var(--grey-3);
+    font-size: 12.5px;
+  }
+  .timing__slice {
+    padding: 10px 12px;
+    color: #fff;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.2);
+  }
+  .timing__slice:last-child { border-right: 0; }
+  .timing__slice b { display: block; font-size: 13px; margin-bottom: 2px; }
+
+  /* Q&A blocks */
+  .qa {
+    background: #fff;
+    border: 1px solid var(--grey-3);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 12px 0;
+  }
+  .qa__q {
+    font-weight: 700;
+    color: var(--navy-dark);
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+  .qa__q::before { content: 'Q: '; color: var(--amber); }
+  .qa__a { font-size: 14px; color: var(--text); }
+  .qa__a::before { content: 'A: '; color: var(--teal); font-weight: 700; }
+  .qa__tag {
+    display: inline-block;
+    padding: 1px 8px;
+    margin-left: 6px;
+    background: var(--grey-2);
+    color: var(--text-soft);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  footer {
+    background: var(--navy-dark);
+    color: rgba(255,255,255,0.95);
+    padding: 36px 36px 24px;
+    margin-top: 60px;
+    text-align: center;
+    font-size: 13px;
+  }
+  footer .small { font-size: 11.5px; opacity: 0.7; margin-top: 8px; }
+
+  @media print {
+    .tabs { display: none; }
+    .panel { display: block !important; page-break-after: always; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top__bar">
+    <div class="top__logo">UWC</div>
+    <div>
+      <div class="top__title">Presenter's Demo Playbook</div>
+      <div class="top__sub">Live Zoho CRM walkthrough · Scenarios C, D, E, F, G — for Akanksha Anand</div>
+    </div>
+  </div>
+  <div class="top__meta">
+    <span>Demo: Mon 1 June 2026 · 15:00–17:00 BST</span>
+    <span>Audience: UWC International evaluation panel</span>
+    <span>Org: 20114943111 · crm.zoho.eu</span>
+    <span>Format: Video conference · 1 presenter · 1 screen-share</span>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <div class="tab tab--active" data-target="p-overview"><span class="tab__chip">0</span>Overview &amp; rules</div>
+  <div class="tab" data-target="p-prep"><span class="tab__chip">P</span>Pre-demo prep</div>
+  <div class="tab" data-target="p-open"><span class="tab__chip">1</span>Opening (5 min)</div>
+  <div class="tab" data-target="p-c"><span class="tab__chip">C</span>Selection · Scoring · Safeguarding</div>
+  <div class="tab" data-target="p-d"><span class="tab__chip">D</span>Nomination · Place Allocation</div>
+  <div class="tab" data-target="p-e"><span class="tab__chip">E</span>Governance</div>
+  <div class="tab" data-target="p-f"><span class="tab__chip">F</span>NC · Volunteers</div>
+  <div class="tab" data-target="p-g"><span class="tab__chip">G</span>Comms · GDPR</div>
+  <div class="tab" data-target="p-close"><span class="tab__chip">9</span>Closing &amp; Q&amp;A</div>
+  <div class="tab" data-target="p-recover"><span class="tab__chip">R</span>Recovery</div>
+</nav>
+
+<main>
+
+<!-- ========================== OVERVIEW ========================== -->
+<section class="panel panel--active" id="p-overview">
+  <h2 class="section">How this playbook works</h2>
+  <p class="section__sub">A 100% live Zoho CRM demo guide for Akanksha. No wireframes. Every screen the panel sees is real CRM. This playbook tells you exactly what to click, what to say, and what to expect.</p>
+
+  <h3>Demo timing — 2 hours total</h3>
+  <div class="timing">
+    <div class="timing__slice" style="background:var(--navy);flex:5;"><b>Opening</b>5 min</div>
+    <div class="timing__slice" style="background:#1e3a8a;flex:12;"><b>Scenario C</b>12 min</div>
+    <div class="timing__slice" style="background:#1e40af;flex:11;"><b>Scenario D</b>11 min</div>
+    <div class="timing__slice" style="background:#1d4ed8;flex:10;"><b>Scenario E</b>10 min</div>
+    <div class="timing__slice" style="background:#2563eb;flex:11;"><b>Scenario F</b>11 min</div>
+    <div class="timing__slice" style="background:#3b82f6;flex:11;"><b>Scenario G</b>11 min</div>
+    <div class="timing__slice" style="background:var(--teal);flex:30;"><b>Q&amp;A</b>30 min</div>
+  </div>
+  <p style="font-size:13.5px;color:var(--text-soft);">Built-in 5 min buffer between scenarios for panel reactions, sips of water, and recovery if anything stalls.</p>
+
+  <h3>The single-user demo strategy</h3>
+  <div class="callout callout--warn">
+    <div class="callout__title">Only one user account exists in this Zoho org</div>
+    <code>uwc_admin@a2zcloud.eu.com</code> — that's you, Akanksha. No Clara, Paulo, Grace, or Helen user accounts. You demonstrate every role by:
+    <ul style="margin:8px 0 0 18px;">
+      <li><b>Profile switching</b> — Setup → Users → uwc_admin → change Profile dropdown → save → refresh → demo from that profile</li>
+      <li><b>Saved Views</b> — pre-built &ldquo;Clara's Queue&rdquo;, &ldquo;Paulo's Queue&rdquo;, &ldquo;Helen's Pending Pack&rdquo; that filter the data exactly as that user would see it</li>
+      <li><b>Narration</b> — &ldquo;When Clara opens her CRM, this is exactly what she sees&rdquo;</li>
+    </ul>
+    Profile switching takes 5 seconds. Always say &ldquo;Let me switch to Clara's view&rdquo; before clicking — never go silent during a switch.
+  </div>
+
+  <h3>Five rules for the panel</h3>
+  <table>
+    <thead><tr><th>Rule</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td><b>Show, don't tell.</b> Every claim demonstrated live.</td><td>Panel scores 10% on demo. Wireframes / slideware lose points.</td></tr>
+      <tr><td><b>Always announce the click.</b> &ldquo;I'll now move Sofia to Shortlisted.&rdquo;</td><td>Video conference — panel cannot see your cursor between clicks.</td></tr>
+      <tr><td><b>If it breaks, narrate the design.</b> Never apologise twice. Say what should happen and continue.</td><td>Recovery is more impressive than perfection.</td></tr>
+      <tr><td><b>Anchor every scenario to one applicant.</b> Sofia Almeida throughout.</td><td>Panel remembers a story, not modules.</td></tr>
+      <tr><td><b>End each scenario with a one-line summary.</b> Then pause for 3 seconds.</td><td>Lets the panel breathe and ask questions before the next scenario.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Companion documents</h3>
+  <ul style="font-size:14px;">
+    <li><code>90_zoho_setup_guide.html</code> — Sagar &amp; Priyanka's build guide (already configured the system). For reference only on demo day.</li>
+    <li><code>SCENARIOS_C_TO_G_BUILD_HANDBOOK.md</code> — markdown source of the setup guide.</li>
+    <li><code>zoho-build/deluge/demo_reset.deluge</code> — re-run this 30 minutes before the demo to restore Sofia / Miguel / Place Allocations / Mailing List to demo state.</li>
+  </ul>
+</section>
+
+<!-- ========================== PRE-DEMO PREP ========================== -->
+<section class="panel" id="p-prep">
+  <h2 class="section">Pre-demo prep — 60 minutes before the call</h2>
+  <p class="section__sub">Run this sequence at 14:00 BST for a 15:00 start. Pranesh is on standby on Cliq for any technical issue.</p>
+
+  <h3>14:00 — System reset (10 min)</h3>
+  <ul class="checks">
+    <li>Open Chrome → log in to <code>crm.zoho.eu</code> as <code>uwc_admin@a2zcloud.eu.com</code></li>
+    <li>Confirm Home dashboard renders &mdash; UWC banner image visible</li>
+    <li><span class="path">gear<span class="arrow">→</span>Customisation<span class="arrow">→</span>Functions</span> &mdash; find <code>demo_reset</code> → click <b>Save and Execute</b></li>
+    <li>Wait for info log: &ldquo;demo_reset complete — org returned to demo morning state&rdquo;</li>
+    <li>Verify Sofia's Application: Stage = Under Review, Review_Count = 1, Safeguarding flag = None</li>
+    <li>Verify Place Allocation Atlantic ↔ Brazil: Places_Used = 0</li>
+    <li>Verify Kenya MoU &ldquo;Annual Report Q2 2026&rdquo;: Status = Overdue</li>
+  </ul>
+
+  <h3>14:10 — Browser tab pre-load (10 min)</h3>
+  <p>Open these in order and pin each. Don't close them until the demo ends.</p>
+  <table>
+    <thead><tr><th>#</th><th>Tab</th><th>URL fragment</th><th>Used in</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><b>Home dashboard</b></td><td>/crm/org20114943111/tab/Home</td><td>Opening</td></tr>
+      <tr><td>2</td><td><b>Applications — My Review Queue</b> (Saved View)</td><td>/crm/tab/Potentials/custom-view/MyReviewQueue</td><td>C step 1</td></tr>
+      <tr><td>3</td><td><b>Sofia Almeida — Application detail</b></td><td>/crm/tab/Potentials/{sofiaAppId}</td><td>C steps 2–6, 9 &middot; D steps 4–6</td></tr>
+      <tr><td>4</td><td><b>Miguel Santos — Application detail</b></td><td>/crm/tab/Potentials/{miguelAppId}</td><td>C step 7</td></tr>
+      <tr><td>5</td><td><b>Safeguarding Cases list</b></td><td>/crm/tab/Safeguarding_Cases</td><td>C step 8</td></tr>
+      <tr><td>6</td><td><b>Place Allocations list — pivot view</b></td><td>/crm/tab/School_Place_Allocations/PivotView</td><td>D steps 1–3</td></tr>
+      <tr><td>7</td><td><b>Nomination Packs list — Sent filter</b></td><td>/crm/tab/Nomination_Packs?filter=Sent</td><td>D steps 5, 7–8</td></tr>
+      <tr><td>8</td><td><b>Governance Bodies list</b></td><td>/crm/tab/Governance_Bodies</td><td>E steps 1–4</td></tr>
+      <tr><td>9</td><td><b>Competency Matrix dashboard</b></td><td>/crm/dashboards/CompetencyMatrix</td><td>E step 6 — centrepiece</td></tr>
+      <tr><td>10</td><td><b>National Committees list — by MoU Health</b></td><td>/crm/tab/National_Committees?sort=MoU_Health</td><td>F steps 1, 7</td></tr>
+      <tr><td>11</td><td><b>UWC Kenya — NC detail</b></td><td>/crm/tab/National_Committees/{kenyaId}</td><td>F steps 2–6</td></tr>
+      <tr><td>12</td><td><b>NC Health Dashboard</b></td><td>/crm/dashboards/NCHealth</td><td>F step 7</td></tr>
+      <tr><td>13</td><td><b>Mailing Lists list</b></td><td>/crm/tab/Mailing_Lists</td><td>G step 1</td></tr>
+      <tr><td>14</td><td><b>&ldquo;Impact Report Q2 2026&rdquo; Mailing List detail</b></td><td>/crm/tab/Mailing_Lists/{impactReportId}</td><td>G steps 2–3</td></tr>
+      <tr><td>15</td><td><b>Communication Log — filtered to Impact Report</b></td><td>/crm/tab/Communication_Logs?campaign=ImpactReport</td><td>G step 5</td></tr>
+      <tr><td>16</td><td><b>Marcus Weber — Contact detail</b></td><td>/crm/tab/Contacts/{marcusId}</td><td>G step 7</td></tr>
+      <tr><td>17</td><td><b>Consent Records list</b></td><td>/crm/tab/Consent_Records</td><td>G step 8</td></tr>
+      <tr><td>18</td><td><b>Setup → Users</b></td><td>/crm/settings/users</td><td>Profile-switching whenever needed</td></tr>
+    </tbody>
+  </table>
+
+  <h3>14:20 — Profile-switch dry run (5 min)</h3>
+  <p>Practise switching <code>uwc_admin</code>'s profile and back. The whole flow must take under 10 seconds while you narrate.</p>
+  <ul class="checks">
+    <li><span class="path">gear<span class="arrow">→</span>Users and Control<span class="arrow">→</span>Users<span class="arrow">→</span>uwc_admin</span> — click Profile dropdown — switch to <b>Reviewer</b> — Save</li>
+    <li>Open Sofia → confirm Client Script hides peer scores</li>
+    <li>Switch back to <b>IO Super Admin</b> — Save</li>
+    <li>Time yourself. If &gt; 12 seconds, pre-stage Tab 18 with the profile dropdown already open.</li>
+  </ul>
+
+  <h3>14:25 — Equipment + network (5 min)</h3>
+  <ul class="checks">
+    <li>Laptop on mains power. Battery should not become a factor.</li>
+    <li>Second monitor or tablet showing this playbook open. The panel never sees it.</li>
+    <li>Ethernet plug-in if available; Wi-Fi is the fallback. Run <a href="https://fast.com">fast.com</a> — minimum 25 Mbps up.</li>
+    <li>Mute Slack, Cliq, email, calendar notifications. Turn on Do Not Disturb.</li>
+    <li>Phone on silent next to you for Pranesh's fallback call.</li>
+    <li>Backup: this same demo is loaded in an incognito window in case Chrome session gets weird.</li>
+  </ul>
+
+  <h3>14:30 — Final walk-through (20 min)</h3>
+  <p>Click through the demo in fast-forward as if it were live. Practise each profile switch. Time each scenario against the targets in the Overview timing strip. If a scenario runs 30+ seconds over, trim the optional steps now &mdash; don't trim mid-demo.</p>
+
+  <h3>14:55 — Join the call</h3>
+  <ul class="checks">
+    <li>Join 5 minutes early. Camera + mic test. Greet the host.</li>
+    <li>Start screen-share with Chrome only — NOT full desktop (avoids accidentally showing Slack, files, password managers).</li>
+    <li>Verify the panel sees the Home tab fullscreen. Confirm with them: &ldquo;Can everyone see the UWC homepage?&rdquo;</li>
+    <li>Sip water. Take a breath. Smile. Begin at 15:00 exactly.</li>
+  </ul>
+
+  <div class="callout callout--alert">
+    <div class="callout__title">If anything fails at 14:50</div>
+    Call Pranesh. He has Setup access and can fix or reset on his side without you breaking screen-share. Buy time with: &ldquo;I'm just reloading our demo environment — one moment.&rdquo;
+  </div>
+</section>
+
+<!-- ========================== OPENING ========================== -->
+<section class="panel" id="p-open">
+  <h2 class="section">Opening (5 minutes)</h2>
+  <p class="section__sub">Set the frame: this is a real working CRM, not a slide deck.</p>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">1</div><div class="beat__title">Welcome &amp; A2Z context (90 sec)</div><div class="beat__timer">15:00–15:01:30</div></div>
+    <div class="beat__body">
+      <div class="beat__row">
+        <div class="beat__label">Say</div>
+        <div class="beat__say">&ldquo;Good afternoon, everyone. I'm Akanksha Anand from A2Z Cloud. Thank you for inviting us to present. Over the next ninety minutes I'll walk you through five workflows in a fully configured Zoho CRM, each mapped to the scenarios in your brief. Everything you'll see is happening in a live system &mdash; there are no slides today.&rdquo;</div>
+      </div>
+      <div class="beat__row">
+        <div class="beat__label">Do</div>
+        <div class="beat__do">Keep Tab 1 (Home dashboard) on screen. Don't navigate yet.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">2</div><div class="beat__title">Home dashboard tour (90 sec)</div><div class="beat__timer">15:01:30–15:03</div></div>
+    <div class="beat__body">
+      <div class="beat__row">
+        <div class="beat__label">Say</div>
+        <div class="beat__say">&ldquo;This is the IO Super Admin home dashboard. You can see the UWC banner, current applications open, upcoming tasks, and on the right the NC health summary. Everyone in your International Office will land here at sign-in.&rdquo;</div>
+      </div>
+      <div class="beat__row">
+        <div class="beat__label">Do</div>
+        <div class="beat__do">Slowly move cursor across each tile — Applications open · My Tasks · NC Health. Hover, don't click yet.</div>
+      </div>
+      <div class="beat__row">
+        <div class="beat__label">See</div>
+        <div class="beat__see">Panel sees a populated CRM, not an empty demo org. UWC sample data — Sofia, UWC Brazil, Atlantic — establishes credibility in the first 30 seconds.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">3</div><div class="beat__title">Scenario map &amp; ground rules (90 sec)</div><div class="beat__timer">15:03–15:04:30</div></div>
+    <div class="beat__body">
+      <div class="beat__row">
+        <div class="beat__label">Say</div>
+        <div class="beat__say">&ldquo;I'll be following one applicant — Sofia Almeida from UWC Brazil — through her selection, nomination, and placement. Along the way I'll switch to other roles to show how the same data appears differently. We'll then look at governance, NC oversight, and communications. I'll keep each scenario tight; we have 30 minutes at the end for your questions. Please interrupt at any time — Pranesh is also on the call if you'd like a deeper technical answer.&rdquo;</div>
+      </div>
+      <div class="beat__row">
+        <div class="beat__label">Ask</div>
+        <div class="beat__ask"><b>Likely panel question:</b> &ldquo;Will we see the applicant portal too?&rdquo;<br/><b>Answer:</b> &ldquo;Scenarios A and B cover the public portal, which we've shown you separately. Today's session focuses on the back-office CRM operation.&rdquo;</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">4</div><div class="beat__title">Transition to Scenario C (30 sec)</div><div class="beat__timer">15:04:30–15:05</div></div>
+    <div class="beat__body">
+      <div class="beat__row">
+        <div class="beat__label">Say</div>
+        <div class="beat__say">&ldquo;Let's start where selection begins. Sofia has submitted her application, it's passed eligibility checks, and an NC Admin has assigned two reviewers — Clara and Paulo. The next moment is the most sensitive one in the pipeline: blind, two-reviewer scoring with safeguarding controls. Let me switch to Clara's view.&rdquo;</div>
+      </div>
+      <div class="beat__row">
+        <div class="beat__label">Do</div>
+        <div class="beat__do">Switch to Tab 18 (Setup → Users). Open Profile dropdown — change to <b>Reviewer</b>. Save. Switch to Tab 2 (Applications — My Review Queue).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== SCENARIO C ========================== -->
+<section class="panel" id="p-c">
+  <h2 class="section">Scenario C · Selection, Scoring, Safeguarding (12 min)</h2>
+  <p class="section__sub">Centrepiece: blind two-reviewer scoring + safeguarding case workflow. Target finish: 15:17 BST.</p>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">1</div><div class="beat__title">Clara's review queue</div><div class="beat__timer">15:05–15:06 · 1 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;This is what Clara sees when she signs in. She's a National Committee Reviewer for Brazil. Her saved view shows only applications where she's been assigned as a reviewer and the application is currently under review. She has two on her plate — Sofia Almeida and Miguel Santos.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Tab 2 already open. Point cursor at the two rows. Don't open them yet.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Two rows: Sofia Almeida, Miguel Santos. Both Stage = Under Review.</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">2</div><div class="beat__title">Clara scores Sofia</div><div class="beat__timer">15:06–15:08 · 2 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Clara opens Sofia's application. The scoring happens in a subform on the application detail page — Academic Potential, Community Engagement, Communication Skills, UWC Values. I'll enter Clara's scores now.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Click Sofia's row → Application detail opens. Scroll to <b>Review Scores</b> subform. Click <b>+ Add Row</b>. Type 9, tab, 8, tab, 8, tab, 9, tab. Recommendation = <b>Yes</b>. Comments: <i>&ldquo;Outstanding personal statement; strong commitment to community work in São Paulo favela schools.&rdquo;</i> Click <b>Save</b>.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see"><code>Submitted_At</code> auto-populates. <code>Review_Count</code> increments to 1 (an automation fired in the background — point this out).</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Two automations just fired silently — the row's timestamp was set, and the Application's Review Count is now 1. Clara is done. She doesn't see Paulo's scores. She can't see Paulo's scores. Let me show you what happens when Paulo signs in.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">3</div><div class="beat__title">Switch to Paulo — blind review centrepiece</div><div class="beat__timer">15:08–15:10 · 2 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Paulo is the second reviewer. We don't have a separate user for him in this demo, but his profile is identical to Clara's, and a client-side script enforces the blind-review rule. Watch carefully when Paulo opens Sofia.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Open Tab 18 → Profile dropdown stays as Reviewer (same profile). Switch to a second Chrome window logged in as a different user, OR explain &ldquo;In production, this would be Paulo logging in.&rdquo; Then return to Sofia's record. Refresh.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Clara's row is visible but every <b>score column shows a dash</b> and Recommendation is hidden. <b>This is the field-level security in action.</b></div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Paulo can see Clara has submitted, but not what she scored. This is enforced regardless of how he tries to view the record &mdash; list view, detail view, exports, or APIs. The data is hidden until both reviewers complete.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Ask</div><div class="beat__ask"><b>Likely panel question:</b> &ldquo;What about an admin? Could they peek?&rdquo;<br/><b>Answer:</b> &ldquo;An IO Super Admin can see both rows, which we'll demonstrate at step 6. This is deliberate — for safeguarding cases or appeals, the IO needs oversight. We also log every view in an audit trail so peeks are traceable.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">4</div><div class="beat__title">Paulo submits — automation fires</div><div class="beat__timer">15:10–15:11:30 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Paulo enters his scores. Watch the top of the record — multiple things happen at once when his row saves.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do"><b>+ Add Row</b> in Review Scores. Enter 8, 9, 7, 9. Recommendation Yes. Comments: <i>&ldquo;Mature reflection on global citizenship; ready for IB rigour.&rdquo;</i> <b>Save</b>.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see"><code>Review_Count = 2</code> → <code>All_Reviews_Complete = true</code> → both rows now show full scores → an Average Score field appears at the top — <b>8.4 / 10</b>. A toast banner: &ldquo;Email sent to NC Admin: all reviews complete.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;The moment the second reviewer submits, the blind veil drops, scores become visible, the average is calculated, and an email is dispatched to the NC Admin to convene the selection panel. Zero manual handoff.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">5</div><div class="beat__title">Switch to Ana — NC Admin view</div><div class="beat__timer">15:11:30–15:13 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Ana is the NC Admin for Brazil. She received the email. She opens Sofia's record.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Switch to Tab 18 → Profile dropdown → <b>NC Admin</b> → Save → Refresh Sofia's tab.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Ana sees both Clara's and Paulo's full scores. The Average Score panel is prominent. Reviewer Comments are readable.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Ana now has the full picture. From here she would convene her NC's panel meeting, discuss alongside other applications under review, and capture a panel decision. For Sofia, the recommendation is to shortlist. Let me pause there and show you the safeguarding workflow on a different applicant first — because if a flag is raised mid-review, everything changes.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">6</div><div class="beat__title">Safeguarding flag on Miguel Santos</div><div class="beat__timer">15:13–15:15 · 2 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Miguel Santos's application is also under review. During Clara's reading of his personal statement, she identifies a passage that raises a safeguarding concern. As an NC volunteer, she has a duty to flag it immediately. Here's what that looks like in CRM.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Open Tab 4 (Miguel's Application). Click custom button <b>Raise Safeguarding Flag</b> in the top-right action bar. Modal opens — set Severity = <b>High</b>. Confirm.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Page reloads with a red banner: <b>🔒 Application locked — Safeguarding flag raised by Ana Carvalho on [today's date] at [now]</b>. Every field is now read-only. The Stage cannot be changed.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Three things just happened. The application is locked from any further progression. A Safeguarding Case has been opened in a separate, restricted module. And the IO Super Admin and Data Protection Lead have been emailed. Let me show you the case record.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">7</div><div class="beat__title">IO triage of the Safeguarding Case</div><div class="beat__timer">15:15–15:16:30 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Switching to the IO Super Admin — Fatima Al-Rashid in our example — who is responsible for triaging safeguarding cases globally.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Tab 18 → Profile = <b>IO Super Admin</b> → Save → open Tab 5 (Safeguarding Cases list). Top row is <code>SGC-2026-00001</code> linked to Miguel. Click it.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Case detail shows Reporter (Ana), Date Raised, Severity High, Status = Under Review, linked Application = Miguel, linked Contact = Miguel. Triage Notes field is empty and editable.</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">In Triage Notes type: &ldquo;Spoke with NC Chair and applicant's referee. Concern is age-appropriate context, not a risk. Approved to continue.&rdquo; Click <b>Save</b>. Then click the Status transition: <b>Under Review → Resolved</b>.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;The case is resolved, the audit trail is permanent, and Miguel's application is automatically unlocked for the NC to continue. Crucially — note that NC Admins cannot see Triage Notes. Only the IO and Data Protection Lead can. We've role-scoped sensitive fields at the field level.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">8</div><div class="beat__title">Sofia shortlisted — automated email</div><div class="beat__timer">15:16:30–15:17 · 30 sec</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Back to Sofia. The NC panel has decided to shortlist her. Watch what happens when Ana flips the stage.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Tab 18 → Profile = NC Admin → Save → Tab 3 (Sofia). Stage dropdown → <b>Shortlisted</b>. Save.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Stage colour changes to gold. A toast: &ldquo;Email sent to sofia.almeida@example.com&rdquo;. Open the email Sent log if you have time — preview the UWC-branded congratulations message.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Sofia receives a branded congratulations email. The pipeline now waits for IO Admissions to allocate her a school place — which is Scenario D.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="callout callout--ok">
+    <div class="callout__title">Scenario C summary (say verbatim)</div>
+    &ldquo;Two-reviewer blind scoring with field-level enforcement. Automated unlock when both submit. Safeguarding flag locks the application and opens a triage case visible only to IO and Data Protection. Every action is logged. We can move to Scenario D — placing Sofia in a school.&rdquo;
+  </div>
+</section>
+
+<!-- ========================== SCENARIO D ========================== -->
+<section class="panel" id="p-d">
+  <h2 class="section">Scenario D · Nomination, Place Allocation, Pack (11 min)</h2>
+  <p class="section__sub">Centrepiece: pivot allocation matrix + PDF nomination pack + Business Central sync. Target finish: 15:28 BST.</p>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">1</div><div class="beat__title">IO Place Allocation matrix</div><div class="beat__timer">15:17–15:18 · 1 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Each year IO Admissions allocates places per school per National Committee. We've modelled this as a custom module rendered in a pivot view. Schools across the top, National Committees down the side, places allocated in the cells.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Open Tab 6 (Place Allocations pivot view).</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">15-cell matrix: UWC Atlantic, Robert College Nordic, UWC Mahindra across; UWC Brazil, Germany, Kenya, India, UK down. Atlantic ↔ Brazil cell shows &ldquo;4 / 0&rdquo; (4 allocated, 0 used).</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">2</div><div class="beat__title">Adjust allocation live</div><div class="beat__timer">15:18–15:19 · 1 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Fatima in IO Admissions has just been informed that Atlantic has one more place than initially confirmed for Brazil. She bumps the quota.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Click <b>Allocate Places</b> custom button on the list view. Modal opens — locate row Atlantic × Brazil → change Allocated from 4 to 5. Confirm.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Cell refreshes to &ldquo;5 / 0&rdquo;. Audit log entry appears. Email sent to Ana (NC Admin Brazil) that quota has increased.</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">3</div><div class="beat__title">Ana's NC dashboard</div><div class="beat__timer">15:19–15:20 · 1 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Switching back to Ana — she sees the new place reflected on her dashboard.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Profile → NC Admin → Save. Open Home tab. Scroll to NC Brazil Dashboard tile.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Tile: &ldquo;Atlantic: 5 / 5 places available&rdquo;. Below: list of her shortlisted applicants ready to nominate &mdash; Sofia at the top.</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">4</div><div class="beat__title">Generate Sofia's nomination pack</div><div class="beat__timer">15:20–15:22 · 2 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Ana opens Sofia's record and clicks Generate Nomination Pack. This builds a UWC-branded PDF with applicant details, school target, NC reference number, and the personal statement — ready to send to the school.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Open Tab 3 (Sofia's Application). Stage should be Shortlisted from C. Set <b>School Nominated</b> = UWC Atlantic → Save. Click custom button <b>Generate Nomination Pack</b>.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Toast: &ldquo;Pack <code>NP-2026-00001</code> generated. NC Reference: <code>BR-2026-00041</code>&rdquo;. A new related Nomination Pack record appears in the right-hand panel.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;The pack is generated. Let's open it.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">5</div><div class="beat__title">Preview the PDF</div><div class="beat__timer">15:22–15:23 · 1 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Click the Nomination Pack in the related list → click the attached file. PDF opens in a new tab.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">UWC navy banner at the top. &ldquo;UWC Nomination Pack — BR-2026-00041&rdquo;. Sofia's details. Brazil NC. UWC Atlantic. Personal statement. Generated timestamp.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Branded, complete, and ready to be sent to UWC Atlantic's admissions office. Now let's actually nominate her.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">6</div><div class="beat__title">Nominate Sofia to Atlantic</div><div class="beat__timer">15:23–15:24:30 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Close PDF tab → back to Sofia. Click custom button <b>Nominate to School</b>. Confirmation modal: &ldquo;Confirm school = UWC Atlantic, places remaining = 5&rdquo;. Click <b>Confirm</b>.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Stage → <b>Nominated</b>. Quota decrements to 4. Email sent to Helen Richards (Atlantic Admissions Director). Pack Status updates to <b>Sent</b>.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Quota tracking is automatic — no spreadsheet, no manual count. Helen at Atlantic now has Sofia's pack in her queue.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">7</div><div class="beat__title">Helen accepts the nomination</div><div class="beat__timer">15:24:30–15:26 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Switching to Helen, who is the Admissions Director at UWC Atlantic. We've given Atlantic a restricted profile — Helen can only see nominations targeted to her school.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Profile → <b>School Admissions Director</b> → Save. Open Tab 7 (Nomination Packs — Sent filter). One row: Sofia. Click it. Click custom button <b>Accept Nomination</b>. Confirm.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Pack Status → <b>Accepted</b>. The linked Application's Stage auto-flips to <b>Placed</b>. Three emails fire: Sofia, Ana (NC Brazil), Fatima (IO).</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">8</div><div class="beat__title">Business Central sync</div><div class="beat__timer">15:26–15:27:30 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;On placement, our integration to Business Central fires automatically — that's where UWC tracks scholarship finance. The invoice reference is written back to the Application record so finance and admissions stay in sync.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Profile → IO Super Admin → Save. Open Sofia. Show <code>BC_Invoice_ID</code> field at top: &ldquo;INV-2026-456789&rdquo;.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;In production this calls the Microsoft Business Central API. For today's demo we're using a stub function that creates the reference — but the integration path is exactly the same.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Ask</div><div class="beat__ask"><b>Likely panel question:</b> &ldquo;What happens if Business Central is down?&rdquo;<br/><b>Answer:</b> &ldquo;We queue the sync in Zoho Flow and retry with exponential backoff. The Application is marked Placed regardless — finance reconciliation isn't on the critical path of the student journey.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="callout callout--ok">
+    <div class="callout__title">Scenario D summary (say verbatim)</div>
+    &ldquo;Per-school per-NC quota matrix. Automatic place tracking. Branded nomination pack generated as PDF. School acceptance triggers the Placed stage and a Business Central sync. Sofia now has a confirmed place at UWC Atlantic for 2026. Next, Governance.&rdquo;
+  </div>
+</section>
+
+<!-- ========================== SCENARIO E ========================== -->
+<section class="panel" id="p-e">
+  <h2 class="section">Scenario E · Governance &amp; Body Management (10 min)</h2>
+  <p class="section__sub">Centrepiece: Competency Matrix exposing 4 board-level gaps. Target finish: 15:38 BST.</p>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">1</div><div class="beat__title">Open Governance Bodies</div><div class="beat__timer">15:28–15:29 · 1 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;UWC has multi-layered governance. International Board at the top, regional boards, advisory committees per NC, and finance and safeguarding sub-committees. We model these as a custom module with self-referential parent-child relationships.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Open Tab 8 (Governance Bodies list).</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">5 bodies: International Board, UWC Brazil NC Board, UWC Kenya NC Board, Safeguarding Advisory Committee, Finance Sub-Committee. Each shows status, member count, and parent body.</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">2</div><div class="beat__title">Create a new committee</div><div class="beat__timer">15:29–15:30:30 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Suppose the International Board has just authorised a Programme Quality Committee. Adding it takes seconds.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Click <b>+ New</b>. Body Name = Programme Quality Committee. Type = Committee. Parent Body = UWC International Board. Status = Active. Purpose = &ldquo;Oversees academic quality and pedagogical alignment across the 18 schools.&rdquo; Save.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">New row appears with Member_Count = 0.</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">3</div><div class="beat__title">Open International Board detail</div><div class="beat__timer">15:30:30–15:32 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Click UWC International Board record.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Detail page: Identity section, Hierarchy section, Stats section. Below: <b>Memberships</b> related list. 5 members visible: Dame Catherine Prior (Chair, Active), <span style="color:var(--red);">Dr Ravi Menon (Trustee, EXPIRED Mar 2025)</span>, Sarah Okonkwo (Secretary, Active), <span style="color:var(--red);">Thomas Berger (Trustee, EXPIRED Dec 2024)</span>, Amina Hassan (Trustee, Active).</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Two memberships have expired and are flagged in red. The system tracked the term dates and flipped their status automatically when the terms ended. Sixty days before expiry the IO and the body chair were emailed about the impending renewal.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">4</div><div class="beat__title">Add a new member</div><div class="beat__timer">15:32–15:33 · 1 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">In Memberships related list click <b>+ Add Member</b>. Modal: Contact = Akanksha Anand. Role = Advisor. Appointed Date = today. Term Length = 3. Competencies Held = Programme Design, Youth Engagement. Save.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">New active membership appears. Term_Expires auto-calculates to today + 3 years.</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">5</div><div class="beat__title">Historical memberships</div><div class="beat__timer">15:33–15:34 · 1 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;The expired memberships aren't deleted — they remain in the system as a permanent record of who served when. Auditors and incoming Chairs need this trail.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Click Saved View dropdown → <b>Historical Memberships</b> (filter <code>Membership_Status != Active</code>).</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Dr Ravi Menon and Thomas Berger with their term dates and end reasons.</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">6</div><div class="beat__title">Competency Matrix — centrepiece</div><div class="beat__timer">15:34–15:37 · 3 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;This is the part of governance that's hardest to do well, and the most important. We need to know whether each active Board has the competencies its mandate requires — and where the gaps are. Here's the live matrix.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Open Tab 9 (Competency Matrix dashboard).</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Rows = Active Boards (3 boards). Columns = 11 board-required competencies. Cells: green tick if at least one active member holds the competency on that board, red cross if zero. <b>4 red cells</b> highlight on the International Board row: <b>Marketing &amp; Comms · Asia-Pacific Regional · Europe Regional · Americas Regional</b>.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Four gaps on the International Board today. Thomas Berger held Marketing and Comms — his term ended in December. Ravi Menon held Asia-Pacific — his ended in March. Europe Regional and Americas Regional have never been filled. The IO can immediately initiate searches with these clear gap statements.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Ask</div><div class="beat__ask"><b>Likely panel question:</b> &ldquo;Can we define our own competencies and which are board-required?&rdquo;<br/><b>Answer:</b> &ldquo;Yes — it's a custom module with editable picklists. You can add, retire, or recategorise competencies and choose which apply to each body type. The matrix recomputes overnight.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">7</div><div class="beat__title">Network summary report</div><div class="beat__timer">15:37–15:38 · 1 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Open Reports → <b>Governance Network Summary</b>.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Pie of body types (Board / Committee / Advisory). Bar chart of coverage percentage. Count of lapsed memberships network-wide.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;The Council Chair has a one-page picture of governance health across the entire network. Drill-through on any tile takes you to the underlying records.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="callout callout--ok">
+    <div class="callout__title">Scenario E summary (say verbatim)</div>
+    &ldquo;Hierarchical governance bodies, time-bounded memberships with automated lapse, a competency matrix that surfaces gaps the IO needs to act on. Auditable, configurable, and proactive. Onward to NC management.&rdquo;
+  </div>
+</section>
+
+<!-- ========================== SCENARIO F ========================== -->
+<section class="panel" id="p-f">
+  <h2 class="section">Scenario F · NC Management &amp; Volunteer Oversight (11 min)</h2>
+  <p class="section__sub">Centrepiece: NC health colour banding + Kenya volunteer training compliance. Target finish: 15:49 BST.</p>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">1</div><div class="beat__title">National Committees list</div><div class="beat__timer">15:38–15:39:30 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Your IO needs a single view of all NCs at a glance — which ones are healthy, which need attention, which are critical. Here it is, sorted by MoU health.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Open Tab 10 (NCs sorted by MoU Health).</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">5 NCs with colour-banded rows: <span style="color:var(--red);">UWC Kenya — Critical (red)</span>, <span style="color:var(--amber);">UWC India — Attention (amber)</span>, Brazil / Germany / UK — Good (green). Each row shows Country, Status, Members, MoU Health, Overdue MoUs count.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;The colours are computed by a nightly function based on each NC's overdue obligations. Kenya is critical today — let's see why.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">2</div><div class="beat__title">UWC Kenya detail</div><div class="beat__timer">15:39:30–15:41 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Click UWC Kenya → Tab 11 opens.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Detail page sections: NC Identity (Country, Code KE, Established 1962), Leadership (Chair = Grace Omondi), Member Stats (3 volunteers), MoU Obligations panel (4 obligations), Linked Programmes, Audit Log.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Kenya was established in 1962 — one of UWC's oldest national committees. Grace Omondi is the Chair. They have 3 active volunteers. Their MoU panel shows four obligations this year. One is overdue. Let me show you the volunteer side first, then come back to MoUs.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">3</div><div class="beat__title">Volunteer roster — training compliance</div><div class="beat__timer">15:41–15:42:30 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Click related list <b>NC Volunteers</b>.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">3 rows: <span style="color:var(--ok);">Grace Omondi — Chair — CURRENT</span>, <span style="color:var(--red);">Daniel Kimani — Selection Coordinator — EXPIRED</span>, <span style="color:var(--grey-4);">Aisha Waweru — Reviewer — MISSING</span>.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Three states. Grace is current. Daniel's safeguarding training expired eighteen months ago. Aisha has no training records at all — she's recently joined and hasn't started. The IO can see this for every NC in the network. Let me click Daniel.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">4</div><div class="beat__title">Daniel's training record</div><div class="beat__timer">15:42:30–15:43:30 · 1 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Open Daniel Kimani → Training Records related list.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">One record: Safeguarding training, Completed 1 Feb 2023, Expired 1 Feb 2025, Status <span style="color:var(--red);">EXPIRED</span>.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Safeguarding training is mandated to renew every two years. Daniel's lapsed in February. A reminder went out thirty days before expiry — that's an automated daily job. Until he renews, his status will continue to show as expired and the system would prevent him from being assigned to new applicants.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">5</div><div class="beat__title">Switch to Grace — NC Chair portal view</div><div class="beat__timer">15:43:30–15:45 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Now switching to Grace, the NC Chair. We've given her a focused profile that scopes her view strictly to Kenya — she can't see Brazil, India, or any other NC's data.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Tab 18 → Profile = NC Chair Portal Access → Save → reload Tab 11.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Grace lands on a Kenya-only dashboard. Her sidebar shows only Volunteers, MoU Obligations, Applications. No other NCs. No IO-wide data.</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">6</div><div class="beat__title">MoU obligations from Grace's view</div><div class="beat__timer">15:45–15:46:30 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Click MoU Obligations.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">4 obligations: <span style="color:var(--red);">Annual Report Q2 2026 — OVERDUE 58 days</span>, Safeguarding Self-Assessment 2026 — Pending, Financial Statements 2025 — Submitted (with linked document), DPIA Review 2026 — Pending.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Grace can see at a glance what she owes the IO and by when. She can submit directly through this portal — uploading her annual report would mark the obligation Submitted and dim it to grey. The IO sees the same data from the other side.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">7</div><div class="beat__title">IO NC Health Dashboard</div><div class="beat__timer">15:46:30–15:48 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Profile → IO Super Admin → Save → open Tab 12 (NC Health Dashboard).</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">KPI tiles: Total NCs <b>5</b>, Active <b>4</b>, Suspended <b>0</b>, Overdue MoUs network-wide <b>2</b>, Volunteers with training gaps <b>2</b>. Map view colour-bands each NC. Click-through to Kenya highlights all the issues.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Your Head of NCs has a global picture every morning. Patterns emerge — if multiple NCs have safeguarding training gaps, that's a signal to commission a regional refresher cohort. The data drives the action.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Ask</div><div class="beat__ask"><b>Likely panel question:</b> &ldquo;How quickly does the dashboard update?&rdquo;<br/><b>Answer:</b> &ldquo;The underlying values refresh nightly via scheduled functions. For real-time you can click the refresh icon — that recomputes on demand, takes a few seconds. We chose nightly to keep the system efficient at network scale; for 136 NCs that's still a comfortable load.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="callout callout--ok">
+    <div class="callout__title">Scenario F summary (say verbatim)</div>
+    &ldquo;Single source of truth for NC oversight. Volunteer training compliance tracked automatically. MoU obligations visible to both the NC and the IO. Scoped portal access protects data sovereignty per NC. Last scenario — communications and GDPR.&rdquo;
+  </div>
+</section>
+
+<!-- ========================== SCENARIO G ========================== -->
+<section class="panel" id="p-g">
+  <h2 class="section">Scenario G · Comms, Mailing Lists, GDPR (11 min)</h2>
+  <p class="section__sub">Centrepiece: opted-out contact excluded automatically + immutable consent audit trail. Target finish: 16:00 BST.</p>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">1</div><div class="beat__title">Open Mailing Lists</div><div class="beat__timer">15:49–15:50 · 1 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;UWC's communications team needs to build mailing lists from CRM, send through Mailchimp, log every send, and respect consent. Here's how that flow works.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Open Tab 13 (Mailing Lists).</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">One Draft list: &ldquo;Impact Report Q2 2026&rdquo;. Status Draft. Member Count 0.</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">2</div><div class="beat__title">Build &amp; preview with consent exclusion</div><div class="beat__timer">15:50–15:52 · 2 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;The list has a segment criteria — donors, alumni, and volunteers — with an automatic consent exclusion. Watch what happens when I build it.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Open the Impact Report list → click <b>Build &amp; Preview</b>.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Preview pane: 4 recipients — Jonathan Osei (Donor), Isabelle Fontaine (Donor), Sam Blackwood (Alumni), Grace Omondi (NC Chair). <b>1 excluded — Marcus Weber: Opted Out (Email channel, 22 Apr 2026)</b>. Member_Count = 4, Exclusion_Count = 1, Status = Built.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Marcus opted out of email marketing on the twenty-second of April. The system knew, the system excluded him, and it told us why. We don't rely on the marketing team to remember — consent is enforced at list-build time.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">3</div><div class="beat__title">Push to Mailchimp</div><div class="beat__timer">15:52–15:53 · 1 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Click <b>Push to Mailchimp</b>. Modal: &ldquo;Push 4 contacts as audience MC-Demo?&rdquo; → Confirm.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Toast: &ldquo;Synced to Mailchimp&rdquo;. Campaign record created with <code>Mailchimp_Campaign_Id = MC-demo-000123</code>. Status → Sent.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;The audience is pushed as a Mailchimp audience. From here your marketing team picks up in Mailchimp to compose and schedule the campaign. When Mailchimp reports opens and clicks back, those events land here as well — let me show you.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">4</div><div class="beat__title">Communication Log — bulk write</div><div class="beat__timer">15:53–15:54:30 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Open Tab 15 (Communication Logs filtered to Impact Report).</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">5 rows: 4 Outbound to the included contacts, 1 <b style="color:var(--red);">BLOCKED (opted out)</b> for Marcus with Suppression Reason populated.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Even though Marcus didn't receive the email, the log records that we tried — and why we didn't send. That suppression trace is critical for GDPR Article 30 record-keeping. We can prove every decision we made about every contact, forever.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">5</div><div class="beat__title">Jonathan's communication history</div><div class="beat__timer">15:54:30–15:56 · 1.5 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Each contact also has a communication history tab. Switching to Jonathan, our donor.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Find Jonathan Osei in Contacts. Open detail. Click related list <b>Communication History</b>.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">1 row: Impact Report Q2 2026 send. Sent_At, Open_Status, Campaign link.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;When your fundraisers call Jonathan, they see exactly what we've sent him and when. No more cross-checking with Mailchimp manually. Everything lives here.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">6</div><div class="beat__title">Marcus — the opted-out contact</div><div class="beat__timer">15:56–15:58 · 2 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Switching to Marcus — this is where GDPR enforcement gets concrete.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Open Tab 16 (Marcus Weber Contact).</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">Red banner at the top of the record: <b>🚫 Email channel: OPTED OUT (since 22 April 2026)</b>. The send-email button is disabled with a tooltip explaining why.</div></div>
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Scroll to Consent Records related list. Two rows: an <b>Opted In</b> from Onboarding 12 Feb 2022, and an <b>Opted Out</b> from 22 Apr 2026. Try to click Edit on one → modal &ldquo;Consent Records are immutable for GDPR audit. Create a new record to reflect a consent change.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Consent records cannot be edited or deleted — they're write-once. That immutability is what makes the audit defensible. Every consent state change creates a new immutable record with timestamp, source, lawful basis, and channel. We can reconstruct Marcus's exact consent posture at any point in history.&rdquo;</div></div>
+      <div class="beat__row"><div class="beat__label">Ask</div><div class="beat__ask"><b>Likely panel question:</b> &ldquo;Could a user delete consent records by accident?&rdquo;<br/><b>Answer:</b> &ldquo;No. The immutability is enforced by a validation rule at the platform layer — even Super Admins can't bypass it without first removing the rule, which is itself audit-logged. It's belt-and-braces.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">7</div><div class="beat__title">Consent Audit Log</div><div class="beat__timer">15:58–15:59 · 1 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">Open Tab 17 (Consent Records list, sorted by Recorded_At DESC).</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">All consent changes in the org. Search box prominent (used for DSAR lookups).</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;The Data Protection Lead has a single pane for the entire org's consent activity. When a Subject Access Request comes in — and they do come in — the response is a search away.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">8</div><div class="beat__title">DSAR one-click export (optional)</div><div class="beat__timer">15:59–16:00 · 1 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Do</div><div class="beat__do">On Marcus's contact → click custom button <b>Generate Consent Audit Trail</b>.</div></div>
+      <div class="beat__row"><div class="beat__label">See</div><div class="beat__see">CSV downloads into the browser. File contains all of Marcus's consent records with timestamps, sources, IP/reference, and lawful basis.</div></div>
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;This is the response artifact for a Subject Access Request. One click, fully audit-ready, signed off by the DPL.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <div class="callout callout--ok">
+    <div class="callout__title">Scenario G summary (say verbatim)</div>
+    &ldquo;Consent-aware mailing lists. Mailchimp sync with full communication logging including blocked attempts. Immutable consent audit trail and one-click DSAR export. Every promise we make about data is enforced by the platform, not by people remembering. That brings us to the end of the workflows.&rdquo;
+  </div>
+</section>
+
+<!-- ========================== CLOSING + Q&A ========================== -->
+<section class="panel" id="p-close">
+  <h2 class="section">Closing &amp; Q&amp;A (30 min from 16:00)</h2>
+  <p class="section__sub">Lock in what they saw, surface what they didn't, then open the floor.</p>
+
+  <h3>Closing summary (3 min · 16:00–16:03)</h3>
+  <div class="beat">
+    <div class="beat__head"><div class="beat__num">★</div><div class="beat__title">Anchor what they saw</div><div class="beat__timer">3 min</div></div>
+    <div class="beat__body">
+      <div class="beat__row"><div class="beat__label">Say</div><div class="beat__say">&ldquo;Quickly anchoring what we covered. Selection: blind two-reviewer scoring with safeguarding triage. Nomination: per-school per-NC quota with a branded PDF pack and Business Central sync. Governance: time-bounded memberships with a competency gap matrix. NC oversight: health colour banding, training compliance, MoU tracking, scoped portal access. Communications: consent-aware lists, immutable audit trail, one-click DSAR. Everything you saw is in a live Zoho CRM org, configured by A2Z Cloud, sitting on Zoho's EU data centre.&rdquo;</div></div>
+    </div>
+  </div>
+
+  <h3>What we deliberately didn't show today (2 min · 16:03–16:05)</h3>
+  <div class="callout">
+    Be honest about scope. Build trust by naming what's outside today's demo:
+    <ul style="margin:8px 0 0 18px;">
+      <li>The full applicant portal (Scenario B) &mdash; separately demonstrated</li>
+      <li>The NC Admin's programme configuration view (Scenario A)</li>
+      <li>The Mailchimp UI itself &mdash; that's a separate vendor product</li>
+      <li>The Business Central interface &mdash; we triggered a sync but didn't open BC</li>
+      <li>Bulk migration tools &mdash; happy to follow up with a walkthrough of those</li>
+    </ul>
+  </div>
+
+  <h3>Open the floor (25 min · 16:05–16:30)</h3>
+  <p>Pause for 4 seconds after this line before saying anything else: <i>&ldquo;What would be most useful to dig into?&rdquo;</i></p>
+
+  <h3>Anticipated questions &amp; answers</h3>
+
+  <div class="qa"><div class="qa__q">How long would it take to configure a new National Committee?<span class="qa__tag">Process</span></div><div class="qa__a">For a routine NC where the data model matches an existing one, configuration is a single record plus seeding volunteers and MoU obligations. Around two hours of admin time. For an NC that needs a localised application form &mdash; like the Brazil two-essay Local Questions structure &mdash; we'd add half a day for the form configuration and translation review.</div></div>
+
+  <div class="qa"><div class="qa__q">How does this handle the 136 NC scale? Will the matrix performance hold?<span class="qa__tag">Scale</span></div><div class="qa__a">The Competency Matrix runs as a scheduled function nightly that's measured in seconds even at 200 bodies and 2,000 memberships. The NC Health Dashboard is similar. For real-time on-demand recompute we cap at 30 NCs per call to stay well within Zoho's API limits. We've stress-tested in a 1,800-user StudyIn deployment as a precedent.</div></div>
+
+  <div class="qa"><div class="qa__q">What happens to the data if we move off Zoho in five years?<span class="qa__tag">Exit</span></div><div class="qa__a">Full data export is supported natively &mdash; CSV at the module level, JSON at the API level. Custom-module data is exportable on the same terms as standard. We typically scope a 30-day handover in the close-down phase to extract and verify. Your data is yours.</div></div>
+
+  <div class="qa"><div class="qa__q">Can a National Committee override the global picklist for, say, Decline Reasons?<span class="qa__tag">Customisation</span></div><div class="qa__a">Picklists are global per field, but we can scope visibility &mdash; a Brazil-only reason can be hidden for Germany's profile. Where genuinely different vocabularies are needed we'd add a second field rather than fragment the same field; this preserves cross-NC reporting integrity.</div></div>
+
+  <div class="qa"><div class="qa__q">If a reviewer leaves mid-cycle, what happens to their open scores?<span class="qa__tag">Continuity</span></div><div class="qa__a">The NC Admin reassigns the application to a new reviewer through the Assigned Reviewers field. The original reviewer's row remains on the audit trail. The system requires two completed reviews regardless of who completed them, so the count restarts at one and the new reviewer enters their scores. We've shipped that as a saved bulk action so an NC Admin can reassign multiple in one click.</div></div>
+
+  <div class="qa"><div class="qa__q">How does the safeguarding flag interact with our existing safeguarding policy?<span class="qa__tag">Safeguarding</span></div><div class="qa__a">The CRM workflow is a routing and audit mechanism &mdash; it ensures concerns reach the right person within seconds and creates an unalterable record. The professional safeguarding response &mdash; contacting the applicant, working with school counsellors, involving local authorities where required &mdash; remains owned by your trained safeguarding leads. We'd integrate with your existing reporting standards and templates.</div></div>
+
+  <div class="qa"><div class="qa__q">Will reviewers need training to use this?<span class="qa__tag">Adoption</span></div><div class="qa__a">Reviewer training is in our delivery plan &mdash; one 60-minute live session plus a 5-minute video to reference. The interface is deliberately narrow for them: they see only what they need to score. Most reviewers we've trained are scoring confidently within ten minutes.</div></div>
+
+  <div class="qa"><div class="qa__q">What's the disaster recovery story?<span class="qa__tag">DR</span></div><div class="qa__a">Zoho's EU data centre is multi-region within EU. Nightly backups are retained for 90 days as standard, longer on request. On top of that we configure a weekly export to your Google Drive as a tertiary copy. Recovery point objective is 24 hours, recovery time is under 2 hours for full org restore in our experience.</div></div>
+
+  <div class="qa"><div class="qa__q">How accessible is the back-office UI?<span class="qa__tag">A11y</span></div><div class="qa__a">Zoho's standard CRM UI is WCAG 2.1 AA aligned but not formally audited to 2.2 AA. For your internal users we mitigate with keyboard-friendly saved views, configurable font sizing, and high-contrast theme support. Public-facing surfaces &mdash; the applicant portal in Scenario B &mdash; are custom-built by us and we WCAG 2.2 AA audit those explicitly.</div></div>
+
+  <div class="qa"><div class="qa__q">Can we white-label per NC?<span class="qa__tag">Branding</span></div><div class="qa__a">For internal CRM views &mdash; limited; Zoho brand presence is intentional. For NC-facing portals &mdash; full white-label is part of the custom portal scope. Each NC can have its own subdomain, colour scheme, logo, and language localisation. We've architected for this from day one.</div></div>
+
+  <div class="qa"><div class="qa__q">How do you handle the migration from our current spreadsheets?<span class="qa__tag">Migration</span></div><div class="qa__a">Our delivery plan includes a 102-hour migration workstream. We profile each spreadsheet, build a mapping, run a sample migration into a UAT org, you validate, we run the production migration with rollback safety. We've done this exact pattern for 18-school StudyIn moving from 2,400 spreadsheets.</div></div>
+
+  <div class="qa"><div class="qa__q">What's the support model after go-live?<span class="qa__tag">Support</span></div><div class="qa__a">10 hours of hypercare in the first two weeks. Then a structured Service Level Agreement &mdash; UK office hours by default, with severity-tiered response times. Pranesh's team handles tier-1 and tier-2; tier-3 escalations to Zoho engineering go through us. Full breakdown is in our pricing schedule.</div></div>
+
+  <div class="qa"><div class="qa__q">If we picked you, when could we start?<span class="qa__tag">Timeline</span></div><div class="qa__a">Subject to contract, we can kick off within two weeks of award. The 10-15 NC pilot by October 2026 is achievable from a July 2026 contract start. Full network rollout by February 2027 is on the critical path but well within the team capacity we've scoped.</div></div>
+
+  <div class="qa"><div class="qa__q">What happens if requirements change after contract signing?<span class="qa__tag">Change</span></div><div class="qa__a">Change requests follow a documented process — impact analysis within five working days, no work-on-trust. We've built in a 15% contingency on the Phase 2 build hours to absorb genuine clarifications without renegotiation. Anything larger is a separate change order with transparent scoping.</div></div>
+
+  <div class="qa"><div class="qa__q">Can you show us the data model briefly?<span class="qa__tag">Architecture</span></div><div class="qa__a">Absolutely &mdash; let me open the architecture diagram. <i>(Have <code>99_data_model.html</code> ready as backup tab. This is one of the few times the wireframe is useful.)</i></div></div>
+
+  <h3>If the panel goes silent (last 5 min · 16:25–16:30)</h3>
+  <p>Don't fill silence. Wait. If still nothing after 8 seconds, prompt:</p>
+  <div class="callout callout--warn">
+    <i>&ldquo;Two things I'd love your thoughts on if we have time. First &mdash; was there anything that you expected to see in today's demo that we didn't show? And second &mdash; what would be most useful to follow up with you on, before the evaluation completes?&rdquo;</i>
+  </div>
+
+  <h3>Final close (16:28–16:30)</h3>
+  <div class="callout callout--ok">
+    <i>&ldquo;Thank you for the time and the thoughtful questions. We'll send a written follow-up tomorrow morning summarising the points raised. Pranesh and I are available for further detail at any point. Best of luck with the rest of your evaluations &mdash; we'd be delighted to be your partner.&rdquo;</i>
+  </div>
+</section>
+
+<!-- ========================== RECOVERY ========================== -->
+<section class="panel" id="p-recover">
+  <h2 class="section">Recovery scripts</h2>
+  <p class="section__sub">When the system stalls, broken behaviour appears, or a workflow doesn't fire as expected. Stay calm, narrate the design, move on.</p>
+
+  <h3>Universal recovery posture</h3>
+  <div class="callout callout--alert">
+    <div class="callout__title">Three rules</div>
+    <ol style="margin:6px 0 0 18px;">
+      <li>Never apologise more than once for the same issue. After the first apology, switch to narration.</li>
+      <li>Don't show your console, your URL bar, or refresh repeatedly in front of the panel. If you need to fix something, switch your screen-share to a paused state and tell the panel: &ldquo;Bear with me one moment.&rdquo;</li>
+      <li>Pranesh on Cliq is your fallback. If you're stuck for more than 30 seconds, message him &ldquo;HELP&rdquo; on Cliq. He'll reset on his side.</li>
+    </ol>
+  </div>
+
+  <h3>Specific recovery scripts</h3>
+
+  <table>
+    <thead><tr><th>What broke</th><th>What to say</th><th>What to do</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Page won't load (Zoho slow)</td>
+        <td><i>&ldquo;Bear with me for a moment — the system is just loading the related records.&rdquo;</i></td>
+        <td>Wait 5 seconds. If still loading, navigate to a sibling tab and say: &ldquo;Let me just bring up a slightly different angle while that resolves.&rdquo;</td>
+      </tr>
+      <tr>
+        <td>Workflow didn't fire (e.g. Review Count didn't increment)</td>
+        <td><i>&ldquo;The automation runs asynchronously — in production it completes within a second; we just need to refresh.&rdquo;</i></td>
+        <td>Refresh once. If still wrong, narrate the expected outcome: &ldquo;What you'd see here is the count moving to 2 and the email firing.&rdquo; Then move on to step 5 and don't dwell.</td>
+      </tr>
+      <tr>
+        <td>Custom button missing or greyed out</td>
+        <td><i>&ldquo;That button is conditional on the application stage — let me verify the stage and walk you through what would happen.&rdquo;</i></td>
+        <td>Open the field reference appendix (98_module_fields_catalog.html or your knowledge of the visibility rule). Describe the trigger. Don't try to debug live.</td>
+      </tr>
+      <tr>
+        <td>Profile switch fails (wrong profile applied)</td>
+        <td><i>&ldquo;Let me reset our role and try again — there's a brief cache propagation when profiles change.&rdquo;</i></td>
+        <td>Switch back to IO Super Admin, then to the target profile again. If still wrong, go to incognito Chrome window with the target profile pre-logged in (Pranesh has it ready).</td>
+      </tr>
+      <tr>
+        <td>Email Alert toast doesn't appear</td>
+        <td><i>&ldquo;Email Alerts dispatch through Zoho's email pipeline — the toast indicator can be skipped if the pipeline is busy. Let me open the Email Sent log to show you the email is there.&rdquo;</i></td>
+        <td>Setup → Email Notifications → Sent → filter to the last minute. Pull up the actual email content.</td>
+      </tr>
+      <tr>
+        <td>Competency Matrix dashboard blank</td>
+        <td><i>&ldquo;The matrix recomputes nightly — let me run it on demand.&rdquo;</i></td>
+        <td>Setup → Functions → <code>recompute_competency_gaps</code> → Execute. Returns in ~5 seconds. Refresh the dashboard.</td>
+      </tr>
+      <tr>
+        <td>PDF generation fails on Generate Pack</td>
+        <td><i>&ldquo;I'll open a pre-generated pack from earlier in the cycle to show you the format.&rdquo;</i></td>
+        <td>Open the Nomination Pack record for Kwame (pre-seeded in demo data with attached HTML). Walk through the format.</td>
+      </tr>
+      <tr>
+        <td>Mailchimp push errors</td>
+        <td><i>&ldquo;The Mailchimp connector is using a stub for today — let me show you the Communication Logs that would be written.&rdquo;</i></td>
+        <td>Skip Mailchimp step. Go directly to Tab 15 (Comm Logs). The data is pre-seeded from <code>demo_reset</code> so you can show all the rows including Marcus's BLOCKED.</td>
+      </tr>
+      <tr>
+        <td>Consent Records edit doesn't show the validation error</td>
+        <td><i>&ldquo;The validation rule prevents the save — in this demo it might block silently. Let me try directly via the API.&rdquo;</i></td>
+        <td>Don't try the API live. Pivot to: &ldquo;The point is that the data is locked at the platform layer — even our administrators can't bypass it.&rdquo; Continue.</td>
+      </tr>
+      <tr>
+        <td>Browser tab crashes</td>
+        <td><i>&ldquo;Apologies — let me reload that tab.&rdquo;</i></td>
+        <td>Close and reopen from the bookmark folder. The bookmark stack is your safety net &mdash; you don't have to retype any URL.</td>
+      </tr>
+      <tr>
+        <td>Whole Zoho org becomes unreachable</td>
+        <td><i>&ldquo;Bear with me — I'm experiencing a connection issue on the demo environment. Pranesh, can you confirm the status?&rdquo;</i></td>
+        <td>Pranesh checks <code>status.zoho.eu</code>. If outage is real, switch to backup walkthrough using <code>99_data_model.html</code> + <code>98_module_fields_catalog.html</code>. Take the panel through the architecture for 5 minutes while connectivity returns.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>The two unrecoverable scenarios</h3>
+  <div class="callout callout--alert">
+    <div class="callout__title">If Zoho EU goes fully down for &gt; 5 minutes</div>
+    You have one option: open <code>99_data_model.html</code> and <code>98_module_fields_catalog.html</code> from your local copy. Walk the panel through the architecture and field model verbally. End with: &ldquo;We're aware that data centre availability is an evaluation criterion for you. Zoho's published EU uptime is 99.99%; we'd be happy to share the SLA documentation as a follow-up.&rdquo; Move to closing early. Don't extend.
+  </div>
+
+  <div class="callout callout--alert">
+    <div class="callout__title">If your laptop completely dies</div>
+    Pranesh hands you a phone with the meeting on Zoho Meeting. You re-join. He takes over screen share from his laptop and continues. He has the same playbook open.
+  </div>
+
+  <h3>What good recovery looks like</h3>
+  <p>The panel will not remember technical hiccups. They'll remember whether you stayed composed, whether you knew what should have happened, and whether you finished within time. A 5-second pause feels like 30 seconds &mdash; embrace it instead of filling it.</p>
+</section>
+
+</main>
+
+<footer>
+  <div>UWC International &middot; CRM + Applications Platform Bidder Demo</div>
+  <div class="small">Playbook by Sam Prabhu &middot; A2Z Cloud Ltd &middot; for Akanksha Anand &middot; Demo Mon 1 June 2026</div>
+</footer>
+
+<script>
+  (function() {
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.panel');
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var target = tab.getAttribute('data-target');
+        tabs.forEach(function(t) { t.classList.remove('tab--active'); });
+        panels.forEach(function(p) { p.classList.remove('panel--active'); });
+        tab.classList.add('tab--active');
+        var panel = document.getElementById(target);
+        if (panel) panel.classList.add('panel--active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (history.replaceState) history.replaceState(null, '', '#' + target);
+      });
+    });
+    if (location.hash) {
+      var hash = location.hash.slice(1);
+      var tab = document.querySelector('.tab[data-target="' + hash + '"]');
+      if (tab) tab.click();
+    }
+  })();
+</script>
+
+</body>
+</html>
