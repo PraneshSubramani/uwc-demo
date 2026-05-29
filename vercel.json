@@ -16,6 +16,7 @@
     { "source": "/dashboards/de", "destination": "/wireframes/93_dashboards_scenario_DE.html", "permanent": false },
     { "source": "/test/d", "destination": "/wireframes/94_scenario_D_test_guide.html", "permanent": false },
     { "source": "/test/e", "destination": "/wireframes/95_scenario_E_test_guide.html", "permanent": false },
+    { "source": "/mockups/e", "destination": "/wireframes/95b_scenario_E_mockups.html", "permanent": false },
     { "source": "/test/f", "destination": "/wireframes/96_scenario_F_test_guide.html", "permanent": false },
     { "source": "/sample/nomination-pack", "destination": "/wireframes/samples/nomination_pack_sofia.html", "permanent": false },
     { "source": "/sample/nomination-pack.pdf", "destination": "/wireframes/samples/nomination_pack_sofia.pdf", "permanent": false },

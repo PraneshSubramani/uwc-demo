@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scenario E — Governance Dashboard Mockups · UWC International CRM</title>
+<link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============ base + zoho-faithful chrome (audited tokens) ============ */
+:root{
+  --navy:#003087; --navy-deep:#001a4d; --red:#C8102E;
+  --tb-bg:#fff; --tb-border:#e5e7eb; --tb-text:#1f2937; --tb-muted:#6b7280;
+  --sb-bg:#f7f8fa; --sb-border:#e8eaed; --sb-text:#4a5568; --sb-active-bg:#e6efff; --sb-active-text:#2563eb;
+  --content-bg:#fff; --content-alt:#f9fafb; --border:#e5e7eb; --divider:#ebeef2;
+  --text:#1f2937; --text-sec:#4b5563; --muted:#6b7280; --link:#2563eb; --primary:#3b6ef5;
+  --good-bg:#d1fae5; --good-tx:#065f46; --att-bg:#fef3c7; --att-tx:#92400e; --crit-bg:#fee2e2; --crit-tx:#991b1b;
+  --info-bg:#dbeafe; --info-tx:#1e40af;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;color:var(--text);background:#eef1f6;-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:var(--link);text-decoration:none}
+code{font-family:'JetBrains Mono',monospace;font-size:11px;background:#eef2f7;padding:1px 5px;border-radius:4px}
+
+/* page intro band (UWC) */
+.intro{background:linear-gradient(135deg,#001a4d,#003087 55%,#004A97);color:#fff;border-bottom:3px solid var(--red);padding:22px 32px}
+.intro-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:16px}
+.intro .mark{width:46px;height:46px;border-radius:50%;background:#fff;color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:15px}
+.intro h1{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:21px}
+.intro p{font-size:12.5px;color:rgba(255,255,255,0.72);margin-top:3px}
+.intro .back{margin-left:auto;font-size:12.5px;color:rgba(255,255,255,0.85);font-weight:500}
+
+.wrap{max-width:1200px;margin:0 auto;padding:24px 32px 56px}
+.mock-label{display:flex;align-items:baseline;gap:10px;margin:34px 0 6px}
+.mock-label .t{font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:600;color:var(--navy)}
+.mock-label .tag{font-size:10.5px;font-weight:600;letter-spacing:0.4px;text-transform:uppercase;color:#fff;background:var(--navy);padding:2px 9px;border-radius:999px}
+.mock-desc{font-size:12.5px;color:var(--text-sec);margin-bottom:14px;max-width:920px}
+
+/* ===== the Zoho CRM window frame ===== */
+.crm{border:1px solid #d6dae1;border-radius:10px;overflow:hidden;box-shadow:0 10px 30px rgba(15,23,42,0.13);background:#fff}
+.crm-tb{height:48px;background:var(--tb-bg);border-bottom:1px solid var(--tb-border);display:flex;align-items:center;gap:14px;padding:0 14px}
+.crm-tb .logo{width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:9px}
+.crm-tb .brand{font-weight:600;font-size:13px;color:var(--tb-text)}
+.crm-tb .tabs{display:flex;gap:2px;margin-left:14px}
+.crm-tb .tab{font-size:12.5px;color:var(--tb-muted);padding:6px 10px;border-radius:6px}
+.crm-tb .tab.on{color:var(--navy);background:#eef3ff;font-weight:600}
+.crm-tb .search{margin-left:auto;background:#f3f5fa;border-radius:6px;height:30px;width:230px;display:flex;align-items:center;padding:0 10px;font-size:12px;color:#9aa3b8;gap:7px}
+.crm-tb .ico{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#6b7280;font-size:14px}
+.crm-tb .av{width:28px;height:28px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600}
+.crm-body{display:flex;min-height:340px}
+.crm-sb{width:188px;background:var(--sb-bg);border-right:1px solid var(--sb-border);padding:10px 0;flex-shrink:0}
+.crm-sb .si{display:flex;align-items:center;gap:9px;padding:7px 16px;font-size:12.5px;color:var(--sb-text)}
+.crm-sb .si.on{background:var(--sb-active-bg);color:var(--sb-active-text);font-weight:600;border-right:2px solid var(--sb-active-text)}
+.crm-sb .si .d{width:6px;height:6px;border-radius:2px;background:currentColor;opacity:.5}
+.crm-main{flex:1;background:#fff;min-width:0}
+.crm-strip{display:flex;align-items:center;gap:12px;padding:11px 18px;border-bottom:1px solid #f0f2f5}
+.crm-strip .view{font-size:13px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:6px}
+.crm-strip .chevr{color:#9aa3b8;font-size:11px}
+.crm-strip .btn{margin-left:auto;font-size:12px;font-weight:500;color:#fff;background:var(--primary);padding:6px 13px;border-radius:6px}
+.crm-strip .btn.ghost{background:#fff;color:var(--text);border:1px solid var(--border)}
+.crm-content{padding:18px}
+
+/* ===== KPI tiles ===== */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.kpi{border:1px solid var(--border);border-radius:9px;padding:14px 16px;position:relative;overflow:hidden;background:#fff}
+.kpi::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.kpi.b::before{background:#2563eb}.kpi.g::before{background:#16a34a}.kpi.r::before{background:#dc2626}.kpi.a::before{background:#ea580c}
+.kpi .v{font-size:28px;font-weight:700;line-height:1}
+.kpi .l{font-size:11px;color:var(--muted);margin-top:5px}
+
+/* ===== matrix ===== */
+.matrix-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:9px}
+table.matrix{border-collapse:collapse;width:100%;font-size:12px;min-width:680px}
+table.matrix th,table.matrix td{border:1px solid #edf0f4;padding:9px 10px;text-align:center}
+table.matrix thead th{background:#f7f8fa;font-weight:600;color:var(--text-sec);font-size:11px;position:sticky;top:0}
+table.matrix thead th.corner{text-align:left;color:var(--navy);font-weight:700}
+table.matrix td.rowh{text-align:left;font-weight:600;color:var(--text);background:#fbfcfe;white-space:nowrap}
+table.matrix td.rowh small{display:block;font-weight:400;color:#9aa3b8;font-size:10px}
+.cell-ok{background:#f0fdf4}.cell-gap{background:#fef2f2}
+.tick{color:#16a34a;font-weight:700;font-size:14px}
+.cross{color:#dc2626;font-weight:700;font-size:14px}
+.foot td{background:#f7f8fa;font-weight:700;font-size:11px}
+.foot .gapn{color:#dc2626}
+.matrix-cap{display:flex;gap:16px;margin-top:10px;font-size:11px;color:var(--muted);flex-wrap:wrap}
+.matrix-cap span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border-radius:3px;border:1px solid #e5e7eb}
+.sw.ok{background:#f0fdf4}.sw.gap{background:#fef2f2}
+
+/* ===== reports / charts ===== */
+.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.rep{border:1px solid var(--border);border-radius:9px;padding:16px}
+.rep h4{font-size:12.5px;font-weight:600;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.rep h4 .dot{width:8px;height:8px;border-radius:2px;background:var(--navy)}
+/* donut */
+.donut-wrap{display:flex;align-items:center;gap:18px}
+.donut{width:120px;height:120px;border-radius:50%;flex-shrink:0;
+  background:conic-gradient(#003087 0 50%,#2563eb 50% 75%,#7c3aed 75% 100%);
+  -webkit-mask:radial-gradient(circle 36px at center,transparent 98%,#000 100%);mask:radial-gradient(circle 36px at center,transparent 98%,#000 100%)}
+.legend{font-size:12px}
+.legend .li{display:flex;align-items:center;gap:8px;padding:3px 0}
+.legend .sq{width:11px;height:11px;border-radius:3px}
+.legend b{margin-left:auto;font-variant-numeric:tabular-nums}
+/* bars */
+.bars{display:flex;flex-direction:column;gap:10px}
+.bar-row{display:grid;grid-template-columns:130px 1fr 34px;align-items:center;gap:10px;font-size:11.5px}
+.bar-track{height:18px;background:#f1f5f9;border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#003087,#2563eb)}
+.bar-row .pct{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+/* lapsed KPI mini */
+.lapsed{margin-top:14px;border:1px solid #fde68a;background:#fffbeb;border-radius:9px;padding:12px 16px;display:flex;align-items:center;gap:14px}
+.lapsed .n{font-size:30px;font-weight:700;color:#92400e;line-height:1}
+.lapsed .x{font-size:12px;color:#92400e}
+
+/* ===== email alert mock ===== */
+.email{border:1px solid var(--border);border-radius:10px;overflow:hidden;max-width:640px}
+.email-bar{background:#f7f8fa;border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}
+.email-bar .dotr{width:11px;height:11px;border-radius:50%}
+.email-head{padding:16px 20px;border-bottom:1px solid var(--divider)}
+.email-head .subj{font-size:15px;font-weight:600;color:var(--text)}
+.email-head .meta{font-size:11.5px;color:var(--muted);margin-top:5px}
+.email-banner{background:linear-gradient(135deg,#001a4d,#003087);color:#fff;padding:18px 20px;font-family:'Playfair Display',serif;font-size:16px;font-weight:500;display:flex;align-items:center;gap:10px}
+.email-banner .m{width:30px;height:30px;border-radius:50%;background:#fff;color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-family:Inter}
+.email-body{padding:20px}
+.email-body p{font-size:13px;color:var(--text-sec);margin-bottom:12px;line-height:1.6}
+.email-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:6px 0 16px}
+.email-table td{padding:7px 0;border-bottom:1px solid var(--divider)}
+.email-table td:first-child{color:var(--muted);width:150px}
+.email-table td:last-child{font-weight:500}
+.email-cta{display:inline-block;background:var(--primary);color:#fff;font-size:12.5px;font-weight:600;padding:9px 18px;border-radius:6px}
+.email-foot{padding:14px 20px;border-top:1px solid var(--divider);font-size:10.5px;color:#9aa3b8}
+
+.pill{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 9px;border-radius:999px}
+.p-crit{background:var(--crit-bg);color:var(--crit-tx)}.p-att{background:var(--att-bg);color:var(--att-tx)}.p-good{background:var(--good-bg);color:var(--good-tx)}
+
+.note{border-radius:9px;padding:13px 16px;margin-top:14px;font-size:12px;line-height:1.55}
+.note.spec{background:#f8fafc;border:1px solid #e5e7eb;color:#475569}
+.note.spec b{color:var(--navy)}
+
+@media(max-width:820px){.kpis{grid-template-columns:repeat(2,1fr)}.report-grid{grid-template-columns:1fr}.crm-sb{display:none}.intro .back{display:none}}
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <div class="intro-inner">
+    <div class="mark">UWC</div>
+    <div>
+      <h1>Scenario E — Governance Dashboard Mockups</h1>
+      <p>How Tests 5 · 6 · 7 render for the customer — built in the audited Zoho CRM shell with the UWC navy theme</p>
+    </div>
+    <a href="95_scenario_E_test_guide.html" class="intro back">← Back to E test guide</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ============ TEST 5 — COMPETENCY MATRIX ============ -->
+  <div class="mock-label"><span class="t">Test 5 — Competency Matrix</span><span class="tag">Dashboard · HTML widget</span></div>
+  <p class="mock-desc">The centrepiece. A Boards × Required-Competencies grid on a Zoho dashboard. Green = an active member covers it; red = a gap. The four red cells are the headline the board must act on.</p>
+
+  <div class="crm">
+    <div class="crm-tb">
+      <div class="logo">UWC</div><div class="brand">UWC International</div>
+      <div class="tabs"><span class="tab">Governance Bodies</span><span class="tab on">Dashboards</span><span class="tab">Memberships</span></div>
+      <div class="search">⌕ Search</div>
+      <div class="ico">✦</div><div class="ico">⚙</div><div class="av">AA</div>
+    </div>
+    <div class="crm-body">
+      <div class="crm-sb">
+        <div class="si"><span class="d"></span> Home</div>
+        <div class="si on"><span class="d"></span> Governance Matrix</div>
+        <div class="si"><span class="d"></span> Network Summary</div>
+        <div class="si"><span class="d"></span> Bodies</div>
+        <div class="si"><span class="d"></span> Memberships</div>
+        <div class="si"><span class="d"></span> Competencies</div>
+      </div>
+      <div class="crm-main">
+        <div class="crm-strip"><span class="view">Governance Competency Matrix <span class="chevr">▾</span></span><span class="btn ghost">⟳ Refresh</span><span class="btn">Edit</span></div>
+        <div class="crm-content">
+          <div class="matrix-scroll">
+            <table class="matrix">
+              <thead><tr>
+                <th class="corner">Active Board ↓ / Required Competency →</th>
+                <th>Governance</th><th>Finance</th><th>Legal</th><th>Strategy</th>
+                <th>Marketing&nbsp;&amp;<br>Comms</th><th>Youth<br>Engagement</th><th>Safe&shy;guarding</th>
+                <th>Asia-Pac<br>Regional</th><th>Africa<br>Regional</th><th>Europe<br>Regional</th><th>Americas<br>Regional</th>
+              </tr></thead>
+              <tbody>
+                <tr>
+                  <td class="rowh">UWC International Board<small>5 members · 2 lapsed</small></td>
+                  <td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td>
+                  <td class="cell-gap"><span class="cross">✗</span></td><td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td>
+                  <td class="cell-gap"><span class="cross">✗</span></td><td class="cell-ok"><span class="tick">✓</span></td><td class="cell-gap"><span class="cross">✗</span></td><td class="cell-gap"><span class="cross">✗</span></td>
+                </tr>
+                <tr>
+                  <td class="rowh">UWC Brazil NC Board<small>4 members</small></td>
+                  <td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td>
+                  <td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td>
+                  <td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td>
+                </tr>
+                <tr>
+                  <td class="rowh">UWC Kenya NC Board<small>3 members</small></td>
+                  <td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td>
+                  <td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td>
+                  <td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td><td class="cell-ok"><span class="tick">✓</span></td>
+                </tr>
+                <tr class="foot">
+                  <td class="rowh" style="background:#f7f8fa">Gap Count (active boards missing it)</td>
+                  <td>0</td><td>0</td><td>0</td><td>0</td>
+                  <td class="gapn">1</td><td>0</td><td>0</td>
+                  <td class="gapn">1</td><td>0</td><td class="gapn">1</td><td class="gapn">1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="matrix-cap">
+            <span><span class="sw ok"></span> Covered — ≥1 active member holds it</span>
+            <span><span class="sw gap"></span> Gap — no active member holds it</span>
+            <span style="margin-left:auto">4 gaps · driven by 2 lapsed terms (Berger → Marketing &amp; Comms, Menon → Asia-Pac) + 2 never-covered regions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="note spec"><b>Build:</b> custom HTML widget "Governance Matrix" on a dashboard, fed by Deluge <code>getCompetencyMatrix()</code>; footer counts from <code>recompute_competency_gaps()</code>. Cell colours use UWC status tints (<code>#f0fdf4</code> / <code>#fef2f2</code>). Clicking a red cell drills to the competency record.</div>
+
+  <!-- ============ TEST 6 — NETWORK SUMMARY ============ -->
+  <div class="mock-label"><span class="t">Test 6 — Network Summary</span><span class="tag">Report dashboard</span></div>
+  <p class="mock-desc">A one-page governance-health picture for the Council Chair: body composition, competency coverage, and lapsed memberships network-wide. Standard Zoho report components.</p>
+
+  <div class="crm">
+    <div class="crm-tb">
+      <div class="logo">UWC</div><div class="brand">UWC International</div>
+      <div class="tabs"><span class="tab">Governance Matrix</span><span class="tab on">Network Summary</span></div>
+      <div class="search">⌕ Search</div><div class="ico">⚙</div><div class="av">AA</div>
+    </div>
+    <div class="crm-body">
+      <div class="crm-sb">
+        <div class="si"><span class="d"></span> Home</div>
+        <div class="si"><span class="d"></span> Governance Matrix</div>
+        <div class="si on"><span class="d"></span> Network Summary</div>
+        <div class="si"><span class="d"></span> Bodies</div>
+        <div class="si"><span class="d"></span> Memberships</div>
+      </div>
+      <div class="crm-main">
+        <div class="crm-strip"><span class="view">Governance — Network Summary <span class="chevr">▾</span></span><span class="btn ghost">⟳ Refresh</span><span class="btn ghost">Export</span></div>
+        <div class="crm-content">
+          <div class="kpis">
+            <div class="kpi b"><div class="v">6</div><div class="l">Governance Bodies</div></div>
+            <div class="kpi g"><div class="v">82%</div><div class="l">Avg Competency Coverage</div></div>
+            <div class="kpi r"><div class="v">2</div><div class="l">Lapsed Memberships</div></div>
+            <div class="kpi a"><div class="v">4</div><div class="l">Open Competency Gaps</div></div>
+          </div>
+          <div class="report-grid">
+            <div class="rep">
+              <h4><span class="dot"></span> Bodies by Type</h4>
+              <div class="donut-wrap">
+                <div class="donut"></div>
+                <div class="legend">
+                  <div class="li"><span class="sq" style="background:#003087"></span> Board <b>3</b></div>
+                  <div class="li"><span class="sq" style="background:#2563eb"></span> Committee <b>2</b></div>
+                  <div class="li"><span class="sq" style="background:#7c3aed"></span> Advisory <b>1</b></div>
+                </div>
+              </div>
+            </div>
+            <div class="rep">
+              <h4><span class="dot"></span> Competency Coverage %</h4>
+              <div class="bars">
+                <div class="bar-row"><span>Governance</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="pct">100%</span></div>
+                <div class="bar-row"><span>Finance</span><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div><span class="pct">88%</span></div>
+                <div class="bar-row"><span>Marketing &amp; Comms</span><div class="bar-track"><div class="bar-fill" style="width:60%;background:linear-gradient(90deg,#ea580c,#f59e0b)"></div></div><span class="pct">60%</span></div>
+                <div class="bar-row"><span>Asia-Pac Regional</span><div class="bar-track"><div class="bar-fill" style="width:55%;background:linear-gradient(90deg,#ea580c,#f59e0b)"></div></div><span class="pct">55%</span></div>
+                <div class="bar-row"><span>Europe Regional</span><div class="bar-track"><div class="bar-fill" style="width:40%;background:linear-gradient(90deg,#dc2626,#ef4444)"></div></div><span class="pct">40%</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="lapsed">
+            <div class="n">2</div>
+            <div class="x"><b>Lapsed memberships network-wide</b><br>Thomas Berger (Trustee, term to 31/12/2024) · Dr Ravi Menon (Trustee, term to 31/03/2025) — click to view</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="note spec"><b>Build:</b> three standard report components on one dashboard — a pie grouped by <code>Body_Type</code>, a bar of coverage % per competency, and a count KPI filtered to <code>Membership_Status = Lapsed</code>. Drill-through enabled on every tile.</div>
+
+  <!-- ============ TEST 7 — RENEWAL ALERT ============ -->
+  <div class="mock-label"><span class="t">Test 7 — Renewal Alert (WR-E-1)</span><span class="tag">Workflow email</span></div>
+  <p class="mock-desc">60 days before a term expires, <code>email_renewal_due</code> sends a branded alert to the IO Super Admin and the Body Chair. Here is the email the customer receives.</p>
+
+  <div class="email">
+    <div class="email-bar"><span class="dotr" style="background:#ef4444"></span><span class="dotr" style="background:#f59e0b"></span><span class="dotr" style="background:#22c55e"></span><span style="margin-left:8px">Inbox — UWC International CRM</span></div>
+    <div class="email-head">
+      <div class="subj">Action needed: Board term expiring in 60 days — Dr Ravi Menon</div>
+      <div class="meta">From <b>UWC International CRM</b> &lt;noreply@uwc.org&gt; · to akanksha.anand@uwc.org, board-chair@uwc.org · Today 02:00</div>
+    </div>
+    <div class="email-banner"><span class="m">UWC</span> Governance — Membership Renewal Due</div>
+    <div class="email-body">
+      <p>A governance membership on the <b>UWC International Board</b> is due to expire in <b>60 days</b>. Please initiate the renewal or succession process.</p>
+      <table class="email-table">
+        <tr><td>Member</td><td>Dr Ravi Menon</td></tr>
+        <tr><td>Body</td><td>UWC International Board</td></tr>
+        <tr><td>Role</td><td>Trustee</td></tr>
+        <tr><td>Competencies held</td><td>Finance · Asia-Pacific Regional</td></tr>
+        <tr><td>Term expires</td><td>31 March 2025 &nbsp; <span class="pill p-att">EXPIRING SOON</span></td></tr>
+        <tr><td>Coverage impact</td><td>Losing this term leaves <b>Asia-Pacific Regional</b> uncovered</td></tr>
+      </table>
+      <p style="margin-bottom:16px">Renewing maintains competency coverage and avoids a gap appearing on the governance matrix.</p>
+      <a class="email-cta">Open membership in CRM →</a>
+    </div>
+    <div class="email-foot">Automated by Workflow Rule WR-E-1 · UWC International CRM · EU data residency · You received this as IO Super Admin / Body Chair.</div>
+  </div>
+  <div class="note spec"><b>Build:</b> scheduled rule WR-E-1 runs daily, queries memberships where <code>Term_Expires = TODAY + 60</code>, and sends the <code>MembershipRenewalDue</code> email template to IO Super Admin + Body Chair. The 60-day window is the cue to act <i>before</i> a red cell appears in Test 5.</div>
+
+</div>
+
+</body>
+</html>
