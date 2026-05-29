@@ -1047,6 +1047,167 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .lp-footer__brand-tag { font-size: 14px !important; line-height: 1.6; }
 </style>
 
+
+
+
+
+<style>
+/* v16 — force LIGHT theme on appform sidebar (override sonnet's dark navy)
+   PROBLEM: Sonnet designed appform sidebar dark navy + white text + red active.
+   This collides with Sofia dashboard light sidebar (navy text + blue active).
+   FIX: Force light theme using maximum specificity + !important. */
+
+/* Sidebar shell light theme */
+#sc-app .uwc-portal-shell .uwc-portal-sidebar,
+#sc-app .uwc-portal-shell .appform-sidebar,
+#sc-app .uwc-portal-shell nav.uwc-portal-sidebar {
+  background: #f7f8fa !important;
+  border-right: 1px solid #e5e7eb !important;
+  color: #4b5563 !important;
+  padding: 16px 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 240px !important;
+}
+
+/* Sidebar SECTION + LABEL */
+#sc-app .uwc-portal-shell .appform-side-section {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+#sc-app .uwc-portal-shell .appform-side-label {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  color: #6b7280 !important;
+  padding: 0 18px 10px !important;
+  background: transparent !important;
+}
+
+/* Sidebar ITEMS — light bg, dark text */
+#sc-app .uwc-portal-shell .appform-side-item,
+#sc-app .uwc-portal-shell a.appform-side-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 11px 18px !important;
+  margin: 0 8px 2px !important;
+  color: #4b5563 !important;          /* override sonnet's white */
+  background: transparent !important;
+  border-radius: 8px !important;
+  border-left: none !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  transition: background 120ms ease !important;
+}
+#sc-app .uwc-portal-shell .appform-side-item:hover {
+  background: #eef1f7 !important;
+  color: #003087 !important;
+}
+#sc-app .uwc-portal-shell .appform-side-item.is-active {
+  background: #E8EEF6 !important;
+  color: #003087 !important;
+  font-weight: 600 !important;
+  border-left: 3px solid #003087 !important;
+  padding-left: 15px !important;
+}
+#sc-app .uwc-portal-shell .appform-side-item svg {
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0 !important;
+  color: currentColor !important;
+}
+#sc-app .uwc-portal-shell .appform-side-item.is-active svg {
+  color: #003087 !important;
+}
+
+/* Section 6 LOCKED — fix lock icon overlap */
+#sc-app .appform-section .appform-num {
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  border-radius: 50% !important;
+  background: #e5e7eb !important;
+  color: #6b7280 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
+}
+#sc-app .appform-section .appform-num svg {
+  width: 16px !important;
+  height: 16px !important;
+  display: block !important;
+}
+#sc-app .appform-section.is-locked .appform-num {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+}
+#sc-app .appform-section.is-complete .appform-num {
+  background: #dcfce7 !important;
+  color: #16a34a !important;
+}
+#sc-app .appform-section[open] .appform-num {
+  background: #003087 !important;
+  color: #fff !important;
+}
+/* Remove ANY before/after pseudo overlay on locked sections */
+#sc-app .appform-section.is-locked::before,
+#sc-app .appform-section.is-locked::after,
+#sc-app .appform-section.is-locked .appform-summary::before,
+#sc-app .appform-section.is-locked .appform-summary::after,
+#sc-app .appform-section.is-locked .appform-body::before,
+#sc-app .appform-section.is-locked .appform-body::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Summary layout */
+#sc-app details.appform-section > summary,
+#sc-app details.appform-section .appform-summary {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 16px 20px !important;
+  cursor: pointer !important;
+  list-style: none !important;
+}
+#sc-app details.appform-section > summary::-webkit-details-marker { display: none !important; }
+#sc-app .appform-sum-title {
+  flex: 1 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #0d1b3e !important;
+}
+#sc-app .appform-sum-status {
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+}
+#sc-app .appform-sum-status.is-complete { color: #16a34a !important; }
+#sc-app .appform-sum-status.is-locked { color: #d97706 !important; }
+#sc-app .appform-sum-status.is-progress { color: #003087 !important; }
+
+/* Layout */
+#sc-app .uwc-portal-layout {
+  display: grid !important;
+  grid-template-columns: 240px 1fr !important;
+  min-height: calc(100vh - 56px) !important;
+}
+#sc-app .uwc-portal-main {
+  padding: 24px !important;
+  background: #f3f5fa !important;
+  overflow-y: auto !important;
+}
+</style>
+
 </head>
 <body>
 
