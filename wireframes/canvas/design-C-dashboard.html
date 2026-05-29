@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Canvas Design C — Dashboard Canvas · UWC Application</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css">
+<style>
+/* Design C — Executive dashboard: KPI tiles + mini charts + Blueprint + record below */
+.hero-C{background:linear-gradient(180deg,#fafbfc 0%,#fff 100%);padding:18px 28px 0;border-bottom:1px solid #e5e7eb}
+.hero-C__row{display:flex;align-items:center;gap:18px}
+.hero-C__avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#003087,#1d4ed8);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:18px;flex-shrink:0}
+.hero-C__name-block{flex:1;min-width:0}
+.hero-C__id{font-family:'JetBrains Mono','Consolas',monospace;font-size:11px;color:#6b7280}
+.hero-C__name{font-size:20px;font-weight:600;color:#1f2937;margin-top:2px}
+.hero-C__sub{font-size:12px;color:#6b7280;margin-top:2px}
+.hero-C__actions{display:flex;gap:6px}
+
+/* KPI tiles */
+.kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;padding:18px 22px;background:#f9fafb}
+.kpi{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:14px 16px;position:relative;overflow:hidden}
+.kpi__label{font-size:10.5px;color:#6b7280;text-transform:uppercase;letter-spacing:.6px;font-weight:600}
+.kpi__value{font-size:24px;font-weight:700;color:#1f2937;margin:4px 0 0;letter-spacing:-.5px}
+.kpi__sub{font-size:11px;color:#6b7280;margin-top:2px}
+.kpi__delta{font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:2px;margin-top:4px}
+.kpi__delta--up{color:#065f46}
+.kpi__delta--down{color:#991b1b}
+.kpi__delta--neutral{color:#6b7280}
+.kpi--accent-blue{border-left:3px solid #3b6ef5}
+.kpi--accent-green{border-left:3px solid #10b981}
+.kpi--accent-yellow{border-left:3px solid #f59e0b}
+.kpi--accent-red{border-left:3px solid #ef4444}
+.kpi--accent-navy{border-left:3px solid #003087}
+.kpi--accent-violet{border-left:3px solid #7c3aed}
+
+/* Sparkline / mini chart placeholder */
+.spark{height:24px;margin-top:6px;display:flex;align-items:flex-end;gap:2px}
+.spark__bar{flex:1;background:linear-gradient(180deg,#3b6ef5,#1d4ed8);border-radius:2px;min-height:3px;opacity:.8}
+
+/* Section grid */
+.dash-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;padding:0 22px 14px;background:#f9fafb}
+.dash-card{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:16px 18px}
+.dash-card__title{font-size:13px;font-weight:600;color:#1f2937;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.dash-card__title small{font-size:11px;color:#6b7280;font-weight:400}
+
+/* Radar / score bars */
+.score-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:12px}
+.score-bar-label{min-width:90px;color:#4b5563}
+.score-bar-track{flex:1;background:#f1f5f9;height:8px;border-radius:4px;overflow:hidden}
+.score-bar-fill{height:100%;background:linear-gradient(90deg,#3b6ef5,#10b981);border-radius:4px}
+.score-bar-value{font-weight:600;color:#1f2937;min-width:36px;text-align:right}
+
+/* Timeline mini */
+.tl-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f0f2f5;font-size:12.5px}
+.tl-row:last-child{border-bottom:none}
+.tl-row__date{color:#6b7280;font-size:11px;min-width:70px;font-weight:600}
+.tl-row__text{color:#1f2937;flex:1}
+.tl-row__by{color:#6b7280;font-size:11px}
+
+/* Donut / status mini */
+.donut-wrap{display:flex;align-items:center;gap:14px}
+.donut{width:80px;height:80px;border-radius:50%;background:conic-gradient(#10b981 0% 100%, #f1f5f9 100% 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
+.donut::after{content:'';position:absolute;inset:14px;background:#fff;border-radius:50%}
+.donut__center{position:relative;z-index:1;font-size:18px;font-weight:700;color:#1f2937}
+.donut-legend{flex:1;font-size:12px}
+.donut-legend__row{display:flex;align-items:center;gap:8px;padding:3px 0}
+.donut-legend__dot{width:9px;height:9px;border-radius:2px}
+
+/* Record header block below tiles */
+.record-strip{background:#fff;border-top:1px solid #e5e7eb;padding:14px 24px;display:flex;align-items:center;gap:18px}
+.record-strip__bp{flex:1;display:flex;align-items:center;gap:8px}
+.record-strip__bp-label{font-size:10px;font-weight:700;color:#003087;letter-spacing:.6px;text-transform:uppercase}
+
+/* Section cards in main body */
+.main-body{padding:14px 22px;background:#f9fafb}
+
+.legend{padding:14px 24px;background:#fff;border-top:1px solid #f0f2f5;font-size:11.5px;color:#6b7280}
+.legend strong{color:#003087}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <span class="demo-bar__brand">DESIGN C · DASHBOARD CANVAS</span>
+  <span class="demo-bar__title">Executive view — KPI tiles + charts upfront · for NC Directors and IO Super Admin</span>
+  <span class="demo-bar__spacer"></span>
+  <div class="demo-bar__role">
+    <span class="demo-bar__role-avatar" style="background:#003087">AA</span>
+    <span>Akanksha Anand · IO Super Admin</span>
+  </div>
+  <a class="demo-bar__home" href="../00_index.html">← All scenarios</a>
+</div>
+
+<div class="zoho-shell" style="grid-template-rows:auto 52px 1fr">
+  <header class="zoho-topbar" style="grid-row:2">
+    <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span></div>
+    <div class="zoho-tb__center">
+      <h1 class="zoho-tb__module">Applications</h1>
+      <div class="zoho-tb__search">🔍 Search records</div>
+    </div>
+    <div class="zoho-tb__icons">
+      <button class="zoho-tb__icon zoho-tb__icon--plus">+</button>
+      <button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button>
+      <button class="zoho-tb__icon">🔔</button>
+      <button class="zoho-tb__icon">📅</button>
+      <button class="zoho-tb__icon">⚙</button>
+      <span class="zoho-tb__org">A2Z</span>
+    </div>
+  </header>
+
+  <div class="zoho-body" style="grid-row:3">
+    <nav class="zoho-sidebar">
+      <div class="zoho-sb__teamspace">
+        <span class="zoho-sb__teamspace-icon" style="background:#003087">IO</span>
+        <span>UWC International</span>
+      </div>
+      <a class="zoho-sb__item"><span class="zoho-sb__item-icon" style="color:#f43f5e">🏠</span> Home</a>
+      <a class="zoho-sb__item"><span class="zoho-sb__item-icon" style="color:#ec4899">📊</span> Reports</a>
+      <a class="zoho-sb__item"><span class="zoho-sb__item-icon" style="color:#a855f7">📈</span> Analytics</a>
+      <div class="zoho-sb__group">
+        <div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">📁</span> Sales</div>
+        <div class="zoho-sb__group-items">
+          <a class="zoho-sb__item">· Leads</a>
+          <a class="zoho-sb__item">· Contacts</a>
+          <a class="zoho-sb__item active">· Applications</a>
+          <a class="zoho-sb__item">· Campaigns</a>
+        </div>
+      </div>
+      <a class="zoho-sb__item">🎓 Programmes</a>
+      <a class="zoho-sb__item">🌐 National Committees</a>
+    </nav>
+
+    <main class="zoho-content">
+      <!-- HERO -->
+      <div class="hero-C">
+        <div class="hero-C__row">
+          <span style="color:#6b7280;font-size:18px;cursor:pointer">←</span>
+          <div class="hero-C__avatar">LF</div>
+          <div class="hero-C__name-block">
+            <div class="hero-C__id">APP-2026-00073 · UWC Germany NC</div>
+            <div class="hero-C__name">Lena Fischer Application 2026 <span class="canvas-pill canvas-pill--review" style="margin-left:8px">Under Review</span></div>
+            <div class="hero-C__sub">17 yrs · 🇩🇪 Cologne · Owned by Marcus Weber · Applied 25 May · Closing 15 Jun</div>
+          </div>
+          <div class="hero-C__actions">
+            <button class="btn">✏ Edit</button>
+            <button class="btn">✉ Mail</button>
+            <button class="btn btn--warning">★ Score</button>
+            <button class="btn btn--success">✓ Accept</button>
+            <button class="btn btn--danger">⊖ Unlock</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI TILES -->
+      <div class="kpi-grid">
+        <div class="kpi kpi--accent-blue">
+          <div class="kpi__label">Probability</div>
+          <div class="kpi__value">60%</div>
+          <div class="kpi__delta kpi__delta--up">↑ +20 since submitted</div>
+          <div class="spark">
+            <div class="spark__bar" style="height:30%"></div>
+            <div class="spark__bar" style="height:35%"></div>
+            <div class="spark__bar" style="height:40%"></div>
+            <div class="spark__bar" style="height:50%"></div>
+            <div class="spark__bar" style="height:60%"></div>
+            <div class="spark__bar" style="height:60%"></div>
+          </div>
+        </div>
+        <div class="kpi kpi--accent-green">
+          <div class="kpi__label">Review Score</div>
+          <div class="kpi__value">33<span style="font-size:14px;color:#9ca3af;font-weight:500">/40</span></div>
+          <div class="kpi__sub">Avg of 2 reviewers · top quartile</div>
+          <div class="kpi__delta kpi__delta--neutral">Both reviewers agree</div>
+        </div>
+        <div class="kpi kpi--accent-yellow">
+          <div class="kpi__label">Days in Stage</div>
+          <div class="kpi__value">4<span style="font-size:14px;color:#9ca3af;font-weight:500">/10</span></div>
+          <div class="kpi__sub">SLA: Under Review 10 days</div>
+          <div class="kpi__delta kpi__delta--neutral">On track</div>
+        </div>
+        <div class="kpi kpi--accent-red">
+          <div class="kpi__label">Days to Deadline</div>
+          <div class="kpi__value">18</div>
+          <div class="kpi__sub">Closing 15 Jun 2026</div>
+          <div class="kpi__delta kpi__delta--down">⚠ Decision needed by 10 Jun</div>
+        </div>
+        <div class="kpi kpi--accent-navy">
+          <div class="kpi__label">Doc Completion</div>
+          <div class="kpi__value">100%</div>
+          <div class="kpi__sub">4 / 4 verified</div>
+          <div class="kpi__delta kpi__delta--up">All required submitted</div>
+        </div>
+        <div class="kpi kpi--accent-violet">
+          <div class="kpi__label">Aid Requested</div>
+          <div class="kpi__value">£45K</div>
+          <div class="kpi__sub">Full · Priority 87/100</div>
+          <div class="kpi__delta kpi__delta--neutral">Awaiting finance review</div>
+        </div>
+      </div>
+
+      <!-- 3-COL CHARTS -->
+      <div class="dash-grid">
+        <!-- Reviewer score breakdown -->
+        <div class="dash-card">
+          <div class="dash-card__title">★ Reviewer Score Breakdown <small>2 reviewers · blind</small></div>
+          <div class="score-bar-row">
+            <span class="score-bar-label">Academic</span>
+            <div class="score-bar-track"><div class="score-bar-fill" style="width:85%"></div></div>
+            <span class="score-bar-value">8.5</span>
+          </div>
+          <div class="score-bar-row">
+            <span class="score-bar-label">Motivation</span>
+            <div class="score-bar-track"><div class="score-bar-fill" style="width:90%"></div></div>
+            <span class="score-bar-value">9.0</span>
+          </div>
+          <div class="score-bar-row">
+            <span class="score-bar-label">Leadership</span>
+            <div class="score-bar-track"><div class="score-bar-fill" style="width:85%"></div></div>
+            <span class="score-bar-value">8.5</span>
+          </div>
+          <div class="score-bar-row">
+            <span class="score-bar-label">Diversity</span>
+            <div class="score-bar-track"><div class="score-bar-fill" style="width:70%"></div></div>
+            <span class="score-bar-value">7.0</span>
+          </div>
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid #f0f2f5;display:flex;justify-content:space-between;font-size:12px;font-weight:600">
+            <span style="color:#6b7280">Total avg</span>
+            <span style="color:#065f46">33 / 40 (82.5%)</span>
+          </div>
+        </div>
+
+        <!-- Stage progression timeline -->
+        <div class="dash-card">
+          <div class="dash-card__title">⏱ Stage Progression <small>last 4 transitions</small></div>
+          <div class="tl-row">
+            <span class="tl-row__date">26 May</span>
+            <span class="tl-row__text">→ Under Review</span>
+            <span class="tl-row__by">Marcus W</span>
+          </div>
+          <div class="tl-row">
+            <span class="tl-row__date">25 May</span>
+            <span class="tl-row__text">→ Submitted</span>
+            <span class="tl-row__by">Applicant</span>
+          </div>
+          <div class="tl-row">
+            <span class="tl-row__date">12 May</span>
+            <span class="tl-row__text">→ In Progress</span>
+            <span class="tl-row__by">Applicant</span>
+          </div>
+          <div class="tl-row">
+            <span class="tl-row__date">25 Apr</span>
+            <span class="tl-row__text">→ Registered</span>
+            <span class="tl-row__by">Marcus W</span>
+          </div>
+        </div>
+
+        <!-- Doc completion donut -->
+        <div class="dash-card">
+          <div class="dash-card__title">📄 Document Status <small>4 of 4 verified</small></div>
+          <div class="donut-wrap">
+            <div class="donut" style="background:conic-gradient(#10b981 0% 75%, #3b6ef5 75% 100%)">
+              <span class="donut__center">100%</span>
+            </div>
+            <div class="donut-legend">
+              <div class="donut-legend__row">
+                <span class="donut-legend__dot" style="background:#10b981"></span>
+                <span style="flex:1">Verified</span>
+                <span style="font-weight:600">3</span>
+              </div>
+              <div class="donut-legend__row">
+                <span class="donut-legend__dot" style="background:#3b6ef5"></span>
+                <span style="flex:1">Received</span>
+                <span style="font-weight:600">1</span>
+              </div>
+              <div class="donut-legend__row">
+                <span class="donut-legend__dot" style="background:#f59e0b"></span>
+                <span style="flex:1">Pending</span>
+                <span style="font-weight:600">0</span>
+              </div>
+              <div class="donut-legend__row">
+                <span class="donut-legend__dot" style="background:#ef4444"></span>
+                <span style="flex:1">Rejected</span>
+                <span style="font-weight:600">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Record strip — Blueprint + actions in compact form -->
+      <div class="record-strip">
+        <span class="record-strip__bp-label">BLUEPRINT</span>
+        <div class="record-strip__bp">
+          <span class="bp-stage">Registered</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage">In Progress</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage">Submitted</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage bp-stage--active">Under Review</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage">Shortlisted</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage">Nominated</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage bp-stage--placed">Placed</span>
+          <span style="color:#cbd5e1;margin:0 6px;font-size:18px">│</span>
+          <span class="bp-stage bp-stage--declined">Declined</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage bp-stage--withdrawn">Withdrawn</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage bp-stage--waitlisted">Waitlisted</span>
+        </div>
+      </div>
+
+      <!-- MAIN BODY — record sections in compact 2-col grid -->
+      <div class="main-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="dash-card">
+            <div class="dash-card__title">📋 Application Information</div>
+            <div class="fld-grid" style="grid-template-columns:1fr 1fr;gap:12px 24px">
+              <div class="fld"><div class="fld__label">Applicant</div><div class="fld__value link">Lena Fischer</div></div>
+              <div class="fld"><div class="fld__label">Applicant Number</div><div class="fld__value">73</div></div>
+              <div class="fld"><div class="fld__label">Account</div><div class="fld__value link">UWC Germany NC</div></div>
+              <div class="fld"><div class="fld__label">Nationality</div><div class="fld__value">German</div></div>
+              <div class="fld"><div class="fld__label">School</div><div class="fld__value link">Gymnasium am Wirteltor</div></div>
+              <div class="fld"><div class="fld__label">Eligibility</div><div class="fld__value success">✓ Eligible</div></div>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <div class="dash-card__title">🎓 Programme Details</div>
+            <div class="fld-grid" style="grid-template-columns:1fr 1fr;gap:12px 24px">
+              <div class="fld"><div class="fld__label">Interested</div><div class="fld__value">UWC Atlantic · UWC Adriatic</div></div>
+              <div class="fld"><div class="fld__label">Selected</div><div class="fld__value" style="color:#9ca3af">— pending</div></div>
+              <div class="fld"><div class="fld__label">Submission Date</div><div class="fld__value">25 May 2026</div></div>
+              <div class="fld"><div class="fld__label">Application Language</div><div class="fld__value">Deutsch</div></div>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <div class="dash-card__title">💷 Financial Aid</div>
+            <div class="fld-grid" style="grid-template-columns:1fr 1fr;gap:12px 24px">
+              <div class="fld"><div class="fld__label">Requested</div><div class="fld__value success">Full Scholarship</div></div>
+              <div class="fld"><div class="fld__label">Household</div><div class="fld__value">€35K – €50K / yr</div></div>
+              <div class="fld"><div class="fld__label">Dependents</div><div class="fld__value">2</div></div>
+              <div class="fld"><div class="fld__label">Priority</div><div class="fld__value success">87 / 100</div></div>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <div class="dash-card__title">🛡 Consent &amp; Safeguarding</div>
+            <div class="fld-grid" style="grid-template-columns:1fr 1fr;gap:12px 24px">
+              <div class="fld"><div class="fld__label">Parental Consent</div><div class="fld__value success">Received</div></div>
+              <div class="fld"><div class="fld__label">Safeguarding Flag</div><div class="fld__value success">None</div></div>
+              <div class="fld"><div class="fld__label">Consent Date</div><div class="fld__value">24 May 2026</div></div>
+              <div class="fld"><div class="fld__label">Guardian</div><div class="fld__value">Petra Fischer</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <strong>Design C — Dashboard Canvas</strong> · 6 KPI tiles upfront (Probability · Score · Days in Stage · Days to Deadline · Doc % · Aid) · 3 mini-charts (Score breakdown · Stage progression · Document donut) · compact Blueprint strip · 2×2 section grid below. Best for NC Director / IO daily standup view.
+      </div>
+    </main>
+  </div>
+</div>
+
+</body>
+</html>

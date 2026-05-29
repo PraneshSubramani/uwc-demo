@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Canvas Design B — Tabbed Detail · UWC Application</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css">
+<style>
+/* Design B: compact hero + workspace tabs + dense data table style */
+.hero-B{background:#ffffff;padding:16px 28px 0;border-bottom:1px solid #e5e7eb}
+.hero-B__row{display:flex;align-items:center;gap:18px}
+.hero-B__back{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;background:#f1f5f9;border-radius:6px;cursor:pointer;color:#6b7280}
+.hero-B__avatar{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#003087,#1d4ed8);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;flex-shrink:0}
+.hero-B__name-block{flex:1;min-width:0}
+.hero-B__id{font-family:'JetBrains Mono','Consolas',monospace;font-size:11px;color:#6b7280}
+.hero-B__name{font-size:22px;font-weight:600;color:#1f2937;margin-top:2px;letter-spacing:-.2px;display:flex;align-items:center;gap:10px}
+.hero-B__name-tags{display:flex;gap:6px}
+.hero-B__sub{font-size:12px;color:#6b7280;margin-top:4px}
+.hero-B__sub strong{color:#1f2937;font-weight:500}
+.hero-B__actions{display:flex;gap:6px}
+.hero-B__actions .btn{padding:6px 12px;font-size:12.5px}
+
+/* Quick stat strip */
+.hero-B__stats{display:flex;gap:0;margin-top:14px;padding-top:0;border-top:1px solid #f0f2f5}
+.hero-B__stat{padding:10px 18px;border-right:1px solid #f0f2f5;flex:1}
+.hero-B__stat:last-child{border-right:none}
+.hero-B__stat-label{font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.hero-B__stat-value{font-size:14px;font-weight:600;color:#1f2937;margin-top:3px}
+.hero-B__stat-value.success{color:#065f46}
+.hero-B__stat-value.warning{color:#92400e}
+.hero-B__stat .trend{font-size:11px;color:#6b7280;margin-left:6px;font-weight:400}
+
+/* Blueprint strip */
+.hero-B__bp{padding:12px 20px;background:#f9fafb;border-top:1px solid #f0f2f5;display:flex;align-items:center;gap:14px;overflow-x:auto}
+.hero-B__bp-label{font-size:10px;font-weight:700;color:#003087;letter-spacing:.6px;text-transform:uppercase;flex-shrink:0}
+
+/* Tabs */
+.tabs-B{display:flex;background:#fff;border-bottom:2px solid #e5e7eb;padding:0 22px;gap:0}
+.tab-B{padding:12px 18px;font-size:13px;color:#6b7280;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:all .12s}
+.tab-B:hover{color:#1f2937;background:#f9fafb}
+.tab-B.active{color:#3b6ef5;border-bottom-color:#3b6ef5;font-weight:600}
+.tab-B__count{background:#f1f5f9;color:#4b5563;font-size:10px;padding:1px 7px;border-radius:999px;font-weight:600}
+.tab-B.active .tab-B__count{background:#dbeafe;color:#1e40af}
+
+/* Tab body */
+.tab-body{padding:18px 22px;background:#f9fafb;min-height:calc(100vh - 280px);overflow:auto}
+
+/* Dense fields grid for overview */
+.dense-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 22px}
+.dense-cell{background:#fff;border:1px solid #e5e7eb;border-radius:6px;padding:11px 14px}
+.dense-cell__label{font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px}
+.dense-cell__value{font-size:13.5px;color:#1f2937;font-weight:500}
+.dense-cell__value.link{color:#2563eb}
+.dense-cell__value.success{color:#065f46}
+.dense-cell--span2{grid-column:span 2}
+.dense-cell--span3{grid-column:span 3}
+
+/* Two-col layout inside tab */
+.two-col{display:grid;grid-template-columns:1fr 320px;gap:14px;align-items:flex-start}
+
+/* Timeline */
+.tl-entry{display:flex;gap:12px;padding-bottom:18px;border-left:2px solid #e5e7eb;margin-left:14px;padding-left:18px;position:relative}
+.tl-entry::before{content:'';position:absolute;left:-7px;top:4px;width:12px;height:12px;border-radius:50%;background:#3b6ef5;border:3px solid #fff;box-shadow:0 0 0 1px #3b6ef5}
+.tl-entry__time{font-size:11px;color:#6b7280;font-weight:600;min-width:80px}
+.tl-entry__body{flex:1}
+.tl-entry__title{font-size:13px;color:#1f2937;font-weight:600}
+.tl-entry__sub{font-size:12px;color:#6b7280;margin-top:2px}
+
+/* Right summary card in two-col */
+.summary-card{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:14px 16px}
+.summary-card__title{font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px}
+.summary-row{display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:1px solid #f0f2f5}
+.summary-row:last-child{border-bottom:none}
+.summary-row__label{color:#6b7280}
+.summary-row__value{color:#1f2937;font-weight:500}
+
+.legend{padding:14px 24px;background:#fff;border-top:1px solid #f0f2f5;font-size:11.5px;color:#6b7280}
+.legend strong{color:#003087}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <span class="demo-bar__brand">DESIGN B · TABBED DETAIL</span>
+  <span class="demo-bar__title">Compact — saves vertical scroll · best for reviewers handling 20+ apps/day</span>
+  <span class="demo-bar__spacer"></span>
+  <div class="demo-bar__role">
+    <span class="demo-bar__role-avatar">MW</span>
+    <span>Marcus Weber · NC Admin</span>
+  </div>
+  <a class="demo-bar__home" href="../00_index.html">← All scenarios</a>
+</div>
+
+<div class="zoho-shell" style="grid-template-rows:auto 52px 1fr">
+  <header class="zoho-topbar" style="grid-row:2">
+    <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span></div>
+    <div class="zoho-tb__center">
+      <h1 class="zoho-tb__module">Applications</h1>
+      <div class="zoho-tb__search">🔍 Search records</div>
+    </div>
+    <div class="zoho-tb__icons">
+      <button class="zoho-tb__icon zoho-tb__icon--plus">+</button>
+      <button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button>
+      <button class="zoho-tb__icon">🔔</button>
+      <button class="zoho-tb__icon">📅</button>
+      <button class="zoho-tb__icon">⚙</button>
+      <span class="zoho-tb__org">A2Z</span>
+    </div>
+  </header>
+
+  <div class="zoho-body" style="grid-row:3">
+    <nav class="zoho-sidebar">
+      <div class="zoho-sb__teamspace">
+        <span class="zoho-sb__teamspace-icon">CT</span>
+        <span>Germany NC</span>
+      </div>
+      <a class="zoho-sb__item"><span class="zoho-sb__item-icon" style="color:#f43f5e">🏠</span> Home</a>
+      <a class="zoho-sb__item"><span class="zoho-sb__item-icon" style="color:#ec4899">📊</span> Reports</a>
+      <a class="zoho-sb__item"><span class="zoho-sb__item-icon" style="color:#a855f7">📈</span> Analytics</a>
+      <div class="zoho-sb__group">
+        <div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">📁</span> Sales</div>
+        <div class="zoho-sb__group-items">
+          <a class="zoho-sb__item">· Leads</a>
+          <a class="zoho-sb__item">· Contacts</a>
+          <a class="zoho-sb__item active">· Applications</a>
+          <a class="zoho-sb__item">· Campaigns</a>
+        </div>
+      </div>
+      <a class="zoho-sb__item">🎓 Programmes</a>
+      <a class="zoho-sb__item">🌐 National Committees</a>
+    </nav>
+
+    <main class="zoho-content">
+      <!-- COMPACT HERO -->
+      <div class="hero-B">
+        <div class="hero-B__row">
+          <span class="hero-B__back">←</span>
+          <div class="hero-B__avatar">LF</div>
+          <div class="hero-B__name-block">
+            <div class="hero-B__id">APP-2026-00073 · UWC Germany NC</div>
+            <div class="hero-B__name">
+              Lena Fischer Application 2026
+              <span class="hero-B__name-tags">
+                <span class="canvas-pill canvas-pill--review">Under Review</span>
+                <span class="canvas-pill" style="background:#dcfce7;color:#065f46;border:1px solid #86efac">✓ Eligible</span>
+                <span class="canvas-pill" style="background:#fefce8;color:#854d0e;border:1px solid #fde047">Priority 87</span>
+              </span>
+            </div>
+            <div class="hero-B__sub">
+              <strong>17 yrs</strong> · 🇩🇪 Cologne, Germany · <strong>Marcus Weber</strong> owns · Applied <strong>25 May 2026</strong> · Closing <strong>15 Jun 2026 (18 d)</strong>
+            </div>
+          </div>
+          <div class="hero-B__actions">
+            <button class="btn">✏ Edit</button>
+            <button class="btn">✉ Mail</button>
+            <button class="btn btn--warning">★ Score</button>
+            <button class="btn btn--success">✓ Accept</button>
+            <button class="btn btn--danger">⊖ Unlock</button>
+            <button class="btn btn--ghost">⋯</button>
+          </div>
+        </div>
+        <div class="hero-B__stats">
+          <div class="hero-B__stat"><div class="hero-B__stat-label">Days in Stage</div><div class="hero-B__stat-value">4<span class="trend">/ 10 SLA</span></div></div>
+          <div class="hero-B__stat"><div class="hero-B__stat-label">Probability</div><div class="hero-B__stat-value">60%<span class="trend">↑ from 40</span></div></div>
+          <div class="hero-B__stat"><div class="hero-B__stat-label">Reviewer Score</div><div class="hero-B__stat-value success">33 / 40<span class="trend">avg of 2</span></div></div>
+          <div class="hero-B__stat"><div class="hero-B__stat-label">Doc Completion</div><div class="hero-B__stat-value success">4 / 4 verified</div></div>
+          <div class="hero-B__stat"><div class="hero-B__stat-label">Aid Requested</div><div class="hero-B__stat-value">£45,000<span class="trend">Full</span></div></div>
+          <div class="hero-B__stat"><div class="hero-B__stat-label">Last Activity</div><div class="hero-B__stat-value">29 May<span class="trend">19:33</span></div></div>
+        </div>
+      </div>
+
+      <!-- Blueprint strip -->
+      <div class="hero-B__bp">
+        <span class="hero-B__bp-label">BLUEPRINT</span>
+        <div class="bp-strip" style="flex:1">
+          <span class="bp-stage">Registered</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage">In Progress</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage">Submitted</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage bp-stage--active">Under Review</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage">Shortlisted</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage">Nominated</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage bp-stage--placed">Placed</span>
+          <span style="color:#cbd5e1;margin:0 6px;font-size:18px">│</span>
+          <span class="bp-stage bp-stage--declined">Declined</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage bp-stage--withdrawn">Withdrawn</span>
+          <span class="bp-sep">›</span>
+          <span class="bp-stage bp-stage--waitlisted">Waitlisted</span>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="tabs-B">
+        <div class="tab-B active">📋 Overview</div>
+        <div class="tab-B">⏱ Timeline <span class="tab-B__count">12</span></div>
+        <div class="tab-B">★ Reviews <span class="tab-B__count">2</span></div>
+        <div class="tab-B">📄 Documents <span class="tab-B__count">4</span></div>
+        <div class="tab-B">🛡 Consent &amp; Safeguarding <span class="tab-B__count">2</span></div>
+        <div class="tab-B">💷 Financial Aid <span class="tab-B__count">1</span></div>
+        <div class="tab-B">🎙 Interviews <span class="tab-B__count">1</span></div>
+        <div class="tab-B">🔒 Audit Log <span class="tab-B__count">8</span></div>
+      </div>
+
+      <!-- TAB BODY -->
+      <div class="tab-body">
+        <div class="two-col">
+          <!-- LEFT: Dense field grid -->
+          <div>
+            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:18px 20px;margin-bottom:14px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+                <span style="font-size:15px;font-weight:600">📋 Application Information</span>
+                <button class="btn btn--ghost" style="font-size:12px">Edit ↗</button>
+              </div>
+              <div class="dense-grid">
+                <div class="dense-cell">
+                  <div class="dense-cell__label">Applicant Number</div>
+                  <div class="dense-cell__value">73</div>
+                </div>
+                <div class="dense-cell">
+                  <div class="dense-cell__label">Applicant</div>
+                  <div class="dense-cell__value link">Lena Fischer</div>
+                </div>
+                <div class="dense-cell">
+                  <div class="dense-cell__label">Account</div>
+                  <div class="dense-cell__value link">UWC Germany NC</div>
+                </div>
+                <div class="dense-cell">
+                  <div class="dense-cell__label">Nationality</div>
+                  <div class="dense-cell__value">German</div>
+                </div>
+                <div class="dense-cell">
+                  <div class="dense-cell__label">Country of Residence</div>
+                  <div class="dense-cell__value">Germany</div>
+                </div>
+                <div class="dense-cell">
+                  <div class="dense-cell__label">School</div>
+                  <div class="dense-cell__value link">Gymnasium am Wirteltor</div>
+                </div>
+                <div class="dense-cell">
+                  <div class="dense-cell__label">Stage</div>
+                  <div class="dense-cell__value"><span class="canvas-pill canvas-pill--review">Under Review</span></div>
+                </div>
+                <div class="dense-cell">
+                  <div class="dense-cell__label">Eligibility</div>
+                  <div class="dense-cell__value success">✓ Eligible</div>
+                </div>
+                <div class="dense-cell">
+                  <div class="dense-cell__label">Application Language</div>
+                  <div class="dense-cell__value">Deutsch</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:18px 20px;margin-bottom:14px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+                <span style="font-size:15px;font-weight:600">🎓 Programme Details</span>
+              </div>
+              <div class="dense-grid">
+                <div class="dense-cell dense-cell--span2">
+                  <div class="dense-cell__label">Interested Programmes</div>
+                  <div class="dense-cell__value">UWC Atlantic 2026 · UWC Adriatic 2026</div>
+                </div>
+                <div class="dense-cell">
+                  <div class="dense-cell__label">Selected Programme</div>
+                  <div class="dense-cell__value" style="color:#9ca3af">— (pending nomination)</div>
+                </div>
+                <div class="dense-cell">
+                  <div class="dense-cell__label">Submission Date</div>
+                  <div class="dense-cell__value">25 May 2026</div>
+                </div>
+                <div class="dense-cell">
+                  <div class="dense-cell__label">Closing Date</div>
+                  <div class="dense-cell__value">15 Jun 2026</div>
+                </div>
+                <div class="dense-cell">
+                  <div class="dense-cell__label">Days in Stage</div>
+                  <div class="dense-cell__value">4 days</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:18px 20px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+                <span style="font-size:15px;font-weight:600">📝 Description</span>
+              </div>
+              <p style="font-size:13.5px;color:#374151;line-height:1.7">
+                Lena, 17, from Cologne is applying to UWC Atlantic as first choice. Strong academics (Abitur projected 1.2), school council president, leads climate-action society. Demonstrates clear alignment with UWC mission. Single-parent household — full scholarship required.
+              </p>
+            </div>
+          </div>
+
+          <!-- RIGHT: Summary cards -->
+          <div>
+            <div class="summary-card" style="margin-bottom:12px">
+              <div class="summary-card__title">💷 Financial Snapshot</div>
+              <div style="font-size:24px;font-weight:600;color:#003087">£45,000</div>
+              <div style="font-size:11px;color:#6b7280;margin-bottom:10px">Full scholarship · 2-year</div>
+              <div class="summary-row"><span class="summary-row__label">Household</span><span class="summary-row__value">€35K–€50K/yr</span></div>
+              <div class="summary-row"><span class="summary-row__label">Dependents</span><span class="summary-row__value">2</span></div>
+              <div class="summary-row"><span class="summary-row__label">Priority Score</span><span class="summary-row__value" style="color:#065f46">87/100</span></div>
+              <div class="summary-row"><span class="summary-row__label">Review Status</span><span class="summary-row__value" style="color:#92400e">Pending</span></div>
+            </div>
+
+            <div class="summary-card" style="margin-bottom:12px">
+              <div class="summary-card__title">📞 Guardian</div>
+              <div style="font-size:14px;font-weight:600">Petra Fischer</div>
+              <div style="font-size:11px;color:#6b7280;margin-bottom:10px">Mother · single parent</div>
+              <div class="summary-row"><span class="summary-row__label">📞</span><span class="summary-row__value link" style="color:#2563eb">+49 221 5555 1234</span></div>
+              <div class="summary-row"><span class="summary-row__label">✉</span><span class="summary-row__value link" style="color:#2563eb;font-size:11.5px">petra.fischer@example.de</span></div>
+            </div>
+
+            <div class="summary-card">
+              <div class="summary-card__title">🔔 Open Tasks · 2</div>
+              <div style="font-size:13px;padding:8px 0;border-bottom:1px solid #f0f2f5">
+                <div style="font-weight:500">Review application documents</div>
+                <div style="font-size:11px;color:#ef4444;margin-top:2px">Due today · Marcus Weber</div>
+              </div>
+              <div style="font-size:13px;padding:8px 0">
+                <div style="font-weight:500">Send confirmation email</div>
+                <div style="font-size:11px;color:#6b7280;margin-top:2px">Due today · Marcus Weber</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <strong>Design B — Tabbed Detail</strong> · Compact hero (no big purple/navy block) · 6 KPI stats inline · Blueprint always visible · 8 tabs swap content area · 2-col layout (info | summary cards) inside each tab. Best for high-volume reviewers.
+      </div>
+    </main>
+  </div>
+</div>
+
+</body>
+</html>

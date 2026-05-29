@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Canvas Design A — Pipeline Card · UWC Application</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css">
+<style>
+/* Design A specific */
+.hero-A{background:linear-gradient(135deg,#003087 0%,#1d4ed8 75%,#2563eb 100%);color:#fff;padding:22px 28px 18px;position:relative;overflow:hidden}
+.hero-A::after{content:'';position:absolute;top:-40%;right:-5%;width:380px;height:380px;background:radial-gradient(circle,rgba(255,184,28,.18) 0%,transparent 65%);border-radius:50%;pointer-events:none}
+.hero-A__row{display:flex;align-items:center;gap:20px;position:relative;z-index:1}
+.hero-A__back{width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:50%;color:#fff;cursor:pointer;font-size:14px}
+.hero-A__avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#FFB81C,#C8102E);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:24px;border:3px solid rgba(255,255,255,.4);flex-shrink:0}
+.hero-A__name-block{flex:1;min-width:0}
+.hero-A__id{font-size:11px;font-weight:600;letter-spacing:1.2px;color:rgba(255,255,255,.7);text-transform:uppercase}
+.hero-A__name{font-size:26px;font-weight:600;letter-spacing:-.3px;margin-top:1px}
+.hero-A__sub{display:flex;align-items:center;gap:10px;margin-top:6px;font-size:12px;color:rgba(255,255,255,.85)}
+.hero-A__sub-sep{opacity:.4}
+.hero-A__actions{display:flex;gap:8px}
+.hero-A__btn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:#fff;padding:7px 14px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;backdrop-filter:blur(8px)}
+.hero-A__btn:hover{background:rgba(255,255,255,.22)}
+.hero-A__btn--accept{background:#10b981;border-color:#10b981}
+.hero-A__btn--score{background:#FFB81C;border-color:#FFB81C;color:#1f2937}
+.hero-A__btn--unlock{background:#C8102E;border-color:#C8102E}
+
+/* Metrics strip */
+.hero-A__metrics{margin-top:18px;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;position:relative;z-index:1}
+.hero-A__metric{padding:8px 14px;border-left:2px solid rgba(255,255,255,.3)}
+.hero-A__metric-label{font-size:10px;color:rgba(255,255,255,.6);font-weight:500;text-transform:uppercase;letter-spacing:.6px}
+.hero-A__metric-value{font-size:15px;font-weight:600;color:#fff;margin-top:3px}
+
+/* Progress bar — probability */
+.prob-track{width:100%;height:4px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden;margin-top:6px}
+.prob-fill{height:100%;background:linear-gradient(90deg,#FFB81C,#10b981);border-radius:2px;transition:width 600ms}
+
+/* Body grid: rail | center | related */
+.body-A{display:grid;grid-template-columns:240px 1fr 220px;gap:0;background:#f9fafb;min-height:0}
+.rail-A{padding:18px 14px;background:#fff;border-right:1px solid var(--zoho-divider)}
+.rail-A__card{background:#fff;border:1px solid var(--zoho-border);border-radius:8px;padding:14px 16px;margin-bottom:12px}
+.rail-A__header{font-size:11px;font-weight:600;color:var(--zoho-text-muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.rail-A__row{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid var(--zoho-divider)}
+.rail-A__row:last-child{border-bottom:none}
+.rail-A__row-label{color:var(--zoho-text-muted)}
+.rail-A__row-value{color:var(--zoho-text);font-weight:500;text-align:right}
+.rail-A__amount{font-size:24px;font-weight:600;color:var(--zoho-navy,#003087);margin:6px 0}
+.rail-A__amount-sub{font-size:11px;color:var(--zoho-text-muted)}
+.center-A{padding:18px 20px;min-width:0}
+.center-A__bp{background:#fff;border:1px solid var(--zoho-border);border-radius:8px;padding:14px 18px;margin-bottom:14px}
+.center-A__bp-label{font-size:10px;font-weight:600;color:#003087;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+
+/* Section headers in center */
+.center-A .sec__header{background:linear-gradient(180deg,#fafbfc 0%,#fff 100%)}
+
+.legend{padding:18px 24px;background:#fff;border-top:1px solid var(--zoho-divider);font-size:11.5px;color:#6b7280;display:flex;align-items:center;gap:14px}
+.legend strong{color:#003087}
+.legend-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
+</style>
+</head>
+<body>
+
+<!-- Demo bar -->
+<div class="demo-bar">
+  <span class="demo-bar__brand">DESIGN A · PIPELINE CARD</span>
+  <span class="demo-bar__title">Recommended Canvas — full-fidelity Zoho replica · UWC branded</span>
+  <span class="demo-bar__spacer"></span>
+  <div class="demo-bar__role">
+    <span class="demo-bar__role-avatar">MW</span>
+    <span>Marcus Weber · NC Admin Germany</span>
+  </div>
+  <a class="demo-bar__home" href="../00_index.html">← All scenarios</a>
+</div>
+
+<!-- Zoho shell -->
+<div class="zoho-shell" style="grid-template-rows:auto 52px 1fr">
+  <header class="zoho-topbar" style="grid-row:2">
+    <div class="zoho-tb__brand">
+      <div class="zoho-tb__logo"></div>
+      <span class="zoho-tb__name">Zoho CRM</span>
+    </div>
+    <div class="zoho-tb__center">
+      <h1 class="zoho-tb__module">Applications</h1>
+      <div class="zoho-tb__search">🔍 Search records</div>
+    </div>
+    <div class="zoho-tb__icons">
+      <button class="zoho-tb__icon zoho-tb__icon--plus">+</button>
+      <button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button>
+      <button class="zoho-tb__icon">🔔</button>
+      <button class="zoho-tb__icon">📅</button>
+      <button class="zoho-tb__icon">⚙</button>
+      <span class="zoho-tb__org">A2Z</span>
+    </div>
+  </header>
+
+  <div class="zoho-body" style="grid-row:3">
+    <!-- Sidebar -->
+    <nav class="zoho-sidebar">
+      <div class="zoho-sb__teamspace">
+        <span class="zoho-sb__teamspace-icon">CT</span>
+        <span>Germany NC</span>
+      </div>
+      <a class="zoho-sb__item"><span class="zoho-sb__item-icon" style="color:#f43f5e">🏠</span> Home</a>
+      <a class="zoho-sb__item"><span class="zoho-sb__item-icon" style="color:#ec4899">📊</span> Reports</a>
+      <a class="zoho-sb__item"><span class="zoho-sb__item-icon" style="color:#a855f7">📈</span> Analytics</a>
+      <div class="zoho-sb__group">
+        <div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">📁</span> Sales</div>
+        <div class="zoho-sb__group-items">
+          <a class="zoho-sb__item">· Leads</a>
+          <a class="zoho-sb__item">· Contacts</a>
+          <a class="zoho-sb__item">· Accounts</a>
+          <a class="zoho-sb__item active">· Applications</a>
+          <a class="zoho-sb__item">· Campaigns</a>
+        </div>
+      </div>
+      <a class="zoho-sb__item">🎓 Programmes</a>
+      <a class="zoho-sb__item">🏛 Governance</a>
+      <a class="zoho-sb__item">🌐 National Committees</a>
+    </nav>
+
+    <!-- Content -->
+    <main class="zoho-content">
+      <!-- HERO -->
+      <div class="hero-A">
+        <div class="hero-A__row">
+          <span class="hero-A__back">←</span>
+          <div class="hero-A__avatar">LF</div>
+          <div class="hero-A__name-block">
+            <div class="hero-A__id">APP-2026-00073 · UWC Germany NC</div>
+            <div class="hero-A__name">Lena Fischer Application 2026</div>
+            <div class="hero-A__sub">
+              <span class="canvas-pill canvas-pill--submitted">SUBMITTED · Under Review</span>
+              <span class="hero-A__sub-sep">•</span>
+              <span>17 years old · Cologne, 🇩🇪 Germany</span>
+              <span class="hero-A__sub-sep">•</span>
+              <span>Applied 25 May 2026 · 4 days in stage</span>
+            </div>
+          </div>
+          <div class="hero-A__actions">
+            <button class="hero-A__btn">✏ Edit</button>
+            <button class="hero-A__btn">✉ Send Mail</button>
+            <button class="hero-A__btn hero-A__btn--score">★ Score</button>
+            <button class="hero-A__btn hero-A__btn--accept">✓ Accept</button>
+            <button class="hero-A__btn hero-A__btn--unlock">⊖ Unlock</button>
+          </div>
+        </div>
+
+        <div class="hero-A__metrics">
+          <div class="hero-A__metric">
+            <div class="hero-A__metric-label">Owner</div>
+            <div class="hero-A__metric-value">Marcus Weber</div>
+          </div>
+          <div class="hero-A__metric">
+            <div class="hero-A__metric-label">Programme Interest</div>
+            <div class="hero-A__metric-value">UWC Atlantic · UWC Adriatic</div>
+          </div>
+          <div class="hero-A__metric">
+            <div class="hero-A__metric-label">Probability</div>
+            <div class="hero-A__metric-value">60%</div>
+            <div class="prob-track"><div class="prob-fill" style="width:60%"></div></div>
+          </div>
+          <div class="hero-A__metric">
+            <div class="hero-A__metric-label">Aid Requested</div>
+            <div class="hero-A__metric-value">£45,000 · Full</div>
+          </div>
+          <div class="hero-A__metric">
+            <div class="hero-A__metric-label">Closing Date</div>
+            <div class="hero-A__metric-value">15 Jun 2026 · 18 days</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BODY -->
+      <div class="body-A">
+        <!-- LEFT RAIL: Applicant + Eligibility + Aid -->
+        <aside class="rail-A">
+          <div class="rail-A__card">
+            <div class="rail-A__header">📋 Applicant Snapshot</div>
+            <div class="rail-A__row"><span class="rail-A__row-label">Applicant Number</span><span class="rail-A__row-value">73</span></div>
+            <div class="rail-A__row"><span class="rail-A__row-label">Account</span><span class="rail-A__row-value" style="color:#2563eb">UWC Germany NC</span></div>
+            <div class="rail-A__row"><span class="rail-A__row-label">Nationality</span><span class="rail-A__row-value">German</span></div>
+            <div class="rail-A__row"><span class="rail-A__row-label">School</span><span class="rail-A__row-value" style="color:#2563eb">Gymnasium am Wirteltor</span></div>
+            <div class="rail-A__row"><span class="rail-A__row-label">Language</span><span class="rail-A__row-value">Deutsch (+EN exam)</span></div>
+          </div>
+
+          <div class="rail-A__card">
+            <div class="rail-A__header">✓ Eligibility</div>
+            <div style="text-align:center;padding:6px 0">
+              <span style="display:inline-block;background:#d1fae5;color:#065f46;padding:6px 14px;border-radius:999px;font-weight:600;font-size:13px">✓ Eligible</span>
+            </div>
+            <div class="rail-A__row"><span class="rail-A__row-label">Citizenship Docs</span><span class="rail-A__row-value" style="color:#065f46">Verified</span></div>
+            <div class="rail-A__row"><span class="rail-A__row-label">Academic Baseline</span><span class="rail-A__row-value" style="color:#065f46">Met (Abitur 1.2)</span></div>
+            <div class="rail-A__row"><span class="rail-A__row-label">Safeguarding Flag</span><span class="rail-A__row-value" style="color:#065f46">None</span></div>
+          </div>
+
+          <div class="rail-A__card">
+            <div class="rail-A__header">💷 Financial Aid</div>
+            <div class="rail-A__amount">£45,000</div>
+            <div class="rail-A__amount-sub">Full scholarship requested (2-year)</div>
+            <div class="rail-A__row" style="margin-top:8px"><span class="rail-A__row-label">Household Income</span><span class="rail-A__row-value">€35K – €50K / yr</span></div>
+            <div class="rail-A__row"><span class="rail-A__row-label">Dependents</span><span class="rail-A__row-value">2 (sibling, age 11)</span></div>
+            <div class="rail-A__row"><span class="rail-A__row-label">Priority Score</span><span class="rail-A__row-value" style="color:#065f46;font-weight:600">87/100 — High</span></div>
+            <div class="rail-A__row"><span class="rail-A__row-label">Finance Review</span><span class="rail-A__row-value" style="color:#92400e">Pending</span></div>
+          </div>
+
+          <div class="rail-A__card">
+            <div class="rail-A__header">📞 Guardian Contact</div>
+            <div style="font-size:13px;line-height:1.6">
+              <div style="font-weight:600">Petra Fischer</div>
+              <div style="color:#6b7280">Mother · single parent</div>
+              <div style="color:#2563eb;margin-top:4px">📞 +49 221 5555 1234</div>
+              <div style="color:#2563eb">✉ petra.fischer@example.de</div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- CENTER: Blueprint + Sections -->
+        <section class="center-A">
+          <!-- Blueprint strip -->
+          <div class="center-A__bp">
+            <div class="center-A__bp-label">BLUEPRINT · Application Lifecycle</div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+              <div style="font-size:11px;color:#6b7280;font-weight:500"><span style="font-weight:700;color:#003087">START</span><br>27 May 2026</div>
+              <div class="bp-strip" style="flex:1">
+                <span class="bp-stage">Registered</span>
+                <span class="bp-sep">›</span>
+                <span class="bp-stage">In Progress</span>
+                <span class="bp-sep">›</span>
+                <span class="bp-stage">Submitted</span>
+                <span class="bp-sep">›</span>
+                <span class="bp-stage bp-stage--active">Under Review</span>
+                <span class="bp-sep">›</span>
+                <span class="bp-stage">Shortlisted</span>
+                <span class="bp-sep">›</span>
+                <span class="bp-stage">Nominated</span>
+                <span class="bp-sep">›</span>
+                <span class="bp-stage bp-stage--placed">Placed</span>
+                <span style="color:#cbd5e1;margin:0 8px;font-size:18px">│</span>
+                <span class="bp-stage bp-stage--declined">Declined</span>
+                <span class="bp-sep">›</span>
+                <span class="bp-stage bp-stage--withdrawn">Withdrawn</span>
+                <span class="bp-sep">›</span>
+                <span class="bp-stage bp-stage--waitlisted">Waitlisted</span>
+              </div>
+              <div style="font-size:11px;color:#6b7280;font-weight:500;text-align:right"><span style="font-weight:700;color:#003087">CLOSING</span><br>15 Jun 2026</div>
+            </div>
+          </div>
+
+          <!-- Quick info -->
+          <div class="qi-card" style="margin-bottom:14px">
+            <div class="qi-cell"><div class="qi-label">Stage</div><div class="qi-value"><span class="canvas-pill canvas-pill--review">Under Review</span></div></div>
+            <div class="qi-cell"><div class="qi-label">Probability</div><div class="qi-value">60%</div></div>
+            <div class="qi-cell"><div class="qi-label">Submission Date</div><div class="qi-value">25 May 2026</div></div>
+            <div class="qi-cell"><div class="qi-label">Last Modified</div><div class="qi-value">29 May 19:33</div></div>
+          </div>
+
+          <!-- Section: Programme Details -->
+          <div class="sec">
+            <div class="sec__header">
+              <span class="sec__title">🎓 Programme Details</span>
+              <button class="btn btn--ghost" style="font-size:12px">Edit ↗</button>
+            </div>
+            <div class="sec__body">
+              <div class="fld-grid">
+                <div class="fld"><div class="fld__label">Interested Programmes</div><div class="fld__value">UWC Atlantic 2026 · UWC Adriatic 2026</div></div>
+                <div class="fld"><div class="fld__label">Selected Programme</div><div class="fld__value" style="color:#9ca3af">— (pending nomination)</div></div>
+                <div class="fld"><div class="fld__label">Application Language</div><div class="fld__value">Deutsch (with English written exam)</div></div>
+                <div class="fld"><div class="fld__label">Submission Date</div><div class="fld__value">25 May 2026</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section: Review Score -->
+          <div class="sec">
+            <div class="sec__header">
+              <span class="sec__title">★ Review Score · 2 reviewers (blind)</span>
+              <span style="font-size:13px;color:#065f46;font-weight:600">Avg 33 / 40</span>
+            </div>
+            <div class="sec__body">
+              <table style="width:100%;border-collapse:collapse;font-size:13px">
+                <thead>
+                  <tr style="border-bottom:2px solid #e5e7eb">
+                    <th style="text-align:left;padding:8px 6px;font-size:11px;color:#6b7280;font-weight:600">Reviewer</th>
+                    <th style="text-align:center;padding:8px 6px;font-size:11px;color:#6b7280;font-weight:600">Academic</th>
+                    <th style="text-align:center;padding:8px 6px;font-size:11px;color:#6b7280;font-weight:600">Motivation</th>
+                    <th style="text-align:center;padding:8px 6px;font-size:11px;color:#6b7280;font-weight:600">Leadership</th>
+                    <th style="text-align:center;padding:8px 6px;font-size:11px;color:#6b7280;font-weight:600">Diversity</th>
+                    <th style="text-align:center;padding:8px 6px;font-size:11px;color:#6b7280;font-weight:600">Total</th>
+                    <th style="text-align:left;padding:8px 6px;font-size:11px;color:#6b7280;font-weight:600">Comment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="padding:10px 6px">Clara Ramos <span style="background:#dbeafe;color:#1e40af;padding:1px 6px;border-radius:3px;font-size:10px;margin-left:4px">Blind</span></td>
+                    <td style="text-align:center"><span style="display:inline-block;width:28px;height:28px;line-height:28px;background:#d1fae5;color:#065f46;border-radius:50%;font-weight:600">9</span></td>
+                    <td style="text-align:center"><span style="display:inline-block;width:28px;height:28px;line-height:28px;background:#d1fae5;color:#065f46;border-radius:50%;font-weight:600">9</span></td>
+                    <td style="text-align:center"><span style="display:inline-block;width:28px;height:28px;line-height:28px;background:#e0e7ff;color:#3730a3;border-radius:50%;font-weight:600">8</span></td>
+                    <td style="text-align:center"><span style="display:inline-block;width:28px;height:28px;line-height:28px;background:#e0e7ff;color:#3730a3;border-radius:50%;font-weight:600">7</span></td>
+                    <td style="text-align:center;font-weight:600;color:#065f46">33</td>
+                    <td style="padding:10px 6px;font-style:italic;color:#4b5563">Articulate, modest financial means…</td>
+                  </tr>
+                  <tr style="background:#f9fafb">
+                    <td style="padding:10px 6px">Paulo Fonseca <span style="background:#dbeafe;color:#1e40af;padding:1px 6px;border-radius:3px;font-size:10px;margin-left:4px">Blind</span></td>
+                    <td style="text-align:center"><span style="display:inline-block;width:28px;height:28px;line-height:28px;background:#e0e7ff;color:#3730a3;border-radius:50%;font-weight:600">8</span></td>
+                    <td style="text-align:center"><span style="display:inline-block;width:28px;height:28px;line-height:28px;background:#d1fae5;color:#065f46;border-radius:50%;font-weight:600">9</span></td>
+                    <td style="text-align:center"><span style="display:inline-block;width:28px;height:28px;line-height:28px;background:#d1fae5;color:#065f46;border-radius:50%;font-weight:600">9</span></td>
+                    <td style="text-align:center"><span style="display:inline-block;width:28px;height:28px;line-height:28px;background:#e0e7ff;color:#3730a3;border-radius:50%;font-weight:600">7</span></td>
+                    <td style="text-align:center;font-weight:600;color:#065f46">33</td>
+                    <td style="padding:10px 6px;font-style:italic;color:#4b5563">Strong leadership, recommend shortlist</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section: Interview + Description -->
+          <div class="sec">
+            <div class="sec__header"><span class="sec__title">🎙 Interview Summary</span></div>
+            <div class="sec__body">
+              <div class="fld-grid">
+                <div class="fld"><div class="fld__label">Interview Date</div><div class="fld__value">20 May 2026 · 14:00 CET</div></div>
+                <div class="fld"><div class="fld__label">Interview Mode</div><div class="fld__value">In-person · UWC Bonn office</div></div>
+                <div class="fld"><div class="fld__label">Communication</div><div class="fld__value success">8 / 10 — articulate, strong English fluency</div></div>
+                <div class="fld"><div class="fld__label">Leadership</div><div class="fld__value success">9 / 10 — school council president · climate-action society lead</div></div>
+                <div class="fld" style="grid-column:1/-1"><div class="fld__label">Final Recommendation</div><div class="fld__value success">✓ Recommend — Shortlist</div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT RAIL: Related lists + audit -->
+        <aside class="rl-rail">
+          <div class="rl-rail__header">Related Lists</div>
+          <div class="rl-item"><span class="rl-item__icon">📝</span><span class="rl-item__label">Notes</span><span class="rl-item__count">3</span></div>
+          <div class="rl-item active"><span class="rl-item__icon">⏱</span><span class="rl-item__label">Stage History</span><span class="rl-item__count">4</span></div>
+          <div class="rl-item"><span class="rl-item__icon">📄</span><span class="rl-item__label">Documents</span><span class="rl-item__count">4</span></div>
+          <div class="rl-item"><span class="rl-item__icon">📞</span><span class="rl-item__label">Open Calls</span><span class="rl-item__count">2</span></div>
+          <div class="rl-item"><span class="rl-item__icon">📅</span><span class="rl-item__label">Open Meetings</span><span class="rl-item__count">1</span></div>
+          <div class="rl-item"><span class="rl-item__icon">✓</span><span class="rl-item__label">Open Tasks</span><span class="rl-item__count">2</span></div>
+          <div class="rl-item"><span class="rl-item__icon">✉</span><span class="rl-item__label">Emails</span><span class="rl-item__count">6</span></div>
+          <div class="rl-item"><span class="rl-item__icon">🎓</span><span class="rl-item__label">Programmes</span><span class="rl-item__count">2</span></div>
+          <div class="rl-item"><span class="rl-item__icon">🛡</span><span class="rl-item__label">Consent Records</span><span class="rl-item__count">2</span></div>
+          <div class="rl-item"><span class="rl-item__icon">💷</span><span class="rl-item__label">Financial Aid</span><span class="rl-item__count">1</span></div>
+          <div class="rl-item"><span class="rl-item__icon">🔒</span><span class="rl-item__label">Audit Log</span><span class="rl-item__count">8</span></div>
+
+          <div class="rl-rail__header" style="margin-top:18px">SLA Status</div>
+          <div style="background:#fff;border:1px solid var(--zoho-border);border-radius:8px;padding:12px;font-size:12px">
+            <div style="display:flex;justify-content:space-between;color:#6b7280;margin-bottom:6px">
+              <span>Review SLA</span><span style="color:#065f46;font-weight:600">On track</span>
+            </div>
+            <div style="background:#f0f2f5;border-radius:999px;height:6px;overflow:hidden">
+              <div style="width:40%;height:100%;background:linear-gradient(90deg,#10b981,#3b6ef5)"></div>
+            </div>
+            <div style="font-size:11px;color:#6b7280;margin-top:5px">Day 4 of 10 · Review by 5 Jun</div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Legend -->
+      <div class="legend">
+        <strong>Design A — Pipeline Card</strong>
+        <span style="color:#9ca3af">·</span>
+        <span><span class="legend-dot" style="background:#003087"></span>Hero: UWC navy + applicant identity + 5 key metrics + role-gated CTAs</span>
+        <span style="color:#9ca3af">·</span>
+        <span><span class="legend-dot" style="background:#3b6ef5"></span>Body: 240px applicant rail · flexible centre · 220px related-list rail</span>
+      </div>
+    </main>
+  </div>
+</div>
+
+</body>
+</html>
