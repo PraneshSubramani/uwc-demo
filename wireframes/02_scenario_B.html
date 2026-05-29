@@ -1455,6 +1455,210 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 })();
 </script>
 
+
+<style>
+/* ============================================================
+   v19 — TYPOGRAPHY -1pt + LIGHTER SUB-TEXT + DEADLINES ONE-LINE
+   ============================================================ */
+   
+/* Welcome heading -1pt */
+#sc-3 .dash-shell h1,
+#sc-3 .dash-shell [class*="welcome-title"] {
+  font-size: 24px !important;        /* was 26 */
+  font-weight: 700 !important;
+}
+
+/* Welcome sub copy: lighter weight, smaller, refined color */
+#sc-3 .dash-shell [class*="welcome-sub"],
+#sc-3 .dash-shell [class*="welcome"] + p,
+#sc-3 .dash-shell .dash-welcome p,
+#sc-3 .dash-shell .dash-welcome-sub {
+  font-size: 13px !important;
+  font-weight: 400 !important;     /* lighter, not 600 */
+  color: #64748b !important;
+  line-height: 1.55 !important;
+  margin-bottom: 2px !important;
+}
+
+/* "Every UWC journey..." italic motivational line */
+#sc-3 .dash-shell em,
+#sc-3 .dash-shell i,
+#sc-3 .dash-shell [class*="motivational"],
+#sc-3 .dash-shell [class*="tagline"] {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: #94a3b8 !important;
+  font-style: italic;
+}
+
+/* Stat cards -1pt */
+#sc-3 .dash-shell [class*="stat"] [class*="num"] {
+  font-size: 22px !important;       /* was 24 */
+}
+#sc-3 .dash-shell [class*="stat"] [class*="label"] {
+  font-size: 12px !important;
+}
+
+/* Section headers -1pt */
+#sc-3 .dash-shell h2 {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+/* App cards -1pt */
+#sc-3 .dash-shell [class*="app-card"] h3,
+#sc-3 .dash-shell [class*="app-card"] [class*="title"] {
+  font-size: 15px !important;
+}
+#sc-3 .dash-shell [class*="app-card"] [class*="meta"] {
+  font-size: 12px !important;
+}
+
+/* Filter pills -1pt */
+#sc-3 .dash-shell [class*="filter-pill"] {
+  font-size: 12px !important;
+}
+
+/* Buttons in dashboard -1pt */
+#sc-3 .dash-shell button {
+  font-size: 12.5px !important;
+  padding: 8px 14px !important;
+}
+
+/* UPCOMING DEADLINES — keep dates on one line */
+#sc-3 .dash-shell [class*="deadline"],
+#sc-3 .dash-shell [class*="upcoming"] {
+  font-size: 12.5px !important;
+}
+#sc-3 .dash-shell [class*="deadline"] [class*="date"],
+#sc-3 .dash-shell [class*="deadline-date"],
+#sc-3 .dash-shell [class*="upcoming"] [class*="date"] {
+  white-space: nowrap !important;
+  font-size: 12px !important;
+  letter-spacing: -0.2px !important;
+}
+#sc-3 .dash-shell [class*="deadline-row"],
+#sc-3 .dash-shell [class*="upcoming-row"],
+#sc-3 .dash-shell [class*="deadline"] > div {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-wrap: nowrap !important;
+}
+#sc-3 .dash-shell [class*="deadline"] [class*="text"],
+#sc-3 .dash-shell [class*="deadline"] [class*="label"] {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Activity feed entries — smaller, refined */
+#sc-3 .dash-shell [class*="activity"] [class*="item"],
+#sc-3 .dash-shell [class*="activity"] li {
+  font-size: 12.5px !important;
+  line-height: 1.5 !important;
+}
+#sc-3 .dash-shell [class*="activity"] [class*="time"],
+#sc-3 .dash-shell [class*="activity"] time {
+  font-size: 11.5px !important;
+  color: #94a3b8 !important;
+}
+</style>
+
+<script>
+/* v19 — Demo-friendly word count thresholds + Fill sample button
+   The form's 500/300 word minimums are realistic but block a quick demo.
+   Lower thresholds to 50/30 so a paragraph completes the section. */
+(function() {
+  function applyDemoMode() {
+    if (!window.UWCFormState) { setTimeout(applyDemoMode, 100); return; }
+    
+    // Override isSectionComplete for statement to use lower thresholds
+    var originalIsSectionComplete = window.UWCFormState.isSectionComplete;
+    window.UWCFormState.isSectionComplete = function(section) {
+      if (section === 'statement') {
+        var why = (this.data.statement.whyUwc || '').trim();
+        var community = (this.data.statement.communityContribution || '').trim();
+        var whyWords = why ? why.split(/\s+/).filter(Boolean).length : 0;
+        var communityWords = community ? community.split(/\s+/).filter(Boolean).length : 0;
+        return whyWords >= 50 && communityWords >= 30;  // demo mode
+      }
+      return originalIsSectionComplete.call(this, section);
+    };
+    
+    // Update visible counter target labels (500 → 50, 300 → 30)
+    function updateCounterLabels() {
+      var sc = document.getElementById('sc-app');
+      if (!sc) return;
+      sc.querySelectorAll('*').forEach(function(el) {
+        if (el.children.length > 0) return;  // leaf nodes only
+        var t = el.textContent || '';
+        if (/\b500 words\b|\/ 500\b|out of 500/.test(t)) {
+          el.textContent = t.replace(/500/g, '50');
+        }
+        if (/\b300 words\b|\/ 300\b|out of 300/.test(t)) {
+          el.textContent = t.replace(/300/g, '30');
+        }
+      });
+    }
+    setTimeout(updateCounterLabels, 200);
+    
+    // Add "Fill with sample (demo)" button into section 3
+    function addSampleFillBtn() {
+      var sc = document.getElementById('sc-app');
+      if (!sc) return;
+      var section3 = sc.querySelectorAll('details.appform-section')[2];
+      if (!section3 || section3.querySelector('.demo-fill-btn')) return;
+      
+      var body = section3.querySelector('.appform-body, [class*="appform-body"]');
+      if (!body) return;
+      
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'demo-fill-btn';
+      btn.textContent = '✨ Fill with sample answer (demo)';
+      btn.setAttribute('style', 'background:#E8EEF6;color:#003087;border:1px dashed #003087;padding:8px 14px;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;margin:0 0 14px;display:inline-block;');
+      btn.onclick = function() {
+        var whyUwc = document.getElementById('appform-why-uwc');
+        var community = document.getElementById('appform-community');
+        var sampleWhy = 'I want to attend UWC because I believe in education that builds bridges across cultures, languages, and worldviews. As a Brazilian student who has studied alongside classmates from every continent, I have seen how genuine understanding requires daily contact, shared meals, and honest disagreement. UWC offers exactly this kind of immersive, two-year experience that no traditional school can replicate. I hope to contribute my background in social entrepreneurship and bring home a global network of changemakers.';
+        var sampleCommunity = 'I co-founded a literacy programme in São Paulo that serves children in underserved neighbourhoods. Over two years we trained twelve volunteers, partnered with three local libraries, and helped over a hundred students improve their reading levels measurably. The work taught me that systemic change requires patience and humility — listening to teachers, parents, and the children themselves.';
+        if (whyUwc) {
+          whyUwc.value = sampleWhy;
+          whyUwc.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+        if (community) {
+          community.value = sampleCommunity;
+          community.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+        if (window.UWCToast) window.UWCToast('Sample answer filled — section ready to mark complete', { kind: 'ok' });
+      };
+      
+      // Insert at top of body
+      body.insertBefore(btn, body.firstChild);
+    }
+    
+    // Try add now + on appform render
+    addSampleFillBtn();
+    var obs = new MutationObserver(function() { addSampleFillBtn(); });
+    obs.observe(document.body, { childList: true, subtree: true });
+    
+    // Re-render so the new isSectionComplete logic propagates
+    if (window.UWCFormState._notify) {
+      window.UWCFormState._notify('statement');
+    }
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyDemoMode);
+  } else {
+    applyDemoMode();
+  }
+})();
+</script>
+
 </head>
 <body>
 
