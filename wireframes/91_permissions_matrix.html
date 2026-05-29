@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Permission Matrix · UWC International CRM · A2Z Cloud</title>
+<link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-feature-settings:'cv02','cv03','cv11';color:#0f172a;background:#f1f5f9;-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:#003087;text-decoration:none}
+a:hover{text-decoration:underline}
+.serif{font-family:'Playfair Display',Georgia,serif;font-weight:500}
+.mono{font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+
+/* ===== HEADER ===== */
+.header{background:linear-gradient(135deg,#001a4d 0%,#003087 50%,#004A97 100%);color:#fff;border-bottom:3px solid #C8102E;padding:0}
+.header-inner{max-width:1440px;margin:0 auto;padding:26px 32px;display:flex;align-items:center;gap:20px}
+.header-mark{width:48px;height:48px;border-radius:50%;background:#fff;color:#003087;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:14px;flex-shrink:0}
+.header-titleblock{flex:1}
+.header-title{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:24px;letter-spacing:0.2px}
+.header-sub{font-size:12.5px;color:rgba(255,255,255,0.7);margin-top:4px;letter-spacing:0.3px}
+.header-meta{display:flex;gap:14px;font-size:11px;color:rgba(255,255,255,0.65)}
+.header-meta strong{color:#fff;font-weight:600;display:block;font-size:14px;margin-top:2px}
+.header-meta div{padding:0 14px;border-left:1px solid rgba(255,255,255,0.18)}
+.header-meta div:first-child{border-left:none;padding-left:0}
+
+/* ===== BACK LINK ===== */
+.backbar{max-width:1440px;margin:0 auto;padding:14px 32px 0}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:#003087}
+.back-link::before{content:'←'}
+
+/* ===== WRAP ===== */
+.wrap{max-width:1440px;margin:0 auto;padding:24px 32px 48px}
+.lead{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:22px 26px;box-shadow:0 1px 2px rgba(0,0,0,0.04);margin-bottom:28px}
+.lead h2{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:20px;color:#003087;margin-bottom:8px}
+.lead p{font-size:13.5px;color:#475569;max-width:920px}
+.badge{display:inline-block;background:#dcfce7;color:#166534;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;margin-bottom:12px}
+
+.section-label{font-size:11px;font-weight:600;color:#64748b;letter-spacing:1.8px;text-transform:uppercase;margin:36px 0 14px}
+
+/* ===== TABLE ===== */
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,0.04);overflow:hidden;margin-bottom:8px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:#f8fafc;color:#0f172a;font-weight:600;text-align:left;padding:13px 16px;border-bottom:2px solid #e2e8f0;font-size:12px;letter-spacing:0.2px;position:sticky;top:0}
+thead th:first-child{min-width:220px}
+tbody td{padding:12px 16px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#f8fafc}
+td.module-name{font-weight:600;color:#0f172a}
+td.module-name small{display:block;font-weight:400;color:#94a3b8;font-size:11px;margin-top:1px}
+
+/* permission pills */
+.perm{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:500;padding:3px 9px;border-radius:6px;white-space:nowrap}
+.perm-full{background:#dbeafe;color:#1e40af}     /* View + Create + Edit */
+.perm-view{background:#f1f5f9;color:#475569}     /* View only */
+.perm-none{background:#fef2f2;color:#b91c1c}     /* No access */
+.perm-none::before{content:'✗ '}
+
+/* ===== USER CARDS ===== */
+.user-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.user-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(0,0,0,0.04)}
+.user-card h3{font-size:14px;font-weight:600;color:#003087;display:flex;align-items:center;gap:8px}
+.user-card .role-tag{font-size:10.5px;font-weight:600;color:#64748b;background:#f1f5f9;padding:2px 8px;border-radius:999px;letter-spacing:0.3px}
+.user-card p{font-size:12.5px;color:#475569;margin-top:8px;line-height:1.55}
+.user-card.admin{border-color:#bfdbfe;background:linear-gradient(135deg,#eff6ff,#fff)}
+
+/* ===== NOTE ===== */
+.note{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:18px 22px;margin-top:24px}
+.note h4{font-size:13px;font-weight:600;color:#92400e;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.note h4::before{content:'⚠'}
+.note p{font-size:12.5px;color:#78350f;line-height:1.6;max-width:980px}
+.note code{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;background:#fef3c7;padding:1px 5px;border-radius:4px}
+
+/* ===== LEGEND ===== */
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.legend .perm{cursor:default}
+
+/* ===== FOOTER ===== */
+.footer{background:#001a4d;color:rgba(255,255,255,0.55);padding:22px 32px;text-align:center;font-size:11px;letter-spacing:0.4px;margin-top:40px}
+.footer strong{color:rgba(255,255,255,0.85)}
+
+@media (max-width:820px){.user-grid{grid-template-columns:1fr}.header-meta{display:none}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-mark">UWC</div>
+    <div class="header-titleblock">
+      <div class="header-title">Profile Permission Matrix</div>
+      <div class="header-sub">UWC International CRM &amp; Applications Platform · Module-level access by profile + per-user effect</div>
+    </div>
+    <div class="header-meta">
+      <div>Reference<strong>UWC-CRM-5128</strong></div>
+      <div>Demo<strong>1 June 2026</strong></div>
+      <div>Partner<strong>A2Z Cloud · Zoho Premium</strong></div>
+    </div>
+  </div>
+</header>
+
+<div class="backbar"><a href="00_index.html" class="back-link">Back to demo home</a></div>
+
+<div class="wrap">
+
+  <div class="lead">
+    <span class="badge">31 permission changes applied · 3 profiles</span>
+    <h2>Module Permission Matrix</h2>
+    <p>Profile-level permissions configured in Zoho CRM Setup → Security Control → Profiles. The <strong>Administrator</strong> profile has full access on every module (View + Create + Edit + Delete) and is not shown in the matrix. Permissions below control <em>which modules</em> each profile can touch; the Role hierarchy controls <em>which records</em> within those modules.</p>
+  </div>
+
+  <div class="section-label">Module access by profile</div>
+
+  <div class="legend">
+    <span class="perm perm-full">View + Create + Edit</span>
+    <span class="perm perm-view">View only</span>
+    <span class="perm perm-none">No access</span>
+  </div>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Module</th>
+          <th>Standard (NC Admin)</th>
+          <th>IO Admissions</th>
+          <th>NC Reviewer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="module-name">National_Committee</td>
+          <td><span class="perm perm-view">View only</span></td>
+          <td><span class="perm perm-view">View only</span></td>
+          <td><span class="perm perm-none">No access</span></td>
+        </tr>
+        <tr>
+          <td class="module-name">NC_Volunteers</td>
+          <td><span class="perm perm-full">View + Create + Edit</span></td>
+          <td><span class="perm perm-view">View only</span></td>
+          <td><span class="perm perm-none">No access</span></td>
+        </tr>
+        <tr>
+          <td class="module-name">Training_Record</td>
+          <td><span class="perm perm-full">View + Create + Edit</span></td>
+          <td><span class="perm perm-view">View only</span></td>
+          <td><span class="perm perm-view">View only</span></td>
+        </tr>
+        <tr>
+          <td class="module-name">MoU_Obligation</td>
+          <td><span class="perm perm-view">View only</span></td>
+          <td><span class="perm perm-view">View only</span></td>
+          <td><span class="perm perm-none">No access</span></td>
+        </tr>
+        <tr>
+          <td class="module-name">Governance_Body</td>
+          <td><span class="perm perm-none">No access</span></td>
+          <td><span class="perm perm-view">View only</span></td>
+          <td><span class="perm perm-none">No access</span></td>
+        </tr>
+        <tr>
+          <td class="module-name">Governance_Membership</td>
+          <td><span class="perm perm-none">No access</span></td>
+          <td><span class="perm perm-view">View only</span></td>
+          <td><span class="perm perm-none">No access</span></td>
+        </tr>
+        <tr>
+          <td class="module-name">Contacts</td>
+          <td><span class="perm perm-full">View + Create + Edit</span></td>
+          <td><span class="perm perm-view">View only</span></td>
+          <td><span class="perm perm-view">View only</span></td>
+        </tr>
+        <tr>
+          <td class="module-name">Schools</td>
+          <td><span class="perm perm-view">View only</span></td>
+          <td><span class="perm perm-view">View only</span></td>
+          <td><span class="perm perm-none">No access</span></td>
+        </tr>
+        <tr>
+          <td class="module-name">School_Place_Allocation</td>
+          <td><span class="perm perm-full">View + Create + Edit</span></td>
+          <td><span class="perm perm-view">View only</span></td>
+          <td><span class="perm perm-none">No access</span></td>
+        </tr>
+        <tr>
+          <td class="module-name">Leads <small>(Applications)</small></td>
+          <td><span class="perm perm-full">View + Create + Edit</span></td>
+          <td><span class="perm perm-view">View only</span></td>
+          <td><span class="perm perm-full">View + Create + Edit</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-label">What each user sees in practice</div>
+
+  <div class="user-grid">
+
+    <div class="user-card admin">
+      <h3>UWC A2Z Admin — Akanksha <span class="role-tag">Administrator</span></h3>
+      <p>Full system — all modules, all operations (View, Create, Edit, Delete) across the entire CRM.</p>
+    </div>
+
+    <div class="user-card">
+      <h3>Ana Carvalho <span class="role-tag">NC Admin · Brazil</span></h3>
+      <p>View NCs &amp; MoUs, manage volunteers + contacts, manage school place allocations. Scoped to <strong>Brazil</strong> records via the role hierarchy.</p>
+    </div>
+
+    <div class="user-card">
+      <h3>Marcus Weber <span class="role-tag">NC Admin · Germany</span></h3>
+      <p>Same module access as Ana, but scoped to <strong>Germany</strong> only (role-level data sharing enforces the row-level isolation).</p>
+    </div>
+
+    <div class="user-card">
+      <h3>Clara Ramos / Paulo Fonseca <span class="role-tag">NC Reviewer</span></h3>
+      <p>View contacts + training, full CRUD on applications (Leads). No NC config, no governance, no MoUs.</p>
+    </div>
+
+    <div class="user-card">
+      <h3>Fatima Al-Rashid <span class="role-tag">IO Admissions</span></h3>
+      <p>View everything including governance — but no create or edit anywhere. Read-only oversight across the network.</p>
+    </div>
+
+    <div class="user-card">
+      <h3>Helen Richards <span class="role-tag">School Admissions</span></h3>
+      <p>View contacts + training + schools + applications. No governance, no NC config.</p>
+    </div>
+
+  </div>
+
+  <div class="note">
+    <h4>Data-level scoping is enforced by Roles, not Profiles</h4>
+    <p>The profile permissions above control <em>what modules</em> a user can touch. <strong>Which records</strong> they see within those modules (Ana → Brazil only, Marcus → Germany only) is enforced by the Role hierarchy + Data Sharing Rules in <code>CRM Setup → Security → Data Sharing Settings</code>. Confirm the data sharing rules there to enforce NC-level row-level isolation.</p>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <strong>UWC International CRM — Profile Permission Matrix</strong> · A2Z Cloud Ltd · Zoho Premium Partner · Salisbury, UK · <em>Demo reference document for procurement evaluation 1 June 2026</em>
+</footer>
+
+</body>
+</html>
