@@ -1659,6 +1659,159 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 })();
 </script>
 
+
+<style>
+/* ============================================================
+   v20 — UNIFY: dashboard matches application form aesthetic
+   User: "I like the second screenshot UI" (cleaner app-form look)
+   ============================================================ */
+
+/* 1. Remove the RED LINE under dashboard topbar */
+#sc-3 .uwc-portal-topbar,
+#sc-3 [class*="topbar"] {
+  border-bottom: none !important;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06) !important;
+  background: linear-gradient(180deg, #003087 0%, #002770 100%) !important;
+}
+#sc-3 .uwc-portal-shell::after,
+#sc-3 .uwc-portal-topbar::after {
+  display: none !important;
+  content: none !important;
+  border: none !important;
+}
+/* Remove any red horizontal divider/strip immediately after topbar */
+#sc-3 hr,
+#sc-3 .uwc-topbar-divider,
+#sc-3 [class*="red-strip"],
+#sc-3 [class*="topbar-strip"] {
+  display: none !important;
+}
+
+/* 2. Dashboard sidebar — remove per-icon colors (too playful), 
+      use muted grey icons like the application form sidebar */
+#sc-3 .uwc-portal-sidebar__item[data-portal-section] .uwc-portal-sidebar__icon,
+#sc-3 .uwc-portal-sidebar__item[data-portal-section] svg {
+  color: #94a3b8 !important;         /* muted slate */
+  filter: none !important;
+}
+#sc-3 .uwc-portal-sidebar__item:hover .uwc-portal-sidebar__icon,
+#sc-3 .uwc-portal-sidebar__item:hover svg {
+  color: #003087 !important;
+}
+#sc-3 .uwc-portal-sidebar__item.active .uwc-portal-sidebar__icon,
+#sc-3 .uwc-portal-sidebar__item.active svg {
+  color: #ffffff !important;
+}
+/* Specifically OVERRIDE the v18 per-tab colors */
+#sc-3 .uwc-portal-sidebar__item[data-portal-section="dashboard"]:not(.active) .uwc-portal-sidebar__icon,
+#sc-3 .uwc-portal-sidebar__item[data-portal-section="application"]:not(.active) .uwc-portal-sidebar__icon,
+#sc-3 .uwc-portal-sidebar__item[data-portal-section="documents"]:not(.active) .uwc-portal-sidebar__icon,
+#sc-3 .uwc-portal-sidebar__item[data-portal-section="references"]:not(.active) .uwc-portal-sidebar__icon,
+#sc-3 .uwc-portal-sidebar__item[data-portal-section="status"]:not(.active) .uwc-portal-sidebar__icon {
+  color: #94a3b8 !important;
+}
+
+/* 3. Dashboard sidebar label "MY APPLICATION" → "APPLICATION" 
+      (visual update via CSS — exact match to app form) */
+#sc-3 .uwc-portal-sidebar__section {
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.8px !important;
+  text-transform: uppercase !important;
+  color: #64748b !important;
+  padding: 0 18px 10px !important;
+  margin-top: 8px !important;
+  font-size-adjust: none;
+}
+
+/* 4. Hide the language buttons (PT/EN) on Sofia dashboard topbar 
+      — only show Sofia chip + role badge */
+#sc-3 .uwc-portal-topbar__lang,
+#sc-3 [class*="lang-btn"],
+#sc-3 [class*="lang-toggle"],
+#sc-3 button[class*="topbar__lang"] {
+  display: none !important;
+}
+
+/* 5. Topbar title style match: "Applicant Portal" cleaner */
+#sc-3 .uwc-portal-topbar__title {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  letter-spacing: -0.2px !important;
+}
+#sc-3 .uwc-portal-topbar__logo {
+  background: #ffffff !important;
+  color: #003087 !important;
+  font-weight: 700 !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 8px !important;
+  font-size: 11px !important;
+}
+
+/* 6. Consistent sidebar item padding/spacing across both views */
+#sc-3 .uwc-portal-sidebar,
+#sc-app .uwc-portal-shell .uwc-portal-sidebar {
+  background: #f7f8fa !important;
+  border-right: 1px solid #e5e7eb !important;
+  padding: 16px 0 !important;
+  width: 240px !important;
+  min-width: 240px !important;
+}
+</style>
+
+<script>
+/* v20 — Visual unification script:
+   - Reorder sidebar items: Dashboard / Application form / Documents / References / Status
+   - Rename label "MY APPLICATION" → "APPLICATION" for consistency */
+(function() {
+  function unifyDashboard() {
+    var sc3 = document.getElementById('sc-3');
+    if (!sc3) return;
+    
+    // Rename section label
+    var labels = sc3.querySelectorAll('.uwc-portal-sidebar__section, [class*="sidebar__section"]');
+    labels.forEach(function(l) {
+      var txt = (l.textContent || '').trim();
+      if (txt === 'MY APPLICATION' || txt === 'My application' || txt === 'My Application' || txt.toLowerCase() === 'my application') {
+        l.textContent = 'APPLICATION';
+      }
+    });
+    
+    // Reorder sidebar: Dashboard, Application form, Documents, References, Status
+    var sidebar = sc3.querySelector('.uwc-portal-sidebar');
+    if (!sidebar) return;
+    
+    var desiredOrder = ['dashboard', 'application', 'documents', 'references', 'status'];
+    var items = Array.from(sidebar.querySelectorAll('.uwc-portal-sidebar__item[data-portal-section]'));
+    if (items.length < 3) return;
+    
+    var byKey = {};
+    items.forEach(function(it) {
+      byKey[it.getAttribute('data-portal-section')] = it;
+    });
+    
+    // Reattach in correct order (only sections that exist)
+    desiredOrder.forEach(function(key) {
+      if (byKey[key]) {
+        // Re-append (moves it to end of current order)
+        byKey[key].parentNode.appendChild(byKey[key]);
+      }
+    });
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', unifyDashboard);
+  } else {
+    unifyDashboard();
+  }
+  // Re-run on screen changes (defensive against re-renders)
+  setTimeout(unifyDashboard, 500);
+  setTimeout(unifyDashboard, 1500);
+})();
+</script>
+
 </head>
 <body>
 
@@ -3288,7 +3441,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         </div>
         <div class="uwc-portal-layout">
           <nav class="uwc-portal-sidebar">
-            <div class="uwc-portal-sidebar__section">My Application</div>
+            <div class="uwc-portal-sidebar__section">Application</div>
             <a class="uwc-portal-sidebar__item active" data-portal-section="dashboard"><span class="uwc-portal-sidebar__icon">🏠</span> Dashboard</a>
             <a class="uwc-portal-sidebar__item" data-portal-section="application" onclick="window.go && window.go(5)"><span class="uwc-portal-sidebar__icon">📝</span> Application form</a>
             <a class="uwc-portal-sidebar__item" data-portal-section="references" onclick="window.go(4); setTimeout(function(){window.UWCSwitchPanel&&window.UWCSwitchPanel('references')},50)"><span class="uwc-portal-sidebar__icon">👥</span> References</a>
