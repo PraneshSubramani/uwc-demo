@@ -5,4 +5,5 @@ data/
 *.md
 *.docx
 *.pdf
+!wireframes/samples/*.pdf
 .git

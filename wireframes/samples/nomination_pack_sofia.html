@@ -91,8 +91,11 @@ body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;color:#1f293
 <body>
 
 <div class="toolbar">
-  <span>Sample document. If the navy header prints white, tick <b>“Background graphics”</b> (Chrome: More settings) or <b>“Print backgrounds”</b> in the print dialog.</span>
-  <button onclick="window.print()">⎙ Print / Save as PDF</button>
+  <span>Sample document. Use <b>Download PDF</b> for the ready-made file, or print this page yourself.</span>
+  <span style="display:flex;gap:10px">
+    <a href="nomination_pack_sofia.pdf" download style="text-decoration:none"><button>⤓ Download PDF</button></a>
+    <button onclick="window.print()" style="background:#fff;color:#003087;border:1px solid #003087">⎙ Print page</button>
+  </span>
 </div>
 
 <div class="page">
