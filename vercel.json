@@ -36,7 +36,9 @@
       "source": "/wireframes/samples/nomination_pack_sofia.pdf",
       "headers": [
         { "key": "Content-Type", "value": "application/pdf" },
-        { "key": "Content-Disposition", "value": "attachment; filename=\"UWC-Nomination-Pack-BR-2026-00041-Sofia-Carvalho.pdf\"" }
+        { "key": "Content-Disposition", "value": "inline; filename=\"UWC-Nomination-Pack-BR-2026-00041-Sofia-Carvalho.pdf\"" },
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
       ]
     }
   ]
