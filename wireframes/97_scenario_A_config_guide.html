@@ -154,9 +154,9 @@ td.mod{font-weight:600;color:#0f172a}
     <ol class="steps">
       <li>Confirm you are signed in with an <b>Administrator</b> profile. If you hit "Insufficient privileges", you must be promoted to Administrator before any of this works.</li>
       <li>Disable unused stock modules (Vendors, Services, Projects, Sales Inbox, stock Questions) via the module kebab → <b>Disable Module</b>.</li>
-      <li>Leave enabled: Home · Leads (Applications) · Contacts · Programmes · Campaigns · Tasks · Meetings · Calls · plus the custom modules (NCs, Schools, Place Allocations, Nomination Packs, NC Volunteers, Training Records, MoU Obligations, Governance Bodies/Memberships, Competencies, Mailing Lists, Communication Logs, Consent Records, Safeguarding Cases).</li>
+      <li>Leave enabled: Home · Deals (Applications) · Contacts · Programmes · Campaigns · Tasks · Meetings · Calls · plus the custom modules (NCs, Schools, Place Allocations, Nomination Packs, NC Volunteers, Training Records, MoU Obligations, Governance Bodies/Memberships, Competencies, Mailing Lists, Communication Logs, Consent Records, Safeguarding Cases).</li>
     </ol>
-    <div class="note info"><h4>Note</h4><p>The "Applications" module is the standard <b>Leads</b> module, relabelled. Permission screens will say Leads.</p></div>
+    <div class="note info"><h4>Note</h4><p>The "Applications" module is the standard <b>Deals</b> module, relabelled. Permission screens will say Deals.</p></div>
   </div>
 
   <!-- ===== STEP 1 PROFILES ===== -->
@@ -187,7 +187,7 @@ td.mod{font-weight:600;color:#0f172a}
       <table>
         <thead><tr><th>Module</th><th>NC Admin</th><th>Reviewer</th><th>Data Protection Lead</th></tr></thead>
         <tbody>
-          <tr><td class="mod">Leads (Applications)</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm full">View+Create+Edit</span><br><span style="font-size:10px;color:#64748b">via "My Review Queue" view</span></td><td><span class="perm view">View</span></td></tr>
+          <tr><td class="mod">Deals (Applications)</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm full">View+Create+Edit</span><br><span style="font-size:10px;color:#64748b">via "My Review Queue" view</span></td><td><span class="perm view">View</span></td></tr>
           <tr><td class="mod">Contacts</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm view">View (own NC)</span></td><td><span class="perm rw">View+Edit (masked)</span></td></tr>
           <tr><td class="mod">National Committees</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
           <tr><td class="mod">NC Volunteers</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
@@ -225,7 +225,7 @@ td.mod{font-weight:600;color:#0f172a}
     <ol class="steps">
       <li>Under Roles, create the tree above — each NC Admin role reports to <b>International Office</b>; each NC Reviewer reports to its NC Admin.</li>
       <li>Assign <code>uwc_admin</code> the <b>International Office</b> role + <b>IO Super Admin</b> profile.</li>
-      <li>Go to <b>Security Control → Data Sharing Settings</b>. Set the default access for record-scoped modules (Leads, Contacts, NC Volunteers, MoU Obligations, Place Allocations) to <b>Private</b>.</li>
+      <li>Go to <b>Security Control → Data Sharing Settings</b>. Set the default access for record-scoped modules (Deals, Contacts, NC Volunteers, MoU Obligations, Place Allocations) to <b>Private</b>.</li>
       <li>With Private default, each role sees only its own records + those below it. Ana (Brazil) cannot see Germany's; Marcus (Germany) cannot see Brazil's — automatically, because they are sibling branches.</li>
       <li>If a module should be network-visible (e.g. Programmes), set its default to <b>Public Read Only</b> instead.</li>
     </ol>
@@ -237,7 +237,7 @@ td.mod{font-weight:600;color:#0f172a}
     <div class="step-head"><span class="step-badge">4</span><h2>Field-level security</h2></div>
     <div class="step-path">Setup → Modules and Fields → [module] → Field Permissions</div>
 
-    <div class="section-label">4a · Blind review — Review Scores subform (Leads)</div>
+    <div class="section-label">4a · Blind review — Review Scores subform (Deals)</div>
     <div class="card">
       <table>
         <thead><tr><th>Field</th><th>IO Super Admin</th><th>NC Admin</th><th>Reviewer</th><th>DPL</th></tr></thead>
@@ -274,9 +274,9 @@ td.mod{font-weight:600;color:#0f172a}
       <table>
         <thead><tr><th>Button</th><th>Module · where</th><th>Visible when</th><th>Action</th></tr></thead>
         <tbody>
-          <tr><td class="mod">Raise Safeguarding Flag</td><td>Leads · detail</td><td><code>Safeguarding_Flag_Status = None</code> AND Stage ∈ {Under Review, Shortlisted}</td><td>Popup → set status Under Review (fires WR-C-5)</td></tr>
-          <tr><td class="mod">Generate Nomination Pack</td><td>Leads · detail</td><td><code>Stage = Shortlisted</code> AND School_Nominated not empty</td><td><code>generate_nomination_pack()</code></td></tr>
-          <tr><td class="mod">Nominate to School</td><td>Leads · detail</td><td>Stage = Shortlisted AND a Generated pack exists</td><td>Confirm → Stage = Nominated</td></tr>
+          <tr><td class="mod">Raise Safeguarding Flag</td><td>Deals · detail</td><td><code>Safeguarding_Flag_Status = None</code> AND Stage ∈ {Under Review, Shortlisted}</td><td>Popup → set status Under Review (fires WR-C-5)</td></tr>
+          <tr><td class="mod">Generate Nomination Pack</td><td>Deals · detail</td><td><code>Stage = Shortlisted</code> AND School_Nominated not empty</td><td><code>generate_nomination_pack()</code></td></tr>
+          <tr><td class="mod">Nominate to School</td><td>Deals · detail</td><td>Stage = Shortlisted AND a Generated pack exists</td><td>Confirm → Stage = Nominated</td></tr>
           <tr><td class="mod">Accept / Decline Nomination</td><td>Nomination Packs · detail</td><td><code>Pack_Status = Sent</code></td><td>Set Accepted (fires WR-D-Pack) / Declined</td></tr>
           <tr><td class="mod">Build &amp; Preview</td><td>Mailing Lists · detail</td><td>List_Status ∈ {Draft, Built}</td><td><code>build_mailing_list()</code></td></tr>
           <tr><td class="mod">Push to Mailchimp</td><td>Mailing Lists · detail</td><td>List_Status = Built</td><td><code>log_campaign_sends()</code></td></tr>

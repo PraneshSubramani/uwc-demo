@@ -88,7 +88,7 @@ table.t tbody tr:last-child td{border-bottom:none}
     </div>
     <div class="header-meta">
       <div>Reference<strong>UWC-CRM-5128</strong></div>
-      <div>Module<strong>Leads (Applications)</strong></div>
+      <div>Module<strong>Deals (Applications)</strong></div>
       <div>Org<strong>Zoho CRM · EU DC</strong></div>
     </div>
   </div>
@@ -101,12 +101,12 @@ table.t tbody tr:last-child td{border-bottom:none}
   <div class="lead">
     <h2>What you're testing</h2>
     <p>Scenario D moves an applicant (Sofia) into a confirmed school place. The chain is: <b>allocate places → generate a branded pack → nominate to school → school accepts → finance sync fires</b>. Unlike the read-only scenarios, this one exercises <b>2 custom buttons, 3 workflow rules and 4 Deluge functions</b> across three custom modules — so it's the most worth testing end-to-end.</p>
-    <p>The whole scenario hinges on one field — <code>Leads.Stage</code> moving <code>Shortlisted → Nominated → Placed</code>. If you watch only one thing, watch that.</p>
+    <p>The whole scenario hinges on one field — <code>Deals.Stage</code> moving <code>Shortlisted → Nominated → Placed</code>. If you watch only one thing, watch that.</p>
   </div>
 
   <div class="note info">
     <h4>Field names verified against the live EU org (29 May 2026)</h4>
-    <p>The names below are confirmed live — and several <b>differ from the original build spec</b>. The Applications module is <b><code>Leads</code></b> (not Deals); the cycle field is <b><code>Cycle_Year</code></b> (not Cycle); place counts are <b><code>Allocated_Places</code> / <code>Used_Places</code></b>. The demo applicant is <b>Sofia Carvalho</b>. Two data gaps remain to fix before testing — see the box under "Pre-test setup".</p>
+    <p>The names below are confirmed live. The Applications module is the <b><code>Deals</code></b> module (relabelled "Applications"); the cycle field is <b><code>Cycle_Year</code></b>; place counts are <b><code>Allocated_Places</code> / <code>Used_Places</code></b>. The demo applicant is <b>Sofia Carvalho</b>. Two data gaps remain to fix before testing — see the box under "Pre-test setup".</p>
   </div>
 
   <div class="section-label">The moving parts (live API names)</div>
@@ -114,7 +114,7 @@ table.t tbody tr:last-child td{border-bottom:none}
     <table class="t">
       <thead><tr><th>Thing</th><th>API name in CRM</th><th>Type</th></tr></thead>
       <tbody>
-        <tr><td>Applications module</td><td><code>Leads</code> (relabelled "Applications") — name field <code>First_Name</code>/<code>Last_Name</code></td><td>module</td></tr>
+        <tr><td>Applications module</td><td><code>Deals</code> (relabelled "Applications") — name field <code>Deal_Name</code></td><td>module</td></tr>
         <tr><td>Place Allocations</td><td><code>School_Place_Allocation</code></td><td>module</td></tr>
         <tr><td>Nomination Packs</td><td><code>Nomination_Packs</code></td><td>module</td></tr>
         <tr><td>Generate pack</td><td><code>generate_nomination_pack(applicationId)</code></td><td>function + button</td></tr>
@@ -126,7 +126,7 @@ table.t tbody tr:last-child td{border-bottom:none}
   </div>
   <div class="note warn">
     <h4>Manual build needed — not API-creatable</h4>
-    <p>The custom <b>buttons</b> (Generate Nomination Pack, Nominate to School on Leads; Accept Nomination on Nomination_Packs), the <b>workflow rules</b> (WR-D-1/2/Pack), and the <b>functions</b> cannot be created or verified via the CRM v8 REST API. Build them manually: buttons in <code>Setup → Modules → Leads → Buttons</code>, rules in <code>Setup → Automation → Workflow Rules</code>, functions in <code>Setup → Developer Tools → Functions</code>.</p>
+    <p>The custom <b>buttons</b> (Generate Nomination Pack, Nominate to School on Deals; Accept Nomination on Nomination_Packs), the <b>workflow rules</b> (WR-D-1/2/Pack), and the <b>functions</b> cannot be created or verified via the CRM v8 REST API. Build them manually: buttons in <code>Setup → Modules → Deals → Buttons</code>, rules in <code>Setup → Automation → Workflow Rules</code>, functions in <code>Setup → Developer Tools → Functions</code>.</p>
   </div>
 
   <div class="section-label">The Stage chain — trace this end to end</div>
@@ -145,7 +145,7 @@ table.t tbody tr:last-child td{border-bottom:none}
     <h4>Pre-test setup (do once)</h4>
     <p>1. Apply the two data-gap fixes above.<br>
     2. Run the <code>demo_reset</code> function — resets Sofia to <code>Stage = Shortlisted</code> and <code>Used_Places = 0</code> on all allocations.<br>
-    3. Confirm: Sofia Carvalho exists in <code>Leads</code> (Stage=Shortlisted, School_Nominated=UWC Atlantic, NC=UWC National Committee Brazil), the 15-cell allocation matrix is loaded, and Nomination Pack <code>NP-2026-00001</code> exists.</p>
+    3. Confirm: Sofia Carvalho exists in <code>Deals</code> (Stage=Shortlisted, School_Nominated=UWC Atlantic, NC=UWC National Committee Brazil), the 15-cell allocation matrix is loaded, and Nomination Pack <code>NP-2026-00001</code> exists.</p>
   </div>
 
   <div class="section-label">Tests</div>
