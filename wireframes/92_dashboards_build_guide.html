@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Build Guide · IO NC Health Dashboard · UWC International CRM</title>
+<link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-feature-settings:'cv02','cv03','cv11';color:#0f172a;background:#f1f5f9;-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:#003087;text-decoration:none}
+a:hover{text-decoration:underline}
+.serif{font-family:'Playfair Display',Georgia,serif;font-weight:500}
+.mono{font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#001a4d 0%,#003087 50%,#004A97 100%);color:#fff;border-bottom:3px solid #C8102E}
+.header-inner{max-width:1280px;margin:0 auto;padding:26px 32px;display:flex;align-items:center;gap:20px}
+.header-mark{width:48px;height:48px;border-radius:50%;background:#fff;color:#003087;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:14px;flex-shrink:0}
+.header-titleblock{flex:1}
+.header-title{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:24px;letter-spacing:0.2px}
+.header-sub{font-size:12.5px;color:rgba(255,255,255,0.7);margin-top:4px;letter-spacing:0.3px}
+.header-meta{display:flex;gap:14px;font-size:11px;color:rgba(255,255,255,0.65)}
+.header-meta strong{color:#fff;font-weight:600;display:block;font-size:14px;margin-top:2px}
+.header-meta div{padding:0 14px;border-left:1px solid rgba(255,255,255,0.18)}
+.header-meta div:first-child{border-left:none;padding-left:0}
+
+.backbar{max-width:1280px;margin:0 auto;padding:14px 32px 0}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:#003087}
+.back-link::before{content:'←'}
+
+.wrap{max-width:1280px;margin:0 auto;padding:24px 32px 48px}
+.lead{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:22px 26px;box-shadow:0 1px 2px rgba(0,0,0,0.04);margin-bottom:28px}
+.lead h2{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:20px;color:#003087;margin-bottom:8px}
+.lead p{font-size:13.5px;color:#475569;max-width:980px}
+.lead p+p{margin-top:8px}
+.badge{display:inline-block;background:#dbeafe;color:#1e40af;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;margin-bottom:12px}
+.lead code,.note code,.step code,td code{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;background:#eef2f7;padding:1px 5px;border-radius:4px;color:#0f172a}
+
+.section-label{font-size:11px;font-weight:600;color:#64748b;letter-spacing:1.8px;text-transform:uppercase;margin:38px 0 14px}
+
+/* KPI PREVIEW ROW */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.kpi{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(0,0,0,0.04);position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.kpi.blue::before{background:#2563eb}
+.kpi.green::before{background:#16a34a}
+.kpi.red::before{background:#dc2626}
+.kpi.amber::before{background:#ea580c}
+.kpi-val{font-size:38px;font-weight:700;line-height:1;color:#0f172a;font-feature-settings:'tnum'}
+.kpi-label{font-size:12px;color:#64748b;margin-top:8px;font-weight:500}
+.kpi-mod{font-size:10.5px;color:#94a3b8;margin-top:6px}
+
+/* STEP CARDS */
+.step{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:18px 22px;box-shadow:0 1px 2px rgba(0,0,0,0.04);margin-bottom:12px}
+.step h3{font-size:14.5px;font-weight:600;color:#003087;display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:6px;background:#003087;color:#fff;font-size:12px;font-weight:600;flex-shrink:0}
+.step-type{font-size:10px;font-weight:600;letter-spacing:0.4px;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-left:auto}
+.step-type.kpi-t{background:#dbeafe;color:#1e40af}
+.step-type.chart-t{background:#dcfce7;color:#166534}
+table.cfg{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px}
+table.cfg td{padding:7px 12px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+table.cfg tr:last-child td{border-bottom:none}
+table.cfg td:first-child{width:230px;color:#64748b;font-weight:500}
+table.cfg td:last-child{color:#0f172a}
+.expect{font-size:12px;color:#475569;margin-top:10px;padding:9px 12px;background:#f8fafc;border-left:3px solid #003087;border-radius:0 6px 6px 0}
+.expect b{color:#0f172a}
+
+/* CHIP */
+.chip{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px}
+.c-green{background:#D1FAE5;color:#065f46}
+.c-amber{background:#FEF3C7;color:#92400e}
+.c-red{background:#FEE2E2;color:#991b1b}
+.c-grey{background:#F3F4F6;color:#374151}
+
+/* LAYOUT DIAGRAM */
+.layout-diagram{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:20px 24px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;line-height:1.7;overflow-x:auto;white-space:pre}
+
+/* NOTE */
+.note{border-radius:12px;padding:16px 20px;margin-top:16px}
+.note.warn{background:#fffbeb;border:1px solid #fde68a}
+.note.warn h4{color:#92400e}
+.note.info{background:#eff6ff;border:1px solid #bfdbfe}
+.note.info h4{color:#1e40af}
+.note h4{font-size:13px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.note.warn h4::before{content:'⚠'}
+.note.info h4::before{content:'ℹ'}
+.note p{font-size:12.5px;color:#334155;line-height:1.6;max-width:1000px}
+.note p+p{margin-top:6px}
+
+/* MAPPING TABLE */
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,0.04);overflow:hidden}
+table.map{width:100%;border-collapse:collapse;font-size:13px}
+table.map thead th{background:#f8fafc;text-align:left;padding:12px 16px;border-bottom:2px solid #e2e8f0;font-size:12px;font-weight:600}
+table.map tbody td{padding:11px 16px;border-bottom:1px solid #f1f5f9}
+table.map tbody tr:last-child td{border-bottom:none}
+
+.footer{background:#001a4d;color:rgba(255,255,255,0.55);padding:22px 32px;text-align:center;font-size:11px;letter-spacing:0.4px;margin-top:40px}
+.footer strong{color:rgba(255,255,255,0.85)}
+
+@media (max-width:900px){.kpi-row{grid-template-columns:repeat(2,1fr)}.header-meta{display:none}table.cfg td:first-child{width:auto}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-mark">UWC</div>
+    <div class="header-titleblock">
+      <div class="header-title">Dashboard Build Guide</div>
+      <div class="header-sub">IO NC Health Dashboard · click-by-click build in Zoho CRM Reports &amp; Dashboards</div>
+    </div>
+    <div class="header-meta">
+      <div>Reference<strong>UWC-CRM-5128</strong></div>
+      <div>Org<strong>Zoho CRM · EU DC</strong></div>
+      <div>Partner<strong>A2Z Cloud · Zoho Premium</strong></div>
+    </div>
+  </div>
+</header>
+
+<div class="backbar"><a href="00_index.html" class="back-link">Back to demo home</a></div>
+
+<div class="wrap">
+
+  <div class="lead">
+    <span class="badge">7 components · live org values</span>
+    <h2>IO NC Health Dashboard</h2>
+    <p>The Scenario&nbsp;F centrepiece: the IO sees the whole network at a glance and clicks through to any National Committee. Build it under <code>Reports &amp; Dashboards → Dashboards → + Create Dashboard</code>. Name it <code>IO NC Health Dashboard</code> in the "Untitled Dashboard" box first.</p>
+    <p>Values below reflect the <b>live EU org</b> (11 NCs). When all 7 components are saved, set sharing to <b>Everyone</b> so every profile can view it.</p>
+  </div>
+
+  <div class="section-label">Row 1 — what the tiles will read</div>
+  <div class="kpi-row">
+    <div class="kpi blue"><div class="kpi-val">11</div><div class="kpi-label">Total NCs</div><div class="kpi-mod">National Committee · Count</div></div>
+    <div class="kpi green"><div class="kpi-val">11</div><div class="kpi-label">Active NCs</div><div class="kpi-mod">Status = Active</div></div>
+    <div class="kpi red"><div class="kpi-val">2</div><div class="kpi-label">Overdue MoUs (Network)</div><div class="kpi-mod">MoU Obligation · Overdue</div></div>
+    <div class="kpi amber"><div class="kpi-val">2</div><div class="kpi-label">Volunteers · Training Gaps</div><div class="kpi-mod">EXPIRED or MISSING</div></div>
+  </div>
+
+  <div class="note info">
+    <h4>Choose the "Basic" KPI style</h4>
+    <p>When you click <b>KPI</b>, the picker offers Basic / Standard / Growth Index / Scorecard / Rankings. Pick <b>Basic</b> (top-right) — it shows a single clean number, exactly what the demo needs. <b>Avoid</b> Standard &amp; Growth Index (they add a %-change arrow vs last period, meaningless for operational counts and implying a target you haven't set). Set <b>Duration</b> to <code>All Time</code> so the KPI counts every record regardless of created date.</p>
+    <p>The measure to select is <b>Count of Records</b>.</p>
+  </div>
+
+  <div class="section-label">KPI tiles — field-by-field (click KPI → Basic for each)</div>
+
+  <div class="step">
+    <h3><span class="step-num">1</span> Total NCs <span class="step-type kpi-t">KPI · Basic</span></h3>
+    <table class="cfg">
+      <tr><td>Component / Report Name</td><td>Total NCs</td></tr>
+      <tr><td>Module</td><td>National Committee</td></tr>
+      <tr><td>Measure</td><td>Count of Records</td></tr>
+      <tr><td>Criteria filter</td><td>None — count all</td></tr>
+      <tr><td>Duration</td><td>All Time</td></tr>
+      <tr><td>Colour</td><td>Blue</td></tr>
+    </table>
+    <div class="expect">Reads <b>11</b>.</div>
+  </div>
+
+  <div class="step">
+    <h3><span class="step-num">2</span> Active NCs <span class="step-type kpi-t">KPI · Basic</span></h3>
+    <table class="cfg">
+      <tr><td>Component Name</td><td>Active NCs</td></tr>
+      <tr><td>Module</td><td>National Committee</td></tr>
+      <tr><td>Measure</td><td>Count of Records</td></tr>
+      <tr><td>Criteria filter</td><td><code>Status</code> is <code>Active</code></td></tr>
+      <tr><td>Colour</td><td>Green</td></tr>
+    </table>
+    <div class="expect">Reads <b>11</b>.</div>
+  </div>
+
+  <div class="step">
+    <h3><span class="step-num">3</span> Overdue MoUs (Network) <span class="step-type kpi-t">KPI · Basic</span></h3>
+    <table class="cfg">
+      <tr><td>Component Name</td><td>Overdue MoUs (Network)</td></tr>
+      <tr><td>Module</td><td>MoU Obligation</td></tr>
+      <tr><td>Measure</td><td>Count of Records</td></tr>
+      <tr><td>Criteria filter</td><td><code>Status</code> is <code>Overdue</code></td></tr>
+      <tr><td>Colour</td><td>Red</td></tr>
+    </table>
+    <div class="expect">Reads <b>2</b>.</div>
+  </div>
+
+  <div class="step">
+    <h3><span class="step-num">4</span> Volunteers with Training Gaps <span class="step-type kpi-t">KPI · Basic</span></h3>
+    <table class="cfg">
+      <tr><td>Component Name</td><td>Volunteers with Training Gaps</td></tr>
+      <tr><td>Module</td><td>NC Volunteers</td></tr>
+      <tr><td>Measure</td><td>Count of Records</td></tr>
+      <tr><td>Criteria filter</td><td><code>Training Status</code> is <code>EXPIRED</code> &nbsp;<b>+ Add</b>&nbsp; <code>Training Status</code> is <code>MISSING</code> — set the join to <b>OR</b></td></tr>
+      <tr><td>Colour</td><td>Orange / Amber</td></tr>
+    </table>
+    <div class="expect">Reads <b>2</b>. Requires <code>Training Status</code> to be a picklist — see the note below.</div>
+  </div>
+
+  <div class="note warn">
+    <h4>Prerequisite: Training Status must be a colour-coded picklist</h4>
+    <p><code>NC_Volunteers.Training_Status</code> was originally a <b>text</b> field — the EXPIRED-OR-MISSING filter won't work reliably against free text. It was converted to a picklist with four colour-coded values and all 23 volunteer records repopulated:
+      <span class="chip c-green">CURRENT</span> <code>#D1FAE5</code> ·
+      <span class="chip c-amber">EXPIRING SOON</span> <code>#FEF3C7</code> ·
+      <span class="chip c-red">EXPIRED</span> <code>#FEE2E2</code> ·
+      <span class="chip c-grey">MISSING</span> <code>#F3F4F6</code>.</p>
+    <p>Kenya is the worked example: Grace = CURRENT, Daniel = EXPIRED, Aisha = MISSING (→ the 2 training gaps). Refresh the NC Volunteers related list on the Kenya record to see the chips.</p>
+  </div>
+
+  <div class="section-label">Charts — field-by-field (click Chart for each)</div>
+
+  <div class="step">
+    <h3><span class="step-num">5</span> NC Health Overview <span class="step-type chart-t">Chart · Table</span></h3>
+    <table class="cfg">
+      <tr><td>Report Name</td><td>NC Health Overview</td></tr>
+      <tr><td>Module</td><td>National Committee</td></tr>
+      <tr><td>Chart type</td><td>Table (grid icon)</td></tr>
+      <tr><td>Group by (rows)</td><td>NC Name</td></tr>
+      <tr><td>Columns</td><td>Country · NC Code · Status · MoU Health · Member Count · Active Programmes Count</td></tr>
+      <tr><td>Sort</td><td>MoU Health ascending (Critical first)</td></tr>
+      <tr><td>Filters</td><td>None — show all NCs</td></tr>
+    </table>
+    <div class="expect">Kenya row = <span class="chip c-red">Critical</span>, India = <span class="chip c-amber">Attention</span>, rest = <span class="chip c-green">Good</span>. This is the Step 1 &amp; Step 7 view; clicking the Kenya row is the <b>click-through-to-Kenya</b> moment. Full width.</div>
+  </div>
+
+  <div class="step">
+    <h3><span class="step-num">6</span> Volunteer Training Compliance <span class="step-type chart-t">Chart · Bar</span></h3>
+    <table class="cfg">
+      <tr><td>Report Name</td><td>Volunteer Training Compliance</td></tr>
+      <tr><td>Module</td><td>NC Volunteers</td></tr>
+      <tr><td>Chart type</td><td>Bar (vertical)</td></tr>
+      <tr><td>X-axis (Group by)</td><td>National Committee (the NC lookup field)</td></tr>
+      <tr><td>Y-axis</td><td>Count of records</td></tr>
+      <tr><td>Divide by (stack)</td><td>Training Status</td></tr>
+      <tr><td>Colour mapping</td><td>CURRENT → green · EXPIRED → red · MISSING → grey</td></tr>
+    </table>
+    <div class="expect">Kenya bar splits 1 green / 1 red / 1 grey; other NCs show full green bars.</div>
+  </div>
+
+  <div class="step">
+    <h3><span class="step-num">7</span> MoU Obligation Status <span class="step-type chart-t">Chart · Donut</span></h3>
+    <table class="cfg">
+      <tr><td>Report Name</td><td>MoU Obligation Status</td></tr>
+      <tr><td>Module</td><td>MoU Obligation</td></tr>
+      <tr><td>Chart type</td><td>Donut</td></tr>
+      <tr><td>Group by</td><td>Status</td></tr>
+      <tr><td>Aggregate</td><td>Count</td></tr>
+      <tr><td>Colour mapping</td><td>Overdue <code>#FEE2E2</code> · Pending <code>#FEF3C7</code> · Submitted <code>#D1FAE5</code> · Waived <code>#F3F4F6</code></td></tr>
+    </table>
+    <div class="expect">Donut shows 2 red (Overdue), majority amber / green.</div>
+  </div>
+
+  <div class="step">
+    <h3><span class="step-num">8</span> Kenya Volunteer Roster <span class="step-type chart-t">Chart · Table · drill-down</span></h3>
+    <table class="cfg">
+      <tr><td>Report Name</td><td>Kenya Volunteer Roster</td></tr>
+      <tr><td>Module</td><td>NC Volunteers</td></tr>
+      <tr><td>Chart type</td><td>Table</td></tr>
+      <tr><td>Group by</td><td>Name</td></tr>
+      <tr><td>Columns</td><td>Volunteer Role · Training Status · Member Since · Email · National Committee</td></tr>
+      <tr><td>Filter</td><td>National Committee is <code>UWC National Committee Kenya</code></td></tr>
+      <tr><td>Sort</td><td>Training Status ascending (CURRENT first)</td></tr>
+    </table>
+    <div class="expect">3 rows — Grace <span class="chip c-green">CURRENT</span>, Daniel <span class="chip c-red">EXPIRED</span>, Aisha <span class="chip c-grey">MISSING</span>. The Step 3 view.</div>
+  </div>
+
+  <div class="step">
+    <h3><span class="step-num">9</span> Kenya MoU Obligations <span class="step-type chart-t">Chart · Table · drill-down</span></h3>
+    <table class="cfg">
+      <tr><td>Report Name</td><td>Kenya MoU Obligations</td></tr>
+      <tr><td>Module</td><td>MoU Obligation</td></tr>
+      <tr><td>Chart type</td><td>Table</td></tr>
+      <tr><td>Group by</td><td>Obligation Name</td></tr>
+      <tr><td>Columns</td><td>Status · Due Date · Overdue Days · NC</td></tr>
+      <tr><td>Filter</td><td>NC is <code>UWC National Committee Kenya</code></td></tr>
+      <tr><td>Sort</td><td>Overdue Days descending (58 days at top)</td></tr>
+    </table>
+    <div class="expect">Annual Activity Report <span class="chip c-red">OVERDUE 58 days</span> at top, then 3 others.</div>
+  </div>
+
+  <div class="section-label">Final layout — drag components into this arrangement</div>
+  <div class="layout-diagram">┌──────────┬──────────┬──────────┬──────────┐
+│ Total NCs│ Active   │ Overdue  │ Training │
+│  KPI 1   │  KPI 2   │  KPI 3   │  KPI 4   │
+├──────────┴──────────┴──────────┴──────────┤
+│         NC Health Overview Table          │
+│   (Chart 5 — full width)                  │
+├─────────────────────┬─────────────────────┤
+│ Training Compliance │ MoU Obligation      │
+│   Bar (Chart 6)     │   Donut (Chart 7)   │
+├─────────────────────┴─────────────────────┤
+│  Kenya Volunteer Roster  (Chart 8)        │
+├───────────────────────────────────────────┤
+│  Kenya MoU Obligations   (Chart 9)        │
+└───────────────────────────────────────────┘</div>
+
+  <div class="note info">
+    <h4>Final settings</h4>
+    <p>Dashboard name <code>IO NC Health Dashboard</code> → click the <b>sharing</b> icon (top-right) → change from <b>Only me</b> to <b>Everyone</b> → click <b>Save</b> (blue button, top-right).</p>
+  </div>
+
+  <div class="section-label">Demo talking points → component</div>
+  <div class="card">
+    <table class="map">
+      <thead><tr><th>Demo moment</th><th>Point at</th></tr></thead>
+      <tbody>
+        <tr><td>"sorted by MoU Health"</td><td>NC Health Overview table (Chart 5)</td></tr>
+        <tr><td>"Total NCs, Active NCs"</td><td>KPI tiles row (1 &amp; 2)</td></tr>
+        <tr><td>"Overdue MoUs across the network"</td><td>KPI 3</td></tr>
+        <tr><td>"Volunteers with training gaps"</td><td>KPI 4</td></tr>
+        <tr><td>"click through to Kenya"</td><td>Kenya Volunteer Roster (Chart 8)</td></tr>
+        <tr><td>"training compliance by NC"</td><td>Training Compliance bar (Chart 6)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note warn">
+    <h4>Pre-seed before the live demo</h4>
+    <p><code>MoU_Health</code> on the NC records and the volunteer <code>Training_Status</code> are written by nightly scheduled functions (<code>recompute_mou_health</code> 03:15 UTC, etc.). Seed/verify these values the evening before so the dashboard renders correctly on stage rather than waiting for the overnight run.</p>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <strong>UWC International CRM — IO NC Health Dashboard Build Guide</strong> · A2Z Cloud Ltd · Zoho Premium Partner · Salisbury, UK · <em>Demo reference document · values reflect the live EU org</em>
+</footer>
+
+</body>
+</html>
