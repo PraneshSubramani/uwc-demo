@@ -11,6 +11,8 @@
     { "source": "/cheat-sheet", "destination": "/wireframes/PRESENTER_CHEAT_SHEET.html", "permanent": false },
     { "source": "/data-model", "destination": "/wireframes/99_data_model.html", "permanent": false },
     { "source": "/catalog", "destination": "/wireframes/98_module_fields_catalog.html", "permanent": false },
+    { "source": "/permissions", "destination": "/wireframes/91_permissions_matrix.html", "permanent": false },
+    { "source": "/dashboards", "destination": "/wireframes/92_dashboards_build_guide.html", "permanent": false },
     { "source": "/scenarios/a", "destination": "/wireframes/01_scenario_A.html", "permanent": false },
     { "source": "/scenarios/b", "destination": "/wireframes/02_scenario_B.html", "permanent": false },
     { "source": "/scenarios/c", "destination": "/wireframes/03_scenario_C.html", "permanent": false },
