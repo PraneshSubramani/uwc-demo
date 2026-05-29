@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>UWC Application Canvas — Clean (enterprise-grade, Canvas-implementable)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== Reset + base ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Inter','Helvetica Neue',Arial,sans-serif;background:#f4f6fa;color:#1f2937;-webkit-font-smoothing:antialiased;overflow:hidden;font-size:13px}
+
+/* ===== UWC palette ===== */
+:root{
+  --uwc-navy:#003087;
+  --uwc-navy-deep:#002468;
+  --uwc-navy-soft:#e8eef9;
+  --uwc-red:#C8102E;
+  --text:#1f2937;
+  --text-mute:#6b7280;
+  --text-soft:#9ca3af;
+  --border:#e5e7eb;
+  --divider:#f0f2f5;
+  --bg-card:#ffffff;
+  --bg-page:#f4f6fa;
+  --link:#2563eb;
+  --success:#065f46;
+  --success-bg:#d1fae5;
+  --warning:#92400e;
+  --warning-bg:#fef3c7;
+  --review-bg:#dbeafe;
+  --review-text:#1e40af;
+}
+
+/* ===== Demo bar (just for the mockup) ===== */
+.demo-bar{background:#003087;color:#fff;height:34px;display:flex;align-items:center;padding:0 16px;gap:14px;font-size:11.5px}
+.demo-bar__brand{font-weight:600;letter-spacing:1.4px;text-transform:uppercase;font-size:10px}
+.demo-bar__title{color:rgba(255,255,255,.85)}
+.demo-bar__spacer{flex:1}
+.demo-bar__home{color:rgba(255,255,255,.85);text-decoration:none;font-size:11px;padding:3px 10px;border:1px solid rgba(255,255,255,.3);border-radius:4px}
+
+/* ===== Zoho chrome ===== */
+.zoho-shell{display:grid;grid-template-rows:34px 52px 1fr;height:100vh}
+.zoho-topbar{background:#fff;border-bottom:1px solid var(--border);display:grid;grid-template-columns:225px 1fr auto;align-items:stretch;height:52px}
+.zoho-tb__brand{display:flex;align-items:center;gap:8px;padding:0 14px;border-right:1px solid var(--border)}
+.zoho-tb__logo{width:22px;height:22px;border-radius:50%;background:conic-gradient(from 0deg,#f43f5e,#ec4899,#a855f7,#6366f1,#3b82f6,#06b6d4,#f43f5e);position:relative;flex-shrink:0}
+.zoho-tb__logo::after{content:'';position:absolute;inset:4px;background:#fff;border-radius:50%}
+.zoho-tb__logo::before{content:'';position:absolute;inset:7px;background:linear-gradient(135deg,#ec4899,#a855f7,#3b82f6);border-radius:50%;z-index:1}
+.zoho-tb__name{font-size:14px;font-weight:500;color:var(--text)}
+.zoho-tb__center{display:flex;align-items:center;gap:18px;padding:0 18px}
+.zoho-tb__module{font-size:17px;font-weight:500;color:var(--text)}
+.zoho-tb__search{display:flex;align-items:center;gap:8px;background:#f1f5f9;border-radius:6px;padding:6px 12px;flex:1;max-width:340px;margin-left:auto;font-size:12px;color:#9ca3af}
+.zoho-tb__icons{display:flex;align-items:center;gap:4px;padding:0 14px}
+.zoho-tb__icon{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:5px;color:#6b7280;font-size:14px;cursor:pointer;background:transparent;border:none}
+.zoho-tb__icon:hover{background:#eef1f7}
+.zoho-tb__icon--plus{border:1.5px solid #7c3aed;color:#7c3aed;font-weight:600}
+.zoho-tb__icon--zia{background:linear-gradient(135deg,#f43f5e,#a855f7);color:#fff;font-size:10px;font-weight:700}
+.zoho-tb__org{width:30px;height:30px;border-radius:50%;background:#fbd926;color:var(--text);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;margin-left:6px}
+
+/* ===== Body grid ===== */
+.zoho-body{display:grid;grid-template-columns:225px 1fr;min-height:0;overflow:hidden}
+.zoho-sidebar{background:#f7f8fa;border-right:1px solid #e8eaed;overflow-y:auto;padding:8px 0;font-size:13px}
+.zoho-sb__item{display:flex;align-items:center;gap:10px;padding:7px 14px;color:#4a5568;cursor:pointer}
+.zoho-sb__item:hover{background:#eef1f7}
+.zoho-sb__item.active{background:#dbeafe;color:#1d4ed8;font-weight:600;border-right:2px solid #1d4ed8}
+.zoho-sb__item-icon{width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+.zoho-sb__teamspace{margin:10px;padding:10px 12px;background:#fff;border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;gap:8px;font-size:13px}
+.zoho-sb__teamspace-icon{width:22px;height:22px;background:#ef4444;color:#fff;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.zoho-sb__group{margin:4px 0}
+.zoho-sb__group-header{padding:6px 14px;font-weight:500;display:flex;align-items:center;gap:8px}
+.zoho-sb__group-icon{color:#3b82f6;font-size:14px}
+.zoho-sb__group-items .zoho-sb__item{padding-left:38px}
+
+.zoho-content{background:var(--bg-page);overflow:auto;padding:18px 22px}
+
+/* ===== Toolbar above the canvas ===== */
+.cv-toolbar{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.cv-toolbar__back{width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--border);border-radius:6px;color:#6b7280;cursor:pointer;font-size:14px}
+.cv-toolbar__title{font-size:18px;font-weight:600;color:var(--text);letter-spacing:-.1px}
+.cv-toolbar__stage{display:inline-flex;align-items:center;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:600;background:var(--review-bg);color:var(--review-text)}
+.cv-toolbar__sub{font-size:12px;color:var(--text-mute);margin-left:4px}
+.cv-toolbar__spacer{flex:1}
+.cv-toolbar__btn{font-family:inherit;font-size:13px;padding:6px 13px;background:#fff;color:var(--text);border:1px solid var(--border);border-radius:5px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-weight:500}
+.cv-toolbar__btn:hover{background:#f1f5f9}
+.cv-toolbar__btn--primary{background:#3b6ef5;color:#fff;border-color:#3b6ef5}
+.cv-toolbar__btn--primary:hover{background:#2563eb}
+
+/* ===== Canvas grid: two columns (35 / 65) ===== */
+.cv-grid{display:grid;grid-template-columns:340px 1fr;gap:16px}
+
+/* ===== Card base (any Canvas block sits in this) ===== */
+.cv-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.cv-card__header{padding:14px 18px;border-bottom:1px solid var(--divider);display:flex;align-items:center;justify-content:space-between}
+.cv-card__title{font-size:13px;font-weight:600;color:var(--text);letter-spacing:.1px;display:flex;align-items:center;gap:8px}
+.cv-card__title-icon{color:var(--uwc-navy)}
+.cv-card__action{font-size:12px;color:var(--link);cursor:pointer;font-weight:500}
+.cv-card__body{padding:18px 20px}
+
+/* ===== Field row (label : value) ===== */
+.fld{display:grid;grid-template-columns:130px 1fr;gap:14px;padding:8px 0;align-items:baseline}
+.fld + .fld{border-top:1px solid var(--divider)}
+.fld__label{color:var(--text-mute);font-size:12.5px;font-weight:400}
+.fld__value{color:var(--text);font-size:13px;font-weight:500;word-break:break-word}
+.fld__value.link{color:var(--link)}
+.fld__value.success{color:var(--success);font-weight:600}
+.fld__value.warning{color:var(--warning);font-weight:600}
+.fld__value.muted{color:var(--text-soft);font-style:italic;font-weight:400}
+
+/* ===== Identity card (left top) ===== */
+.identity{padding:22px 20px;text-align:center;border-bottom:1px solid var(--divider)}
+.identity__avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#003087,#1d4ed8);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:28px;margin:0 auto 12px;border:3px solid #fff;box-shadow:0 4px 14px rgba(0,48,135,.15)}
+.identity__name{font-size:16px;font-weight:600;color:var(--text);margin-bottom:2px}
+.identity__sub{font-size:12px;color:var(--text-mute)}
+.identity__id{display:inline-block;font-family:'JetBrains Mono','Consolas',monospace;font-size:11px;color:var(--text-soft);background:#f1f5f9;padding:2px 8px;border-radius:3px;margin-top:8px;letter-spacing:.3px}
+
+/* ===== Status / pill ===== */
+.pill{display:inline-flex;align-items:center;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:600}
+.pill--review{background:var(--review-bg);color:var(--review-text)}
+.pill--eligible{background:var(--success-bg);color:var(--success)}
+.pill--pending{background:var(--warning-bg);color:var(--warning)}
+
+/* ===== Blueprint card (matches the Zoho built-in Blueprint widget) ===== */
+.bp{padding:16px 20px}
+.bp__current-label{font-size:11px;color:var(--text-mute);font-weight:500;text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px}
+.bp__current-value{display:inline-flex;align-items:center;padding:5px 14px;background:#003087;color:#fff;border-radius:4px;font-size:13px;font-weight:600}
+.bp__transitions-label{font-size:11px;color:var(--text-mute);font-weight:500;text-transform:uppercase;letter-spacing:.6px;margin:16px 0 8px}
+.bp__transitions{display:flex;gap:8px;flex-wrap:wrap}
+.bp__btn{padding:7px 14px;font-size:13px;font-weight:500;border-radius:5px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-family:inherit}
+.bp__btn--next{background:#10b981;color:#fff}
+.bp__btn--next:hover{background:#059669}
+.bp__btn--decline{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
+.bp__btn--decline:hover{background:#fecaca}
+.bp__btn--withdraw{background:#f3f4f6;color:#4b5563;border:1px solid #d1d5db}
+.bp__btn--withdraw:hover{background:#e5e7eb}
+
+/* ===== Related-list tab strip ===== */
+.tabs{display:flex;background:#fff;border:1px solid var(--border);border-radius:8px;padding:4px;gap:2px;margin-top:16px;overflow-x:auto}
+.tab{padding:8px 14px;font-size:12.5px;color:var(--text-mute);cursor:pointer;border-radius:5px;font-weight:500;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;transition:all .12s}
+.tab:hover{background:#f1f5f9;color:var(--text)}
+.tab.active{background:#003087;color:#fff}
+.tab__count{background:rgba(255,255,255,.18);padding:0 7px;border-radius:9px;font-size:10.5px;font-weight:600}
+.tab:not(.active) .tab__count{background:#e5e7eb;color:#4b5563}
+
+.tab-body{background:#fff;border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;padding:18px 20px;margin-top:-1px}
+
+/* ===== Note item ===== */
+.note{display:flex;gap:12px;padding:12px 0}
+.note + .note{border-top:1px solid var(--divider)}
+.note__avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#3b82f6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
+.note__body{flex:1}
+.note__text{font-size:13px;color:var(--text);line-height:1.55}
+.note__meta{font-size:11px;color:var(--text-soft);margin-top:4px}
+.note__meta a{color:var(--link);text-decoration:none}
+
+.note-input{display:flex;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--divider)}
+.note-input input{flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:5px;font-family:inherit;font-size:13px;color:var(--text)}
+.note-input input:focus{outline:none;border-color:#3b6ef5;box-shadow:0 0 0 3px rgba(59,110,245,.12)}
+.note-input button{padding:8px 16px;background:#3b6ef5;color:#fff;border:none;border-radius:5px;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer}
+
+/* ===== Footnote ===== */
+.cv-footer{text-align:center;padding:18px 0 0;font-size:11.5px;color:var(--text-mute)}
+.cv-footer strong{color:var(--uwc-navy);font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <span class="demo-bar__brand">UWC CANVAS · CLEAN</span>
+  <span class="demo-bar__title">Simple enterprise layout — uses only Zoho Canvas-supported primitives</span>
+  <span class="demo-bar__spacer"></span>
+  <a class="demo-bar__home" href="../00_index.html">← All scenarios</a>
+</div>
+
+<div class="zoho-shell" style="grid-template-rows:auto 52px 1fr">
+  <header class="zoho-topbar" style="grid-row:2">
+    <div class="zoho-tb__brand"><div class="zoho-tb__logo"></div><span class="zoho-tb__name">Zoho CRM</span></div>
+    <div class="zoho-tb__center">
+      <h1 class="zoho-tb__module">Applications</h1>
+      <div class="zoho-tb__search">🔍 Search records</div>
+    </div>
+    <div class="zoho-tb__icons">
+      <button class="zoho-tb__icon zoho-tb__icon--plus">+</button>
+      <button class="zoho-tb__icon zoho-tb__icon--zia">ZA</button>
+      <button class="zoho-tb__icon">🔔</button>
+      <button class="zoho-tb__icon">📅</button>
+      <button class="zoho-tb__icon">⚙</button>
+      <span class="zoho-tb__org">A2Z</span>
+    </div>
+  </header>
+
+  <div class="zoho-body" style="grid-row:3">
+    <nav class="zoho-sidebar">
+      <div class="zoho-sb__teamspace">
+        <span class="zoho-sb__teamspace-icon">CT</span>
+        <span>Germany NC</span>
+      </div>
+      <a class="zoho-sb__item"><span class="zoho-sb__item-icon" style="color:#f43f5e">🏠</span> Home</a>
+      <a class="zoho-sb__item"><span class="zoho-sb__item-icon" style="color:#ec4899">📊</span> Reports</a>
+      <a class="zoho-sb__item"><span class="zoho-sb__item-icon" style="color:#a855f7">📈</span> Analytics</a>
+      <div class="zoho-sb__group">
+        <div class="zoho-sb__group-header"><span class="zoho-sb__group-icon">📁</span> Sales</div>
+        <div class="zoho-sb__group-items">
+          <a class="zoho-sb__item">· Leads</a>
+          <a class="zoho-sb__item">· Contacts</a>
+          <a class="zoho-sb__item">· Accounts</a>
+          <a class="zoho-sb__item active">· Applications</a>
+        </div>
+      </div>
+      <a class="zoho-sb__item">🎓 Programmes</a>
+      <a class="zoho-sb__item">🌐 National Committees</a>
+    </nav>
+
+    <main class="zoho-content">
+
+      <!-- ===== TOP TOOLBAR ===== -->
+      <div class="cv-toolbar">
+        <span class="cv-toolbar__back">←</span>
+        <span class="cv-toolbar__title">APP-2026-00073 · Lena Fischer</span>
+        <span class="cv-toolbar__stage">Under Review</span>
+        <span class="cv-toolbar__sub">Last update: 29 May 2026 · Owner: Marcus Weber</span>
+        <span class="cv-toolbar__spacer"></span>
+        <button class="cv-toolbar__btn">✏ Edit</button>
+        <button class="cv-toolbar__btn">⋯</button>
+      </div>
+
+      <!-- ===== TWO-COL CANVAS ===== -->
+      <div class="cv-grid">
+
+        <!-- ===== LEFT COLUMN ===== -->
+        <div>
+          <!-- Identity card -->
+          <div class="cv-card" style="margin-bottom:14px">
+            <div class="identity">
+              <div class="identity__avatar">LF</div>
+              <div class="identity__name">Lena Fischer</div>
+              <div class="identity__sub">17 years old · 🇩🇪 Cologne, Germany</div>
+              <div class="identity__id">APP-2026-00073</div>
+            </div>
+            <div class="cv-card__body" style="padding:14px 20px">
+              <div class="fld" style="padding:6px 0">
+                <span class="fld__label">Applicant Number</span>
+                <span class="fld__value">73</span>
+              </div>
+              <div class="fld" style="padding:6px 0">
+                <span class="fld__label">Created</span>
+                <span class="fld__value">25 May 2026 · 09:54 PM</span>
+              </div>
+              <div class="fld" style="padding:6px 0">
+                <span class="fld__label">Modified</span>
+                <span class="fld__value">29 May 2026 · 07:33 PM</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Eligibility card -->
+          <div class="cv-card" style="margin-bottom:14px">
+            <div class="cv-card__header">
+              <span class="cv-card__title"><span class="cv-card__title-icon">✓</span> Eligibility Status</span>
+              <span class="pill pill--eligible">Passed</span>
+            </div>
+            <div class="cv-card__body">
+              <div class="fld">
+                <span class="fld__label">Preferred School</span>
+                <span class="fld__value link">UWC Atlantic</span>
+              </div>
+              <div class="fld">
+                <span class="fld__label">Alternate School</span>
+                <span class="fld__value link">UWC Adriatic</span>
+              </div>
+              <div class="fld">
+                <span class="fld__label">Nominated School</span>
+                <span class="fld__value muted">— Pending nomination</span>
+              </div>
+              <div class="fld">
+                <span class="fld__label">Nomination Status</span>
+                <span class="fld__value warning">Awaiting</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Financial Aid card -->
+          <div class="cv-card">
+            <div class="cv-card__header">
+              <span class="cv-card__title"><span class="cv-card__title-icon">💷</span> Financial Aid</span>
+            </div>
+            <div class="cv-card__body">
+              <div class="fld">
+                <span class="fld__label">Aid Requested</span>
+                <span class="fld__value success">Full Scholarship</span>
+              </div>
+              <div class="fld">
+                <span class="fld__label">Amount (GBP)</span>
+                <span class="fld__value">£45,000</span>
+              </div>
+              <div class="fld">
+                <span class="fld__label">Priority Score</span>
+                <span class="fld__value success">87 / 100</span>
+              </div>
+              <div class="fld">
+                <span class="fld__label">Finance Review</span>
+                <span class="fld__value warning">Pending</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== RIGHT COLUMN ===== -->
+        <div>
+          <!-- Blueprint card (Zoho's built-in widget) -->
+          <div class="cv-card" style="margin-bottom:14px">
+            <div class="cv-card__header">
+              <span class="cv-card__title"><span class="cv-card__title-icon">📐</span> Blueprint</span>
+              <span class="cv-card__action">View configured actions →</span>
+            </div>
+            <div class="bp">
+              <div class="bp__current-label">Current State</div>
+              <div class="bp__current-value">Under Review</div>
+
+              <div class="bp__transitions-label">Available Transitions</div>
+              <div class="bp__transitions">
+                <button class="bp__btn bp__btn--next">→ Shortlisted</button>
+                <button class="bp__btn bp__btn--decline">✗ Declined</button>
+                <button class="bp__btn bp__btn--withdraw">↩ Withdrawn</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Application Information section -->
+          <div class="cv-card" style="margin-bottom:14px">
+            <div class="cv-card__header">
+              <span class="cv-card__title"><span class="cv-card__title-icon">📋</span> Application Information</span>
+              <span class="cv-card__action">Edit</span>
+            </div>
+            <div class="cv-card__body">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 32px">
+                <div>
+                  <div class="fld">
+                    <span class="fld__label">Application Name</span>
+                    <span class="fld__value">Lena Fischer Application 2026</span>
+                  </div>
+                  <div class="fld">
+                    <span class="fld__label">Applicant</span>
+                    <span class="fld__value link">Lena Fischer</span>
+                  </div>
+                  <div class="fld">
+                    <span class="fld__label">Account (NC)</span>
+                    <span class="fld__value link">UWC Germany NC</span>
+                  </div>
+                  <div class="fld">
+                    <span class="fld__label">Nationality</span>
+                    <span class="fld__value">German</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="fld">
+                    <span class="fld__label">Country</span>
+                    <span class="fld__value">Germany</span>
+                  </div>
+                  <div class="fld">
+                    <span class="fld__label">Stage</span>
+                    <span class="fld__value"><span class="pill pill--review">Under Review</span></span>
+                  </div>
+                  <div class="fld">
+                    <span class="fld__label">Application Language</span>
+                    <span class="fld__value">Deutsch</span>
+                  </div>
+                  <div class="fld">
+                    <span class="fld__label">Closing Date</span>
+                    <span class="fld__value">15 Jun 2026</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Programme Details section -->
+          <div class="cv-card">
+            <div class="cv-card__header">
+              <span class="cv-card__title"><span class="cv-card__title-icon">🎓</span> Programme Details</span>
+              <span class="cv-card__action">Edit</span>
+            </div>
+            <div class="cv-card__body">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 32px">
+                <div>
+                  <div class="fld">
+                    <span class="fld__label">Interested Programmes</span>
+                    <span class="fld__value">UWC Atlantic 2026 · UWC Adriatic 2026</span>
+                  </div>
+                  <div class="fld">
+                    <span class="fld__label">Selected Programme</span>
+                    <span class="fld__value muted">— Pending nomination</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="fld">
+                    <span class="fld__label">Submission Date</span>
+                    <span class="fld__value">25 May 2026</span>
+                  </div>
+                  <div class="fld">
+                    <span class="fld__label">Probability</span>
+                    <span class="fld__value">60%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== RELATED-LIST TABS ===== -->
+      <div class="tabs">
+        <div class="tab active">📝 Notes <span class="tab__count">1</span></div>
+        <div class="tab">📄 Attachments <span class="tab__count">4</span></div>
+        <div class="tab">✉ Emails <span class="tab__count">6</span></div>
+        <div class="tab">⏱ Stage History <span class="tab__count">4</span></div>
+        <div class="tab">✓ Open Tasks <span class="tab__count">2</span></div>
+        <div class="tab">📞 Open Calls <span class="tab__count">1</span></div>
+        <div class="tab">📅 Open Meetings <span class="tab__count">1</span></div>
+        <div class="tab">🛡 Consent Records <span class="tab__count">2</span></div>
+      </div>
+
+      <div class="tab-body">
+        <div class="note">
+          <div class="note__avatar">A2Z</div>
+          <div class="note__body">
+            <div class="note__text">Take all details of the student and need one call with parents.</div>
+            <div class="note__meta">
+              Application · <a href="#">APP-2026-00073</a> · Add Note · now by UWC A2Z Admin
+            </div>
+          </div>
+        </div>
+        <div class="note">
+          <div class="note__avatar" style="background:linear-gradient(135deg,#10b981,#3b82f6)">MW</div>
+          <div class="note__body">
+            <div class="note__text">Eligibility verified. Both reviewers recommend shortlist. Forward to selection committee next week.</div>
+            <div class="note__meta">
+              Application · <a href="#">APP-2026-00073</a> · 26 May 2026 · 09:45 AM by Marcus Weber
+            </div>
+          </div>
+        </div>
+        <div class="note-input">
+          <input placeholder="Add a note…">
+          <button>Add</button>
+        </div>
+      </div>
+
+      <div class="cv-footer">
+        <strong>Clean Canvas</strong> · 2 columns (340px / flex) · 5 cards · 1 Blueprint widget · 1 related-list tab strip · All standard Zoho Canvas primitives — no charts, no sparklines, no custom widgets
+      </div>
+    </main>
+  </div>
+</div>
+
+</body>
+</html>
