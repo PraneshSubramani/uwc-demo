@@ -1226,6 +1226,235 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 }
 </style>
 
+
+<style>
+/* ============================================================
+   v18 — ENTERPRISE POLISH
+   - Refined typography (scaled down for enterprise feel)
+   - Colored sidebar with per-item icon accents
+   - Consistent active state
+   - Cleaner spacing
+   ============================================================ */
+
+/* ---------- DASHBOARD TYPOGRAPHY REFINEMENT ---------- */
+#sc-3 .dash-shell h1,
+#sc-3 .dash-shell .dash-welcome-title,
+#sc-3 .dash-shell [class*="welcome"] {
+  font-size: 26px !important;        /* was ~36px */
+  line-height: 1.25 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.3px !important;
+  margin-bottom: 6px !important;
+  color: #001a4d !important;
+}
+#sc-3 .dash-shell .dash-welcome-sub,
+#sc-3 .dash-shell [class*="welcome-sub"],
+#sc-3 .dash-shell [class*="welcome"] + p {
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+  color: #475569 !important;
+  margin-bottom: 4px !important;
+}
+
+/* Stat numbers smaller */
+#sc-3 .dash-shell [class*="stat"] [class*="num"],
+#sc-3 .dash-shell .dash-stat-num,
+#sc-3 .dash-shell strong[class*="num"] {
+  font-size: 24px !important;        /* was 32-36 */
+  font-weight: 700 !important;
+  line-height: 1 !important;
+}
+#sc-3 .dash-shell [class*="stat"] [class*="label"] {
+  font-size: 12.5px !important;
+  color: #64748b !important;
+  margin-top: 4px !important;
+}
+
+/* Section headers */
+#sc-3 .dash-shell h2,
+#sc-3 .dash-shell [class*="section-title"] {
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  color: #1f2937 !important;
+}
+
+/* App cards typography */
+#sc-3 .dash-shell [class*="app-card"] [class*="title"],
+#sc-3 .dash-shell [class*="app-card"] h3 {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #1f2937 !important;
+}
+#sc-3 .dash-shell [class*="app-card"] [class*="meta"],
+#sc-3 .dash-shell [class*="app-card"] [class*="sub"] {
+  font-size: 12.5px !important;
+  color: #64748b !important;
+}
+
+/* ---------- COLORED ENTERPRISE SIDEBAR ---------- */
+/* Override BOTH Sofia dashboard sidebar AND appform sidebar consistently */
+#sc-3 .uwc-portal-sidebar,
+#sc-3 nav.uwc-portal-sidebar,
+#sc-app .uwc-portal-shell .uwc-portal-sidebar {
+  background: linear-gradient(180deg, #fafbff 0%, #f3f5fa 100%) !important;
+  border-right: 1px solid #e2e8f0 !important;
+  padding: 18px 0 !important;
+  width: 240px !important;
+  min-width: 240px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1px;
+}
+
+/* Section label */
+#sc-3 .uwc-portal-sidebar__section,
+#sc-app .uwc-portal-shell .appform-side-label {
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.8px !important;
+  text-transform: uppercase !important;
+  color: #64748b !important;
+  padding: 0 18px 10px !important;
+  margin-top: 8px !important;
+  background: transparent !important;
+}
+
+/* Sidebar items — enterprise feel with colored icon strip */
+#sc-3 .uwc-portal-sidebar__item,
+#sc-app .uwc-portal-shell .appform-side-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 10px 14px !important;
+  margin: 1px 10px !important;
+  border-radius: 9px !important;
+  color: #475569 !important;
+  background: transparent !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  border-left: none !important;
+  transition: all 140ms ease !important;
+  position: relative;
+}
+
+#sc-3 .uwc-portal-sidebar__item:hover,
+#sc-app .uwc-portal-shell .appform-side-item:hover {
+  background: rgba(0,48,135,0.04) !important;
+  color: #003087 !important;
+}
+
+#sc-3 .uwc-portal-sidebar__item.active,
+#sc-app .uwc-portal-shell .appform-side-item.is-active {
+  background: linear-gradient(135deg, #003087 0%, #004A97 100%) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(0,48,135,0.25) !important;
+  border-left: none !important;
+  padding-left: 14px !important;
+}
+#sc-3 .uwc-portal-sidebar__item.active svg,
+#sc-3 .uwc-portal-sidebar__item.active .uwc-portal-sidebar__icon,
+#sc-app .uwc-portal-shell .appform-side-item.is-active svg {
+  color: #ffffff !important;
+  filter: brightness(1.2);
+}
+
+/* Sidebar icons with per-item colored accent (when NOT active) */
+#sc-3 .uwc-portal-sidebar__item .uwc-portal-sidebar__icon,
+#sc-3 .uwc-portal-sidebar__item svg,
+#sc-app .uwc-portal-shell .appform-side-item svg {
+  font-size: 16px !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  color: #94a3b8 !important;
+  transition: color 140ms ease !important;
+}
+
+/* Per-tab icon color when not active (gives sidebar life) */
+#sc-3 .uwc-portal-sidebar__item[data-portal-section="dashboard"]:not(.active) .uwc-portal-sidebar__icon { color: #003087 !important; }
+#sc-3 .uwc-portal-sidebar__item[data-portal-section="application"]:not(.active) .uwc-portal-sidebar__icon { color: #C8102E !important; }
+#sc-3 .uwc-portal-sidebar__item[data-portal-section="documents"]:not(.active) .uwc-portal-sidebar__icon { color: #C8AB00 !important; }
+#sc-3 .uwc-portal-sidebar__item[data-portal-section="references"]:not(.active) .uwc-portal-sidebar__icon { color: #009482 !important; }
+#sc-3 .uwc-portal-sidebar__item[data-portal-section="status"]:not(.active) .uwc-portal-sidebar__icon { color: #7c3aed !important; }
+
+/* Same for appform sidebar (different IDs but matching scheme) */
+#sc-app .uwc-portal-shell .appform-side-item[data-portal-section="dashboard"]:not(.is-active) svg { color: #003087 !important; }
+#sc-app .uwc-portal-shell .appform-side-item[data-portal-section="application"]:not(.is-active) svg { color: #C8102E !important; }
+#sc-app .uwc-portal-shell .appform-side-item[data-portal-section="documents"]:not(.is-active) svg { color: #C8AB00 !important; }
+#sc-app .uwc-portal-shell .appform-side-item[data-portal-section="references"]:not(.is-active) svg { color: #009482 !important; }
+#sc-app .uwc-portal-shell .appform-side-item[data-portal-section="status"]:not(.is-active) svg { color: #7c3aed !important; }
+
+/* App card buttons more refined */
+#sc-3 .dash-shell button,
+#sc-3 .dash-shell [class*="btn"] {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  padding: 9px 16px !important;
+  border-radius: 8px !important;
+  letter-spacing: 0 !important;
+}
+
+/* Filter pills */
+#sc-3 .dash-shell [class*="filter-pill"],
+#sc-3 .dash-shell [class*="dash-pill"] {
+  font-size: 12.5px !important;
+  padding: 6px 14px !important;
+  font-weight: 500 !important;
+}
+</style>
+
+<script>
+/* v18 — Nav consolidation: ONE source of truth for sidebar clicks
+   Prevents duplicate handlers from competing and breaking navigation */
+(function(){
+  // Remove all earlier delegated click handlers — replace with single canonical one
+  function canonicalNavHandler(e) {
+    var item = e.target && e.target.closest && e.target.closest('[data-portal-section]');
+    if (!item) return;
+    // Only handle actual nav items (sidebar items), not panel containers
+    if (!item.classList.contains('uwc-portal-sidebar__item') 
+        && !item.classList.contains('appform-side-item')) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();  // prevent any other handlers from running
+    
+    var section = item.getAttribute('data-portal-section');
+    if (!section) return;
+    
+    // Special case: application form is a separate screen
+    if (section === 'application') {
+      if (window.go) window.go(5);
+      return;
+    }
+    
+    // For all other sections: ensure on Sofia dashboard, then swap panel
+    var currentScreen = document.querySelector('section.screen.active');
+    if (currentScreen && currentScreen.id !== 'sc-3') {
+      // Navigate to dashboard first
+      if (window.go) window.go(4);
+      // Defer panel swap to next tick so screen is visible
+      setTimeout(function() {
+        if (window.UWCSwitchPanel) window.UWCSwitchPanel(section);
+      }, 80);
+    } else {
+      // Already on dashboard — just swap panel
+      if (window.UWCSwitchPanel) window.UWCSwitchPanel(section);
+    }
+  }
+  
+  // Attach with capture-phase to win over any other handlers
+  document.addEventListener('click', canonicalNavHandler, true);
+  
+  // Mark as canonical so any future handler can check + skip
+  document.__uwcCanonicalNav = true;
+})();
+</script>
+
 </head>
 <body>
 
