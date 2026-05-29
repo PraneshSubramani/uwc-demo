@@ -252,7 +252,7 @@ body{{font-family:'Inter','Helvetica Neue',Arial,sans-serif;background:#f4f6fa;c
   <span class="demo-bar__brand">{name}</span>
   <span class="demo-bar__title">{tagline}</span>
   <span class="demo-bar__spacer"></span>
-  <a class="demo-bar__home" href="../README.md">← Theme comparison</a>
+  <a class="demo-bar__home" href="../../00_index.html#canvas">← Theme comparison</a>
 </div>
 
 <div class="zoho-shell" style="grid-template-rows:auto 52px 1fr">
