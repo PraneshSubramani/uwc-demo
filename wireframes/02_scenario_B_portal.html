@@ -15,7 +15,7 @@ html, body { height: 100%; }
 body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; background: #f3f5fa; color: #1f2937; -webkit-font-smoothing: antialiased; overflow-x: hidden; overflow-y: auto; }
 
 /* INLINE:demo-bar.css */
-.demo-bar { background: linear-gradient(90deg, #C8102E 0%, #a00d24 100%); color: #fff; height: 32px; display: flex; align-items: center; padding: 0 14px; gap: 14px; font-family: 'DM Sans', system-ui, sans-serif; font-size: 11.5px; position: relative; z-index: 200; box-shadow: 0 1px 0 rgba(0,0,0,0.1); }
+.demo-bar { background: linear-gradient(90deg, #C8102E 0%, #a00d24 100%); color: #fff; height: 32px; display: flex; align-items: center; padding: 0 14px; gap: 14px; font-family: 'DM Sans', system-ui, sans-serif; font-size: 13px; position: relative; z-index: 200; box-shadow: 0 1px 0 rgba(0,0,0,0.1); }
 .demo-bar__brand { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase; font-size: 10px; color: rgba(255,255,255,0.95); }
 .demo-bar__brand::before { content: '▶'; font-size: 8px; color: rgba(255,255,255,0.7); }
 .demo-bar__scenario { color: rgba(255,255,255,0.85); font-weight: 500; }
@@ -23,12 +23,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .demo-bar__spacer { flex: 1; }
 .demo-bar__step { font-family: 'DM Mono', ui-monospace, monospace; font-size: 10.5px; color: rgba(255,255,255,0.85); padding: 3px 8px; background: rgba(255,255,255,0.12); border-radius: 4px; letter-spacing: 0.4px; }
 .demo-bar__nav { display: flex; gap: 2px; }
-.demo-bar__nav-btn { width: 24px; height: 22px; background: rgba(255,255,255,0.12); border: none; color: #fff; cursor: pointer; border-radius: 4px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; font-family: inherit; transition: background 120ms; }
+.demo-bar__nav-btn { width: 24px; height: 22px; background: rgba(255,255,255,0.12); border: none; color: #fff; cursor: pointer; border-radius: 4px; font-size: 13.5px; display: inline-flex; align-items: center; justify-content: center; font-family: inherit; transition: background 120ms; }
 .demo-bar__nav-btn:hover:not(:disabled) { background: rgba(255,255,255,0.22); }
 .demo-bar__nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-.demo-bar__home { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 11px; padding: 3px 8px; border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; transition: background 120ms; }
+.demo-bar__home { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13.5px; padding: 3px 8px; border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; transition: background 120ms; }
 .demo-bar__home:hover { background: rgba(255,255,255,0.12); color: #fff; }
-.demo-bar #role-switcher .rs-trigger { background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.3); padding: 3px 10px 3px 4px; font-size: 11px; min-width: 180px; height: 22px; }
+.demo-bar #role-switcher .rs-trigger { background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.3); padding: 3px 10px 3px 4px; font-size: 13.5px; min-width: 180px; height: 22px; }
 .demo-bar #role-switcher .rs-avatar { width: 18px; height: 18px; font-size: 9px; }
 .demo-bar #role-switcher .rs-name { font-size: 10.5px; }
 .demo-bar #role-switcher .rs-role { font-size: 9.5px; }
@@ -51,19 +51,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .zoho-tb__logo::after { content: ''; position: absolute; inset: 4px; background: #fff; border-radius: 50%; }
 .zoho-tb__logo::before { content: ''; position: absolute; inset: 7px; background: linear-gradient(135deg, #ec4899 0%, #a855f7 50%, #3b82f6 100%); border-radius: 50%; z-index: 1; }
 .zoho-tb__name { font-size: 14px; font-weight: 500; color: #1f2937; }
-.zoho-tb__panel-toggle { margin-left: auto; background: none; border: none; color: #6b7280; font-size: 16px; cursor: pointer; padding: 4px 6px; border-radius: 4px; }
+.zoho-tb__panel-toggle { margin-left: auto; background: none; border: none; color: #4b5563; font-size: 16px; cursor: pointer; padding: 4px 6px; border-radius: 4px; }
 .zoho-tb__center { display: flex; align-items: center; gap: 18px; padding: 0 18px; min-width: 0; }
 .zoho-tb__module { font-size: 17px; font-weight: 500; color: #1f2937; margin: 0; white-space: nowrap; }
 .zoho-tb__search { display: flex; align-items: center; gap: 8px; background: #f3f5fa; border: 1px solid transparent; border-radius: 6px; padding: 6px 12px; flex: 1; max-width: 360px; margin-left: auto; }
-.zoho-tb__search-icon { color: #9ca3af; font-size: 13px; }
-.zoho-tb__search input { background: transparent; border: none; outline: none; font-size: 12px; color: #1f2937; flex: 1; font-family: inherit; }
-.zoho-tb__search input::placeholder { color: #9ca3af; }
+.zoho-tb__search-icon { color: #4b5563; font-size: 13px; }
+.zoho-tb__search input { background: transparent; border: none; outline: none; font-size: 13px; color: #1f2937; flex: 1; font-family: inherit; }
+.zoho-tb__search input::placeholder { color: #4b5563; }
 .zoho-tb__icons { display: flex; align-items: center; gap: 4px; padding: 0 14px; }
-.zoho-tb__icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: transparent; border: none; color: #6b7280; cursor: pointer; font-size: 15px; position: relative; transition: background 120ms; }
+.zoho-tb__icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: transparent; border: none; color: #4b5563; cursor: pointer; font-size: 15px; position: relative; transition: background 120ms; }
 .zoho-tb__icon:hover { background: #eef1f7; color: #1f2937; }
 .zoho-tb__icon--plus { border: 1.5px solid #7c3aed; color: #7c3aed; font-weight: 600; }
 .zoho-tb__icon--plus:hover { background: #ede9fe; color: #7c3aed; }
-.zoho-tb__icon--zia { background: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #a855f7 100%); color: #fff; font-size: 11px; font-weight: 700; }
+.zoho-tb__icon--zia { background: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #a855f7 100%); color: #fff; font-size: 13.5px; font-weight: 700; }
 .zoho-tb__icon--zia:hover { color: #fff; }
 .zoho-tb__icon--bell::after { content: ''; position: absolute; top: 8px; right: 9px; width: 6px; height: 6px; background: #ef4444; border-radius: 50%; border: 1.5px solid #fff; }
 .zoho-tb__org { width: 32px; height: 32px; border-radius: 50%; background: #fbd926; color: #1f2937; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; letter-spacing: -0.3px; margin-left: 6px; position: relative; cursor: pointer; }
@@ -79,20 +79,20 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .zoho-sb__teamspace { margin: 12px 10px; padding: 10px 12px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
 .zoho-sb__teamspace-icon { width: 22px; height: 22px; background: #ef4444; color: #fff; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
 .zoho-sb__teamspace-name { font-weight: 500; color: #1f2937; flex: 1; }
-.zoho-sb__teamspace-chev { color: #6b7280; font-size: 10px; }
-.zoho-sb__teamspace-more { color: #6b7280; font-size: 16px; line-height: 1; cursor: pointer; padding: 0 4px; }
+.zoho-sb__teamspace-chev { color: #4b5563; font-size: 10px; }
+.zoho-sb__teamspace-more { color: #4b5563; font-size: 16px; line-height: 1; cursor: pointer; padding: 0 4px; }
 .zoho-sb__search { margin: 0 10px 12px; background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 6px 10px; display: flex; align-items: center; gap: 8px; }
-.zoho-sb__search input { border: none; outline: none; background: transparent; width: 100%; font-size: 12px; color: #1f2937; font-family: inherit; }
-.zoho-sb__search input::placeholder { color: #9ca3af; }
+.zoho-sb__search input { border: none; outline: none; background: transparent; width: 100%; font-size: 13px; color: #1f2937; font-family: inherit; }
+.zoho-sb__search input::placeholder { color: #4b5563; }
 .zoho-sb__group { margin: 4px 0; }
 .zoho-sb__group-header { display: flex; align-items: center; gap: 8px; padding: 6px 14px; cursor: pointer; color: #1f2937; font-weight: 500; font-size: 13px; }
 .zoho-sb__group-header:hover { background: #eef1f7; }
 .zoho-sb__group-icon { color: #3b82f6; font-size: 14px; }
-.zoho-sb__group-chev { margin-left: auto; font-size: 10px; color: #6b7280; transition: transform 150ms; }
+.zoho-sb__group-chev { margin-left: auto; font-size: 10px; color: #4b5563; transition: transform 150ms; }
 .zoho-sb__group.collapsed .zoho-sb__group-chev { transform: rotate(-90deg); }
 .zoho-sb__group.collapsed .zoho-sb__group-items { display: none; }
 .zoho-sb__group-items .zoho-sb__item { padding-left: 38px; }
-.zoho-sb__group-items .zoho-sb__item-icon { color: #6b7280; }
+.zoho-sb__group-items .zoho-sb__item-icon { color: #4b5563; }
 .zoho-content { background: #fff; overflow: auto; position: relative; }
 .zoho-page-strip { display: flex; align-items: center; gap: 12px; padding: 10px 22px; border-bottom: 1px solid #f0f2f5; background: #fff; }
 .zoho-page-strip__view { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; background: #eef1f7; border-radius: 6px; font-size: 13px; color: #1f2937; cursor: pointer; font-weight: 500; }
@@ -100,39 +100,39 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .zoho-toolbar__btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: transparent; border: 1px solid transparent; border-radius: 6px; font-size: 13px; color: #1f2937; cursor: pointer; font-family: inherit; }
 .zoho-toolbar__btn:hover { background: #eef1f7; }
 .zoho-toolbar__divider { width: 1px; height: 20px; background: #e5e7eb; margin: 0 4px; }
-.zoho-toolbar__view-icon { width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; cursor: pointer; color: #6b7280; font-size: 14px; }
+.zoho-toolbar__view-icon { width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; cursor: pointer; color: #4b5563; font-size: 14px; }
 .zoho-toolbar__view-icon:hover { background: #eef1f7; color: #1f2937; }
 .zoho-toolbar__view-icon.active { background: #ede9fe; color: #7c3aed; }
 .zoho-toolbar__spacer { flex: 1; }
 .zoho-toolbar__cta { background: #3b6ef5; color: #fff; border: 1px solid #3b6ef5; border-radius: 6px 0 0 6px; padding: 6px 14px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; }
 .zoho-toolbar__cta:hover { background: #2563eb; }
 .zoho-toolbar__cta-split { background: #3b6ef5; color: #fff; border: 1px solid #3b6ef5; border-left: 1px solid rgba(255,255,255,0.3); border-radius: 0 6px 6px 0; padding: 6px 8px; cursor: pointer; }
-.zoho-toolbar__more { color: #6b7280; font-size: 16px; cursor: pointer; padding: 0 8px; margin-left: 6px; }
+.zoho-toolbar__more { color: #4b5563; font-size: 16px; cursor: pointer; padding: 0 8px; margin-left: 6px; }
 .zoho-detail__hero { display: flex; align-items: center; gap: 16px; padding: 16px 22px; background: #fff; border-bottom: 1px solid #f0f2f5; }
-.zoho-detail__back { color: #6b7280; font-size: 18px; cursor: pointer; padding: 4px; }
+.zoho-detail__back { color: #4b5563; font-size: 18px; cursor: pointer; padding: 4px; }
 .zoho-detail__avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #ec4899); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 16px; flex-shrink: 0; }
 .zoho-detail__name-block { flex: 1; }
 .zoho-detail__name { font-size: 19px; font-weight: 600; color: #1f2937; }
-.zoho-detail__add-tags { font-size: 12px; color: #2563eb; cursor: pointer; margin-top: 2px; }
+.zoho-detail__add-tags { font-size: 13px; color: #2563eb; cursor: pointer; margin-top: 2px; }
 .zoho-detail__actions { display: flex; align-items: center; gap: 8px; }
-.zoho-detail__last-update { font-size: 12px; color: #6b7280; margin-right: 12px; }
+.zoho-detail__last-update { font-size: 13px; color: #4b5563; margin-right: 12px; }
 .zoho-tabs { display: inline-flex; background: #eef1f7; border-radius: 6px; padding: 3px; gap: 0; margin: 14px 22px 0; }
-.zoho-tabs__tab { padding: 6px 22px; font-size: 13px; color: #6b7280; cursor: pointer; border-radius: 4px; font-weight: 500; }
+.zoho-tabs__tab { padding: 6px 22px; font-size: 13px; color: #4b5563; cursor: pointer; border-radius: 4px; font-weight: 500; }
 .zoho-tabs__tab.active { background: #fff; color: #1f2937; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
 .zoho-detail__body { display: grid; grid-template-columns: 220px 1fr; gap: 0; }
 .zoho-detail__rail { background: #fff; border-right: 1px solid #f0f2f5; padding: 16px 14px; font-size: 13px; }
-.zoho-detail__rail-header { font-size: 12px; font-weight: 600; color: #1f2937; margin-bottom: 8px; }
+.zoho-detail__rail-header { font-size: 13px; font-weight: 600; color: #1f2937; margin-bottom: 8px; }
 .zoho-detail__rail-item { display: flex; align-items: center; gap: 8px; padding: 5px 0; color: #4b5563; cursor: pointer; }
 .zoho-detail__rail-item:hover { color: #2563eb; }
 .zoho-detail__rail-item.active { color: #2563eb; font-weight: 500; }
-.zoho-detail__rail-count { margin-left: auto; background: #eef1f7; color: #6b7280; font-size: 11px; padding: 1px 7px; border-radius: 999px; }
+.zoho-detail__rail-count { margin-left: auto; background: #eef1f7; color: #4b5563; font-size: 13.5px; padding: 1px 7px; border-radius: 999px; }
 .zoho-detail__rail-add { color: #2563eb; cursor: pointer; padding: 5px 0; }
 .zoho-detail__main { padding: 16px 22px; background: #f9fafb; min-height: 100%; }
 .zoho-detail__card { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 18px 22px; margin-bottom: 14px; }
 .zoho-detail__card-title { font-size: 13px; font-weight: 600; color: #1f2937; margin-bottom: 14px; }
 .zoho-fields-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 28px; font-size: 13px; }
 .zoho-field-row { display: flex; align-items: baseline; gap: 16px; }
-.zoho-field-row__label { min-width: 130px; text-align: right; color: #6b7280; font-size: 12px; flex-shrink: 0; }
+.zoho-field-row__label { min-width: 130px; text-align: right; color: #4b5563; font-size: 13px; flex-shrink: 0; }
 .zoho-field-row__value { color: #1f2937; flex: 1; font-size: 13px; word-break: break-word; }
 .zoho-field-row__value.link { color: #2563eb; }
 .zoho-btn { padding: 7px 14px; font-size: 13px; border-radius: 6px; border: 1px solid #d1d5db; background: #fff; color: #1f2937; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 6px; transition: all 120ms; font-weight: 400; }
@@ -140,13 +140,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .zoho-btn--primary { background: #3b6ef5; color: #fff; border-color: #3b6ef5; font-weight: 500; }
 .zoho-btn--primary:hover { background: #2563eb; }
 .zoho-input { width: 100%; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; font-family: inherit; color: #1f2937; background: #fff; }
-.zoho-label { display: block; font-size: 12px; color: #6b7280; margin-bottom: 4px; font-weight: 500; }
+.zoho-label { display: block; font-size: 13px; color: #4b5563; margin-bottom: 4px; font-weight: 500; }
 .zoho-list { width: 100%; border-collapse: collapse; font-size: 13px; }
-.zoho-list th { padding: 10px 16px; text-align: left; font-size: 12px; font-weight: 500; color: #4b5563; border-bottom: 1px solid #e5e7eb; white-space: nowrap; background: #fff; }
+.zoho-list th { padding: 10px 16px; text-align: left; font-size: 13px; font-weight: 500; color: #4b5563; border-bottom: 1px solid #e5e7eb; white-space: nowrap; background: #fff; }
 .zoho-list td { padding: 12px 16px; border-bottom: 1px solid #f0f2f5; color: #1f2937; vertical-align: middle; }
 .zoho-list tr:hover td { background: #f9fafb; }
 .zoho-list__name-link { color: #2563eb; cursor: pointer; }
-.zoho-pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+.zoho-pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 4px; font-size: 13.5px; font-weight: 500; }
 .zoho-pill--qual { background: #ede9fe; color: #5b21b6; }
 .zoho-pill--elig { background: #fff1de; color: #c2410c; }
 .zoho-pill--review { background: #fefce8; color: #854d0e; }
@@ -154,14 +154,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .zoho-pill--nominate { background: #f0fdf4; color: #14532d; }
 .zoho-pill--placed { background: #ecfdf5; color: #064e3b; }
 .zoho-stat-block { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px 18px; }
-.zoho-stat-block__label { font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 500; }
+.zoho-stat-block__label { font-size: 13.5px; color: #4b5563; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 500; }
 .zoho-stat-block__value { font-size: 20px; font-weight: 600; color: #1f2937; margin-top: 4px; }
 .zoho-helper-tag { display: inline-flex; align-items: center; gap: 5px; background: #ede9fe; color: #5b21b6; font-size: 10.5px; padding: 2px 8px; border-radius: 999px; font-weight: 500; }
-.zoho-helper-tag::before { content: '👁'; font-size: 11px; }
-.zoho-smart-chat { position: absolute; bottom: 0; left: 225px; right: 0; background: #fff; border-top: 1px solid #e5e7eb; padding: 6px 22px; display: flex; align-items: center; gap: 12px; font-size: 12px; color: #6b7280; z-index: 4; }
+.zoho-helper-tag::before { content: '👁'; font-size: 13.5px; }
+.zoho-smart-chat { position: absolute; bottom: 0; left: 225px; right: 0; background: #fff; border-top: 1px solid #e5e7eb; padding: 6px 22px; display: flex; align-items: center; gap: 12px; font-size: 13px; color: #4b5563; z-index: 4; }
 .zoho-smart-chat__placeholder { flex: 1; }
 .zoho-smart-chat__icons { display: flex; gap: 4px; }
-.zoho-smart-chat__icon { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; color: #6b7280; font-size: 13px; cursor: pointer; }
+.zoho-smart-chat__icon { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; color: #4b5563; font-size: 13px; cursor: pointer; }
 /* /INLINE */
 
 /* role-switcher CSS */
@@ -174,16 +174,16 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .rs-role { color: rgba(255,255,255,0.6); }
 .rs-chev { color: rgba(255,255,255,0.6); margin-left: 2px; }
 .rs-menu { position: absolute; top: calc(100% + 6px); right: 0; background: #fff; border: 1px solid #e2e6ed; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); min-width: 300px; z-index: 100; overflow: hidden; }
-.rs-menu-header { padding: 10px 14px; font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: #6b7280; background: #f7f8fa; font-weight: 600; }
-.rs-menu-footer { padding: 10px 14px; font-size: 11px; color: #6b7280; border-top: 1px solid #f0f2f5; background: #fafbfd; line-height: 1.4; }
+.rs-menu-header { padding: 10px 14px; font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: #4b5563; background: #f7f8fa; font-weight: 600; }
+.rs-menu-footer { padding: 10px 14px; font-size: 13.5px; color: #4b5563; border-top: 1px solid #f0f2f5; background: #fafbfd; line-height: 1.4; }
 .rs-option { display: flex; align-items: center; gap: 10px; padding: 10px 14px; width: 100%; background: #fff; border: none; border-bottom: 1px solid #f0f2f5; cursor: pointer; text-align: left; }
 .rs-option:hover { background: #f7f8fa; }
 .rs-option.active { background: #E8EEF6; }
-.rs-option .rs-avatar { width: 32px; height: 32px; font-size: 12px; }
+.rs-option .rs-avatar { width: 32px; height: 32px; font-size: 13px; }
 .rs-opt-text { flex: 1; display: flex; flex-direction: column; line-height: 1.3; }
 .rs-opt-name { font-size: 13px; font-weight: 500; color: #0d1b3e; }
-.rs-opt-role { font-size: 11.5px; color: #5a6480; }
-.rs-opt-scope { font-size: 10.5px; color: #9aa3b8; font-style: italic; }
+.rs-opt-role { font-size: 13px; color: #374151; }
+.rs-opt-scope { font-size: 10.5px; color: #4b5563; font-style: italic; }
 .rs-check { color: #003087; font-weight: 600; opacity: 0; font-size: 14px; }
 .rs-option.active .rs-check { opacity: 1; }
 
@@ -193,19 +193,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .uwc-portal-topbar__logo { width: 40px; height: 40px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #003087; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-weight: 700; font-size: 13px; flex-shrink: 0; }
 .uwc-portal-topbar__title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-weight: 500; font-size: 17px; }
 .uwc-portal-topbar__lang { margin-left: auto; display: flex; gap: 4px; }
-.uwc-portal-topbar__lang-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; }
+.uwc-portal-topbar__lang-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 13.5px; }
 .uwc-portal-topbar__lang-btn.active { background: rgba(255,255,255,0.2); color: #fff; border-color: rgba(255,255,255,0.6); }
 .uwc-portal-body { flex: 1; padding: 24px; }
 .uwc-portal-content { max-width: 920px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 32px; box-shadow: 0 2px 8px rgba(0,48,135,0.06); }
 .uwc-portal-h1 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-weight: 500; font-size: 26px; color: #003087; margin-bottom: 8px; }
 .uwc-portal-h2 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-weight: 500; font-size: 18px; color: #0d1b3e; margin-bottom: 6px; }
-.uwc-portal-sub { color: #5a6480; font-size: 14px; line-height: 1.6; }
+.uwc-portal-sub { color: #374151; font-size: 14px; line-height: 1.6; }
 .uwc-portal-btn-primary { background: #003087; color: #fff; border: none; padding: 12px 22px; border-radius: 8px; font-weight: 500; font-size: 14px; cursor: pointer; }
 
 /* Portal sidebar layout */
 .uwc-portal-layout { display: grid; grid-template-columns: 220px 1fr; flex: 1; min-height: calc(100vh - 56px); }
 .uwc-portal-sidebar { background: #fff; border-right: 1px solid #e5e7eb; padding: 20px 0; overflow-y: auto; }
-.uwc-portal-sidebar__section { padding: 8px 20px 4px; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: #9ca3af; font-weight: 600; }
+.uwc-portal-sidebar__section { padding: 8px 20px 4px; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: #4b5563; font-weight: 600; }
 .uwc-portal-sidebar__item { display: flex; align-items: center; gap: 10px; padding: 9px 20px; color: #4a5568; cursor: pointer; font-size: 14px; text-decoration: none; }
 .uwc-portal-sidebar__item:hover { background: #f3f5fa; }
 .uwc-portal-sidebar__item.active { background: #E8EEF6; color: #003087; font-weight: 500; border-right: 3px solid #003087; }
@@ -219,10 +219,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .progress-card__sub { font-size: 13px; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
 .progress-bar-track { background: rgba(255,255,255,0.2); border-radius: 999px; height: 8px; margin-bottom: 6px; }
 .progress-bar-fill { background: #fff; border-radius: 999px; height: 8px; width: 60%; }
-.progress-bar-label { font-size: 12px; color: rgba(255,255,255,0.7); }
+.progress-bar-label { font-size: 13px; color: rgba(255,255,255,0.7); }
 .progress-card__pct { text-align: right; }
 .progress-card__pct-val { font-size: 36px; font-weight: 600; }
-.progress-card__pct-text { font-size: 12px; color: rgba(255,255,255,0.7); }
+.progress-card__pct-text { font-size: 13px; color: rgba(255,255,255,0.7); }
 
 /* Checklist */
 .checklist-card { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,48,135,0.06); }
@@ -231,25 +231,25 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .checklist-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
 .checklist-icon--done { background: #dcfce7; color: #166534; }
 .checklist-icon--prog { background: #dbeafe; color: #1e40af; }
-.checklist-icon--todo { background: #f3f4f6; color: #6b7280; }
+.checklist-icon--todo { background: #f3f4f6; color: #4b5563; }
 .checklist-label { flex: 1; font-size: 14px; color: #1f2937; font-weight: 500; }
-.checklist-status { font-size: 12px; font-weight: 500; }
-.cs-done { color: #166534; } .cs-prog { color: #1e40af; } .cs-todo { color: #6b7280; }
+.checklist-status { font-size: 13px; font-weight: 500; }
+.cs-done { color: #166534; } .cs-prog { color: #1e40af; } .cs-todo { color: #4b5563; }
 
 /* Blueprint strip */
 .blueprint-strip { display: flex; align-items: center; gap: 0; padding: 14px 22px; overflow-x: auto; border-bottom: 1px solid #f0f2f5; background: #fff; }
-.bp-node { padding: 5px 12px; font-size: 11.5px; font-weight: 500; border-radius: 4px; white-space: nowrap; }
+.bp-node { padding: 5px 12px; font-size: 13px; font-weight: 500; border-radius: 4px; white-space: nowrap; }
 .bp-node--done { background: #dcfce7; color: #166534; }
 .bp-node--active { background: #003087; color: #fff; }
-.bp-node--todo { background: #f3f4f6; color: #6b7280; }
-.bp-arrow { color: #9ca3af; font-size: 13px; padding: 0 5px; flex-shrink: 0; }
+.bp-node--todo { background: #f3f4f6; color: #4b5563; }
+.bp-arrow { color: #4b5563; font-size: 13px; padding: 0 5px; flex-shrink: 0; }
 
 /* Pie chart placeholder */
 .pie-chart { width: 110px; height: 110px; border-radius: 50%; background: conic-gradient(#3b6ef5 0% 47%, #10b981 47% 70%, #f59e0b 70% 88%, #ef4444 88% 100%); flex-shrink: 0; }
 .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
 /* Tags */
-.tag { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+.tag { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 4px; font-size: 13.5px; font-weight: 500; }
 .tag--blue { background: #dbeafe; color: #1e3a8a; }
 .tag--green { background: #dcfce7; color: #166534; }
 .tag--orange { background: #fff7ed; color: #c2410c; }
@@ -271,26 +271,26 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .consent-item { display: flex; align-items: flex-start; gap: 12px; padding: 13px 0; border-bottom: 1px solid #f0f2f5; }
 .consent-item:last-child { border-bottom: none; }
 .consent-title { font-size: 14px; font-weight: 500; color: #1f2937; margin-bottom: 3px; }
-.consent-desc { font-size: 12px; color: #6b7280; line-height: 1.5; }
+.consent-desc { font-size: 13px; color: #4b5563; line-height: 1.5; }
 
 /* Conversion highlight */
 .conv-row td { background: #fffbeb !important; }
 .conv-btn-wrap { position: relative; display: inline-block; }
-.conv-btn { background: #003087; color: #fff; border: none; padding: 5px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; font-weight: 500; }
-.conv-tooltip { position: absolute; bottom: calc(100% + 8px); right: 0; background: #1f2937; color: #fff; font-size: 11.5px; padding: 10px 14px; border-radius: 6px; width: 260px; line-height: 1.5; z-index: 10; }
+.conv-btn { background: #003087; color: #fff; border: none; padding: 5px 12px; border-radius: 6px; font-size: 13px; cursor: pointer; font-weight: 500; }
+.conv-tooltip { position: absolute; bottom: calc(100% + 8px); right: 0; background: #1f2937; color: #fff; font-size: 13px; padding: 10px 14px; border-radius: 6px; width: 260px; line-height: 1.5; z-index: 10; }
 .conv-tooltip::after { content: ''; position: absolute; top: 100%; right: 16px; border: 6px solid transparent; border-top-color: #1f2937; }
 
 /* Field-reference appendix */
 .appendix { background: #fff; padding: 30px 40px; height: 100%; overflow: auto; }
 .appendix h1 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-weight: 500; color: #003087; font-size: 24px; margin-bottom: 6px; }
-.appendix p { color: #5a6480; font-size: 13px; margin-bottom: 22px; }
-.ref-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 20px; }
-.ref-table th { background: #003087; color: #fff; padding: 8px 14px; text-align: left; font-size: 11px; font-weight: 500; }
+.appendix p { color: #374151; font-size: 13px; margin-bottom: 22px; }
+.ref-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-bottom: 20px; }
+.ref-table th { background: #003087; color: #fff; padding: 8px 14px; text-align: left; font-size: 13.5px; font-weight: 500; }
 .ref-table td { padding: 8px 14px; border-bottom: 1px solid #e2e6ed; vertical-align: top; }
 .ref-table tr:nth-child(even) td { background: #f8f9fb; }
-.ref-table tr.section td { background: #E8EEF6; color: #003087; font-weight: 600; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 14px; }
-.ft-name { font-family: 'DM Mono', monospace; font-size: 11px; color: #5a6480; }
-.ft-t { display: inline-block; padding: 2px 7px; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 10px; background: #f3f5fa; color: #5a6480; }
+.ref-table tr.section td { background: #E8EEF6; color: #003087; font-weight: 600; font-size: 13.5px; letter-spacing: 1px; text-transform: uppercase; padding: 6px 14px; }
+.ft-name { font-family: 'DM Mono', monospace; font-size: 13.5px; color: #374151; }
+.ft-t { display: inline-block; padding: 2px 7px; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 10px; background: #f3f5fa; color: #374151; }
 .ft-pick { background: #f0f4ff; color: #1e3a8a; } .ft-look { background: #f0fdf4; color: #166534; } .ft-auto { background: #fef3c7; color: #92400e; }
 </style>
 
@@ -367,7 +367,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   }
   .auth-field label {
     display: block;
-    font-size: 12.5px;
+    font-size: 13.5px;
     font-weight: 600;
     color: #2a3658;
     margin-bottom: 6px;
@@ -409,7 +409,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
     box-shadow: 0 0 0 3px rgba(200,16,46,.12);
   }
   .auth-field-error {
-    font-size: 12px;
+    font-size: 13px;
     color: #C8102E;
     margin-top: 5px;
     min-height: 14px;
@@ -520,7 +520,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
     gap: 12px;
     margin: 22px 0;
     color: #97a2bd;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     letter-spacing: .6px;
     text-transform: uppercase;
@@ -625,7 +625,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   }
   .auth-success-id-label {
     display: block;
-    font-size: 11px;
+    font-size: 13.5px;
     text-transform: uppercase;
     letter-spacing: .8px;
     color: #6b7a99;
@@ -771,7 +771,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   .dash-pill, .docs-pill, .refs-pill, .status-pill {
     display: inline-flex; align-items: center; gap: 5px;
     padding: 3px 10px; border-radius: 100px;
-    font-size: 12px; font-weight: 600; line-height: 1.4; letter-spacing: 0.1px;
+    font-size: 13px; font-weight: 600; line-height: 1.4; letter-spacing: 0.1px;
   }
   .dash-pill svg, .docs-pill svg, .refs-pill svg, .status-pill svg { width: 11px; height: 11px; }
   .dash-pill--in_progress, .docs-pill--in_progress, .refs-pill--in_progress, .status-pill--in_progress { background: rgba(0,48,135,0.1); color: #003087; }
@@ -792,9 +792,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   /* DASHBOARD */
   .dash-welcome { margin-bottom: 26px; padding: 4px 2px; }
   .dash-welcome h1 { margin: 0 0 6px; font-size: 28px; font-weight: 700; color: #003087; letter-spacing: -0.3px; }
-  .dash-welcome-sub { color: #6b7280; font-size: 15px; margin: 0; }
+  .dash-welcome-sub { color: #4b5563; font-size: 15px; margin: 0; }
   .dash-welcome-sub b { color: #1f2937; font-weight: 600; }
-  .dash-welcome-motivate { color: #9ca3af; font-size: 13px; margin-top: 6px; font-style: italic; }
+  .dash-welcome-motivate { color: #4b5563; font-size: 13px; margin-top: 6px; font-style: italic; }
 
   .dash-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
   .dash-stat { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px 18px; display: flex; align-items: center; gap: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
@@ -805,13 +805,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   .dash-stat-icon--green { background: rgba(22,163,74,0.12); color: #15803d; }
   .dash-stat-icon--teal { background: rgba(0,148,130,0.12); color: #009482; }
   .dash-stat-value { font-size: 22px; font-weight: 700; color: #1f2937; line-height: 1.1; }
-  .dash-stat-label { font-size: 12.5px; color: #6b7280; margin-top: 2px; }
+  .dash-stat-label { font-size: 13.5px; color: #4b5563; margin-top: 2px; }
 
   .dash-section-head { display: flex; align-items: center; justify-content: space-between; margin: 28px 0 14px; gap: 14px; flex-wrap: wrap; }
   .dash-section-head h2 { margin: 0; font-size: 20px; font-weight: 700; color: #1f2937; letter-spacing: -0.2px; }
 
   .dash-filters { display: inline-flex; gap: 4px; background: #fff; border: 1px solid #e5e7eb; border-radius: 100px; padding: 3px; }
-  .dash-filter { padding: 6px 14px; border-radius: 100px; font-size: 13px; font-weight: 500; color: #6b7280; cursor: pointer; background: transparent; border: none; font-family: inherit; transition: background 0.15s, color 0.15s; }
+  .dash-filter { padding: 6px 14px; border-radius: 100px; font-size: 13px; font-weight: 500; color: #4b5563; cursor: pointer; background: transparent; border: none; font-family: inherit; transition: background 0.15s, color 0.15s; }
   .dash-filter:hover { color: #1f2937; }
   .dash-filter.is-active { background: #003087; color: #fff; font-weight: 600; }
 
@@ -825,16 +825,16 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   .dash-app-icon--locked { background: #f1f5f9; color: #94a3b8; }
   .dash-app-body { min-width: 0; }
   .dash-app-title { font-size: 17px; font-weight: 600; color: #1f2937; margin: 0 0 4px; line-height: 1.3; }
-  .dash-app-meta { font-size: 12.5px; color: #6b7280; margin: 0 0 10px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .dash-app-meta { font-size: 13.5px; color: #4b5563; margin: 0 0 10px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
   .dash-app-status-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
   .dash-app-progress-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
   .dash-app-progress-wrap .dash-bar { flex: 1; max-width: 340px; }
-  .dash-app-progress-pct { font-size: 12.5px; font-weight: 600; color: #6b7280; min-width: 38px; text-align: right; }
-  .dash-app-subinfo { font-size: 13px; color: #6b7280; margin: 0; }
+  .dash-app-progress-pct { font-size: 13.5px; font-weight: 600; color: #4b5563; min-width: 38px; text-align: right; }
+  .dash-app-subinfo { font-size: 13px; color: #4b5563; margin: 0; }
   .dash-app-subinfo b { color: #1f2937; font-weight: 600; }
   .dash-app-actions { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
-  .dash-app-reviewer { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #6b7280; margin-bottom: 4px; }
-  .dash-app-reviewer-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #C8102E, #9a0c23); color: #fff; display: grid; place-items: center; font-weight: 600; font-size: 11px; }
+  .dash-app-reviewer { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: #4b5563; margin-bottom: 4px; }
+  .dash-app-reviewer-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #C8102E, #9a0c23); color: #fff; display: grid; place-items: center; font-weight: 600; font-size: 13.5px; }
   .dash-app-action-row { display: flex; gap: 6px; }
 
   .dash-activity { margin-top: 12px; }
@@ -844,7 +844,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   .dash-activity-icon { width: 32px; height: 32px; border-radius: 50%; background: rgba(0,48,135,0.08); color: #003087; display: grid; place-items: center; flex-shrink: 0; }
   .dash-activity-icon svg { width: 14px; height: 14px; }
   .dash-activity-text { flex: 1; font-size: 13.5px; color: #1f2937; }
-  .dash-activity-time { font-size: 12px; color: #9ca3af; flex-shrink: 0; white-space: nowrap; }
+  .dash-activity-time { font-size: 13px; color: #4b5563; flex-shrink: 0; white-space: nowrap; }
   .dash-activity-footer { text-align: center; margin-top: 14px; padding-top: 12px; border-top: 1px solid #f3f4f6; }
   .dash-link { color: #003087; font-size: 13px; font-weight: 600; text-decoration: none; cursor: pointer; background: none; border: none; font-family: inherit; padding: 0; }
   .dash-link:hover { text-decoration: underline; }
@@ -852,7 +852,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   .dash-deadline-list { list-style: none; padding: 0; margin: 0; }
   .dash-deadline-item { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid #f3f4f6; }
   .dash-deadline-item:last-child { border-bottom: none; }
-  .dash-deadline-date { background: rgba(200,16,46,0.08); color: #C8102E; padding: 6px 10px; border-radius: 8px; font-size: 11.5px; font-weight: 700; text-align: center; min-width: 78px; line-height: 1.3; }
+  .dash-deadline-date { background: rgba(200,16,46,0.08); color: #C8102E; padding: 6px 10px; border-radius: 8px; font-size: 13px; font-weight: 700; text-align: center; min-width: 78px; line-height: 1.3; }
   .dash-deadline-text { flex: 1; font-size: 13.5px; color: #1f2937; }
 
   .dash-grid-2 { display: grid; grid-template-columns: 1.5fr 1fr; gap: 18px; margin-top: 8px; }
@@ -869,7 +869,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   /* DOCUMENTS */
   .docs-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; gap: 14px; flex-wrap: wrap; }
   .docs-head h1 { margin: 0; font-size: 26px; font-weight: 700; color: #003087; }
-  .docs-head-sub { color: #6b7280; font-size: 13.5px; margin: 4px 0 0; }
+  .docs-head-sub { color: #4b5563; font-size: 13.5px; margin: 4px 0 0; }
 
   .docs-layout { display: grid; grid-template-columns: 1fr 280px; gap: 20px; }
   .docs-main { display: flex; flex-direction: column; gap: 12px; }
@@ -879,17 +879,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   .docs-file-icon svg { width: 20px; height: 20px; }
   .docs-file-info { min-width: 0; }
   .docs-file-name { font-weight: 600; color: #1f2937; margin: 0 0 3px; font-size: 14.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .docs-file-meta { font-size: 12.5px; color: #6b7280; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .docs-file-meta { font-size: 13.5px; color: #4b5563; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .docs-file-meta-dot { color: #cbd5e1; }
   .docs-file-actions { display: flex; gap: 6px; align-items: center; }
-  .docs-file-actions .docs-btn { padding: 6px 10px; font-size: 12.5px; }
+  .docs-file-actions .docs-btn { padding: 6px 10px; font-size: 13.5px; }
 
   .docs-dropzone { border: 2px dashed #cbd5e1; border-radius: 12px; padding: 28px 20px; text-align: center; background: #fff; cursor: pointer; transition: border-color 0.18s, background 0.18s; margin-top: 4px; }
   .docs-dropzone:hover, .docs-dropzone.is-dragover { border-color: #003087; background: rgba(0,48,135,0.03); }
   .docs-dropzone-icon { width: 44px; height: 44px; margin: 0 auto 10px; color: #003087; background: rgba(0,48,135,0.08); border-radius: 50%; display: grid; place-items: center; }
   .docs-dropzone-icon svg { width: 22px; height: 22px; }
   .docs-dropzone-text { color: #1f2937; font-weight: 600; margin: 0 0 4px; }
-  .docs-dropzone-hint { color: #6b7280; font-size: 12.5px; margin: 0; }
+  .docs-dropzone-hint { color: #4b5563; font-size: 13.5px; margin: 0; }
 
   .docs-side { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px 18px; height: fit-content; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
   .docs-side h3 { margin: 0 0 12px; font-size: 15px; font-weight: 600; color: #1f2937; display: flex; align-items: center; gap: 8px; }
@@ -897,7 +897,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   .docs-checklist { list-style: none; padding: 0; margin: 0; }
   .docs-checklist li { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 13px; color: #1f2937; border-bottom: 1px solid #f3f4f6; }
   .docs-checklist li:last-child { border-bottom: none; }
-  .docs-checklist li.is-optional { color: #6b7280; }
+  .docs-checklist li.is-optional { color: #4b5563; }
   .docs-checklist-icon { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; }
   .docs-checklist-icon svg { width: 11px; height: 11px; }
   .docs-checklist li.is-done .docs-checklist-icon { background: #16a34a; color: #fff; }
@@ -923,11 +923,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   .refs-avatar--4 { background: linear-gradient(135deg, #C8AB00, #eab308); }
   .refs-info { min-width: 0; }
   .refs-name { font-size: 16px; font-weight: 600; color: #1f2937; margin: 0 0 2px; }
-  .refs-role { font-size: 13px; color: #6b7280; margin: 0 0 2px; }
-  .refs-org { font-size: 12.5px; color: #9ca3af; margin: 0 0 6px; }
-  .refs-email { display: inline-flex; align-items: center; gap: 5px; color: #003087; text-decoration: none; font-size: 12.5px; font-weight: 500; margin-bottom: 8px; }
+  .refs-role { font-size: 13px; color: #4b5563; margin: 0 0 2px; }
+  .refs-org { font-size: 13.5px; color: #4b5563; margin: 0 0 6px; }
+  .refs-email { display: inline-flex; align-items: center; gap: 5px; color: #003087; text-decoration: none; font-size: 13.5px; font-weight: 500; margin-bottom: 8px; }
   .refs-email:hover { text-decoration: underline; }
-  .refs-status-row { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: #6b7280; flex-wrap: wrap; }
+  .refs-status-row { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: #4b5563; flex-wrap: wrap; }
   .refs-actions { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
 
   .refs-note { margin-top: 18px; padding: 16px 18px; background: rgba(0,48,135,0.05); border-left: 3px solid #003087; border-radius: 8px; font-size: 13.5px; color: #1f2937; display: flex; align-items: flex-start; gap: 12px; }
@@ -944,16 +944,16 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   /* STATUS */
   .status-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; gap: 14px; flex-wrap: wrap; }
   .status-head h1 { margin: 0; font-size: 26px; font-weight: 700; color: #003087; }
-  .status-ref { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: #f1f5f9; color: #1f2937; padding: 6px 12px; border-radius: 6px; font-size: 12.5px; font-weight: 600; border: 1px solid #e5e7eb; }
+  .status-ref { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: #f1f5f9; color: #1f2937; padding: 6px 12px; border-radius: 6px; font-size: 13.5px; font-weight: 600; border: 1px solid #e5e7eb; }
 
   .status-banner { background: linear-gradient(135deg, #003087 0%, #001a4d 100%); color: #fff; border-radius: 14px; padding: 26px 28px; margin-bottom: 22px; box-shadow: 0 6px 24px rgba(0,48,135,0.18); }
-  .status-banner-label { font-size: 12.5px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; margin: 0 0 4px; }
+  .status-banner-label { font-size: 13.5px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; margin: 0 0 4px; }
   .status-banner-stage { font-size: 24px; font-weight: 700; margin: 0 0 4px; letter-spacing: -0.3px; }
   .status-banner-nc { font-size: 14px; color: rgba(255,255,255,0.85); margin: 0 0 18px; }
   .status-banner-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.15); }
-  .status-banner-stat-label { font-size: 11.5px; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 6px; font-weight: 600; }
+  .status-banner-stat-label { font-size: 13px; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 6px; font-weight: 600; }
   .status-banner-stat-value { font-size: 16px; font-weight: 600; color: #fff; margin: 0; display: flex; align-items: center; gap: 8px; }
-  .status-banner-reviewer-avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.2); color: #fff; display: grid; place-items: center; font-weight: 600; font-size: 11px; }
+  .status-banner-reviewer-avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.2); color: #fff; display: grid; place-items: center; font-weight: 600; font-size: 13.5px; }
 
   .status-timeline-card { margin-bottom: 22px; }
   .status-timeline { list-style: none; padding: 0; margin: 12px 0 0; position: relative; }
@@ -967,14 +967,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   .status-timeline-item.is-current .status-timeline-dot::after { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid #003087; animation: status-pulse 1.6s infinite; }
   @keyframes status-pulse { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.7); opacity: 0; } }
   .status-timeline-name { font-weight: 600; color: #1f2937; font-size: 14.5px; margin: 0; }
-  .status-timeline-item.is-pending .status-timeline-name { color: #9ca3af; font-weight: 500; }
-  .status-timeline-date { font-size: 12.5px; color: #6b7280; margin: 2px 0 0; }
+  .status-timeline-item.is-pending .status-timeline-name { color: #4b5563; font-weight: 500; }
+  .status-timeline-date { font-size: 13.5px; color: #4b5563; margin: 2px 0 0; }
   .status-timeline-item.is-current .status-timeline-date { color: #003087; font-weight: 600; }
 
   .status-next-list { list-style: none; padding: 0; margin: 12px 0 14px; }
   .status-next-list li { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; font-size: 13.5px; color: #1f2937; border-bottom: 1px solid #f3f4f6; }
   .status-next-list li:last-child { border-bottom: none; }
-  .status-next-num { background: rgba(0,48,135,0.1); color: #003087; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 11.5px; font-weight: 700; flex-shrink: 0; }
+  .status-next-num { background: rgba(0,48,135,0.1); color: #003087; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
   .status-tip { background: rgba(245,158,11,0.08); border-left: 3px solid #f59e0b; padding: 12px 14px; border-radius: 6px; margin-top: 6px; font-size: 13px; color: #1f2937; display: flex; align-items: flex-start; gap: 10px; }
   .status-tip svg { color: #f59e0b; margin-top: 2px; }
   .status-tip b { font-weight: 600; }
@@ -982,7 +982,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   .status-toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f3f4f6; gap: 14px; }
   .status-toggle-row:last-child { border-bottom: none; }
   .status-toggle-label { font-size: 13.5px; color: #1f2937; font-weight: 500; }
-  .status-toggle-hint { font-size: 12px; color: #6b7280; margin-top: 2px; }
+  .status-toggle-hint { font-size: 13px; color: #4b5563; margin-top: 2px; }
   .status-toggle { position: relative; width: 40px; height: 22px; background: #cbd5e1; border-radius: 100px; cursor: pointer; transition: background 0.2s; border: none; padding: 0; flex-shrink: 0; }
   .status-toggle::after { content: ''; position: absolute; left: 2px; top: 2px; width: 18px; height: 18px; background: #fff; border-radius: 50%; transition: left 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.15); }
   .status-toggle.is-on { background: #003087; }
@@ -1007,6 +1007,32 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
     .dash-stats { grid-template-columns: 1fr 1fr; }
   }
 </style>
+
+<style>
+/* v13 — readability boost: ensure portal sub-text isn't too light/small */
+.uwc-portal-shell, .dash-shell, .docs-shell, .refs-shell, .status-shell, .appform-shell {
+  color: #1f2937;
+}
+.uwc-portal-shell *, .dash-shell *, .docs-shell *, .refs-shell *, .status-shell *, .appform-shell * {
+  font-size: max(13px, 1em);  /* avoid tiny text */
+}
+/* Common sub-text classes — ensure darker grey for legibility */
+.lp-section__lede, .lp-section__eyebrow, 
+.lp-stats__label, .lp-school__country, .lp-school__year,
+.lp-footer__brand-tag, .lp-footer__link,
+.dash-helper, .dash-sub, .dash-meta,
+[class*="muted"], [class*="hint"], [class*="sub"],
+.uwc-portal-sub, .uwc-portal-meta { 
+  color: #374151 !important;  /* darker than agent default */
+  font-size: 14px !important;
+  line-height: 1.55;
+}
+.lp-section__lede { font-size: 17px !important; }
+.lp-hero__sub { color: rgba(255,255,255,0.95) !important; font-size: 18px !important; }
+/* Footer links must be readable */
+.lp-footer__link { color: rgba(255,255,255,0.85) !important; }
+</style>
+
 </head>
 <body>
 
@@ -1334,8 +1360,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         .lp-nav__links { display: flex; gap: 28px; flex: 1; }
         .lp-nav__link { color: #4b5563; font-size: 14px; font-weight: 500; text-decoration: none; cursor: pointer; transition: color 120ms; }
         .lp-nav__link:hover { color: #003087; }
-        .lp-nav__role { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #6b7280; }
-        .lp-nav__role-badge { background: #E8EEF6; color: #003087; padding: 4px 10px; border-radius: 999px; font-weight: 600; font-size: 11.5px; letter-spacing: 0.3px; }
+        .lp-nav__role { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #4b5563; }
+        .lp-nav__role-badge { background: #E8EEF6; color: #003087; padding: 4px 10px; border-radius: 999px; font-weight: 600; font-size: 13px; letter-spacing: 0.3px; }
         .lp-nav__actions { display: flex; gap: 12px; align-items: center; }
         .lp-btn-ghost { background: transparent; color: #003087; border: none; padding: 10px 18px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 8px; transition: background 120ms; }
         .lp-btn-ghost:hover { background: #E8EEF6; }
@@ -1348,14 +1374,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 
         /* HERO — full viewport minus 72px nav */
         .lp-hero { position: relative; min-height: calc(100vh - 72px); display: flex; align-items: center; justify-content: center; overflow: hidden; background: linear-gradient(135deg, #001a4d 0%, #003087 100%); }
-        .lp-hero__bg { position: absolute; inset: 0; background-image: url('../_shared/assets/uwc-brand/hero-students-flags.jpeg'); background-size: cover; background-position: center 35%; opacity: 0.45; }
+        .lp-hero__bg { position: absolute; inset: 0; background-image: url('_shared/assets/uwc-brand/hero-students-flags.jpeg'); background-size: cover; background-position: center 35%; opacity: 0.45; }
         .lp-hero__overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,26,77,0.7) 0%, rgba(0,48,135,0.55) 60%, rgba(0,148,130,0.4) 100%); }
         .lp-hero__content { position: relative; max-width: 920px; padding: 0 32px; text-align: center; z-index: 2; }
         .lp-hero__eyebrow { display: inline-block; color: #C8AB00; font-size: 13px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 24px; padding: 6px 18px; border: 1px solid rgba(200,171,0,0.5); border-radius: 999px; background: rgba(200,171,0,0.08); }
         .lp-hero__headline { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-size: clamp(40px, 6vw, 68px); line-height: 1.05; font-weight: 500; color: #fff; margin: 0 0 24px; letter-spacing: -1px; text-shadow: 0 4px 24px rgba(0,0,0,0.25); }
         .lp-hero__sub { font-size: clamp(16px, 1.6vw, 19px); line-height: 1.55; color: rgba(255,255,255,0.92); max-width: 680px; margin: 0 auto 40px; }
         .lp-hero__ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-        .lp-hero__scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .lp-hero__scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 8px; }
         .lp-hero__scroll-hint::after { content: '↓'; font-size: 18px; animation: lp-bounce 2s ease infinite; }
         @keyframes lp-bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
 
@@ -1365,13 +1391,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         .lp-stats__item { text-align: center; padding: 8px 14px; position: relative; }
         .lp-stats__item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 14%; bottom: 14%; width: 1px; background: #e5e7eb; }
         .lp-stats__num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-size: 36px; font-weight: 600; color: #003087; line-height: 1; }
-        .lp-stats__label { font-size: 13px; color: #6b7280; margin-top: 6px; font-weight: 500; }
+        .lp-stats__label { font-size: 13px; color: #4b5563; margin-top: 6px; font-weight: 500; }
 
         /* HOW TO APPLY */
         .lp-section { max-width: 1180px; margin: 0 auto; padding: 96px 32px; }
-        .lp-section__eyebrow { text-align: center; color: #003087; font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 12px; }
+        .lp-section__eyebrow { text-align: center; color: #003087; font-size: 13px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 12px; }
         .lp-section__title { text-align: center; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-size: clamp(30px, 3.5vw, 44px); font-weight: 500; color: #0d1b3e; line-height: 1.15; margin: 0 auto 18px; max-width: 700px; letter-spacing: -0.5px; }
-        .lp-section__lede { text-align: center; font-size: 17px; line-height: 1.6; color: #5a6480; max-width: 640px; margin: 0 auto 56px; }
+        .lp-section__lede { text-align: center; font-size: 17px; line-height: 1.6; color: #374151; max-width: 640px; margin: 0 auto 56px; }
 
         .lp-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; }
         .lp-steps::before { content: ''; position: absolute; top: 32px; left: 12.5%; right: 12.5%; height: 2px; background: repeating-linear-gradient(90deg, #c8cdd8 0, #c8cdd8 6px, transparent 6px, transparent 12px); z-index: 0; }
@@ -1379,7 +1405,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         .lp-step:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,48,135,0.12); border-color: #003087; }
         .lp-step__num { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #003087, #004A97); color: #fff; display: flex; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-size: 24px; font-weight: 600; margin: 0 auto 16px; box-shadow: 0 4px 12px rgba(0,48,135,0.3); }
         .lp-step__title { font-size: 16px; font-weight: 600; color: #0d1b3e; margin-bottom: 8px; text-align: center; }
-        .lp-step__desc { font-size: 13.5px; line-height: 1.55; color: #6b7280; text-align: center; }
+        .lp-step__desc { font-size: 13.5px; line-height: 1.55; color: #4b5563; text-align: center; }
         .lp-steps-cta { text-align: center; margin-top: 48px; }
 
         /* WHY UWC */
@@ -1392,7 +1418,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         .lp-why__icon--2 { background: #fef3c7; }
         .lp-why__icon--3 { background: #dcfce7; }
         .lp-why__card-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-size: 22px; font-weight: 500; color: #0d1b3e; margin-bottom: 12px; }
-        .lp-why__card-desc { font-size: 14.5px; line-height: 1.65; color: #5a6480; }
+        .lp-why__card-desc { font-size: 14.5px; line-height: 1.65; color: #374151; }
 
         /* SCHOOLS row */
         .lp-schools { max-width: 1240px; margin: 0 auto; padding: 96px 32px 64px; }
@@ -1402,8 +1428,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         .lp-school::before { content: ''; position: absolute; top: -40px; right: -40px; width: 140px; height: 140px; border-radius: 50%; background: rgba(255,255,255,0.06); }
         .lp-school__flag { font-size: 32px; margin-bottom: 14px; position: relative; z-index: 1; }
         .lp-school__name { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-size: 19px; font-weight: 500; line-height: 1.25; margin-bottom: 4px; position: relative; z-index: 1; }
-        .lp-school__country { font-size: 12.5px; opacity: 0.75; position: relative; z-index: 1; }
-        .lp-school__year { font-size: 11px; opacity: 0.6; margin-top: 8px; position: relative; z-index: 1; font-family: 'DM Mono', ui-monospace, monospace; }
+        .lp-school__country { font-size: 13.5px; opacity: 0.75; position: relative; z-index: 1; }
+        .lp-school__year { font-size: 13.5px; opacity: 0.6; margin-top: 8px; position: relative; z-index: 1; font-family: 'DM Mono', ui-monospace, monospace; }
 
         /* FOOTER */
         .lp-footer { background: #001a4d; color: rgba(255,255,255,0.7); padding: 64px 32px 28px; }
@@ -1414,7 +1440,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         .lp-footer__col-title { color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; }
         .lp-footer__link { display: block; color: rgba(255,255,255,0.65); font-size: 13.5px; margin-bottom: 10px; text-decoration: none; cursor: pointer; transition: color 120ms; }
         .lp-footer__link:hover { color: #fff; }
-        .lp-footer__bottom { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px; display: flex; justify-content: space-between; font-size: 12.5px; flex-wrap: wrap; gap: 16px; }
+        .lp-footer__bottom { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px; display: flex; justify-content: space-between; font-size: 13.5px; flex-wrap: wrap; gap: 16px; }
 
         @media (max-width: 900px) {
           .lp-nav { padding: 0 20px; gap: 16px; }
@@ -1609,9 +1635,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         .elig-back:hover { background: #E8EEF6; }
         .elig-card { max-width: 640px; margin: 24px auto 0; background: #fff; border-radius: 16px; box-shadow: 0 12px 40px rgba(0,48,135,0.08); border: 1px solid #e5e7eb; overflow: hidden; }
         .elig-card__head { padding: 32px 36px 24px; border-bottom: 1px solid #f0f2f5; }
-        .elig-card__eyebrow { color: #003087; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+        .elig-card__eyebrow { color: #003087; font-size: 13.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
         .elig-card__title { font-size: 28px; font-weight: 600; color: #0d1b3e; line-height: 1.2; margin: 0 0 10px; letter-spacing: -0.3px; }
-        .elig-card__sub { font-size: 14.5px; line-height: 1.55; color: #5a6480; }
+        .elig-card__sub { font-size: 14.5px; line-height: 1.55; color: #374151; }
         .elig-card__body { padding: 28px 36px 32px; }
 
         .elig-field { margin-bottom: 22px; }
@@ -1623,18 +1649,18 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
           transition: border-color 150ms ease, box-shadow 150ms ease;
           appearance: none; -webkit-appearance: none;
         }
-        .elig-field__input:hover, .elig-field__select:hover { border-color: #9ca3af; }
+        .elig-field__input:hover, .elig-field__select:hover { border-color: #4b5563; }
         .elig-field__input:focus, .elig-field__select:focus { outline: none; border-color: #003087; box-shadow: 0 0 0 3px rgba(0,48,135,0.15); }
         .elig-field--ok .elig-field__input, .elig-field--ok .elig-field__select { border-color: #16a34a; }
         .elig-field--err .elig-field__input, .elig-field--err .elig-field__select { border-color: #c8102e; }
         .elig-field__select { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
-        .elig-field__msg { margin-top: 6px; font-size: 12.5px; line-height: 1.45; display: flex; align-items: flex-start; gap: 6px; min-height: 18px; }
+        .elig-field__msg { margin-top: 6px; font-size: 13.5px; line-height: 1.45; display: flex; align-items: flex-start; gap: 6px; min-height: 18px; }
         .elig-field__msg.ok { color: #16a34a; }
         .elig-field__msg.err { color: #c8102e; }
-        .elig-field__msg.info { color: #5a6480; }
+        .elig-field__msg.info { color: #374151; }
 
         .elig-submit-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 8px; padding-top: 24px; border-top: 1px solid #f0f2f5; }
-        .elig-submit-row__help { font-size: 12.5px; color: #6b7280; flex: 1; }
+        .elig-submit-row__help { font-size: 13.5px; color: #4b5563; flex: 1; }
         .elig-submit { background: #c8102e; color: #fff; border: none; padding: 14px 32px; font-size: 15px; font-weight: 600; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 14px rgba(200,16,46,0.28); transition: all 180ms ease; }
         .elig-submit:hover { background: #a00d24; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(200,16,46,0.35); }
         .elig-submit:focus { outline: none; box-shadow: 0 0 0 4px rgba(200,16,46,0.25), 0 4px 14px rgba(200,16,46,0.28); }
@@ -1646,7 +1672,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         .elig-outcome__icon--warn { background: #fef3c7; color: #d97706; }
         .elig-outcome__icon--err { background: #fee2e2; color: #c8102e; }
         .elig-outcome__title { font-size: 26px; font-weight: 600; color: #0d1b3e; margin-bottom: 10px; letter-spacing: -0.2px; }
-        .elig-outcome__sub { font-size: 14.5px; line-height: 1.6; color: #5a6480; max-width: 460px; margin: 0 auto; }
+        .elig-outcome__sub { font-size: 14.5px; line-height: 1.6; color: #374151; max-width: 460px; margin: 0 auto; }
         .elig-outcome__detail { margin: 24px 36px; padding: 18px 22px; border-radius: 12px; font-size: 13.5px; line-height: 1.6; }
         .elig-outcome__detail--ok { background: #f0fdf4; border: 1px solid #86efac; color: #14532d; }
         .elig-outcome__detail--warn { background: #fffbeb; border: 1px solid #fde68a; color: #78350f; }
@@ -1654,13 +1680,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         .elig-outcome__actions { display: flex; gap: 12px; padding: 0 36px 36px; flex-wrap: wrap; }
         .elig-outcome__btn { flex: 1; min-width: 180px; padding: 14px 24px; font-size: 14.5px; font-weight: 600; border-radius: 10px; cursor: pointer; transition: all 180ms ease; border: none; font-family: inherit; }
         .elig-outcome__btn--ghost { background: #fff; color: #374151; border: 1px solid #d1d5db; }
-        .elig-outcome__btn--ghost:hover { background: #f3f5fa; border-color: #9ca3af; }
+        .elig-outcome__btn--ghost:hover { background: #f3f5fa; border-color: #4b5563; }
         .elig-outcome__btn--primary { background: #003087; color: #fff; }
         .elig-outcome__btn--primary:hover { background: #001a4d; transform: translateY(-1px); }
         .elig-outcome__btn--red { background: #c8102e; color: #fff; }
         .elig-outcome__btn--red:hover { background: #a00d24; }
 
-        .elig-helper { background: #E8EEF6; border-radius: 8px; padding: 14px 18px; font-size: 12.5px; line-height: 1.55; color: #003087; margin-bottom: 22px; display: flex; gap: 10px; align-items: flex-start; }
+        .elig-helper { background: #E8EEF6; border-radius: 8px; padding: 14px 18px; font-size: 13.5px; line-height: 1.55; color: #003087; margin-bottom: 22px; display: flex; gap: 10px; align-items: flex-start; }
         .elig-helper-icon { font-size: 18px; flex-shrink: 0; line-height: 1.2; }
 
         @keyframes elig-fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
@@ -2019,9 +2045,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
               <div><label class="portal-label">Country</label><select class="portal-input"><option selected>🇧🇷 Brazil</option><option>🇵🇹 Portugal</option><option>🇦🇴 Angola</option></select></div>
               <div><label class="portal-label">Idioma preferido</label><select class="portal-input"><option selected>Português (PT)</option><option>English</option><option>Español</option></select></div>
             </div>
-            <div style="margin-bottom:20px;font-size:12px;color:#6b7280;display:flex;align-items:flex-start;gap:8px;"><input type="checkbox" checked style="margin-top:2px;accent-color:#003087;"><span>I agree to UWC International's <a href="#" style="color:#003087;">Terms of Use</a> and <a href="#" style="color:#003087;">Privacy Policy</a>.</span></div>
+            <div style="margin-bottom:20px;font-size:13px;color:#4b5563;display:flex;align-items:flex-start;gap:8px;"><input type="checkbox" checked style="margin-top:2px;accent-color:#003087;"><span>I agree to UWC International's <a href="#" style="color:#003087;">Terms of Use</a> and <a href="#" style="color:#003087;">Privacy Policy</a>.</span></div>
             <button class="uwc-portal-btn-primary" style="width:100%;padding:14px;font-size:15px;">📧 Verify email and create account</button>
-            <div style="text-align:center;margin-top:14px;font-size:12px;color:#6b7280;">Already have an account? <a href="#" style="color:#003087;">Sign in</a></div>
+            <div style="text-align:center;margin-top:14px;font-size:13px;color:#4b5563;">Already have an account? <a href="#" style="color:#003087;">Sign in</a></div>
           </div>
         </div>
       </div>
@@ -2073,7 +2099,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
           <div class="uwc-portal-topbar__logo">UWC</div>
           <span class="uwc-portal-topbar__title">Applicant Portal — Sofia Almeida</span>
           <div style="margin-left:auto;display:flex;align-items:center;gap:12px;">
-            <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border:1px solid rgba(255,255,255,0.4);">SA</div>
+            <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;border:1px solid rgba(255,255,255,0.4);">SA</div>
             <div class="uwc-portal-topbar__lang">
               <button class="uwc-portal-topbar__lang-btn">PT</button>
               <button class="uwc-portal-topbar__lang-btn active">EN</button>
@@ -2085,9 +2111,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
             <div class="uwc-portal-sidebar__section">My Application</div>
             <a class="uwc-portal-sidebar__item active" data-portal-section="dashboard"><span class="uwc-portal-sidebar__icon">🏠</span> Dashboard</a>
             <a class="uwc-portal-sidebar__item" data-portal-section="application" onclick="window.go && window.go(5)"><span class="uwc-portal-sidebar__icon">📝</span> Application form</a>
-            <a class="uwc-portal-sidebar__item" data-portal-section="references"><span class="uwc-portal-sidebar__icon">👥</span> References</a>
-            <a class="uwc-portal-sidebar__item" data-portal-section="documents"><span class="uwc-portal-sidebar__icon">📎</span> Documents</a>
-            <a class="uwc-portal-sidebar__item" data-portal-section="status"><span class="uwc-portal-sidebar__icon">📊</span> Status</a>
+            <a class="uwc-portal-sidebar__item" data-portal-section="references" onclick="window.go(4); setTimeout(function(){window.UWCSwitchPanel&&window.UWCSwitchPanel('references')},50)"><span class="uwc-portal-sidebar__icon">👥</span> References</a>
+            <a class="uwc-portal-sidebar__item" data-portal-section="documents" onclick="window.go(4); setTimeout(function(){window.UWCSwitchPanel&&window.UWCSwitchPanel('documents')},50)"><span class="uwc-portal-sidebar__icon">📎</span> Documents</a>
+            <a class="uwc-portal-sidebar__item" data-portal-section="status" onclick="window.go(4); setTimeout(function(){window.UWCSwitchPanel&&window.UWCSwitchPanel('status')},50)"><span class="uwc-portal-sidebar__icon">📊</span> Status</a>
           </nav>
           <div class="uwc-portal-main"><div data-portal-section="dashboard" class="dash-shell">
 
@@ -2149,7 +2175,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 
 </div>
 
-<div data-portal-section="documents" hidden class="docs-shell">
+<div data-portal-section="documents" hidden class="docs-shell" onclick="window.go(4); setTimeout(function(){window.UWCSwitchPanel&&window.UWCSwitchPanel('documents')},50)">
 
   <header class="docs-head">
     <div>
@@ -2175,7 +2201,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 
     <aside class="docs-side">
       <h3><svg><use href="#icon-check"/></svg> Required documents</h3>
-      <p style="margin:0 0 12px;color:#6b7280;font-size:12.5px;">3 of 3 uploaded</p>
+      <p style="margin:0 0 12px;color:#4b5563;font-size:13.5px;">3 of 3 uploaded</p>
       <ul class="docs-checklist">
         <li class="is-done"><span class="docs-checklist-icon"><svg><use href="#icon-check"/></svg></span> Passport scan</li>
         <li class="is-done"><span class="docs-checklist-icon"><svg><use href="#icon-check"/></svg></span> School transcript</li>
@@ -2192,7 +2218,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   </div>
 
 </div>
-<div data-portal-section="references" hidden class="refs-shell">
+<div data-portal-section="references" hidden class="refs-shell" onclick="window.go(4); setTimeout(function(){window.UWCSwitchPanel&&window.UWCSwitchPanel('references')},50)">
 
   <header class="refs-head">
     <div>
@@ -2215,7 +2241,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   </div>
 
 </div>
-<div data-portal-section="status" hidden class="status-shell">
+<div data-portal-section="status" hidden class="status-shell" onclick="window.go(4); setTimeout(function(){window.UWCSwitchPanel&&window.UWCSwitchPanel('status')},50)">
 
   <header class="status-head">
     <h1>Application status</h1>
@@ -2293,6 +2319,789 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 
 
     <!-- DYNAMIC APPLICATION FORM (v11) - real state, live word count, section progression -->
+<!-- ============================================================ -->
+<!-- UWC DYNAMIC APPLICATION FORM (sc-app replacement)             -->
+<!-- All fields editable; live word count; section progression;   -->
+<!-- Submit unlocks when all 6 complete.                           -->
+<!-- ============================================================ -->
+
+<style>
+  /* ============================================================ */
+  /* APPFORM — scoped styles                                       */
+  /* ============================================================ */
+  #sc-app .appform-shell {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif;
+    color: #1f2937;
+    background: #f5f7fb;
+    min-height: 100vh;
+  }
+  #sc-app .appform-shell * { box-sizing: border-box; }
+
+  /* topbar */
+  #sc-app .uwc-portal-topbar {
+    background: #003087;
+    color: #fff;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 3px solid #001a4d;
+  }
+  #sc-app .appform-topbar-left {
+    display: flex; align-items: center; gap: 14px;
+  }
+  #sc-app .appform-logo {
+    width: 36px; height: 36px;
+    background: #fff;
+    color: #003087;
+    border-radius: 6px;
+    display: grid; place-items: center;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+  #sc-app .appform-crumb {
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  #sc-app .appform-crumb b { color: #fff; font-weight: 600; }
+  #sc-app .appform-topbar-right {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 13px;
+  }
+  #sc-app .appform-back-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 6px;
+    transition: background 0.15s;
+    cursor: pointer;
+    background: transparent;
+    font-family: inherit;
+    font-size: 13px;
+  }
+  #sc-app .appform-back-link:hover { background: rgba(255,255,255,0.1); }
+  #sc-app .appform-user-chip {
+    display: flex; align-items: center; gap: 8px;
+    color: #fff;
+  }
+  #sc-app .appform-user-avatar {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: #C8102E;
+    display: grid; place-items: center;
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  /* layout */
+  #sc-app .uwc-portal-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: calc(100vh - 67px);
+  }
+  #sc-app .uwc-portal-sidebar {
+    background: #001a4d;
+    color: #fff;
+    padding: 24px 0;
+  }
+  #sc-app .appform-side-section {
+    padding: 0 16px;
+    margin-bottom: 18px;
+  }
+  #sc-app .appform-side-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    padding: 0 12px 8px;
+  }
+  #sc-app .appform-side-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px;
+    color: rgba(255,255,255,0.85);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.15s;
+    text-decoration: none;
+    margin-bottom: 2px;
+  }
+  #sc-app .appform-side-item:hover { background: rgba(255,255,255,0.08); }
+  #sc-app .appform-side-item.is-active {
+    background: rgba(200,16,46,0.18);
+    color: #fff;
+    font-weight: 600;
+    border-left: 3px solid #C8102E;
+    padding-left: 9px;
+  }
+  #sc-app .appform-side-item svg {
+    width: 16px; height: 16px;
+    flex-shrink: 0;
+  }
+  #sc-app .appform-side-badge {
+    margin-left: auto;
+    background: #C8102E;
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+
+  /* main */
+  #sc-app .uwc-portal-main {
+    padding: 28px 36px 100px;
+    overflow-y: auto;
+    max-width: 1100px;
+  }
+
+  /* header card */
+  #sc-app .appform-header-card {
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #e4e7eb;
+    padding: 24px 28px;
+    margin-bottom: 22px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  #sc-app .appform-header-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #001a4d;
+    margin: 0 0 6px;
+  }
+  #sc-app .appform-header-sub {
+    font-size: 13px;
+    color: #4b5563;
+    margin: 0 0 20px;
+  }
+  #sc-app .appform-progress-row {
+    display: flex; align-items: center; gap: 14px;
+    flex-wrap: wrap;
+  }
+  #sc-app .appform-progress-dots {
+    display: flex; align-items: center; gap: 8px;
+    flex: 1;
+  }
+  #sc-app .appform-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-weight: 600;
+    font-size: 13px;
+    border: 2px solid #cbd5e1;
+    background: #fff;
+    color: #94a3b8;
+    transition: all 0.2s;
+    position: relative;
+  }
+  #sc-app .appform-dot.is-complete {
+    background: #16a34a;
+    border-color: #16a34a;
+    color: #fff;
+  }
+  #sc-app .appform-dot.is-current {
+    background: #003087;
+    border-color: #003087;
+    color: #fff;
+  }
+  #sc-app .appform-dot.is-locked {
+    background: #fff;
+    border-color: #cbd5e1;
+    color: #94a3b8;
+  }
+  #sc-app .appform-dot svg { width: 16px; height: 16px; }
+  #sc-app .appform-dot-line {
+    flex: 1;
+    height: 2px;
+    background: #cbd5e1;
+    max-width: 32px;
+  }
+  #sc-app .appform-dot-line.is-passed { background: #16a34a; }
+  #sc-app .appform-progress-pct {
+    font-size: 14px;
+    font-weight: 600;
+    color: #003087;
+    white-space: nowrap;
+  }
+
+  /* section card */
+  #sc-app .appform-section {
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #e4e7eb;
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  #sc-app .appform-section[open] { border-color: #cbd5e1; }
+  #sc-app .appform-section.is-complete { border-left: 4px solid #16a34a; }
+  #sc-app .appform-section.is-locked { opacity: 0.6; pointer-events: none; }
+  #sc-app .appform-section.is-locked .appform-summary { cursor: not-allowed; }
+
+  #sc-app .appform-summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 24px;
+    display: flex; align-items: center; gap: 14px;
+    user-select: none;
+  }
+  #sc-app .appform-summary::-webkit-details-marker { display: none; }
+  #sc-app .appform-summary:hover { background: #f9fafb; }
+
+  #sc-app .appform-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    color: #4b5563;
+    display: grid; place-items: center;
+    font-weight: 600;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  #sc-app .appform-section.is-complete .appform-num {
+    background: #16a34a;
+    color: #fff;
+  }
+  #sc-app .appform-section[open] .appform-num {
+    background: #003087;
+    color: #fff;
+  }
+  #sc-app .appform-section.is-complete[open] .appform-num {
+    background: #16a34a;
+  }
+
+  #sc-app .appform-sum-title {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 15px;
+  }
+  #sc-app .appform-sum-status {
+    font-size: 13px;
+    color: #4b5563;
+    margin-top: 2px;
+  }
+  #sc-app .appform-sum-status.is-complete { color: #16a34a; font-weight: 500; }
+  #sc-app .appform-sum-status.is-warn { color: #f59e0b; font-weight: 500; }
+  #sc-app .appform-sum-status.is-locked { color: #94a3b8; }
+
+  #sc-app .appform-sum-chev {
+    margin-left: auto;
+    transition: transform 0.2s;
+    color: #4b5563;
+  }
+  #sc-app .appform-section[open] .appform-sum-chev {
+    transform: rotate(90deg);
+  }
+  #sc-app .appform-sum-chev svg { width: 18px; height: 18px; }
+
+  #sc-app .appform-body {
+    padding: 4px 24px 24px;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  /* display-mode grid */
+  #sc-app .appform-display-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 28px;
+    margin: 20px 0;
+  }
+  #sc-app .appform-display-grid.is-single { grid-template-columns: 1fr; }
+  #sc-app .appform-field {
+    display: flex; flex-direction: column;
+    gap: 4px;
+  }
+  #sc-app .appform-field-full { grid-column: 1 / -1; }
+  #sc-app .appform-label {
+    font-size: 13.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #4b5563;
+  }
+  #sc-app .appform-value {
+    font-size: 14px;
+    color: #1f2937;
+    padding: 4px 0;
+    min-height: 22px;
+  }
+
+  /* edit mode inputs */
+  #sc-app .appform-input,
+  #sc-app .appform-select,
+  #sc-app .appform-textarea {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #1f2937;
+    background: #fff;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  #sc-app .appform-input:focus,
+  #sc-app .appform-select:focus,
+  #sc-app .appform-textarea:focus {
+    outline: none;
+    border-color: #003087;
+    box-shadow: 0 0 0 3px rgba(0,48,135,0.12);
+  }
+  #sc-app .appform-textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+  #sc-app .appform-textarea--statement {
+    min-height: 200px;
+  }
+  #sc-app .appform-textarea.is-err { border-color: #c8102e; }
+  #sc-app .appform-textarea.is-warn { border-color: #f59e0b; }
+  #sc-app .appform-textarea.is-ok { border-color: #16a34a; }
+
+  /* buttons */
+  #sc-app .appform-btn {
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+    transition: all 0.15s;
+    background: #fff;
+    color: #1f2937;
+  }
+  #sc-app .appform-btn svg { width: 14px; height: 14px; }
+  #sc-app .appform-btn--primary {
+    background: #003087;
+    color: #fff;
+    border-color: #003087;
+  }
+  #sc-app .appform-btn--primary:hover:not(:disabled) {
+    background: #001a4d;
+    border-color: #001a4d;
+  }
+  #sc-app .appform-btn--ghost {
+    background: #fff;
+    color: #4b5563;
+    border-color: #d1d5db;
+  }
+  #sc-app .appform-btn--ghost:hover { background: #f9fafb; }
+  #sc-app .appform-btn--danger {
+    background: #fff;
+    color: #c8102e;
+    border-color: #fecaca;
+  }
+  #sc-app .appform-btn--danger:hover { background: #fef2f2; }
+  #sc-app .appform-btn--success {
+    background: #16a34a;
+    color: #fff;
+    border-color: #16a34a;
+  }
+  #sc-app .appform-btn--success:hover:not(:disabled) { background: #15803d; }
+  #sc-app .appform-btn:disabled {
+    background: #e5e7eb !important;
+    color: #4b5563 !important;
+    border-color: #e5e7eb !important;
+    cursor: not-allowed;
+  }
+  #sc-app .appform-edit-btn {
+    margin-left: auto;
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  #sc-app .appform-action-row {
+    display: flex; align-items: center; gap: 10px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #f1f5f9;
+  }
+  #sc-app .appform-action-row .appform-spacer { flex: 1; }
+
+  /* word counter */
+  #sc-app .appform-counter-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    font-size: 13px;
+  }
+  #sc-app .appform-counter {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  #sc-app .appform-counter--ok { color: #16a34a; }
+  #sc-app .appform-counter--warn { color: #f59e0b; }
+  #sc-app .appform-counter--err { color: #c8102e; }
+  #sc-app .appform-counter-bar {
+    margin-top: 6px;
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  #sc-app .appform-counter-bar-fill {
+    height: 100%;
+    background: #c8102e;
+    transition: width 0.2s, background 0.2s;
+  }
+  #sc-app .appform-counter-bar-fill.is-warn { background: #f59e0b; }
+  #sc-app .appform-counter-bar-fill.is-ok { background: #16a34a; }
+
+  #sc-app .appform-field-help {
+    font-size: 13px;
+    color: #4b5563;
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+  #sc-app .appform-textarea-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 4px;
+    margin-top: 14px;
+    display: block;
+  }
+  #sc-app .appform-textarea-label .req {
+    color: #c8102e;
+    font-weight: 600;
+  }
+
+  /* documents */
+  #sc-app .appform-drop {
+    border: 2px dashed #cbd5e1;
+    border-radius: 10px;
+    padding: 32px 20px;
+    text-align: center;
+    margin: 16px 0;
+    background: #f8fafc;
+    transition: all 0.15s;
+    cursor: pointer;
+  }
+  #sc-app .appform-drop:hover,
+  #sc-app .appform-drop.is-drag {
+    border-color: #003087;
+    background: #eff6ff;
+  }
+  #sc-app .appform-drop svg {
+    width: 36px; height: 36px;
+    color: #003087;
+    margin-bottom: 8px;
+  }
+  #sc-app .appform-drop-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 4px 0;
+  }
+  #sc-app .appform-drop-sub {
+    font-size: 13px;
+    color: #4b5563;
+  }
+  #sc-app .appform-file-list {
+    margin-top: 14px;
+    display: flex; flex-direction: column;
+    gap: 8px;
+  }
+  #sc-app .appform-file-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 14px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+  }
+  #sc-app .appform-file-icon {
+    width: 32px; height: 32px;
+    border-radius: 6px;
+    background: #eff6ff;
+    color: #003087;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  #sc-app .appform-file-icon svg { width: 16px; height: 16px; }
+  #sc-app .appform-file-info { flex: 1; min-width: 0; }
+  #sc-app .appform-file-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1f2937;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  #sc-app .appform-file-meta {
+    font-size: 13.5px;
+    color: #4b5563;
+  }
+  #sc-app .appform-file-remove {
+    background: transparent;
+    border: none;
+    color: #c8102e;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+  }
+  #sc-app .appform-file-remove:hover { background: #fef2f2; }
+  #sc-app .appform-file-remove svg { width: 14px; height: 14px; }
+
+  /* guardian banner */
+  #sc-app .appform-warn-panel {
+    padding: 14px 16px;
+    border-radius: 8px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    color: #92400e;
+    margin: 16px 0;
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  #sc-app .appform-warn-panel.is-ok {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+    color: #166534;
+  }
+  #sc-app .appform-warn-panel svg {
+    width: 20px; height: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  #sc-app .appform-warn-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  #sc-app .appform-warn-text {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  #sc-app .appform-warn-actions {
+    margin-top: 10px;
+    display: flex; gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  /* locked banner */
+  #sc-app .appform-lock-banner {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    color: #92400e;
+    padding: 18px 20px;
+    border-radius: 8px;
+    margin: 12px 0 4px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  #sc-app .appform-lock-banner svg {
+    width: 20px; height: 20px;
+    color: #f59e0b;
+    flex-shrink: 0;
+  }
+  #sc-app .appform-lock-banner-text {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  #sc-app .appform-lock-banner-text b { color: #78350f; }
+
+  /* declaration */
+  #sc-app .appform-decl-text {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px 18px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #374151;
+    margin: 12px 0;
+  }
+  #sc-app .appform-checkbox-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 12px 0;
+  }
+  #sc-app .appform-checkbox-row input[type=checkbox] {
+    margin-top: 3px;
+    width: 16px; height: 16px;
+    accent-color: #003087;
+    cursor: pointer;
+  }
+  #sc-app .appform-checkbox-row label {
+    font-size: 13px;
+    color: #374151;
+    cursor: pointer;
+    line-height: 1.5;
+  }
+
+  /* success view */
+  #sc-app .appform-success {
+    text-align: center;
+    padding: 36px 24px;
+  }
+  #sc-app .appform-success-icon {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: #16a34a;
+    color: #fff;
+    display: grid; place-items: center;
+    margin: 0 auto 18px;
+  }
+  #sc-app .appform-success-icon svg { width: 36px; height: 36px; }
+  #sc-app .appform-success-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #001a4d;
+    margin: 0 0 8px;
+  }
+  #sc-app .appform-success-ref {
+    font-size: 13px;
+    color: #4b5563;
+    margin: 0 0 4px;
+  }
+  #sc-app .appform-success-ref code {
+    font-size: 15px;
+    font-weight: 700;
+    color: #003087;
+    background: #eff6ff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid #bfdbfe;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+  }
+  #sc-app .appform-timeline {
+    margin: 28px auto 0;
+    max-width: 540px;
+    text-align: left;
+  }
+  #sc-app .appform-timeline-step {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 12px 0;
+    position: relative;
+  }
+  #sc-app .appform-timeline-step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 13px;
+    top: 36px;
+    bottom: -4px;
+    width: 2px;
+    background: #e5e7eb;
+  }
+  #sc-app .appform-timeline-step.is-done::before { background: #16a34a; }
+  #sc-app .appform-timeline-bullet {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    color: #4b5563;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 600;
+    z-index: 1;
+  }
+  #sc-app .appform-timeline-step.is-done .appform-timeline-bullet {
+    background: #16a34a;
+    color: #fff;
+  }
+  #sc-app .appform-timeline-step.is-done .appform-timeline-bullet svg {
+    width: 14px; height: 14px;
+  }
+  #sc-app .appform-timeline-text {
+    flex: 1;
+  }
+  #sc-app .appform-timeline-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+  }
+  #sc-app .appform-timeline-meta {
+    font-size: 13px;
+    color: #4b5563;
+    margin-top: 2px;
+  }
+
+  /* sticky footer */
+  #sc-app .appform-sticky-footer {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 1px solid #e4e7eb;
+    padding: 14px 28px;
+    display: flex; align-items: center; gap: 18px;
+    margin: 24px -36px -100px;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
+    z-index: 10;
+  }
+  #sc-app .appform-footer-status {
+    flex: 1;
+    font-size: 13px;
+    color: #4b5563;
+  }
+  #sc-app .appform-footer-status b { color: #1f2937; font-weight: 600; }
+
+  /* toast */
+  #sc-app .appform-toast {
+    position: fixed;
+    bottom: 100px;
+    right: 28px;
+    background: #001a4d;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+    font-size: 13px;
+    font-weight: 500;
+    display: flex; align-items: center; gap: 10px;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+  }
+  #sc-app .appform-toast.is-show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #sc-app .appform-toast svg { width: 16px; height: 16px; color: #16a34a; }
+
+  @media (max-width: 880px) {
+    #sc-app .uwc-portal-layout { grid-template-columns: 1fr; }
+    #sc-app .uwc-portal-sidebar { display: none; }
+    #sc-app .uwc-portal-main { padding: 20px; }
+    #sc-app .appform-display-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<!-- SVG sprite (only used if existing sprite is not on the page) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" id="appform-sprite-fallback">
+  <defs>
+    <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="icon-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></symbol>
+    <symbol id="icon-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+    <symbol id="icon-upload-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/><polyline points="16 16 12 12 8 16"/></symbol>
+    <symbol id="icon-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
+    <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></symbol>
+    <symbol id="icon-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="icon-alert-triangle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+    <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+    <symbol id="icon-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="icon-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
+    <symbol id="icon-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
+    <symbol id="icon-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></symbol>
+    <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  </defs>
+</svg>
+
 <!-- ============================================================ -->
 <!-- UWC DYNAMIC APPLICATION FORM (sc-app replacement)             -->
 <!-- All fields editable; live word count; section progression;   -->
@@ -4293,6 +5102,1134 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 </script>
 
 
+<script>
+(function() {
+  'use strict';
+
+  /* ============================================================ */
+  /* STATE                                                         */
+  /* ============================================================ */
+  const State = {
+    data: {
+      personal: {
+        fullName: 'Sofia Maria Almeida',
+        preferredName: 'Sofia',
+        dob: '2009-03-14',
+        gender: 'Female',
+        nationality: 'Brazilian',
+        passport: 'FH 832 491',
+        address: 'Rua das Acácias 142, São Paulo, SP, 04532-001, Brazil',
+        phone: '+55 11 9 4321 5678',
+        email: 'sofia.almeida@example.com'
+      },
+      academic: {
+        school: 'Colégio Bandeirantes, São Paulo',
+        currentYear: '10th grade (Ensino Médio Year 1)',
+        graduationYear: '2026',
+        languageInstruction: 'Portuguese',
+        languagesSpoken: 'Portuguese (native), English (C1), Spanish (B2)',
+        averageGrade: '9.4',
+        gradeScale: '/10',
+        awards: 'Math Olympiad gold 2025, English-language debate runner-up 2024'
+      },
+      statement: {
+        whyUwc: '',
+        communityContribution: '',
+        brazilNcQuestion: ''
+      },
+      documents: [],
+      guardian: {
+        name: 'Maria Almeida',
+        relationship: 'Mother',
+        email: 'maria.almeida@example.com',
+        phone: '+55 11 9 4321 5677',
+        consentReceived: false,
+        consentReceivedAt: null
+      },
+      declaration: {
+        signedName: '',
+        signedAt: null,
+        agreed: false
+      },
+      submission: {
+        submitted: false,
+        referenceId: null,
+        submittedAt: null
+      }
+    },
+    editMode: { personal: false, academic: false },
+    _listeners: [],
+
+    get(section, field) { return this.data[section][field]; },
+    set(section, field, value) {
+      this.data[section][field] = value;
+      this._notify(section);
+    },
+    isSectionComplete(section) {
+      const d = this.data;
+      if (section === 'personal') {
+        const p = d.personal;
+        return !!(p.fullName && p.dob && p.nationality && p.passport && p.email);
+      }
+      if (section === 'academic') {
+        const a = d.academic;
+        return !!(a.school && a.currentYear && a.graduationYear);
+      }
+      if (section === 'statement') {
+        return countWords(d.statement.whyUwc) >= 500
+          && countWords(d.statement.communityContribution) >= 300;
+      }
+      if (section === 'documents') {
+        return d.documents.length >= 3;
+      }
+      if (section === 'guardian') {
+        return d.guardian.consentReceived === true;
+      }
+      if (section === 'declaration') {
+        return d.declaration.agreed && d.declaration.signedName.length > 0;
+      }
+      return false;
+    },
+    getStatusText(section) {
+      if (section === 'declaration' && !this.canSubmit()) return 'Locked until sections 1-5 are complete';
+      if (this.isSectionComplete(section)) return 'Complete';
+      if (section === 'personal') return 'Tap to review and edit';
+      if (section === 'academic') return 'Tap to review and edit';
+      if (section === 'statement') {
+        const w1 = countWords(this.data.statement.whyUwc);
+        const w2 = countWords(this.data.statement.communityContribution);
+        if (w1 === 0 && w2 === 0) return 'Not started — 0 / 800 minimum words';
+        return `In progress — ${w1} / 500 + ${w2} / 300 words`;
+      }
+      if (section === 'documents') {
+        const n = this.data.documents.length;
+        if (n === 0) return 'Not started — 0 of 3 documents uploaded';
+        return `${n} of 3 documents uploaded`;
+      }
+      if (section === 'guardian') {
+        if (this.data.guardian.consentReceived) return 'Consent received';
+        return 'Awaiting consent from Maria Almeida';
+      }
+      if (section === 'declaration') return 'Ready to sign and submit';
+      return '';
+    },
+    completedCount() {
+      return ['personal','academic','statement','documents','guardian','declaration']
+        .filter(s => this.isSectionComplete(s)).length;
+    },
+    requiredCompletedCount() {
+      return ['personal','academic','statement','documents','guardian']
+        .filter(s => this.isSectionComplete(s)).length;
+    },
+    getCompletionPercent() {
+      return Math.round((this.completedCount() / 6) * 100);
+    },
+    canSubmit() {
+      return ['personal','academic','statement','documents','guardian']
+        .every(s => this.isSectionComplete(s));
+    },
+    onUpdate(cb) { this._listeners.push(cb); },
+    _notify(section) {
+      this._listeners.forEach(cb => {
+        try { cb(section, this); } catch (e) { console.error(e); }
+      });
+    }
+  };
+
+  // expose
+  window.UWCFormState = State;
+
+  /* ============================================================ */
+  /* HELPERS                                                       */
+  /* ============================================================ */
+  function countWords(s) {
+    if (!s || typeof s !== 'string') return 0;
+    const trimmed = s.trim();
+    if (!trimmed) return 0;
+    return trimmed.split(/\s+/).filter(Boolean).length;
+  }
+
+  function esc(s) {
+    if (s == null) return '';
+    return String(s)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&#39;');
+  }
+
+  function fmtBytes(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/(1024*1024)).toFixed(1) + ' MB';
+  }
+
+  function fmtDate(ts) {
+    if (!ts) return '';
+    const d = new Date(ts);
+    return d.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+  }
+
+  function fmtDateLong(ts) {
+    if (!ts) return '';
+    const d = new Date(ts);
+    return d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' })
+      + ' at ' + d.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+  }
+
+  function toast(msg) {
+    if (window.UWCToast && typeof window.UWCToast.show === 'function') {
+      window.UWCToast.show(msg);
+      return;
+    }
+    const el = document.getElementById('appform-toast');
+    const t = document.getElementById('appform-toast-text');
+    if (!el) return;
+    t.textContent = msg;
+    el.classList.add('is-show');
+    clearTimeout(el._t);
+    el._t = setTimeout(() => el.classList.remove('is-show'), 2400);
+  }
+
+  function genRef() {
+    const n = String(Math.floor(Math.random() * 90000) + 10000);
+    return 'UWC-2026-BR-' + n;
+  }
+
+  /* ============================================================ */
+  /* RENDER — PROGRESS DOTS                                        */
+  /* ============================================================ */
+  function renderDots() {
+    const host = document.getElementById('appform-dots');
+    if (!host) return;
+    const sections = ['personal','academic','statement','documents','guardian','declaration'];
+    let html = '';
+    sections.forEach((s, i) => {
+      const complete = State.isSectionComplete(s);
+      const locked = (s === 'declaration' && !State.canSubmit());
+      let cls = 'appform-dot';
+      let inner = (i+1);
+      if (complete) { cls += ' is-complete'; inner = '<svg><use href="#icon-check"/></svg>'; }
+      else if (locked) { cls += ' is-locked'; inner = '<svg><use href="#icon-lock"/></svg>'; }
+      else if (i === State.requiredCompletedCount() && !complete) { cls += ' is-current'; }
+      html += `<div class="${cls}" title="Section ${i+1}">${inner}</div>`;
+      if (i < sections.length - 1) {
+        const passed = complete;
+        html += `<div class="appform-dot-line${passed ? ' is-passed' : ''}"></div>`;
+      }
+    });
+    host.innerHTML = html;
+    const pctEl = document.getElementById('appform-pct');
+    if (pctEl) pctEl.textContent = State.getCompletionPercent() + '% complete';
+  }
+
+  /* ============================================================ */
+  /* RENDER — SECTIONS                                             */
+  /* ============================================================ */
+  function renderSections() {
+    const host = document.getElementById('appform-sections-host');
+    if (!host) return;
+    // preserve open states
+    const openStates = {};
+    host.querySelectorAll('details.appform-section').forEach(d => {
+      openStates[d.dataset.section] = d.open;
+    });
+
+    host.innerHTML = `
+      ${renderSectionWrapper('personal', '1', 'Personal information', renderPersonal())}
+      ${renderSectionWrapper('academic', '2', 'Academic background', renderAcademic())}
+      ${renderSectionWrapper('statement', '3', 'Personal statement and local questions', renderStatement())}
+      ${renderSectionWrapper('documents', '4', 'Supporting documents', renderDocuments())}
+      ${renderSectionWrapper('guardian', '5', 'Parent / Guardian consent', renderGuardian())}
+      ${renderSectionWrapper('declaration', '6', 'Declaration and submit', renderDeclaration())}
+    `;
+
+    // restore open states
+    Object.keys(openStates).forEach(k => {
+      const el = host.querySelector(`details.appform-section[data-section="${k}"]`);
+      if (el && openStates[k]) el.open = true;
+    });
+
+    bindSectionHandlers();
+  }
+
+  function renderSectionWrapper(key, num, title, body) {
+    const complete = State.isSectionComplete(key);
+    const locked = (key === 'declaration' && !State.canSubmit());
+    const status = State.getStatusText(key);
+    let statusCls = '';
+    if (complete) statusCls = 'is-complete';
+    else if (locked) statusCls = 'is-locked';
+    else if (key === 'guardian' && !State.data.guardian.consentReceived) statusCls = 'is-warn';
+    const sectionCls = 'appform-section'
+      + (complete ? ' is-complete' : '')
+      + (locked ? ' is-locked' : '');
+    const numContent = complete ? '<svg><use href="#icon-check"/></svg>'
+      : (locked ? '<svg><use href="#icon-lock"/></svg>' : num);
+    return `
+      <details class="${sectionCls}" data-section="${key}" id="appform-section-${num}">
+        <summary class="appform-summary">
+          <div class="appform-num">${numContent}</div>
+          <div>
+            <div class="appform-sum-title">${esc(title)}</div>
+            <div class="appform-sum-status ${statusCls}">${esc(status)}</div>
+          </div>
+          <div class="appform-sum-chev"><svg><use href="#icon-chevron-right"/></svg></div>
+        </summary>
+        <div class="appform-body">${body}</div>
+      </details>
+    `;
+  }
+
+  /* ---------- SECTION 1: Personal ---------- */
+  function renderPersonal() {
+    const p = State.data.personal;
+    if (State.editMode.personal) {
+      return `
+        <div class="appform-display-grid">
+          ${editField('personal','fullName','Full legal name','text', true)}
+          ${editField('personal','preferredName','Preferred name','text')}
+          ${editField('personal','dob','Date of birth','date', true)}
+          ${editField('personal','gender','Gender','text')}
+          ${editField('personal','nationality','Nationality','text', true)}
+          ${editField('personal','passport','Passport number','text', true)}
+          <div class="appform-field appform-field-full">
+            <span class="appform-label">Home address</span>
+            <input class="appform-input" data-edit="personal.address" value="${esc(p.address)}" />
+          </div>
+          ${editField('personal','phone','Phone','tel')}
+          ${editField('personal','email','Email','email', true)}
+        </div>
+        <div class="appform-action-row">
+          <button type="button" class="appform-btn appform-btn--primary" data-action="save-personal">
+            <svg><use href="#icon-save"/></svg> Save changes
+          </button>
+          <button type="button" class="appform-btn appform-btn--ghost" data-action="cancel-personal">
+            <svg><use href="#icon-x"/></svg> Cancel
+          </button>
+        </div>
+      `;
+    }
+    return `
+      <div class="appform-display-grid">
+        ${displayField('Full legal name', p.fullName)}
+        ${displayField('Preferred name', p.preferredName || '—')}
+        ${displayField('Date of birth', fmtDate(p.dob))}
+        ${displayField('Gender', p.gender || '—')}
+        ${displayField('Nationality', p.nationality)}
+        ${displayField('Passport number', p.passport)}
+        ${displayField('Home address', p.address, true)}
+        ${displayField('Phone', p.phone)}
+        ${displayField('Email', p.email)}
+      </div>
+      <div class="appform-action-row">
+        <div class="appform-spacer"></div>
+        <button type="button" class="appform-btn appform-btn--ghost" data-action="edit-personal">
+          <svg><use href="#icon-edit"/></svg> Edit
+        </button>
+      </div>
+    `;
+  }
+
+  /* ---------- SECTION 2: Academic ---------- */
+  function renderAcademic() {
+    const a = State.data.academic;
+    if (State.editMode.academic) {
+      const yearOptions = ['9th grade (Ensino Fundamental Year 9)',
+        '10th grade (Ensino Médio Year 1)',
+        '11th grade (Ensino Médio Year 2)',
+        '12th grade (Ensino Médio Year 3)'];
+      const scaleOptions = ['/10','/20','/100','A-F'];
+      return `
+        <div class="appform-display-grid">
+          ${editField('academic','school','Current school','text', true)}
+          <div class="appform-field">
+            <span class="appform-label">Current year of study</span>
+            <select class="appform-select" data-edit="academic.currentYear">
+              ${yearOptions.map(o => `<option ${o === a.currentYear ? 'selected':''}>${esc(o)}</option>`).join('')}
+            </select>
+          </div>
+          ${editField('academic','graduationYear','Graduation year','number', true)}
+          ${editField('academic','languageInstruction','Language of instruction','text')}
+          <div class="appform-field appform-field-full">
+            <span class="appform-label">Languages spoken</span>
+            <input class="appform-input" data-edit="academic.languagesSpoken" value="${esc(a.languagesSpoken)}" />
+          </div>
+          ${editField('academic','averageGrade','Average grade','number')}
+          <div class="appform-field">
+            <span class="appform-label">Grade scale</span>
+            <select class="appform-select" data-edit="academic.gradeScale">
+              ${scaleOptions.map(o => `<option ${o === a.gradeScale ? 'selected':''}>${esc(o)}</option>`).join('')}
+            </select>
+          </div>
+          <div class="appform-field appform-field-full">
+            <span class="appform-label">Awards and recognitions</span>
+            <textarea class="appform-textarea" data-edit="academic.awards">${esc(a.awards)}</textarea>
+          </div>
+        </div>
+        <div class="appform-action-row">
+          <button type="button" class="appform-btn appform-btn--primary" data-action="save-academic">
+            <svg><use href="#icon-save"/></svg> Save changes
+          </button>
+          <button type="button" class="appform-btn appform-btn--ghost" data-action="cancel-academic">
+            <svg><use href="#icon-x"/></svg> Cancel
+          </button>
+        </div>
+      `;
+    }
+    return `
+      <div class="appform-display-grid">
+        ${displayField('Current school', a.school, true)}
+        ${displayField('Current year of study', a.currentYear)}
+        ${displayField('Graduation year', a.graduationYear)}
+        ${displayField('Language of instruction', a.languageInstruction)}
+        ${displayField('Languages spoken', a.languagesSpoken, true)}
+        ${displayField('Average grade', a.averageGrade + ' ' + a.gradeScale)}
+        ${displayField('Awards and recognitions', a.awards, true)}
+      </div>
+      <div class="appform-action-row">
+        <div class="appform-spacer"></div>
+        <button type="button" class="appform-btn appform-btn--ghost" data-action="edit-academic">
+          <svg><use href="#icon-edit"/></svg> Edit
+        </button>
+      </div>
+    `;
+  }
+
+  /* ---------- SECTION 3: Statement ---------- */
+  function renderStatement() {
+    const s = State.data.statement;
+    return `
+      <p class="appform-field-help" style="margin-top:8px">
+        Three short essays. The first two are required for the application to be considered complete.
+        Word counts update live as you type. UK spelling is accepted.
+      </p>
+
+      <label class="appform-textarea-label" for="appform-why-uwc">
+        Why UWC? <span class="req">*</span>
+        <span style="font-weight:400;color:#4b5563;font-size:13px"> · minimum 500 words, maximum 600</span>
+      </label>
+      <textarea
+        id="appform-why-uwc"
+        class="appform-textarea appform-textarea--statement"
+        data-edit="statement.whyUwc"
+        data-min="500" data-max="600"
+        placeholder="Tell us why you want to attend a UWC school. What aspects of the UWC mission resonate with you? How will this experience shape your future?">${esc(s.whyUwc)}</textarea>
+      ${renderCounter('whyUwc', s.whyUwc, 500, 600)}
+
+      <label class="appform-textarea-label" for="appform-community">
+        Community contribution <span class="req">*</span>
+        <span style="font-weight:400;color:#4b5563;font-size:13px"> · minimum 300 words, maximum 400</span>
+      </label>
+      <textarea
+        id="appform-community"
+        class="appform-textarea appform-textarea--statement"
+        data-edit="statement.communityContribution"
+        data-min="300" data-max="400"
+        placeholder="Describe a specific contribution you have made to your school or community. What did you do, and what did you learn?">${esc(s.communityContribution)}</textarea>
+      ${renderCounter('communityContribution', s.communityContribution, 300, 400)}
+
+      <label class="appform-textarea-label" for="appform-brazil">
+        Brazil National Committee question <span style="font-weight:400;color:#4b5563;font-size:13px"> · optional, maximum 200 words</span>
+      </label>
+      <p class="appform-field-help" style="margin-top:0">
+        How do you envisage contributing to the Brazilian community after your UWC experience?
+      </p>
+      <textarea
+        id="appform-brazil"
+        class="appform-textarea"
+        data-edit="statement.brazilNcQuestion"
+        data-max="200"
+        placeholder="Optional reflection — what role do you imagine playing back home?">${esc(s.brazilNcQuestion)}</textarea>
+      ${renderCounter('brazilNcQuestion', s.brazilNcQuestion, 0, 200)}
+
+      <div class="appform-action-row">
+        <button type="button" class="appform-btn appform-btn--ghost" data-action="back-to-academic">
+          <svg><use href="#icon-arrow-left"/></svg> Back to Academic
+        </button>
+        <div class="appform-spacer"></div>
+        <button type="button" class="appform-btn appform-btn--ghost" data-action="save-draft">
+          <svg><use href="#icon-save"/></svg> Save draft
+        </button>
+        <button type="button" class="appform-btn appform-btn--primary" data-action="next-to-documents">
+          Next: Documents <svg><use href="#icon-arrow-right"/></svg>
+        </button>
+      </div>
+    `;
+  }
+
+  function renderCounter(field, value, min, max) {
+    const n = countWords(value);
+    let cls = 'appform-counter--err';
+    let barCls = '';
+    let label = '';
+    if (min === 0) {
+      // optional field
+      cls = n > max ? 'appform-counter--err' : (n > 0 ? 'appform-counter--ok' : '');
+      label = `${n} / ${max} words (optional)`;
+    } else {
+      if (n >= min && n <= max) { cls = 'appform-counter--ok'; barCls = 'is-ok'; }
+      else if (n >= min * 0.7) { cls = 'appform-counter--warn'; barCls = 'is-warn'; }
+      label = `${n} / ${min} words ${n >= min ? '· minimum met' : '· keep writing'}`;
+    }
+    const pct = max ? Math.min(100, (n / max) * 100) : 0;
+    return `
+      <div class="appform-counter-row">
+        <span class="appform-field-help" style="margin:0" data-counter-help="${field}">${field === 'brazilNcQuestion' ? 'Optional. Word limit guidance.' : 'Word count updates as you type.'}</span>
+        <span class="appform-counter ${cls}" data-counter="${field}">${label}</span>
+      </div>
+      <div class="appform-counter-bar">
+        <div class="appform-counter-bar-fill ${barCls}" data-counter-bar="${field}" style="width:${pct}%"></div>
+      </div>
+    `;
+  }
+
+  /* ---------- SECTION 4: Documents ---------- */
+  function renderDocuments() {
+    const docs = State.data.documents;
+    return `
+      <p class="appform-field-help" style="margin-top:8px">
+        Upload at least <b>3</b> supporting documents. Accepted formats: PDF, JPG, PNG. Suggested:
+        academic transcript, school reference letter, language certificate, identity document, portfolio of activities.
+      </p>
+
+      <div class="appform-drop" id="appform-drop">
+        <svg><use href="#icon-upload-cloud"/></svg>
+        <div class="appform-drop-title">Drag files here or click to browse</div>
+        <div class="appform-drop-sub">PDF, JPG, PNG · up to 10 MB each</div>
+      </div>
+      <input type="file" id="appform-file-input" multiple accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/*" style="display:none" />
+
+      <div class="appform-file-list">
+        ${docs.length === 0
+          ? '<div style="text-align:center;color:#4b5563;font-size:13px;padding:8px">No files uploaded yet.</div>'
+          : docs.map((d, i) => `
+            <div class="appform-file-row">
+              <div class="appform-file-icon"><svg><use href="#icon-file-text"/></svg></div>
+              <div class="appform-file-info">
+                <div class="appform-file-name">${esc(d.name)}</div>
+                <div class="appform-file-meta">${fmtBytes(d.size)} · uploaded ${fmtDate(d.uploadedAt)}</div>
+              </div>
+              <button type="button" class="appform-file-remove" data-remove-doc="${i}" aria-label="Remove">
+                <svg><use href="#icon-x"/></svg>
+              </button>
+            </div>
+          `).join('')
+        }
+      </div>
+
+      <div class="appform-action-row">
+        <div class="appform-spacer"></div>
+        <span class="appform-field-help" style="margin:0">
+          ${docs.length} of 3 documents uploaded ${docs.length >= 3 ? '· minimum met' : '· keep uploading'}
+        </span>
+      </div>
+    `;
+  }
+
+  /* ---------- SECTION 5: Guardian ---------- */
+  function renderGuardian() {
+    const g = State.data.guardian;
+    return `
+      <div class="appform-display-grid">
+        ${displayField('Guardian name', g.name)}
+        ${displayField('Relationship', g.relationship)}
+        ${displayField('Email', g.email)}
+        ${displayField('Phone', g.phone)}
+      </div>
+
+      ${g.consentReceived
+        ? `<div class="appform-warn-panel is-ok">
+            <svg><use href="#icon-check"/></svg>
+            <div>
+              <div class="appform-warn-title">Consent received from Maria Almeida</div>
+              <div class="appform-warn-text">
+                Signed digitally on ${esc(fmtDateLong(g.consentReceivedAt))}. Section 6 is now unlocked.
+              </div>
+            </div>
+          </div>`
+        : `<div class="appform-warn-panel">
+            <svg><use href="#icon-alert-triangle"/></svg>
+            <div style="flex:1">
+              <div class="appform-warn-title">Awaiting consent from Maria Almeida</div>
+              <div class="appform-warn-text">
+                A consent request was emailed to <b>maria.almeida@example.com</b> on 26 May 2026.
+                Section 6 (Declaration and submit) is locked until consent is recorded.
+              </div>
+              <div class="appform-warn-actions">
+                <button type="button" class="appform-btn appform-btn--ghost" data-action="send-guardian-reminder">
+                  <svg><use href="#icon-send"/></svg> Send reminder
+                </button>
+                <button type="button" class="appform-btn appform-btn--success" data-action="mark-consent">
+                  <svg><use href="#icon-check"/></svg> Mark consent received (demo)
+                </button>
+              </div>
+            </div>
+          </div>`
+      }
+    `;
+  }
+
+  /* ---------- SECTION 6: Declaration ---------- */
+  function renderDeclaration() {
+    const d = State.data.declaration;
+    const sub = State.data.submission;
+
+    if (sub.submitted) {
+      return renderSuccess();
+    }
+
+    if (!State.canSubmit()) {
+      const done = State.requiredCompletedCount();
+      return `
+        <div class="appform-lock-banner">
+          <svg><use href="#icon-lock"/></svg>
+          <div class="appform-lock-banner-text">
+            <b>Locked until sections 1-5 are complete.</b><br>
+            Currently <b>${done} of 5</b> required sections are complete.
+            Finish the remaining sections to unlock the declaration and submission.
+          </div>
+        </div>
+      `;
+    }
+
+    return `
+      <p class="appform-field-help" style="margin-top:8px">
+        Please read the declaration carefully. By signing you confirm that all information in this application is true and accurate.
+      </p>
+
+      <div class="appform-decl-text">
+        I, the applicant, confirm that the information provided in this application is true,
+        complete and accurate to the best of my knowledge. I understand that providing false or
+        misleading information may result in my application being rejected or, if I have already
+        been offered a place, my offer being withdrawn.
+        <br><br>
+        I authorise UWC and the Brazil National Committee to verify my academic records,
+        contact my school for references, and share my application materials with selection
+        panels and partner UWC schools as part of the selection process.
+        <br><br>
+        I understand that the UWC scholarship is awarded on merit and need, and I agree to
+        participate in good faith in the entire selection programme — including written
+        assessments, group activities, and interviews — should I be shortlisted.
+      </div>
+
+      <div class="appform-checkbox-row">
+        <input type="checkbox" id="appform-decl-agree" ${d.agreed ? 'checked' : ''} />
+        <label for="appform-decl-agree">
+          I have read and agree to the declaration above. I confirm that all information in this application is true and accurate.
+        </label>
+      </div>
+
+      <div class="appform-field" style="margin-top:14px">
+        <span class="appform-label">Type your full name to sign</span>
+        <input class="appform-input" id="appform-decl-name" placeholder="e.g. Sofia Maria Almeida" value="${esc(d.signedName)}" />
+        <span class="appform-field-help">Your typed name will be recorded as your digital signature.</span>
+      </div>
+
+      <div class="appform-action-row">
+        <div class="appform-spacer"></div>
+        <button type="button" class="appform-btn appform-btn--primary" id="appform-decl-submit"
+          ${(!d.agreed || !d.signedName) ? 'disabled' : ''}>
+          <svg><use href="#icon-send"/></svg> Submit application
+        </button>
+      </div>
+    `;
+  }
+
+  function renderSuccess() {
+    const sub = State.data.submission;
+    return `
+      <div class="appform-success">
+        <div class="appform-success-icon">
+          <svg><use href="#icon-check"/></svg>
+        </div>
+        <h2 class="appform-success-title">Application submitted successfully</h2>
+        <div class="appform-success-ref">Your reference number is</div>
+        <div style="margin:8px 0 4px"><code>${esc(sub.referenceId)}</code></div>
+        <div class="appform-success-ref" style="margin-top:6px">
+          Submitted ${esc(fmtDateLong(sub.submittedAt))}. A confirmation email has been sent to
+          <b>${esc(State.data.personal.email)}</b>.
+        </div>
+
+        <div class="appform-timeline">
+          <div class="appform-timeline-step is-done">
+            <div class="appform-timeline-bullet"><svg><use href="#icon-check"/></svg></div>
+            <div class="appform-timeline-text">
+              <div class="appform-timeline-title">Application submitted</div>
+              <div class="appform-timeline-meta">${esc(fmtDate(sub.submittedAt))} · ref ${esc(sub.referenceId)}</div>
+            </div>
+          </div>
+          <div class="appform-timeline-step">
+            <div class="appform-timeline-bullet">2</div>
+            <div class="appform-timeline-text">
+              <div class="appform-timeline-title">Eligibility review</div>
+              <div class="appform-timeline-meta">Expected within 5 working days · documents and references checked</div>
+            </div>
+          </div>
+          <div class="appform-timeline-step">
+            <div class="appform-timeline-bullet">3</div>
+            <div class="appform-timeline-text">
+              <div class="appform-timeline-title">Local selection interview</div>
+              <div class="appform-timeline-meta">Mid-December 2026 · shortlisted candidates only</div>
+            </div>
+          </div>
+          <div class="appform-timeline-step">
+            <div class="appform-timeline-bullet">4</div>
+            <div class="appform-timeline-text">
+              <div class="appform-timeline-title">National selection weekend</div>
+              <div class="appform-timeline-meta">Late January 2026 · group exercises and panel interviews</div>
+            </div>
+          </div>
+          <div class="appform-timeline-step">
+            <div class="appform-timeline-bullet">5</div>
+            <div class="appform-timeline-text">
+              <div class="appform-timeline-title">Place decision and school assignment</div>
+              <div class="appform-timeline-meta">By March 2026 · confirmation of school placement and scholarship</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  /* ---------- shared field renderers ---------- */
+  function displayField(label, value, full) {
+    return `
+      <div class="appform-field ${full ? 'appform-field-full' : ''}">
+        <span class="appform-label">${esc(label)}</span>
+        <span class="appform-value">${esc(value || '—')}</span>
+      </div>
+    `;
+  }
+
+  function editField(section, field, label, type, required) {
+    const v = State.data[section][field] || '';
+    return `
+      <div class="appform-field">
+        <span class="appform-label">${esc(label)}${required ? ' <span style="color:#c8102e">*</span>' : ''}</span>
+        <input class="appform-input" type="${type}" data-edit="${section}.${field}" value="${esc(v)}" />
+      </div>
+    `;
+  }
+
+  /* ============================================================ */
+  /* EVENT BINDING                                                 */
+  /* ============================================================ */
+  function bindSectionHandlers() {
+    const host = document.getElementById('appform-sections-host');
+    if (!host) return;
+
+    // detail open: only one expanded at a time (accordion) — but allow free open
+    host.querySelectorAll('details.appform-section').forEach(d => {
+      d.addEventListener('toggle', () => {
+        if (d.open) {
+          // close others (accordion behaviour)
+          host.querySelectorAll('details.appform-section').forEach(other => {
+            if (other !== d) other.open = false;
+          });
+        }
+      });
+    });
+
+    // file drop / browse
+    const drop = document.getElementById('appform-drop');
+    const fileInput = document.getElementById('appform-file-input');
+    if (drop && fileInput) {
+      drop.addEventListener('click', () => fileInput.click());
+      drop.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        drop.classList.add('is-drag');
+      });
+      drop.addEventListener('dragleave', () => drop.classList.remove('is-drag'));
+      drop.addEventListener('drop', (e) => {
+        e.preventDefault();
+        drop.classList.remove('is-drag');
+        handleFiles(e.dataTransfer.files);
+      });
+      fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+    }
+
+    // live word count on statement textareas
+    host.querySelectorAll('textarea[data-edit^="statement."]').forEach(ta => {
+      ta.addEventListener('input', () => {
+        const path = ta.dataset.edit.split('.');
+        const field = path[1];
+        State.data.statement[field] = ta.value;
+
+        const min = parseInt(ta.dataset.min || '0', 10);
+        const max = parseInt(ta.dataset.max || '0', 10);
+        const n = countWords(ta.value);
+
+        // update counter label
+        const counterEl = host.querySelector(`[data-counter="${field}"]`);
+        const barEl = host.querySelector(`[data-counter-bar="${field}"]`);
+        if (counterEl) {
+          let cls = 'appform-counter ';
+          let label = '';
+          if (min === 0) {
+            cls += n > max ? 'appform-counter--err' : (n > 0 ? 'appform-counter--ok' : '');
+            label = `${n} / ${max} words (optional)`;
+          } else {
+            if (n >= min && n <= max) cls += 'appform-counter--ok';
+            else if (n >= min * 0.7) cls += 'appform-counter--warn';
+            else cls += 'appform-counter--err';
+            label = `${n} / ${min} words ${n >= min ? '· minimum met' : '· keep writing'}`;
+          }
+          counterEl.className = cls;
+          counterEl.textContent = label;
+        }
+        if (barEl) {
+          const pct = max ? Math.min(100, (n / max) * 100) : 0;
+          barEl.style.width = pct + '%';
+          barEl.className = 'appform-counter-bar-fill';
+          if (n >= min && n <= max && min > 0) barEl.classList.add('is-ok');
+          else if (n >= min * 0.7 && min > 0) barEl.classList.add('is-warn');
+        }
+        // update textarea border color
+        ta.classList.remove('is-err','is-warn','is-ok');
+        if (min > 0) {
+          if (n >= min && n <= max) ta.classList.add('is-ok');
+          else if (n >= min * 0.7) ta.classList.add('is-warn');
+          else ta.classList.add('is-err');
+        } else if (n > max) ta.classList.add('is-err');
+
+        // notify (updates dots, summary status, footer) — but do NOT re-render the textarea
+        notifyShallow('statement');
+      });
+    });
+
+    // edit-mode inputs: just track value
+    host.querySelectorAll('[data-edit]:not(textarea[data-edit^="statement."])').forEach(inp => {
+      inp.addEventListener('input', () => {
+        // values get harvested on Save
+      });
+    });
+
+    // declaration handlers
+    const declAgree = document.getElementById('appform-decl-agree');
+    if (declAgree) {
+      declAgree.addEventListener('change', () => {
+        State.data.declaration.agreed = declAgree.checked;
+        updateSubmitButtonState();
+      });
+    }
+    const declName = document.getElementById('appform-decl-name');
+    if (declName) {
+      declName.addEventListener('input', () => {
+        State.data.declaration.signedName = declName.value;
+        updateSubmitButtonState();
+      });
+    }
+    const declSubmit = document.getElementById('appform-decl-submit');
+    if (declSubmit) {
+      declSubmit.addEventListener('click', submitApplication);
+    }
+
+    // action buttons
+    host.querySelectorAll('[data-action]').forEach(btn => {
+      btn.addEventListener('click', (e) => handleAction(e.currentTarget.dataset.action));
+    });
+
+    // remove document buttons
+    host.querySelectorAll('[data-remove-doc]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const idx = parseInt(e.currentTarget.dataset.removeDoc, 10);
+        State.data.documents.splice(idx, 1);
+        State._notify('documents');
+        renderSections();
+      });
+    });
+  }
+
+  function updateSubmitButtonState() {
+    const declSubmit = document.getElementById('appform-decl-submit');
+    if (declSubmit) {
+      const d = State.data.declaration;
+      declSubmit.disabled = !(d.agreed && d.signedName.length > 0);
+    }
+    renderFooter();
+  }
+
+  /* ============================================================ */
+  /* ACTION HANDLERS                                               */
+  /* ============================================================ */
+  function handleAction(action) {
+    switch (action) {
+      case 'edit-personal':
+        State.editMode.personal = true;
+        renderSectionBody('personal');
+        break;
+
+      case 'save-personal':
+        harvestEdits('personal');
+        State.editMode.personal = false;
+        State._notify('personal');
+        renderSections();
+        toast('Personal information saved');
+        break;
+
+      case 'cancel-personal':
+        State.editMode.personal = false;
+        renderSectionBody('personal');
+        break;
+
+      case 'edit-academic':
+        State.editMode.academic = true;
+        renderSectionBody('academic');
+        break;
+
+      case 'save-academic':
+        harvestEdits('academic');
+        State.editMode.academic = false;
+        State._notify('academic');
+        renderSections();
+        toast('Academic background saved');
+        break;
+
+      case 'cancel-academic':
+        State.editMode.academic = false;
+        renderSectionBody('academic');
+        break;
+
+      case 'back-to-academic': {
+        const s3 = document.querySelector('details[data-section="statement"]');
+        const s2 = document.querySelector('details[data-section="academic"]');
+        if (s3) s3.open = false;
+        if (s2) s2.open = true;
+        s2 && s2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        break;
+      }
+
+      case 'save-draft':
+        toast('Draft saved');
+        State._notify('statement');
+        break;
+
+      case 'next-to-documents': {
+        const s3 = document.querySelector('details[data-section="statement"]');
+        const s4 = document.querySelector('details[data-section="documents"]');
+        if (s3) s3.open = false;
+        if (s4) s4.open = true;
+        s4 && s4.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        break;
+      }
+
+      case 'send-guardian-reminder':
+        toast('Reminder sent to maria.almeida@example.com');
+        break;
+
+      case 'mark-consent':
+        State.data.guardian.consentReceived = true;
+        State.data.guardian.consentReceivedAt = Date.now();
+        State._notify('guardian');
+        renderSections();
+        toast('Consent received from Maria Almeida — section 6 unlocked');
+        // auto-open declaration
+        setTimeout(() => {
+          const s6 = document.querySelector('details[data-section="declaration"]');
+          if (s6) {
+            s6.open = true;
+            s6.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 400);
+        break;
+    }
+  }
+
+  function harvestEdits(section) {
+    document.querySelectorAll(`[data-edit^="${section}."]`).forEach(inp => {
+      const [, field] = inp.dataset.edit.split('.');
+      State.data[section][field] = inp.value;
+    });
+  }
+
+  function renderSectionBody(sectionKey) {
+    const det = document.querySelector(`details[data-section="${sectionKey}"]`);
+    if (!det) return;
+    const body = det.querySelector('.appform-body');
+    if (!body) return;
+    let html = '';
+    if (sectionKey === 'personal') html = renderPersonal();
+    else if (sectionKey === 'academic') html = renderAcademic();
+    else if (sectionKey === 'statement') html = renderStatement();
+    else if (sectionKey === 'documents') html = renderDocuments();
+    else if (sectionKey === 'guardian') html = renderGuardian();
+    else if (sectionKey === 'declaration') html = renderDeclaration();
+    body.innerHTML = html;
+    bindSectionHandlers();
+  }
+
+  /* ============================================================ */
+  /* FILE HANDLING                                                 */
+  /* ============================================================ */
+  function handleFiles(fileList) {
+    if (!fileList || !fileList.length) return;
+    Array.from(fileList).forEach(f => {
+      State.data.documents.push({
+        name: f.name,
+        size: f.size,
+        uploadedAt: Date.now()
+      });
+    });
+    State._notify('documents');
+    renderSections();
+    toast(fileList.length + ' file(s) uploaded');
+  }
+
+  /* ============================================================ */
+  /* SUBMIT                                                        */
+  /* ============================================================ */
+  function submitApplication() {
+    if (!State.canSubmit()) {
+      toast('Complete all sections before submitting');
+      return;
+    }
+    const d = State.data.declaration;
+    if (!d.agreed || !d.signedName) {
+      toast('Please agree and sign before submitting');
+      return;
+    }
+    State.data.declaration.signedAt = Date.now();
+    State.data.submission.submitted = true;
+    State.data.submission.submittedAt = Date.now();
+
+    let ref = null;
+    if (window.UWCSubmit && typeof window.UWCSubmit.application === 'function') {
+      try {
+        const result = window.UWCSubmit.application(State.data);
+        if (result && result.referenceId) ref = result.referenceId;
+      } catch (e) { console.error(e); }
+    }
+    if (!ref) ref = genRef();
+    State.data.submission.referenceId = ref;
+
+    State._notify('declaration');
+    renderSections();
+    // open declaration section to show success
+    const s6 = document.querySelector('details[data-section="declaration"]');
+    if (s6) {
+      s6.open = true;
+      s6.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    toast('Application submitted · ref ' + ref);
+  }
+
+  /* ============================================================ */
+  /* FOOTER + SUBMIT BUTTON                                        */
+  /* ============================================================ */
+  function renderFooter() {
+    const text = document.getElementById('appform-footer-text');
+    const btn = document.getElementById('appform-submit-btn');
+    if (!text || !btn) return;
+    const done = State.completedCount();
+    const submitted = State.data.submission.submitted;
+    if (submitted) {
+      text.innerHTML = `<b>Application submitted</b> · reference ${esc(State.data.submission.referenceId)} · ${esc(fmtDate(State.data.submission.submittedAt))}`;
+      btn.disabled = true;
+      btn.innerHTML = '<svg><use href="#icon-check"/></svg> Submitted';
+      btn.classList.remove('appform-btn--primary');
+      btn.classList.add('appform-btn--success');
+    } else {
+      text.innerHTML = `<b>${done} of 6 sections complete</b> · Submission deadline 30 Nov 2026 · Auto-save is on`;
+      const can = State.canSubmit();
+      btn.disabled = !can;
+      btn.title = can ? 'Submit your application' : 'Complete all 6 sections to submit';
+    }
+  }
+
+  function notifyShallow(section) {
+    // update dots + footer + this section's summary line WITHOUT re-rendering the body
+    renderDots();
+    renderFooter();
+    const det = document.querySelector(`details[data-section="${section}"]`);
+    if (!det) return;
+    const complete = State.isSectionComplete(section);
+    const locked = (section === 'declaration' && !State.canSubmit());
+    det.classList.toggle('is-complete', complete);
+    det.classList.toggle('is-locked', locked);
+    const num = det.querySelector('.appform-num');
+    if (num) {
+      const idx = ['personal','academic','statement','documents','guardian','declaration'].indexOf(section) + 1;
+      num.innerHTML = complete ? '<svg><use href="#icon-check"/></svg>'
+        : (locked ? '<svg><use href="#icon-lock"/></svg>' : String(idx));
+    }
+    const status = det.querySelector('.appform-sum-status');
+    if (status) {
+      status.textContent = State.getStatusText(section);
+      status.className = 'appform-sum-status';
+      if (complete) status.classList.add('is-complete');
+      else if (locked) status.classList.add('is-locked');
+      else if (section === 'guardian' && !State.data.guardian.consentReceived) status.classList.add('is-warn');
+    }
+    // also: declaration section may have just unlocked/locked — refresh it without disturbing currently-edited section
+    if (section !== 'declaration') {
+      const declDet = document.querySelector('details[data-section="declaration"]');
+      if (declDet && !declDet.open) {
+        // just toggle locked state on the closed summary
+        const declLocked = !State.canSubmit();
+        declDet.classList.toggle('is-locked', declLocked);
+        const dNum = declDet.querySelector('.appform-num');
+        if (dNum) dNum.innerHTML = declLocked ? '<svg><use href="#icon-lock"/></svg>' : '6';
+        const dStatus = declDet.querySelector('.appform-sum-status');
+        if (dStatus) {
+          dStatus.textContent = State.getStatusText('declaration');
+          dStatus.className = 'appform-sum-status' + (declLocked ? ' is-locked' : '');
+        }
+      }
+    }
+  }
+
+  /* ============================================================ */
+  /* WIRE STATE → UI                                               */
+  /* ============================================================ */
+  State.onUpdate(() => {
+    renderDots();
+    renderFooter();
+  });
+
+  /* ============================================================ */
+  /* INIT                                                          */
+  /* ============================================================ */
+  function init() {
+    renderDots();
+    renderSections();
+    renderFooter();
+
+    // wire global submit button
+    const btn = document.getElementById('appform-submit-btn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        if (!State.canSubmit()) {
+          toast('Complete all 6 sections to submit');
+          return;
+        }
+        const s6 = document.querySelector('details[data-section="declaration"]');
+        if (s6) {
+          s6.open = true;
+          s6.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    // open section 3 by default since it's the "in progress" one
+    const s3 = document.querySelector('details[data-section="statement"]');
+    if (s3) s3.open = true;
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    // already loaded — but the section may not be visible yet; init when it appears
+    const sec = document.getElementById('sc-app');
+    if (sec) init();
+    else document.addEventListener('DOMContentLoaded', init);
+  }
+
+})();
+</script>
+
+
     <!-- GUARDIAN CONSENT — Maria's portal -->
     <section class="screen" id="sc-6">
       <div class="uwc-portal-shell">
@@ -4301,7 +6238,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
           <span class="uwc-portal-topbar__title">Guardian Portal — UWC International</span>
           <div style="margin-left:auto;display:flex;align-items:center;gap:10px;">
             <div style="font-size:13px;color:rgba(255,255,255,0.8);" data-role-variant="maria:Maria Almeida|visitor:Maria Almeida|sofia:Maria Almeida|ana:Maria Almeida|io-mkt:Maria Almeida">Maria Almeida</div>
-            <div style="width:32px;height:32px;border-radius:50%;background:#f59e0b;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;">MA</div>
+            <div style="width:32px;height:32px;border-radius:50%;background:#f59e0b;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;">MA</div>
             <div class="uwc-portal-topbar__lang">
               <button class="uwc-portal-topbar__lang-btn">PT</button>
               <button class="uwc-portal-topbar__lang-btn active">EN</button>
@@ -4424,7 +6361,7 @@ UWC.getRolesFor = function(code) {
     + '.uwc-field--err input,.uwc-field--err textarea,.uwc-field--err select{border:1.5px solid #c8102e;}'
     + '.uwc-field--ok input,.uwc-field--ok textarea,.uwc-field--ok select{border:1.5px solid #16a34a;}'
     + '.uwc-field--ok::after{content:"\\2713";position:absolute;right:10px;top:32px;color:#16a34a;font-weight:700;pointer-events:none;}'
-    + '.uwc-field__msg{font-size:12px;margin-top:4px;min-height:14px;line-height:1.2;}'
+    + '.uwc-field__msg{font-size:13px;margin-top:4px;min-height:14px;line-height:1.2;}'
     + '.uwc-field--err .uwc-field__msg{color:#c8102e;}'
     + '.uwc-field--ok .uwc-field__msg{color:#16a34a;}'
     + '@keyframes uwc-shake{0%{transform:translateX(0);}25%{transform:translateX(-4px);}50%{transform:translateX(4px);}75%{transform:translateX(-2px);}100%{transform:translateX(0);}}'
@@ -4436,7 +6373,7 @@ UWC.getRolesFor = function(code) {
     + '.uwc-toast--ok{background:#16a34a;}'
     + '.uwc-toast--info{background:#003087;}'
     + '.uwc-wizard-progress{display:flex;gap:8px;align-items:center;margin:12px 0 20px;}'
-    + '.uwc-wizard-dot{width:28px;height:28px;border-radius:50%;background:#e5e7eb;color:#6b7280;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;transition:background 180ms ease,color 180ms ease;}'
+    + '.uwc-wizard-dot{width:28px;height:28px;border-radius:50%;background:#e5e7eb;color:#4b5563;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;transition:background 180ms ease,color 180ms ease;}'
     + '.uwc-wizard-dot--active{background:#003087;color:#fff;}'
     + '.uwc-wizard-dot--complete{background:#16a34a;color:#fff;}'
     + '.uwc-wizard-line{flex:1;height:2px;background:#e5e7eb;}'
@@ -4970,7 +6907,7 @@ UWC.getRolesFor = function(code) {
         '.uwc-timeline-item:before{content:"";position:absolute;left:-22px;top:4px;',
         '  width:12px;height:12px;border-radius:50%;background:#0a1637;',
         '  box-shadow:0 0 0 3px #fff;}',
-        '.uwc-timeline-when{font-size:12px;color:#5a6478;font-weight:500;}',
+        '.uwc-timeline-when{font-size:13px;color:#5a6478;font-weight:500;}',
         '.uwc-timeline-what{font-size:14px;color:#0a1637;margin-top:2px;}'
       ].join('\n'));
     }
@@ -5483,7 +7420,7 @@ UWC.getRolesFor = function(code) {
       '.uwc-consent-success{background:#eef7ee;border:1px solid #c7e1c8;color:#1f4d27;',
       '  padding:12px 14px;border-radius:8px;font-size:13px;margin:8px 0;font-weight:500;}',
       '.uwc-consent-mark-btn{margin-left:10px;padding:6px 12px;border-radius:6px;',
-      '  border:1px solid #0a1637;background:#fff;color:#0a1637;font-size:12px;',
+      '  border:1px solid #0a1637;background:#fff;color:#0a1637;font-size:13px;',
       '  cursor:pointer;font-family:inherit;font-weight:600;}',
       '.uwc-consent-mark-btn:hover{background:#0a1637;color:#fff;}',
       '.uwc-section-unlocked{border-color:#0a1637 !important;opacity:1 !important;}',
@@ -6237,7 +8174,7 @@ go(0);
       </svg>
     </div>
     <h2 style="font-size:22px;font-weight:600;color:#0d1b3e;margin:0 0 10px;">Email sent to your guardian</h2>
-    <p style="font-size:14.5px;line-height:1.6;color:#5a6480;margin:0 0 20px;">We've sent a secure consent link to your parent or guardian. Once they sign the consent form, you'll be able to continue your application.</p>
+    <p style="font-size:14.5px;line-height:1.6;color:#374151;margin:0 0 20px;">We've sent a secure consent link to your parent or guardian. Once they sign the consent form, you'll be able to continue your application.</p>
     <div style="background:#E8EEF6;border-radius:10px;padding:14px 16px;margin-bottom:24px;font-size:13px;color:#003087;text-align:left;">
       <b>What happens next:</b><br>
       • Your guardian receives an email with a secure link<br>
@@ -6248,7 +8185,7 @@ go(0);
       <button onclick="window.UWCEmailSent.close(); window.go(0);" style="flex:1;min-width:140px;background:#fff;color:#374151;border:1px solid #d1d5db;padding:12px 20px;font-size:14px;font-weight:600;border-radius:10px;cursor:pointer;">Back to home</button>
       <button onclick="window.UWCEmailSent.close(); window.go(3);" style="flex:1;min-width:140px;background:#003087;color:#fff;border:none;padding:12px 20px;font-size:14px;font-weight:600;border-radius:10px;cursor:pointer;">Continue to register →</button>
     </div>
-    <p style="font-size:11.5px;color:#9ca3af;margin:18px 0 0;">For demo: guardian email pretends to be sent. Switch role to Maria to see the guardian view.</p>
+    <p style="font-size:13px;color:#4b5563;margin:18px 0 0;">For demo: guardian email pretends to be sent. Switch role to Maria to see the guardian view.</p>
   </div>
 </div>
 
@@ -6454,7 +8391,7 @@ go(0);
     var visible = state.apps.filter(function(a){ if (filter === 'all') return true; return a.statusKind === filter; });
 
     if (visible.length === 0) {
-      list.innerHTML = '<div class="dash-card" style="text-align:center;color:#6b7280;padding:30px;">No applications match this filter.</div>';
+      list.innerHTML = '<div class="dash-card" style="text-align:center;color:#4b5563;padding:30px;">No applications match this filter.</div>';
       return;
     }
 
@@ -6769,7 +8706,7 @@ go(0);
     if (!timeline) return;
     var app = window.UWCMultiApp.apps.find(function(a){ return a.statusKind === 'in_progress'; });
     if (!app) {
-      timeline.innerHTML = '<li style="color:#6b7280;padding:14px 0;">No active application — submit a draft to see your status here.</li>';
+      timeline.innerHTML = '<li style="color:#4b5563;padding:14px 0;">No active application — submit a draft to see your status here.</li>';
       return;
     }
     if ($('#status-ref-id')) $('#status-ref-id').textContent = app.id || '—';
