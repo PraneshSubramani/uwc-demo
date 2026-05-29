@@ -1,0 +1,8 @@
+docs/
+session-log/
+zoho-build/
+data/
+*.md
+*.docx
+*.pdf
+.git

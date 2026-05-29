@@ -2,3 +2,5 @@
 *.bak*
 .playwright-mcp/
 data/~$UWC_CRM_Sample_Dataset.xlsx
+
+.vercel
