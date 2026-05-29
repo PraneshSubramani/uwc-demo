@@ -1812,6 +1812,124 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 })();
 </script>
 
+
+<style>
+/* ============================================================
+   v21 — Remove duplicates + footer padding fix
+   ============================================================ */
+
+/* 1. Hide DUPLICATE Submit button INSIDE Section 6 accordion body
+      (sticky footer Submit is the canonical one — keep it) */
+#sc-app details.appform-section button.appform-btn--primary[type="submit"],
+#sc-app details.appform-section button[class*="appform-submit-inline"],
+#sc-app details.appform-section .appform-body button.appform-btn--primary {
+  display: none !important;
+}
+/* More aggressive: any "Submit application" button NOT inside the sticky footer */
+#sc-app details.appform-section button[class*="appform-btn"]:not(.appform-btn--ghost):not(.appform-btn--success) {
+  /* Only hide if its text matches Submit application — guard via JS below */
+}
+
+/* 2. Hide DUPLICATE legacy Mark consent button (v9 .uwc-consent-mark-btn) 
+      The new appform-btn--success consent button is the canonical one */
+#sc-app .uwc-consent-mark-btn,
+.uwc-consent-mark-btn {
+  display: none !important;
+}
+
+/* 3. Sticky footer padding refinement */
+#sc-app .appform-sticky-footer {
+  padding: 16px 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 24px !important;
+  flex-wrap: wrap !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-top: 1px solid #e5e7eb !important;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.04) !important;
+  min-height: 64px !important;
+}
+#sc-app .appform-sticky-footer [class*="footer-left"],
+#sc-app .appform-sticky-footer [class*="footer-status"] {
+  flex: 1 1 auto !important;
+  min-width: 200px !important;
+  font-size: 13px !important;
+  color: #475569 !important;
+  line-height: 1.45 !important;
+}
+#sc-app .appform-sticky-footer button {
+  padding: 10px 22px !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  letter-spacing: 0.1px !important;
+  white-space: nowrap !important;
+}
+#sc-app .appform-sticky-footer button[disabled],
+#sc-app .appform-sticky-footer button:disabled {
+  background: #e5e7eb !important;
+  color: #94a3b8 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+/* Bottom-of-page breathing room so sticky footer doesn't crop content */
+#sc-app .uwc-portal-main {
+  padding-bottom: 100px !important;
+}
+</style>
+
+<script>
+/* v21 — JS-level dedup for any Submit button inside <details> (not sticky footer) */
+(function() {
+  function dedupeButtons() {
+    var sc = document.getElementById('sc-app');
+    if (!sc) return;
+    
+    // Hide any Submit application button NOT inside sticky footer
+    sc.querySelectorAll('button').forEach(function(btn) {
+      var txt = (btn.textContent || '').trim().toLowerCase();
+      if (txt.indexOf('submit application') === -1) return;
+      // Keep only if it's the sticky footer Submit
+      if (!btn.closest('.appform-sticky-footer')) {
+        btn.style.display = 'none';
+      }
+    });
+    
+    // Dedupe Mark consent buttons — keep only the first .appform-btn--success
+    var consentBtns = Array.from(sc.querySelectorAll('button')).filter(function(b){
+      return /mark consent received/i.test(b.textContent || '');
+    });
+    if (consentBtns.length > 1) {
+      // Keep only the appform-btn variant, hide others
+      var keptOne = false;
+      consentBtns.forEach(function(b) {
+        var isAppform = b.classList.contains('appform-btn--success') || 
+                        b.className.indexOf('appform-btn') !== -1;
+        if (isAppform && !keptOne) {
+          keptOne = true;
+        } else {
+          b.style.display = 'none';
+        }
+      });
+    }
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', dedupeButtons);
+  } else {
+    dedupeButtons();
+  }
+  setTimeout(dedupeButtons, 300);
+  setTimeout(dedupeButtons, 1000);
+  // Re-run on accordion changes
+  document.addEventListener('toggle', function(e) {
+    if (e.target.tagName === 'DETAILS') setTimeout(dedupeButtons, 50);
+  }, true);
+})();
+</script>
+
 </head>
 <body>
 
