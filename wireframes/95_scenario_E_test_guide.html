@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scenario E Test Guide · Governance &amp; Competency Matrix · UWC International CRM</title>
+<link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-feature-settings:'cv02','cv03','cv11';color:#0f172a;background:#f1f5f9;-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:#003087;text-decoration:none}a:hover{text-decoration:underline}
+.header{background:linear-gradient(135deg,#001a4d 0%,#003087 50%,#004A97 100%);color:#fff;border-bottom:3px solid #C8102E}
+.header-inner{max-width:1180px;margin:0 auto;padding:26px 32px;display:flex;align-items:center;gap:20px}
+.header-mark{width:48px;height:48px;border-radius:50%;background:#fff;color:#003087;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:14px;flex-shrink:0}
+.header-titleblock{flex:1}
+.header-title{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:24px}
+.header-sub{font-size:12.5px;color:rgba(255,255,255,0.7);margin-top:4px}
+.header-meta{display:flex;gap:14px;font-size:11px;color:rgba(255,255,255,0.65)}
+.header-meta strong{color:#fff;font-weight:600;display:block;font-size:14px;margin-top:2px}
+.header-meta div{padding:0 14px;border-left:1px solid rgba(255,255,255,0.18)}
+.header-meta div:first-child{border-left:none;padding-left:0}
+.backbar{max-width:1180px;margin:0 auto;padding:14px 32px 0}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:#003087}
+.back-link::before{content:'←'}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 32px 48px}
+code,.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;background:#eef2f7;padding:1px 5px;border-radius:4px;color:#0f172a}
+.lead{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:22px 26px;box-shadow:0 1px 2px rgba(0,0,0,0.04);margin-bottom:24px}
+.lead h2{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:20px;color:#003087;margin-bottom:8px}
+.lead p{font-size:13.5px;color:#475569;max-width:960px}.lead p+p{margin-top:8px}
+.section-label{font-size:11px;font-weight:600;color:#64748b;letter-spacing:1.6px;text-transform:uppercase;margin:30px 0 12px}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,0.04);overflow:hidden;margin-bottom:8px}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+table.t thead th{background:#f8fafc;text-align:left;padding:11px 16px;border-bottom:2px solid #e2e8f0;font-size:12px;font-weight:600}
+table.t tbody td{padding:10px 16px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+table.t tbody tr:last-child td{border-bottom:none}
+.chain{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:18px 22px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.8;overflow-x:auto;white-space:pre;margin-bottom:8px}
+.chain .g{color:#86efac}.chain .y{color:#fde68a}.chain .r{color:#fca5a5}
+.test{background:#fff;border:1px solid #e2e8f0;border-left:4px solid #003087;border-radius:10px;padding:16px 20px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,0.04)}
+.test h3{font-size:14.5px;font-weight:600;color:#0f172a;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.test-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:7px;background:#003087;color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
+.test-as{font-size:10.5px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase;padding:2px 9px;border-radius:999px;background:#e0e7ff;color:#3730a3;margin-left:auto}
+.test dl{margin-top:8px;font-size:12.5px}
+.test dt{font-weight:600;color:#475569;display:flex;align-items:center;gap:6px;margin-top:8px}
+.test dd{color:#334155;margin-left:0;margin-top:3px;line-height:1.55}
+.do::before{content:'▸';color:#003087}
+.pass::before{content:'✓';color:#16a34a;font-weight:700}
+.verify::before{content:'🔍'}
+.fail::before{content:'✗';color:#dc2626;font-weight:700}
+.test dd code{font-size:11px}
+.note{border-radius:10px;padding:14px 18px;margin:14px 0}
+.note.warn{background:#fffbeb;border:1px solid #fde68a}
+.note.info{background:#eff6ff;border:1px solid #bfdbfe}
+.note h4{font-size:12.5px;font-weight:600;margin-bottom:5px;display:flex;align-items:center;gap:6px}
+.note.warn h4{color:#92400e}.note.warn h4::before{content:'⚠'}
+.note.info h4{color:#1e40af}.note.info h4::before{content:'ℹ'}
+.note p{font-size:12.5px;color:#334155;line-height:1.6;max-width:980px}.note p+p{margin-top:6px}
+.confirm{font-size:10px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase;padding:1px 7px;border-radius:4px;background:#fef3c7;color:#92400e;margin-left:6px}
+.chip{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px}
+.c-red{background:#FEE2E2;color:#991b1b}.c-amber{background:#FEF3C7;color:#92400e}.c-green{background:#D1FAE5;color:#065f46}
+.footer{background:#001a4d;color:rgba(255,255,255,0.55);padding:22px 32px;text-align:center;font-size:11px;margin-top:40px}
+.footer strong{color:rgba(255,255,255,0.85)}
+@media (max-width:820px){.header-meta{display:none}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-mark">UWC</div>
+    <div class="header-titleblock">
+      <div class="header-title">Scenario E — Test Guide</div>
+      <div class="header-sub">Governance bodies · memberships · auto-lapse · the Competency Matrix — how to verify it in the CRM</div>
+    </div>
+    <div class="header-meta">
+      <div>Reference<strong>UWC-CRM-5128</strong></div>
+      <div>Centrepiece<strong>Competency Matrix</strong></div>
+      <div>Org<strong>Zoho CRM · EU DC</strong></div>
+    </div>
+  </div>
+</header>
+
+<div class="backbar"><a href="00_index.html" class="back-link">Back to demo home</a></div>
+
+<div class="wrap">
+
+  <div class="lead">
+    <h2>What you're testing</h2>
+    <p>Scenario E is governance health. Members sit on Boards with time-bounded terms. When a term expires the membership <b>auto-lapses</b>, and any competency that member held drops out of coverage — turning a cell <b>red</b> in the Competency Matrix. The centrepiece is that the matrix surfaces <b>4 board-level gaps</b> caused by two expired terms plus two never-covered regions.</p>
+    <p>The mechanism to test: <code>Term_Expires</code> (formula) → <code>Membership_Status = Lapsed</code> (scheduled function) → <code>Gap_Count</code> (scheduled function) → red cells in the widget.</p>
+  </div>
+
+  <div class="note warn">
+    <h4>Field / config names are from the build spec — confirm against the live org</h4>
+    <p>Unlike Scenario D, the governance module field names have <b>not yet been verified</b> against the live EU org. Names tagged <span class="confirm">confirm</span> should be checked before relying on them (e.g. via <code>GET /crm/v8/settings/fields?module=Governance_Memberships</code>).</p>
+  </div>
+
+  <div class="section-label">The moving parts</div>
+  <div class="card">
+    <table class="t">
+      <thead><tr><th>Thing</th><th>API name in CRM</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td>Governance Bodies</td><td><code>Governance_Bodies</code> <span class="confirm">confirm</span></td><td>module</td></tr>
+        <tr><td>Governance Memberships</td><td><code>Governance_Memberships</code> <span class="confirm">confirm</span></td><td>module</td></tr>
+        <tr><td>Competencies</td><td><code>Competencies</code> <span class="confirm">confirm</span></td><td>module</td></tr>
+        <tr><td>Term expiry (computed)</td><td><code>Term_Expires</code> = <code>Appointed_Date + (Term_Length × 365)</code></td><td>formula field</td></tr>
+        <tr><td>Auto-lapse on expiry</td><td><code>lapse_expired_memberships</code> via <b>WR-E-2</b></td><td>scheduled function</td></tr>
+        <tr><td>Renewal alert (60 days out)</td><td><code>email_renewal_due</code> via <b>WR-E-1</b></td><td>scheduled function</td></tr>
+        <tr><td>Gap recompute</td><td><code>recompute_competency_gaps()</code> — daily 02:45 UTC</td><td>scheduled function</td></tr>
+        <tr><td>The matrix itself</td><td>HTML widget "Governance Matrix" + <code>getCompetencyMatrix()</code></td><td>dashboard widget</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note warn">
+    <h4>Manual build — not API-creatable</h4>
+    <p>The formula field, scheduled functions, WR-E-1/E-2 rules, list-view conditional formatting (red EXPIRED badge), and the HTML widget all need building in Setup. They can't be created/verified via the CRM REST API.</p>
+  </div>
+
+  <div class="section-label">The cause → effect chain</div>
+  <div class="chain">Member term expires ──▶ <span class="r">Membership_Status = Lapsed</span>  (lapse_expired_memberships)
+                   ──▶ that member's competencies drop out of active coverage
+                   ──▶ <span class="r">Gap_Count++</span> for those competencies  (recompute_competency_gaps)
+                   ──▶ <span class="r">red cell</span> in the Competency Matrix widget</div>
+
+  <div class="note info">
+    <h4>Pre-test setup (do once)</h4>
+    <p>1. Confirm the 5 seed bodies exist (UWC International Board + Brazil/Kenya NC Boards + Safeguarding Advisory + Finance Sub-Committee) and the 5 seed memberships, two of which are expired: <b>Dr Ravi Menon</b> (term to 31/03/2025) and <b>Thomas Berger</b> (to 31/12/2024).<br>
+    2. <b>Pre-seed <code>Gap_Count</code> manually</b> — the recompute runs only overnight; without seeding, the matrix shows zero gaps on stage.<br>
+    3. Confirm Competencies with <code>Required_Board = true</code> include Marketing &amp; Comms, Asia-Pacific Regional, Europe Regional, Americas Regional.</p>
+  </div>
+
+  <div class="section-label">Tests</div>
+
+  <div class="test">
+    <h3><span class="test-num">1</span> Governance Bodies list renders <span class="test-as">IO Super Admin</span></h3>
+    <dl>
+      <dt class="do">Do</dt><dd>Open the Governance Bodies list view.</dd>
+      <dt class="pass">Pass</dt><dd>5 bodies with status badges and member counts. (Create "Programme Quality Committee" via + New → it appears with Member_Count = 0.)</dd>
+    </dl>
+  </div>
+
+  <div class="test">
+    <h3><span class="test-num">2</span> Term_Expires formula computes <span class="test-as">IO Super Admin</span></h3>
+    <dl>
+      <dt class="do">Do</dt><dd>On any membership, set <code>Appointed_Date = 01/01/2023</code>, <code>Term_Length = 3</code> → Save.</dd>
+      <dt class="pass">Pass</dt><dd><code>Term_Expires</code> computes to <b>31/12/2025</b> (Appointed + Term_Length × 365).</dd>
+      <dt class="fail">If wrong</dt><dd>The formula field is mis-defined or Term_Length is empty/non-integer.</dd>
+    </dl>
+  </div>
+
+  <div class="test">
+    <h3><span class="test-num">3</span> Expired memberships show red + are Lapsed <span class="test-as">IO Super Admin</span></h3>
+    <dl>
+      <dt class="do">Do</dt><dd>Open UWC International Board → Members related list. Then open the <b>Historical Memberships</b> saved view (<code>Membership_Status != Active</code>).</dd>
+      <dt class="pass">Pass</dt><dd>Members list shows 5, with <b>two red EXPIRED badges</b> (Dr Ravi Menon, Thomas Berger). Historical view lists exactly those two.</dd>
+      <dt class="fail">If they're not Lapsed</dt><dd><code>lapse_expired_memberships</code> hasn't run. Run it manually (Functions → Save &amp; Execute), or the badge formatting / saved-view filter is wrong. Note: Zoho can't auto-flip status on a date alone — it needs the scheduled function.</dd>
+    </dl>
+  </div>
+
+  <div class="test">
+    <h3><span class="test-num">4</span> Add a member <span class="test-as">IO Super Admin</span></h3>
+    <dl>
+      <dt class="do">Do</dt><dd>On UWC International Board → + Add Member → Contact = Akanksha Anand, Role = Advisor, Appointed = today, Term Length = 3, Competencies = [Programme Design, Youth Engagement] → Save.</dd>
+      <dt class="pass">Pass</dt><dd>A new <b>Active</b> membership appears; the board's Member_Count increments.</dd>
+    </dl>
+  </div>
+
+  <div class="test">
+    <h3><span class="test-num">5</span> Competency Matrix shows 4 red cells <span class="test-as">IO Super Admin · CENTREPIECE</span></h3>
+    <dl>
+      <dt class="do">Do</dt><dd>Open the Competency Matrix dashboard (the HTML widget).</dd>
+      <dt class="pass">Pass</dt><dd>Grid renders rows = boards, cols = required competencies, with <b>4 red cells</b>: <span class="chip c-red">Marketing &amp; Comms</span> <span class="chip c-red">Asia-Pacific Regional</span> <span class="chip c-red">Europe Regional</span> <span class="chip c-red">Americas Regional</span>. Footer shows Gap_Count per competency. Loads in &lt; 2 seconds.</dd>
+      <dt class="verify">Trace the why</dt><dd>Marketing &amp; Comms is red because Thomas Berger (its only holder) lapsed; Asia-Pacific because Dr Ravi Menon lapsed; Europe + Americas because no member ever held them. If a cell is wrongly green, that member's <code>Membership_Status</code> is still Active, or <code>Gap_Count</code> wasn't recomputed.</dd>
+      <dt class="fail">If all cells green / zero gaps</dt><dd><code>recompute_competency_gaps()</code> hasn't run since the lapses — pre-seed Gap_Count or run the function manually.</dd>
+    </dl>
+  </div>
+
+  <div class="test">
+    <h3><span class="test-num">6</span> Network Summary report <span class="test-as">IO Super Admin</span></h3>
+    <dl>
+      <dt class="do">Do</dt><dd>Open the Network Summary report/dashboard.</dd>
+      <dt class="pass">Pass</dt><dd>Pie of body types (Board / Committee / Advisory), bar of competency coverage %, and a count of <b>lapsed memberships network-wide</b> (includes Berger + Menon). Drill-through on a tile opens the underlying records.</dd>
+    </dl>
+  </div>
+
+  <div class="test">
+    <h3><span class="test-num">7</span> Renewal alert is wired (WR-E-1) <span class="test-as">IO Super Admin</span></h3>
+    <dl>
+      <dt class="do">Do</dt><dd>Setup → Workflow Rules → WR-E-1. (Optional functional test: set a membership's <code>Term_Expires = today + 60</code> and run <code>email_renewal_due</code>.)</dd>
+      <dt class="pass">Pass</dt><dd>Rule exists and is active; the function emails IO Super Admin + the Body Chair for memberships expiring in 60 days.</dd>
+    </dl>
+  </div>
+
+  <div class="note info">
+    <h4>Re-running the test</h4>
+    <p>If you manually flipped a membership to test lapsing, reset its <code>Membership_Status</code> back to <code>Active</code> (or re-run <code>demo_reset</code>) and re-seed <code>Gap_Count</code> before the next dry-run, so the matrix shows the intended 4 gaps.</p>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <strong>UWC International CRM — Scenario E Test Guide</strong> · A2Z Cloud Ltd · Zoho Premium Partner · Salisbury, UK · <em>Verification procedure · governance field names pending live-org confirmation</em>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scenario F Test Guide · NC Management &amp; Volunteer Oversight · UWC International CRM</title>
+<link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-feature-settings:'cv02','cv03','cv11';color:#0f172a;background:#f1f5f9;-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:#003087;text-decoration:none}a:hover{text-decoration:underline}
+.header{background:linear-gradient(135deg,#001a4d 0%,#003087 50%,#004A97 100%);color:#fff;border-bottom:3px solid #C8102E}
+.header-inner{max-width:1180px;margin:0 auto;padding:26px 32px;display:flex;align-items:center;gap:20px}
+.header-mark{width:48px;height:48px;border-radius:50%;background:#fff;color:#003087;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:14px;flex-shrink:0}
+.header-titleblock{flex:1}
+.header-title{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:24px}
+.header-sub{font-size:12.5px;color:rgba(255,255,255,0.7);margin-top:4px}
+.header-meta{display:flex;gap:14px;font-size:11px;color:rgba(255,255,255,0.65)}
+.header-meta strong{color:#fff;font-weight:600;display:block;font-size:14px;margin-top:2px}
+.header-meta div{padding:0 14px;border-left:1px solid rgba(255,255,255,0.18)}
+.header-meta div:first-child{border-left:none;padding-left:0}
+.backbar{max-width:1180px;margin:0 auto;padding:14px 32px 0}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:#003087}
+.back-link::before{content:'←'}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 32px 48px}
+code,.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;background:#eef2f7;padding:1px 5px;border-radius:4px;color:#0f172a}
+.lead{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:22px 26px;box-shadow:0 1px 2px rgba(0,0,0,0.04);margin-bottom:24px}
+.lead h2{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:20px;color:#003087;margin-bottom:8px}
+.lead p{font-size:13.5px;color:#475569;max-width:960px}.lead p+p{margin-top:8px}
+.section-label{font-size:11px;font-weight:600;color:#64748b;letter-spacing:1.6px;text-transform:uppercase;margin:30px 0 12px}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,0.04);overflow:hidden;margin-bottom:8px}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+table.t thead th{background:#f8fafc;text-align:left;padding:11px 16px;border-bottom:2px solid #e2e8f0;font-size:12px;font-weight:600}
+table.t tbody td{padding:10px 16px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+table.t tbody tr:last-child td{border-bottom:none}
+.chain{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:18px 22px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.8;overflow-x:auto;white-space:pre;margin-bottom:8px}
+.chain .g{color:#86efac}.chain .y{color:#fde68a}.chain .r{color:#fca5a5}.chain .gr{color:#cbd5e1}
+.test{background:#fff;border:1px solid #e2e8f0;border-left:4px solid #003087;border-radius:10px;padding:16px 20px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,0.04)}
+.test h3{font-size:14.5px;font-weight:600;color:#0f172a;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.test-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:7px;background:#003087;color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
+.test-as{font-size:10.5px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase;padding:2px 9px;border-radius:999px;background:#e0e7ff;color:#3730a3;margin-left:auto}
+.test dl{margin-top:8px;font-size:12.5px}
+.test dt{font-weight:600;color:#475569;display:flex;align-items:center;gap:6px;margin-top:8px}
+.test dd{color:#334155;margin-left:0;margin-top:3px;line-height:1.55}
+.do::before{content:'▸';color:#003087}
+.pass::before{content:'✓';color:#16a34a;font-weight:700}
+.verify::before{content:'🔍'}
+.fail::before{content:'✗';color:#dc2626;font-weight:700}
+.test dd code{font-size:11px}
+.note{border-radius:10px;padding:14px 18px;margin:14px 0}
+.note.warn{background:#fffbeb;border:1px solid #fde68a}
+.note.info{background:#eff6ff;border:1px solid #bfdbfe}
+.note h4{font-size:12.5px;font-weight:600;margin-bottom:5px;display:flex;align-items:center;gap:6px}
+.note.warn h4{color:#92400e}.note.warn h4::before{content:'⚠'}
+.note.info h4{color:#1e40af}.note.info h4::before{content:'ℹ'}
+.note p{font-size:12.5px;color:#334155;line-height:1.6;max-width:980px}.note p+p{margin-top:6px}
+.confirm{font-size:10px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase;padding:1px 7px;border-radius:4px;background:#fef3c7;color:#92400e;margin-left:6px}
+.ok{font-size:10px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase;padding:1px 7px;border-radius:4px;background:#D1FAE5;color:#065f46;margin-left:6px}
+.chip{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px}
+.c-green{background:#D1FAE5;color:#065f46}.c-amber{background:#FEF3C7;color:#92400e}.c-red{background:#FEE2E2;color:#991b1b}.c-grey{background:#F3F4F6;color:#374151}
+.footer{background:#001a4d;color:rgba(255,255,255,0.55);padding:22px 32px;text-align:center;font-size:11px;margin-top:40px}
+.footer strong{color:rgba(255,255,255,0.85)}
+@media (max-width:820px){.header-meta{display:none}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-mark">UWC</div>
+    <div class="header-titleblock">
+      <div class="header-title">Scenario F — Test Guide</div>
+      <div class="header-sub">NC management · volunteer training compliance · MoU obligations · NC Chair portal · IO Health Dashboard</div>
+    </div>
+    <div class="header-meta">
+      <div>Reference<strong>UWC-CRM-5128</strong></div>
+      <div>Worked example<strong>UWC Kenya</strong></div>
+      <div>Org<strong>Zoho CRM · EU DC</strong></div>
+    </div>
+  </div>
+</header>
+
+<div class="backbar"><a href="00_index.html" class="back-link">Back to demo home</a></div>
+
+<div class="wrap">
+
+  <div class="lead">
+    <h2>What you're testing</h2>
+    <p>Scenario F is the IO overseeing the National Committee network. The worked example is <b>UWC Kenya</b>: a volunteer roster with colour-coded training compliance, MoU obligations (one overdue 58 days), the NC Chair's scoped portal view, and the network-wide <b>IO NC Health Dashboard</b>. Two nightly functions keep it honest: one marks MoUs overdue, one recomputes volunteer training status.</p>
+    <p>Three things prove the scenario: the <b>training colour chips</b> (CURRENT/EXPIRED/MISSING), the <b>MoU overdue</b> state, and the <b>role-scoping</b> (Grace sees only Kenya).</p>
+  </div>
+
+  <div class="note info">
+    <h4>Training_Status is verified live; other F field names are not</h4>
+    <p><code>NC_Volunteers.Training_Status</code> is confirmed live as a colour-coded picklist <span class="ok">verified</span> (CURRENT/EXPIRING SOON/EXPIRED/MISSING). Other F module fields are tagged <span class="confirm">confirm</span> — verify before relying on them. The IO NC Health Dashboard has its own <a href="92_dashboards_build_guide.html">build guide</a>.</p>
+  </div>
+
+  <div class="section-label">The moving parts</div>
+  <div class="card">
+    <table class="t">
+      <thead><tr><th>Thing</th><th>API name in CRM</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td>National Committees</td><td><code>National_Committees</code></td><td>module</td></tr>
+        <tr><td>NC Volunteers</td><td><code>NC_Volunteers</code> · field <code>Training_Status</code> <span class="ok">verified</span></td><td>module</td></tr>
+        <tr><td>Training Records</td><td><code>Training_Records</code> <span class="confirm">confirm</span></td><td>module</td></tr>
+        <tr><td>MoU Obligations</td><td><code>MoU_Obligations</code> · fields <code>Obligation_Status</code>, <code>Due_Date</code>, <code>Overdue_Days</code> <span class="confirm">confirm</span></td><td>module</td></tr>
+        <tr><td>Mark MoU overdue</td><td><code>mark_mou_overdue</code> via <b>WR-F-1</b> — daily 02:30</td><td>scheduled function</td></tr>
+        <tr><td>Training expiry warning</td><td><code>notify_training_expiring</code> via <b>WR-F-2</b> — daily 03:00</td><td>scheduled function</td></tr>
+        <tr><td>NC health roll-up</td><td><code>recompute_mou_health</code> — daily 03:15 (writes <code>MoU_Health</code>)</td><td>scheduled function</td></tr>
+        <tr><td>Volunteer training status</td><td><code>recompute_volunteer_training_status</code> — daily 03:30</td><td>scheduled function</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note warn">
+    <h4>Manual build — not API-creatable</h4>
+    <p>WR-F-1/F-2, the four scheduled functions, list-view conditional formatting (NC colour banding by MoU_Health), and the NC Chair portal profile must be built in Setup. The REST API confirms <i>fields</i>, not these.</p>
+  </div>
+
+  <div class="section-label">How the two nightly jobs feed the views</div>
+  <div class="chain">MoU Due_Date &lt; today &amp; not done ──▶ <span class="r">Obligation_Status = Overdue</span>  (mark_mou_overdue)
+                              ──▶ count overdue per NC ──▶ <span class="r">MoU_Health = Critical/Attention</span>  (recompute_mou_health)
+                              ──▶ NC list banding + IO dashboard KPI
+
+Volunteer training records ──▶ <span class="g">CURRENT</span> / <span class="r">EXPIRED</span> / <span class="gr">MISSING</span>  (recompute_volunteer_training_status)
+                          ──▶ roster chips + "Training Gaps" KPI (EXPIRED or MISSING)</div>
+
+  <div class="note info">
+    <h4>Pre-test setup (do once)</h4>
+    <p>1. Confirm UWC Kenya seed: 3 volunteers — <b>Grace</b> (CURRENT), <b>Daniel</b> (EXPIRED), <b>Aisha</b> (MISSING); 4 MoU obligations incl. <b>Annual Report Q2 2026</b> overdue ~58 days.<br>
+    2. <b>Pre-seed <code>MoU_Health = Critical</code></b> on Kenya — <code>recompute_mou_health</code> runs only overnight.<br>
+    3. Decide the NC Chair view: Option A (real user "Grace Omondi" with NC Chair Portal profile) or Option B (Switch User). <b>Roles must be configured before profile restrictions take effect.</b></p>
+  </div>
+
+  <div class="section-label">Tests</div>
+
+  <div class="test">
+    <h3><span class="test-num">1</span> NC list banded by health <span class="test-as">IO Super Admin</span></h3>
+    <dl>
+      <dt class="do">Do</dt><dd>Open National Committees list, sort by <code>MoU_Health</code>.</dd>
+      <dt class="pass">Pass</dt><dd>UWC Kenya banded <span class="chip c-red">Critical</span>, UWC India <span class="chip c-amber">Attention</span>, others <span class="chip c-green">Good</span>.</dd>
+      <dt class="fail">If all green</dt><dd><code>recompute_mou_health</code> hasn't run — pre-seed <code>MoU_Health</code> on Kenya, or run the function manually. Also check list-view conditional formatting is configured.</dd>
+    </dl>
+  </div>
+
+  <div class="test">
+    <h3><span class="test-num">2</span> Kenya volunteer roster chips <span class="test-as">IO Super Admin</span></h3>
+    <dl>
+      <dt class="do">Do</dt><dd>Open UWC Kenya → NC Volunteers related list.</dd>
+      <dt class="pass">Pass</dt><dd>3 rows: Grace <span class="chip c-green">CURRENT</span>, Daniel <span class="chip c-red">EXPIRED</span>, Aisha <span class="chip c-grey">MISSING</span>.</dd>
+      <dt class="verify">Verify</dt><dd><code>Training_Status</code> is the verified colour-coded picklist; chips should render immediately. If Aisha isn't MISSING, <code>recompute_volunteer_training_status</code> hasn't set it (Zoho formulas can't detect "no related records" — it needs the function).</dd>
+    </dl>
+  </div>
+
+  <div class="test">
+    <h3><span class="test-num">3</span> Daniel's expired training record <span class="test-as">IO Super Admin</span></h3>
+    <dl>
+      <dt class="do">Do</dt><dd>Open Daniel Kimani → Training Records related list.</dd>
+      <dt class="pass">Pass</dt><dd>One record: Safeguarding · Completed 01/02/2023 · Expired 01/02/2025 · <span class="chip c-red">EXPIRED</span> badge. (Expiry = Completed + 730 days for Safeguarding.)</dd>
+    </dl>
+  </div>
+
+  <div class="test">
+    <h3><span class="test-num">4</span> MoU obligation marked overdue (WR-F-1) <span class="test-as">IO Super Admin</span></h3>
+    <dl>
+      <dt class="do">Do</dt><dd>Open UWC Kenya → MoU Obligations panel.</dd>
+      <dt class="pass">Pass</dt><dd>4 rows; <b>Annual Report Q2 2026</b> = <span class="chip c-red">Overdue</span>, <code>Overdue_Days ≈ 58</code>. Others: Safeguarding Self-Assessment (Pending), Financial Statements 2025 (Submitted), DPIA Review (Pending).</dd>
+      <dt class="fail">If still Pending</dt><dd><code>mark_mou_overdue</code> hasn't run — it flips <code>Obligation_Status</code> to Overdue where <code>Due_Date &lt; today</code> and status = Pending. Run it manually, or check the Due_Date is actually in the past.</dd>
+    </dl>
+  </div>
+
+  <div class="test">
+    <h3><span class="test-num">5</span> NC Chair portal is scoped to Kenya <span class="test-as">NC Chair (Grace)</span></h3>
+    <dl>
+      <dt class="do">Do</dt><dd>Log in as Grace (Option A) or Switch User (Option B). Land on the NC Dashboard.</dd>
+      <dt class="pass">Pass</dt><dd>Grace sees <b>only Kenya data</b> — 3 volunteers, the MoU panel, NC detail. <b>No other NCs, no IO-wide data.</b></dd>
+      <dt class="verify">The key test</dt><dd>If Grace can see other NCs, the role hierarchy / data-sharing isn't scoping correctly. Common pitfall: Roles must be set up <i>before</i> profile permission restrictions apply.</dd>
+    </dl>
+  </div>
+
+  <div class="test">
+    <h3><span class="test-num">6</span> MoU panel in the portal <span class="test-as">NC Chair (Grace)</span></h3>
+    <dl>
+      <dt class="do">Do</dt><dd>In Grace's portal, click the MoU Obligations panel.</dd>
+      <dt class="pass">Pass</dt><dd>4 rows; Annual Report Q2 2026 shown <span class="chip c-red">OVERDUE 58 days</span> — same data the IO sees, from the NC side.</dd>
+    </dl>
+  </div>
+
+  <div class="test">
+    <h3><span class="test-num">7</span> IO NC Health Dashboard KPIs <span class="test-as">IO Super Admin</span></h3>
+    <dl>
+      <dt class="do">Do</dt><dd>Switch back to IO Super Admin → open the NC Health Dashboard.</dd>
+      <dt class="pass">Pass</dt><dd>KPI tiles read (live org): <b>Total NCs 11 · Active 11 · Overdue MoUs 2 · Training Gaps 2</b>. Kenya row is red; clicking it is the click-through moment.</dd>
+      <dt class="verify">Note</dt><dd>See the dedicated <a href="92_dashboards_build_guide.html">Dashboard Build Guide</a> for the component-by-component build. KPI values depend on the nightly recompute — pre-seed before the demo.</dd>
+    </dl>
+  </div>
+
+  <div class="test">
+    <h3><span class="test-num">8</span> Daily lifecycle is wired (WR-F-1 / F-2) <span class="test-as">IO Super Admin</span></h3>
+    <dl>
+      <dt class="do">Do</dt><dd>Setup → Workflow Rules → confirm WR-F-1 (mark overdue, 02:30) and WR-F-2 (training expiry email, 03:00) exist and are active.</dd>
+      <dt class="pass">Pass</dt><dd>Both scheduled rules present; functions bound. (WR-F-2 emails the volunteer cc the NC Chair when a training record expires within 30 days.)</dd>
+    </dl>
+  </div>
+
+  <div class="note info">
+    <h4>Re-running the test</h4>
+    <p>If you ran the functions manually or changed records, re-run <code>demo_reset</code> and re-seed Kenya's <code>MoU_Health = Critical</code> before the next dry-run so the banding and KPIs show the intended state.</p>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <strong>UWC International CRM — Scenario F Test Guide</strong> · A2Z Cloud Ltd · Zoho Premium Partner · Salisbury, UK · <em>Verification procedure · Training_Status verified live; other NC fields pending confirmation</em>
+</footer>
+
+</body>
+</html>
