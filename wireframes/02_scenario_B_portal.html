@@ -2128,6 +2128,169 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 })();
 </script>
 
+
+<style>
+/* ============================================================
+   v23 — BULLETPROOF FOOTER + SUBMIT BUTTON
+   Maximum specificity overrides for any conflicting earlier rules.
+   ============================================================ */
+
+/* Force footer ALWAYS visible when sc-app is active */
+html body #sc-app .appform-sticky-footer,
+html body #sc-app div.appform-sticky-footer,
+html body #sc-app #appform-status-bar {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 240px !important;
+  right: 0 !important;
+  z-index: 9999 !important;
+  padding: 14px 28px !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 20px !important;
+  flex-wrap: wrap !important;
+  background: #ffffff !important;
+  border-top: 2px solid #003087 !important;
+  box-shadow: 0 -6px 24px rgba(0, 48, 135, 0.15) !important;
+  min-height: 68px !important;
+  width: auto !important;
+  box-sizing: border-box !important;
+  pointer-events: auto !important;
+}
+
+/* Force Submit button visible inside footer */
+html body #sc-app .appform-sticky-footer button,
+html body #sc-app .appform-sticky-footer #appform-submit-btn,
+html body #sc-app .appform-sticky-footer button.appform-btn,
+html body #sc-app .appform-sticky-footer button.appform-btn--primary {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 11px 24px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  background: #003087 !important;
+  color: #ffffff !important;
+  border: none !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  pointer-events: auto !important;
+}
+html body #sc-app .appform-sticky-footer button:disabled,
+html body #sc-app .appform-sticky-footer button[disabled] {
+  background: #e5e7eb !important;
+  color: #94a3b8 !important;
+  cursor: not-allowed !important;
+}
+html body #sc-app .appform-sticky-footer button:not(:disabled):hover {
+  background: #001a4d !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 48, 135, 0.25) !important;
+}
+
+/* Footer status text */
+html body #sc-app .appform-sticky-footer .appform-footer-status,
+html body #sc-app .appform-sticky-footer #appform-footer-text {
+  display: block !important;
+  visibility: visible !important;
+  flex: 1 1 auto !important;
+  min-width: 180px !important;
+  font-size: 13px !important;
+  color: #475569 !important;
+  line-height: 1.45 !important;
+}
+
+/* Ensure main content has space for fixed footer */
+html body #sc-app .uwc-portal-main {
+  padding-bottom: 100px !important;
+}
+
+/* When viewport narrow, footer spans full width (no sidebar offset) */
+@media (max-width: 900px) {
+  html body #sc-app .appform-sticky-footer {
+    left: 0 !important;
+    padding: 12px 16px !important;
+  }
+}
+</style>
+
+<script>
+/* v23 — Force footer visibility in JS at multiple lifecycle points 
+   to defeat any race conditions with other scripts. */
+(function() {
+  function forceFooter() {
+    var sc = document.getElementById('sc-app');
+    if (!sc) return;
+    var footer = sc.querySelector('.appform-sticky-footer, #appform-status-bar');
+    if (!footer) return;
+    
+    // Force inline styles (highest priority short of !important)
+    footer.style.cssText = footer.style.cssText + 
+      ';display:flex !important;visibility:visible !important;opacity:1 !important;' +
+      'position:fixed !important;bottom:0 !important;left:240px !important;right:0 !important;' +
+      'z-index:9999 !important;background:#fff !important;padding:14px 28px !important;' +
+      'min-height:68px !important;border-top:2px solid #003087 !important;' +
+      'box-shadow:0 -6px 24px rgba(0,48,135,0.15) !important;align-items:center !important;' +
+      'justify-content:space-between !important;gap:20px !important;flex-wrap:wrap !important;';
+    
+    // Force responsive on narrow viewport
+    if (window.innerWidth <= 900) {
+      footer.style.left = '0px';
+    }
+    
+    // Force Submit button visible
+    var submitBtn = footer.querySelector('button');
+    if (submitBtn) {
+      submitBtn.style.cssText = submitBtn.style.cssText + 
+        ';display:inline-flex !important;visibility:visible !important;opacity:1 !important;' +
+        'background:#003087 !important;color:#fff !important;padding:11px 24px !important;' +
+        'border-radius:8px !important;font-weight:600 !important;font-size:14px !important;' +
+        'cursor:pointer !important;white-space:nowrap !important;';
+      
+      // If button is "disabled" from state, restyle but keep clickable for demo
+      if (submitBtn.disabled) {
+        submitBtn.style.background = '#e5e7eb';
+        submitBtn.style.color = '#94a3b8';
+        submitBtn.style.cursor = 'not-allowed';
+      }
+    }
+  }
+  
+  // Run at multiple lifecycle points
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', forceFooter);
+  } else {
+    forceFooter();
+  }
+  setTimeout(forceFooter, 100);
+  setTimeout(forceFooter, 500);
+  setTimeout(forceFooter, 1500);
+  
+  // Re-run when screen changes (window.go switches active screen)
+  var originalGo = window.go;
+  if (typeof originalGo === 'function') {
+    window.go = function(i) {
+      var r = originalGo.apply(this, arguments);
+      if (i === 5) {  // sc-app screen
+        setTimeout(forceFooter, 50);
+        setTimeout(forceFooter, 200);
+      }
+      return r;
+    };
+  }
+  
+  // Window resize handler for responsive
+  window.addEventListener('resize', forceFooter);
+})();
+</script>
+
 </head>
 <body>
 
