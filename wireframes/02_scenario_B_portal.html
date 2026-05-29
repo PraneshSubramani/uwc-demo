@@ -1930,6 +1930,204 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 })();
 </script>
 
+
+<style>
+/* ============================================================
+   v22 — Layout fixes: full-width content + bottom-fixed footer
+   User: Declaration end broken, Submit btn outside container,
+   width not used, footer not at bottom.
+   ============================================================ */
+
+/* 1. Application form layout — sidebar (240px) + main (flex 1, full width) */
+#sc-app .uwc-portal-shell {
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: visible !important;
+}
+#sc-app .uwc-portal-shell .uwc-portal-topbar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+  flex-shrink: 0 !important;
+}
+#sc-app .uwc-portal-layout {
+  display: grid !important;
+  grid-template-columns: 240px 1fr !important;
+  min-height: calc(100vh - 56px) !important;
+  flex: 1 !important;
+  position: relative !important;
+}
+
+/* Sidebar sticks to its column */
+#sc-app .uwc-portal-shell .uwc-portal-sidebar {
+  position: sticky !important;
+  top: 56px !important;
+  height: calc(100vh - 56px) !important;
+  overflow-y: auto !important;
+}
+
+/* Main content takes ALL remaining width, no max-width cap */
+#sc-app .uwc-portal-main {
+  padding: 28px 32px 120px !important;   /* extra bottom for fixed footer */
+  background: #f3f5fa !important;
+  overflow-y: auto !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* The form card / accordion container — use up the width */
+#sc-app .appform-card,
+#sc-app .appform-header,
+#sc-app .appform-progress-card,
+#sc-app .uwc-portal-main > * {
+  max-width: none !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Each accordion section: full width */
+#sc-app details.appform-section {
+  width: 100% !important;
+  max-width: none !important;
+  margin-bottom: 12px !important;
+  box-sizing: border-box !important;
+}
+
+/* 2. STICKY FOOTER — actually fixed to viewport bottom inside the appform */
+#sc-app .appform-sticky-footer {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 240px !important;             /* start after sidebar */
+  right: 0 !important;
+  z-index: 50 !important;
+  padding: 16px 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 24px !important;
+  flex-wrap: wrap !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-top: 1px solid #e5e7eb !important;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06) !important;
+  min-height: 64px !important;
+  box-sizing: border-box !important;
+}
+
+#sc-app .appform-sticky-footer > * {
+  flex: 0 1 auto;
+}
+#sc-app .appform-sticky-footer > *:first-child,
+#sc-app .appform-sticky-footer [class*="footer-left"],
+#sc-app .appform-sticky-footer [class*="footer-status"],
+#sc-app .appform-sticky-footer [class*="footer-text"] {
+  flex: 1 1 auto !important;
+  min-width: 180px !important;
+  font-size: 13px !important;
+  color: #475569 !important;
+  line-height: 1.45 !important;
+}
+
+#sc-app .appform-sticky-footer button {
+  padding: 11px 24px !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+/* 3. Declaration card breathing room — no abrupt cut-off */
+#sc-app details.appform-section[data-section="declaration"],
+#sc-app details.appform-section:last-of-type {
+  margin-bottom: 32px !important;     /* gap before footer */
+}
+#sc-app details.appform-section .appform-body {
+  padding: 22px 26px 28px !important;
+  border-radius: 0 0 12px 12px !important;
+}
+
+/* Declaration sub-elements properly spaced */
+#sc-app .appform-declaration-text,
+#sc-app [class*="declaration-text"] {
+  padding: 18px 22px !important;
+  background: #fafbff !important;
+  border-radius: 10px !important;
+  border: 1px solid #e2e8f0 !important;
+  font-size: 13.5px !important;
+  line-height: 1.65 !important;
+  color: #1e293b !important;
+  margin-bottom: 18px !important;
+}
+
+#sc-app .appform-signature-input,
+#sc-app input[id*="signature"],
+#sc-app input[id*="appform-signature"] {
+  width: 100% !important;
+  padding: 11px 14px !important;
+  border: 1.5px solid #d1d5db !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  font-family: inherit !important;
+  box-sizing: border-box !important;
+}
+
+/* Hide any in-section Submit button (canonical one is in sticky footer) */
+#sc-app details.appform-section button[type="submit"],
+#sc-app .appform-body > button.appform-btn--primary {
+  display: none !important;
+}
+
+/* 4. Responsive: small screens — footer becomes full-width */
+@media (max-width: 900px) {
+  #sc-app .uwc-portal-layout {
+    grid-template-columns: 1fr !important;
+  }
+  #sc-app .uwc-portal-shell .uwc-portal-sidebar {
+    display: none !important;
+  }
+  #sc-app .appform-sticky-footer {
+    left: 0 !important;
+    padding: 12px 16px !important;
+  }
+}
+</style>
+
+<script>
+/* v22 — Re-run dedupe + ensure body has bottom padding so content above 
+   sticky footer is never cropped */
+(function() {
+  function ensureLayout() {
+    var sc = document.getElementById('sc-app');
+    if (!sc) return;
+    var main = sc.querySelector('.uwc-portal-main');
+    if (main && parseInt(getComputedStyle(main).paddingBottom) < 100) {
+      main.style.paddingBottom = '120px';
+    }
+    // Force any in-section Submit btn to hide (defensive)
+    sc.querySelectorAll('details.appform-section button').forEach(function(b){
+      var txt = (b.textContent || '').trim().toLowerCase();
+      if (txt.indexOf('submit application') !== -1) {
+        if (!b.closest('.appform-sticky-footer')) {
+          b.style.display = 'none';
+        }
+      }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ensureLayout);
+  } else {
+    ensureLayout();
+  }
+  setTimeout(ensureLayout, 300);
+  setTimeout(ensureLayout, 1000);
+})();
+</script>
+
 </head>
 <body>
 
