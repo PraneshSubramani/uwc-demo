@@ -1,0 +1,1219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>UWC Demo · Zoho CRM Setup Guide · Scenarios C – G</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  :root {
+    --navy: #003087;
+    --navy-dark: #001a4d;
+    --teal: #009482;
+    --red: #C8102E;
+    --gold: #C8AB00;
+    --grey-1: #f5f7fb;
+    --grey-2: #e6eaf2;
+    --grey-3: #c9d2e0;
+    --grey-4: #6c757d;
+    --text: #1f2937;
+    --text-soft: #4b5563;
+    --ok: #166534;
+    --bg: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--grey-1); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }
+  a { color: var(--navy); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code, pre { font-family: 'JetBrains Mono', 'DM Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  code { background: var(--grey-2); padding: 1px 6px; border-radius: 4px; color: var(--navy-dark); }
+  pre { background: #0b1230; color: #d9e1ff; padding: 16px 20px; border-radius: 8px; overflow-x: auto; line-height: 1.55; font-size: 12.5px; }
+  pre .kw { color: #ffb86c; }
+  pre .str { color: #a5e9a5; }
+  pre .cm { color: #6c7896; font-style: italic; }
+  hr { border: 0; border-top: 1px solid var(--grey-3); margin: 24px 0; }
+
+  /* Header */
+  .top {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+    color: #fff;
+    padding: 28px 36px 22px;
+    border-bottom: 4px solid var(--gold);
+  }
+  .top__bar { display: flex; align-items: center; gap: 16px; }
+  .top__logo {
+    width: 48px; height: 48px;
+    background: #fff;
+    color: var(--navy);
+    font-weight: 800;
+    font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+  .top__title { font-family: 'Playfair Display', Georgia, serif; font-size: 26px; font-weight: 700; line-height: 1.2; }
+  .top__sub { font-size: 13.5px; opacity: 0.85; margin-top: 4px; }
+  .top__meta { margin-top: 14px; display: flex; gap: 18px; font-size: 12.5px; opacity: 0.85; flex-wrap: wrap; }
+  .top__meta span { padding: 4px 10px; background: rgba(255,255,255,0.12); border-radius: 4px; }
+
+  /* Tab navigation */
+  .tabs {
+    background: #fff;
+    border-bottom: 1px solid var(--grey-3);
+    position: sticky; top: 0; z-index: 10;
+    display: flex; overflow-x: auto;
+    padding: 0 24px;
+  }
+  .tab {
+    padding: 14px 18px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    color: var(--grey-4);
+    font-weight: 500;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--navy); background: var(--grey-1); }
+  .tab--active { color: var(--navy); border-bottom-color: var(--navy); font-weight: 600; }
+  .tab__num {
+    display: inline-block;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--grey-2);
+    color: var(--text-soft);
+    font-weight: 700; font-size: 11px;
+    text-align: center; line-height: 22px;
+    margin-right: 8px;
+  }
+  .tab--active .tab__num { background: var(--navy); color: #fff; }
+
+  /* Main */
+  main { max-width: 1100px; margin: 0 auto; padding: 32px 36px 80px; }
+  .panel { display: none; animation: fade 0.25s; }
+  .panel--active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  /* Section heading */
+  h2.section {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: var(--navy);
+    font-size: 30px;
+    margin: 0 0 4px;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 10px;
+    display: inline-block;
+  }
+  .section__sub {
+    color: var(--text-soft);
+    font-size: 14.5px;
+    margin: 0 0 28px;
+  }
+  h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: var(--navy-dark);
+    font-size: 21px;
+    margin: 36px 0 12px;
+    padding-left: 12px;
+    border-left: 4px solid var(--navy);
+  }
+  h4 {
+    color: var(--navy);
+    font-size: 15.5px;
+    margin: 22px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  /* Callout boxes */
+  .callout {
+    border-left: 4px solid var(--navy);
+    background: #f0f4ff;
+    padding: 14px 18px;
+    border-radius: 0 6px 6px 0;
+    margin: 18px 0;
+    font-size: 14px;
+  }
+  .callout--ok    { border-left-color: var(--teal);  background: #e6f7f3; }
+  .callout--warn  { border-left-color: var(--gold);  background: #fdf6dd; }
+  .callout--alert { border-left-color: var(--red);   background: #fde7eb; }
+  .callout__title { font-weight: 700; color: var(--navy-dark); margin-bottom: 4px; }
+  .callout--ok    .callout__title { color: #045d52; }
+  .callout--warn  .callout__title { color: #8a6900; }
+  .callout--alert .callout__title { color: var(--red); }
+
+  /* Step cards */
+  .steps { counter-reset: step; margin: 22px 0; }
+  .step {
+    background: #fff;
+    border: 1px solid var(--grey-3);
+    border-radius: 8px;
+    padding: 16px 18px 14px 56px;
+    margin: 12px 0;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .step::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    top: 14px; left: 14px;
+    width: 30px; height: 30px;
+    background: var(--navy);
+    color: #fff;
+    border-radius: 50%;
+    text-align: center; line-height: 30px;
+    font-weight: 700; font-size: 13.5px;
+  }
+  .step__title { font-weight: 700; color: var(--navy-dark); font-size: 15px; margin-bottom: 4px; }
+  .step__body { font-size: 14px; color: var(--text-soft); }
+  .step__body p { margin: 6px 0; }
+  .step__body code { font-size: 12.5px; }
+
+  /* Breadcrumb path */
+  .path {
+    display: inline-block;
+    background: var(--navy-dark);
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    margin: 4px 0;
+  }
+  .path .arrow { opacity: 0.5; padding: 0 4px; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 20px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    font-size: 13.5px;
+  }
+  thead { background: var(--grey-2); }
+  th {
+    text-align: left;
+    padding: 11px 12px;
+    color: var(--navy-dark);
+    font-weight: 700;
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  td {
+    padding: 11px 12px;
+    border-top: 1px solid var(--grey-2);
+    vertical-align: top;
+  }
+  td code { font-size: 12px; }
+  tr:hover td { background: #fbfcfe; }
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .pill--required { background: #fee2e2; color: var(--red); }
+  .pill--auto     { background: #e0f2fe; color: #0369a1; }
+  .pill--default  { background: var(--grey-2); color: var(--text-soft); }
+  .pill--formula  { background: #ede9fe; color: #6b21a8; }
+  .pill--new      { background: #d1fae5; color: var(--ok); }
+
+  /* TOC sidebar */
+  .toc {
+    background: #fff;
+    border: 1px solid var(--grey-3);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 28px;
+  }
+  .toc__title { font-weight: 700; color: var(--navy); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .toc ul { margin: 0; padding-left: 20px; columns: 2; font-size: 13.5px; }
+  .toc li { margin: 4px 0; break-inside: avoid; }
+
+  /* Demo card */
+  .demo-card {
+    background: linear-gradient(135deg, #fffde6 0%, #fff6c2 100%);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+  }
+  .demo-card__role {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .demo-card__text { font-size: 14px; color: var(--text); }
+  .demo-card__obs { font-size: 13px; color: var(--text-soft); margin-top: 4px; font-style: italic; }
+
+  footer {
+    background: var(--navy-dark);
+    color: rgba(255,255,255,0.95);
+    padding: 36px 36px 24px;
+    margin-top: 60px;
+    text-align: center;
+    font-size: 13px;
+  }
+  footer .small { font-size: 11.5px; opacity: 0.7; margin-top: 8px; }
+
+  /* Print */
+  @media print {
+    .tabs { display: none; }
+    .panel { display: block !important; page-break-after: always; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top__bar">
+    <div class="top__logo">UWC</div>
+    <div>
+      <div class="top__title">Zoho CRM Setup Guide</div>
+      <div class="top__sub">Step-by-step build for demo Scenarios C, D, E, F, G &middot; Org <code style="background:rgba(255,255,255,0.15);color:#fff;">20114943111</code> on crm.zoho.eu</div>
+    </div>
+  </div>
+  <div class="top__meta">
+    <span>Author: Sam Prabhu, A2Z Cloud</span>
+    <span>Demo: Mon 1 June 2026 &middot; 15:00 BST</span>
+    <span>Build window: Thu 28 &mdash; Fri 29 May</span>
+    <span>Companion: <code style="background:rgba(255,255,255,0.15);color:#fff;">zoho-build/</code> bundle</span>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <div class="tab tab--active" data-target="p-overview"><span class="tab__num">0</span>Overview</div>
+  <div class="tab" data-target="p-preflight"><span class="tab__num">P</span>Pre-flight</div>
+  <div class="tab" data-target="p-c"><span class="tab__num">C</span>Selection &middot; Scoring &middot; Safeguarding</div>
+  <div class="tab" data-target="p-d"><span class="tab__num">D</span>Nomination &middot; Place Allocation</div>
+  <div class="tab" data-target="p-e"><span class="tab__num">E</span>Governance</div>
+  <div class="tab" data-target="p-f"><span class="tab__num">F</span>NC &middot; Volunteers</div>
+  <div class="tab" data-target="p-g"><span class="tab__num">G</span>Comms &middot; GDPR</div>
+  <div class="tab" data-target="p-reset"><span class="tab__num">R</span>Demo Reset</div>
+</nav>
+
+<main>
+
+<!-- ========================== OVERVIEW ========================== -->
+<section class="panel panel--active" id="p-overview">
+  <h2 class="section">How to use this guide</h2>
+  <p class="section__sub">A single-file, browser-viewable build guide that walks Sagar and Priyanka through the live Zoho CRM configuration for each demo scenario, click by click.</p>
+
+  <div class="callout callout--ok">
+    <div class="callout__title">What sits behind this guide</div>
+    Three companion artifacts already in this repo (use them together with this guide):
+    <ul style="margin:8px 0 0 18px;">
+      <li><code>SCENARIOS_C_TO_G_ZOHO_CRM_PLAN.md</code> &mdash; strategy &amp; scope (read first)</li>
+      <li><code>SCENARIOS_C_TO_G_BUILD_HANDBOOK.md</code> &mdash; the markdown master spec this HTML is rendered from</li>
+      <li><code>zoho-build/</code> &mdash; paste-ready CSVs, Deluge functions, email templates, demo reset</li>
+    </ul>
+  </div>
+
+  <h3>Build sequencing &mdash; what to do when</h3>
+  <table>
+    <thead><tr><th>Slot</th><th>Sagar (modules + data)</th><th>Priyanka (automation + Blueprint)</th></tr></thead>
+    <tbody>
+      <tr><td><b>Thu 28 PM</b> (3h)</td><td>M-1 NCs, M-2 Schools, Programmes; seed steps 1&ndash;3</td><td>Application Blueprint (10 stages + colours)</td></tr>
+      <tr><td><b>Fri 29 AM</b> (3h)</td><td>M-5 Review Scores subform, M-6 Safeguarding Cases, M-7 Place Allocations, M-8 Nomination Packs</td><td>WR-C-1..6, WR-D-1..2 + Deluge functions 1&ndash;6</td></tr>
+      <tr><td><b>Fri lunch</b></td><td colspan="2"><b>Internal review</b> with Paul Whitelock + Dash Bunyan &mdash; A+B wireframes; C+D live</td></tr>
+      <tr><td><b>Fri 29 PM</b> (4h)</td><td>M-9..M-17 (Governance &middot; NC Volunteers &middot; Training &middot; MoU &middot; Mailing &middot; Comm Log &middot; Consent)</td><td>WR-E/F/G + scheduled functions + Competency Matrix widget + Consent Validation Rule</td></tr>
+      <tr><td><b>Fri evening</b></td><td colspan="2">Verification checklist &middot; tab pre-load &middot; <code>demo_reset.deluge</code> dry-run</td></tr>
+      <tr><td><b>Sat 30</b></td><td colspan="2">Akanksha walkthrough &middot; fix list &middot; polish</td></tr>
+      <tr><td><b>Sun 31</b></td><td colspan="2">Final dry-run &middot; tab pre-load &middot; deliverability check</td></tr>
+      <tr><td><b>Mon 1 Jun 14:30 BST</b></td><td colspan="2">Final smoke test &middot; Akanksha at the console</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Open questions to confirm before build (decide tonight)</h3>
+  <ol style="font-size:14.5px;">
+    <li>Setup access on <code>uwc_admin</code> &mdash; promoted to Super Administrator?</li>
+    <li>Approve 1&ndash;2 secondary users (Clara, Grace) for cleaner blind-review and NC Chair proof?</li>
+    <li>Mailchimp &mdash; install real extension or use the stub function?</li>
+    <li>Demo email catch-all confirmed = <code>sam.prabhu+uwc-demo@a2zcloud.eu.com</code>?</li>
+    <li>Wireframes A + B stay as-is &mdash; confirmed?</li>
+    <li>Business Central sync &mdash; stub OK?</li>
+    <li>Tab pre-load 30 min before demo &mdash; Akanksha comfortable?</li>
+  </ol>
+</section>
+
+<!-- ========================== PRE-FLIGHT ========================== -->
+<section class="panel" id="p-preflight">
+  <h2 class="section">Pre-flight setup</h2>
+  <p class="section__sub">30 minutes. Run before any scenario-specific build.</p>
+
+  <h3>0.1 Confirm Super Admin access</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step__title">Login as uwc_admin</div>
+      <div class="step__body">
+        Log in to <a href="https://crm.zoho.eu" target="_blank">crm.zoho.eu</a> with <code>uwc_admin@a2zcloud.eu.com</code>.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step__title">Open Setup</div>
+      <div class="step__body">
+        Click <b>gear icon</b> top-right &rarr; <span class="path">Setup Home</span>.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step__title">Verify access</div>
+      <div class="step__body">
+        You must see <b>Users and Control</b>, <b>Customisation</b>, <b>Automation</b> in the side menu.
+        <div class="callout callout--alert">
+          <div class="callout__title">If you see &ldquo;Insufficient privileges&rdquo;</div>
+          STOP. Pranesh must promote your profile to Administrator before continuing. Without this, no Blueprint, no custom modules, no workflows.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>0.2 Purge default Zoho sample data</h3>
+  <div class="callout callout--warn">
+    The org currently has placeholder data (&ldquo;Christopher Maclead&rdquo;, &ldquo;Sage Wieser&rdquo;, &ldquo;Benton&rdquo;, &ldquo;Chemel&rdquo;).
+    <b>BUILD_DECISIONS_v4 &sect;2 forbids these on demo day.</b>
+  </div>
+  <table>
+    <thead><tr><th>Module</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>Leads</td><td>Module &rarr; All Leads list view &rarr; Select All &rarr; <b>Delete Selected</b> &rarr; confirm</td></tr>
+      <tr><td>Contacts</td><td>Module &rarr; All Contacts &rarr; Select All &rarr; Delete (keep your own user)</td></tr>
+      <tr><td>Applications (Potentials)</td><td>Module &rarr; All Applications &rarr; Select All &rarr; Delete (Benton, Truhlar, Chemel, Chanay)</td></tr>
+      <tr><td>Tasks &middot; Meetings</td><td>Filter <code>Owner = uwc_admin</code>, &ldquo;Demo&rdquo;/&ldquo;Webinar&rdquo;/&ldquo;TradeShow&rdquo; &rarr; Delete</td></tr>
+    </tbody>
+  </table>
+
+  <h3>0.3 Brand &amp; theme</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step__title">Upload UWC logo</div>
+      <div class="step__body">
+        <span class="path">gear<span class="arrow">&rarr;</span>Personalisation<span class="arrow">&rarr;</span>Company Details</span>.
+        Upload <code>wireframes/_shared/assets/uwc-brand/uwc-logo.svg</code> (the navy UWC mark).
+        Set Company Name = <code>UWC International (Demo)</code>.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step__title">Theme colours</div>
+      <div class="step__body">
+        <span class="path">gear<span class="arrow">&rarr;</span>Personalisation<span class="arrow">&rarr;</span>Theme</span> &rarr;
+        Classic theme &rarr; Customise &rarr; Primary <code>#003087</code> (UWC navy) &middot; Accent <code>#C8102E</code> (UWC red).
+      </div>
+    </div>
+    <div class="step">
+      <div class="step__title">Disable noisy sidebar modules</div>
+      <div class="step__body">
+        <span class="path">gear<span class="arrow">&rarr;</span>Modules and Fields</span> &rarr; for each of Vendors, Sales Inbox, Services, Projects, Questions: kebab menu &rarr; Disable Module.
+        Keep only: Home, Leads, Contacts, Applications, Programmes, Campaigns, Tasks, Meetings, Calls + the new custom modules below.
+      </div>
+    </div>
+  </div>
+
+  <h3>0.4 Create 4 Permission Profiles</h3>
+  <p><span class="path">gear<span class="arrow">&rarr;</span>Users and Control<span class="arrow">&rarr;</span>Profiles<span class="arrow">&rarr;</span>+ New Profile</span></p>
+  <table>
+    <thead><tr><th>Profile</th><th>Clone from</th><th>Modules visible</th><th>Masking</th></tr></thead>
+    <tbody>
+      <tr><td><b>IO Super Admin</b></td><td>Administrator</td><td>All</td><td>Nothing masked</td></tr>
+      <tr><td><b>NC Admin</b></td><td>Standard</td><td>Apps, Contacts, NCs, Schools, Programmes, NC Volunteers, MoU, Mailing Lists, Tasks, Meetings</td><td>None at this stage (per-field FLS later)</td></tr>
+      <tr><td><b>Reviewer</b></td><td>Standard</td><td>Apps (own queue), Contacts (own NC), Review Scores</td><td>Peer scores hidden via Client Script</td></tr>
+      <tr><td><b>Data Protection Lead</b></td><td>Standard</td><td>Contacts, Consent Records, Comm Logs, Safeguarding Cases</td><td>DOB &middot; Address masked in Contacts</td></tr>
+    </tbody>
+  </table>
+
+  <h3>0.5 Create 3 Roles</h3>
+  <p><span class="path">gear<span class="arrow">&rarr;</span>Users and Control<span class="arrow">&rarr;</span>Roles</span></p>
+  <pre>International Office  (top)
+&#9500;&#9472;&#9472; NC Admin
+&#9474;   &#9500;&#9472;&#9472; NC Reviewer
+&#9474;   &#9492;&#9472;&#9472; NC Volunteer
+&#9492;&#9472;&#9472; School Admissions Director</pre>
+  uwc_admin = <code>International Office</code> role + <code>IO Super Admin</code> profile.
+
+  <h3>0.6 Take a snapshot</h3>
+  <div class="callout callout--alert">
+    <div class="callout__title">CRITICAL safety net</div>
+    <span class="path">gear<span class="arrow">&rarr;</span>Data Administration<span class="arrow">&rarr;</span>Backup<span class="arrow">&rarr;</span>+ Schedule Backup</span> &mdash; run an immediate one-off backup BEFORE Section 1.
+    If anything goes wrong, restore from this snapshot.
+  </div>
+</section>
+
+<!-- ========================== SCENARIO C ========================== -->
+<section class="panel" id="p-c">
+  <h2 class="section">Scenario C &middot; Selection, Scoring, Safeguarding</h2>
+  <p class="section__sub">10 demo steps &middot; ~10 minutes &middot; Reviewer / NC Admin / IO Super Admin roles</p>
+
+  <div class="toc">
+    <div class="toc__title">Scenario C contents</div>
+    <ul>
+      <li><a href="#c-goal">Goal &amp; narrative</a></li>
+      <li><a href="#c-modules">Modules &amp; fields</a></li>
+      <li><a href="#c-workflows">Workflow rules</a></li>
+      <li><a href="#c-deluge">Deluge functions</a></li>
+      <li><a href="#c-fls">Field-level security</a></li>
+      <li><a href="#c-buttons">Custom buttons</a></li>
+      <li><a href="#c-data">Sample data</a></li>
+      <li><a href="#c-demo">Demo click-path</a></li>
+    </ul>
+  </div>
+
+  <h3 id="c-goal">Goal &amp; narrative</h3>
+  <div class="callout">
+    Show the live CRM enforcing <b>blind two-reviewer scoring</b> with a real automation that unlocks both reviewers' scores once both have submitted, and a <b>safeguarding flag workflow</b> that locks the application and creates a Safeguarding Case record for IO triage.
+  </div>
+  <p><i>&ldquo;Selection is the most safeguarding-sensitive moment in the UWC pipeline. Two reviewers per applicant, fully blinded to each other's scores until both have submitted. If at any point a reviewer raises a safeguarding flag, the application is immediately locked and an IO triage case opens. Watch.&rdquo;</i> &mdash; Akanksha</p>
+
+  <h3 id="c-modules">Modules &amp; fields to configure</h3>
+
+  <h4>Review Scores subform (on Applications)</h4>
+  <p><span class="path">gear<span class="arrow">&rarr;</span>Modules and Fields<span class="arrow">&rarr;</span>Applications<span class="arrow">&rarr;</span>+ Subform &ldquo;Review Scores&rdquo;</span></p>
+  <table>
+    <thead><tr><th>Label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Reviewer</td><td><code>Reviewer_Lookup</code></td><td>Lookup &rarr; Users</td><td>Auto-populate to current user on row create</td></tr>
+      <tr><td>Academic Potential</td><td><code>Score_Academic</code></td><td>Integer 1&ndash;10</td><td>Hidden from peer reviewer via FLS rule</td></tr>
+      <tr><td>Community Engagement</td><td><code>Score_Community</code></td><td>Integer 1&ndash;10</td><td>Same rule</td></tr>
+      <tr><td>Communication Skills</td><td><code>Score_Communication</code></td><td>Integer 1&ndash;10</td><td>Same rule</td></tr>
+      <tr><td>UWC Values Commitment</td><td><code>Score_Values</code></td><td>Integer 1&ndash;10</td><td>Same rule</td></tr>
+      <tr><td>Overall Recommendation</td><td><code>Overall_Recommendation</code></td><td>Picklist</td><td><code>Yes &middot; Conditional &middot; No</code></td></tr>
+      <tr><td>Reviewer Comments</td><td><code>Reviewer_Comments</code></td><td>Multi-line (2000)</td><td>Same FLS rule</td></tr>
+      <tr><td>Submitted At</td><td><code>Submitted_At</code></td><td>DateTime</td><td><span class="pill pill--auto">Auto</span> via WR-C-3</td></tr>
+      <tr><td>Visible to NC Admin</td><td><code>Visible_to_NC_Admin</code></td><td>Checkbox</td><td>Default <code>false</code>. Flipped by WR-C-4</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Application module &mdash; extra fields for C</h4>
+  <table>
+    <thead><tr><th>Label</th><th>API name</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Assigned Reviewers</td><td><code>Assigned_Reviewers</code></td><td>Multi-user Lookup</td><td>&mdash;</td><td>Set during Blueprint T3 transition</td></tr>
+      <tr><td>Review Count</td><td><code>Review_Count</code></td><td>Integer</td><td><code>0</code></td><td>Incremented by Deluge</td></tr>
+      <tr><td>All Reviews Complete</td><td><code>All_Reviews_Complete</code></td><td>Checkbox</td><td><code>false</code></td><td>Auto-flipped by WR-C-4</td></tr>
+      <tr><td>Safeguarding Flag Status</td><td><code>Safeguarding_Flag_Status</code></td><td>Picklist</td><td><code>None</code></td><td><code>None &middot; Under Review &middot; Escalated &middot; Resolved &middot; Closed</code></td></tr>
+      <tr><td>Safeguarding Raised By</td><td><code>Safeguarding_Flag_Raised_By</code></td><td>Lookup &rarr; Users</td><td>&mdash;</td><td>Auto on flag</td></tr>
+      <tr><td>Safeguarding Raised Date</td><td><code>Safeguarding_Flag_Raised_Date</code></td><td>DateTime</td><td>&mdash;</td><td>Auto on flag</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Safeguarding Cases <span class="pill pill--new">NEW MODULE</span></h4>
+  <p><span class="path">gear<span class="arrow">&rarr;</span>Modules and Fields<span class="arrow">&rarr;</span>+ Create New Module</span> &rarr; name <b>Safeguarding Cases</b></p>
+  <p>Layout sections: <b>Case Identity</b> &middot; <b>Triage</b> &middot; <b>Resolution</b> &middot; <b>Linked Records</b> &middot; System.</p>
+  <table>
+    <thead><tr><th>Label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Case ID</td><td><code>Case_Id</code></td><td>Auto-number</td><td>Format <code>SGC-{YYYY}-{00001}</code></td></tr>
+      <tr><td>Reporter</td><td><code>Reporter_Lookup</code></td><td>Lookup &rarr; Users</td><td>Auto-set by Deluge</td></tr>
+      <tr><td>Date Raised</td><td><code>Date_Raised</code></td><td>DateTime <span class="pill pill--auto">Auto</span></td><td>On record create</td></tr>
+      <tr><td>Severity <span class="pill pill--required">REQ</span></td><td><code>Severity</code></td><td>Picklist</td><td><code>Low &middot; Medium &middot; High</code></td></tr>
+      <tr><td>Status</td><td><code>SG_Status</code></td><td>Picklist</td><td><code>Under Review &middot; Escalated &middot; Resolved &middot; Closed</code> &middot; default <code>Under Review</code></td></tr>
+      <tr><td>Triage Notes</td><td><code>Triage_Notes</code></td><td>Multi-line (5000)</td><td>Visible to IO Super Admin + DPL only</td></tr>
+      <tr><td>Resolution Steps</td><td><code>Resolution_Steps</code></td><td>Multi-line (5000)</td><td>Free-text actions log</td></tr>
+      <tr><td>Linked Application <span class="pill pill--required">REQ</span></td><td><code>Application_Lookup</code></td><td>Lookup &rarr; Applications</td><td>&mdash;</td></tr>
+      <tr><td>Linked Contact</td><td><code>Contact_Lookup</code></td><td>Lookup &rarr; Contacts</td><td>Auto by Deluge from Application.Applicant</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Safeguarding Cases Blueprint</h4>
+  <p><span class="path">gear<span class="arrow">&rarr;</span>Customisation<span class="arrow">&rarr;</span>Blueprints<span class="arrow">&rarr;</span>+ Create</span> &rarr; Module = Safeguarding Cases, Field = SG_Status.</p>
+  <p>States: <code>Under Review &rarr; Escalated &rarr; Resolved &rarr; Closed</code>. Gate: cannot leave <code>Under Review</code> unless <code>Triage_Notes</code> is non-empty.</p>
+
+  <h3 id="c-workflows">Workflow rules (gear &rarr; Automation &rarr; Workflow Rules &rarr; Applications)</h3>
+  <table>
+    <thead><tr><th>Rule</th><th>Trigger</th><th>Criteria</th><th>Actions</th></tr></thead>
+    <tbody>
+      <tr><td><b>WR-C-1</b><br/>Auto-task on Under Review</td><td>Edit, field-update: <code>Stage</code> &rarr; <code>Under Review</code></td><td>Always</td><td>Create Task: &ldquo;Assign reviewers &mdash; {{Contact_Name}}&rdquo;, due +3 working days, owner = NC Admin</td></tr>
+      <tr><td><b>WR-C-3</b><br/>Increment count + stamp submitted</td><td>Subform row added with <code>Submitted_At</code> empty</td><td>Always</td><td>Function <code>increment_review_count</code> &middot; Field Update <code>Submitted_At = NOW()</code></td></tr>
+      <tr><td><b>WR-C-4</b><br/>Unlock all scores</td><td>Edit, field-update: <code>Review_Count</code> changes</td><td><code>Review_Count &ge; 2</code></td><td>Field Update <code>All_Reviews_Complete = true</code> &middot; Function <code>unlock_all_review_scores</code> &middot; Email Alert <code>reviews_complete_for_nc_admin</code></td></tr>
+      <tr><td><b>WR-C-5</b><br/>Safeguarding lock + case</td><td>Field-update: <code>Safeguarding_Flag_Status</code> changes from <code>None</code></td><td>Always</td><td>Function <code>create_safeguarding_case</code> &middot; Field Update raised-by/date &middot; Email Alert <code>safeguarding_flag_raised</code> to IO + DPL</td></tr>
+      <tr><td><b>WR-C-6</b><br/>Shortlisted email</td><td>Field-update: <code>Stage</code> &rarr; <code>Shortlisted</code></td><td>Always</td><td>Email Alert <code>shortlist_congratulations</code> to applicant</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="c-deluge">Deluge functions</h3>
+  <p><span class="path">gear<span class="arrow">&rarr;</span>Customisation<span class="arrow">&rarr;</span>Functions<span class="arrow">&rarr;</span>+ Create Function</span> &middot; Category = Workflow.<br/>Source bundle: <code>zoho-build/deluge/_all_functions.deluge</code>.</p>
+
+  <h4>increment_review_count(applicationId : STRING)</h4>
+  <pre><span class="cm">// Fired by WR-C-3 when a Review Scores subform row is added.</span>
+appId   = applicationId.toLong();
+app     = zoho.crm.getRecordById(<span class="str">"Deals"</span>, appId);
+current = ifnull(app.get(<span class="str">"Review_Count"</span>), 0).toLong();
+upd     = Map();
+upd.put(<span class="str">"Review_Count"</span>, current + 1);
+zoho.crm.updateRecord(<span class="str">"Deals"</span>, appId, upd);
+info <span class="str">"Review_Count -&gt; "</span> + (current + 1);
+return <span class="str">"ok"</span>;</pre>
+
+  <h4>unlock_all_review_scores(applicationId : STRING)</h4>
+  <pre><span class="cm">// Fired by WR-C-4 when Review_Count &ge; 2. Flips Visible_to_NC_Admin true on every row.</span>
+appId = applicationId.toLong();
+app   = zoho.crm.getRecordById(<span class="str">"Deals"</span>, appId);
+rows  = ifnull(app.get(<span class="str">"Review_Scores"</span>), List());
+updated = List();
+<span class="kw">for each</span> r <span class="kw">in</span> rows {
+  r.put(<span class="str">"Visible_to_NC_Admin"</span>, true);
+  updated.add(r);
+}
+upd = Map();
+upd.put(<span class="str">"Review_Scores"</span>, updated);
+zoho.crm.updateRecord(<span class="str">"Deals"</span>, appId, upd);
+return <span class="str">"ok"</span>;</pre>
+
+  <h4>create_safeguarding_case(applicationId : STRING, raisedByUserId : STRING)</h4>
+  <pre><span class="cm">// Fired by WR-C-5 when Safeguarding_Flag_Status changes from None.</span>
+appId      = applicationId.toLong();
+app        = zoho.crm.getRecordById(<span class="str">"Deals"</span>, appId);
+contactId  = app.get(<span class="str">"Contact_Name"</span>).get(<span class="str">"id"</span>);
+caseRec    = Map();
+caseRec.put(<span class="str">"Reporter_Lookup"</span>, raisedByUserId);
+caseRec.put(<span class="str">"Date_Raised"</span>, zoho.currenttime.toString(<span class="str">"yyyy-MM-dd'T'HH:mm:ss"</span>));
+caseRec.put(<span class="str">"SG_Status"</span>, <span class="str">"Under Review"</span>);
+caseRec.put(<span class="str">"Application_Lookup"</span>, appId);
+caseRec.put(<span class="str">"Contact_Lookup"</span>, contactId);
+created = zoho.crm.createRecord(<span class="str">"Safeguarding_Cases"</span>, caseRec);
+return created.get(<span class="str">"id"</span>);</pre>
+
+  <h3 id="c-fls">Field-level security &mdash; blind review</h3>
+  <div class="callout callout--warn">
+    <div class="callout__title">Zoho FLS doesn't natively scope by row-value</div>
+    Native FLS hides a field for a profile across all rows. To hide a peer reviewer's row scores but show your own, we use a <b>Client Script</b> on the Application detail page: wipes peer score cells unless <code>All_Reviews_Complete = true</code>. The script lives at <code>zoho-build/client-scripts/blind_review.js</code> (Priyanka builds it during Fri AM slot).
+  </div>
+  <table>
+    <thead><tr><th>Subform field</th><th>IO Super Admin</th><th>NC Admin</th><th>Reviewer</th><th>DPL</th></tr></thead>
+    <tbody>
+      <tr><td><code>Score_*</code> (4 fields)</td><td>Read+Write</td><td>Read</td><td>Read on own row; <b>Script wipes peer rows</b></td><td>None</td></tr>
+      <tr><td><code>Overall_Recommendation</code></td><td>Read+Write</td><td>Read</td><td>Same</td><td>None</td></tr>
+      <tr><td><code>Reviewer_Comments</code></td><td>Read+Write</td><td>Read</td><td>Same</td><td>None</td></tr>
+    </tbody>
+  </table>
+  <p>Safeguarding Cases <code>Triage_Notes</code>: NC Admin none, DPL Read+Write, IO Super Admin Read+Write.</p>
+
+  <h3 id="c-buttons">Custom buttons</h3>
+  <table>
+    <thead><tr><th>Button</th><th>Module</th><th>Visible when</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td><b>Raise Safeguarding Flag</b></td><td>Applications &middot; detail page</td><td><code>Safeguarding_Flag_Status = None AND Stage IN (Under Review, Shortlisted)</code></td><td>Popup: pick Severity &rarr; on confirm sets <code>Safeguarding_Flag_Status = Under Review</code> (fires WR-C-5)</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="c-data">Sample data to seed</h3>
+  <p>Import CSVs from <code>zoho-build/csv/</code>. Subform rows are manual (Zoho CRM doesn't import subform via CSV).</p>
+  <table>
+    <thead><tr><th>Record</th><th>Module</th><th>Key field values</th></tr></thead>
+    <tbody>
+      <tr><td>Sofia Almeida</td><td>Contacts</td><td>Type=Student, DOB=10/03/2009, Country=Brazil</td></tr>
+      <tr><td>Miguel Santos</td><td>Contacts</td><td>Type=Student, DOB=12/06/2009, Country=Portugal</td></tr>
+      <tr><td>Sofia &mdash; Application</td><td>Applications</td><td>Stage=Under Review, Assigned_Reviewers=[Clara, Paulo], Review_Count=0, NC=UWC Brazil, Programme=UWC Brazil 2026</td></tr>
+      <tr><td>Miguel &mdash; Application</td><td>Applications</td><td>Stage=Under Review, Safeguarding_Flag_Status=None (flip live during demo)</td></tr>
+      <tr><td>Clara's review of Sofia</td><td>Review_Scores subform</td><td>Manual add: scores 9/8/8/9 &middot; Yes &middot; <code>Submitted_At</code> set</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="c-demo">Demo click-path &mdash; 10 steps for Akanksha</h3>
+  <div class="demo-card"><span class="demo-card__role">Step 1 &middot; Reviewer (Clara)</span><div class="demo-card__text">Switch profile to <b>Reviewer (Clara)</b> &rarr; open Applications &rarr; Saved View <b>My Review Queue</b> (<code>Assigned_Reviewers contains me AND Stage = Under Review</code>).</div><div class="demo-card__obs">Two rows: Sofia Almeida, Miguel Santos.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 2 &middot; Clara</span><div class="demo-card__text">Open Sofia &rarr; Review Scores subform &rarr; <b>+ Add Row</b> &rarr; enter Clara's scores (9/8/8/9, Recommendation Yes) &rarr; Save.</div><div class="demo-card__obs"><code>Submitted_At</code> populates.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 3 &middot; Clara</span><div class="demo-card__text">Refresh page (still as Clara).</div><div class="demo-card__obs"><code>Review_Count = 1</code>. Clara's scores visible (her own row). No second reviewer row yet.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 4 &middot; Reviewer (Paulo)</span><div class="demo-card__text">Switch profile to <b>Reviewer (Paulo)</b> &rarr; open Sofia.</div><div class="demo-card__obs">Paulo sees Clara's row but <b>all score columns are blank</b> &mdash; Client Script enforced. Paulo can't see her recommendation.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 5 &middot; Paulo</span><div class="demo-card__text">Paulo enters his scores (8/9/7/9, Yes) &rarr; Save.</div><div class="demo-card__obs">WR-C-3 fires &rarr; <code>Review_Count = 2</code> &rarr; WR-C-4 fires &rarr; <code>All_Reviews_Complete = true</code>. Refresh &rarr; both rows fully visible. Email Alert toast.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 6 &middot; NC Admin (Ana)</span><div class="demo-card__text">Switch profile to <b>NC Admin</b> &rarr; open Sofia.</div><div class="demo-card__obs">Ana sees both rows fully. <code>Average_Score</code> formula widget on layout.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 7 &middot; NC Admin</span><div class="demo-card__text">Stay as Ana &rarr; open Miguel &rarr; click <b>Raise Safeguarding Flag</b> custom button &rarr; Severity = High &rarr; confirm.</div><div class="demo-card__obs">WR-C-5 fires: page reloads, red banner &ldquo;&#128274; Application locked &mdash; Safeguarding flag raised&rdquo;. All fields read-only.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 8 &middot; IO Super Admin (Akanksha)</span><div class="demo-card__text">Sidebar &rarr; <b>Safeguarding Cases</b> module &rarr; top row is <code>SGC-2026-00001</code> (Miguel, reporter = Ana). Switch profile to <b>IO Super Admin</b> &rarr; enter Triage Notes &ldquo;Spoke with NC Chair, age-appropriate concern&rdquo; &rarr; transition Blueprint &rarr; Resolved.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 9 &middot; NC Admin</span><div class="demo-card__text">Back to Applications &rarr; Sofia &rarr; Stage dropdown &rarr; move to <b>Shortlisted</b> &rarr; save.</div><div class="demo-card__obs">WR-C-6 fires &rarr; Email Alert sent to Sofia. Open Setup &rarr; Email Sent &rarr; preview template.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 10 &middot; Reference</span><div class="demo-card__text">Open the saved Tab Group &ldquo;Scenario C reference&rdquo; &mdash; shows Module Fields catalog filtered to Scenario C.</div></div>
+</section>
+
+<!-- ========================== SCENARIO D ========================== -->
+<section class="panel" id="p-d">
+  <h2 class="section">Scenario D &middot; Nomination, Place Allocation, Pack</h2>
+  <p class="section__sub">10 demo steps &middot; ~9 minutes &middot; IO Admissions / NC Admin / School Admissions Director</p>
+
+  <h3>Goal &amp; narrative</h3>
+  <div class="callout">Show IO Admissions allocating school places to NCs, an NC Admin generating a UWC-branded nomination pack PDF, a school accepting, and the application moving to <b>Placed</b> with a Business Central sync notification.</div>
+  <p><i>&ldquo;Once selection is complete, IO Admissions allocates places per NC per school per cycle. NC Admins see only their own quota. When a school accepts, the application moves to Placed and a finance event fires to Business Central. Here is one Brazilian applicant going to UWC Atlantic.&rdquo;</i></p>
+
+  <h3>Modules to configure</h3>
+
+  <h4>School Place Allocations <span class="pill pill--new">NEW</span></h4>
+  <table>
+    <thead><tr><th>Label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Allocation ID</td><td><code>Allocation_Id</code></td><td>Auto-number</td><td><code>SPA-{YYYY}-{0001}</code></td></tr>
+      <tr><td>School <span class="pill pill--required">REQ</span></td><td><code>School_Lookup</code></td><td>Lookup &rarr; Schools</td><td></td></tr>
+      <tr><td>NC <span class="pill pill--required">REQ</span></td><td><code>NC_Lookup</code></td><td>Lookup &rarr; National Committees</td><td></td></tr>
+      <tr><td>Cycle</td><td><code>Cycle</code></td><td>Picklist</td><td><code>2026 &middot; 2027 &middot; 2028</code></td></tr>
+      <tr><td>Places Allocated <span class="pill pill--required">REQ</span></td><td><code>Places_Allocated</code></td><td>Integer</td><td>Set by IO Admissions</td></tr>
+      <tr><td>Places Used</td><td><code>Places_Used</code></td><td>Integer <span class="pill pill--default">0</span></td><td>Auto-incremented</td></tr>
+      <tr><td>Places Remaining</td><td><code>Places_Remaining</code></td><td>Formula <span class="pill pill--formula">f(x)</span></td><td><code>Places_Allocated - Places_Used</code></td></tr>
+    </tbody>
+  </table>
+  <p>List view: <b>Group By &rarr; School + NC (pivot matrix)</b>. Custom button <b>Allocate Places</b> popup for IO.</p>
+
+  <h4>Nomination Packs <span class="pill pill--new">NEW</span></h4>
+  <table>
+    <thead><tr><th>Label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Pack ID</td><td><code>Pack_Id</code></td><td>Auto-number</td><td><code>NP-{YYYY}-{00001}</code></td></tr>
+      <tr><td>Application <span class="pill pill--required">REQ</span></td><td><code>Application_Lookup</code></td><td>Lookup &rarr; Applications</td><td></td></tr>
+      <tr><td>Target School <span class="pill pill--required">REQ</span></td><td><code>Target_School_Lookup</code></td><td>Lookup &rarr; Schools</td><td></td></tr>
+      <tr><td>Pack Status</td><td><code>Pack_Status</code></td><td>Picklist</td><td><code>Draft &middot; Generated &middot; Sent &middot; Acknowledged &middot; Accepted &middot; Declined</code></td></tr>
+      <tr><td>Generated At</td><td><code>Generated_At</code></td><td>DateTime <span class="pill pill--auto">Auto</span></td><td>Set by Deluge</td></tr>
+      <tr><td>NC Reference</td><td><code>NC_Reference</code></td><td>Text (24)</td><td>e.g. <code>BR-2026-041</code></td></tr>
+      <tr><td>BC Invoice ID</td><td><code>BC_Invoice_ID</code></td><td>Text (32)</td><td>Set by BC stub</td></tr>
+      <tr><td>Pack PDF</td><td>&mdash;</td><td>File Attachment</td><td>Auto via <code>generate_nomination_pack</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Workflow rules</h3>
+  <table>
+    <thead><tr><th>Rule</th><th>Trigger</th><th>Actions</th></tr></thead>
+    <tbody>
+      <tr><td><b>WR-D-1</b><br/>Nominated &rarr; quota &amp; email</td><td>App <code>Stage</code> &rarr; <code>Nominated</code></td><td>Function <code>decrement_school_quota</code> &middot; Email Alert <code>nomination_to_school</code> &middot; Pack <code>Pack_Status = Sent</code></td></tr>
+      <tr><td><b>WR-D-Pack</b><br/>School accepts</td><td>Nomination Pack <code>Pack_Status</code> &rarr; <code>Accepted</code></td><td>Field Update on linked Application <code>Stage = Placed</code></td></tr>
+      <tr><td><b>WR-D-2</b><br/>Placed &rarr; BC + emails</td><td>App <code>Stage</code> &rarr; <code>Placed</code></td><td>Function <code>send_to_business_central</code> &middot; 3 Email Alerts (applicant + NC + IO) &middot; Layout Rule lock all fields</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Custom buttons</h3>
+  <table>
+    <thead><tr><th>Button</th><th>Module</th><th>Visible when</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td><b>Generate Nomination Pack</b></td><td>Applications detail</td><td><code>Stage = Shortlisted AND School_Nominated NOT EMPTY</code></td><td>Function <code>generate_nomination_pack</code></td></tr>
+      <tr><td><b>Nominate to School</b></td><td>Applications detail</td><td><code>Stage = Shortlisted AND Nomination_Pack exists</code></td><td>Confirm modal &rarr; <code>Stage = Nominated</code></td></tr>
+      <tr><td><b>Accept Nomination</b></td><td>Nomination Packs detail</td><td><code>Pack_Status = Sent</code></td><td>Field Update <code>Pack_Status = Accepted</code></td></tr>
+      <tr><td><b>Decline Nomination</b></td><td>Nomination Packs detail</td><td><code>Pack_Status = Sent</code></td><td>Field Update <code>Pack_Status = Declined</code></td></tr>
+      <tr><td><b>Allocate Places</b></td><td>Place Allocations list (IO only)</td><td>Always</td><td>Popup to adjust <code>Places_Allocated</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Deluge functions</h3>
+  <h4>generate_nomination_pack(applicationId : STRING)</h4>
+  <pre><span class="cm">// Custom button. Builds UWC-branded HTML, creates Pack record, attaches file.</span>
+appId     = applicationId.toLong();
+app       = zoho.crm.getRecordById(<span class="str">"Deals"</span>, appId);
+applicant = zoho.crm.getRecordById(<span class="str">"Contacts"</span>, app.get(<span class="str">"Contact_Name"</span>).get(<span class="str">"id"</span>));
+school    = zoho.crm.getRecordById(<span class="str">"Schools"</span>,  app.get(<span class="str">"School_Nominated"</span>).get(<span class="str">"id"</span>));
+nc        = zoho.crm.getRecordById(<span class="str">"National_Committees"</span>, app.get(<span class="str">"National_Committee"</span>).get(<span class="str">"id"</span>));
+
+ncCode = ifnull(nc.get(<span class="str">"NC_Code"</span>), <span class="str">"XX"</span>);
+yr     = zoho.currenttime.year();
+suffix = app.get(<span class="str">"Deal_Name"</span>).subString(app.get(<span class="str">"Deal_Name"</span>).lastIndexOf(<span class="str">"-"</span>) + 1);
+ncRef  = ncCode + <span class="str">"-"</span> + yr + <span class="str">"-"</span> + suffix;
+
+html = <span class="str">"&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;style&gt;"</span>
+     + <span class="str">".banner{background:#003087;color:#fff;padding:28px;font-size:22px;}"</span>
+     + <span class="str">".section{padding:18px;border-bottom:1px solid #eee;}"</span>
+     + <span class="str">"&lt;/style&gt;&lt;/head&gt;&lt;body&gt;"</span>
+     + <span class="str">"&lt;div class='banner'&gt;UWC Nomination Pack &mdash; "</span> + ncRef + <span class="str">"&lt;/div&gt;"</span>
+     + <span class="str">"&lt;div class='section'&gt;&lt;b&gt;Applicant&lt;/b&gt; "</span> + applicant.get(<span class="str">"First_Name"</span>) + <span class="str">" "</span> + applicant.get(<span class="str">"Last_Name"</span>) + <span class="str">"&lt;/div&gt;"</span>
+     + <span class="str">"&lt;div class='section'&gt;&lt;b&gt;Nominating NC&lt;/b&gt; "</span> + nc.get(<span class="str">"NC_Name"</span>) + <span class="str">"&lt;/div&gt;"</span>
+     + <span class="str">"&lt;div class='section'&gt;&lt;b&gt;Target School&lt;/b&gt; "</span> + school.get(<span class="str">"School_Name"</span>) + <span class="str">"&lt;/div&gt;"</span>
+     + <span class="str">"&lt;/body&gt;&lt;/html&gt;"</span>;
+
+pack = Map();
+pack.put(<span class="str">"Application_Lookup"</span>, appId);
+pack.put(<span class="str">"Target_School_Lookup"</span>, school.get(<span class="str">"id"</span>));
+pack.put(<span class="str">"Pack_Status"</span>, <span class="str">"Generated"</span>);
+pack.put(<span class="str">"Generated_At"</span>, zoho.currenttime.toString(<span class="str">"yyyy-MM-dd'T'HH:mm:ss"</span>));
+pack.put(<span class="str">"NC_Reference"</span>, ncRef);
+created = zoho.crm.createRecord(<span class="str">"Nomination_Packs"</span>, pack);
+zoho.crm.attachFile(<span class="str">"Nomination_Packs"</span>, created.get(<span class="str">"id"</span>).toLong(), html);
+return created.get(<span class="str">"id"</span>);</pre>
+
+  <h4>send_to_business_central(applicationId) &mdash; STUB</h4>
+  <pre>appId  = applicationId.toLong();
+invNum = <span class="str">"INV-2026-"</span> + randomNumber(100000, 999999).toString();
+zoho.crm.updateRecord(<span class="str">"Deals"</span>, appId, {<span class="str">"BC_Invoice_ID"</span>: invNum});
+info <span class="str">"BC STUB: "</span> + invNum;
+return invNum;</pre>
+
+  <h3>Sample data</h3>
+  <p>15-row Place Allocation matrix: 3 schools &times; 5 NCs. UWC Atlantic capacity = 12 total (4 BR + 3 DE + 2 KE + 2 IN + 1 UK). Pre-seed Sofia in Stage = Shortlisted after Scenario C ends (or use <code>demo_reset</code>).</p>
+
+  <h3>Demo click-path &mdash; 10 steps</h3>
+  <div class="demo-card"><span class="demo-card__role">Step 1 &middot; IO Admissions (Fatima)</span><div class="demo-card__text">Open <b>Place Allocations</b> list view in pivot mode (Schools &times; NCs).</div><div class="demo-card__obs">Matrix of 15 allocations + totals row.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 2 &middot; IO Admissions</span><div class="demo-card__text">Click <b>Allocate Places</b> &rarr; bump UWC Atlantic &harr; UWC Brazil from 4 to 5 &rarr; confirm.</div><div class="demo-card__obs">Cell updates &middot; audit row added.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 3 &middot; NC Admin (Ana)</span><div class="demo-card__text">Switch profile &rarr; open <b>NC Dashboard &mdash; Brazil</b> (homepage tab) &mdash; tile &ldquo;Atlantic: 5 / 5 places available&rdquo;.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 4 &middot; NC Admin</span><div class="demo-card__text">Open Sofia (Stage = Shortlisted from C) &rarr; click <b>Generate Nomination Pack</b>.</div><div class="demo-card__obs">Toast: &ldquo;Pack <code>NP-2026-00001</code> generated for UWC Atlantic&rdquo;.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 5 &middot; NC Admin</span><div class="demo-card__text">Open the Nomination Pack record &rarr; click the attached HTML to preview.</div><div class="demo-card__obs">UWC navy banner, Sofia's details, Brazil NC reference <code>BR-2026-041</code>.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 6 &middot; NC Admin</span><div class="demo-card__text">Back to Sofia &rarr; click <b>Nominate to School</b> &rarr; confirm modal (school + places remaining = 5) &rarr; confirm.</div><div class="demo-card__obs">Stage &rarr; Nominated &middot; WR-D-1 fires: quota decrements to 4, email sent to Helen.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 7 &middot; School Admissions (Helen)</span><div class="demo-card__text">Switch profile &rarr; open <b>Nomination Packs</b> filtered to <code>Target_School = Atlantic AND Pack_Status = Sent</code>.</div><div class="demo-card__obs">One row: Sofia.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 8 &middot; Helen</span><div class="demo-card__text">Open Sofia's pack &rarr; click <b>Accept Nomination</b> &rarr; confirm.</div><div class="demo-card__obs"><code>Pack_Status = Accepted</code> &middot; WR-D-Pack &amp; WR-D-2 fire.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 9 &middot; IO Admissions</span><div class="demo-card__text">Switch back to IO Admissions profile &rarr; open Sofia's Application.</div><div class="demo-card__obs">Stage = <b>Placed</b> &middot; <code>BC_Invoice_ID = INV-2026-456789</code> populated &middot; banner &ldquo;Locked &mdash; placed&rdquo;.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 10 &middot; Reference</span><div class="demo-card__text">(Optional) Show Setup &rarr; Workflow Rules &rarr; WR-D-2 to prove the BC sync action is wired.</div></div>
+</section>
+
+<!-- ========================== SCENARIO E ========================== -->
+<section class="panel" id="p-e">
+  <h2 class="section">Scenario E &middot; Governance, Body Management</h2>
+  <p class="section__sub">8 demo steps &middot; ~7 minutes &middot; IO Super Admin focus</p>
+
+  <h3>Goal &amp; narrative</h3>
+  <div class="callout">Show the IO managing the global UWC governance structure: bodies (Boards, Committees, Advisory groups), memberships with term dates and renewal alerts, and a <b>Competency Matrix</b> that identifies gaps where a Board lacks members with required expertise.</div>
+  <p><i>&ldquo;UWC governance is multi-layered &mdash; global board, regional boards, advisory committees per NC. Members rotate every 3&ndash;4 years. Compliance and skills coverage matter. Here's how the IO sees the network state and identifies competency gaps.&rdquo;</i></p>
+
+  <h3>Modules to configure</h3>
+
+  <h4>Governance Bodies <span class="pill pill--new">NEW</span></h4>
+  <table>
+    <thead><tr><th>Label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Body Name <span class="pill pill--required">REQ</span></td><td><code>Body_Name</code></td><td>Text (60)</td><td>Unique per organisation</td></tr>
+      <tr><td>Type <span class="pill pill--required">REQ</span></td><td><code>Body_Type</code></td><td>Picklist</td><td><code>Board &middot; Committee &middot; Advisory</code></td></tr>
+      <tr><td>Status</td><td><code>Body_Status</code></td><td>Picklist</td><td><code>Active &middot; Dormant &middot; Dissolved</code> &middot; default <code>Active</code></td></tr>
+      <tr><td>Parent Body</td><td><code>Parent_Body</code></td><td>Lookup &rarr; Governance Bodies</td><td>Self-reference; null for top-level</td></tr>
+      <tr><td>Purpose</td><td><code>Body_Purpose</code></td><td>Multi-line (3000)</td><td>Governance mandate</td></tr>
+      <tr><td>Member Count</td><td><code>Member_Count</code></td><td>Integer</td><td>Roll-up</td></tr>
+      <tr><td>Expired Member Count</td><td><code>Expired_Member_Count</code></td><td>Integer</td><td>Drives red badges</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Governance Memberships <span class="pill pill--new">NEW</span> (junction Contact &harr; Body)</h4>
+  <table>
+    <thead><tr><th>Label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Member <span class="pill pill--required">REQ</span></td><td><code>Member_Contact</code></td><td>Lookup &rarr; Contacts</td><td></td></tr>
+      <tr><td>Body <span class="pill pill--required">REQ</span></td><td><code>Governance_Body</code></td><td>Lookup &rarr; Governance Bodies</td><td></td></tr>
+      <tr><td>Role <span class="pill pill--required">REQ</span></td><td><code>Member_Role</code></td><td>Picklist</td><td><code>Chair &middot; Vice-Chair &middot; Trustee &middot; Secretary &middot; Treasurer &middot; Advisor</code></td></tr>
+      <tr><td>Appointed Date <span class="pill pill--required">REQ</span></td><td><code>Appointed_Date</code></td><td>Date</td><td></td></tr>
+      <tr><td>Term Length (years)</td><td><code>Term_Length</code></td><td>Integer <span class="pill pill--default">3</span></td><td></td></tr>
+      <tr><td>Term Expires</td><td><code>Term_Expires</code></td><td>Formula (Date) <span class="pill pill--formula">f(x)</span></td><td><code>addDay(Appointed_Date, Term_Length * 365)</code></td></tr>
+      <tr><td>Status</td><td><code>Membership_Status</code></td><td>Picklist</td><td><code>Active &middot; Lapsed &middot; Resigned &middot; Concluded</code></td></tr>
+      <tr><td>Competencies Held</td><td><code>Competencies_Held</code></td><td>Multi-lookup &rarr; Competencies</td><td>Drives matrix</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Competencies <span class="pill pill--new">NEW</span></h4>
+  <table>
+    <thead><tr><th>Label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Competency Name <span class="pill pill--required">REQ</span></td><td><code>Competency_Name</code></td><td>Text</td><td>e.g. &ldquo;Marketing &amp; Comms&rdquo;</td></tr>
+      <tr><td>Category</td><td><code>Competency_Category</code></td><td>Picklist</td><td><code>Governance &middot; Finance &middot; Legal &middot; Technical &middot; Regional &middot; Sector</code></td></tr>
+      <tr><td>Required for Board</td><td><code>Required_Board</code></td><td>Checkbox <span class="pill pill--default">true</span></td><td>Drives gap analysis</td></tr>
+      <tr><td>Total Holders</td><td><code>Total_Holders</code></td><td>Integer</td><td>Auto via daily Deluge</td></tr>
+      <tr><td>Gap Count</td><td><code>Gap_Count</code></td><td>Integer</td><td>Auto via daily Deluge</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Scheduled functions</h3>
+  <h4>recompute_competency_gaps() &mdash; Daily @ 02:45 UTC</h4>
+  <pre>comps  = zoho.crm.getRecords(<span class="str">"Competencies"</span>, 1, 200);
+bodies = zoho.crm.searchRecords(<span class="str">"Governance_Bodies"</span>, <span class="str">"(Body_Type:equals:Board)and(Body_Status:equals:Active)"</span>);
+<span class="kw">for each</span> c <span class="kw">in</span> comps {
+  gap = 0; total = 0;
+  <span class="kw">for each</span> b <span class="kw">in</span> bodies {
+    crit = <span class="str">"(Governance_Body:equals:"</span> + b.get(<span class="str">"id"</span>) + <span class="str">")and(Membership_Status:equals:Active)"</span>;
+    members = zoho.crm.searchRecords(<span class="str">"Governance_Memberships"</span>, crit);
+    found = false;
+    <span class="kw">for each</span> m <span class="kw">in</span> members {
+      <span class="kw">for each</span> h <span class="kw">in</span> ifnull(m.get(<span class="str">"Competencies_Held"</span>), List()) {
+        <span class="kw">if</span> (h.get(<span class="str">"id"</span>) == c.get(<span class="str">"id"</span>).toString()) { found = true; total = total + 1; }
+      }
+    }
+    <span class="kw">if</span> (!found) gap = gap + 1;
+  }
+  zoho.crm.updateRecord(<span class="str">"Competencies"</span>, c.get(<span class="str">"id"</span>).toLong(), {<span class="str">"Gap_Count"</span>: gap, <span class="str">"Total_Holders"</span>: total});
+}</pre>
+
+  <h3>Competency Matrix dashboard widget</h3>
+  <p><span class="path">gear<span class="arrow">&rarr;</span>Customisation<span class="arrow">&rarr;</span>Widgets<span class="arrow">&rarr;</span>+ Create<span class="arrow">&rarr;</span>&ldquo;Governance Matrix&rdquo;</span></p>
+  <p>HTML widget fetching via Deluge <code>getCompetencyMatrix()</code>. Renders a table: rows = Active Boards, columns = Competencies (Required_Board = true), cells = &#10003; or &#10007;, footer = Gap_Count per competency.</p>
+
+  <h3>Sample bodies + memberships</h3>
+  <table>
+    <thead><tr><th>Body</th><th>Type</th><th>Parent</th></tr></thead>
+    <tbody>
+      <tr><td>UWC International Board</td><td>Board</td><td>&mdash;</td></tr>
+      <tr><td>UWC Brazil NC Board</td><td>Board</td><td>UWC International Board</td></tr>
+      <tr><td>UWC Kenya NC Board</td><td>Board</td><td>UWC International Board</td></tr>
+      <tr><td>Safeguarding Advisory Committee</td><td>Advisory</td><td>UWC International Board</td></tr>
+      <tr><td>Finance Sub-Committee</td><td>Committee</td><td>UWC International Board</td></tr>
+    </tbody>
+  </table>
+  <table>
+    <thead><tr><th>Member</th><th>Role</th><th>Appointed</th><th>Expires</th><th>Status</th><th>Competencies</th></tr></thead>
+    <tbody>
+      <tr><td>Dame Catherine Prior</td><td>Chair</td><td>01/01/2024</td><td>31/12/2026</td><td>Active</td><td>Governance, Strategy</td></tr>
+      <tr><td>Dr Ravi Menon</td><td>Trustee</td><td>01/03/2022</td><td><b style="color:var(--red);">31/03/2025</b></td><td>Lapsed</td><td>Finance, Asia-Pacific Regional</td></tr>
+      <tr><td>Sarah Okonkwo</td><td>Secretary</td><td>01/08/2024</td><td>31/08/2027</td><td>Active</td><td>Legal, Governance</td></tr>
+      <tr><td>Thomas Berger</td><td>Trustee</td><td>01/12/2021</td><td><b style="color:var(--red);">31/12/2024</b></td><td>Lapsed</td><td>Marketing &amp; Comms</td></tr>
+      <tr><td>Amina Hassan</td><td>Trustee</td><td>01/09/2025</td><td>30/09/2028</td><td>Active</td><td>Youth Engagement, Africa Regional</td></tr>
+    </tbody>
+  </table>
+  <p><b>Expected demo gaps:</b> Marketing &amp; Comms (Thomas lapsed), Asia-Pacific (Ravi lapsed), Europe Regional, Americas Regional &mdash; 4 red cells.</p>
+
+  <h3>Demo click-path &mdash; 8 steps</h3>
+  <div class="demo-card"><span class="demo-card__role">Step 1 &middot; IO Super Admin</span><div class="demo-card__text">Open <b>Governance Bodies</b> list view.</div><div class="demo-card__obs">5 bodies with status badges and member counts.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 2 &middot; IO Super Admin</span><div class="demo-card__text">Click <b>+ New</b> &rarr; create &ldquo;Programme Quality Committee&rdquo; &rarr; save.</div><div class="demo-card__obs">New row, Member_Count = 0.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 3 &middot; IO Super Admin</span><div class="demo-card__text">Open UWC International Board record.</div><div class="demo-card__obs">Membership list shows 5, two with red EXPIRED badges.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 4 &middot; IO Super Admin</span><div class="demo-card__text">Click <b>+ Add Member</b> &rarr; Contact = Akanksha Anand, Role = Advisor, Appointed = today, Term Length = 3, Competencies = [Programme Design, Youth Engagement] &rarr; save.</div><div class="demo-card__obs">New active membership appears.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 5 &middot; IO Super Admin</span><div class="demo-card__text">Switch tab &rarr; <b>Historical Memberships</b> Saved View (<code>Membership_Status != Active</code>).</div><div class="demo-card__obs">Thomas Berger + Dr Ravi Menon with their expired terms.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 6 &middot; IO Super Admin (centrepiece)</span><div class="demo-card__text">Switch tab &rarr; <b>Competency Matrix</b> dashboard.</div><div class="demo-card__obs">HTML matrix: rows = boards, cols = competencies. 4 red cells highlighted in Marketing &amp; Comms, Asia-Pacific Regional, Europe Regional, Americas Regional.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 7 &middot; IO Super Admin</span><div class="demo-card__text">Switch tab &rarr; <b>Network Summary</b> report (Zoho Reports: bodies &times; member counts &times; coverage %).</div><div class="demo-card__obs">Pie of body types, bar of coverage, count of lapsed memberships.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 8 &middot; (Optional)</span><div class="demo-card__text">Open Setup &rarr; Workflow Rules &rarr; WR-E-1 (60-day renewal alert).</div></div>
+</section>
+
+<!-- ========================== SCENARIO F ========================== -->
+<section class="panel" id="p-f">
+  <h2 class="section">Scenario F &middot; NC Management &amp; Volunteer Oversight</h2>
+  <p class="section__sub">8 demo steps &middot; ~8 minutes &middot; IO Super Admin / NC Chair (Grace) roles</p>
+
+  <h3>Goal &amp; narrative</h3>
+  <div class="callout">Show the IO managing all 30+ National Committees: drill into UWC Kenya, view its volunteer roster with training-compliance colour codes, role-swap to the NC Chair's portal view (MoU obligations), and the IO NC Health Dashboard with global KPIs.</div>
+  <p><i>&ldquo;Every NC operates with a small volunteer team. The IO must be able to see at a glance which NCs are healthy and which have safeguarding training gaps or overdue MoU obligations. Here is UWC Kenya as a worked example &mdash; including a clearly visible compliance gap.&rdquo;</i></p>
+
+  <h3>Modules to configure</h3>
+
+  <h4>National Committees &mdash; full field set</h4>
+  <table>
+    <thead><tr><th>Label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>NC Name <span class="pill pill--required">REQ</span></td><td><code>NC_Name</code></td><td>Text</td><td></td></tr>
+      <tr><td>NC Code <span class="pill pill--required">REQ</span></td><td><code>NC_Code</code></td><td>Text (2)</td><td><code>BR &middot; DE &middot; KE &middot; IN &middot; UK</code></td></tr>
+      <tr><td>Country</td><td><code>Country</code></td><td>Picklist (ISO)</td><td></td></tr>
+      <tr><td>Status</td><td><code>NC_Status</code></td><td>Picklist</td><td><code>Active &middot; Suspended &middot; Observer &middot; Inactive</code></td></tr>
+      <tr><td>NC Chair</td><td><code>NC_Chair_Lookup</code></td><td>Lookup &rarr; NC Volunteers</td><td>One active Chair per NC</td></tr>
+      <tr><td>Members Count</td><td><code>Member_Count</code></td><td>Integer</td><td>Roll-up</td></tr>
+      <tr><td>Established Year</td><td><code>Established_Year</code></td><td>Integer</td><td></td></tr>
+      <tr><td>Governance Body</td><td><code>Governance_Body_Lookup</code></td><td>Lookup &rarr; Governance Bodies</td><td>Cross-link to Scenario E</td></tr>
+      <tr><td>MoU Health</td><td><code>MoU_Health</code></td><td>Text (16) <span class="pill pill--formula">via Deluge</span></td><td><code>Good</code> / <code>Attention</code> / <code>Critical</code> &mdash; nightly</td></tr>
+      <tr><td>Country Flag URL</td><td><code>Country_Flag_URL</code></td><td>URL</td><td>Raw GitHub URL to <code>flags/&lt;cc&gt;.svg</code></td></tr>
+    </tbody>
+  </table>
+  <p><b>List view conditional formatting:</b> <code>MoU_Health = Critical</code> &rarr; bg <code>#FEE2E2</code> red, Attention &rarr; <code>#FEF3C7</code> amber, Good &rarr; <code>#D1FAE5</code> green.</p>
+
+  <h4>NC Volunteers <span class="pill pill--new">NEW</span> (junction)</h4>
+  <table>
+    <thead><tr><th>Label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Full Name</td><td><code>Full_Name</code></td><td>Formula <span class="pill pill--formula">f(x)</span></td><td><code>First_Name + " " + Last_Name</code></td></tr>
+      <tr><td>Contact <span class="pill pill--required">REQ</span></td><td><code>Contact_Lookup</code></td><td>Lookup &rarr; Contacts</td><td></td></tr>
+      <tr><td>NC <span class="pill pill--required">REQ</span></td><td><code>NC_Lookup</code></td><td>Lookup &rarr; National Committees</td><td>Controls data scope</td></tr>
+      <tr><td>Volunteer Role <span class="pill pill--required">REQ</span></td><td><code>Volunteer_Role</code></td><td>Picklist</td><td><code>Chair &middot; Admin &middot; Selection Coordinator &middot; Reviewer &middot; Observer</code></td></tr>
+      <tr><td>Member Since</td><td><code>Member_Since</code></td><td>Date</td><td></td></tr>
+      <tr><td>Portal Access</td><td><code>Portal_Role</code></td><td>Picklist</td><td><code>Chair &middot; Member &middot; None</code></td></tr>
+      <tr><td>Training Status</td><td><code>Training_Status</code></td><td>Text (16) <span class="pill pill--formula">via Deluge</span></td><td><code>CURRENT &middot; EXPIRING SOON &middot; EXPIRED &middot; MISSING</code></td></tr>
+    </tbody>
+  </table>
+
+  <h4>Training Records <span class="pill pill--new">NEW</span></h4>
+  <table>
+    <thead><tr><th>Label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Volunteer <span class="pill pill--required">REQ</span></td><td><code>Volunteer_Lookup</code></td><td>Lookup &rarr; NC Volunteers</td><td></td></tr>
+      <tr><td>Training Type <span class="pill pill--required">REQ</span></td><td><code>Training_Type</code></td><td>Picklist</td><td><code>Safeguarding &middot; Code of Conduct &middot; Selection Process &middot; GDPR</code></td></tr>
+      <tr><td>Completed <span class="pill pill--required">REQ</span></td><td><code>Completed_Date</code></td><td>Date</td><td></td></tr>
+      <tr><td>Expires</td><td><code>Expiry_Date</code></td><td>Formula (Date) <span class="pill pill--formula">f(x)</span></td><td>Safeguarding +730, Code of Conduct +1095, Selection +365, GDPR +730 days</td></tr>
+      <tr><td>Certificate</td><td>&mdash;</td><td>File Upload</td><td>Optional</td></tr>
+      <tr><td>Status</td><td><code>Training_Status</code></td><td>Formula <span class="pill pill--formula">f(x)</span></td><td><code>CURRENT</code> / <code>EXPIRING SOON</code> / <code>EXPIRED</code></td></tr>
+    </tbody>
+  </table>
+
+  <h4>MoU Obligations <span class="pill pill--new">NEW</span></h4>
+  <table>
+    <thead><tr><th>Label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Obligation Name <span class="pill pill--required">REQ</span></td><td><code>Obligation_Name</code></td><td>Text</td><td></td></tr>
+      <tr><td>NC <span class="pill pill--required">REQ</span></td><td><code>NC_Lookup</code></td><td>Lookup &rarr; National Committees</td><td></td></tr>
+      <tr><td>Due Date <span class="pill pill--required">REQ</span></td><td><code>Due_Date</code></td><td>Date</td><td></td></tr>
+      <tr><td>Status</td><td><code>Obligation_Status</code></td><td>Picklist</td><td><code>Pending &middot; Submitted &middot; Overdue &middot; Waived</code></td></tr>
+      <tr><td>Submitted On</td><td><code>Submitted_On</code></td><td>DateTime</td><td>Auto on status change</td></tr>
+      <tr><td>Overdue Days</td><td><code>Overdue_Days</code></td><td>Formula (Integer) <span class="pill pill--formula">f(x)</span></td><td>If Overdue: <code>TODAY - Due_Date</code> else 0</td></tr>
+      <tr><td>Linked Document</td><td><code>Linked_Document</code></td><td>URL</td><td>Optional WorkDrive link</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Scheduled functions (daily)</h3>
+  <table>
+    <thead><tr><th>Rule</th><th>Function</th><th>Time</th></tr></thead>
+    <tbody>
+      <tr><td>WR-F-1</td><td><code>mark_mou_overdue</code></td><td>02:30 UTC</td></tr>
+      <tr><td>WR-F-2</td><td><code>notify_training_expiring</code> (30-day warning)</td><td>03:00 UTC</td></tr>
+      <tr><td>WR-F-Health</td><td><code>recompute_mou_health</code> &mdash; updates NC MoU_Health colour</td><td>03:15 UTC</td></tr>
+      <tr><td>WR-F-VolStat</td><td><code>recompute_volunteer_training_status</code></td><td>03:30 UTC</td></tr>
+    </tbody>
+  </table>
+
+  <h3>NC Chair portal access (Step 5&ndash;6)</h3>
+  <p>Two options for Grace's view:</p>
+  <ul>
+    <li><b>Option A (cleaner):</b> create one secondary user &ldquo;Grace Omondi&rdquo; with profile = NC Chair Portal Access. Akanksha logs out / logs in.</li>
+    <li><b>Option B (lower risk):</b> profile switch &mdash; Akanksha narrates &ldquo;this is what Grace sees&rdquo;.</li>
+  </ul>
+  <p>Pranesh to confirm Option A user creation OK; otherwise Option B.</p>
+
+  <h3>Sample data &mdash; Kenya focus</h3>
+  <p>UWC Kenya: Code = KE, Established = 1962, Chair = Grace Omondi.</p>
+  <table>
+    <thead><tr><th>Volunteer</th><th>Role</th><th>Training</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Grace Omondi</td><td>Chair</td><td>Safeguarding 10/04/2025, Code of Conduct 15/03/2024</td><td><b style="color:var(--ok);">CURRENT</b></td></tr>
+      <tr><td>Daniel Kimani</td><td>Selection Coordinator</td><td>Safeguarding 01/02/2023 (expired 01/02/2025)</td><td><b style="color:var(--red);">EXPIRED</b></td></tr>
+      <tr><td>Aisha Waweru</td><td>Reviewer</td><td>(none)</td><td><b style="color:var(--grey-4);">MISSING</b></td></tr>
+    </tbody>
+  </table>
+  <p>MoU obligations Kenya: Annual Report Q2 2026 due 31/03/2026 &rarr; <b style="color:var(--red);">Overdue 58 days</b>; Safeguarding Self-Assessment 2026 Pending; Financial Statements 2025 Submitted; DPIA Review 2026 Pending.</p>
+
+  <h3>Demo click-path &mdash; 8 steps</h3>
+  <div class="demo-card"><span class="demo-card__role">Step 1 &middot; IO Super Admin</span><div class="demo-card__text">Open <b>National Committees</b> list view, sorted by <code>MoU_Health</code>.</div><div class="demo-card__obs">5 NCs &middot; UWC Kenya red (Critical) &middot; UWC India amber &middot; others green.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 2 &middot; IO Super Admin</span><div class="demo-card__text">Open UWC Kenya record.</div><div class="demo-card__obs">Detail page sections: NC Identity, Leadership, Member Stats, MoU Obligations, Linked Programmes, Audit.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 3 &middot; IO Super Admin</span><div class="demo-card__text">Click related list <b>NC Volunteers</b>.</div><div class="demo-card__obs">3 rows: Grace green (CURRENT) &middot; Daniel red (EXPIRED) &middot; Aisha grey (MISSING).</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 4 &middot; IO Super Admin</span><div class="demo-card__text">Open Daniel Kimani &rarr; Training Records related list.</div><div class="demo-card__obs">One Training record: Safeguarding &middot; Completed 01/02/2023 &middot; Expired 01/02/2025 &middot; EXPIRED red badge.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 5 &middot; NC Chair (Grace)</span><div class="demo-card__text">Log in as <b>Grace</b> (Option A) OR switch profile (Option B) &rarr; NC Chair portal opens to NC Dashboard.</div><div class="demo-card__obs">Grace sees only Kenya data &mdash; 3 volunteers, MoU panel, no IO data.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 6 &middot; Grace</span><div class="demo-card__text">Click MoU Obligations panel.</div><div class="demo-card__obs">4 rows &middot; Annual Report Q2 2026 in red OVERDUE 58 days.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 7 &middot; IO Super Admin</span><div class="demo-card__text">Switch back &rarr; open <b>NC Health Dashboard</b> (Zoho Reports/Dashboards).</div><div class="demo-card__obs">KPIs: Total NCs 5, Active 4, Overdue MoUs network-wide 1, Volunteers with Training Gaps 2, click-through to Kenya.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 8 &middot; (Optional)</span><div class="demo-card__text">Open Setup &rarr; Workflows &rarr; WR-F-1 + WR-F-2 to prove the daily lifecycle is wired.</div></div>
+</section>
+
+<!-- ========================== SCENARIO G ========================== -->
+<section class="panel" id="p-g">
+  <h2 class="section">Scenario G &middot; Comms, Mailing Lists, GDPR</h2>
+  <p class="section__sub">9 demo steps &middot; ~8 minutes &middot; IO Marketing / Data Protection Lead roles</p>
+
+  <h3>Goal &amp; narrative</h3>
+  <div class="callout">Build a <b>dynamic mailing list</b> with consent exclusions, push to Mailchimp, write back <b>Communication Logs</b> in bulk, view per-contact comm history, and demonstrate <b>GDPR opt-out enforcement</b> plus the <b>Consent Records audit log</b>.</div>
+  <p><i>&ldquo;Marketing operations must respect consent and produce an audit trail every time a contact's consent changes or a campaign is sent. Here we build an Impact Report mailing list &mdash; watch the opted-out contact be excluded automatically.&rdquo;</i></p>
+
+  <h3>Modules to configure</h3>
+
+  <h4>Mailing Lists <span class="pill pill--new">NEW</span></h4>
+  <table>
+    <thead><tr><th>Label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>List Name <span class="pill pill--required">REQ</span></td><td><code>List_Name</code></td><td>Text</td><td>e.g. &ldquo;Impact Report Q2 2026&rdquo;</td></tr>
+      <tr><td>Segment Criteria</td><td><code>Segment_Criteria_JSON</code></td><td>Multi-line (10000)</td><td>Serialised JSON &mdash; see <code>build_mailing_list.deluge</code></td></tr>
+      <tr><td>Member Count</td><td><code>Member_Count</code></td><td>Integer</td><td>Auto after Build</td></tr>
+      <tr><td>Exclusion Count</td><td><code>Exclusion_Count</code></td><td>Integer</td><td>Consent exclusions</td></tr>
+      <tr><td>Built At</td><td><code>Built_At</code></td><td>DateTime</td><td>Auto</td></tr>
+      <tr><td>Status</td><td><code>List_Status</code></td><td>Picklist</td><td><code>Draft &middot; Built &middot; Sent &middot; Archived</code></td></tr>
+      <tr><td>Linked Campaign</td><td><code>Campaign_Lookup</code></td><td>Lookup &rarr; Campaigns</td><td>Set on Push</td></tr>
+    </tbody>
+  </table>
+  <p>Custom buttons: <b>Build &amp; Preview</b> (<code>build_mailing_list</code>) &middot; <b>Push to Mailchimp</b> (<code>log_campaign_sends</code>).</p>
+
+  <h4>Campaigns &mdash; extend standard Zoho Campaigns</h4>
+  <p>Add custom fields: <code>Mailing_List_Lookup</code>, <code>Delivery_Channel</code> (<code>Zoho Campaigns &middot; Mailchimp &middot; Manual</code>), <code>Mailchimp_Campaign_Id</code>, <code>Subject_Line</code>, <code>From_Name</code> (default <code>UWC International &lt;hello@uwc.org&gt;</code>).</p>
+
+  <h4>Communication Logs <span class="pill pill--new">NEW</span></h4>
+  <table>
+    <thead><tr><th>Label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Contact <span class="pill pill--required">REQ</span></td><td><code>Contact_Lookup</code></td><td>Lookup &rarr; Contacts</td><td>One row per contact per send</td></tr>
+      <tr><td>Campaign</td><td><code>Campaign_Lookup</code></td><td>Lookup &rarr; Campaigns</td><td></td></tr>
+      <tr><td>Direction</td><td><code>Direction</code></td><td>Picklist</td><td><code>Outbound &middot; Inbound</code></td></tr>
+      <tr><td>Channel</td><td><code>Channel</code></td><td>Picklist</td><td><code>Email &middot; SMS &middot; Letter &middot; Call</code></td></tr>
+      <tr><td>Sent At</td><td><code>Sent_At</code></td><td>DateTime <span class="pill pill--auto">Auto</span></td><td></td></tr>
+      <tr><td>Open Status</td><td><code>Open_Status</code></td><td>Picklist</td><td><code>Not opened &middot; Opened &middot; Clicked &middot; Bounced &middot; Unsubscribed &middot; BLOCKED (opted out)</code></td></tr>
+      <tr><td>Suppression Reason</td><td><code>Suppression_Reason</code></td><td>Text (255)</td><td>Populated when BLOCKED</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Consent Records <span class="pill pill--new">NEW</span> &mdash; IMMUTABLE</h4>
+  <table>
+    <thead><tr><th>Label</th><th>API name</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Contact <span class="pill pill--required">REQ</span></td><td><code>Contact_Lookup</code></td><td>Lookup &rarr; Contacts</td><td></td></tr>
+      <tr><td>Change Type <span class="pill pill--required">REQ</span></td><td><code>Consent_Change</code></td><td>Picklist</td><td><code>Opted In &middot; Opted Out &middot; Withdrawn &middot; Re-confirmed</code></td></tr>
+      <tr><td>Source</td><td><code>Consent_Source</code></td><td>Picklist</td><td><code>Web form &middot; Email link &middot; Portal preferences &middot; Manual &middot; Onboarding</code></td></tr>
+      <tr><td>Lawful Basis</td><td><code>Lawful_Basis</code></td><td>Picklist</td><td><code>Consent &middot; Legitimate interest &middot; Contract &middot; Legal obligation</code></td></tr>
+      <tr><td>Channel</td><td><code>Consent_Channel</code></td><td>Picklist</td><td><code>Email &middot; SMS &middot; Postal &middot; Phone</code></td></tr>
+      <tr><td>IP / Reference</td><td><code>IP_Or_Reference</code></td><td>Text (60)</td><td>Masked after 90 days (out of demo scope)</td></tr>
+      <tr><td>Recorded At <span class="pill pill--auto">Auto</span></td><td><code>Recorded_At</code></td><td>DateTime</td><td>Write-locked via Validation Rule</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout--alert">
+    <div class="callout__title">Immutability Validation Rule</div>
+    <span class="path">gear<span class="arrow">&rarr;</span>Modules and Fields<span class="arrow">&rarr;</span>Consent Records<span class="arrow">&rarr;</span>Validation Rules<span class="arrow">&rarr;</span>+ Rule</span><br/>
+    Apply on Update &middot; Criteria: Always &middot; Message: <i>&ldquo;Consent Records are immutable for GDPR audit. Create a new record to reflect a consent change.&rdquo;</i> &middot; Action: <b>Block save</b>.
+  </div>
+
+  <h4>Contacts &mdash; derived field</h4>
+  <p>Add <code>Consent_Email_Status</code> Text (16) on Contacts. Written by <code>mirror_consent_to_contact</code> when a new Consent Record is created. Used by Mailing List exclusion filter for fast queries.</p>
+
+  <h3>Workflow rules</h3>
+  <table>
+    <thead><tr><th>Rule</th><th>Trigger</th><th>Actions</th></tr></thead>
+    <tbody>
+      <tr><td><b>WR-G-1</b><br/>Opt-out write-back</td><td>Consent Record created</td><td>Function <code>mirror_consent_to_contact</code></td></tr>
+      <tr><td><b>WR-G-2</b><br/>Block send</td><td>Implicit in <code>build_mailing_list</code></td><td>Excluded contacts get BLOCKED log row</td></tr>
+      <tr><td><b>WR-G-3</b><br/>DSAR shortcut</td><td>Manual button on Contact (DPL only)</td><td>Function <code>generate_consent_audit_trail</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Sample data</h3>
+  <table>
+    <thead><tr><th>Contact</th><th>Type</th><th>Consent state</th></tr></thead>
+    <tbody>
+      <tr><td>Jonathan Osei</td><td>Donor</td><td>Opted In (Web form 02/01/2026)</td></tr>
+      <tr><td>Isabelle Fontaine</td><td>Donor</td><td>Opted In (Email link 14/11/2025)</td></tr>
+      <tr><td>Sam Blackwood</td><td>Alumni</td><td>Opted In (Portal preferences 09/03/2026)</td></tr>
+      <tr><td>Grace Omondi</td><td>NC Chair</td><td>Opted In (Onboarding 01/01/2024)</td></tr>
+      <tr><td><b>Marcus Weber</b></td><td>NC Admin Germany</td><td><b style="color:var(--red);">Opted Out (Email link 22/04/2026)</b> &mdash; GDPR demo subject</td></tr>
+    </tbody>
+  </table>
+  <p>For Marcus: seed BOTH the historical Opted In (Onboarding 12/02/2022) AND the current Opted Out &mdash; proves immutable audit trail with two records.</p>
+
+  <h3>Demo click-path &mdash; 9 steps</h3>
+  <div class="demo-card"><span class="demo-card__role">Step 1 &middot; IO Marketing</span><div class="demo-card__text">Open <b>Mailing Lists</b> &rarr; + New &rarr; name &ldquo;Impact Report Q2 2026&rdquo; &rarr; paste segment JSON &rarr; save Draft.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 2 &middot; IO Marketing</span><div class="demo-card__text">Click <b>Build &amp; Preview</b>.</div><div class="demo-card__obs">Preview pane lists 4 names (Jonathan, Isabelle, Sam, Grace) + &ldquo;1 excluded (Marcus Weber &mdash; opted out)&rdquo;. Member_Count = 4, Exclusion_Count = 1.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 3 &middot; IO Marketing</span><div class="demo-card__text">Click <b>Push to Mailchimp</b> &rarr; modal &ldquo;Push 4 contacts as audience MC-Demo?&rdquo; &rarr; confirm.</div><div class="demo-card__obs">Campaign created &middot; <code>Mailchimp_Campaign_Id = MC-demo-000123</code> &middot; toast &ldquo;Synced to Mailchimp&rdquo;.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 4 &middot; IO Marketing</span><div class="demo-card__text">Switch tab to pre-loaded Mailchimp UI (real if extension live, otherwise sanitised screenshot).</div><div class="demo-card__obs">4 recipients &middot; 50% open rate (illustrative).</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 5 &middot; IO Marketing</span><div class="demo-card__text">Back in CRM &rarr; <b>Communication Log</b> filtered to Campaign = &ldquo;Impact Report Q2 2026&rdquo;.</div><div class="demo-card__obs">5 rows: 4 Outbound + 1 BLOCKED (opted out) for Marcus with <code>Suppression_Reason</code>.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 6 &middot; IO Marketing</span><div class="demo-card__text">Open Jonathan Osei &rarr; tab <b>Communication History</b> (related list).</div><div class="demo-card__obs">1 row &middot; Impact Report send &middot; Sent_At populated.</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 7 &middot; IO Marketing</span><div class="demo-card__text">Open Marcus Weber &rarr; red banner &ldquo;&#128683; Email channel: OPTED OUT (22/04/2026)&rdquo;. Related list <b>Consent Records</b> shows 2 immutable rows.</div><div class="demo-card__obs">Click the older Opt In row &rarr; modal: &ldquo;Locked &mdash; GDPR audit. Cannot edit.&rdquo;</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 8 &middot; IO Marketing / DPL</span><div class="demo-card__text">Sidebar &rarr; <b>Consent Audit Log</b> (Saved View on Consent_Records, sorted by Recorded_At DESC).</div><div class="demo-card__obs">All consent changes in the org &middot; search prominent (DSAR shortcut).</div></div>
+  <div class="demo-card"><span class="demo-card__role">Step 9 &middot; DPL (optional)</span><div class="demo-card__text">On Marcus &rarr; click <b>Generate Consent Audit Trail</b> button &rarr; CSV downloads as DSAR demo.</div><div class="demo-card__obs"><i>&ldquo;This is the response to a Subject Access Request &mdash; fully audit-ready.&rdquo;</i></div></div>
+</section>
+
+<!-- ========================== DEMO RESET ========================== -->
+<section class="panel" id="p-reset">
+  <h2 class="section">Demo reset procedure</h2>
+  <p class="section__sub">Re-runnable state restore &mdash; takes ~10 seconds &middot; run before every dry-run + 30 min before live demo</p>
+
+  <h3>What it resets</h3>
+  <ul>
+    <li>Sofia's Application: Stage = Under Review, Review_Count = 1, all flags off</li>
+    <li>Sofia's Review_Scores subform: keep Clara's row, remove Paulo's if present</li>
+    <li>Miguel's Application: Stage = Under Review, Safeguarding_Flag_Status = None</li>
+    <li>Kwame's Application: Stage = Nominated (jumpoff for D continuation)</li>
+    <li>All Place Allocations: Places_Used = 0</li>
+    <li>Delete demo-created Safeguarding Cases</li>
+    <li>Delete demo-created Nomination Packs</li>
+    <li>Reset Mailing List &ldquo;Impact Report Q2 2026&rdquo; to Draft + clear linked Campaign + Comm Logs</li>
+    <li>Re-insert Marcus's BLOCKED historical Communication Log row</li>
+    <li>MoU Annual Report Q2 2026 (Kenya): Status = Overdue, Submitted_On = null</li>
+    <li>Re-run all 5 recompute_* scheduled functions</li>
+  </ul>
+
+  <h3>How to run</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step__title">Open Functions</div>
+      <div class="step__body"><span class="path">gear<span class="arrow">&rarr;</span>Customisation<span class="arrow">&rarr;</span>Functions<span class="arrow">&rarr;</span>demo_reset</span></div>
+    </div>
+    <div class="step">
+      <div class="step__title">Execute</div>
+      <div class="step__body">Click <b>Save and Execute</b>. Wait for info log &ldquo;demo_reset complete&rdquo; (~10s).</div>
+    </div>
+    <div class="step">
+      <div class="step__title">Open Akanksha's tab group</div>
+      <div class="step__body">Chrome &rarr; bookmark folder <b>UWC Demo</b> &rarr; <b>Open all bookmarks</b>.<br/>
+      Tabs: Home / UWC Dashboard &middot; Applications &ldquo;My Review Queue&rdquo; &middot; Sofia &middot; Safeguarding Cases &middot; NCs &middot; UWC Kenya &middot; Governance Bodies &middot; Competency Matrix &middot; Mailing Lists &middot; Consent Records.</div>
+    </div>
+  </div>
+
+  <h3>QA checklist &mdash; run Fri eve + Sat AM + Sun AM + Mon 14:30</h3>
+
+  <h4>Scenario C</h4>
+  <ul>
+    <li>[ ] Clara's row on Sofia hides scores for Paulo until WR-C-4 fires</li>
+    <li>[ ] WR-C-3 increments <code>Review_Count</code> reliably</li>
+    <li>[ ] WR-C-4 unlocks all subform rows (re-login as Paulo, scores visible)</li>
+    <li>[ ] <b>Raise Safeguarding Flag</b> button on Application detail page creates Safeguarding Case + locks app</li>
+    <li>[ ] <code>Triage_Notes</code> hidden from Reviewer profile</li>
+    <li>[ ] Email template <code>shortlist_congratulations</code> renders Sofia's first name correctly</li>
+  </ul>
+
+  <h4>Scenario D</h4>
+  <ul>
+    <li>[ ] Place Allocations list view renders pivot Schools &times; NCs</li>
+    <li>[ ] Click <b>Allocate Places</b> &rarr; bump Atlantic &harr; Brazil to 5 &rarr; save</li>
+    <li>[ ] On Sofia (Shortlisted) click <b>Generate Nomination Pack</b> &rarr; toast confirms</li>
+    <li>[ ] Nomination Pack record created with <code>NC_Reference = BR-2026-00041</code></li>
+    <li>[ ] HTML/PDF file attached (UWC banner visible)</li>
+    <li>[ ] <b>Nominate to School</b> &rarr; Stage = Nominated &middot; quota decrements</li>
+    <li>[ ] As Helen &rarr; pack in Sent &rarr; <b>Accept</b> &rarr; Application Stage = Placed</li>
+    <li>[ ] <code>BC_Invoice_ID</code> populated (<code>INV-2026-{number}</code>)</li>
+  </ul>
+
+  <h4>Scenario E</h4>
+  <ul>
+    <li>[ ] Governance Bodies list shows 5 bodies</li>
+    <li>[ ] International Board detail: 5 memberships, 2 red EXPIRED (Ravi + Thomas)</li>
+    <li>[ ] Add new advisor via popup &rarr; saves</li>
+    <li>[ ] Historical Memberships saved view shows the 2 lapsed</li>
+    <li>[ ] Competency Matrix dashboard widget renders &ge; 4 red cells</li>
+    <li>[ ] Network summary report loads</li>
+  </ul>
+
+  <h4>Scenario F</h4>
+  <ul>
+    <li>[ ] NCs list view shows colour banding (Kenya red, India amber, others green)</li>
+    <li>[ ] UWC Kenya detail: 3 volunteers, MoU panel shows 4 items</li>
+    <li>[ ] Daniel Kimani Training Record shows EXPIRED red badge</li>
+    <li>[ ] As Grace (Option B = profile switch): only Kenya data visible</li>
+    <li>[ ] MoU panel: Annual Report Q2 2026 OVERDUE 58 days</li>
+    <li>[ ] IO NC Health Dashboard renders network KPIs</li>
+  </ul>
+
+  <h4>Scenario G</h4>
+  <ul>
+    <li>[ ] Mailing List &ldquo;Impact Report Q2 2026&rdquo; &rarr; <b>Build &amp; Preview</b> &rarr; Member_Count = 4, Exclusion_Count = 1</li>
+    <li>[ ] <b>Push to Mailchimp</b> &rarr; Campaign + Comm Log rows created</li>
+    <li>[ ] Marcus Weber detail page: red OPTED OUT banner</li>
+    <li>[ ] Trying to edit a Consent Record triggers validation error</li>
+    <li>[ ] DSAR custom button: CSV downloads attached to Contact</li>
+  </ul>
+
+  <h3>Rollback if things break</h3>
+  <table>
+    <thead><tr><th>Symptom</th><th>Rollback</th></tr></thead>
+    <tbody>
+      <tr><td>Endless workflow loop</td><td>Setup &rarr; Workflow Rules &rarr; toggle Active off on offending rule</td></tr>
+      <tr><td>Bad Deluge function</td><td>Setup &rarr; Functions &rarr; revert to previous version (keeps last 5)</td></tr>
+      <tr><td>CSV import dropped wrong rows</td><td>Module &rarr; Recycle Bin &rarr; Restore</td></tr>
+      <tr><td>Field deleted by mistake</td><td>Setup &rarr; Modules &rarr; Deleted Fields (30 days) &rarr; Restore</td></tr>
+      <tr><td>Profile locked someone out</td><td>Switch to uwc_admin (Admin) &rarr; fix</td></tr>
+      <tr><td>Nuclear option</td><td>Setup &rarr; Data Administration &rarr; Backup &rarr; Restore from §0.6 snapshot</td></tr>
+    </tbody>
+  </table>
+</section>
+
+</main>
+
+<footer>
+  <div>UWC International &middot; CRM + Applications Platform &middot; A2Z Cloud bid</div>
+  <div class="small">Drafted by Sam Prabhu &middot; A2Z Cloud Ltd &middot; UK Zoho Premium Partner &middot; Companion to <code>SCENARIOS_C_TO_G_BUILD_HANDBOOK.md</code> and <code>zoho-build/</code></div>
+</footer>
+
+<script>
+  (function() {
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.panel');
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var target = tab.getAttribute('data-target');
+        tabs.forEach(function(t) { t.classList.remove('tab--active'); });
+        panels.forEach(function(p) { p.classList.remove('panel--active'); });
+        tab.classList.add('tab--active');
+        var panel = document.getElementById(target);
+        if (panel) panel.classList.add('panel--active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (history.replaceState) history.replaceState(null, '', '#' + target);
+      });
+    });
+
+    // Open by hash
+    if (location.hash) {
+      var hash = location.hash.slice(1);
+      var tab = document.querySelector('.tab[data-target="' + hash + '"]');
+      if (tab) tab.click();
+    }
+  })();
+</script>
+
+</body>
+</html>
