@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UWC Nomination Pack — BR-2026-00041 · Sofia Carvalho</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;color:#1f2937;background:#e5e7eb;line-height:1.5;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Playfair Display',Georgia,serif}
+
+/* page = A4-ish sheet */
+.page{max-width:820px;margin:24px auto;background:#fff;box-shadow:0 4px 24px rgba(0,0,0,0.12)}
+
+/* print toolbar (screen only) */
+.toolbar{max-width:820px;margin:16px auto 0;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.toolbar span{font-size:12.5px;color:#6b7280}
+.toolbar button{font-family:inherit;font-size:13px;font-weight:600;background:#003087;color:#fff;border:none;border-radius:8px;padding:9px 18px;cursor:pointer}
+.toolbar button:hover{background:#001a4d}
+
+/* header banner */
+.banner{background:linear-gradient(135deg,#001a4d 0%,#003087 55%,#004A97 100%);color:#fff;padding:32px 40px;border-bottom:4px solid #C8102E}
+.banner-top{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+.logo{width:54px;height:54px;border-radius:50%;background:#fff;color:#003087;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:17px;flex-shrink:0}
+.org-name{font-family:'Playfair Display',Georgia,serif;font-size:16px;font-weight:600}
+.org-sub{font-size:11px;color:rgba(255,255,255,0.7);letter-spacing:1.6px;text-transform:uppercase;margin-top:2px}
+.doc-title{font-family:'Playfair Display',Georgia,serif;font-size:30px;font-weight:500}
+.doc-ref{font-size:13px;color:rgba(255,255,255,0.78);margin-top:6px;letter-spacing:0.5px}
+.doc-meta{display:flex;gap:28px;margin-top:18px}
+.doc-meta div{font-size:11px}
+.doc-meta .l{color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:1px;font-size:9.5px}
+.doc-meta .v{font-weight:600;font-size:13px;margin-top:2px}
+
+/* body */
+.body{padding:8px 40px 40px}
+.section{padding:22px 0;border-bottom:1px solid #eceef2}
+.section:last-child{border-bottom:none}
+.section-h{font-family:'Playfair Display',Georgia,serif;font-size:15px;font-weight:600;color:#003087;display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.section-h .n{width:22px;height:22px;border-radius:5px;background:#003087;color:#fff;font-family:'Inter';font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 28px}
+.f .l{font-size:9.5px;color:#9aa3b8;text-transform:uppercase;letter-spacing:0.6px}
+.f .v{font-size:13.5px;color:#1f2937;margin-top:2px;font-weight:500}
+
+.statement{font-size:13px;color:#374151;line-height:1.65;white-space:pre-wrap;background:#f8f9fb;border-left:3px solid #003087;padding:14px 18px;border-radius:0 6px 6px 0}
+
+/* scores */
+.scores{width:100%;border-collapse:collapse;font-size:12.5px}
+.scores th{text-align:left;color:#6b7280;font-size:10px;text-transform:uppercase;letter-spacing:0.5px;padding:6px 10px;border-bottom:2px solid #e5e7eb;font-weight:600}
+.scores td{padding:8px 10px;border-bottom:1px solid #f1f5f9}
+.scores .dim{font-weight:500;color:#1f2937}
+.bar{display:inline-block;height:7px;border-radius:4px;background:#003087;vertical-align:middle}
+.bartrack{display:inline-block;width:120px;height:7px;border-radius:4px;background:#e5e7eb;vertical-align:middle;margin-right:8px;position:relative;overflow:hidden}
+.bartrack .bar{position:absolute;left:0;top:0}
+.sc-num{font-weight:700;color:#003087}
+.avg-row td{border-top:2px solid #e5e7eb;border-bottom:none;font-weight:700;color:#003087}
+
+/* consent / decision pills */
+.pill{display:inline-block;font-size:11px;font-weight:600;padding:3px 11px;border-radius:999px}
+.pill-green{background:#D1FAE5;color:#065f46}
+.pill-navy{background:#E8EEF6;color:#003087}
+
+.decision{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:16px 20px}
+.decision .verdict{font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:600;color:#15803d;display:flex;align-items:center;gap:8px}
+.decision .rationale{font-size:12.5px;color:#374151;margin-top:8px;line-height:1.6}
+.decision .panel-meta{font-size:11px;color:#6b7280;margin-top:10px}
+
+.referee{font-size:13px;color:#374151;line-height:1.65;font-style:italic}
+.referee .by{font-style:normal;font-size:11.5px;color:#6b7280;margin-top:10px}
+
+/* footer */
+.footer{padding:18px 40px;background:#001a4d;color:rgba(255,255,255,0.6);font-size:10.5px;display:flex;justify-content:space-between;align-items:center}
+.footer strong{color:rgba(255,255,255,0.85)}
+
+@media print{
+  body{background:#fff}
+  .toolbar{display:none}
+  .page{box-shadow:none;margin:0;max-width:none}
+  .section{break-inside:avoid}
+}
+@media (max-width:640px){.grid{grid-template-columns:1fr}.doc-meta{flex-wrap:wrap;gap:14px}}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span>Sample document — generated by the <b>Generate Nomination Pack</b> button on Sofia's application.</span>
+  <button onclick="window.print()">⎙ Print / Save as PDF</button>
+</div>
+
+<div class="page">
+
+  <!-- ===== BANNER ===== -->
+  <div class="banner">
+    <div class="banner-top">
+      <div class="logo">UWC</div>
+      <div>
+        <div class="org-name">United World Colleges</div>
+        <div class="org-sub">International · Nomination to School</div>
+      </div>
+    </div>
+    <div class="doc-title serif">UWC Nomination Pack</div>
+    <div class="doc-ref">Reference BR-2026-00041 · Pack NP-2026-00001</div>
+    <div class="doc-meta">
+      <div><div class="l">Nominating NC</div><div class="v">UWC Brazil</div></div>
+      <div><div class="l">Target School</div><div class="v">UWC Atlantic</div></div>
+      <div><div class="l">Cycle</div><div class="v">2026</div></div>
+      <div><div class="l">Generated</div><div class="v">29 May 2026</div></div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- 1 PERSONAL DETAILS -->
+    <div class="section">
+      <div class="section-h"><span class="n">1</span> Personal Details</div>
+      <div class="grid">
+        <div class="f"><div class="l">Full Name</div><div class="v">Sofia Carvalho</div></div>
+        <div class="f"><div class="l">Date of Birth</div><div class="v">12 March 2010 (16 years)</div></div>
+        <div class="f"><div class="l">Nationality</div><div class="v">Brazilian</div></div>
+        <div class="f"><div class="l">Country of Residence</div><div class="v">Brazil</div></div>
+        <div class="f"><div class="l">Email</div><div class="v">sofia.carvalho@gmail.com</div></div>
+        <div class="f"><div class="l">Application Language</div><div class="v">Português</div></div>
+        <div class="f"><div class="l">National Committee</div><div class="v">UWC National Committee Brazil</div></div>
+        <div class="f"><div class="l">Applicant Number</div><div class="v">APP-2026-00041</div></div>
+      </div>
+    </div>
+
+    <!-- 2 FORM SUMMARY -->
+    <div class="section">
+      <div class="section-h"><span class="n">2</span> Application Form Summary</div>
+      <div class="grid" style="margin-bottom:14px">
+        <div class="f"><div class="l">Eligibility Status</div><div class="v">Passed</div></div>
+        <div class="f"><div class="l">Stage</div><div class="v">Shortlisted</div></div>
+        <div class="f"><div class="l">Submitted Date</div><div class="v">15 January 2026</div></div>
+        <div class="f"><div class="l">Interested Programmes</div><div class="v">IB Diploma · UWC Atlantic</div></div>
+      </div>
+      <div class="f" style="margin-bottom:6px"><div class="l">Personal Statement</div></div>
+      <div class="statement">Growing up in São Paulo, I learned early that opportunity is not evenly shared. I spent two years tutoring younger students in my community's library on weekends — what began as homework help became a small reading club of fourteen children. Seeing them grow in confidence taught me that education is the most durable form of hope.
+
+I am drawn to UWC because I want to learn alongside people whose lives have been shaped by circumstances different from my own. I believe the deepest learning happens when difference is not smoothed over but understood. At Atlantic, I hope to study marine science and continue the community work that has defined my life so far — carrying it into a context far larger than my neighbourhood.</div>
+    </div>
+
+    <!-- 3 ASSESSMENT SCORES -->
+    <div class="section">
+      <div class="section-h"><span class="n">3</span> Assessment Scores</div>
+      <div class="f" style="margin-bottom:10px"><div class="l">Unlocked by Blueprint after shortlist · two independent reviewers (blind-scored)</div></div>
+      <table class="scores">
+        <thead><tr><th>Dimension</th><th>Clara Ramos</th><th>Paulo Fonseca</th><th style="text-align:right">Average</th></tr></thead>
+        <tbody>
+          <tr><td class="dim">Academic Potential</td><td>8</td><td>9</td><td style="text-align:right"><span class="bartrack"><span class="bar" style="width:85%"></span></span><span class="sc-num">8.5</span></td></tr>
+          <tr><td class="dim">Community Engagement</td><td>9</td><td>10</td><td style="text-align:right"><span class="bartrack"><span class="bar" style="width:95%"></span></span><span class="sc-num">9.5</span></td></tr>
+          <tr><td class="dim">Communication Skills</td><td>8</td><td>8</td><td style="text-align:right"><span class="bartrack"><span class="bar" style="width:80%"></span></span><span class="sc-num">8.0</span></td></tr>
+          <tr><td class="dim">UWC Values Commitment</td><td>9</td><td>9</td><td style="text-align:right"><span class="bartrack"><span class="bar" style="width:90%"></span></span><span class="sc-num">9.0</span></td></tr>
+          <tr class="avg-row"><td>Overall Average</td><td></td><td></td><td style="text-align:right">8.75 / 10</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 4 REFEREE STATEMENT -->
+    <div class="section">
+      <div class="section-h"><span class="n">4</span> Referee Statement</div>
+      <div class="referee">
+        "Sofia is among the most quietly determined students I have taught in twenty years. She does not seek attention, yet others gravitate to her — in group work she is the one who makes sure every voice is heard. Her reading club was entirely her own initiative; she sourced the books, set the schedule, and never once asked for recognition. She has the rare combination of intellectual seriousness and genuine warmth that UWC is built for. I recommend her without reservation."
+        <div class="by">— Prof. Helena Duarte · Coordinator, Escola Estadual São Paulo · Referee since 2024</div>
+      </div>
+    </div>
+
+    <!-- 5 PARENTAL CONSENT -->
+    <div class="section">
+      <div class="section-h"><span class="n">5</span> Parental / Guardian Consent</div>
+      <div class="grid">
+        <div class="f"><div class="l">Consent Status</div><div class="v"><span class="pill pill-green">Received</span></div></div>
+        <div class="f"><div class="l">Consent Date</div><div class="v">14 January 2026</div></div>
+        <div class="f"><div class="l">Guardian</div><div class="v">Maria Carvalho (Mother)</div></div>
+        <div class="f"><div class="l">Lawful Basis</div><div class="v">Consent (GDPR Art. 6 / 8)</div></div>
+        <div class="f"><div class="l">Data Processing</div><div class="v">Authorised — selection &amp; placement</div></div>
+        <div class="f"><div class="l">Source</div><div class="v">Applicant portal · Guardian sign-in</div></div>
+      </div>
+    </div>
+
+    <!-- 6 PANEL DECISION -->
+    <div class="section">
+      <div class="section-h"><span class="n">6</span> Selection Panel Decision</div>
+      <div class="decision">
+        <div class="verdict">✓ Nominated to UWC Atlantic</div>
+        <div class="rationale">The Brazil National Committee selection panel unanimously recommends Sofia Carvalho for nomination to UWC Atlantic for the 2026 cohort. Her assessment scores place her in the top tier of this cycle's shortlist, with exceptional community engagement and consistent reviewer agreement. No safeguarding concerns are on file. Parental consent is received and valid.</div>
+        <div class="panel-meta">Panel: Ana Carvalho (Chair), Clara Ramos, Paulo Fonseca · Decision recorded 28 May 2026 · UWC Brazil NC</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">
+    <span><strong>UWC Nomination Pack BR-2026-00041</strong> · Confidential — for UWC Atlantic admissions use only</span>
+    <span>United World Colleges International · EU data residency · GDPR</span>
+  </div>
+
+</div>
+
+</body>
+</html>
