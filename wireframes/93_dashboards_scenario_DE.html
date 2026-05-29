@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Build Guides · Scenarios D &amp; E · UWC International CRM</title>
+<link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-feature-settings:'cv02','cv03','cv11';color:#0f172a;background:#f1f5f9;-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:#003087;text-decoration:none}a:hover{text-decoration:underline}
+.mono{font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+
+.header{background:linear-gradient(135deg,#001a4d 0%,#003087 50%,#004A97 100%);color:#fff;border-bottom:3px solid #C8102E}
+.header-inner{max-width:1280px;margin:0 auto;padding:26px 32px;display:flex;align-items:center;gap:20px}
+.header-mark{width:48px;height:48px;border-radius:50%;background:#fff;color:#003087;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:14px;flex-shrink:0}
+.header-titleblock{flex:1}
+.header-title{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:24px;letter-spacing:0.2px}
+.header-sub{font-size:12.5px;color:rgba(255,255,255,0.7);margin-top:4px}
+.header-meta{display:flex;gap:14px;font-size:11px;color:rgba(255,255,255,0.65)}
+.header-meta strong{color:#fff;font-weight:600;display:block;font-size:14px;margin-top:2px}
+.header-meta div{padding:0 14px;border-left:1px solid rgba(255,255,255,0.18)}
+.header-meta div:first-child{border-left:none;padding-left:0}
+
+.backbar{max-width:1280px;margin:0 auto;padding:14px 32px 0}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:#003087}
+.back-link::before{content:'←'}
+
+.wrap{max-width:1280px;margin:0 auto;padding:24px 32px 48px}
+
+.tocbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.tocbar a{font-size:12.5px;font-weight:600;background:#fff;border:1px solid #e2e8f0;border-radius:999px;padding:7px 14px;color:#003087}
+.tocbar a:hover{border-color:#003087;text-decoration:none}
+
+.guide{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:26px 28px;box-shadow:0 1px 2px rgba(0,0,0,0.04);margin-bottom:28px}
+.guide-eyebrow{font-size:11px;font-weight:600;color:#C8102E;letter-spacing:1.4px;text-transform:uppercase}
+.guide h2{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:21px;color:#003087;margin:4px 0 8px}
+.guide-intro{font-size:13.5px;color:#475569;max-width:980px}
+.guide-intro code,.note code,.step code,td code{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;background:#eef2f7;padding:1px 5px;border-radius:4px;color:#0f172a}
+
+.section-label{font-size:11px;font-weight:600;color:#64748b;letter-spacing:1.6px;text-transform:uppercase;margin:22px 0 12px}
+
+.step{border:1px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:12px;background:#fcfcfd}
+.step h3{font-size:14px;font-weight:600;color:#003087;display:flex;align-items:center;gap:10px;margin-bottom:2px}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:6px;background:#003087;color:#fff;font-size:12px;font-weight:600;flex-shrink:0}
+.step-type{font-size:10px;font-weight:600;letter-spacing:0.4px;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-left:auto;background:#dcfce7;color:#166534}
+.step-type.widget-t{background:#ede9fe;color:#5b21b6}
+.step-type.report-t{background:#dbeafe;color:#1e40af}
+table.cfg{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px}
+table.cfg td{padding:7px 12px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+table.cfg tr:last-child td{border-bottom:none}
+table.cfg td:first-child{width:215px;color:#64748b;font-weight:500}
+.expect{font-size:12px;color:#475569;margin-top:10px;padding:9px 12px;background:#f1f5f9;border-left:3px solid #003087;border-radius:0 6px 6px 0}
+.expect b{color:#0f172a}
+
+.chip{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px}
+.c-green{background:#D1FAE5;color:#065f46}.c-amber{background:#FEF3C7;color:#92400e}.c-red{background:#FEE2E2;color:#991b1b}
+
+/* matrix preview */
+.matrix-prev{overflow-x:auto;margin-top:6px}
+table.matrix{border-collapse:collapse;font-size:11.5px;min-width:560px}
+table.matrix th,table.matrix td{border:1px solid #e2e8f0;padding:7px 9px;text-align:center}
+table.matrix th{background:#f8fafc;font-weight:600}
+table.matrix td.rowh{background:#f8fafc;font-weight:600;text-align:left;white-space:nowrap}
+.tick{color:#16a34a;font-weight:700}.cross{color:#dc2626;font-weight:700}
+td.gap{background:#FEE2E2}
+
+.note{border-radius:10px;padding:14px 18px;margin-top:14px}
+.note.warn{background:#fffbeb;border:1px solid #fde68a}
+.note.info{background:#eff6ff;border:1px solid #bfdbfe}
+.note h4{font-size:12.5px;font-weight:600;margin-bottom:5px;display:flex;align-items:center;gap:6px}
+.note.warn h4{color:#92400e}.note.warn h4::before{content:'⚠'}
+.note.info h4{color:#1e40af}.note.info h4::before{content:'ℹ'}
+.note p{font-size:12.5px;color:#334155;line-height:1.6;max-width:1000px}
+.note pre{background:#0f172a;color:#e2e8f0;border-radius:8px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.6;overflow-x:auto;margin-top:8px}
+
+.footer{background:#001a4d;color:rgba(255,255,255,0.55);padding:22px 32px;text-align:center;font-size:11px;margin-top:40px}
+.footer strong{color:rgba(255,255,255,0.85)}
+@media (max-width:900px){.header-meta{display:none}table.cfg td:first-child{width:auto}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-mark">UWC</div>
+    <div class="header-titleblock">
+      <div class="header-title">Dashboard Build Guides — Scenarios D &amp; E</div>
+      <div class="header-sub">Place Allocation matrix · Competency Matrix · Network Summary report</div>
+    </div>
+    <div class="header-meta">
+      <div>Reference<strong>UWC-CRM-5128</strong></div>
+      <div>Org<strong>Zoho CRM · EU DC</strong></div>
+      <div>Partner<strong>A2Z Cloud</strong></div>
+    </div>
+  </div>
+</header>
+
+<div class="backbar"><a href="00_index.html" class="back-link">Back to demo home</a></div>
+
+<div class="wrap">
+
+  <div class="tocbar">
+    <a href="#place">① Place Allocation Matrix (D)</a>
+    <a href="#competency">② Competency Matrix (E)</a>
+    <a href="#network">③ Network Summary Report (E)</a>
+    <a href="92_dashboards_build_guide.html">↗ IO NC Health Dashboard (F)</a>
+  </div>
+
+  <div class="note info" style="margin-bottom:24px">
+    <h4>How these relate to the NC Health Dashboard</h4>
+    <p>This page covers the three remaining scenario dashboards. The <b>IO NC Health Dashboard</b> (Scenario F) has its own detailed page — <a href="92_dashboards_build_guide.html">open it here</a>. Build each component under <code>Reports &amp; Dashboards</code>, except the Competency Matrix which is a <b>custom HTML widget</b> (explained below).</p>
+  </div>
+
+  <!-- ============ PLACE ALLOCATION ============ -->
+  <div class="guide" id="place">
+    <div class="guide-eyebrow">Scenario D · IO Admissions</div>
+    <h2>① Place Allocation Matrix</h2>
+    <p class="guide-intro">A schools × NCs pivot showing how many places each partner school has allocated to each National Committee, and how many are used. Fatima opens this to bump a cell (Atlantic ↔ Brazil 4 → 5); Ana later sees the result as a tile on her NC dashboard.</p>
+
+    <div class="section-label">Component A — the pivot matrix</div>
+    <div class="step">
+      <h3><span class="step-num">1</span> Place Allocations pivot <span class="step-type report-t">Report · Matrix / Pivot</span></h3>
+      <table class="cfg">
+        <tr><td>Report Name</td><td>Place Allocations — Schools × NCs</td></tr>
+        <tr><td>Module</td><td>School Place Allocations</td></tr>
+        <tr><td>Report type</td><td>Matrix (rows × columns) — in Zoho this is a <b>Group By with two dimensions</b></td></tr>
+        <tr><td>Rows (group by)</td><td>National Committee</td></tr>
+        <tr><td>Columns (group by)</td><td>School (Atlantic · Robert College Nordic · UWC Mahindra)</td></tr>
+        <tr><td>Cell value</td><td>Sum of <code>Allocated</code> (and a second measure: Sum of <code>Used</code>, shown as "4 / 0")</td></tr>
+        <tr><td>Filter</td><td><code>Cycle = 2026</code></td></tr>
+      </table>
+      <div class="expect">15-cell matrix (3 schools × 5 named NCs). Atlantic ↔ Brazil cell shows <b>4 / 0</b> (allocated / used), becoming <b>5 / 0</b> after Fatima's edit. Totals row at the bottom.</div>
+    </div>
+
+    <div class="section-label">Component B — Ana's NC Brazil tile</div>
+    <div class="step">
+      <h3><span class="step-num">2</span> Atlantic places available <span class="step-type">KPI · Basic</span></h3>
+      <table class="cfg">
+        <tr><td>Component Name</td><td>Atlantic — Places Available (Brazil)</td></tr>
+        <tr><td>Module</td><td>School Place Allocations</td></tr>
+        <tr><td>Measure</td><td>Sum of <code>Allocated</code> minus Sum of <code>Used</code> (or show Allocated, label "available")</td></tr>
+        <tr><td>Filter</td><td><code>School = UWC Atlantic</code> AND <code>National Committee = UWC Brazil</code></td></tr>
+        <tr><td>Placement</td><td>On the <b>NC Dashboard — Brazil</b> (role-scoped homepage), not the IO dashboard</td></tr>
+      </table>
+      <div class="expect">Tile reads <b>"Atlantic: 5 / 5 places available"</b> after the allocation bump. Because it's role-scoped, Ana sees Brazil; Marcus would see Germany.</div>
+    </div>
+
+    <div class="note warn">
+      <h4>Pivot may need a fallback</h4>
+      <p>Zoho list views can render a 2-dimension Group By, but if the pivot is awkward to read, build it as a <b>Custom Dashboard matrix report</b> instead (per the plan's risk note). The cell-edit "Allocate Places" action is a custom button, not part of the report itself.</p>
+    </div>
+  </div>
+
+  <!-- ============ COMPETENCY MATRIX ============ -->
+  <div class="guide" id="competency">
+    <div class="guide-eyebrow">Scenario E · IO Super Admin · CENTREPIECE</div>
+    <h2>② Competency Matrix</h2>
+    <p class="guide-intro">A Boards × Required-Competencies grid. A cell is a green tick if ≥1 <i>active</i> member of that board holds the competency, a red cross if zero. Expired board terms drop competencies out of coverage — surfacing the gaps the board must address.</p>
+
+    <div class="section-label">What it looks like</div>
+    <div class="matrix-prev">
+      <table class="matrix">
+        <tr><th>Board ↓ / Competency →</th><th>Governance</th><th>Finance</th><th>Marketing &amp; Comms</th><th>Asia-Pacific</th><th>Europe</th><th>Americas</th></tr>
+        <tr><td class="rowh">UWC International Board</td><td class="tick">✓</td><td class="tick">✓</td><td class="gap"><span class="cross">✗</span></td><td class="gap"><span class="cross">✗</span></td><td class="gap"><span class="cross">✗</span></td><td class="gap"><span class="cross">✗</span></td></tr>
+        <tr><td class="rowh">UWC Brazil NC Board</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+        <tr><td class="rowh">Gap Count (footer)</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+      </table>
+    </div>
+    <div class="expect" style="margin-top:14px"><b>4 red cells</b> are the headline — Marketing &amp; Comms (Thomas Berger's term expired), Asia-Pacific (Dr Ravi Menon expired), Europe Regional &amp; Americas Regional (nobody holds them).</div>
+
+    <div class="section-label">How to build it</div>
+    <div class="step">
+      <h3><span class="step-num">1</span> Custom HTML widget <span class="step-type widget-t">Widget</span></h3>
+      <table class="cfg">
+        <tr><td>Where</td><td><code>Setup → Customisation → Widgets → + Create → "Governance Matrix"</code></td></tr>
+        <tr><td>Hosted on</td><td>A Zoho CRM Dashboard named "Governance Competency Matrix"</td></tr>
+        <tr><td>Rows</td><td>Active Boards (<code>Body_Type = Board AND Body_Status = Active</code>)</td></tr>
+        <tr><td>Columns</td><td>Competencies where <code>Required_Board = true</code></td></tr>
+        <tr><td>Cell logic</td><td>green tick if ≥1 Active membership in that body holds the competency, else red cross</td></tr>
+        <tr><td>Footer row</td><td><code>Gap_Count</code> per competency (from the Competencies module)</td></tr>
+      </table>
+    </div>
+    <div class="step">
+      <h3><span class="step-num">2</span> Data feed — inline Deluge <span class="step-type">Deluge</span></h3>
+      <p style="font-size:12.5px;color:#475569;margin-top:4px">The widget fetches JSON from an inline function <code>getCompetencyMatrix()</code>. <code>Gap_Count</code> is precomputed nightly (Zoho's native roll-ups can't express "boards <i>missing</i> this competency"):</p>
+      <div class="note info" style="margin-top:8px">
+        <h4>recomputeCompetencyGaps() — daily @ 02:00 UTC</h4>
+        <pre>allComps  = zoho.crm.getRecords("Competencies", 1, 200);
+allBodies = zoho.crm.searchRecords("Governance_Bodies",
+  "(Body_Type:equals:Board)and(Body_Status:equals:Active)");
+for each c in allComps {
+  gap = 0;
+  for each b in allBodies {
+    members = zoho.crm.searchRecords("Governance_Memberships",
+      "(Governance_Body:equals:"+b.get("id")+")and(Membership_Status:equals:Active)"
+      +"and(Competencies_Held:in:"+c.get("id")+")");
+    if (members.size() == 0) gap = gap + 1;
+  }
+  zoho.crm.updateRecord("Competencies", c.get("id"), {"Gap_Count": gap});
+}</pre>
+      </div>
+    </div>
+
+    <div class="note warn">
+      <h4>Pre-seed before the live demo</h4>
+      <p>Seed <code>Gap_Count</code> manually the evening before — the scheduler only fires overnight, so a fresh build would otherwise show zero gaps on stage. Target: widget loads in under 2 seconds and renders ≥ 4 red cells.</p>
+    </div>
+  </div>
+
+  <!-- ============ NETWORK SUMMARY ============ -->
+  <div class="guide" id="network">
+    <div class="guide-eyebrow">Scenario E · IO Super Admin</div>
+    <h2>③ Network Summary Report</h2>
+    <p class="guide-intro">A one-page governance-health picture the Council Chair reads after the matrix. Built as standard Zoho Reports — three components on one dashboard.</p>
+
+    <div class="step">
+      <h3><span class="step-num">1</span> Bodies by type <span class="step-type report-t">Chart · Pie</span></h3>
+      <table class="cfg">
+        <tr><td>Module</td><td>Governance Bodies</td></tr>
+        <tr><td>Chart type</td><td>Pie</td></tr>
+        <tr><td>Group by</td><td><code>Body_Type</code> (Board / Committee / Advisory)</td></tr>
+        <tr><td>Aggregate</td><td>Count</td></tr>
+      </table>
+    </div>
+    <div class="step">
+      <h3><span class="step-num">2</span> Competency coverage % <span class="step-type report-t">Chart · Bar</span></h3>
+      <table class="cfg">
+        <tr><td>Module</td><td>Competencies</td></tr>
+        <tr><td>Chart type</td><td>Bar</td></tr>
+        <tr><td>X-axis</td><td>Competency Name</td></tr>
+        <tr><td>Y-axis</td><td>Coverage % (Total Holders vs active boards) — or Total Holders count</td></tr>
+      </table>
+    </div>
+    <div class="step">
+      <h3><span class="step-num">3</span> Lapsed memberships (network-wide) <span class="step-type">KPI · Basic</span></h3>
+      <table class="cfg">
+        <tr><td>Module</td><td>Governance Memberships</td></tr>
+        <tr><td>Measure</td><td>Count of Records</td></tr>
+        <tr><td>Filter</td><td><code>Membership_Status</code> is <code>Lapsed</code></td></tr>
+      </table>
+      <div class="expect">Includes Thomas Berger &amp; Dr Ravi Menon (expired terms). Drill-through on any tile opens the underlying records.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <strong>UWC International CRM — Dashboard Build Guides · Scenarios D &amp; E</strong> · A2Z Cloud Ltd · Zoho Premium Partner · Salisbury, UK
+</footer>
+
+</body>
+</html>
