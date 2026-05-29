@@ -101,7 +101,7 @@ td.mod{font-weight:600;color:#0f172a}
     </div>
     <div class="header-meta">
       <div>Reference<strong>UWC-CRM-5128</strong></div>
-      <div>Scope<strong>4 core profiles</strong></div>
+      <div>Profiles<strong>Admin · Standard · IO Admissions · NC Reviewer</strong></div>
       <div>Org<strong>Zoho CRM · EU DC</strong></div>
     </div>
   </div>
@@ -113,7 +113,13 @@ td.mod{font-weight:600;color:#0f172a}
 
   <div class="lead">
     <h2>The permissions foundation</h2>
-    <p>Scenario A configures who can see and do what. It is the base layer every other scenario depends on. This guide builds the <b>4 core profiles</b> (module access), the <b>role hierarchy + data-sharing rules</b> (which records), <b>field-level security</b> (blind review, DOB masking), and the <b>custom action buttons</b> (with visibility conditions) — step by step in Zoho CRM Setup.</p>
+    <p>Scenario A configures who can see and do what. It is the base layer every other scenario depends on. This guide reflects the <b>actual demo org</b>: <b>4 profiles</b> (Administrator, Standard, IO Admissions, NC Reviewer), the <b>role hierarchy + data-sharing rules</b> (which records), <b>blind-review field-level security</b>, and the <b>custom action buttons</b> — step by step in Zoho CRM Setup.</p>
+  </div>
+
+  <div class="note warn">
+    <h4>Scope of the demo build (confirmed 30 May 2026)</h4>
+    <p><b>Profiles in use:</b> Administrator · Standard · IO Admissions · NC Reviewer — only these four.</p>
+    <p><b>4 modules deleted</b> from the demo org: <code>Mailing_Lists</code>, <code>Communication_Logs</code>, <code>Consent_Records</code>, <code>Safeguarding_Cases</code>. Communications run through <b>Zoho Campaigns</b> (not Mailchimp, not custom comms modules), so those modules and the Data-Protection-Lead profile they implied are out of scope for the demo.</p>
   </div>
 
   <div class="note key">
@@ -123,23 +129,23 @@ td.mod{font-weight:600;color:#0f172a}
   <div class="concept">
     <div class="c">
       <h4>PROFILE = what you can DO</h4>
-      <p>Controls which <b>modules, fields and actions</b> a user can touch (View / Create / Edit / Delete). Profile says "you may edit Volunteers but only view NCs."</p>
-      <p class="ex">e.g. NC Admin profile can create volunteers; Reviewer profile cannot.</p>
+      <p>Controls which <b>modules, fields and actions</b> a user can touch (View / Create / Edit / Delete). Profile says "you may score applications but not configure programmes."</p>
+      <p class="ex">e.g. IO Admissions can edit allocations; NC Reviewer can only score.</p>
     </div>
     <div class="c">
       <h4>ROLE = which records you SEE</h4>
-      <p>Controls <b>data scope</b> via a hierarchy. A user sees their own records + everyone below them in the tree. Role says "you see Brazil's records, not Germany's."</p>
-      <p class="ex">e.g. Ana (NC Admin–Brazil role) sees Brazil; Marcus (NC Admin–Germany) sees Germany — same profile, different role.</p>
+      <p>Controls <b>data scope</b> via a hierarchy. A user sees their own records + everyone below them in the tree. Role says "you see your NC's records, not another's."</p>
+      <p class="ex">e.g. an NC Reviewer in Brazil sees Brazil's applications; the same profile in another NC sees theirs.</p>
     </div>
   </div>
   <div class="note info">
-    <h4>So country scoping is a ROLE job, not a profile job</h4>
-    <p>Ana and Marcus share the identical <code>NC Admin</code> profile (same module access) but sit in different roles, so Data Sharing Rules give each only their country's records. Build profiles first (Steps 1–2), then roles (Step 3), then layer field security (Step 4) and actions (Step 5).</p>
+    <h4>So record scoping is a ROLE job, not a profile job</h4>
+    <p>Two NC Reviewers can share the identical <code>NC Reviewer</code> profile (same module access) but sit in different roles, so Data Sharing Rules give each only their own NC's records. Build profiles first (Steps 1–2), then roles (Step 3), then layer field security (Step 4) and actions (Step 5).</p>
   </div>
 
   <div class="toc">
     <a href="#prep">0 · Prep</a>
-    <a href="#profiles">1 · Create profiles</a>
+    <a href="#profiles">1 · Profiles</a>
     <a href="#modules">2 · Module permissions</a>
     <a href="#roles">3 · Roles &amp; data sharing</a>
     <a href="#fls">4 · Field-level security</a>
@@ -152,59 +158,59 @@ td.mod{font-weight:600;color:#0f172a}
     <div class="step-head"><span class="step-badge">0</span><h2>Prep — modules &amp; admin access</h2></div>
     <div class="step-path">Setup → Modules and Fields</div>
     <ol class="steps">
-      <li>Confirm you are signed in with an <b>Administrator</b> profile. If you hit "Insufficient privileges", you must be promoted to Administrator before any of this works.</li>
+      <li>Confirm you are signed in with the <b>Administrator</b> profile. If you hit "Insufficient privileges", you must be promoted to Administrator before any of this works.</li>
       <li>Disable unused stock modules (Vendors, Services, Projects, Sales Inbox, stock Questions) via the module kebab → <b>Disable Module</b>.</li>
-      <li>Leave enabled: Home · Deals (Applications) · Contacts · Programmes · Campaigns · Tasks · Meetings · Calls · plus the custom modules (NCs, Schools, Place Allocations, Nomination Packs, NC Volunteers, Training Records, MoU Obligations, Governance Bodies/Memberships, Competencies, Mailing Lists, Communication Logs, Consent Records, Safeguarding Cases).</li>
+      <li><b>Delete the 4 out-of-scope modules</b> — <code>Mailing_Lists</code>, <code>Communication_Logs</code>, <code>Consent_Records</code>, <code>Safeguarding_Cases</code> (module kebab → Delete). Comms are handled in <b>Zoho Campaigns</b>.</li>
+      <li>Leave enabled: Home · Deals (Applications) · Contacts · Programmes · Campaigns · Tasks · Meetings · Calls · plus the custom modules (NCs, Schools, Place Allocations, Nomination Packs, NC Volunteers, Training Records, MoU Obligations, Governance Bodies/Memberships, Competencies).</li>
     </ol>
     <div class="note info"><h4>Note</h4><p>The "Applications" module is the standard <b>Deals</b> module, relabelled. Permission screens will say Deals.</p></div>
   </div>
 
   <!-- ===== STEP 1 PROFILES ===== -->
   <div class="step-block" id="profiles">
-    <div class="step-head"><span class="step-badge">1</span><h2>Create the 4 core profiles</h2></div>
-    <div class="step-path">Setup → Users and Control → Profiles → + New Profile</div>
-    <p style="font-size:13px;color:#475569;margin-bottom:12px">Clone each from an existing profile, name it, save. Set module/field permissions in Steps 2 &amp; 4.</p>
+    <div class="step-head"><span class="step-badge">1</span><h2>The 4 demo profiles</h2></div>
+    <div class="step-path">Setup → Users and Control → Profiles</div>
+    <p style="font-size:13px;color:#475569;margin-bottom:12px">Administrator and Standard ship with Zoho. Create the two custom profiles by cloning Standard, then set their permissions in Steps 2 &amp; 4.</p>
     <div class="card">
       <table>
-        <thead><tr><th>Profile</th><th>Clone from</th><th>Purpose / user</th></tr></thead>
+        <thead><tr><th>Profile</th><th>Origin</th><th>Description / use</th></tr></thead>
         <tbody>
-          <tr><td class="mod">IO Super Admin</td><td>Administrator</td><td>Full system. Akanksha — the presenter role.</td></tr>
-          <tr><td class="mod">NC Admin</td><td>Standard</td><td>Runs a National Committee — Ana (Brazil), Marcus (Germany).</td></tr>
-          <tr><td class="mod">Reviewer</td><td>Standard</td><td>Scores applications, blind to peers — Clara, Paulo.</td></tr>
-          <tr><td class="mod">Data Protection Lead</td><td>Standard</td><td>GDPR oversight — consent, safeguarding, masked PII.</td></tr>
+          <tr><td class="mod">Administrator</td><td>Built-in</td><td>All permissions. Akanksha — the presenter role.</td></tr>
+          <tr><td class="mod">Standard</td><td>Built-in</td><td>No administrative permissions. Baseline to clone from.</td></tr>
+          <tr><td class="mod">IO Admissions</td><td>Clone of Standard</td><td>International Office admissions — sees the network, manages allocations &amp; nominations (Fatima).</td></tr>
+          <tr><td class="mod">NC Reviewer</td><td>Clone of Standard</td><td>Scores applications, blind to peers (Clara, Paulo).</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="note info"><h4>Demo shortcut</h4><p>You don't need to create a user per profile — Akanksha demos by <b>switching profile</b> (Setup → Users → Switch User). One optional real user (a Reviewer) proves the blind-review wipe in Scenario C.</p></div>
+    <div class="note info"><h4>Demo shortcut</h4><p>You don't need a user per profile — Akanksha demos by <b>switching profile</b> (Setup → Users → Switch User). One optional real user (an NC Reviewer) proves the blind-review wipe in Scenario C.</p></div>
   </div>
 
   <!-- ===== STEP 2 MODULE PERMISSIONS ===== -->
   <div class="step-block" id="modules">
     <div class="step-head"><span class="step-badge">2</span><h2>Set module permissions per profile</h2></div>
     <div class="step-path">Setup → Users and Control → Profiles → [profile] → Module-level permissions</div>
-    <p style="font-size:13px;color:#475569;margin-bottom:8px">For each profile, toggle each module on/off; when on, expand the <code>View · Create · Edit · Delete</code> dropdown and tick only what's needed. IO Super Admin = full on everything (not shown). Apply this matrix to the other three:</p>
+    <p style="font-size:13px;color:#475569;margin-bottom:8px">For each profile, toggle each module on/off; when on, expand the <code>View · Create · Edit · Delete</code> dropdown and tick only what's needed. Administrator = full on everything (not shown). Apply this matrix to the two custom profiles (Standard stays at Zoho defaults unless used):</p>
     <div class="card">
       <table>
-        <thead><tr><th>Module</th><th>NC Admin</th><th>Reviewer</th><th>Data Protection Lead</th></tr></thead>
+        <thead><tr><th>Module</th><th>IO Admissions</th><th>NC Reviewer</th></tr></thead>
         <tbody>
-          <tr><td class="mod">Deals (Applications)</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm full">View+Create+Edit</span><br><span style="font-size:10px;color:#64748b">via "My Review Queue" view</span></td><td><span class="perm view">View</span></td></tr>
-          <tr><td class="mod">Contacts</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm view">View (own NC)</span></td><td><span class="perm rw">View+Edit (masked)</span></td></tr>
-          <tr><td class="mod">National Committees</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
-          <tr><td class="mod">NC Volunteers</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
-          <tr><td class="mod">Training Records</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td></tr>
-          <tr><td class="mod">MoU Obligations</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
-          <tr><td class="mod">Schools</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
-          <tr><td class="mod">School Place Allocations</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
-          <tr><td class="mod">Programmes</td><td><span class="perm view">View</span></td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td></tr>
-          <tr><td class="mod">Mailing Lists</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
-          <tr><td class="mod">Consent Records</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td><td><span class="perm rw">View+Create+Edit</span></td></tr>
-          <tr><td class="mod">Communication Logs</td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td><td><span class="perm view">View</span></td></tr>
-          <tr><td class="mod">Safeguarding Cases</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td><td><span class="perm rw">View+Edit</span></td></tr>
-          <tr><td class="mod">Governance Bodies / Memberships</td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td><td><span class="perm none">No access</span></td></tr>
+          <tr><td class="mod">Deals (Applications)</td><td><span class="perm view">View</span></td><td><span class="perm full">View+Create+Edit</span><br><span style="font-size:10px;color:#64748b">via "My Review Queue" view</span></td></tr>
+          <tr><td class="mod">Contacts</td><td><span class="perm view">View</span></td><td><span class="perm view">View (own NC)</span></td></tr>
+          <tr><td class="mod">National Committees</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td></tr>
+          <tr><td class="mod">NC Volunteers</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td></tr>
+          <tr><td class="mod">Training Records</td><td><span class="perm view">View</span></td><td><span class="perm view">View</span></td></tr>
+          <tr><td class="mod">MoU Obligations</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td></tr>
+          <tr><td class="mod">Schools</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td></tr>
+          <tr><td class="mod">School Place Allocations</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm none">No access</span></td></tr>
+          <tr><td class="mod">Nomination Packs</td><td><span class="perm full">View+Create+Edit</span></td><td><span class="perm view">View</span></td></tr>
+          <tr><td class="mod">Programmes</td><td><span class="perm view">View</span></td><td><span class="perm view">View</span></td></tr>
+          <tr><td class="mod">Campaigns</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td></tr>
+          <tr><td class="mod">Governance Bodies / Memberships</td><td><span class="perm view">View</span></td><td><span class="perm none">No access</span></td></tr>
         </tbody>
       </table>
     </div>
-    <div class="note warn"><h4>Verify against the live org <span class="confirm">confirm</span></h4><p>This matrix follows the build spec. The 3-profile subset (NC Admin / IO Admissions / NC Reviewer) already on the <a href="91_permissions_matrix.html">Permission Matrix page</a> was applied live (31 changes). Reconcile any module-name differences before applying to the live org.</p></div>
+    <div class="note info"><h4>Communications via Zoho Campaigns</h4><p>Mailing lists, sends, and consent live in <b>Zoho Campaigns</b> (synced to CRM), not in CRM modules — which is why Mailing_Lists / Communication_Logs / Consent_Records were deleted. Campaign records still surface in CRM under the standard <b>Campaigns</b> module.</p></div>
+    <div class="note warn"><h4>Reconcile with the applied changes <span class="confirm">confirm</span></h4><p>The IO Admissions / NC Reviewer subset on the <a href="91_permissions_matrix.html">Permission Matrix page</a> was applied live (31 changes). Confirm exact module CRUD against that before re-applying.</p></div>
   </div>
 
   <!-- ===== STEP 3 ROLES ===== -->
@@ -213,56 +219,43 @@ td.mod{font-weight:600;color:#0f172a}
     <div class="step-path">Setup → Users and Control → Roles  ·  then  Security Control → Data Sharing Settings</div>
     <p style="font-size:13px;color:#475569;margin-bottom:10px">The role tree decides record visibility. Build it top-down, then set the org-wide default to Private so the hierarchy actually restricts.</p>
     <div class="tree"><span class="io">International Office</span>  (top — sees everything)
-├── <span class="nc">NC Admin — Brazil</span>  (Ana)
-│   ├── NC Reviewer Brazil  (Clara)
-│   └── NC Reviewer Brazil  (Paulo)
-├── <span class="nc">NC Admin — Germany</span>  (Marcus)
-│   └── NC Reviewer Germany
-├── <span class="nc">NC Admin — Kenya</span>  (Grace)
-├── <span class="nc">NC Admin — India</span>  ·  <span class="nc">NC Admin — UK</span>
-└── <span class="sc">School Admissions Director</span>  (Helen, Erik, Anjali)</div>
+├── <span class="nc">IO Admissions</span>  (Fatima — network-wide admissions)
+├── NC — Brazil
+│   ├── <span class="sc">NC Reviewer Brazil</span>  (Clara)
+│   └── <span class="sc">NC Reviewer Brazil</span>  (Paulo)
+└── NC — Germany / Kenya / India / UK
+    └── <span class="sc">NC Reviewer</span>  (per NC)</div>
     <div class="section-label">Steps</div>
     <ol class="steps">
-      <li>Under Roles, create the tree above — each NC Admin role reports to <b>International Office</b>; each NC Reviewer reports to its NC Admin.</li>
-      <li>Assign <code>uwc_admin</code> the <b>International Office</b> role + <b>IO Super Admin</b> profile.</li>
-      <li>Go to <b>Security Control → Data Sharing Settings</b>. Set the default access for record-scoped modules (Deals, Contacts, NC Volunteers, MoU Obligations, Place Allocations) to <b>Private</b>.</li>
-      <li>With Private default, each role sees only its own records + those below it. Ana (Brazil) cannot see Germany's; Marcus (Germany) cannot see Brazil's — automatically, because they are sibling branches.</li>
-      <li>If a module should be network-visible (e.g. Programmes), set its default to <b>Public Read Only</b> instead.</li>
+      <li>Under Roles, build the tree — IO Admissions reports to <b>International Office</b>; each NC Reviewer reports to its NC.</li>
+      <li>Assign <code>uwc_admin</code> the <b>International Office</b> role + <b>Administrator</b> profile.</li>
+      <li>Go to <b>Security Control → Data Sharing Settings</b>. Set the default access for record-scoped modules (Deals, Contacts) to <b>Private</b>.</li>
+      <li>With Private default, each role sees only its own records + those below it. A Brazil reviewer can't see Germany's applications — they're sibling branches.</li>
+      <li>For network-visible modules (Programmes, Schools, Governance), set the default to <b>Public Read Only</b> instead.</li>
     </ol>
-    <div class="note key"><h4>This is what enforces NC-level isolation</h4><p>Profiles gave Ana and Marcus the same module access. The <b>Private default + sibling roles</b> is what makes Ana see only Brazil and Marcus only Germany. Without setting the default to Private, the hierarchy does nothing.</p></div>
+    <div class="note key"><h4>This is what enforces NC-level isolation</h4><p>Profiles give reviewers the same module access. The <b>Private default + sibling roles</b> is what scopes each reviewer to their own NC. Without setting the default to Private, the hierarchy does nothing.</p></div>
   </div>
 
   <!-- ===== STEP 4 FLS ===== -->
   <div class="step-block" id="fls">
-    <div class="step-head"><span class="step-badge">4</span><h2>Field-level security</h2></div>
-    <div class="step-path">Setup → Modules and Fields → [module] → Field Permissions</div>
-
-    <div class="section-label">4a · Blind review — Review Scores subform (Deals)</div>
+    <div class="step-head"><span class="step-badge">4</span><h2>Field-level security — blind review</h2></div>
+    <div class="step-path">Setup → Modules and Fields → Deals → Field Permissions → Review Scores subform</div>
+    <p style="font-size:13px;color:#475569;margin-bottom:8px">The one FLS rule the demo needs: two reviewers score independently and can't see each other's scores until both submit.</p>
     <div class="card">
       <table>
-        <thead><tr><th>Field</th><th>IO Super Admin</th><th>NC Admin</th><th>Reviewer</th><th>DPL</th></tr></thead>
+        <thead><tr><th>Field</th><th>Administrator</th><th>IO Admissions</th><th>NC Reviewer</th></tr></thead>
         <tbody>
-          <tr><td class="mod">Score_Academic</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td><td><span class="perm none">None</span></td></tr>
-          <tr><td class="mod">Score_Community</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td><td><span class="perm none">None</span></td></tr>
-          <tr><td class="mod">Score_Communication</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td><td><span class="perm none">None</span></td></tr>
-          <tr><td class="mod">Score_Values</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td><td><span class="perm none">None</span></td></tr>
-          <tr><td class="mod">Overall_Recommendation</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td><td><span class="perm none">None</span></td></tr>
-          <tr><td class="mod">Reviewer_Comments</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td><td><span class="perm none">None</span></td></tr>
+          <tr><td class="mod">Score_Academic</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td></tr>
+          <tr><td class="mod">Score_Community</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td></tr>
+          <tr><td class="mod">Score_Communication</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td></tr>
+          <tr><td class="mod">Score_Values</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td></tr>
+          <tr><td class="mod">Overall_Recommendation</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td></tr>
+          <tr><td class="mod">Reviewer_Comments</td><td><span class="perm rw">R+W</span></td><td><span class="perm view">Read</span></td><td><span class="perm rw">R+W own row</span></td></tr>
         </tbody>
       </table>
     </div>
-    <div class="note warn"><h4>"Own row only" needs a Client Script</h4><p>Zoho FLS can't scope by row value. Set Reviewer to Read+Write at the field level, then add a <b>Client Script</b> on the Application detail page that <b>blanks peer reviewers' cells</b> unless <code>All_Reviews_Complete = true</code>. Script: <code>zoho-build/client-scripts/blind_review.js</code>. This is what makes the blind-review reveal work in Scenario C.</p></div>
-
-    <div class="section-label">4b · DOB masking for the Data Protection Lead</div>
-    <ol class="steps">
-      <li>Contacts → Field Permissions → <code>Date_of_Birth</code> → for the <b>Data Protection Lead</b> profile choose <b>"View masked"</b> (Zoho's built-in mask) — also apply to Address fields.</li>
-    </ol>
-
-    <div class="section-label">4c · Safeguarding sensitivity</div>
-    <ol class="steps">
-      <li>Safeguarding Cases → <code>Triage_Notes</code> → IO Super Admin + DPL = Read+Write; NC Admin = None.</li>
-      <li>Safeguarding Cases → <code>Resolution_Steps</code> → IO Super Admin + DPL only.</li>
-    </ol>
+    <div class="note warn"><h4>"Own row only" needs a Client Script</h4><p>Zoho FLS can't scope by row value. Set NC Reviewer to Read+Write at the field level, then add a <b>Client Script</b> on the Application detail page that <b>blanks peer reviewers' cells</b> unless <code>All_Reviews_Complete = true</code>. Script: <code>zoho-build/client-scripts/blind_review.js</code>. This is what makes the blind-review reveal work in Scenario C.</p></div>
+    <div class="note info"><h4>Out of scope for the demo</h4><p>DOB masking, Triage Notes and consent FLS depended on the deleted Safeguarding_Cases / Consent_Records modules and a Data Protection Lead profile — none of which are in the demo build. They return in the full rollout.</p></div>
   </div>
 
   <!-- ===== STEP 5 ACTIONS ===== -->
@@ -274,18 +267,14 @@ td.mod{font-weight:600;color:#0f172a}
       <table>
         <thead><tr><th>Button</th><th>Module · where</th><th>Visible when</th><th>Action</th></tr></thead>
         <tbody>
-          <tr><td class="mod">Raise Safeguarding Flag</td><td>Deals · detail</td><td><code>Safeguarding_Flag_Status = None</code> AND Stage ∈ {Under Review, Shortlisted}</td><td>Popup → set status Under Review (fires WR-C-5)</td></tr>
           <tr><td class="mod">Generate Nomination Pack</td><td>Deals · detail</td><td><code>Stage = Shortlisted</code> AND School_Nominated not empty</td><td><code>generate_nomination_pack()</code></td></tr>
           <tr><td class="mod">Nominate to School</td><td>Deals · detail</td><td>Stage = Shortlisted AND a Generated pack exists</td><td>Confirm → Stage = Nominated</td></tr>
           <tr><td class="mod">Accept / Decline Nomination</td><td>Nomination Packs · detail</td><td><code>Pack_Status = Sent</code></td><td>Set Accepted (fires WR-D-Pack) / Declined</td></tr>
-          <tr><td class="mod">Build &amp; Preview</td><td>Mailing Lists · detail</td><td>List_Status ∈ {Draft, Built}</td><td><code>build_mailing_list()</code></td></tr>
-          <tr><td class="mod">Push to Mailchimp</td><td>Mailing Lists · detail</td><td>List_Status = Built</td><td><code>log_campaign_sends()</code></td></tr>
-          <tr><td class="mod">Allocate Places</td><td>Place Allocations · list</td><td>Always — <b>IO Super Admin profile only</b></td><td>Popup → adjust Allocated_Places</td></tr>
-          <tr><td class="mod">Generate Consent Audit Trail</td><td>Contacts · detail</td><td>Always — <b>DPL profile only</b></td><td><code>generate_consent_audit_trail()</code> → CSV</td></tr>
+          <tr><td class="mod">Allocate Places</td><td>Place Allocations · list</td><td>Always — <b>IO Admissions profile only</b></td><td>Popup → adjust Allocated_Places</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="note info"><h4>Profile-scoped buttons</h4><p>"Allocate Places" and "Generate Consent Audit Trail" are restricted to a single profile via the button's <b>profile visibility</b> setting — so even though the module is visible to others, only IO Super Admin / DPL see the action.</p></div>
+    <div class="note info"><h4>Profile-scoped button</h4><p>"Allocate Places" is restricted to the <b>IO Admissions</b> profile via the button's profile-visibility setting — so even where the module is visible to others, only IO Admissions sees the action. (The Raise-Safeguarding-Flag, Build &amp; Preview / Push, and Consent-Audit buttons are out — their modules were deleted; comms run in Zoho Campaigns.)</p></div>
   </div>
 
   <!-- ===== STEP 6 VERIFY ===== -->
@@ -296,11 +285,10 @@ td.mod{font-weight:600;color:#0f172a}
       <table>
         <thead><tr><th>As…</th><th>Should see</th><th>Should NOT see</th></tr></thead>
         <tbody>
-          <tr><td class="mod">IO Super Admin (Akanksha)</td><td>Everything; Allocate Places button</td><td>—</td></tr>
-          <tr><td class="mod">NC Admin — Ana (Brazil)</td><td>Brazil applications, contacts, volunteers, allocations</td><td>Germany's records; governance; Triage Notes</td></tr>
-          <tr><td class="mod">NC Admin — Marcus (Germany)</td><td>Germany's records only</td><td>Brazil's records (sibling role)</td></tr>
-          <tr><td class="mod">Reviewer (Clara)</td><td>Her own score row on Sofia; My Review Queue</td><td>Paulo's score cells (Client Script wipes them until all reviews complete)</td></tr>
-          <tr><td class="mod">Data Protection Lead</td><td>Consent, Safeguarding, Triage Notes; masked DOB</td><td>Unmasked DOB; NC config modules</td></tr>
+          <tr><td class="mod">Administrator (Akanksha)</td><td>Everything; Allocate Places button</td><td>—</td></tr>
+          <tr><td class="mod">IO Admissions (Fatima)</td><td>Network-wide applications, allocations, nomination packs; Allocate Places button</td><td>Edit on programmes/NC config (view only)</td></tr>
+          <tr><td class="mod">NC Reviewer (Clara)</td><td>Her own score row on Sofia; My Review Queue (own NC only)</td><td>Paulo's score cells (Client Script wipes them until all reviews complete); other NCs' applications</td></tr>
+          <tr><td class="mod">Standard</td><td>Zoho default access</td><td>—</td></tr>
         </tbody>
       </table>
     </div>
@@ -315,7 +303,7 @@ td.mod{font-weight:600;color:#0f172a}
 </div>
 
 <footer class="footer">
-  <strong>UWC International CRM — Scenario A Configuration Guide</strong> · A2Z Cloud Ltd · Zoho Premium Partner · Salisbury, UK · <em>Profiles · Roles · FLS · Actions · field names pending full live-org confirmation</em>
+  <strong>UWC International CRM — Scenario A Configuration Guide</strong> · A2Z Cloud Ltd · Zoho Premium Partner · Salisbury, UK · <em>Demo build: 4 profiles · Zoho Campaigns for comms · updated 30 May 2026</em>
 </footer>
 
 </body>
