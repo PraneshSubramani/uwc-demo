@@ -1033,6 +1033,20 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 .lp-footer__link { color: rgba(255,255,255,0.85) !important; }
 </style>
 
+
+<style>
+/* v14 — footer text contrast on navy bg */
+.lp-footer { color: rgba(255,255,255,0.85) !important; }
+.lp-footer .lp-footer__brand-tag,
+.lp-footer__brand-tag,
+.lp-footer__brand-name,
+.lp-footer__bottom { color: rgba(255,255,255,0.85) !important; }
+.lp-footer__link, .lp-footer a { color: rgba(255,255,255,0.78) !important; }
+.lp-footer__link:hover, .lp-footer a:hover { color: #fff !important; }
+.lp-footer__col-title { color: #fff !important; }
+.lp-footer__brand-tag { font-size: 14px !important; line-height: 1.6; }
+</style>
+
 </head>
 <body>
 
@@ -1432,11 +1446,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         .lp-school__year { font-size: 13.5px; opacity: 0.6; margin-top: 8px; position: relative; z-index: 1; font-family: 'DM Mono', ui-monospace, monospace; }
 
         /* FOOTER */
-        .lp-footer { background: #001a4d; color: rgba(255,255,255,0.7); padding: 64px 32px 28px; }
+        .lp-footer { background: #001a4d; color: rgba(255,255,255,0.92); padding: 64px 32px 28px; }
         .lp-footer__inner { max-width: 1180px; margin: 0 auto; }
         .lp-footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
         .lp-footer__brand-name { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open Sans", sans-serif; font-size: 24px; font-weight: 600; color: #fff; margin: 14px 0 12px; }
-        .lp-footer__brand-tag { font-size: 13.5px; line-height: 1.65; }
+        .lp-footer__brand-tag { font-size: 14px; line-height: 1.7; color: #ffffff; max-width: 360px; font-weight: 400; }
         .lp-footer__col-title { color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; }
         .lp-footer__link { display: block; color: rgba(255,255,255,0.65); font-size: 13.5px; margin-bottom: 10px; text-decoration: none; cursor: pointer; transition: color 120ms; }
         .lp-footer__link:hover { color: #fff; }
@@ -1949,6 +1963,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
               autocomplete="username"
               placeholder="you@example.com"
               spellcheck="false"
+              value="sofia.almeida@example.com"
               required
             />
           </div>
@@ -1964,6 +1979,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
               type="password"
               autocomplete="current-password"
               placeholder="Enter your password"
+              value="uwc@2026"
               required
             />
             <button
@@ -1994,6 +2010,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 
       </form>
 
+      
+      <div style="margin-top:16px;padding:10px 14px;background:#E8EEF6;border:1px dashed #003087;border-radius:8px;font-size:12.5px;color:#003087;text-align:center;">
+        <b>Demo credentials:</b> sofia.almeida@example.com / uwc@2026
+      </div>
       <div class="auth-divider"><span>or</span></div>
 
       <p class="auth-foot">
@@ -2027,26 +2047,26 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
         <div class="uwc-portal-body">
           <div class="uwc-portal-content" style="max-width:620px;">
             <div class="uwc-portal-h1" style="margin-bottom:6px;">Create account</div>
-            <div class="uwc-portal-sub" style="margin-bottom:24px;">Eligibility confirmed <span style="color:#166534;font-weight:600;">✓</span> — nascida em <b>15 ago 2009</b> · terá <b>16 anos</b> em 01/09/2026.</div>
+            <div class="uwc-portal-sub" style="margin-bottom:24px;">Eligibility confirmed <span style="color:#166534;font-weight:600;">✓</span> — born on <b>15 Aug 2009</b> · will be <b>16 years old</b> on 01 Sep 2026.</div>
             <div class="portal-banner portal-banner--ok">
               <span style="font-size:20px;flex-shrink:0;">✅</span>
               <div><b>Eligible for the 2026 Cycle!</b> Fill in the form below to create your account and start your application.</div>
             </div>
             <div class="portal-row">
               <div><label class="portal-label">First name</label><input class="portal-input" type="text" value="Sofia"></div>
-              <div><label class="portal-label">Sobrenome</label><input class="portal-input" type="text" value="Almeida"></div>
+              <div><label class="portal-label">Last name</label><input class="portal-input" type="text" value="Almeida"></div>
             </div>
             <div class="portal-row--full"><label class="portal-label">E-mail</label><input class="portal-input" type="email" value="sofia.almeida@example.com"></div>
             <div class="portal-row">
-              <div><label class="portal-label">Senha</label><input class="portal-input" type="password" value="••••••••••"></div>
-              <div><label class="portal-label">Confirmar senha</label><input class="portal-input ok" type="password" value="••••••••••"></div>
+              <div><label class="portal-label">Password</label><input class="portal-input" type="password" value="••••••••••"></div>
+              <div><label class="portal-label">Confirm password</label><input class="portal-input ok" type="password" value="••••••••••"></div>
             </div>
             <div class="portal-row">
               <div><label class="portal-label">Country</label><select class="portal-input"><option selected>🇧🇷 Brazil</option><option>🇵🇹 Portugal</option><option>🇦🇴 Angola</option></select></div>
-              <div><label class="portal-label">Idioma preferido</label><select class="portal-input"><option selected>Português (PT)</option><option>English</option><option>Español</option></select></div>
+              <div><label class="portal-label">Preferred language</label><select class="portal-input"><option selected>English</option><option>Portuguese</option><option>Spanish</option></select></div>
             </div>
             <div style="margin-bottom:20px;font-size:13px;color:#4b5563;display:flex;align-items:flex-start;gap:8px;"><input type="checkbox" checked style="margin-top:2px;accent-color:#003087;"><span>I agree to UWC International's <a href="#" style="color:#003087;">Terms of Use</a> and <a href="#" style="color:#003087;">Privacy Policy</a>.</span></div>
-            <button class="uwc-portal-btn-primary" style="width:100%;padding:14px;font-size:15px;">📧 Verify email and create account</button>
+            <button type="button" class="uwc-portal-btn-primary" style="width:100%;padding:14px;font-size:15px;" onclick="if(window.UWCAuth&&window.UWCAuth.signUp){window.UWCAuth.signUp({firstName:'Sofia',lastName:'Almeida',email:'sofia.almeida@example.com',password:'uwc@2026',confirmPassword:'uwc@2026',terms:true});}else{var s=document.getElementById('sc-2-success');var c=this.closest('.uwc-portal-content');if(c)c.style.display='none';if(s){s.hidden=false;s.style.display='';}}">📧 Verify email and create account</button>
             <div style="text-align:center;margin-top:14px;font-size:13px;color:#4b5563;">Already have an account? <a href="#" style="color:#003087;">Sign in</a></div>
           </div>
         </div>
@@ -7800,7 +7820,7 @@ go(0);
   // ---------- seeded demo credentials ----------
   var SOFIA_CREDS = {
     email: 'sofia.almeida@example.com',
-    password: 'uwc2026!',
+    password: 'uwc@2026',
     firstName: 'Sofia',
     lastName: 'Almeida'
   };
@@ -8119,7 +8139,7 @@ go(0);
       // wrong credentials
       setError(passWrap, 'Email or password is incorrect.');
       shake(document.getElementById('auth-signin-form'));
-      toast('Email or password incorrect. Try sofia.almeida@example.com / uwc2026!', 'error');
+      toast('Email or password incorrect. Try sofia.almeida@example.com / uwc@2026', 'error');
       return false;
     },
 
@@ -8814,6 +8834,73 @@ go(0);
     if (section === 'application' && window.go) { window.go(5); return; }
     switchPanel(section);
   }, true);  // capture phase to win over any earlier handler
+})();
+</script>
+
+
+<!-- v14 corrective sign-in wiring -->
+<script>
+(function() {
+  function wireSignin() {
+    var form = document.getElementById('auth-signin-form');
+    if (!form || form.__uwcSigninWired) return;
+    form.__uwcSigninWired = true;
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = (document.getElementById('auth-signin-email') || {}).value || '';
+      var password = (document.getElementById('auth-signin-password') || {}).value || '';
+      
+      // Show inline errors if empty
+      var emailErr = document.getElementById('auth-signin-email-error');
+      var passErr = document.getElementById('auth-signin-password-error');
+      if (emailErr) emailErr.textContent = '';
+      if (passErr) passErr.textContent = '';
+      
+      if (!email || !password) {
+        if (!email && emailErr) emailErr.textContent = 'Please enter your email or username.';
+        if (!password && passErr) passErr.textContent = 'Please enter your password.';
+        if (window.UWCToast) window.UWCToast('Please enter your email and password.', { kind: 'err' });
+        return;
+      }
+      
+      // Match Sofia's credentials (case-insensitive email)
+      var SOFIA_EMAIL = 'sofia.almeida@example.com';
+      var SOFIA_PASSWORD = 'uwc@2026';
+      var lowerEmail = email.trim().toLowerCase();
+      
+      if (lowerEmail === SOFIA_EMAIL && password === SOFIA_PASSWORD) {
+        // Success
+        if (window.UWCToast) window.UWCToast('Signed in as Sofia Almeida', { kind: 'ok' });
+        else alert('Signed in as Sofia Almeida');
+        setTimeout(function() {
+          if (window.go) window.go(4);  // Sofia dashboard
+        }, 400);
+      } else {
+        if (passErr) passErr.textContent = 'Email or password incorrect. Try sofia.almeida@example.com / uwc@2026';
+        if (window.UWCToast) window.UWCToast('Email or password incorrect. Try sofia.almeida@example.com / uwc@2026', { kind: 'err' });
+      }
+    });
+    
+    // Also wire the submit BUTTON directly (in case form submit binding is missed)
+    var submitBtn = document.getElementById('auth-signin-submit');
+    if (submitBtn && !submitBtn.__uwcWired) {
+      submitBtn.__uwcWired = true;
+      submitBtn.addEventListener('click', function(e) {
+        if (e.target.type === 'submit') return;  // form submit will handle
+        e.preventDefault();
+        form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+      });
+    }
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wireSignin);
+  } else {
+    wireSignin();
+  }
+  // Re-wire when sc-signin becomes visible (MutationObserver covers race conditions)
+  var obs = new MutationObserver(function() { wireSignin(); });
+  obs.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'hidden'] });
 })();
 </script>
 
