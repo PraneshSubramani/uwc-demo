@@ -88,7 +88,7 @@ table.t tbody tr:last-child td{border-bottom:none}
     </div>
     <div class="header-meta">
       <div>Reference<strong>UWC-CRM-5128</strong></div>
-      <div>Module<strong>Deals (Applications)</strong></div>
+      <div>Module<strong>Leads (Applications)</strong></div>
       <div>Org<strong>Zoho CRM · EU DC</strong></div>
     </div>
   </div>
@@ -101,21 +101,21 @@ table.t tbody tr:last-child td{border-bottom:none}
   <div class="lead">
     <h2>What you're testing</h2>
     <p>Scenario D moves an applicant (Sofia) into a confirmed school place. The chain is: <b>allocate places → generate a branded pack → nominate to school → school accepts → finance sync fires</b>. Unlike the read-only scenarios, this one exercises <b>2 custom buttons, 3 workflow rules and 4 Deluge functions</b> across three custom modules — so it's the most worth testing end-to-end.</p>
-    <p>The whole scenario hinges on one field — <code>Deals.Stage</code> moving <code>Shortlisted → Nominated → Placed</code>. If you watch only one thing, watch that.</p>
+    <p>The whole scenario hinges on one field — <code>Leads.Stage</code> moving <code>Shortlisted → Nominated → Placed</code>. If you watch only one thing, watch that.</p>
   </div>
 
-  <div class="note warn">
-    <h4>Field / config names below are from the build spec — confirm against the live org</h4>
-    <p>API names marked <span class="confirm">confirm</span> should be verified in the live EU org before relying on them (they can drift from the repo). The four high-value checks: field API names on <code>Deals</code>, the <code>School_Place_Allocations</code> fields incl. <code>Cycle=2026</code>, that the buttons + WR-D-1/2/Pack rules exist, and that the Brazil NC has <code>NC_Code = BR</code>.</p>
+  <div class="note info">
+    <h4>Field names verified against the live EU org (29 May 2026)</h4>
+    <p>The names below are confirmed live — and several <b>differ from the original build spec</b>. The Applications module is <b><code>Leads</code></b> (not Deals); the cycle field is <b><code>Cycle_Year</code></b> (not Cycle); place counts are <b><code>Allocated_Places</code> / <code>Used_Places</code></b>. The demo applicant is <b>Sofia Carvalho</b>. Two data gaps remain to fix before testing — see the box under "Pre-test setup".</p>
   </div>
 
-  <div class="section-label">The moving parts</div>
+  <div class="section-label">The moving parts (live API names)</div>
   <div class="card">
     <table class="t">
       <thead><tr><th>Thing</th><th>API name in CRM</th><th>Type</th></tr></thead>
       <tbody>
-        <tr><td>Applications module</td><td><code>Deals</code> (relabelled "Applications")</td><td>module</td></tr>
-        <tr><td>Place Allocations</td><td><code>School_Place_Allocations</code></td><td>module</td></tr>
+        <tr><td>Applications module</td><td><code>Leads</code> (relabelled "Applications") — name field <code>First_Name</code>/<code>Last_Name</code></td><td>module</td></tr>
+        <tr><td>Place Allocations</td><td><code>School_Place_Allocation</code></td><td>module</td></tr>
         <tr><td>Nomination Packs</td><td><code>Nomination_Packs</code></td><td>module</td></tr>
         <tr><td>Generate pack</td><td><code>generate_nomination_pack(applicationId)</code></td><td>function + button</td></tr>
         <tr><td>Nominate → decrement quota</td><td><code>decrement_school_quota(schoolId, ncId)</code> via <b>WR-D-1</b></td><td>function + workflow</td></tr>
@@ -124,16 +124,28 @@ table.t tbody tr:last-child td{border-bottom:none}
       </tbody>
     </table>
   </div>
+  <div class="note warn">
+    <h4>Manual build needed — not API-creatable</h4>
+    <p>The custom <b>buttons</b> (Generate Nomination Pack, Nominate to School on Leads; Accept Nomination on Nomination_Packs), the <b>workflow rules</b> (WR-D-1/2/Pack), and the <b>functions</b> cannot be created or verified via the CRM v8 REST API. Build them manually: buttons in <code>Setup → Modules → Leads → Buttons</code>, rules in <code>Setup → Automation → Workflow Rules</code>, functions in <code>Setup → Developer Tools → Functions</code>.</p>
+  </div>
 
   <div class="section-label">The Stage chain — trace this end to end</div>
   <div class="chain"><span class="g">Shortlisted</span> ──[Generate Pack]──▶ (Nomination_Pack created, status Generated)
-            ──[Nominate]───────▶ <span class="y">Nominated</span>   ─▶ WR-D-1: Places_Used++, email Helen, Pack→Sent
+            ──[Nominate]───────▶ <span class="y">Nominated</span>   ─▶ WR-D-1: Used_Places++, email Helen, Pack→Sent
             ──[Helen Accepts]──▶ <span class="r">Placed</span>      ─▶ WR-D-2: BC_Invoice_ID written</div>
+
+  <div class="note warn">
+    <h4>Fix two data gaps before testing</h4>
+    <p>The live <code>School_Place_Allocation</code> seed rows are missing two values the workflow depends on:</p>
+    <p>1. <b><code>Cycle_Year</code></b> — set to <code>2026</code> on all 15 rows. <code>decrement_school_quota</code> searches on <code>Cycle_Year:equals:2026</code>; if it's blank the quota will never decrement.<br>
+    2. <b><code>Used_Places</code></b> — set to <code>0</code> on all rows so the "X / 0" baseline is correct.</p>
+  </div>
 
   <div class="note info">
     <h4>Pre-test setup (do once)</h4>
-    <p>1. Run the <code>demo_reset</code> function — resets Sofia to <code>Stage = Shortlisted</code> and <code>Places_Used = 0</code> on all allocations.<br>
-    2. Confirm seed data is loaded: <code>08_place_allocations.csv</code> (15 rows), <code>02_schools.csv</code> (3 schools), Sofia exists in <code>Deals</code>.</p>
+    <p>1. Apply the two data-gap fixes above.<br>
+    2. Run the <code>demo_reset</code> function — resets Sofia to <code>Stage = Shortlisted</code> and <code>Used_Places = 0</code> on all allocations.<br>
+    3. Confirm: Sofia Carvalho exists in <code>Leads</code> (Stage=Shortlisted, School_Nominated=UWC Atlantic, NC=UWC National Committee Brazil), the 15-cell allocation matrix is loaded, and Nomination Pack <code>NP-2026-00001</code> exists.</p>
   </div>
 
   <div class="section-label">Tests</div>
@@ -142,26 +154,26 @@ table.t tbody tr:last-child td{border-bottom:none}
     <h3><span class="test-num">1</span> Place Allocation pivot renders <span class="test-as">any IO profile</span></h3>
     <dl>
       <dt class="do">Do</dt><dd>Open Place Allocations list → switch to the pivot / matrix view (Group By two dimensions).</dd>
-      <dt class="pass">Pass</dt><dd>15 cells, schools across the top, NCs down the side. <b>Atlantic ↔ Brazil = "4 / 0"</b> (Allocated / Used).</dd>
-      <dt class="fail">If it fails</dt><dd><code>School_Lookup</code> <span class="confirm">confirm</span> / <code>NC_Lookup</code> <span class="confirm">confirm</span> / <code>Cycle</code> <span class="confirm">confirm</span> aren't populated on the rows, or the view isn't grouped by two dimensions.</dd>
+      <dt class="pass">Pass</dt><dd>15 cells, schools across the top, NCs down the side. <b>Atlantic ↔ Brazil = "4 / 0"</b> (<code>Allocated_Places</code> / <code>Used_Places</code>).</dd>
+      <dt class="fail">If it fails</dt><dd><code>School</code> / <code>National_Committee</code> / <code>Cycle_Year</code> aren't populated on the rows, or the view isn't grouped by two dimensions.</dd>
     </dl>
   </div>
 
   <div class="test">
     <h3><span class="test-num">2</span> "Allocate Places" button edits a cell <span class="test-as">IO Super Admin</span></h3>
     <dl>
-      <dt class="do">Do</dt><dd>Click <b>Allocate Places</b> → change Atlantic × Brazil <code>Places_Allocated</code> from 4 → 5 → Confirm.</dd>
+      <dt class="do">Do</dt><dd>Click <b>Allocate Places</b> → change Atlantic × Brazil <code>Allocated_Places</code> from 4 → 5 → Confirm.</dd>
       <dt class="pass">Pass</dt><dd>Cell shows <b>"5 / 0"</b>; an email goes to Ana.</dd>
-      <dt class="verify">Verify in data</dt><dd>The Atlantic+Brazil+2026 row now has <code>Places_Allocated = 5</code>.</dd>
+      <dt class="verify">Verify in data</dt><dd>The Atlantic + Brazil row with <code>Cycle_Year = 2026</code> now has <code>Allocated_Places = 5</code>.</dd>
     </dl>
   </div>
 
   <div class="test">
     <h3><span class="test-num">3</span> Generate Nomination Pack — the big one <span class="test-as">NC Admin (Ana)</span></h3>
     <dl>
-      <dt class="do">Do</dt><dd>On Sofia: confirm <code>Stage = Shortlisted</code>, set <b><code>School_Nominated = UWC Atlantic</code></b> <span class="confirm">confirm</span> → Save → click <b>Generate Nomination Pack</b>.</dd>
-      <dt class="pass">Pass</dt><dd>Toast <code>Pack NP-2026-xxxxx generated. NC Reference: BR-2026-00041</code>. A new <code>Nomination_Packs</code> record appears with <code>Pack_Status = Generated</code>.</dd>
-      <dt class="verify">Verify the reference logic</dt><dd>The ref is built as <code>NC_Code + "-" + year + "-" + suffix</code>. It needs <b><code>NC_Code = BR</code></b> <span class="confirm">confirm</span> on the Brazil NC and Sofia's <code>Deal_Name</code> to end in <code>-00041</code>. If the ref comes out <code>XX-2026-…</code>, the NC_Code field is empty.</dd>
+      <dt class="do">Do</dt><dd>On Sofia: confirm <code>Stage = Shortlisted</code> and <code>School_Nominated = UWC Atlantic</code> (already set on the seed record) → click <b>Generate Nomination Pack</b>.</dd>
+      <dt class="pass">Pass</dt><dd>Toast <code>Pack NP-2026-00001 generated. NC Reference: BR-2026-00041</code>. A new <code>Nomination_Packs</code> record appears with <code>Pack_Status = Generated</code> (this record already exists in the live org).</dd>
+      <dt class="verify">Verify the reference logic</dt><dd>The ref is built as <code>NC_Code + "-" + year + "-" + suffix</code>. The Brazil NC has <code>NC_Code = BR</code> ✓ — so it produces <code>BR-2026-00041</code>. If the ref comes out <code>XX-2026-…</code>, the NC_Code field is empty.</dd>
       <dt class="fail">Known soft spot</dt><dd>The function attaches the pack as <b>HTML</b> (PDF needs a Zoho Sign / WorkDrive connection). If the attach fails the record still creates — check the function log for <code>attached N bytes</code>.</dd>
     </dl>
   </div>
@@ -178,8 +190,8 @@ table.t tbody tr:last-child td{border-bottom:none}
     <h3><span class="test-num">5</span> Nominate → quota decrements (WR-D-1) <span class="test-as">NC Admin (Ana)</span></h3>
     <dl>
       <dt class="do">Do</dt><dd>On Sofia: click <b>Nominate to School</b> → confirm.</dd>
-      <dt class="pass">Pass — all three must happen</dt><dd>(a) <code>Stage → Nominated</code> · (b) Atlantic ↔ Brazil quota → <b>"5 / 1"</b> (<code>Places_Used</code>++ by <code>decrement_school_quota</code>) · (c) Pack <code>Pack_Status → Sent</code>; email to Helen Richards.</dd>
-      <dt class="fail">Most likely failure</dt><dd>Quota doesn't decrement → the function couldn't find the allocation. Its search needs <code>School_Lookup</code>, <code>NC_Lookup</code> <b>and <code>Cycle = 2026</code></b> all matching. A missing <code>Cycle</code> is the usual culprit.</dd>
+      <dt class="pass">Pass — all three must happen</dt><dd>(a) <code>Stage → Nominated</code> · (b) Atlantic ↔ Brazil quota → <b>"5 / 1"</b> (<code>Used_Places</code>++ by <code>decrement_school_quota</code>) · (c) Pack <code>Pack_Status → Sent</code>; email to Helen Richards.</dd>
+      <dt class="fail">Most likely failure</dt><dd>Quota doesn't decrement → the function couldn't find the allocation. Its search needs <code>School</code>, <code>National_Committee</code> <b>and <code>Cycle_Year = 2026</code></b> all matching. A missing <code>Cycle_Year</code> is the usual culprit — fix it before testing (see the data-gap box above).</dd>
     </dl>
   </div>
 
@@ -195,21 +207,21 @@ table.t tbody tr:last-child td{border-bottom:none}
   <div class="test">
     <h3><span class="test-num">7</span> Business Central sync (WR-D-2 · stub) <span class="test-as">IO Super Admin</span></h3>
     <dl>
-      <dt class="do">Do</dt><dd>Open Sofia → check the top <b><code>BC_Invoice_ID</code></b> <span class="confirm">confirm</span> field.</dd>
-      <dt class="pass">Pass</dt><dd>Populated with <code>INV-2026-{6 digits}</code> (set by <code>send_to_business_central</code> when Stage hit Placed).</dd>
+      <dt class="do">Do</dt><dd>Open Sofia → check the top <b><code>BC_Invoice_ID</code></b> field.</dd>
+      <dt class="pass">Pass</dt><dd>Populated with <code>INV-2026-{6 digits}</code> (Sofia's seed value is <code>INV-2026-456789</code>), set by <code>send_to_business_central</code> when Stage hit Placed.</dd>
       <dt class="verify">Note</dt><dd>This is intentionally a <b>stub</b> — it writes a fake invoice number; the real BC API call is not wired. That's expected and disclosed in the demo. ("If BC is down → queue in Zoho Flow, retry with backoff; Application is marked Placed regardless.")</dd>
     </dl>
   </div>
 
   <div class="note info">
     <h4>Re-running the test</h4>
-    <p><code>decrement_school_quota</code> is <b>not idempotent</b> — each Nominate adds 1 to <code>Places_Used</code>. Before re-testing, run <code>demo_reset</code> (or manually reset <code>Places_Used = 0</code> and Sofia's <code>Stage = Shortlisted</code>), or the quota will keep climbing.</p>
+    <p><code>decrement_school_quota</code> is <b>not idempotent</b> — each Nominate adds 1 to <code>Used_Places</code>. Before re-testing, run <code>demo_reset</code> (or manually reset <code>Used_Places = 0</code> and Sofia's <code>Stage = Shortlisted</code>), or the quota will keep climbing.</p>
   </div>
 
 </div>
 
 <footer class="footer">
-  <strong>UWC International CRM — Scenario D Test Guide</strong> · A2Z Cloud Ltd · Zoho Premium Partner · Salisbury, UK · <em>Verification procedure · field names pending live-org confirmation</em>
+  <strong>UWC International CRM — Scenario D Test Guide</strong> · A2Z Cloud Ltd · Zoho Premium Partner · Salisbury, UK · <em>Verification procedure · field names verified against the live EU org 29 May 2026</em>
 </footer>
 
 </body>
