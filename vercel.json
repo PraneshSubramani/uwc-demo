@@ -3,6 +3,28 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/", "destination": "/wireframes/00_index.html", "permanent": false }
+    { "source": "/", "destination": "/wireframes/00_index.html", "permanent": false },
+    { "source": "/playbook", "destination": "/wireframes/91_zoho_demo_playbook.html", "permanent": false },
+    { "source": "/demo-playbook", "destination": "/wireframes/91_zoho_demo_playbook.html", "permanent": false },
+    { "source": "/setup-guide", "destination": "/wireframes/90_zoho_setup_guide.html", "permanent": false },
+    { "source": "/builder", "destination": "/wireframes/90_zoho_setup_guide.html", "permanent": false },
+    { "source": "/cheat-sheet", "destination": "/wireframes/PRESENTER_CHEAT_SHEET.html", "permanent": false },
+    { "source": "/data-model", "destination": "/wireframes/99_data_model.html", "permanent": false },
+    { "source": "/catalog", "destination": "/wireframes/98_module_fields_catalog.html", "permanent": false },
+    { "source": "/scenarios/a", "destination": "/wireframes/01_scenario_A.html", "permanent": false },
+    { "source": "/scenarios/b", "destination": "/wireframes/02_scenario_B.html", "permanent": false },
+    { "source": "/scenarios/c", "destination": "/wireframes/03_scenario_C.html", "permanent": false },
+    { "source": "/scenarios/d", "destination": "/wireframes/04_scenario_D.html", "permanent": false },
+    { "source": "/scenarios/e", "destination": "/wireframes/05_scenario_E.html", "permanent": false },
+    { "source": "/scenarios/f", "destination": "/wireframes/06_scenario_F.html", "permanent": false },
+    { "source": "/scenarios/g", "destination": "/wireframes/07_scenario_G.html", "permanent": false }
+  ],
+  "headers": [
+    {
+      "source": "/wireframes/(.*).html",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    }
   ]
 }
