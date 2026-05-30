@@ -2294,6 +2294,55 @@ html body #sc-app .uwc-portal-shell .uwc-portal-sidebar {
   overflow-x: hidden !important;
 }
 </style>
+
+<style>
+/* ============================================================
+   v26 — Sidebar active pill GLOW FIX (multi-layer)
+   Box-shadow glow was extending past sidebar bounds. The 
+   overflow-x: hidden clip wasn't catching it because the
+   sticky-positioned sidebar can break clipping in some browsers.
+   ============================================================ */
+
+/* Layer 1: Force overflow-x: hidden via highest specificity */
+html body #sc-3 .uwc-portal-sidebar,
+html body #sc-3 nav.uwc-portal-sidebar,
+html body #sc-app .uwc-portal-shell .uwc-portal-sidebar,
+html body #sc-app .uwc-portal-shell nav.uwc-portal-sidebar {
+  overflow-x: hidden !important;
+  clip-path: inset(0) !important;             /* extra-defensive clip */
+  contain: layout paint !important;            /* CSS containment */
+}
+
+/* Layer 2: Constrain active-item box-shadow to NOT extend horizontally */
+html body #sc-3 .uwc-portal-sidebar__item.active,
+html body #sc-3 .uwc-portal-sidebar__item[class*="active"],
+html body #sc-app .appform-side-item.is-active {
+  box-shadow: 0 2px 6px -1px rgba(0,48,135,0.30) !important;  /* -1px spread shrinks horizontal */
+  margin: 2px 12px !important;                /* more horizontal margin = more breathing room */
+  width: auto !important;
+  max-width: calc(100% - 24px) !important;    /* ensure pill never exceeds sidebar (with 12px margin each side) */
+  box-sizing: border-box !important;
+}
+
+/* Layer 3: All sidebar items consistent constraint */
+html body #sc-3 .uwc-portal-sidebar__item,
+html body #sc-app .appform-side-item {
+  margin: 1px 12px !important;
+  max-width: calc(100% - 24px) !important;
+  box-sizing: border-box !important;
+}
+
+/* Layer 4: Sidebar must have rigid width */
+html body #sc-3 .uwc-portal-sidebar,
+html body #sc-app .uwc-portal-shell .uwc-portal-sidebar {
+  width: 240px !important;
+  min-width: 240px !important;
+  max-width: 240px !important;
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important;
+}
+</style>
+
 </head>
 <body>
 
