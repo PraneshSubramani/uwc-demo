@@ -1818,12 +1818,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
    v21 — Remove duplicates + footer padding fix
    ============================================================ */
 
-/* 1. Hide DUPLICATE Submit button INSIDE Section 6 accordion body
-      (sticky footer Submit is the canonical one — keep it) */
-#sc-app details.appform-section button.appform-btn--primary[type="submit"],
-#sc-app details.appform-section button[class*="appform-submit-inline"],
-#sc-app details.appform-section .appform-body button.appform-btn--primary {
+/* 1. The in-section Submit button (#appform-decl-submit) is now the canonical
+      Submit. Hide only stray inline-submit variants, NOT the declaration submit. */
+#sc-app details.appform-section button[class*="appform-submit-inline"]:not(#appform-decl-submit) {
   display: none !important;
+}
+/* Make sure the declaration Submit button is always shown */
+#sc-app details.appform-section #appform-decl-submit {
+  display: inline-flex !important;
 }
 /* More aggressive: any "Submit application" button NOT inside the sticky footer */
 #sc-app details.appform-section button[class*="appform-btn"]:not(.appform-btn--ghost):not(.appform-btn--success) {
@@ -1887,16 +1889,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
     var sc = document.getElementById('sc-app');
     if (!sc) return;
     
-    // Hide any Submit application button NOT inside sticky footer
-    sc.querySelectorAll('button').forEach(function(btn) {
-      var txt = (btn.textContent || '').trim().toLowerCase();
-      if (txt.indexOf('submit application') === -1) return;
-      // Keep only if it's the sticky footer Submit
-      if (!btn.closest('.appform-sticky-footer')) {
-        btn.style.display = 'none';
-      }
-    });
-    
+    // (in-section Submit button is canonical now — no longer hidden here)
+
     // Dedupe Mark consent buttons — keep only the first .appform-btn--success
     var consentBtns = Array.from(sc.querySelectorAll('button')).filter(function(b){
       return /mark consent received/i.test(b.textContent || '');
@@ -2076,11 +2070,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   box-sizing: border-box !important;
 }
 
-/* Hide any in-section Submit button (canonical one is in sticky footer) */
-#sc-app details.appform-section button[type="submit"],
-#sc-app .appform-body > button.appform-btn--primary {
-  display: none !important;
-}
+/* (in-section Submit is now canonical — no longer hidden) */
 
 /* 4. Responsive: small screens — footer becomes full-width */
 @media (max-width: 900px) {
@@ -2108,15 +2098,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
     if (main && parseInt(getComputedStyle(main).paddingBottom) < 100) {
       main.style.paddingBottom = '120px';
     }
-    // Force any in-section Submit btn to hide (defensive)
-    sc.querySelectorAll('details.appform-section button').forEach(function(b){
-      var txt = (b.textContent || '').trim().toLowerCase();
-      if (txt.indexOf('submit application') !== -1) {
-        if (!b.closest('.appform-sticky-footer')) {
-          b.style.display = 'none';
-        }
-      }
-    });
+    // Ensure the in-section declaration Submit button is visible (it is canonical now)
+    var declBtn = sc.querySelector('#appform-decl-submit');
+    if (declBtn) declBtn.style.display = '';
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', ensureLayout);
@@ -2138,7 +2122,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 /* Force footer ALWAYS visible when sc-app is active */
 html body #sc-app .appform-sticky-footer,
 html body #sc-app div.appform-sticky-footer,
+/* Sticky footer retired — the in-section declaration Submit (#appform-decl-submit)
+   is the canonical Submit, so it can never be clipped by fixed positioning. */
 html body #sc-app #appform-status-bar {
+  display: none !important;
+}
+html body #sc-app #appform-status-bar.__never {
   display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -5934,9 +5923,10 @@ html body #sc-app .uwc-portal-main {
         </label>
       </div>
 
-      <div class="appform-action-row">
+      <div class="appform-action-row" style="margin-top:20px;padding-top:18px;border-top:1px solid #e5e7eb;">
         <div class="appform-spacer"></div>
         <button type="button" class="appform-btn appform-btn--primary" id="appform-decl-submit"
+          style="padding:13px 28px;font-size:15px;"
           ${(!d.agreed) ? 'disabled' : ''}>
           <svg><use href="#icon-send"/></svg> Submit application
         </button>
