@@ -2750,7 +2750,7 @@ html body #sc-app .uwc-portal-main {
             <p class="lp-hero__sub">Join 11,000+ students from 150+ countries at 18 UWC schools and colleges around the world. The 2026/27 application cycle closes on 30 November 2026.</p>
             <div class="lp-hero__ctas">
               <button class="lp-btn-primary-large" onclick="window.go && window.go(1)">Start your application →</button>
-              <button class="lp-btn-ghost-light" onclick="window.go && window.go(3)">Already started? Sign in</button>
+              <button class="lp-btn-ghost-light" onclick="window.go && window.go(2)">Already started? Sign in</button>
             </div>
           </div>
           <div class="lp-hero__scroll-hint">Scroll to explore</div>
@@ -2853,7 +2853,7 @@ html body #sc-app .uwc-portal-main {
                 <div class="lp-footer__col-title">Applicants</div>
                 <a class="lp-footer__link" onclick="window.go && window.go(1)">Check eligibility</a>
                 <a class="lp-footer__link" onclick="window.go && window.go(3)">Create account</a>
-                <a class="lp-footer__link" onclick="window.go && window.go(3)">Sign in</a>
+                <a class="lp-footer__link" onclick="window.go && window.go(2)">Sign in</a>
                 <a class="lp-footer__link">Application FAQ</a>
                 <a class="lp-footer__link">Scholarships</a>
               </div>
@@ -5269,18 +5269,22 @@ html body #sc-app .uwc-portal-main {
         awards: 'Math Olympiad gold 2025, English-language debate runner-up 2024'
       },
       statement: {
-        whyUwc: '',
-        communityContribution: '',
-        brazilNcQuestion: ''
+        whyUwc: 'I want to study at a UWC because I believe the most important questions of our time — climate, migration, inequality — cannot be solved by any one nation alone, and I want to learn how to work across the differences that usually divide us. Growing up in São Paulo, I have seen a single city hold extraordinary wealth and deep poverty side by side, often separated by no more than a single street, and that contrast has shaped every choice I have made. I have spent the last two years tutoring younger students in my neighbourhood library, where what began as homework help for two children became a small reading club of fourteen, and watching them grow in confidence taught me that education is the most durable form of hope, and that real change starts close to home before it can reach further. A UWC education would place me alongside people whose lives have been shaped by circumstances very different from my own, and I am convinced that the deepest learning happens not when difference is smoothed over but when it is genuinely understood, argued about, and lived with day after day. I am drawn especially to the UWC movement because it does not treat international understanding as an abstract ideal but as a daily practice — living, studying, cooking, and disagreeing with people from a hundred countries, then finding a way to share a kitchen and a classroom regardless. I have thought carefully about what I would bring as well as what I would gain. I would bring my curiosity, my discipline, my commitment to service, and above all my willingness to be changed by what I do not yet understand, because I think humility is the beginning of any real education. I am not looking for a school that will simply add to my qualifications; I am looking for a community that will challenge my assumptions and ask more of me than I currently ask of myself. I know that living far from my family at sixteen will be difficult, and that learning in my third language will demand patience, but I see those difficulties as exactly the kind of growth I am seeking rather than obstacles to avoid. After UWC I hope to study environmental science and return to Brazil to work on community-led conservation, carrying everything I have learned back to the place that formed me and the people who believed in me first. I want to help build the kind of bridges between communities that I have only begun to imagine, and I am certain that the friendships and the disagreements I would have at a UWC would shape the rest of my life far beyond the two years I spend there. I have spoken with two UWC alumni from Brazil who told me that what stayed with them was not any single lesson but the habit of listening to people they would never otherwise have met, and that is precisely the habit I most want to build in myself while I am still young enough for it to become second nature. This, more than any single subject or qualification, is why a UWC education matters to me more than any other path I could choose, and why I am ready to give it everything I have.',
+        communityContribution: 'For the past two years I have run a weekend reading club at my local community library in São Paulo, which I started after noticing that several younger children in my building were falling behind in school with no one at home able to help them. What began as informal homework help for two children grew into a structured club of fourteen, for whom I prepare weekly reading materials, organise a rota of volunteer tutors from my school, and track each child\'s progress so that no one is left behind. The work has taught me patience, organisation, and above all that leadership is quiet — it is making sure every voice is heard rather than being the loudest in the room. I have learned to plan a session so that a struggling reader and a confident one both leave feeling they have achieved something, and to notice the child who has gone silent before they slip away entirely. I have also learned to ask for help and to be resourceful: when the library could not fund new books, I approached three local bookshops and secured a regular donation, and when two of my volunteer tutors left, I recruited and trained three more from younger year groups so the club would outlast me. Seeing one of my first students read aloud to the group for the first time, after months of being too shy to try, remains the proudest moment of my school years so far. I want to continue this kind of grassroots, practical service at UWC and beyond, because I have learned that lasting change is built quietly, one relationship and one small commitment at a time, and that the most valuable thing I can offer any community is simply to keep showing up long after the initial enthusiasm has faded and the real, patient work begins.',
+        brazilNcQuestion: 'I am applying through UWC Brazil because I want to represent my country and community on an international stage, and because I am committed to returning the investment by contributing to the UWC Brazil alumni and outreach network after my studies.'
       },
-      documents: [],
+      documents: [
+        { name: 'Passport_Sofia_Almeida.pdf', type: 'Identity document', size: 1258291, uploadedAt: '2026-01-12' },
+        { name: 'Academic_Transcript_2024-2025.pdf', type: 'Academic transcript', size: 860160, uploadedAt: '2026-01-12' },
+        { name: 'School_Reference_Bandeirantes.pdf', type: 'Referee statement', size: 624640, uploadedAt: '2026-01-13' }
+      ],
       guardian: {
         name: 'Maria Almeida',
         relationship: 'Mother',
         email: 'maria.almeida@example.com',
         phone: '+55 11 9 4321 5677',
-        consentReceived: false,
-        consentReceivedAt: null
+        consentReceived: true,
+        consentReceivedAt: '2026-01-14'
       },
       declaration: {
         signedName: '',
@@ -5504,7 +5508,7 @@ html body #sc-app .uwc-portal-main {
     const numContent = complete ? '<svg><use href="#icon-check"/></svg>'
       : (locked ? '<svg><use href="#icon-lock"/></svg>' : num);
     return `
-      <details class="${sectionCls}" data-section="${key}" id="appform-section-${num}">
+      <details class="${sectionCls}" data-section="${key}" id="appform-section-${num}" open>
         <summary class="appform-summary">
           <div class="appform-num">${numContent}</div>
           <div>
@@ -6397,18 +6401,22 @@ html body #sc-app .uwc-portal-main {
         awards: 'Math Olympiad gold 2025, English-language debate runner-up 2024'
       },
       statement: {
-        whyUwc: '',
-        communityContribution: '',
-        brazilNcQuestion: ''
+        whyUwc: 'I want to study at a UWC because I believe the most important questions of our time — climate, migration, inequality — cannot be solved by any one nation alone, and I want to learn how to work across the differences that usually divide us. Growing up in São Paulo, I have seen a single city hold extraordinary wealth and deep poverty side by side, often separated by no more than a single street, and that contrast has shaped every choice I have made. I have spent the last two years tutoring younger students in my neighbourhood library, where what began as homework help for two children became a small reading club of fourteen, and watching them grow in confidence taught me that education is the most durable form of hope, and that real change starts close to home before it can reach further. A UWC education would place me alongside people whose lives have been shaped by circumstances very different from my own, and I am convinced that the deepest learning happens not when difference is smoothed over but when it is genuinely understood, argued about, and lived with day after day. I am drawn especially to the UWC movement because it does not treat international understanding as an abstract ideal but as a daily practice — living, studying, cooking, and disagreeing with people from a hundred countries, then finding a way to share a kitchen and a classroom regardless. I have thought carefully about what I would bring as well as what I would gain. I would bring my curiosity, my discipline, my commitment to service, and above all my willingness to be changed by what I do not yet understand, because I think humility is the beginning of any real education. I am not looking for a school that will simply add to my qualifications; I am looking for a community that will challenge my assumptions and ask more of me than I currently ask of myself. I know that living far from my family at sixteen will be difficult, and that learning in my third language will demand patience, but I see those difficulties as exactly the kind of growth I am seeking rather than obstacles to avoid. After UWC I hope to study environmental science and return to Brazil to work on community-led conservation, carrying everything I have learned back to the place that formed me and the people who believed in me first. I want to help build the kind of bridges between communities that I have only begun to imagine, and I am certain that the friendships and the disagreements I would have at a UWC would shape the rest of my life far beyond the two years I spend there. I have spoken with two UWC alumni from Brazil who told me that what stayed with them was not any single lesson but the habit of listening to people they would never otherwise have met, and that is precisely the habit I most want to build in myself while I am still young enough for it to become second nature. This, more than any single subject or qualification, is why a UWC education matters to me more than any other path I could choose, and why I am ready to give it everything I have.',
+        communityContribution: 'For the past two years I have run a weekend reading club at my local community library in São Paulo, which I started after noticing that several younger children in my building were falling behind in school with no one at home able to help them. What began as informal homework help for two children grew into a structured club of fourteen, for whom I prepare weekly reading materials, organise a rota of volunteer tutors from my school, and track each child\'s progress so that no one is left behind. The work has taught me patience, organisation, and above all that leadership is quiet — it is making sure every voice is heard rather than being the loudest in the room. I have learned to plan a session so that a struggling reader and a confident one both leave feeling they have achieved something, and to notice the child who has gone silent before they slip away entirely. I have also learned to ask for help and to be resourceful: when the library could not fund new books, I approached three local bookshops and secured a regular donation, and when two of my volunteer tutors left, I recruited and trained three more from younger year groups so the club would outlast me. Seeing one of my first students read aloud to the group for the first time, after months of being too shy to try, remains the proudest moment of my school years so far. I want to continue this kind of grassroots, practical service at UWC and beyond, because I have learned that lasting change is built quietly, one relationship and one small commitment at a time, and that the most valuable thing I can offer any community is simply to keep showing up long after the initial enthusiasm has faded and the real, patient work begins.',
+        brazilNcQuestion: 'I am applying through UWC Brazil because I want to represent my country and community on an international stage, and because I am committed to returning the investment by contributing to the UWC Brazil alumni and outreach network after my studies.'
       },
-      documents: [],
+      documents: [
+        { name: 'Passport_Sofia_Almeida.pdf', type: 'Identity document', size: 1258291, uploadedAt: '2026-01-12' },
+        { name: 'Academic_Transcript_2024-2025.pdf', type: 'Academic transcript', size: 860160, uploadedAt: '2026-01-12' },
+        { name: 'School_Reference_Bandeirantes.pdf', type: 'Referee statement', size: 624640, uploadedAt: '2026-01-13' }
+      ],
       guardian: {
         name: 'Maria Almeida',
         relationship: 'Mother',
         email: 'maria.almeida@example.com',
         phone: '+55 11 9 4321 5677',
-        consentReceived: false,
-        consentReceivedAt: null
+        consentReceived: true,
+        consentReceivedAt: '2026-01-14'
       },
       declaration: {
         signedName: '',
@@ -6632,7 +6640,7 @@ html body #sc-app .uwc-portal-main {
     const numContent = complete ? '<svg><use href="#icon-check"/></svg>'
       : (locked ? '<svg><use href="#icon-lock"/></svg>' : num);
     return `
-      <details class="${sectionCls}" data-section="${key}" id="appform-section-${num}">
+      <details class="${sectionCls}" data-section="${key}" id="appform-section-${num}" open>
         <summary class="appform-summary">
           <div class="appform-num">${numContent}</div>
           <div>
