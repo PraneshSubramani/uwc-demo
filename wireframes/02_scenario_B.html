@@ -3834,8 +3834,8 @@ html body #sc-app .uwc-portal-main {
               <div><label class="portal-label">Preferred language</label><select class="portal-input"><option selected>English</option><option>Portuguese</option><option>Spanish</option></select></div>
             </div>
             <div style="margin-bottom:20px;font-size:13px;color:#4b5563;display:flex;align-items:flex-start;gap:8px;"><input type="checkbox" checked style="margin-top:2px;accent-color:#003087;"><span>I agree to UWC International's <a href="#" style="color:#003087;">Terms of Use</a> and <a href="#" style="color:#003087;">Privacy Policy</a>.</span></div>
-            <button type="button" class="uwc-portal-btn-primary" style="width:100%;padding:14px;font-size:15px;" onclick="if(window.UWCAuth&&window.UWCAuth.signUp){window.UWCAuth.signUp({firstName:'Sofia',lastName:'Almeida',email:'sofia.almeida@example.com',password:'uwc@2026',confirmPassword:'uwc@2026',terms:true});}else{var s=document.getElementById('sc-2-success');var c=this.closest('.uwc-portal-content');if(c)c.style.display='none';if(s){s.hidden=false;s.style.display='';}}">📧 Verify email and create account</button>
-            <div style="text-align:center;margin-top:14px;font-size:13px;color:#4b5563;">Already have an account? <a href="#" style="color:#003087;">Sign in</a></div>
+            <button type="button" class="uwc-portal-btn-primary" style="width:100%;padding:14px;font-size:15px;" onclick="if(window.UWCAuth&&window.UWCAuth.signUp){window.UWCAuth.signUp({firstName:'Sofia',lastName:'Almeida',email:'sofia.almeida@example.com',password:'uwc@2026',confirmPassword:'uwc@2026',terms:true});}else if(window.go){window.go(2);}">📧 Verify email and create account</button>
+            <div style="text-align:center;margin-top:14px;font-size:13px;color:#4b5563;">Already have an account? <a href="#" style="color:#003087;" onclick="event.preventDefault(); window.go && window.go(2);">Sign in</a></div>
           </div>
         </div>
       </div>
@@ -11877,8 +11877,13 @@ go(0);
         toast('Please complete all required fields correctly.', 'error');
         return false;
       }
-      showRegistrationSuccess();
-      toast('Account created. Welcome to UWC.', 'success');
+      // Account created → confirm, then redirect to the Sign in page so the
+      // applicant logs in with their new credentials.
+      toast('Account created — please sign in.', 'success');
+      // Pre-fill the sign-in email for convenience, if the field exists.
+      var signinEmail = document.getElementById('auth-signin-email');
+      if (signinEmail && formData.email) signinEmail.value = formData.email;
+      if (typeof window.go === 'function') window.go(2);
       return true;
     },
 
