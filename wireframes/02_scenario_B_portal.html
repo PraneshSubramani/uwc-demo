@@ -2279,6 +2279,21 @@ html body #sc-app .uwc-portal-main {
 })();
 </script>
 
+<style>
+/* v25 — explicit show for inline declaration Submit (the user-facing one) */
+#sc-app details.appform-section .appform-body button#appform-decl-submit {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+</style>
+<style>
+/* v25 — max-specificity sidebar overflow clip (clip active-pill glow at border) */
+html body #sc-3 .uwc-portal-sidebar,
+html body #sc-app .uwc-portal-shell .uwc-portal-sidebar {
+  overflow-x: hidden !important;
+}
+</style>
 </head>
 <body>
 
@@ -8433,7 +8448,7 @@ if (window.UWCFormState && typeof window.UWCFormState.onUpdate === 'function') {
         flag: '🇧🇷',
         status: 'Eligibility Review',
         statusKind: 'in_progress',
-        progress: 67,
+        progress: 100,  /* application form is fully filled & submitted */
         submittedAt: '2026-05-27T14:32',
         nextMilestone: 'Local interview',
         nextDate: '8-15 June 2026',
