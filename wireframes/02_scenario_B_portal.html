@@ -5169,7 +5169,7 @@ html body #sc-app .uwc-portal-main {
         </button>
         <div class="appform-user-chip">
           <div class="appform-user-avatar">SA</div>
-          <span>Sofia Almeida</span>
+          <span data-applicant-name>Sofia Almeida</span>
         </div>
       </div>
     </div>
@@ -5238,1137 +5238,6 @@ html body #sc-app .uwc-portal-main {
   </div>
 </section>
 
-<script>
-(function() {
-  'use strict';
-
-  /* ============================================================ */
-  /* STATE                                                         */
-  /* ============================================================ */
-  const State = {
-    data: {
-      personal: {
-        fullName: 'Sofia Maria Almeida',
-        preferredName: 'Sofia',
-        dob: '2009-03-14',
-        gender: 'Female',
-        nationality: 'Brazilian',
-        passport: 'FH 832 491',
-        address: 'Rua das Acácias 142, São Paulo, SP, 04532-001, Brazil',
-        phone: '+55 11 9 4321 5678',
-        email: 'sofia.almeida@example.com'
-      },
-      academic: {
-        school: 'Colégio Bandeirantes, São Paulo',
-        currentYear: '10th grade (Ensino Médio Year 1)',
-        graduationYear: '2026',
-        languageInstruction: 'Portuguese',
-        languagesSpoken: 'Portuguese (native), English (C1), Spanish (B2)',
-        averageGrade: '9.4',
-        gradeScale: '/10',
-        awards: 'Math Olympiad gold 2025, English-language debate runner-up 2024'
-      },
-      statement: {
-        whyUwc: 'I want to study at a UWC because I believe the most important questions of our time — climate, migration, inequality — cannot be solved by any one nation alone, and I want to learn how to work across the differences that usually divide us. Growing up in São Paulo, I have seen a single city hold extraordinary wealth and deep poverty side by side, often separated by no more than a single street, and that contrast has shaped every choice I have made. I have spent the last two years tutoring younger students in my neighbourhood library, where what began as homework help for two children became a small reading club of fourteen, and watching them grow in confidence taught me that education is the most durable form of hope, and that real change starts close to home before it can reach further. A UWC education would place me alongside people whose lives have been shaped by circumstances very different from my own, and I am convinced that the deepest learning happens not when difference is smoothed over but when it is genuinely understood, argued about, and lived with day after day. I am drawn especially to the UWC movement because it does not treat international understanding as an abstract ideal but as a daily practice — living, studying, cooking, and disagreeing with people from a hundred countries, then finding a way to share a kitchen and a classroom regardless. I have thought carefully about what I would bring as well as what I would gain. I would bring my curiosity, my discipline, my commitment to service, and above all my willingness to be changed by what I do not yet understand, because I think humility is the beginning of any real education. I am not looking for a school that will simply add to my qualifications; I am looking for a community that will challenge my assumptions and ask more of me than I currently ask of myself. I know that living far from my family at sixteen will be difficult, and that learning in my third language will demand patience, but I see those difficulties as exactly the kind of growth I am seeking rather than obstacles to avoid. After UWC I hope to study environmental science and return to Brazil to work on community-led conservation, carrying everything I have learned back to the place that formed me and the people who believed in me first. I want to help build the kind of bridges between communities that I have only begun to imagine, and I am certain that the friendships and the disagreements I would have at a UWC would shape the rest of my life far beyond the two years I spend there. I have spoken with two UWC alumni from Brazil who told me that what stayed with them was not any single lesson but the habit of listening to people they would never otherwise have met, and that is precisely the habit I most want to build in myself while I am still young enough for it to become second nature. This, more than any single subject or qualification, is why a UWC education matters to me more than any other path I could choose, and why I am ready to give it everything I have.',
-        communityContribution: 'For the past two years I have run a weekend reading club at my local community library in São Paulo, which I started after noticing that several younger children in my building were falling behind in school with no one at home able to help them. What began as informal homework help for two children grew into a structured club of fourteen, for whom I prepare weekly reading materials, organise a rota of volunteer tutors from my school, and track each child\'s progress so that no one is left behind. The work has taught me patience, organisation, and above all that leadership is quiet — it is making sure every voice is heard rather than being the loudest in the room. I have learned to plan a session so that a struggling reader and a confident one both leave feeling they have achieved something, and to notice the child who has gone silent before they slip away entirely. I have also learned to ask for help and to be resourceful: when the library could not fund new books, I approached three local bookshops and secured a regular donation, and when two of my volunteer tutors left, I recruited and trained three more from younger year groups so the club would outlast me. Seeing one of my first students read aloud to the group for the first time, after months of being too shy to try, remains the proudest moment of my school years so far. I want to continue this kind of grassroots, practical service at UWC and beyond, because I have learned that lasting change is built quietly, one relationship and one small commitment at a time, and that the most valuable thing I can offer any community is simply to keep showing up long after the initial enthusiasm has faded and the real, patient work begins.',
-        brazilNcQuestion: 'I am applying through UWC Brazil because I want to represent my country and community on an international stage, and because I am committed to returning the investment by contributing to the UWC Brazil alumni and outreach network after my studies.'
-      },
-      documents: [
-        { name: 'Passport_Sofia_Almeida.pdf', type: 'Identity document', size: 1258291, uploadedAt: '2026-01-12' },
-        { name: 'Academic_Transcript_2024-2025.pdf', type: 'Academic transcript', size: 860160, uploadedAt: '2026-01-12' },
-        { name: 'School_Reference_Bandeirantes.pdf', type: 'Referee statement', size: 624640, uploadedAt: '2026-01-13' }
-      ],
-      guardian: {
-        name: 'Maria Almeida',
-        relationship: 'Mother',
-        email: 'maria.almeida@example.com',
-        phone: '+55 11 9 4321 5677',
-        consentReceived: true,
-        consentReceivedAt: '2026-01-14'
-      },
-      declaration: {
-        signedName: '',
-        signedAt: null,
-        agreed: false
-      },
-      submission: {
-        submitted: false,
-        referenceId: null,
-        submittedAt: null
-      }
-    },
-    editMode: { personal: false, academic: false },
-    _listeners: [],
-
-    get(section, field) { return this.data[section][field]; },
-    set(section, field, value) {
-      this.data[section][field] = value;
-      this._notify(section);
-    },
-    isSectionComplete(section) {
-      const d = this.data;
-      if (section === 'personal') {
-        const p = d.personal;
-        return !!(p.fullName && p.dob && p.nationality && p.passport && p.email);
-      }
-      if (section === 'academic') {
-        const a = d.academic;
-        return !!(a.school && a.currentYear && a.graduationYear);
-      }
-      if (section === 'statement') {
-        return countWords(d.statement.whyUwc) >= 500
-          && countWords(d.statement.communityContribution) >= 300;
-      }
-      if (section === 'documents') {
-        return d.documents.length >= 3;
-      }
-      if (section === 'guardian') {
-        return d.guardian.consentReceived === true;
-      }
-      if (section === 'declaration') {
-        return d.declaration.agreed && d.declaration.signedName.length > 0;
-      }
-      return false;
-    },
-    getStatusText(section) {
-      if (section === 'declaration' && !this.canSubmit()) return 'Locked until sections 1-5 are complete';
-      if (this.isSectionComplete(section)) return 'Complete';
-      if (section === 'personal') return 'Tap to review and edit';
-      if (section === 'academic') return 'Tap to review and edit';
-      if (section === 'statement') {
-        const w1 = countWords(this.data.statement.whyUwc);
-        const w2 = countWords(this.data.statement.communityContribution);
-        if (w1 === 0 && w2 === 0) return 'Not started — 0 / 800 minimum words';
-        return `In progress — ${w1} / 500 + ${w2} / 300 words`;
-      }
-      if (section === 'documents') {
-        const n = this.data.documents.length;
-        if (n === 0) return 'Not started — 0 of 3 documents uploaded';
-        return `${n} of 3 documents uploaded`;
-      }
-      if (section === 'guardian') {
-        if (this.data.guardian.consentReceived) return 'Consent received';
-        return 'Awaiting consent from Maria Almeida';
-      }
-      if (section === 'declaration') return 'Ready to sign and submit';
-      return '';
-    },
-    completedCount() {
-      return ['personal','academic','statement','documents','guardian','declaration']
-        .filter(s => this.isSectionComplete(s)).length;
-    },
-    requiredCompletedCount() {
-      return ['personal','academic','statement','documents','guardian']
-        .filter(s => this.isSectionComplete(s)).length;
-    },
-    getCompletionPercent() {
-      return Math.round((this.completedCount() / 6) * 100);
-    },
-    canSubmit() {
-      return ['personal','academic','statement','documents','guardian']
-        .every(s => this.isSectionComplete(s));
-    },
-    onUpdate(cb) { this._listeners.push(cb); },
-    _notify(section) {
-      this._listeners.forEach(cb => {
-        try { cb(section, this); } catch (e) { console.error(e); }
-      });
-    }
-  };
-
-  // expose
-  window.UWCFormState = State;
-
-  /* ============================================================ */
-  /* HELPERS                                                       */
-  /* ============================================================ */
-  function countWords(s) {
-    if (!s || typeof s !== 'string') return 0;
-    const trimmed = s.trim();
-    if (!trimmed) return 0;
-    return trimmed.split(/\s+/).filter(Boolean).length;
-  }
-
-  function esc(s) {
-    if (s == null) return '';
-    return String(s)
-      .replace(/&/g,'&amp;')
-      .replace(/</g,'&lt;')
-      .replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;')
-      .replace(/'/g,'&#39;');
-  }
-
-  function fmtBytes(b) {
-    if (b < 1024) return b + ' B';
-    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
-    return (b/(1024*1024)).toFixed(1) + ' MB';
-  }
-
-  function fmtDate(ts) {
-    if (!ts) return '';
-    const d = new Date(ts);
-    return d.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
-  }
-
-  function fmtDateLong(ts) {
-    if (!ts) return '';
-    const d = new Date(ts);
-    return d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' })
-      + ' at ' + d.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
-  }
-
-  function toast(msg) {
-    if (window.UWCToast && typeof window.UWCToast.show === 'function') {
-      window.UWCToast.show(msg);
-      return;
-    }
-    const el = document.getElementById('appform-toast');
-    const t = document.getElementById('appform-toast-text');
-    if (!el) return;
-    t.textContent = msg;
-    el.classList.add('is-show');
-    clearTimeout(el._t);
-    el._t = setTimeout(() => el.classList.remove('is-show'), 2400);
-  }
-
-  function genRef() {
-    const n = String(Math.floor(Math.random() * 90000) + 10000);
-    return 'UWC-2026-BR-' + n;
-  }
-
-  /* ============================================================ */
-  /* RENDER — PROGRESS DOTS                                        */
-  /* ============================================================ */
-  function renderDots() {
-    const host = document.getElementById('appform-dots');
-    if (!host) return;
-    const sections = ['personal','academic','statement','documents','guardian','declaration'];
-    let html = '';
-    sections.forEach((s, i) => {
-      const complete = State.isSectionComplete(s);
-      const locked = (s === 'declaration' && !State.canSubmit());
-      let cls = 'appform-dot';
-      let inner = (i+1);
-      if (complete) { cls += ' is-complete'; inner = '<svg><use href="#icon-check"/></svg>'; }
-      else if (locked) { cls += ' is-locked'; inner = '<svg><use href="#icon-lock"/></svg>'; }
-      else if (i === State.requiredCompletedCount() && !complete) { cls += ' is-current'; }
-      html += `<div class="${cls}" title="Section ${i+1}">${inner}</div>`;
-      if (i < sections.length - 1) {
-        const passed = complete;
-        html += `<div class="appform-dot-line${passed ? ' is-passed' : ''}"></div>`;
-      }
-    });
-    host.innerHTML = html;
-    const pctEl = document.getElementById('appform-pct');
-    if (pctEl) pctEl.textContent = State.getCompletionPercent() + '% complete';
-  }
-
-  /* ============================================================ */
-  /* RENDER — SECTIONS                                             */
-  /* ============================================================ */
-  function renderSections() {
-    const host = document.getElementById('appform-sections-host');
-    if (!host) return;
-    // preserve open states
-    const openStates = {};
-    host.querySelectorAll('details.appform-section').forEach(d => {
-      openStates[d.dataset.section] = d.open;
-    });
-
-    host.innerHTML = `
-      ${renderSectionWrapper('personal', '1', 'Personal information', renderPersonal())}
-      ${renderSectionWrapper('academic', '2', 'Academic background', renderAcademic())}
-      ${renderSectionWrapper('statement', '3', 'Personal statement and local questions', renderStatement())}
-      ${renderSectionWrapper('documents', '4', 'Supporting documents', renderDocuments())}
-      ${renderSectionWrapper('guardian', '5', 'Parent / Guardian consent', renderGuardian())}
-      ${renderSectionWrapper('declaration', '6', 'Declaration and submit', renderDeclaration())}
-    `;
-
-    // restore open states
-    Object.keys(openStates).forEach(k => {
-      const el = host.querySelector(`details.appform-section[data-section="${k}"]`);
-      if (el && openStates[k]) el.open = true;
-    });
-
-    bindSectionHandlers();
-  }
-
-  function renderSectionWrapper(key, num, title, body) {
-    const complete = State.isSectionComplete(key);
-    const locked = (key === 'declaration' && !State.canSubmit());
-    const status = State.getStatusText(key);
-    let statusCls = '';
-    if (complete) statusCls = 'is-complete';
-    else if (locked) statusCls = 'is-locked';
-    else if (key === 'guardian' && !State.data.guardian.consentReceived) statusCls = 'is-warn';
-    const sectionCls = 'appform-section'
-      + (complete ? ' is-complete' : '')
-      + (locked ? ' is-locked' : '');
-    const numContent = complete ? '<svg><use href="#icon-check"/></svg>'
-      : (locked ? '<svg><use href="#icon-lock"/></svg>' : num);
-    return `
-      <details class="${sectionCls}" data-section="${key}" id="appform-section-${num}" open>
-        <summary class="appform-summary">
-          <div class="appform-num">${numContent}</div>
-          <div>
-            <div class="appform-sum-title">${esc(title)}</div>
-            <div class="appform-sum-status ${statusCls}">${esc(status)}</div>
-          </div>
-          <div class="appform-sum-chev"><svg><use href="#icon-chevron-right"/></svg></div>
-        </summary>
-        <div class="appform-body">${body}</div>
-      </details>
-    `;
-  }
-
-  /* ---------- SECTION 1: Personal ---------- */
-  function renderPersonal() {
-    const p = State.data.personal;
-    if (State.editMode.personal) {
-      return `
-        <div class="appform-display-grid">
-          ${editField('personal','fullName','Full legal name','text', true)}
-          ${editField('personal','preferredName','Preferred name','text')}
-          ${editField('personal','dob','Date of birth','date', true)}
-          ${editField('personal','gender','Gender','text')}
-          ${editField('personal','nationality','Nationality','text', true)}
-          ${editField('personal','passport','Passport number','text', true)}
-          <div class="appform-field appform-field-full">
-            <span class="appform-label">Home address</span>
-            <input class="appform-input" data-edit="personal.address" value="${esc(p.address)}" />
-          </div>
-          ${editField('personal','phone','Phone','tel')}
-          ${editField('personal','email','Email','email', true)}
-        </div>
-        <div class="appform-action-row">
-          <button type="button" class="appform-btn appform-btn--primary" data-action="save-personal">
-            <svg><use href="#icon-save"/></svg> Save changes
-          </button>
-          <button type="button" class="appform-btn appform-btn--ghost" data-action="cancel-personal">
-            <svg><use href="#icon-x"/></svg> Cancel
-          </button>
-        </div>
-      `;
-    }
-    return `
-      <div class="appform-display-grid">
-        ${displayField('Full legal name', p.fullName)}
-        ${displayField('Preferred name', p.preferredName || '—')}
-        ${displayField('Date of birth', fmtDate(p.dob))}
-        ${displayField('Gender', p.gender || '—')}
-        ${displayField('Nationality', p.nationality)}
-        ${displayField('Passport number', p.passport)}
-        ${displayField('Home address', p.address, true)}
-        ${displayField('Phone', p.phone)}
-        ${displayField('Email', p.email)}
-      </div>
-      <div class="appform-action-row">
-        <div class="appform-spacer"></div>
-        <button type="button" class="appform-btn appform-btn--ghost" data-action="edit-personal">
-          <svg><use href="#icon-edit"/></svg> Edit
-        </button>
-      </div>
-    `;
-  }
-
-  /* ---------- SECTION 2: Academic ---------- */
-  function renderAcademic() {
-    const a = State.data.academic;
-    if (State.editMode.academic) {
-      const yearOptions = ['9th grade (Ensino Fundamental Year 9)',
-        '10th grade (Ensino Médio Year 1)',
-        '11th grade (Ensino Médio Year 2)',
-        '12th grade (Ensino Médio Year 3)'];
-      const scaleOptions = ['/10','/20','/100','A-F'];
-      return `
-        <div class="appform-display-grid">
-          ${editField('academic','school','Current school','text', true)}
-          <div class="appform-field">
-            <span class="appform-label">Current year of study</span>
-            <select class="appform-select" data-edit="academic.currentYear">
-              ${yearOptions.map(o => `<option ${o === a.currentYear ? 'selected':''}>${esc(o)}</option>`).join('')}
-            </select>
-          </div>
-          ${editField('academic','graduationYear','Graduation year','number', true)}
-          ${editField('academic','languageInstruction','Language of instruction','text')}
-          <div class="appform-field appform-field-full">
-            <span class="appform-label">Languages spoken</span>
-            <input class="appform-input" data-edit="academic.languagesSpoken" value="${esc(a.languagesSpoken)}" />
-          </div>
-          ${editField('academic','averageGrade','Average grade','number')}
-          <div class="appform-field">
-            <span class="appform-label">Grade scale</span>
-            <select class="appform-select" data-edit="academic.gradeScale">
-              ${scaleOptions.map(o => `<option ${o === a.gradeScale ? 'selected':''}>${esc(o)}</option>`).join('')}
-            </select>
-          </div>
-          <div class="appform-field appform-field-full">
-            <span class="appform-label">Awards and recognitions</span>
-            <textarea class="appform-textarea" data-edit="academic.awards">${esc(a.awards)}</textarea>
-          </div>
-        </div>
-        <div class="appform-action-row">
-          <button type="button" class="appform-btn appform-btn--primary" data-action="save-academic">
-            <svg><use href="#icon-save"/></svg> Save changes
-          </button>
-          <button type="button" class="appform-btn appform-btn--ghost" data-action="cancel-academic">
-            <svg><use href="#icon-x"/></svg> Cancel
-          </button>
-        </div>
-      `;
-    }
-    return `
-      <div class="appform-display-grid">
-        ${displayField('Current school', a.school, true)}
-        ${displayField('Current year of study', a.currentYear)}
-        ${displayField('Graduation year', a.graduationYear)}
-        ${displayField('Language of instruction', a.languageInstruction)}
-        ${displayField('Languages spoken', a.languagesSpoken, true)}
-        ${displayField('Average grade', a.averageGrade + ' ' + a.gradeScale)}
-        ${displayField('Awards and recognitions', a.awards, true)}
-      </div>
-      <div class="appform-action-row">
-        <div class="appform-spacer"></div>
-        <button type="button" class="appform-btn appform-btn--ghost" data-action="edit-academic">
-          <svg><use href="#icon-edit"/></svg> Edit
-        </button>
-      </div>
-    `;
-  }
-
-  /* ---------- SECTION 3: Statement ---------- */
-  function renderStatement() {
-    const s = State.data.statement;
-    return `
-      <p class="appform-field-help" style="margin-top:8px">
-        Three short essays. The first two are required for the application to be considered complete.
-        Word counts update live as you type. UK spelling is accepted.
-      </p>
-
-      <label class="appform-textarea-label" for="appform-why-uwc">
-        Why UWC? <span class="req">*</span>
-        <span style="font-weight:400;color:#6b7280;font-size:12px"> · minimum 500 words, maximum 600</span>
-      </label>
-      <textarea
-        id="appform-why-uwc"
-        class="appform-textarea appform-textarea--statement"
-        data-edit="statement.whyUwc"
-        data-min="500" data-max="600"
-        placeholder="Tell us why you want to attend a UWC school. What aspects of the UWC mission resonate with you? How will this experience shape your future?">${esc(s.whyUwc)}</textarea>
-      ${renderCounter('whyUwc', s.whyUwc, 500, 600)}
-
-      <label class="appform-textarea-label" for="appform-community">
-        Community contribution <span class="req">*</span>
-        <span style="font-weight:400;color:#6b7280;font-size:12px"> · minimum 300 words, maximum 400</span>
-      </label>
-      <textarea
-        id="appform-community"
-        class="appform-textarea appform-textarea--statement"
-        data-edit="statement.communityContribution"
-        data-min="300" data-max="400"
-        placeholder="Describe a specific contribution you have made to your school or community. What did you do, and what did you learn?">${esc(s.communityContribution)}</textarea>
-      ${renderCounter('communityContribution', s.communityContribution, 300, 400)}
-
-      <label class="appform-textarea-label" for="appform-brazil">
-        Brazil National Committee question <span style="font-weight:400;color:#6b7280;font-size:12px"> · optional, maximum 200 words</span>
-      </label>
-      <p class="appform-field-help" style="margin-top:0">
-        How do you envisage contributing to the Brazilian community after your UWC experience?
-      </p>
-      <textarea
-        id="appform-brazil"
-        class="appform-textarea"
-        data-edit="statement.brazilNcQuestion"
-        data-max="200"
-        placeholder="Optional reflection — what role do you imagine playing back home?">${esc(s.brazilNcQuestion)}</textarea>
-      ${renderCounter('brazilNcQuestion', s.brazilNcQuestion, 0, 200)}
-
-      <div class="appform-action-row">
-        <button type="button" class="appform-btn appform-btn--ghost" data-action="back-to-academic">
-          <svg><use href="#icon-arrow-left"/></svg> Back to Academic
-        </button>
-        <div class="appform-spacer"></div>
-        <button type="button" class="appform-btn appform-btn--ghost" data-action="save-draft">
-          <svg><use href="#icon-save"/></svg> Save draft
-        </button>
-        <button type="button" class="appform-btn appform-btn--primary" data-action="next-to-documents">
-          Next: Documents <svg><use href="#icon-arrow-right"/></svg>
-        </button>
-      </div>
-    `;
-  }
-
-  function renderCounter(field, value, min, max) {
-    const n = countWords(value);
-    let cls = 'appform-counter--err';
-    let barCls = '';
-    let label = '';
-    if (min === 0) {
-      // optional field
-      cls = n > max ? 'appform-counter--err' : (n > 0 ? 'appform-counter--ok' : '');
-      label = `${n} / ${max} words (optional)`;
-    } else {
-      if (n >= min && n <= max) { cls = 'appform-counter--ok'; barCls = 'is-ok'; }
-      else if (n >= min * 0.7) { cls = 'appform-counter--warn'; barCls = 'is-warn'; }
-      label = `${n} / ${min} words ${n >= min ? '· minimum met' : '· keep writing'}`;
-    }
-    const pct = max ? Math.min(100, (n / max) * 100) : 0;
-    return `
-      <div class="appform-counter-row">
-        <span class="appform-field-help" style="margin:0" data-counter-help="${field}">${field === 'brazilNcQuestion' ? 'Optional. Word limit guidance.' : 'Word count updates as you type.'}</span>
-        <span class="appform-counter ${cls}" data-counter="${field}">${label}</span>
-      </div>
-      <div class="appform-counter-bar">
-        <div class="appform-counter-bar-fill ${barCls}" data-counter-bar="${field}" style="width:${pct}%"></div>
-      </div>
-    `;
-  }
-
-  /* ---------- SECTION 4: Documents ---------- */
-  function renderDocuments() {
-    const docs = State.data.documents;
-    return `
-      <p class="appform-field-help" style="margin-top:8px">
-        Upload at least <b>3</b> supporting documents. Accepted formats: PDF, JPG, PNG. Suggested:
-        academic transcript, school reference letter, language certificate, identity document, portfolio of activities.
-      </p>
-
-      <div class="appform-drop" id="appform-drop">
-        <svg><use href="#icon-upload-cloud"/></svg>
-        <div class="appform-drop-title">Drag files here or click to browse</div>
-        <div class="appform-drop-sub">PDF, JPG, PNG · up to 10 MB each</div>
-      </div>
-      <input type="file" id="appform-file-input" multiple accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/*" style="display:none" />
-
-      <div class="appform-file-list">
-        ${docs.length === 0
-          ? '<div style="text-align:center;color:#9ca3af;font-size:13px;padding:8px">No files uploaded yet.</div>'
-          : docs.map((d, i) => `
-            <div class="appform-file-row">
-              <div class="appform-file-icon"><svg><use href="#icon-file-text"/></svg></div>
-              <div class="appform-file-info">
-                <div class="appform-file-name">${esc(d.name)}</div>
-                <div class="appform-file-meta">${fmtBytes(d.size)} · uploaded ${fmtDate(d.uploadedAt)}</div>
-              </div>
-              <button type="button" class="appform-file-remove" data-remove-doc="${i}" aria-label="Remove">
-                <svg><use href="#icon-x"/></svg>
-              </button>
-            </div>
-          `).join('')
-        }
-      </div>
-
-      <div class="appform-action-row">
-        <div class="appform-spacer"></div>
-        <span class="appform-field-help" style="margin:0">
-          ${docs.length} of 3 documents uploaded ${docs.length >= 3 ? '· minimum met' : '· keep uploading'}
-        </span>
-      </div>
-    `;
-  }
-
-  /* ---------- SECTION 5: Guardian ---------- */
-  function renderGuardian() {
-    const g = State.data.guardian;
-    return `
-      <div class="appform-display-grid">
-        ${displayField('Guardian name', g.name)}
-        ${displayField('Relationship', g.relationship)}
-        ${displayField('Email', g.email)}
-        ${displayField('Phone', g.phone)}
-      </div>
-
-      ${g.consentReceived
-        ? `<div class="appform-warn-panel is-ok">
-            <svg><use href="#icon-check"/></svg>
-            <div>
-              <div class="appform-warn-title">Consent received from Maria Almeida</div>
-              <div class="appform-warn-text">
-                Signed digitally on ${esc(fmtDateLong(g.consentReceivedAt))}. Section 6 is now unlocked.
-              </div>
-            </div>
-          </div>`
-        : `<div class="appform-warn-panel">
-            <svg><use href="#icon-alert-triangle"/></svg>
-            <div style="flex:1">
-              <div class="appform-warn-title">Awaiting consent from Maria Almeida</div>
-              <div class="appform-warn-text">
-                A consent request was emailed to <b>maria.almeida@example.com</b> on 26 May 2026.
-                Section 6 (Declaration and submit) is locked until consent is recorded.
-              </div>
-              <div class="appform-warn-actions">
-                <button type="button" class="appform-btn appform-btn--ghost" data-action="send-guardian-reminder">
-                  <svg><use href="#icon-send"/></svg> Send reminder
-                </button>
-                <button type="button" class="appform-btn appform-btn--success" data-action="mark-consent">
-                  <svg><use href="#icon-check"/></svg> Mark consent received (demo)
-                </button>
-              </div>
-            </div>
-          </div>`
-      }
-    `;
-  }
-
-  /* ---------- SECTION 6: Declaration ---------- */
-  function renderDeclaration() {
-    const d = State.data.declaration;
-    const sub = State.data.submission;
-
-    if (sub.submitted) {
-      return renderSuccess();
-    }
-
-    if (!State.canSubmit()) {
-      const done = State.requiredCompletedCount();
-      return `
-        <div class="appform-lock-banner">
-          <svg><use href="#icon-lock"/></svg>
-          <div class="appform-lock-banner-text">
-            <b>Locked until sections 1-5 are complete.</b><br>
-            Currently <b>${done} of 5</b> required sections are complete.
-            Finish the remaining sections to unlock the declaration and submission.
-          </div>
-        </div>
-      `;
-    }
-
-    return `
-      <p class="appform-field-help" style="margin-top:8px">
-        Please read the declaration carefully. By signing you confirm that all information in this application is true and accurate.
-      </p>
-
-      <div class="appform-decl-text">
-        I, the applicant, confirm that the information provided in this application is true,
-        complete and accurate to the best of my knowledge. I understand that providing false or
-        misleading information may result in my application being rejected or, if I have already
-        been offered a place, my offer being withdrawn.
-        <br><br>
-        I authorise UWC and the Brazil National Committee to verify my academic records,
-        contact my school for references, and share my application materials with selection
-        panels and partner UWC schools as part of the selection process.
-        <br><br>
-        I understand that the UWC scholarship is awarded on merit and need, and I agree to
-        participate in good faith in the entire selection programme — including written
-        assessments, group activities, and interviews — should I be shortlisted.
-      </div>
-
-      <div class="appform-checkbox-row">
-        <input type="checkbox" id="appform-decl-agree" ${d.agreed ? 'checked' : ''} />
-        <label for="appform-decl-agree">
-          I have read and agree to the declaration above. I confirm that all information in this application is true and accurate.
-        </label>
-      </div>
-
-      <div class="appform-field" style="margin-top:14px">
-        <span class="appform-label">Type your full name to sign</span>
-        <input class="appform-input" id="appform-decl-name" placeholder="e.g. Sofia Maria Almeida" value="${esc(d.signedName)}" />
-        <span class="appform-field-help">Your typed name will be recorded as your digital signature.</span>
-      </div>
-
-      <div class="appform-action-row">
-        <div class="appform-spacer"></div>
-        <button type="button" class="appform-btn appform-btn--primary" id="appform-decl-submit"
-          ${(!d.agreed || !d.signedName) ? 'disabled' : ''}>
-          <svg><use href="#icon-send"/></svg> Submit application
-        </button>
-      </div>
-    `;
-  }
-
-  function renderSuccess() {
-    const sub = State.data.submission;
-    return `
-      <div class="appform-success">
-        <div class="appform-success-icon">
-          <svg><use href="#icon-check"/></svg>
-        </div>
-        <h2 class="appform-success-title">Application submitted successfully</h2>
-        <div class="appform-success-ref">Your reference number is</div>
-        <div style="margin:8px 0 4px"><code>${esc(sub.referenceId)}</code></div>
-        <div class="appform-success-ref" style="margin-top:6px">
-          Submitted ${esc(fmtDateLong(sub.submittedAt))}. A confirmation email has been sent to
-          <b>${esc(State.data.personal.email)}</b>.
-        </div>
-
-        <div class="appform-timeline">
-          <div class="appform-timeline-step is-done">
-            <div class="appform-timeline-bullet"><svg><use href="#icon-check"/></svg></div>
-            <div class="appform-timeline-text">
-              <div class="appform-timeline-title">Application submitted</div>
-              <div class="appform-timeline-meta">${esc(fmtDate(sub.submittedAt))} · ref ${esc(sub.referenceId)}</div>
-            </div>
-          </div>
-          <div class="appform-timeline-step">
-            <div class="appform-timeline-bullet">2</div>
-            <div class="appform-timeline-text">
-              <div class="appform-timeline-title">Eligibility review</div>
-              <div class="appform-timeline-meta">Expected within 5 working days · documents and references checked</div>
-            </div>
-          </div>
-          <div class="appform-timeline-step">
-            <div class="appform-timeline-bullet">3</div>
-            <div class="appform-timeline-text">
-              <div class="appform-timeline-title">Local selection interview</div>
-              <div class="appform-timeline-meta">Mid-December 2026 · shortlisted candidates only</div>
-            </div>
-          </div>
-          <div class="appform-timeline-step">
-            <div class="appform-timeline-bullet">4</div>
-            <div class="appform-timeline-text">
-              <div class="appform-timeline-title">National selection weekend</div>
-              <div class="appform-timeline-meta">Late January 2026 · group exercises and panel interviews</div>
-            </div>
-          </div>
-          <div class="appform-timeline-step">
-            <div class="appform-timeline-bullet">5</div>
-            <div class="appform-timeline-text">
-              <div class="appform-timeline-title">Place decision and school assignment</div>
-              <div class="appform-timeline-meta">By March 2026 · confirmation of school placement and scholarship</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  /* ---------- shared field renderers ---------- */
-  function displayField(label, value, full) {
-    return `
-      <div class="appform-field ${full ? 'appform-field-full' : ''}">
-        <span class="appform-label">${esc(label)}</span>
-        <span class="appform-value">${esc(value || '—')}</span>
-      </div>
-    `;
-  }
-
-  function editField(section, field, label, type, required) {
-    const v = State.data[section][field] || '';
-    return `
-      <div class="appform-field">
-        <span class="appform-label">${esc(label)}${required ? ' <span style="color:#c8102e">*</span>' : ''}</span>
-        <input class="appform-input" type="${type}" data-edit="${section}.${field}" value="${esc(v)}" />
-      </div>
-    `;
-  }
-
-  /* ============================================================ */
-  /* EVENT BINDING                                                 */
-  /* ============================================================ */
-  function bindSectionHandlers() {
-    const host = document.getElementById('appform-sections-host');
-    if (!host) return;
-
-    // detail open: only one expanded at a time (accordion) — but allow free open
-    host.querySelectorAll('details.appform-section').forEach(d => {
-      d.addEventListener('toggle', () => {
-        if (d.open) {
-          // close others (accordion behaviour)
-          host.querySelectorAll('details.appform-section').forEach(other => {
-            if (other !== d) other.open = false;
-          });
-        }
-      });
-    });
-
-    // file drop / browse
-    const drop = document.getElementById('appform-drop');
-    const fileInput = document.getElementById('appform-file-input');
-    if (drop && fileInput) {
-      drop.addEventListener('click', () => fileInput.click());
-      drop.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        drop.classList.add('is-drag');
-      });
-      drop.addEventListener('dragleave', () => drop.classList.remove('is-drag'));
-      drop.addEventListener('drop', (e) => {
-        e.preventDefault();
-        drop.classList.remove('is-drag');
-        handleFiles(e.dataTransfer.files);
-      });
-      fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
-    }
-
-    // live word count on statement textareas
-    host.querySelectorAll('textarea[data-edit^="statement."]').forEach(ta => {
-      ta.addEventListener('input', () => {
-        const path = ta.dataset.edit.split('.');
-        const field = path[1];
-        State.data.statement[field] = ta.value;
-
-        const min = parseInt(ta.dataset.min || '0', 10);
-        const max = parseInt(ta.dataset.max || '0', 10);
-        const n = countWords(ta.value);
-
-        // update counter label
-        const counterEl = host.querySelector(`[data-counter="${field}"]`);
-        const barEl = host.querySelector(`[data-counter-bar="${field}"]`);
-        if (counterEl) {
-          let cls = 'appform-counter ';
-          let label = '';
-          if (min === 0) {
-            cls += n > max ? 'appform-counter--err' : (n > 0 ? 'appform-counter--ok' : '');
-            label = `${n} / ${max} words (optional)`;
-          } else {
-            if (n >= min && n <= max) cls += 'appform-counter--ok';
-            else if (n >= min * 0.7) cls += 'appform-counter--warn';
-            else cls += 'appform-counter--err';
-            label = `${n} / ${min} words ${n >= min ? '· minimum met' : '· keep writing'}`;
-          }
-          counterEl.className = cls;
-          counterEl.textContent = label;
-        }
-        if (barEl) {
-          const pct = max ? Math.min(100, (n / max) * 100) : 0;
-          barEl.style.width = pct + '%';
-          barEl.className = 'appform-counter-bar-fill';
-          if (n >= min && n <= max && min > 0) barEl.classList.add('is-ok');
-          else if (n >= min * 0.7 && min > 0) barEl.classList.add('is-warn');
-        }
-        // update textarea border color
-        ta.classList.remove('is-err','is-warn','is-ok');
-        if (min > 0) {
-          if (n >= min && n <= max) ta.classList.add('is-ok');
-          else if (n >= min * 0.7) ta.classList.add('is-warn');
-          else ta.classList.add('is-err');
-        } else if (n > max) ta.classList.add('is-err');
-
-        // notify (updates dots, summary status, footer) — but do NOT re-render the textarea
-        notifyShallow('statement');
-      });
-    });
-
-    // edit-mode inputs: just track value
-    host.querySelectorAll('[data-edit]:not(textarea[data-edit^="statement."])').forEach(inp => {
-      inp.addEventListener('input', () => {
-        // values get harvested on Save
-      });
-    });
-
-    // declaration handlers
-    const declAgree = document.getElementById('appform-decl-agree');
-    if (declAgree) {
-      declAgree.addEventListener('change', () => {
-        State.data.declaration.agreed = declAgree.checked;
-        updateSubmitButtonState();
-      });
-    }
-    const declName = document.getElementById('appform-decl-name');
-    if (declName) {
-      declName.addEventListener('input', () => {
-        State.data.declaration.signedName = declName.value;
-        updateSubmitButtonState();
-      });
-    }
-    const declSubmit = document.getElementById('appform-decl-submit');
-    if (declSubmit) {
-      declSubmit.addEventListener('click', submitApplication);
-    }
-
-    // action buttons
-    host.querySelectorAll('[data-action]').forEach(btn => {
-      btn.addEventListener('click', (e) => handleAction(e.currentTarget.dataset.action));
-    });
-
-    // remove document buttons
-    host.querySelectorAll('[data-remove-doc]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const idx = parseInt(e.currentTarget.dataset.removeDoc, 10);
-        State.data.documents.splice(idx, 1);
-        State._notify('documents');
-        renderSections();
-      });
-    });
-  }
-
-  function updateSubmitButtonState() {
-    const declSubmit = document.getElementById('appform-decl-submit');
-    if (declSubmit) {
-      const d = State.data.declaration;
-      declSubmit.disabled = !(d.agreed && d.signedName.length > 0);
-    }
-    renderFooter();
-  }
-
-  /* ============================================================ */
-  /* ACTION HANDLERS                                               */
-  /* ============================================================ */
-  function handleAction(action) {
-    switch (action) {
-      case 'edit-personal':
-        State.editMode.personal = true;
-        renderSectionBody('personal');
-        break;
-
-      case 'save-personal':
-        harvestEdits('personal');
-        State.editMode.personal = false;
-        State._notify('personal');
-        renderSections();
-        toast('Personal information saved');
-        break;
-
-      case 'cancel-personal':
-        State.editMode.personal = false;
-        renderSectionBody('personal');
-        break;
-
-      case 'edit-academic':
-        State.editMode.academic = true;
-        renderSectionBody('academic');
-        break;
-
-      case 'save-academic':
-        harvestEdits('academic');
-        State.editMode.academic = false;
-        State._notify('academic');
-        renderSections();
-        toast('Academic background saved');
-        break;
-
-      case 'cancel-academic':
-        State.editMode.academic = false;
-        renderSectionBody('academic');
-        break;
-
-      case 'back-to-academic': {
-        const s3 = document.querySelector('details[data-section="statement"]');
-        const s2 = document.querySelector('details[data-section="academic"]');
-        if (s3) s3.open = false;
-        if (s2) s2.open = true;
-        s2 && s2.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        break;
-      }
-
-      case 'save-draft':
-        toast('Draft saved');
-        State._notify('statement');
-        break;
-
-      case 'next-to-documents': {
-        const s3 = document.querySelector('details[data-section="statement"]');
-        const s4 = document.querySelector('details[data-section="documents"]');
-        if (s3) s3.open = false;
-        if (s4) s4.open = true;
-        s4 && s4.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        break;
-      }
-
-      case 'send-guardian-reminder':
-        toast('Reminder sent to maria.almeida@example.com');
-        break;
-
-      case 'mark-consent':
-        State.data.guardian.consentReceived = true;
-        State.data.guardian.consentReceivedAt = Date.now();
-        State._notify('guardian');
-        renderSections();
-        toast('Consent received from Maria Almeida — section 6 unlocked');
-        // auto-open declaration
-        setTimeout(() => {
-          const s6 = document.querySelector('details[data-section="declaration"]');
-          if (s6) {
-            s6.open = true;
-            s6.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }, 400);
-        break;
-    }
-  }
-
-  function harvestEdits(section) {
-    document.querySelectorAll(`[data-edit^="${section}."]`).forEach(inp => {
-      const [, field] = inp.dataset.edit.split('.');
-      State.data[section][field] = inp.value;
-    });
-  }
-
-  function renderSectionBody(sectionKey) {
-    const det = document.querySelector(`details[data-section="${sectionKey}"]`);
-    if (!det) return;
-    const body = det.querySelector('.appform-body');
-    if (!body) return;
-    let html = '';
-    if (sectionKey === 'personal') html = renderPersonal();
-    else if (sectionKey === 'academic') html = renderAcademic();
-    else if (sectionKey === 'statement') html = renderStatement();
-    else if (sectionKey === 'documents') html = renderDocuments();
-    else if (sectionKey === 'guardian') html = renderGuardian();
-    else if (sectionKey === 'declaration') html = renderDeclaration();
-    body.innerHTML = html;
-    bindSectionHandlers();
-  }
-
-  /* ============================================================ */
-  /* FILE HANDLING                                                 */
-  /* ============================================================ */
-  function handleFiles(fileList) {
-    if (!fileList || !fileList.length) return;
-    Array.from(fileList).forEach(f => {
-      State.data.documents.push({
-        name: f.name,
-        size: f.size,
-        uploadedAt: Date.now()
-      });
-    });
-    State._notify('documents');
-    renderSections();
-    toast(fileList.length + ' file(s) uploaded');
-  }
-
-  /* ============================================================ */
-  /* SUBMIT                                                        */
-  /* ============================================================ */
-  function submitApplication() {
-    if (!State.canSubmit()) {
-      toast('Complete all sections before submitting');
-      return;
-    }
-    const d = State.data.declaration;
-    if (!d.agreed || !d.signedName) {
-      toast('Please agree and sign before submitting');
-      return;
-    }
-    State.data.declaration.signedAt = Date.now();
-    State.data.submission.submitted = true;
-    State.data.submission.submittedAt = Date.now();
-
-    let ref = null;
-    if (window.UWCSubmit && typeof window.UWCSubmit.application === 'function') {
-      try {
-        const result = window.UWCSubmit.application(State.data);
-        if (result && result.referenceId) ref = result.referenceId;
-      } catch (e) { console.error(e); }
-    }
-    if (!ref) ref = genRef();
-    State.data.submission.referenceId = ref;
-
-    State._notify('declaration');
-    renderSections();
-    // open declaration section to show success
-    const s6 = document.querySelector('details[data-section="declaration"]');
-    if (s6) {
-      s6.open = true;
-      s6.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    toast('Application submitted · ref ' + ref);
-  }
-
-  /* ============================================================ */
-  /* FOOTER + SUBMIT BUTTON                                        */
-  /* ============================================================ */
-  function renderFooter() {
-    const text = document.getElementById('appform-footer-text');
-    const btn = document.getElementById('appform-submit-btn');
-    if (!text || !btn) return;
-    const done = State.completedCount();
-    const submitted = State.data.submission.submitted;
-    if (submitted) {
-      text.innerHTML = `<b>Application submitted</b> · reference ${esc(State.data.submission.referenceId)} · ${esc(fmtDate(State.data.submission.submittedAt))}`;
-      btn.disabled = true;
-      btn.innerHTML = '<svg><use href="#icon-check"/></svg> Submitted';
-      btn.classList.remove('appform-btn--primary');
-      btn.classList.add('appform-btn--success');
-    } else {
-      text.innerHTML = `<b>${done} of 6 sections complete</b> · Submission deadline 30 Nov 2026 · Auto-save is on`;
-      const can = State.canSubmit();
-      btn.disabled = !can;
-      btn.title = can ? 'Submit your application' : 'Complete all 6 sections to submit';
-    }
-  }
-
-  function notifyShallow(section) {
-    // update dots + footer + this section's summary line WITHOUT re-rendering the body
-    renderDots();
-    renderFooter();
-    const det = document.querySelector(`details[data-section="${section}"]`);
-    if (!det) return;
-    const complete = State.isSectionComplete(section);
-    const locked = (section === 'declaration' && !State.canSubmit());
-    det.classList.toggle('is-complete', complete);
-    det.classList.toggle('is-locked', locked);
-    const num = det.querySelector('.appform-num');
-    if (num) {
-      const idx = ['personal','academic','statement','documents','guardian','declaration'].indexOf(section) + 1;
-      num.innerHTML = complete ? '<svg><use href="#icon-check"/></svg>'
-        : (locked ? '<svg><use href="#icon-lock"/></svg>' : String(idx));
-    }
-    const status = det.querySelector('.appform-sum-status');
-    if (status) {
-      status.textContent = State.getStatusText(section);
-      status.className = 'appform-sum-status';
-      if (complete) status.classList.add('is-complete');
-      else if (locked) status.classList.add('is-locked');
-      else if (section === 'guardian' && !State.data.guardian.consentReceived) status.classList.add('is-warn');
-    }
-    // also: declaration section may have just unlocked/locked — refresh it without disturbing currently-edited section
-    if (section !== 'declaration') {
-      const declDet = document.querySelector('details[data-section="declaration"]');
-      if (declDet && !declDet.open) {
-        // just toggle locked state on the closed summary
-        const declLocked = !State.canSubmit();
-        declDet.classList.toggle('is-locked', declLocked);
-        const dNum = declDet.querySelector('.appform-num');
-        if (dNum) dNum.innerHTML = declLocked ? '<svg><use href="#icon-lock"/></svg>' : '6';
-        const dStatus = declDet.querySelector('.appform-sum-status');
-        if (dStatus) {
-          dStatus.textContent = State.getStatusText('declaration');
-          dStatus.className = 'appform-sum-status' + (declLocked ? ' is-locked' : '');
-        }
-      }
-    }
-  }
-
-  /* ============================================================ */
-  /* WIRE STATE → UI                                               */
-  /* ============================================================ */
-  State.onUpdate(() => {
-    renderDots();
-    renderFooter();
-  });
-
-  /* ============================================================ */
-  /* INIT                                                          */
-  /* ============================================================ */
-  function init() {
-    renderDots();
-    renderSections();
-    renderFooter();
-
-    // wire global submit button
-    const btn = document.getElementById('appform-submit-btn');
-    if (btn) {
-      btn.addEventListener('click', () => {
-        if (!State.canSubmit()) {
-          toast('Complete all 6 sections to submit');
-          return;
-        }
-        const s6 = document.querySelector('details[data-section="declaration"]');
-        if (s6) {
-          s6.open = true;
-          s6.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    }
-
-    // open section 3 by default since it's the "in progress" one
-    const s3 = document.querySelector('details[data-section="statement"]');
-    if (s3) s3.open = true;
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    // already loaded — but the section may not be visible yet; init when it appears
-    const sec = document.getElementById('sc-app');
-    if (sec) init();
-    else document.addEventListener('DOMContentLoaded', init);
-  }
-
-})();
-</script>
-
 
 <script>
 (function() {
@@ -6458,7 +5327,7 @@ html body #sc-app .uwc-portal-main {
         return d.guardian.consentReceived === true;
       }
       if (section === 'declaration') {
-        return d.declaration.agreed && d.declaration.signedName.length > 0;
+        return d.declaration.agreed;
       }
       return false;
     },
@@ -6510,6 +5379,77 @@ html body #sc-app .uwc-portal-main {
 
   // expose
   window.UWCFormState = State;
+
+  /* ============================================================ */
+  /* APPLICANTS — multi-user demo state                           */
+  /*   sofia  = complete (all sections except declaration)        */
+  /*   lucas  = blank draft (only Personal + Academic filled)     */
+  /* ============================================================ */
+  // snapshot Sofia's seeded data as the canonical full applicant
+  var SOFIA_DATA = JSON.parse(JSON.stringify(State.data));
+
+  var LUCAS_DATA = {
+    personal: {
+      fullName: 'Lucas Fernández',
+      preferredName: 'Lucas',
+      dob: '2009-07-22',
+      gender: 'Male',
+      nationality: 'Argentine',
+      passport: 'AAB 119 204',
+      address: 'Av. Santa Fe 2840, Buenos Aires, C1425, Argentina',
+      phone: '+54 11 4821 9930',
+      email: 'lucas.fernandez@example.com'
+    },
+    academic: {
+      school: 'Colegio Nacional de Buenos Aires',
+      currentYear: '5to año (Secundario)',
+      graduationYear: '2026',
+      languageInstruction: 'Spanish',
+      languagesSpoken: 'Spanish (native), English (B2)',
+      averageGrade: '8.9',
+      gradeScale: '/10',
+      awards: 'Regional science fair finalist 2025'
+    },
+    statement: { whyUwc: '', communityContribution: '', brazilNcQuestion: '' },
+    documents: [],
+    guardian: {
+      name: 'Carla Fernández', relationship: 'Mother',
+      email: 'carla.fernandez@example.com', phone: '+54 11 4821 9931',
+      consentReceived: false, consentReceivedAt: null
+    },
+    declaration: { signedName: '', signedAt: null, agreed: false },
+    submission: { submitted: false, referenceId: null, submittedAt: null }
+  };
+
+  var APPLICANTS = {
+    sofia: { id: 'sofia', name: 'Sofia Almeida', email: 'sofia.almeida@example.com', password: 'uwc@2026', data: SOFIA_DATA },
+    lucas: { id: 'lucas', name: 'Lucas Fernández', email: 'lucas.fernandez@example.com', password: 'uwc@2026', data: LUCAS_DATA }
+  };
+
+  window.UWCApplicant = {
+    current: 'sofia',
+    list: APPLICANTS,
+    byEmail: function (email) {
+      var e = String(email || '').trim().toLowerCase();
+      for (var k in APPLICANTS) { if (APPLICANTS[k].email.toLowerCase() === e) return APPLICANTS[k]; }
+      return null;
+    },
+    load: function (id, opts) {
+      var a = APPLICANTS[id];
+      if (!a) return false;
+      this.current = id;
+      // deep-copy so edits don't mutate the canonical seed
+      State.data = JSON.parse(JSON.stringify(a.data));
+      // update any visible applicant name labels
+      document.querySelectorAll('[data-applicant-name]').forEach(function (el) { el.textContent = a.name; });
+      var topTitle = document.querySelector('#sc-3 .uwc-portal-topbar__title');
+      if (topTitle) topTitle.textContent = 'Applicant Portal — ' + a.name;
+      if (State._notify) State._notify('restore');
+      if (typeof renderSections === 'function') { try { renderSections(); } catch (e) {} }
+      if (!(opts && opts.silent) && window.UWCToast) { try { window.UWCToast('Signed in as ' + a.name, 'success'); } catch (e) {} }
+      return true;
+    }
+  };
 
   /* ============================================================ */
   /* HELPERS                                                       */
@@ -6866,10 +5806,11 @@ html body #sc-app .uwc-portal-main {
         academic transcript, school reference letter, language certificate, identity document, portfolio of activities.
       </p>
 
-      <div class="appform-drop" id="appform-drop">
-        <svg><use href="#icon-upload-cloud"/></svg>
-        <div class="appform-drop-title">Drag files here or click to browse</div>
-        <div class="appform-drop-sub">PDF, JPG, PNG · up to 10 MB each</div>
+      <div class="appform-action-row" style="margin:6px 0 4px">
+        <button type="button" class="appform-btn appform-btn--primary" id="appform-upload-btn">
+          <svg><use href="#icon-upload-cloud"/></svg> Upload files
+        </button>
+        <span class="appform-field-help" style="margin:0">PDF, JPG, PNG · up to 10 MB each</span>
       </div>
       <input type="file" id="appform-file-input" multiple accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/*" style="display:none" />
 
@@ -6993,16 +5934,10 @@ html body #sc-app .uwc-portal-main {
         </label>
       </div>
 
-      <div class="appform-field" style="margin-top:14px">
-        <span class="appform-label">Type your full name to sign</span>
-        <input class="appform-input" id="appform-decl-name" placeholder="e.g. Sofia Maria Almeida" value="${esc(d.signedName)}" />
-        <span class="appform-field-help">Your typed name will be recorded as your digital signature.</span>
-      </div>
-
       <div class="appform-action-row">
         <div class="appform-spacer"></div>
         <button type="button" class="appform-btn appform-btn--primary" id="appform-decl-submit"
-          ${(!d.agreed || !d.signedName) ? 'disabled' : ''}>
+          ${(!d.agreed) ? 'disabled' : ''}>
           <svg><use href="#icon-send"/></svg> Submit application
         </button>
       </div>
@@ -7104,21 +6039,11 @@ html body #sc-app .uwc-portal-main {
       });
     });
 
-    // file drop / browse
-    const drop = document.getElementById('appform-drop');
+    // file browse (upload button only — drag-and-drop removed)
+    const uploadBtn = document.getElementById('appform-upload-btn');
     const fileInput = document.getElementById('appform-file-input');
-    if (drop && fileInput) {
-      drop.addEventListener('click', () => fileInput.click());
-      drop.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        drop.classList.add('is-drag');
-      });
-      drop.addEventListener('dragleave', () => drop.classList.remove('is-drag'));
-      drop.addEventListener('drop', (e) => {
-        e.preventDefault();
-        drop.classList.remove('is-drag');
-        handleFiles(e.dataTransfer.files);
-      });
+    if (uploadBtn && fileInput) {
+      uploadBtn.addEventListener('click', () => fileInput.click());
       fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
     }
 
@@ -7186,13 +6111,6 @@ html body #sc-app .uwc-portal-main {
         updateSubmitButtonState();
       });
     }
-    const declName = document.getElementById('appform-decl-name');
-    if (declName) {
-      declName.addEventListener('input', () => {
-        State.data.declaration.signedName = declName.value;
-        updateSubmitButtonState();
-      });
-    }
     const declSubmit = document.getElementById('appform-decl-submit');
     if (declSubmit) {
       declSubmit.addEventListener('click', submitApplication);
@@ -7218,7 +6136,7 @@ html body #sc-app .uwc-portal-main {
     const declSubmit = document.getElementById('appform-decl-submit');
     if (declSubmit) {
       const d = State.data.declaration;
-      declSubmit.disabled = !(d.agreed && d.signedName.length > 0);
+      declSubmit.disabled = !d.agreed;
     }
     renderFooter();
   }
@@ -7358,8 +6276,8 @@ html body #sc-app .uwc-portal-main {
       return;
     }
     const d = State.data.declaration;
-    if (!d.agreed || !d.signedName) {
-      toast('Please agree and sign before submitting');
+    if (!d.agreed) {
+      toast('Please agree to the declaration before submitting');
       return;
     }
     State.data.declaration.signedAt = Date.now();
@@ -9040,20 +7958,56 @@ UWC.getRolesFor = function(code) {
 })();
 
 
-/* Scenario B driver */
+/* Scenario B driver — with hash router + state restore */
 const TOTAL = 7;
 let step = 0;
 const stepCounterEl = document.getElementById('step-counter');
 const prevBtn = document.getElementById('prev-btn');  // may be null after demo-bar removal
 const nextBtn = document.getElementById('next-btn');  // may be null after demo-bar removal
-function go(i) {
+
+/* index <-> route map (DOM order: sc-0, sc-1, sc-signin, sc-2, sc-3, sc-app, sc-6) */
+const ROUTES = ['welcome', 'eligibility', 'signin', 'create', 'dashboard', 'apply', 'guardian'];
+const SS_KEY = 'uwc_b_portal_state';
+
+function persistState() {
+  try {
+    var payload = {
+      step: step,
+      route: ROUTES[step] || 'welcome',
+      applicant: (window.UWCApplicant && window.UWCApplicant.current) || 'sofia',
+      formData: (window.UWCFormState && window.UWCFormState.data) || null
+    };
+    sessionStorage.setItem(SS_KEY, JSON.stringify(payload));
+  } catch (e) {}
+}
+
+var _suppressHash = false;
+function go(i, opts) {
   if (i < 0 || i >= TOTAL) return;
   step = i;
   document.querySelectorAll('.screen').forEach((s, j) => s.classList.toggle('active', j === i));
   if (stepCounterEl) stepCounterEl.textContent = 'Step ' + (i + 1) + ' / ' + TOTAL;
   if (prevBtn) prevBtn.disabled = i === 0;
   if (nextBtn) nextBtn.disabled = i === TOTAL - 1;
+  // update URL hash (unless we're responding to a hash change) so Back/Forward work
+  if (!(opts && opts.fromHash)) {
+    _suppressHash = true;
+    var newHash = '#/' + (ROUTES[i] || 'welcome');
+    if (location.hash !== newHash) location.hash = newHash; else _suppressHash = false;
+  }
+  persistState();
 }
+function routeToIndex(hash) {
+  var r = String(hash || '').replace(/^#\/?/, '').split('?')[0];
+  var idx = ROUTES.indexOf(r);
+  return idx >= 0 ? idx : -1;
+}
+window.addEventListener('hashchange', function () {
+  if (_suppressHash) { _suppressHash = false; return; }
+  var idx = routeToIndex(location.hash);
+  if (idx >= 0 && idx !== step) go(idx, { fromHash: true });
+});
+
 if (prevBtn) prevBtn.addEventListener('click', () => go(step - 1));
 if (nextBtn) nextBtn.addEventListener('click', () => go(step + 1));
 document.addEventListener('keydown', (e) => {
@@ -9063,7 +8017,38 @@ document.addEventListener('keydown', (e) => {
 });
 RoleSwitcher.init({ scenarioCode: 'B', defaultRoleId: 'visitor', roles: UWC.getRolesFor('B') });
 window.go = go;
-go(0);
+
+/* ---------- restore on load: hash wins, else sessionStorage, else welcome ---------- */
+(function restoreOnLoad() {
+  var startIdx = 0;
+  var fromHash = false;
+  var hashIdx = routeToIndex(location.hash);
+  var saved = null;
+  try { saved = JSON.parse(sessionStorage.getItem(SS_KEY) || 'null'); } catch (e) {}
+
+  // restore the applicant + form data first so the form renders the right state
+  if (saved) {
+    if (saved.applicant && window.UWCApplicant && typeof window.UWCApplicant.load === 'function') {
+      window.UWCApplicant.load(saved.applicant, { silent: true });
+    }
+    if (saved.formData && window.UWCFormState) {
+      try {
+        Object.assign(window.UWCFormState.data, saved.formData);
+        if (window.UWCFormState._notify) window.UWCFormState._notify('restore');
+      } catch (e) {}
+    }
+  }
+
+  if (hashIdx >= 0) { startIdx = hashIdx; fromHash = true; }
+  else if (saved && typeof saved.step === 'number') { startIdx = saved.step; }
+
+  go(startIdx, { fromHash: fromHash });
+})();
+
+/* persist form edits as they happen */
+if (window.UWCFormState && typeof window.UWCFormState.onUpdate === 'function') {
+  window.UWCFormState.onUpdate(function () { persistState(); });
+}
 </script>
 <script>
 (function () {
@@ -9376,11 +8361,13 @@ go(0);
         return false;
       }
 
-      // Compare against Sofia
-      if (e === SOFIA_CREDS.email.toLowerCase() && p === SOFIA_CREDS.password) {
+      // Match against any seeded applicant (Sofia = complete, Lucas = blank draft)
+      var matched = (window.UWCApplicant && window.UWCApplicant.byEmail) ? window.UWCApplicant.byEmail(e) : null;
+      if (matched && p === matched.password) {
         setError(emailWrap, '');
         setError(passWrap, '');
-        toast('Signed in as Sofia Almeida', 'success');
+        if (window.UWCApplicant) window.UWCApplicant.load(matched.id, { silent: true });
+        toast('Signed in as ' + matched.name, 'success');
         // small delay so the toast is visible before navigation
         setTimeout(function () {
           if (typeof window.go === 'function') window.go(4);
@@ -9391,7 +8378,7 @@ go(0);
       // wrong credentials
       setError(passWrap, 'Email or password is incorrect.');
       shake(document.getElementById('auth-signin-form'));
-      toast('Email or password incorrect. Try sofia.almeida@example.com / uwc@2026', 'error');
+      toast('Email or password incorrect. Try sofia.almeida@example.com or lucas.fernandez@example.com (pw: uwc@2026)', 'error');
       return false;
     },
 
