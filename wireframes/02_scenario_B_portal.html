@@ -1815,6 +1815,31 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
 
 <style>
 /* ============================================================
+   Read-only (submitted) application mode
+   ============================================================ */
+#sc-app .appform-readonly-banner {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: #eef3ff; border: 1px solid #c7d7f5; border-left: 4px solid #003087;
+  border-radius: 10px; padding: 14px 18px; margin-bottom: 16px;
+}
+#sc-app .appform-readonly-banner svg { width: 20px; height: 20px; color: #003087; flex-shrink: 0; margin-top: 1px; }
+#sc-app .appform-readonly-banner b { display: block; font-size: 14px; color: #003087; }
+#sc-app .appform-readonly-banner span { display: block; font-size: 12.5px; color: #475569; margin-top: 3px; }
+/* hide every edit/save/cancel/upload/remove/submit control when read-only */
+#sc-app .is-readonly .appform-action-row,
+#sc-app .is-readonly [data-action^="edit-"],
+#sc-app .is-readonly [data-action^="save-"],
+#sc-app .is-readonly [data-action^="cancel-"],
+#sc-app .is-readonly #appform-upload-btn,
+#sc-app .is-readonly .appform-file-remove,
+#sc-app .is-readonly #appform-decl-submit,
+#sc-app .is-readonly .appform-checkbox-row input,
+#sc-app .is-readonly #appform-drop { display: none !important; }
+#sc-app .is-readonly input,
+#sc-app .is-readonly textarea,
+#sc-app .is-readonly select { pointer-events: none; background: #f8fafc; }
+
+/* ============================================================
    v21 — Remove duplicates + footer padding fix
    ============================================================ */
 
@@ -5236,6 +5261,8 @@ html body #sc-app .uwc-portal-main {
   /* STATE                                                         */
   /* ============================================================ */
   const State = {
+    readOnly: false,
+    appTitle: 'UWC 2026/27 Cycle',
     data: {
       personal: {
         fullName: 'Sofia Maria Almeida',
@@ -5370,72 +5397,58 @@ html body #sc-app .uwc-portal-main {
   window.UWCFormState = State;
 
   /* ============================================================ */
-  /* APPLICANTS — multi-user demo state                           */
-  /*   sofia  = complete (all sections except declaration)        */
-  /*   lucas  = blank draft (only Personal + Academic filled)     */
+  /* APPLICATIONS — Sofia has two applications:                   */
+  /*   main  = UWC 2026/27 Cycle — SUBMITTED, read-only           */
+  /*   draft = UWC Short Course Costa Rica — only 2 sections done */
   /* ============================================================ */
-  // snapshot Sofia's seeded data as the canonical full applicant
-  var SOFIA_DATA = JSON.parse(JSON.stringify(State.data));
+  // snapshot Sofia's fully-seeded data as the main (submitted) application
+  var MAIN_DATA = JSON.parse(JSON.stringify(State.data));
+  MAIN_DATA.declaration = { signedName: '', signedAt: Date.now(), agreed: true };
+  MAIN_DATA.submission = { submitted: true, referenceId: 'UWC-2026-BR-00127', submittedAt: Date.parse('2026-05-27T14:32') };
 
-  var LUCAS_DATA = {
-    personal: {
-      fullName: 'Lucas Fernández',
-      preferredName: 'Lucas',
-      dob: '2009-07-22',
-      gender: 'Male',
-      nationality: 'Argentine',
-      passport: 'AAB 119 204',
-      address: 'Av. Santa Fe 2840, Buenos Aires, C1425, Argentina',
-      phone: '+54 11 4821 9930',
-      email: 'lucas.fernandez@example.com'
-    },
-    academic: {
-      school: 'Colegio Nacional de Buenos Aires',
-      currentYear: '5to año (Secundario)',
-      graduationYear: '2026',
-      languageInstruction: 'Spanish',
-      languagesSpoken: 'Spanish (native), English (B2)',
-      averageGrade: '8.9',
-      gradeScale: '/10',
-      awards: 'Regional science fair finalist 2025'
-    },
+  // Costa Rica draft — ONLY Personal + Academic filled, rest empty
+  var DRAFT_DATA = {
+    personal: JSON.parse(JSON.stringify(State.data.personal)),
+    academic: JSON.parse(JSON.stringify(State.data.academic)),
     statement: { whyUwc: '', communityContribution: '', brazilNcQuestion: '' },
     documents: [],
     guardian: {
-      name: 'Carla Fernández', relationship: 'Mother',
-      email: 'carla.fernandez@example.com', phone: '+54 11 4821 9931',
+      name: 'Maria Almeida', relationship: 'Mother',
+      email: 'maria.almeida@example.com', phone: '+55 11 9 4321 5677',
       consentReceived: false, consentReceivedAt: null
     },
     declaration: { signedName: '', signedAt: null, agreed: false },
     submission: { submitted: false, referenceId: null, submittedAt: null }
   };
 
-  var APPLICANTS = {
-    sofia: { id: 'sofia', name: 'Sofia Almeida', email: 'sofia.almeida@example.com', password: 'uwc@2026', data: SOFIA_DATA },
-    lucas: { id: 'lucas', name: 'Lucas Fernández', email: 'lucas.fernandez@example.com', password: 'uwc@2026', data: LUCAS_DATA }
+  var APPLICATIONS = {
+    'UWC-2026-BR-00127': { id: 'UWC-2026-BR-00127', title: 'UWC 2026/27 Cycle',        readOnly: true,  data: MAIN_DATA },
+    'UWC-SC-2026-CR-04832': { id: 'UWC-SC-2026-CR-04832', title: 'UWC Short Course — Costa Rica', readOnly: false, data: DRAFT_DATA }
   };
 
   window.UWCApplicant = {
-    current: 'sofia',
-    list: APPLICANTS,
+    current: 'UWC-2026-BR-00127',
+    list: APPLICATIONS,
+    // sign-in always resolves to Sofia's portal (main application)
     byEmail: function (email) {
       var e = String(email || '').trim().toLowerCase();
-      for (var k in APPLICANTS) { if (APPLICANTS[k].email.toLowerCase() === e) return APPLICANTS[k]; }
+      if (e === 'sofia.almeida@example.com') {
+        return { id: 'UWC-2026-BR-00127', name: 'Sofia Almeida', email: e, password: 'uwc@2026' };
+      }
       return null;
     },
     load: function (id, opts) {
-      var a = APPLICANTS[id];
+      var a = APPLICATIONS[id];
       if (!a) return false;
       this.current = id;
-      // deep-copy so edits don't mutate the canonical seed
       State.data = JSON.parse(JSON.stringify(a.data));
-      // update any visible applicant name labels
-      document.querySelectorAll('[data-applicant-name]').forEach(function (el) { el.textContent = a.name; });
-      var topTitle = document.querySelector('#sc-3 .uwc-portal-topbar__title');
-      if (topTitle) topTitle.textContent = 'Applicant Portal — ' + a.name;
+      State.readOnly = !!a.readOnly || !!(a.data.submission && a.data.submission.submitted);
+      State.appTitle = a.title;
+      // reflect which application is open in the form header
+      var portalTitle = document.querySelector('#sc-app [data-app-title]');
+      if (portalTitle) portalTitle.textContent = a.title;
       if (State._notify) State._notify('restore');
       if (typeof renderSections === 'function') { try { renderSections(); } catch (e) {} }
-      if (!(opts && opts.silent) && window.UWCToast) { try { window.UWCToast('Signed in as ' + a.name, 'success'); } catch (e) {} }
       return true;
     }
   };
@@ -5537,7 +5550,17 @@ html body #sc-app .uwc-portal-main {
       openStates[d.dataset.section] = d.open;
     });
 
-    host.innerHTML = `
+    host.classList.toggle('is-readonly', !!State.readOnly);
+    const roBanner = State.readOnly ? `
+      <div class="appform-readonly-banner">
+        <svg><use href="#icon-lock"/></svg>
+        <div>
+          <b>This application has been submitted and is now read-only.</b>
+          <span>Reference ${esc((State.data.submission && State.data.submission.referenceId) || '—')} · submitted ${esc(fmtDate(State.data.submission && State.data.submission.submittedAt))}. Contact your National Committee to request any change.</span>
+        </div>
+      </div>` : '';
+
+    host.innerHTML = roBanner + `
       ${renderSectionWrapper('personal', '1', 'Personal information', renderPersonal())}
       ${renderSectionWrapper('academic', '2', 'Academic background', renderAcademic())}
       ${renderSectionWrapper('statement', '3', 'Personal statement and local questions', renderStatement())}
@@ -6283,6 +6306,8 @@ html body #sc-app .uwc-portal-main {
     }
     if (!ref) ref = genRef();
     State.data.submission.referenceId = ref;
+    // submitted applications become read-only
+    State.readOnly = true;
 
     State._notify('declaration');
     renderSections();
@@ -7964,7 +7989,7 @@ function persistState() {
     var payload = {
       step: step,
       route: ROUTES[step] || 'welcome',
-      applicant: (window.UWCApplicant && window.UWCApplicant.current) || 'sofia',
+      applicant: (window.UWCApplicant && window.UWCApplicant.current) || 'UWC-2026-BR-00127',
       formData: (window.UWCFormState && window.UWCFormState.data) || null
     };
     sessionStorage.setItem(SS_KEY, JSON.stringify(payload));
@@ -8537,10 +8562,10 @@ if (window.UWCFormState && typeof window.UWCFormState.onUpdate === 'function') {
         flag: '🇨🇷',
         status: 'Draft',
         statusKind: 'draft',
-        progress: 30,
+        progress: 33,
         startedAt: '2026-05-22',
         deadline: '15 June 2026',
-        sectionsCompleted: 3,
+        sectionsCompleted: 2,
         sectionsTotal: 6
       },
       {
@@ -8750,6 +8775,10 @@ if (window.UWCFormState && typeof window.UWCFormState.onUpdate === 'function') {
       var app = window.UWCMultiApp.apps[idx];
       var action = btn.dataset.action;
       if (action === 'view-app' || action === 'continue-app') {
+        // load the specific application's state (submitted=read-only, draft=editable)
+        if (window.UWCApplicant && app && app.id && window.UWCApplicant.list[app.id]) {
+          window.UWCApplicant.load(app.id);
+        }
         if (typeof window.go === 'function') { window.go(5); }
         else { toast('Opening application form...', 'info'); }
       } else if (action === 'view-timeline') {
