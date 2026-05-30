@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UWC Demo Playbook — Start to End · The Application Journey · A2Z Cloud</title>
+<link rel="icon" href="_shared/assets/uwc-brand/uwc-wordmark-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#003087; --navy-deep:#001a4d; --navy-live:#004A97; --red:#C8102E;
+  --gold:#C8AB00; --green:#1f9535; --orange:#e85d0c; --grey:#6C757D;
+  --tint:#E8EEF6; --bg:#f1f5f9; --ink:#0f172a; --ink2:#475569; --line:#e2e8f0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.55}
+a{color:var(--navy);text-decoration:none}
+.serif{font-family:'Playfair Display',Georgia,serif}
+code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:#eef2f7;padding:1px 5px;border-radius:4px}
+
+/* hero */
+.hero{background:linear-gradient(135deg,rgba(0,26,77,.95),rgba(0,48,135,.9) 60%,rgba(0,74,151,.86)),url('_shared/assets/uwc-brand/hero-students-flags.jpeg') center/cover no-repeat;color:#fff;border-bottom:4px solid var(--red);padding:38px 0 44px}
+.hero__in{max-width:1100px;margin:0 auto;padding:0 32px}
+.hero__brand{display:flex;align-items:center;gap:13px;margin-bottom:22px}
+.hero__mark{width:46px;height:46px;border-radius:50%;background:#fff;color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:15px}
+.hero__bn{font-family:'Playfair Display',serif;font-weight:600;font-size:15px}
+.hero__bs{font-size:11px;color:rgba(255,255,255,.65);letter-spacing:1.4px;text-transform:uppercase;margin-top:2px}
+.hero__tag{display:inline-block;background:var(--red);font-size:10.5px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;padding:4px 12px;border-radius:4px;margin-bottom:18px}
+.hero h1{font-family:'Playfair Display',serif;font-weight:500;font-size:38px;line-height:1.1;max-width:760px}
+.hero p{font-size:15.5px;color:rgba(255,255,255,.84);margin-top:14px;max-width:680px}
+.hero__meta{display:flex;gap:26px;margin-top:22px;flex-wrap:wrap}
+.hero__meta div{font-size:12px}
+.hero__meta .l{color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1px;font-size:10px}
+.hero__meta .v{font-weight:600;font-size:14px;margin-top:2px}
+
+.wrap{max-width:1100px;margin:0 auto;padding:0 32px}
+
+/* how-to-read + cast */
+.intro{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,48,135,.06);margin:-26px auto 0;position:relative}
+.intro h2{font-family:'Playfair Display',serif;font-size:19px;color:var(--navy);margin-bottom:8px}
+.intro p{font-size:13.5px;color:var(--ink2);max-width:920px}
+.cast{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.cast__c{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#fbfcfe}
+.cast__n{font-size:13px;font-weight:600;color:var(--ink)}
+.cast__r{font-size:11px;color:var(--navy);font-weight:600;margin-top:2px}
+.cast__s{font-size:11px;color:var(--grey);margin-top:4px;line-height:1.4}
+
+/* stage rail */
+.rail{display:flex;align-items:center;gap:0;flex-wrap:wrap;margin:22px 0 8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.rail__t{font-size:10.5px;font-weight:600;color:var(--grey);letter-spacing:1.4px;text-transform:uppercase;width:100%;margin-bottom:10px}
+.stg{display:inline-flex;align-items:center;font-size:11.5px;font-weight:600;color:#fff;padding:5px 11px;border-radius:999px;white-space:nowrap}
+.stg+.stg{margin-left:4px}
+.arrow{color:var(--grey);margin:0 5px;font-size:12px}
+.s-reg{background:#9ca3af}.s-prog{background:#3b82f6}.s-sub{background:#003087}.s-rev{background:#e85d0c}.s-short{background:#C8AB00}.s-nom{background:#1f9535}.s-placed{background:#059669}
+.term{margin-top:8px;width:100%;font-size:11px;color:var(--grey)}
+.term .stg{font-size:10.5px;padding:3px 9px}
+.s-dec{background:#C8102E}.s-with{background:#6b7280}.s-wait{background:#f59e0b}
+
+/* TOC */
+.toc{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 8px}
+.toc a{font-size:12px;font-weight:600;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 13px}
+.toc a:hover{border-color:var(--navy)}
+.toc a b{color:var(--navy)}
+
+/* act / scene */
+.act{margin-top:34px;scroll-margin-top:14px}
+.act__head{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--navy);padding-bottom:10px;margin-bottom:6px}
+.act__code{font-family:'Playfair Display',serif;font-size:30px;font-weight:600;color:var(--navy);line-height:1}
+.act__title{font-family:'Playfair Display',serif;font-size:21px;font-weight:500;color:var(--ink)}
+.act__who{margin-left:auto;font-size:11.5px;font-weight:600;color:#fff;background:var(--navy);padding:4px 11px;border-radius:999px;white-space:nowrap}
+.act__goal{font-size:13.5px;color:var(--ink2);font-style:italic;margin:10px 0 16px;padding-left:14px;border-left:3px solid var(--gold)}
+
+.scene{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.scene__top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.scene__n{width:26px;height:26px;border-radius:8px;background:var(--tint);color:var(--navy);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.scene__as{font-size:11px;font-weight:600;color:var(--navy);background:var(--tint);padding:2px 9px;border-radius:999px}
+.scene__h{font-size:14px;font-weight:600;color:var(--ink)}
+.scene__row{display:flex;gap:10px;font-size:13px;padding:5px 0;align-items:flex-start}
+.scene__lbl{flex-shrink:0;width:64px;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--grey);padding-top:2px}
+.scene__say{color:var(--navy);font-style:italic}
+.scene__see{color:var(--ink2)}
+.scene__see b,.scene__say b{color:var(--ink)}
+
+/* workflow ribbon */
+.wf{display:flex;align-items:center;gap:8px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:8px 12px;margin-top:8px;font-size:12px;color:#166534}
+.wf::before{content:'⚙';font-size:13px}
+.wf.lock{background:#fef2f2;border-color:#fecaca;color:#991b1b}
+.wf.lock::before{content:'🔒'}
+.wf b{color:inherit}
+
+/* highlight + qa */
+.hl{background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:#fff;border-radius:12px;padding:16px 20px;margin-top:12px}
+.hl__t{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.hl ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.hl li{font-size:13px;color:rgba(255,255,255,.92);padding-left:18px;position:relative;line-height:1.5}
+.hl li::before{content:'◆';position:absolute;left:0;color:var(--gold);font-size:9px;top:4px}
+.qa{margin-top:12px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.qa__row{padding:11px 16px;border-bottom:1px solid var(--line);font-size:12.5px}
+.qa__row:last-child{border-bottom:none}
+.qa__q{font-weight:600;color:var(--ink)}
+.qa__q::before{content:'Q · ';color:var(--red);font-weight:700}
+.qa__a{color:var(--ink2);margin-top:4px}
+.qa__a::before{content:'A · ';color:var(--green);font-weight:700}
+
+/* opening / closing panels */
+.bookend{background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:12px;padding:20px 24px;margin-top:20px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.bookend h2{font-family:'Playfair Display',serif;font-size:19px;color:var(--navy);margin-bottom:8px}
+.bookend p{font-size:13.5px;color:var(--ink2);max-width:940px}
+.bookend p+p{margin-top:8px}
+.bookend .said{font-style:italic;color:var(--navy);border-left:3px solid var(--gold);padding-left:14px;margin-top:10px}
+
+footer{background:var(--navy-deep);color:rgba(255,255,255,.55);padding:24px 32px;text-align:center;font-size:11px;margin-top:44px}
+footer b{color:rgba(255,255,255,.85)}
+
+@media(max-width:820px){.cast{grid-template-columns:1fr 1fr}.act__who{margin-left:0}.hero h1{font-size:28px}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero__in">
+    <div class="hero__brand">
+      <div class="hero__mark">UWC</div>
+      <div><div class="hero__bn">United World Colleges</div><div class="hero__bs">International · CRM &amp; Applications Platform</div></div>
+    </div>
+    <div class="hero__tag">● Demo Playbook · Start to End</div>
+    <h1 class="serif">The Application Journey — one platform, one story</h1>
+    <p>How a real applicant moves through UWC's selection process, and how the platform's workflows and Blueprint do the work behind the scenes. Follow Sofia from the public portal to a confirmed place — meeting every role, automation, and safeguard along the way.</p>
+    <div class="hero__meta">
+      <div><div class="l">Session</div><div class="v">1 June 2026 · 15:00 BST</div></div>
+      <div><div class="l">Presenter</div><div class="v">Akanksha Anand</div></div>
+      <div><div class="l">Worked example</div><div class="v">Sofia Almeida · Brazil &amp; Germany NC</div></div>
+      <div><div class="l">Scenarios</div><div class="v">A → G · ~95 min</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <div class="intro">
+    <h2 class="serif">How to read this playbook</h2>
+    <p>This is a <b>story, not a settings manual</b>. Each act is a real moment in UWC's work — a parent giving consent, two reviewers scoring blind, a place being confirmed. Under each step you'll see the <span style="color:#166534;font-weight:600">⚙ workflow ribbon</span> showing what the platform did automatically, and a navy <b>highlight panel</b> with the point to land with the panel. The thread is one applicant's journey; the National Committees, governance board, and communications all hang off it.</p>
+
+    <div class="cast">
+      <div class="cast__c"><div class="cast__n">Akanksha Anand</div><div class="cast__r">IO Super Admin</div><div class="cast__s">The International Office — sees everything. Your presenter.</div></div>
+      <div class="cast__c"><div class="cast__n">Sofia Almeida</div><div class="cast__r">Applicant · Brazil</div><div class="cast__s">16, from São Paulo. The journey follows her, B → C → D.</div></div>
+      <div class="cast__c"><div class="cast__n">Maria Almeida</div><div class="cast__r">Parent / Guardian</div><div class="cast__s">Sofia's mother. Gives the consent that unlocks submission.</div></div>
+      <div class="cast__c"><div class="cast__n">Marcus Weber</div><div class="cast__r">NC Admin · Germany</div><div class="cast__s">Configures his own committee. Cannot see Brazil's data.</div></div>
+      <div class="cast__c"><div class="cast__n">Ana Carvalho</div><div class="cast__r">NC Admin · Brazil</div><div class="cast__s">Runs Sofia's committee — reviews, nominates.</div></div>
+      <div class="cast__c"><div class="cast__n">Clara &amp; Paulo</div><div class="cast__r">NC Reviewers</div><div class="cast__s">Score Sofia independently — blind to each other.</div></div>
+      <div class="cast__c"><div class="cast__n">Fatima Al-Rashid</div><div class="cast__r">IO Admissions</div><div class="cast__s">Allocates school places across the whole network.</div></div>
+      <div class="cast__c"><div class="cast__n">Helen Richards</div><div class="cast__r">School Admissions</div><div class="cast__s">UWC Atlantic. Sees only nominations sent to her school.</div></div>
+    </div>
+
+    <div class="rail">
+      <div class="rail__t">The Blueprint — every application travels this path, in UWC colours</div>
+      <span class="stg s-reg">Registered</span><span class="arrow">→</span>
+      <span class="stg s-prog">In Progress</span><span class="arrow">→</span>
+      <span class="stg s-sub">Submitted</span><span class="arrow">→</span>
+      <span class="stg s-rev">Under Review</span><span class="arrow">→</span>
+      <span class="stg s-short">Shortlisted</span><span class="arrow">→</span>
+      <span class="stg s-nom">Nominated</span><span class="arrow">→</span>
+      <span class="stg s-placed">Placed</span>
+      <div class="term">Other outcomes any time: <span class="stg s-dec">Declined</span> <span class="stg s-with">Withdrawn</span> <span class="stg s-wait">Waitlisted</span> — every move is gated and logged.</div>
+    </div>
+
+    <div class="toc">
+      <a href="#open"><b>▸</b> Opening</a>
+      <a href="#a"><b>A</b> Set-up &amp; control</a>
+      <a href="#b"><b>B</b> Sofia applies</a>
+      <a href="#c"><b>C</b> Selection &amp; safeguarding</a>
+      <a href="#d"><b>D</b> Nomination &amp; a place</a>
+      <a href="#e"><b>E</b> Governance</a>
+      <a href="#f"><b>F</b> Committee health</a>
+      <a href="#g"><b>G</b> Communications</a>
+      <a href="#close"><b>▸</b> Close</a>
+    </div>
+  </div>
+
+  <!-- OPENING -->
+  <div class="bookend" id="open">
+    <h2 class="serif">Opening — set the scene (5 min)</h2>
+    <p>Land the frame before any clicks: this is <b>one platform that carries an applicant from the public portal all the way to a confirmed school place</b>, while quietly enforcing the rules UWC cares about — eligibility, parental consent, blind review, safeguarding, data protection, and GDPR.</p>
+    <p class="said">"Over the next hour you'll meet Sofia, a sixteen-year-old from São Paulo, and follow her real journey through our platform. Along the way you'll meet the people who support her — her National Committee, two independent reviewers, the International Office, and a partner college. Everything you see is live in a Zoho CRM environment configured for UWC, on UK and EU data centres. Let's begin where Sofia's committee begins: setting up."</p>
+  </div>
+
+  <!-- ACT A -->
+  <div class="act" id="a">
+    <div class="act__head"><span class="act__code serif">A</span><span class="act__title serif">Setting up the committee &amp; who can see what</span><span class="act__who">Marcus Weber · NC Admin Germany</span></div>
+    <div class="act__goal">Proves the platform is self-service for each committee, and that every role sees only what it should — the trust foundation everything else rests on.</div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">1</span><span class="scene__as">Marcus · Germany</span><span class="scene__h">Configure this year's selection programme</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Open the <b>Germany 2026 programme</b> record and edit it live — opening date, 30 April deadline, 6 available places.</span></div>
+      <div class="scene__row"><span class="scene__lbl">Say</span><span class="scene__say">"Each National Committee runs its own cycle. Marcus configures Germany's himself — no ticket to head office, no developer."</span></div>
+      <div class="scene__row"><span class="scene__lbl">See</span><span class="scene__see">The programme updates instantly; the Germany dashboard reflects the new deadline.</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">2</span><span class="scene__as">Marcus · Germany</span><span class="scene__h">Add a question that's specific to Germany</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Add a local question: <i>"Describe a situation where you helped resolve a conflict between people from different backgrounds."</i></span></div>
+      <div class="scene__row"><span class="scene__lbl">Say</span><span class="scene__say">"Committees can tailor their own forms. This question appears only on Germany's application — Brazil's is untouched."</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">3</span><span class="scene__as">Marcus · Germany</span><span class="scene__h">The Germany committee dashboard</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Open the <b>Germany NC dashboard</b> in UWC colours.</span></div>
+      <div class="scene__row"><span class="scene__lbl">See</span><span class="scene__see"><b>14 applications</b>, broken down by Blueprint stage in the UWC stage colours, a pending-review count, and days until the deadline.</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">4</span><span class="scene__as">switch logins</span><span class="scene__h">Different roles, genuinely different access</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Switch between a <b>Reviewer</b>, a <b>Senior Committee Member</b>, and an <b>NC Admin</b> — show the fields and actions visibly change. Then, as Marcus, try to open Brazil's data — it isn't there.</span></div>
+      <div class="scene__row"><span class="scene__lbl">Say</span><span class="scene__say">"This isn't a cosmetic difference. Marcus simply cannot reach another committee's applicants — the platform enforces it, not a policy document."</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">5</span><span class="scene__as">two windows</span><span class="scene__h">Data protection in practice</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Side by side: IO Super Admin vs <b>Data Protection Lead</b>. For the DPL, date of birth, financial-aid and parental contact details are <b>hidden</b>.</span></div>
+      <div class="scene__row"><span class="scene__lbl">See</span><span class="scene__see">Same record, two windows, different visibility — field-level security at work.</span></div>
+    </div>
+
+    <div class="wf"><b>Workflow:</b> Application <b>unlock</b> action returns an application to <code>In Progress</code> and writes an <b>audit entry</b> (who, when, why) — show this button and the log.</div>
+    <div class="hl"><div class="hl__t">Land this with the panel</div><ul>
+      <li>Every committee is <b>self-sufficient</b> — they configure their own programmes and questions.</li>
+      <li>Role boundaries are <b>enforced by the system</b>, demonstrably, not promised on paper.</li>
+      <li>Data protection is built in at the <b>field level</b> — the right people see the right data.</li>
+    </ul></div>
+    <div class="qa">
+      <div class="qa__row"><div class="qa__q">Can an NC Admin really not see another committee's data?</div><div class="qa__a">Log in as Marcus live and try to navigate to Brazil — it's genuinely inaccessible, scoped by the role hierarchy.</div></div>
+    </div>
+  </div>
+
+  <!-- ACT B -->
+  <div class="act" id="b">
+    <div class="act__head"><span class="act__code serif">B</span><span class="act__title serif">Sofia applies — from the public portal to a submitted application</span><span class="act__who">Sofia · Applicant (+ Maria, parent)</span></div>
+    <div class="act__goal">Shows the branded applicant experience and how the Blueprint won't let an incomplete or ineligible application slip through.</div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">1</span><span class="scene__as">Sofia · public</span><span class="scene__h">A portal that feels like UWC</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Open the public portal — UWC logo, navy header, welcome copy, language selector (English · <b>Português</b> · Español).</span></div>
+      <div class="scene__row"><span class="scene__lbl">Say</span><span class="scene__say">"This is the applicant's first impression of UWC — their colours, their language, not a generic form."</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">2</span><span class="scene__as">Sofia · public</span><span class="scene__h">Eligibility is checked before anyone registers</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Run the eligibility checker — country, date of birth, citizenship. Show an out-of-range age being <b>blocked</b> with a clear message, then Sofia passing.</span></div>
+      <div class="scene__row"><span class="scene__lbl">Say</span><span class="scene__say">"The platform gates entry up front. Ineligible applicants are told kindly and never enter the pipeline."</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">3</span><span class="scene__as">Sofia · portal</span><span class="scene__h">Resume where she left off — in Portuguese</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Sign in as Sofia. Her application is <b>part-complete and saved</b>, sitting at <span class="stg s-prog" style="font-size:10px;padding:2px 7px">In Progress</span>. Form is in Portuguese, with a genuine essay already written.</span></div>
+      <div class="scene__row"><span class="scene__lbl">See</span><span class="scene__see">Six sections, varied field types, a real personal statement — no placeholder text anywhere.</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">4</span><span class="scene__as">Maria · parent</span><span class="scene__h">A parent's consent unlocks submission</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Show <b>Maria Almeida</b> recorded as guardian, consent status <b>Received</b> with a timestamp — visible on both the applicant view and the committee's view.</span></div>
+      <div class="scene__row"><span class="scene__lbl">Say</span><span class="scene__say">"Because Sofia is a minor, the platform will not allow submission until a parent has consented. That's a hard gate, not a reminder."</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">5</span><span class="scene__as">Sofia · portal</span><span class="scene__h">Submit</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Complete the final section and submit.</span></div>
+      <div class="scene__row"><span class="scene__lbl">See</span><span class="scene__see">The Blueprint moves <span class="stg s-prog" style="font-size:10px;padding:2px 7px">In Progress</span> → <span class="stg s-sub" style="font-size:10px;padding:2px 7px">Submitted</span>.</span></div>
+    </div>
+
+    <div class="wf"><b>Blueprint gate + workflow:</b> the <code>Submitted</code> transition only allows through if mandatory fields are complete, a file is uploaded, and <b>parental consent is Received</b>. On submission the platform <b>emails the NC Admin</b> — "a new application from Sofia is ready for review" — and stamps the submission date.</div>
+    <div class="hl"><div class="hl__t">Land this with the panel</div><ul>
+      <li>The portal is <b>unmistakably UWC</b> and <b>multilingual</b> — Sofia applies in her own language.</li>
+      <li>The platform <b>refuses to advance</b> an ineligible or incomplete application — quality is enforced, not hoped for.</li>
+      <li><b>Save-and-resume</b> means real applicants aren't punished for applying over several sittings.</li>
+    </ul></div>
+    <div class="qa">
+      <div class="qa__row"><div class="qa__q">How does the portal relate to the CRM?</div><div class="qa__a">The portal is the applicant-facing layer; submissions flow straight into the CRM record and drive the Blueprint. One source of truth.</div></div>
+      <div class="qa__row"><div class="qa__q">What about Arabic and right-to-left languages?</div><div class="qa__a">Supported with additional configuration — confirmed in scope for Phase 1.</div></div>
+    </div>
+  </div>
+
+  <!-- ACT C -->
+  <div class="act" id="c">
+    <div class="act__head"><span class="act__code serif">C</span><span class="act__title serif">Selection, blind scoring &amp; safeguarding</span><span class="act__who">Clara &amp; Paulo · Reviewers</span></div>
+    <div class="act__goal">The integrity heart of the demo: two reviewers score independently and cannot influence each other, and a welfare concern instantly protects an applicant's record.</div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">1</span><span class="scene__as">Clara · Reviewer</span><span class="scene__h">First reviewer scores Sofia</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">As Clara, score Sofia on five criteria (Academic Potential, Community Engagement, Communication, UWC Values — 1–10 — plus an overall recommendation). Submit.</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">2</span><span class="scene__as">Paulo · Reviewer</span><span class="scene__h">Second reviewer sees nothing of the first</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Switch to Paulo (incognito). Open Sofia — <b>Clara's scores are hidden</b>. Paulo scores independently and submits.</span></div>
+      <div class="scene__row"><span class="scene__lbl">Say</span><span class="scene__say">"This is the most important safeguard in selection. Until both reviewers commit, neither can see the other — no anchoring, no influence."</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">3</span><span class="scene__as">Ana · NC Admin</span><span class="scene__h">Both scores unlock — together</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">As the committee, open Sofia — now <b>both</b> score sets are visible side by side.</span></div>
+      <div class="scene__row"><span class="scene__lbl">See</span><span class="scene__see">The moment the second review landed, the platform unlocked both.</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">4</span><span class="scene__as">Ana · NC Admin</span><span class="scene__h">A welfare concern protects an applicant</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Open <b>Miguel Santos</b> — a safeguarding flag is already raised. His record is <b>locked from progression</b> with a red banner.</span></div>
+      <div class="scene__row"><span class="scene__lbl">Say</span><span class="scene__say">"The instant a welfare concern is raised, the application freezes and the right people are alerted. Nobody can quietly progress or alter it while it's investigated."</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">5</span><span class="scene__as">Ana · NC Admin</span><span class="scene__h">Panel decision for Sofia</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Record the panel decision: <b>Shortlisted</b> — "Strong candidate, clear alignment with UWC values."</span></div>
+      <div class="scene__row"><span class="scene__lbl">See</span><span class="scene__see">Blueprint moves <span class="stg s-rev" style="font-size:10px;padding:2px 7px">Under Review</span> → <span class="stg s-short" style="font-size:10px;padding:2px 7px">Shortlisted</span> and Sofia gets a congratulations email.</span></div>
+    </div>
+
+    <div class="wf"><b>Workflow:</b> each submitted review increments a count; at <b>two</b>, the platform flips "all reviews complete" and unlocks both score sets. The <code>Shortlisted</code> gate requires ≥2 assessments, <b>no open safeguarding flags</b>, and a recorded panel decision.</div>
+    <div class="wf lock"><b>Safeguarding:</b> raising a flag <b>locks the record</b> from all stage progression and emails the NC Admin + International Office immediately. (Miguel's was pre-created — shown, not raised live.)</div>
+    <div class="hl"><div class="hl__t">Land this with the panel</div><ul>
+      <li>Blind review is <b>enforced by the platform</b> — fairness isn't left to good behaviour.</li>
+      <li>A safeguarding concern produces an <b>instant, automatic lockdown</b> — child protection first.</li>
+      <li>An application <b>can't be shortlisted</b> while a safeguarding flag is open — the gate won't allow it.</li>
+    </ul></div>
+    <div class="qa">
+      <div class="qa__row"><div class="qa__q">How does the blind review actually work?</div><div class="qa__a">Each reviewer's scores are visible only to them until a count of two submissions trips the unlock — explained honestly as a field-visibility rule driven by the Blueprint.</div></div>
+    </div>
+  </div>
+
+  <!-- ACT D -->
+  <div class="act" id="d">
+    <div class="act__head"><span class="act__code serif">D</span><span class="act__title serif">Nomination, a place, and a confirmed offer</span><span class="act__who">Fatima · IO Admissions · Helen · School</span></div>
+    <div class="act__goal">Shows the hand-off from committee to International Office to college — with automatic quota tracking and a branded pack — ending in Sofia placed.</div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">1</span><span class="scene__as">Fatima · IO Admissions</span><span class="scene__h">Places are tracked, not counted on a spreadsheet</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Open the IO place-allocation view: <b>UWC Atlantic — 12 places, 4 filled, 8 remaining</b>; Brazil holds 3 of those 12.</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">2</span><span class="scene__as">Ana · NC Admin</span><span class="scene__h">Generate Sofia's nomination pack</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">On Sofia's record, click <b>Generate Nomination Pack</b> — a UWC-branded PDF compiling her details, form summary, the now-unlocked assessment scores, referee statement, parental consent and panel decision.</span></div>
+      <div class="scene__row"><span class="scene__lbl">Say</span><span class="scene__say">"One click assembles everything the college needs into a branded pack — no copy-paste, no missed attachment."</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">3</span><span class="scene__as">Ana · NC Admin</span><span class="scene__h">Nominate to UWC Atlantic</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Create the nomination to UWC Atlantic, using one of Brazil's three places.</span></div>
+      <div class="scene__row"><span class="scene__lbl">See</span><span class="scene__see">Blueprint moves to <span class="stg s-nom" style="font-size:10px;padding:2px 7px">Nominated</span>; the Atlantic quota ticks down automatically; Helen at Atlantic is emailed.</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">4</span><span class="scene__as">Helen · School</span><span class="scene__h">The college sees only its own nominations</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Switch to Helen Richards. She sees only nominations <b>to UWC Atlantic</b> — candidate, committee, pack, accept/decline. No scores, no other schools, no committee data.</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Helen <b>accepts</b> Sofia.</span></div>
+      <div class="scene__row"><span class="scene__lbl">See</span><span class="scene__see">Blueprint moves <span class="stg s-nom" style="font-size:10px;padding:2px 7px">Nominated</span> → <span class="stg s-placed" style="font-size:10px;padding:2px 7px">Placed</span>. A finance reference is written back automatically.</span></div>
+    </div>
+
+    <div class="wf"><b>Workflow:</b> creating the nomination <b>decrements the school quota</b> and <b>emails the Admissions Director</b> with a 5-day task. On acceptance the application is marked <code>Placed</code> and an invoice reference syncs to finance (Business Central).</div>
+    <div class="hl"><div class="hl__t">Land this with the panel</div><ul>
+      <li><b>Quota tracking is automatic</b> — the network can never over-allocate a school by accident.</li>
+      <li>The branded pack means <b>consistent, complete</b> submissions to every college, every time.</li>
+      <li>The college sees <b>only what it needs</b> — clean separation between committee and school.</li>
+    </ul></div>
+  </div>
+
+  <!-- ACT E -->
+  <div class="act" id="e">
+    <div class="act__head"><span class="act__code serif">E</span><span class="act__title serif">Governance — keeping the board fit for purpose</span><span class="act__who">Akanksha · IO Super Admin</span></div>
+    <div class="act__goal">Shows the platform watching the network's own governance — expiring terms and skills gaps surfaced before they become problems.</div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">1</span><span class="scene__as">Akanksha · IO</span><span class="scene__h">The International Board at a glance</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Open the UWC International Board — five members, roles, appointment and expiry dates.</span></div>
+      <div class="scene__row"><span class="scene__lbl">See</span><span class="scene__see">Two members — Dr Ravi Menon and Thomas Berger — carry <b>red EXPIRED</b> term labels the platform applied automatically.</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">2</span><span class="scene__as">Akanksha · IO</span><span class="scene__h">The competency matrix — the standout</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Open the competency matrix: required skills vs current board coverage.</span></div>
+      <div class="scene__row"><span class="scene__lbl">See</span><span class="scene__see">Three gaps in red/amber — <b>Marketing &amp; Communications, Youth Engagement, Asia-Pacific expertise</b>.</span></div>
+      <div class="scene__row"><span class="scene__lbl">Say</span><span class="scene__say">"This tells the Chair exactly what to recruit for next — governance health you can see at a glance."</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">3</span><span class="scene__as">Akanksha · IO</span><span class="scene__h">The whole network's governance</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Open the network-wide summary — every body, member counts, upcoming term expiries.</span></div>
+    </div>
+
+    <div class="wf"><b>Workflow:</b> a daily check flags any term past its expiry as <b>EXPIRED</b> (red) and anything within 90 days as <b>EXPIRING SOON</b>, adding it to the renewals list — and warns if two people hold the same role.</div>
+    <div class="hl"><div class="hl__t">Land this with the panel</div><ul>
+      <li>Governance compliance is <b>proactive</b> — expiries surface themselves, nobody has to remember.</li>
+      <li>The competency matrix turns "are we covered?" into a <b>one-glance answer</b>.</li>
+    </ul></div>
+  </div>
+
+  <!-- ACT F -->
+  <div class="act" id="f">
+    <div class="act__head"><span class="act__code serif">F</span><span class="act__title serif">Committee health &amp; volunteer oversight</span><span class="act__who">Akanksha · IO Super Admin</span></div>
+    <div class="act__goal">Shows the International Office seeing the health of all committees at once — training compliance and obligations — with problems flagged automatically.</div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">1</span><span class="scene__as">Akanksha · IO</span><span class="scene__h">Inside UWC Kenya</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Open the Kenya committee — its chair Grace, three volunteers, current MoU, related applications.</span></div>
+      <div class="scene__row"><span class="scene__lbl">See</span><span class="scene__see">Volunteer training: Grace <b>CURRENT</b>, Daniel <b>EXPIRED</b> (red), Aisha <b>MISSING</b> (grey) — all set by the platform.</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">2</span><span class="scene__as">Akanksha · IO</span><span class="scene__h">Obligations that chase themselves</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Show the MoU obligations: Annual Activity Report <b>OVERDUE</b> (red), Selection Results Completed.</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">3</span><span class="scene__as">Akanksha · IO</span><span class="scene__h">The whole network, colour-coded — the standout moment</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Open the <b>IO NC health dashboard</b> across all committees.</span></div>
+      <div class="scene__row"><span class="scene__lbl">See</span><span class="scene__see">Green / amber / red per committee — <b>Kenya flagged amber/red</b> for its training and overdue MoU. Click through to the detail.</span></div>
+      <div class="scene__row"><span class="scene__lbl">Say</span><span class="scene__say">"The International Office can see, in one screen, which committees need support — before a small issue becomes a real one."</span></div>
+    </div>
+
+    <div class="wf"><b>Workflow:</b> nightly, the platform expires safeguarding training (and warns 30 days ahead), marks overdue MoU obligations, and rolls each committee's status up to the health dashboard.</div>
+    <div class="hl"><div class="hl__t">Land this with the panel</div><ul>
+      <li>The IO gets a <b>single, live picture</b> of network health — no chasing committees for updates.</li>
+      <li>Compliance gaps (training, obligations) are <b>flagged automatically</b>, colour-coded for triage.</li>
+    </ul></div>
+  </div>
+
+  <!-- ACT G -->
+  <div class="act" id="g">
+    <div class="act__head"><span class="act__code serif">G</span><span class="act__title serif">Communications, consent &amp; the GDPR loop</span><span class="act__who">Akanksha · IO Marketing</span></div>
+    <div class="act__goal">Closes the GDPR loop that opened with Sofia's consent: the platform won't email anyone who hasn't agreed, and keeps a full record of every send.</div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">1</span><span class="scene__as">IO Marketing</span><span class="scene__h">Build a targeted list</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Build <b>"Impact Report Recipients – June 2026"</b>: donors who gave in the last 12 months and opted in.</span></div>
+      <div class="scene__row"><span class="scene__lbl">See</span><span class="scene__see">Returns Jonathan Osei and Isabelle Fontaine — <b>Marcus Weber is automatically excluded</b> because he opted out.</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">2</span><span class="scene__as">IO Marketing</span><span class="scene__h">Send via the campaign tool</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Sync the list to a draft campaign — <b>"UWC Impact Report 2026"</b> in Zoho Campaigns. (No real email sent in the demo.)</span></div>
+    </div>
+
+    <div class="scene">
+      <div class="scene__top"><span class="scene__n">3</span><span class="scene__as">IO Marketing</span><span class="scene__h">A complete record on every contact</span></div>
+      <div class="scene__row"><span class="scene__lbl">Do</span><span class="scene__see">Open Jonathan Osei — his timeline shows the Impact Report send today, the Q1 newsletter, and prior contact.</span></div>
+      <div class="scene__row"><span class="scene__lbl">Say</span><span class="scene__say">"Every interaction is logged against the person. And the one contact who opted out was never even eligible to be added — that's the GDPR loop that began when Sofia's mother gave consent."</span></div>
+    </div>
+
+    <div class="wf"><b>Workflow:</b> an opted-out contact <b>cannot be added</b> to any list — the platform blocks it. After a send, a communication record is written to <b>every recipient's timeline</b> automatically.</div>
+    <div class="hl"><div class="hl__t">Land this with the panel</div><ul>
+      <li>Consent is <b>enforced at the point of action</b> — you can't accidentally email someone who opted out.</li>
+      <li>Every contact carries a <b>complete, auditable history</b> — one picture of the relationship.</li>
+    </ul></div>
+    <div class="qa">
+      <div class="qa__row"><div class="qa__q">What happens to a rejected applicant's record?</div><div class="qa__a">Retained with the full Blueprint audit trail — nothing is deleted, everything is accountable.</div></div>
+    </div>
+  </div>
+
+  <!-- CLOSE -->
+  <div class="bookend" id="close">
+    <h2 class="serif">Close — one journey, one platform (5 min)</h2>
+    <p>Bring it back to Sofia. In an hour, the panel has watched one applicant travel from a public form to a confirmed place at UWC Atlantic — and seen the platform enforce eligibility, consent, fair review, safeguarding, data protection, quota limits, governance health and GDPR <b>without anyone having to remember to</b>.</p>
+    <p class="said">"Everything you've seen is one connected platform, configured for UWC, on UK and EU data centres. Sofia's journey is the through-line, but the same engine runs every committee, every board, every campaign. The rules you care about most aren't a handbook — they're built into how the system works. We'd be glad to take your questions."</p>
+  </div>
+
+</div>
+
+<footer>
+  <b>UWC International — CRM &amp; Applications Platform · Demo Playbook</b> · Presenter: Akanksha Anand · 1 June 2026 · <em>An interactive demonstration — the through-line is Sofia Almeida's application journey.</em>
+</footer>
+
+</body>
+</html>
