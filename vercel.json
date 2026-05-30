@@ -4,8 +4,9 @@
   "trailingSlash": false,
   "redirects": [
     { "source": "/", "destination": "/wireframes/00_index.html", "permanent": false },
-    { "source": "/playbook", "destination": "/wireframes/A0_demo_playbook_master.html", "permanent": false },
-    { "source": "/playbook-clickpaths", "destination": "/wireframes/91_zoho_demo_playbook.html", "permanent": false },
+    { "source": "/test-plan", "destination": "/wireframes/A0_demo_playbook_master.html", "permanent": false },
+    { "source": "/uat", "destination": "/wireframes/A0_demo_playbook_master.html", "permanent": false },
+    { "source": "/playbook", "destination": "/wireframes/91_zoho_demo_playbook.html", "permanent": false },
     { "source": "/demo-playbook", "destination": "/wireframes/91_zoho_demo_playbook.html", "permanent": false },
     { "source": "/setup-guide", "destination": "/wireframes/90_zoho_setup_guide.html", "permanent": false },
     { "source": "/builder", "destination": "/wireframes/90_zoho_setup_guide.html", "permanent": false },
