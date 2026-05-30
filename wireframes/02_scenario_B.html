@@ -1732,6 +1732,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Open
   padding: 16px 0 !important;
   width: 240px !important;
   min-width: 240px !important;
+  /* clip the active-pill glow so it never bleeds past the right border. This
+     rule is later/equal-specificity to the one above, so the clip must live
+     here too or it gets overridden. */
+  overflow-x: hidden !important;
 }
 </style>
 
@@ -2194,6 +2198,15 @@ html body #sc-app .appform-sticky-footer #appform-footer-text {
 /* Ensure main content has space for fixed footer */
 html body #sc-app .uwc-portal-main {
   padding-bottom: 100px !important;
+}
+
+/* Clip both sidebars horizontally (max specificity so no earlier/later rule
+   re-enables overflow). Stops the active-item gradient pill's glow from
+   bleeding past the sidebar's right border on the dashboard and app form. */
+html body #sc-3 .uwc-portal-sidebar,
+html body #sc-3 nav.uwc-portal-sidebar,
+html body #sc-app .uwc-portal-shell .uwc-portal-sidebar {
+  overflow-x: hidden !important;
 }
 
 /* When viewport narrow, footer spans full width (no sidebar offset) */
@@ -12018,7 +12031,7 @@ go(0);
         flag: '🇧🇷',
         status: 'Eligibility Review',
         statusKind: 'in_progress',
-        progress: 67,
+        progress: 100,  /* application form is fully filled and submitted */
         submittedAt: '2026-05-27T14:32',
         nextMilestone: 'Local interview',
         nextDate: '8-15 June 2026',
